@@ -12,9 +12,11 @@ export function Home() {
         'clock',
         'attach',
         'description',
+        'edit',
+        'comment',
+        'label',
+        'checklist',
     ]
-
-    const trellicons = []
 
     return (
         <div id="home-page">
