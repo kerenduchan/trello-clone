@@ -1,5 +1,4 @@
 import { useParams } from 'react-router'
-import { getBoards } from '../util'
 import { BoardList } from '../cmp/BoardList'
 import { useSelector } from 'react-redux'
 

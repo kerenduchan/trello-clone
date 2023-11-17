@@ -43,7 +43,41 @@ function _createBoards() {
         boards = [
             {
                 _id: '1234',
-                title: 'Gmail Clone Project',
+                title: 'Greengrocer Shop Web Dev',
+                isStarred: false,
+                archivedAt: null,
+                groups: [
+                    {
+                        id: 'g101',
+                        title: 'Backlog: Server',
+                        archivedAt: null,
+                        cards: [
+                            {
+                                id: 'c101',
+                                title: 'Design Web API',
+                            },
+                            {
+                                id: 'c102',
+                                title: 'Install nodeJS',
+                            },
+                        ],
+                    },
+                    {
+                        id: 'g102',
+                        title: 'Backlog: Client',
+                        archivedAt: null,
+                        cards: [
+                            {
+                                id: 'c103',
+                                title: 'Log out functionality',
+                            },
+                            {
+                                id: 'c104',
+                                title: 'Filter products',
+                            },
+                        ],
+                    },
+                ],
             },
             {
                 _id: '1235',

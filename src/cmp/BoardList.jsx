@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 
 export function BoardList({ boards }) {
-    console.log(boards)
     return (
         <ul className="board-list">
             {boards.map((b) => (
