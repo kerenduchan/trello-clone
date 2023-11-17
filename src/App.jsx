@@ -11,24 +11,26 @@ function App() {
     return (
         <div id="app">
             <AppHeader />
-            <Router>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/u/:userId" element={<User />}>
-                        <Route
-                            path="/u/:userId/boards"
-                            element={<BoardIndex />}
-                        ></Route>
-                    </Route>
-                    <Route path="/b/:boardId" element={<BoardDetails />}>
-                        <Route
-                            path="/b/:boardId/c/:taskId"
-                            element={<TaskDetails />}
-                        ></Route>
-                    </Route>
-                </Routes>
-            </Router>
+            <div className="app-content">
+                <Router>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/u/:userId" element={<User />}>
+                            <Route
+                                path="/u/:userId/boards"
+                                element={<BoardIndex />}
+                            ></Route>
+                        </Route>
+                        <Route path="/b/:boardId" element={<BoardDetails />}>
+                            <Route
+                                path="/b/:boardId/c/:taskId"
+                                element={<TaskDetails />}
+                            ></Route>
+                        </Route>
+                    </Routes>
+                </Router>
+            </div>
         </div>
     )
 }
