@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { boardService } from '../services/board.service'
 import { TaskGroup } from '../cmp/TaskGroup'
+import { BoardDetailsTopbar } from '../cmp/BoardDetailsTopbar'
 
 export function BoardDetails() {
     const [board, setBoard] = useState(null)
@@ -24,7 +25,7 @@ export function BoardDetails() {
 
     return (
         <div className="board-details">
-            <h1>{board.title}</h1>
+            <BoardDetailsTopbar board={board} />
             <ul>
                 {board.taskGroups.map((g) => (
                     <li key={g._id}>
