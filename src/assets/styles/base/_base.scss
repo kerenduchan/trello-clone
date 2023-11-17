@@ -28,6 +28,10 @@ h2 {
     @include font(14px, 20px, 600);
 }
 
+button {
+    cursor: pointer;
+}
+
 #app {
     height: 100vh;
 }

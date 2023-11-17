@@ -5,20 +5,50 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50%;
-    display: grid;
-    grid-template-rows: 1fr;
+    display: flex;
     overflow: hidden;
     @include prevent-select();
     cursor: pointer;
 
     .board-preview-contents {
-        grid-area: 1 / 1;
+        flex-grow: 1;
         background-color: rgba(0, 0, 0, 0.3);
-        padding: 8px;
-    }
+        display: grid;
+        grid-template-rows: 8px auto 20px 12px;
+        grid-template-columns: 8px 1fr 20px 12px;
 
-    .board-title {
-        color: var(--text-color-light);
-        @include font(16px, 20px, 700);
+        .board-title {
+            grid-area: 2 / 2 / span 1 / span 2;
+            color: var(--text-color-light);
+            @include font(16px, 20px, 700);
+        }
+
+        .star {
+            grid-area: 3 / 3;
+            margin-inline-end: -50px;
+            width: 16px;
+            height: 16px;
+            align-self: center;
+            justify-self: center;
+            transition: margin-inline-end 0.2s, width 0.2s, height 0.2s;
+
+            img {
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        .star:hover {
+            width: 20px;
+            height: 20px;
+        }
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        &:hover .star {
+            margin-inline-end: 0;
+        }
     }
 }

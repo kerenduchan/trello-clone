@@ -11,6 +11,9 @@ export function BoardPreview({ board }) {
         >
             <div className="board-preview-contents">
                 <h1 className="board-title">{board.title}</h1>
+                <button className="star">
+                    <img src="images/star-white.svg" />
+                </button>
             </div>
         </Link>
     )
