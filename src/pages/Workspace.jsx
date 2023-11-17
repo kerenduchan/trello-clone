@@ -15,9 +15,9 @@ export function Workspace() {
     return (
         <div id="workspace">
             <h1>{params.userId}'s Workspace</h1>
-            <button className="primary-btn" onClick={onCreateBoardClick}>
+            {/* <button className="primary-btn" onClick={onCreateBoardClick}>
                 Create Board
-            </button>
+            </button> */}
             <ul>
                 {getBoards().map((b) => (
                     <li key={b._id}>
