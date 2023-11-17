@@ -9,6 +9,6 @@ function getBoard(_id) {
 }
 
 const _boards = [
-    { _id: '1234', name: 'Gmail Clone Project', slug: 'gmail-clone-project' },
-    { _id: '1235', name: 'Personal Board', slug: 'personal-board' },
+    { _id: '1234', name: 'Gmail Clone Project' },
+    { _id: '1235', name: 'Personal Board' },
 ]

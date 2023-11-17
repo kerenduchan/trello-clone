@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { getBoards } from '../util'
 import { CreateBoard } from '../cmp/CreateBoard'
 
-export function Workspace() {
+export function BoardIndex() {
     const params = useParams()
     const [showCreateBoardDialog, setShowCreateBoardDialog] = useState(false)
 
@@ -13,15 +13,15 @@ export function Workspace() {
     }
 
     return (
-        <div id="workspace">
-            <h1>{params.userId}'s Workspace</h1>
+        <div id="board-index">
+            <h1>{params.userId}'s Boards</h1>
             {/* <button className="primary-btn" onClick={onCreateBoardClick}>
                 Create Board
             </button> */}
             <ul>
                 {getBoards().map((b) => (
                     <li key={b._id}>
-                        <Link to={`/b/${b._id}/${b.slug}`}>{b.name}</Link>
+                        <Link to={`/b/${b._id}`}>{b.name}</Link>
                     </li>
                 ))}
             </ul>
