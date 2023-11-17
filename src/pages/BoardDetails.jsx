@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { boardService } from '../services/board.service'
+import { BoardGroup } from './BoardGroup'
 
 export function BoardDetails() {
     const [board, setBoard] = useState(null)
@@ -25,7 +26,11 @@ export function BoardDetails() {
         <div className="board-details">
             <h1>{board.title}</h1>
             <ul>
-                <li></li>
+                {board.groups.map((g) => (
+                    <li key={g._id}>
+                        <BoardGroup group={g} />
+                    </li>
+                ))}
             </ul>
         </div>
     )

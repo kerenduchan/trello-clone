@@ -48,31 +48,31 @@ function _createBoards() {
                 archivedAt: null,
                 groups: [
                     {
-                        id: 'g101',
+                        _id: 'g101',
                         title: 'Backlog: Server',
                         archivedAt: null,
                         cards: [
                             {
-                                id: 'c101',
+                                _id: 'c101',
                                 title: 'Design Web API',
                             },
                             {
-                                id: 'c102',
+                                _id: 'c102',
                                 title: 'Install nodeJS',
                             },
                         ],
                     },
                     {
-                        id: 'g102',
+                        _id: 'g102',
                         title: 'Backlog: Client',
                         archivedAt: null,
                         cards: [
                             {
-                                id: 'c103',
+                                _id: 'c103',
                                 title: 'Log out functionality',
                             },
                             {
-                                id: 'c104',
+                                _id: 'c104',
                                 title: 'Filter products',
                             },
                         ],
