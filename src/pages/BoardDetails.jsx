@@ -5,7 +5,7 @@ export function BoardDetails() {
     const params = useParams()
 
     return (
-        <div id="board-details">
+        <div className="board-details">
             <h1>{getBoard(params.boardId).name}</h1>
         </div>
     )
