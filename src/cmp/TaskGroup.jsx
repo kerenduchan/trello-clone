@@ -4,7 +4,10 @@ import { TaskPreview } from './TaskPreview'
 export function TaskGroup({ taskGroup }) {
     return (
         <section className="task-group">
-            <h2>{taskGroup.title}</h2>
+            <header className="task-group-header">
+                <h2>{taskGroup.title}</h2>
+            </header>
+
             <ul>
                 {taskGroup.tasks.map((t) => (
                     <li key={t._id}>
