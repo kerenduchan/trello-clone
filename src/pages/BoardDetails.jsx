@@ -28,13 +28,13 @@ export function BoardDetails() {
             <BoardDetailsTopbar board={board} />
 
             <section className="board-canvas">
-                <ul className="task-group-list">
+                <ol className="task-group-list">
                     {board.taskGroups.map((g) => (
                         <li key={g._id}>
                             <TaskGroup taskGroup={g} />
                         </li>
                     ))}
-                </ul>
+                </ol>
             </section>
         </div>
     )
