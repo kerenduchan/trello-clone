@@ -1,5 +1,4 @@
-import { useLocation, useParams } from 'react-router'
-import { BoardIndex } from './BoardIndex'
+import { Outlet, useLocation, useParams } from 'react-router'
 
 export function User() {
     const params = useParams()
@@ -8,7 +7,7 @@ export function User() {
     return (
         <div id="user">
             {location.pathname.split('/').at(-1) == 'boards' ? (
-                <BoardIndex />
+                <Outlet />
             ) : (
                 <h1>User page for {params.userId}</h1>
             )}
