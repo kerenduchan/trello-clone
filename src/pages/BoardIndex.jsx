@@ -14,10 +14,12 @@ export function BoardIndex() {
         loadBoards()
     }, [])
 
+    if (!boards) return <div>Loading..</div>
+
     return (
         <div className="board-index">
             <h1>{params.userId}'s Boards</h1>
-            <BoardList boards={getBoards()} />
+            <BoardList boards={boards} />
         </div>
     )
 }
