@@ -102,7 +102,7 @@ function _createBoards() {
                 },
                 style: {
                     backgroundImage:
-                        'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/43ad260ec2379a1849e5c540c7531f4f/photo-1521495084171-3ad639e3d525',
+                        'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1281x1920/efadbb633bd12e458df6f40484b34d14/photo-1699116548123-73affe0987b7.jpg',
                 },
             },
         ]
