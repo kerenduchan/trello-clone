@@ -1,0 +1,14 @@
+.board-index-header {
+    padding: 8px;
+    background-color: var(--board-index-header-bg-color);
+    box-sizing: border-box;
+    border-bottom: 0.8px solid var(--board-index-header-border-bottom-color);
+    display: grid;
+    grid-template-columns: repeat(2, auto) 1fr;
+    align-items: center;
+    column-gap: 26px;
+
+    .avatar {
+        justify-self: end;
+    }
+}
