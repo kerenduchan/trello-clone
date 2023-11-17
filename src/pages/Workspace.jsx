@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { getBoards } from '../util'
 import { CreateBoard } from '../cmp/CreateBoard'
 
-export function Boards() {
+export function Workspace() {
     const params = useParams()
     const [showCreateBoardDialog, setShowCreateBoardDialog] = useState(false)
 
@@ -13,8 +13,8 @@ export function Boards() {
     }
 
     return (
-        <div id="boards">
-            <h1>Boards for {params.userId}</h1>
+        <div id="workspace">
+            <h1>{params.userId}'s Workspace</h1>
             <button className="primary-btn" onClick={onCreateBoardClick}>
                 Create Board
             </button>

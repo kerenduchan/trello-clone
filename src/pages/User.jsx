@@ -1,5 +1,5 @@
 import { useLocation, useParams } from 'react-router'
-import { Boards } from './Boards'
+import { Workspace } from './Workspace'
 
 export function User() {
     const params = useParams()
@@ -8,7 +8,7 @@ export function User() {
     return (
         <div id="user">
             {location.pathname.split('/').at(-1) == 'boards' ? (
-                <Boards />
+                <Workspace />
             ) : (
                 <h1>User page for {params.userId}</h1>
             )}

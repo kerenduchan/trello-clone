@@ -2,7 +2,7 @@ import { Route, HashRouter as Router, Routes } from 'react-router-dom'
 import { Home } from './pages/Home'
 import { Login } from './pages/Login'
 import { User } from './pages/User'
-import { Boards } from './pages/Boards'
+import { Workspace } from './pages/Workspace'
 import { Board } from './pages/Board'
 
 function App() {
@@ -13,7 +13,10 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/u/:userId/" element={<User />}>
-                        <Route path="/u/:userId/boards" element={<Boards />} />
+                        <Route
+                            path="/u/:userId/boards"
+                            element={<Workspace />}
+                        />
                     </Route>
                     <Route
                         path="/b/:boardId/:slug?"
