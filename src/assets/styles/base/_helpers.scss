@@ -9,3 +9,21 @@
     align-items: center;
     @include font(14px, 32px, 500);
 }
+
+.circle-btn {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        height: 24px;
+        width: 24px;
+    }
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.08);
+    }
+}
