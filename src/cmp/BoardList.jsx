@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom'
+import { BoardPreview } from './BoardPreview'
 
 export function BoardList({ boards }) {
     return (
         <ul className="board-list">
             {boards.map((b) => (
                 <li key={b._id}>
-                    <Link to={`/b/${b._id}`}>{b.title}</Link>
+                    <BoardPreview board={b} />
                 </li>
             ))}
         </ul>

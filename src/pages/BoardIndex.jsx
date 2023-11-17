@@ -19,8 +19,10 @@ export function BoardIndex() {
     return (
         <div className="board-index">
             <BoardIndexHeader />
-            <h1>{params.userId}'s Boards</h1>
-            <BoardList boards={boards} />
+            <div className="board-list-container">
+                <h1>Your Boards</h1>
+                <BoardList boards={boards} />
+            </div>
         </div>
     )
 }
