@@ -46,12 +46,12 @@ function _createBoards() {
                 title: 'Greengrocer Shop Web Dev',
                 isStarred: false,
                 archivedAt: null,
-                groups: [
+                taskGroups: [
                     {
                         _id: 'g101',
                         title: 'Backlog: Server',
                         archivedAt: null,
-                        cards: [
+                        tasks: [
                             {
                                 _id: 'c101',
                                 title: 'Design Web API',
@@ -66,7 +66,7 @@ function _createBoards() {
                         _id: 'g102',
                         title: 'Backlog: Client',
                         archivedAt: null,
-                        cards: [
+                        tasks: [
                             {
                                 _id: 'c103',
                                 title: 'Log out functionality',
