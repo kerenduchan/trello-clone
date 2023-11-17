@@ -2,4 +2,15 @@
     height: 100%;
     background-image: url('https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/74f86385ffe74500fbb085bdcc036411/photo-1699393393028-d44da72dba1d.jpg');
     background-size: cover;
+
+    .board-canvas {
+        margin-top: 12px;
+    }
+
+    .task-group-list {
+        padding-inline-start: 12px;
+        padding-inline-end: 12px;
+        display: flex;
+        gap: 12px;
+    }
 }

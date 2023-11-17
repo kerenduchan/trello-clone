@@ -26,13 +26,16 @@ export function BoardDetails() {
     return (
         <div className="board-details">
             <BoardDetailsTopbar board={board} />
-            <ul>
-                {board.taskGroups.map((g) => (
-                    <li key={g._id}>
-                        <TaskGroup taskGroup={g} />
-                    </li>
-                ))}
-            </ul>
+
+            <section className="board-canvas">
+                <ul className="task-group-list">
+                    {board.taskGroups.map((g) => (
+                        <li key={g._id}>
+                            <TaskGroup taskGroup={g} />
+                        </li>
+                    ))}
+                </ul>
+            </section>
         </div>
     )
 }
