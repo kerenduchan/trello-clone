@@ -1,26 +1,32 @@
-import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
-import { loadBoards } from '../store/actions/board.actions'
+import { boardService } from '../services/board.service'
 
 export function BoardDetails() {
+    const [board, setBoard] = useState(null)
     const params = useParams()
-    const boards = useSelector((storeState) => storeState.boardModule.boards)
 
     useEffect(() => {
-        loadBoards()
-    }, [])
+        loadBoard()
+    }, [params.boardId])
 
-    if (!boards) return <div>Loading..</div>
-
-    function getBoard() {
-        const found = boards.filter((b) => b._id === params.boardId)
-        return found && found.length === 1 ? found[0] : null
+    async function loadBoard() {
+        try {
+            const board = await boardService.getById(params.boardId)
+            setBoard(board)
+        } catch (err) {
+            console.error('Failed to load board:', err)
+        }
     }
+
+    if (!board) return <div>Loading..</div>
 
     return (
         <div className="board-details">
-            <h1>{getBoard()?.title}</h1>
+            <h1>{board.title}</h1>
+            <ul>
+                <li></li>
+            </ul>
         </div>
     )
 }
