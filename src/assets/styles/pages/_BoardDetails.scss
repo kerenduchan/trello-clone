@@ -14,3 +14,19 @@
         gap: 12px;
     }
 }
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    opacity: 50%;
+    background-color: black;
+    min-width: 100%;
+    min-height: 100%;
+    transition: visibility 0.2s, opacity 0.2s;
+
+    &.hidden {
+        visibility: hidden;
+        opacity: 0;
+    }
+}

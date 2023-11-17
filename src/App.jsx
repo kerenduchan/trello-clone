@@ -5,6 +5,7 @@ import { Login } from './pages/Login'
 import { User } from './pages/User'
 import { BoardIndex } from './pages/BoardIndex'
 import { BoardDetails } from './pages/BoardDetails'
+import { TaskDetails } from './pages/TaskDetails'
 
 function App() {
     return (
@@ -20,10 +21,12 @@ function App() {
                             element={<BoardIndex />}
                         ></Route>
                     </Route>
-                    <Route
-                        path="/b/:boardId"
-                        element={<BoardDetails />}
-                    ></Route>
+                    <Route path="/b/:boardId" element={<BoardDetails />}>
+                        <Route
+                            path="/b/:boardId/c/:taskId"
+                            element={<TaskDetails />}
+                        ></Route>
+                    </Route>
                 </Routes>
             </Router>
         </div>
