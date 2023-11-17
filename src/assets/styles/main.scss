@@ -8,3 +8,9 @@
 @import 'base/base';
 @import 'base/helpers';
 @import 'base/layout';
+
+// PAGES
+@import 'pages/board-details';
+
+// COMPONENTS
+@import 'cmp/board-details-topbar';
