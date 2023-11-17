@@ -1,4 +1,5 @@
 import { storageService } from './async-storage.service'
+import { utilService } from './util.service'
 
 export const boardService = {
     query,
@@ -9,6 +10,8 @@ export const boardService = {
 }
 
 const STORAGE_KEY = 'boards'
+
+_createBoards()
 
 async function query() {
     return await storageService.query(STORAGE_KEY)
@@ -32,4 +35,21 @@ function save(boardToSave) {
 
 async function create(board) {
     return await storageService.post(STORAGE_KEY, board)
+}
+
+function _createBoards() {
+    let boards = utilService.loadFromStorage(STORAGE_KEY)
+    if (!boards || !boards.length) {
+        boards = [
+            {
+                _id: '1234',
+                title: 'Gmail Clone Project',
+            },
+            {
+                _id: '1235',
+                title: 'Personal Board',
+            },
+        ]
+        utilService.saveToStorage(STORAGE_KEY, boards)
+    }
 }
