@@ -10,24 +10,10 @@
     @include font(14px, 32px, 500);
 }
 
-.circle-btn {
-    border-radius: 50%;
-    height: 40px;
-    width: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    img {
-        height: 24px;
-        width: 24px;
-    }
-
-    &:hover {
-        background-color: rgba(0, 0, 0, 0.08);
-    }
-}
-
 .app-content {
     grid-area: 2 / 1;
+}
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
