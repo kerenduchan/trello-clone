@@ -8,7 +8,7 @@ export function TaskGroup({ taskGroup }) {
                 <h2>{taskGroup.title}</h2>
             </header>
 
-            <ol>
+            <ol className="task-list">
                 {taskGroup.tasks.map((t) => (
                     <li key={t._id}>
                         <TaskPreview task={t} />

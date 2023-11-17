@@ -1,0 +1,21 @@
+.task-preview {
+    background-color: var(--task-preview-bg-color);
+    border-radius: 8px;
+    box-shadow: var(
+        --ds-shadow-raised,
+        0px 1px 1px #091e4240,
+        0px 0px 1px #091e424f
+    );
+    padding-top: 8px;
+    padding-bottom: 4px;
+    padding-inline-start: 12px;
+    padding-inline-end: 12px;
+
+    &:hover {
+        outline: 2px solid var(--task-preview-hover-outline-color);
+    }
+
+    .title {
+        margin-bottom: 4px;
+    }
+}
