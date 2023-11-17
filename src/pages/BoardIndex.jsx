@@ -2,8 +2,6 @@ import { useEffect } from 'react'
 import { useParams } from 'react-router'
 import { useSelector } from 'react-redux'
 import { loadBoards } from '../store/actions/board.actions'
-
-import { BoardIndexHeader } from '../cmp/BoardIndexHeader'
 import { BoardList } from '../cmp/BoardList'
 
 export function BoardIndex() {
@@ -18,7 +16,6 @@ export function BoardIndex() {
 
     return (
         <div className="board-index">
-            <BoardIndexHeader />
             <div className="board-list-container">
                 <h1>Your Boards</h1>
                 <BoardList boards={boards} />

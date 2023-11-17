@@ -1,4 +1,5 @@
 import { Route, HashRouter as Router, Routes } from 'react-router-dom'
+import { AppHeader } from './cmp/AppHeader'
 import { Home } from './pages/Home'
 import { Login } from './pages/Login'
 import { User } from './pages/User'
@@ -8,6 +9,7 @@ import { BoardDetails } from './pages/BoardDetails'
 function App() {
     return (
         <div id="app">
+            <AppHeader />
             <Router>
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -16,7 +18,7 @@ function App() {
                         <Route
                             path="/u/:userId/boards"
                             element={<BoardIndex />}
-                        />
+                        ></Route>
                     </Route>
                     <Route
                         path="/b/:boardId"
