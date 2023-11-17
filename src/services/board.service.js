@@ -46,6 +46,16 @@ function _createBoards() {
                 title: 'Greengrocer Shop Web Dev',
                 isStarred: false,
                 archivedAt: null,
+                createdBy: {
+                    _id: 'u101',
+                    fullname: 'Keren Duchan',
+                    imgUrl: 'http://some-img',
+                },
+                style: {
+                    backgroundImage:
+                        'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/74f86385ffe74500fbb085bdcc036411/photo-1699393393028-d44da72dba1d.jpg',
+                },
+
                 taskGroups: [
                     {
                         _id: 'g101',
@@ -82,6 +92,18 @@ function _createBoards() {
             {
                 _id: '1235',
                 title: 'Personal Board',
+                isStarred: false,
+                archivedAt: null,
+                taskGroups: [],
+                createdBy: {
+                    _id: 'u102',
+                    fullname: 'Yigal Shalom',
+                    imgUrl: 'http://some-img',
+                },
+                style: {
+                    backgroundImage:
+                        'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/43ad260ec2379a1849e5c540c7531f4f/photo-1521495084171-3ad639e3d525',
+                },
             },
         ]
         utilService.saveToStorage(STORAGE_KEY, boards)

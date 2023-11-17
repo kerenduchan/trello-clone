@@ -21,10 +21,16 @@ export function BoardDetails() {
         }
     }
 
+    console.log(board)
     if (!board) return <div>Loading..</div>
 
     return (
-        <div className="board-details">
+        <div
+            className="board-details"
+            style={{
+                backgroundImage: `url(${board.style.backgroundImage})`,
+            }}
+        >
             <BoardDetailsTopbar board={board} />
 
             <section className="board-canvas">
