@@ -17,7 +17,7 @@ export function BoardIndex() {
     return (
         <div className="board-index">
             <div className="board-list-container">
-                <h1>Your Boards</h1>
+                <h1 className="board-list-title">Your Boards</h1>
                 <BoardList boards={boards} />
             </div>
         </div>
