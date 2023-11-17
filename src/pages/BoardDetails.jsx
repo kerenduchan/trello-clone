@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router'
+import { useParams } from 'react-router'
 import { boardService } from '../services/board.service'
 import { TaskGroup } from '../cmp/TaskGroup'
 import { BoardDetailsTopbar } from '../cmp/BoardDetailsTopbar'
@@ -8,7 +8,6 @@ import { TaskDetails } from './TaskDetails'
 export function BoardDetails() {
     const [board, setBoard] = useState(null)
     const params = useParams()
-    const navigate = useNavigate()
 
     useEffect(() => {
         loadBoard()
@@ -21,10 +20,6 @@ export function BoardDetails() {
         } catch (err) {
             console.error('Failed to load board:', err)
         }
-    }
-
-    function onCloseTaskDetails() {
-        navigate(`/b/${params.boardId}`)
     }
 
     function findTaskById(taskId) {
@@ -61,16 +56,8 @@ export function BoardDetails() {
                 </ol>
             </section>
 
-            <div
-                className={`overlay ${params.taskId ? '' : 'hidden'}`}
-                onClick={onCloseTaskDetails}
-            ></div>
             {params.taskId && (
-                <TaskDetails
-                    board={board}
-                    task={findTaskById(params.taskId)}
-                    onClose={onCloseTaskDetails}
-                />
+                <TaskDetails board={board} task={findTaskById(params.taskId)} />
             )}
         </div>
     )
