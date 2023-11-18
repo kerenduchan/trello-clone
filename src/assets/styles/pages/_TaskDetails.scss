@@ -24,17 +24,24 @@
             right: 16px;
         }
 
+        .cover {
+            height: 116px;
+        }
+
         .header {
             display: grid;
-            grid-template-columns: 16px 1fr 16px;
-            grid-template-rows: auto 16px auto;
-
-            .cover {
-                grid-area: 1 / 1 / span 1 / -1;
-                height: 116px;
+            grid-template-columns: 56px 1fr;
+            grid-template-rows: 16px auto;
+            align-items: center;
+            .icon {
+                grid-area: 2 / 1;
+                justify-self: center;
             }
 
             .title {
+                grid-area: 2 / 2;
+            }
+            .subtitle {
                 grid-area: 3 / 2;
             }
         }
