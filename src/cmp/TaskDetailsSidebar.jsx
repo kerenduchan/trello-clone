@@ -1,4 +1,4 @@
-import { SecondaryIconBtn } from './SecondaryIconBtn'
+import { SecondaryBtn } from './SecondaryBtn'
 
 export function TaskDetailsSidebar() {
     return (
@@ -6,31 +6,31 @@ export function TaskDetailsSidebar() {
             <section>
                 <h3>Suggested</h3>
                 <div className="content">
-                    <SecondaryIconBtn type="member" text="Join" />
+                    <SecondaryBtn icon="member" text="Join" />
                 </div>
             </section>
 
             <section>
                 <h3>Add to card</h3>
                 <div className="content">
-                    <SecondaryIconBtn type="member" text="Members" />
-                    <SecondaryIconBtn type="label" text="Labels" />
-                    <SecondaryIconBtn type="checklist" text="Checklist" />
-                    <SecondaryIconBtn type="date" text="Dates" />
-                    <SecondaryIconBtn type="attachment" text="Attachment" />
-                    <SecondaryIconBtn type="cover" text="Cover" />
-                    <SecondaryIconBtn type="customField" text="Custom Fields" />
+                    <SecondaryBtn icon="member" text="Members" />
+                    <SecondaryBtn icon="label" text="Labels" />
+                    <SecondaryBtn icon="checklist" text="Checklist" />
+                    <SecondaryBtn icon="date" text="Dates" />
+                    <SecondaryBtn icon="attachment" text="Attachment" />
+                    <SecondaryBtn icon="cover" text="Cover" />
+                    <SecondaryBtn icon="customField" text="Custom Fields" />
                 </div>
             </section>
 
             <section>
                 <h3>Actions</h3>
                 <div className="content">
-                    <SecondaryIconBtn type="move" text="Move" />
-                    <SecondaryIconBtn type="copy" text="Copy" />
-                    <SecondaryIconBtn type="template" text="Make Template" />
-                    <SecondaryIconBtn type="archive" text="Archive" />
-                    <SecondaryIconBtn type="share" text="Share" />
+                    <SecondaryBtn icon="move" text="Move" />
+                    <SecondaryBtn icon="copy" text="Copy" />
+                    <SecondaryBtn icon="template" text="Make Template" />
+                    <SecondaryBtn icon="archive" text="Archive" />
+                    <SecondaryBtn icon="share" text="Share" />
                 </div>
             </section>
         </div>

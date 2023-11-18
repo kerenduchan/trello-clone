@@ -2,8 +2,8 @@ import { useNavigate, useParams } from 'react-router'
 import { CircleBtn } from '../cmp/CircleBtn'
 import { TaskDetailsDescription } from '../cmp/TaskDetailsDescription'
 import { TaskDetailsActivity } from '../cmp/TaskDetailsActivity'
-import { SecondaryIconBtn } from '../cmp/SecondaryIconBtn'
 import { TaskDetailsSidebar } from '../cmp/TaskDetailsSidebar'
+import { Icon } from '../cmp/Icon'
 
 export function TaskDetails({ task }) {
     const navigate = useNavigate()
@@ -26,9 +26,7 @@ export function TaskDetails({ task }) {
                     ></div>
                 )}
                 <div className="header">
-                    <div className="icon material-symbols-outlined">
-                        credit_card
-                    </div>
+                    <Icon type="card" size="md" />
                     <h1 className="title">{task.title}</h1>
                     <p className="subtitle">in list...</p>
                 </div>

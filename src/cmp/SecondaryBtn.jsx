@@ -1,10 +1,13 @@
-export function SecondaryBtn({ className, onClick, children }) {
+import { Icon } from './Icon'
+
+export function SecondaryBtn({ icon, text, className, onClick }) {
     return (
         <button
-            className={'secondary-btn' + (className ? ` ${className}` : '')}
+            className={`secondary-btn ${className ? ` ${className}` : ''}`}
             onClick={onClick}
         >
-            {children}
+            {icon && <Icon type={icon} size="sm"></Icon>}
+            <span>{text}</span>
         </button>
     )
 }
