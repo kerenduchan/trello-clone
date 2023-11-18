@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from 'react-router'
 import { CircleButton } from '../cmp/CircleButton'
+import { TaskDetailsDescription } from '../cmp/TaskDetailsDescription'
 
 export function TaskDetails({ task }) {
     const navigate = useNavigate()
@@ -27,6 +28,9 @@ export function TaskDetails({ task }) {
                     </div>
                     <h1 className="title">{task.title}</h1>
                     <p className="subtitle">in list...</p>
+                </div>
+                <div className="main">
+                    <TaskDetailsDescription task={task} />
                 </div>
             </div>
         </div>

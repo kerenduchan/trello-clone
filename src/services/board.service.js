@@ -83,6 +83,8 @@ function _createBoards() {
                             {
                                 _id: 'c103',
                                 title: 'Log out functionality',
+                                description:
+                                    'Allow a logged-in user to log out',
                             },
                             {
                                 _id: 'c104',
