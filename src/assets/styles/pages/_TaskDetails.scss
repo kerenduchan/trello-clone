@@ -9,6 +9,7 @@
     display: flex;
     justify-content: center;
     padding-top: 48px;
+    padding-bottom: 48px;
 
     .task-details {
         position: relative;
@@ -50,6 +51,7 @@
 
             .title {
                 grid-area: 2 / 2;
+                @include font(20px, 24px, 600);
             }
             .subtitle {
                 grid-area: 3 / 2;

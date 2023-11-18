@@ -3,13 +3,14 @@
     background: none repeat scroll 0 0 transparent;
     border: medium none;
     border-spacing: 0;
-    color: unset;
+    color: var(--text-color);
     list-style: none outside none;
     margin: 0;
     padding: 0;
     text-align: left;
     text-decoration: none;
     text-indent: 0;
+    @include font(14px, 20px, 500);
 }
 
 body {
