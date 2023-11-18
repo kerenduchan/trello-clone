@@ -8,7 +8,10 @@ export function TaskDetailsDescription({ task }) {
             <h2 className="title">Description</h2>
 
             {task.description ? (
-                <p className="text">{task.description}</p>
+                <>
+                    <SecondaryBtn className="title-btn" text="Edit" />
+                    <p className="text">{task.description}</p>
+                </>
             ) : (
                 <SecondaryBtn
                     className="add-btn"
