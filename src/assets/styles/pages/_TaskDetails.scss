@@ -59,14 +59,5 @@
         .main {
             grid-area: main;
         }
-
-        .sidebar {
-            grid-area: sidebar;
-
-            .secondary-btn {
-                width: 100%;
-                margin-top: 8px;
-            }
-        }
     }
 }

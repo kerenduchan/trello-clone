@@ -1,0 +1,11 @@
+.task-details-sidebar {
+    grid-area: sidebar;
+
+    display: grid;
+    row-gap: 16px;
+
+    section > .content {
+        display: grid;
+        row-gap: 8px;
+    }
+}
