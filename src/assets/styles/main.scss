@@ -12,6 +12,7 @@
 // PAGES
 @import 'pages/BoardDetails';
 @import 'pages/BoardIndex';
+@import 'pages/TaskDetails';
 
 // COMPONENTS
 @import 'cmp/AppHeader';
@@ -19,6 +20,5 @@
 @import 'cmp/BoardList';
 @import 'cmp/BoardPreview';
 @import 'cmp/CircleBtn';
-@import 'cmp/TaskDetails';
 @import 'cmp/TaskGroup';
 @import 'cmp/TaskPreview';
