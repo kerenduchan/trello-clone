@@ -1,11 +1,17 @@
 @font-face {
     font-family: 'Segoe UI';
     font-style: normal;
-    font-weight: normal;
-    src: local('Segoe UI Regular'),
-        url('/src/assets/fonts/Segoe UI.woff') format('woff');
+    font-weight: 100 400;
+    src: local('Segoe UI'), url('/src/assets/fonts/SegoeUI.woff') format('woff');
 }
 
+@font-face {
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 500 700;
+    src: local('Segoe UI Semibold'),
+        url('/src/assets/fonts/SegoeUI-SemiBold.woff') format('woff');
+}
 @font-face {
     font-family: 'Roboto';
     src: url('/src/assets/fonts/Roboto-Regular.ttf');

@@ -13,11 +13,7 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-        'Noto Sans', Ubuntu, 'Droid Sans', 'Helvetica Neue', sans-serif;
-
-    @include font(14px, 20px, 400);
-    color: var(--text-color);
+    @include font-family();
 }
 
 h1 {
@@ -28,8 +24,13 @@ h2 {
     @include font(14px, 20px, 600);
 }
 
+h3 {
+    @include font(12px, 20px, 600);
+}
+
 button {
     cursor: pointer;
+    @include font-family();
 }
 
 #app {
