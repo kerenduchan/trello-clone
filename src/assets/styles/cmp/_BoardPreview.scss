@@ -26,21 +26,15 @@
         .star {
             grid-area: 3 / 3;
             margin-inline-end: -70px;
-            width: 16px;
-            height: 16px;
             align-self: center;
             justify-self: center;
-            transition: margin-inline-end 0.2s, width 0.2s, height 0.2s;
-
-            img {
-                height: 100%;
-                width: 100%;
-            }
+            color: white;
+            transition: margin-inline-end 0.2s, font-size 0.2s;
+            font-size: 16px;
         }
 
         .star:hover {
-            width: 20px;
-            height: 20px;
+            font-size: 20px;
         }
 
         &:hover {

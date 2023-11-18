@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { Icon } from './Icon'
 
 export function BoardPreview({ board }) {
     return (
@@ -11,9 +12,7 @@ export function BoardPreview({ board }) {
         >
             <div className="board-preview-contents">
                 <h1 className="board-title">{board.title}</h1>
-                <button className="star">
-                    <img src="images/star-white.svg" />
-                </button>
+                <Icon className="star" type="star" />
             </div>
         </Link>
     )

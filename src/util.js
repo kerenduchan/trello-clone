@@ -23,4 +23,5 @@ const _typeToMaterialSymbol = {
     activity: 'list',
     description: 'subject',
     card: 'credit_card',
+    star: 'star',
 }
