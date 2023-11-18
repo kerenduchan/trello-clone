@@ -55,7 +55,26 @@ function _createBoards() {
                     backgroundImage:
                         'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/74f86385ffe74500fbb085bdcc036411/photo-1699393393028-d44da72dba1d.jpg',
                 },
-
+                labels: [
+                    {
+                        _id: 'l101',
+                        title: 'Done',
+                        color: '#61bd4f',
+                        colorName: 'Green',
+                    },
+                    {
+                        _id: 'l102',
+                        title: 'Progress',
+                        color: '#db60a2',
+                        colorName: 'Pink',
+                    },
+                    {
+                        _id: 'l103',
+                        title: '',
+                        color: '#f2ea74',
+                        colorName: 'Yellow',
+                    },
+                ],
                 taskGroups: [
                     {
                         _id: 'g101',
@@ -107,6 +126,7 @@ function _createBoards() {
                                         ],
                                     },
                                 ],
+                                labelIds: ['l101', 'l102'],
                             },
                             {
                                 _id: 'c102',
