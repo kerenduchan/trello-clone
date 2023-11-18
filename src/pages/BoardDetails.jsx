@@ -28,7 +28,13 @@ export function BoardDetails() {
             for (let j = 0; j < taskGroup.tasks.length; ++j) {
                 const task = taskGroup.tasks[j]
                 if (task._id === taskId) {
-                    return task
+                    return {
+                        ...task,
+                        taskGroup: {
+                            _id: taskGroup._id,
+                            title: taskGroup.title,
+                        },
+                    }
                 }
             }
         }

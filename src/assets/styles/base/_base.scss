@@ -30,7 +30,7 @@ h3 {
 }
 
 p {
-    @include font(14px, 20px, 400);
+    @include font-p();
 }
 
 button {

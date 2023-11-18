@@ -9,6 +9,8 @@ export function TaskDetails({ task }) {
     const navigate = useNavigate()
     const params = useParams()
 
+    console.log(task)
+
     function onClose() {
         navigate(`/b/${params.boardId}`)
     }
@@ -28,7 +30,12 @@ export function TaskDetails({ task }) {
                 <div className="header">
                     <Icon type="card" size="md" />
                     <h1 className="title">{task.title}</h1>
-                    <p className="subtitle">in list...</p>
+                    <p className="subtitle">
+                        in list{' '}
+                        <span className="task-group-title">
+                            {task.taskGroup.title}
+                        </span>
+                    </p>
                 </div>
                 <div className="main">
                     <TaskDetailsDescription task={task} />

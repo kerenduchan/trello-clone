@@ -55,6 +55,12 @@
             }
             .subtitle {
                 grid-area: 4 / 2;
+
+                .task-group-title {
+                    text-decoration: underline;
+                    @include font-p();
+                    cursor: pointer;
+                }
             }
         }
 
