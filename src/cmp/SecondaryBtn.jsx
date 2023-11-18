@@ -1,7 +1,7 @@
-export function SecondaryBtn({ text, className, onClick }) {
+export function SecondaryBtn({ className, onClick, children }) {
     return (
         <button className={`secondary-btn ${className}`} onClick={onClick}>
-            {text}
+            {children}
         </button>
     )
 }

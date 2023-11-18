@@ -1,17 +1,5 @@
 .task-details-description {
-    display: grid;
-    grid-template-columns: 56px 1fr;
-    grid-template-rows: 16px auto 12px auto;
-    align-items: center;
-
-    .icon {
-        grid-area: 2 / 1;
-        justify-self: center;
-    }
-
-    .title {
-        grid-area: 2 / 2;
-    }
+    @include task-details-main-subsection();
 
     .text,
     .add-btn {

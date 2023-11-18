@@ -9,10 +9,9 @@ export function TaskDetailsDescription({ task }) {
             {task.description ? (
                 <p className="text">{task.description}</p>
             ) : (
-                <SecondaryBtn
-                    className="add-btn"
-                    text="Add a more detailed description..."
-                />
+                <SecondaryBtn className="add-btn">
+                    "Add a more detailed description..."
+                </SecondaryBtn>
             )}
         </div>
     )

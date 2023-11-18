@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from 'react-router'
 import { CircleBtn } from '../cmp/CircleBtn'
 import { TaskDetailsDescription } from '../cmp/TaskDetailsDescription'
+import { TaskDetailsActivity } from '../cmp/TaskDetailsActivity'
 
 export function TaskDetails({ task }) {
     const navigate = useNavigate()
@@ -31,6 +32,7 @@ export function TaskDetails({ task }) {
                 </div>
                 <div className="main">
                     <TaskDetailsDescription task={task} />
+                    <TaskDetailsActivity task={task} />
                 </div>
                 <div className="sidebar"></div>
             </div>

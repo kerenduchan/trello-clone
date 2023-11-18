@@ -9,3 +9,24 @@
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
 }
+
+@mixin task-details-main-subsection {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    grid-template-rows: 16px auto 12px auto;
+    align-items: center;
+
+    .icon {
+        grid-area: 2 / 1;
+        justify-self: center;
+    }
+
+    .title {
+        grid-area: 2 / 2;
+    }
+
+    .title-btn {
+        grid-area: 2 / 2;
+        justify-self: end;
+    }
+}
