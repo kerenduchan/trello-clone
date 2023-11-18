@@ -15,6 +15,7 @@ export function TaskDetailsChecklist({ checklist }) {
                             className="item-checkbox"
                             type="checkbox"
                             checked={item.isDone}
+                            onChange={() => {}}
                         />
                         <span
                             className={`item-title ${

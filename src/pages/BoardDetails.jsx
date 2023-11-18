@@ -28,12 +28,20 @@ export function BoardDetails() {
             for (let j = 0; j < taskGroup.tasks.length; ++j) {
                 const task = taskGroup.tasks[j]
                 if (task._id === taskId) {
+                    // add more data onto the task that's needed for rendering the task
                     return {
                         ...task,
                         taskGroup: {
                             _id: taskGroup._id,
                             title: taskGroup.title,
                         },
+                        labels: task.labelIds
+                            ? task.labelIds.map((labelId) => {
+                                  return board.labels.filter(
+                                      (l) => l._id === labelId
+                                  )[0]
+                              })
+                            : [],
                     }
                 }
             }

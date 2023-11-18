@@ -5,12 +5,11 @@ import { TaskDetailsActivity } from '../cmp/TaskDetailsActivity'
 import { TaskDetailsSidebar } from '../cmp/TaskDetailsSidebar'
 import { Icon } from '../cmp/Icon'
 import { TaskDetailsChecklists } from '../cmp/TaskDetailsChecklists'
+import { TaskDetailsLabels } from '../cmp/TaskDetailsLabels'
 
 export function TaskDetails({ task }) {
     const navigate = useNavigate()
     const params = useParams()
-
-    console.log(task)
 
     function onClose() {
         navigate(`/b/${params.boardId}`)
@@ -39,6 +38,7 @@ export function TaskDetails({ task }) {
                     </p>
                 </div>
                 <div className="main">
+                    <TaskDetailsLabels labels={task.labels} />
                     <TaskDetailsDescription task={task} />
                     <TaskDetailsChecklists checklists={task.checklists} />
                     <TaskDetailsActivity task={task} />
