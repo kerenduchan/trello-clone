@@ -32,6 +32,7 @@ export function TaskDetails({ task }) {
                 <div className="main">
                     <TaskDetailsDescription task={task} />
                 </div>
+                <div className="sidebar"></div>
             </div>
         </div>
     )

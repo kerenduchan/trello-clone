@@ -17,6 +17,15 @@
         height: 500px;
         background-color: var(--task-details-bg-color);
         overflow: hidden;
+        display: grid;
+        grid-template-columns: 16px 1fr 16px 168px 16px;
+        grid-template-rows: repeat(3, auto);
+        align-content: start;
+
+        grid-template-areas:
+            'cover cover  cover  cover   cover'
+            '.     header header header  .    '
+            '.     main   .      sidebar .    ';
 
         .close-btn {
             position: absolute;
@@ -26,9 +35,11 @@
 
         .cover {
             height: 116px;
+            grid-area: cover;
         }
 
         .header {
+            grid-area: header;
             display: grid;
             grid-template-columns: 56px 1fr;
             grid-template-rows: 16px auto;
@@ -46,8 +57,8 @@
             }
         }
 
-        .body {
-            display: grid;
+        .main {
+            grid-area: main;
         }
     }
 }

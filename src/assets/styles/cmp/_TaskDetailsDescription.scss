@@ -13,7 +13,12 @@
         grid-area: 2 / 2;
     }
 
-    .text {
+    .text,
+    .add-btn {
         grid-area: 4 / 2;
+    }
+
+    .add-btn {
+        min-height: 56px;
     }
 }
