@@ -13,7 +13,17 @@ export function TaskDetails({ task }) {
         <div className="task-details-bg" onClick={onClose}>
             <div className="task-details" onClick={(e) => e.stopPropagation()}>
                 <CircleButton type="close" onClick={onClose} />
-                <h1 className="title">{task.title}</h1>
+                <div className="header">
+                    {task.cover && (
+                        <div
+                            className="cover"
+                            style={{
+                                backgroundColor: task.cover.bgColor,
+                            }}
+                        ></div>
+                    )}
+                    <h1 className="title">{task.title}</h1>
+                </div>
             </div>
         </div>
     )

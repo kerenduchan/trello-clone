@@ -11,22 +11,36 @@
     padding-top: 48px;
 
     .task-details {
+        position: relative;
         border-radius: 8px;
         width: 768px;
         height: 500px;
-        background-color: white;
-        display: grid;
-        grid-template-columns: 16px 40px 1fr 16px 168px 16px;
-        grid-template-rows: 16px auto;
-        z-index: 2;
-
-        .title {
-            grid-area: 2 / 3;
-        }
+        background-color: var(--task-details-bg-color);
+        overflow: hidden;
 
         .close-btn {
-            grid-area: 2 / 5;
-            justify-self: end;
+            position: absolute;
+            top: 16px;
+            right: 16px;
+        }
+
+        .header {
+            display: grid;
+            grid-template-columns: 16px 1fr 16px;
+            grid-template-rows: auto 16px auto;
+
+            .cover {
+                grid-area: 1 / 1 / span 1 / -1;
+                height: 116px;
+            }
+
+            .title {
+                grid-area: 3 / 2;
+            }
+        }
+
+        .body {
+            display: grid;
         }
     }
 }

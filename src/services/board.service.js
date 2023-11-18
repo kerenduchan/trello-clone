@@ -65,6 +65,9 @@ function _createBoards() {
                             {
                                 _id: 'c101',
                                 title: 'Design Web API',
+                                cover: {
+                                    bgColor: '#98b5a0',
+                                },
                             },
                             {
                                 _id: 'c102',
