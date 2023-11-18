@@ -29,8 +29,8 @@
 
         .close-btn {
             position: absolute;
-            top: 16px;
-            right: 16px;
+            top: 12px;
+            right: 12px;
         }
 
         .cover {
@@ -42,7 +42,7 @@
             grid-area: header;
             display: grid;
             grid-template-columns: 56px 1fr;
-            grid-template-rows: 16px auto;
+            grid-template-rows: 20px auto 4px auto;
             align-items: center;
             .icon {
                 grid-area: 2 / 1;
@@ -54,7 +54,7 @@
                 @include font(20px, 24px, 600);
             }
             .subtitle {
-                grid-area: 3 / 2;
+                grid-area: 4 / 2;
             }
         }
 

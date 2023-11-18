@@ -29,6 +29,10 @@ h3 {
     @include font(12px, 20px, 600);
 }
 
+p {
+    @include font(14px, 20px, 400);
+}
+
 button {
     cursor: pointer;
     @include font-family();
