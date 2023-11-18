@@ -4,6 +4,7 @@ import { TaskDetailsDescription } from '../cmp/TaskDetailsDescription'
 import { TaskDetailsActivity } from '../cmp/TaskDetailsActivity'
 import { TaskDetailsSidebar } from '../cmp/TaskDetailsSidebar'
 import { Icon } from '../cmp/Icon'
+import { TaskDetailsChecklists } from '../cmp/TaskDetailsChecklists'
 
 export function TaskDetails({ task }) {
     const navigate = useNavigate()
@@ -39,6 +40,7 @@ export function TaskDetails({ task }) {
                 </div>
                 <div className="main">
                     <TaskDetailsDescription task={task} />
+                    <TaskDetailsChecklists checklists={task.checklists} />
                     <TaskDetailsActivity task={task} />
                 </div>
                 <TaskDetailsSidebar />

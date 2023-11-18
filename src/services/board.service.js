@@ -68,6 +68,45 @@ function _createBoards() {
                                 cover: {
                                     bgColor: '#98b5a0',
                                 },
+                                checklists: [
+                                    {
+                                        _id: 'YEhmF',
+                                        title: 'High Priority',
+                                        items: [
+                                            {
+                                                _id: '212jX',
+                                                title: 'REST or GraphQL?',
+                                                isDone: true,
+                                            },
+                                            {
+                                                _id: '212jZ',
+                                                title: 'Write design doc',
+                                                isDone: false,
+                                            },
+                                            {
+                                                _id: '212jF',
+                                                title: 'Design review meeting',
+                                                isDone: false,
+                                            },
+                                        ],
+                                    },
+                                    {
+                                        _id: 'YEhmF',
+                                        title: 'Maybe if we have time',
+                                        items: [
+                                            {
+                                                _id: '212ja',
+                                                title: 'have coffee',
+                                                isDone: false,
+                                            },
+                                            {
+                                                _id: '212jb',
+                                                title: 'eat lunch',
+                                                isDone: false,
+                                            },
+                                        ],
+                                    },
+                                ],
                             },
                             {
                                 _id: 'c102',
