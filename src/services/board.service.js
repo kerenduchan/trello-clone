@@ -87,6 +87,9 @@ function _createBoards() {
                             {
                                 _id: 'c104',
                                 title: 'Filter products',
+                                cover: {
+                                    bgColor: '#e774bb',
+                                },
                             },
                         ],
                     },
