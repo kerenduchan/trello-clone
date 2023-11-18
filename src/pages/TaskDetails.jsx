@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router'
-import { CircleButton } from '../cmp/CircleButton'
+import { CircleBtn } from '../cmp/CircleBtn'
 import { TaskDetailsDescription } from '../cmp/TaskDetailsDescription'
 
 export function TaskDetails({ task }) {
@@ -13,7 +13,7 @@ export function TaskDetails({ task }) {
     return (
         <div className="task-details-bg" onClick={onClose}>
             <div className="task-details" onClick={(e) => e.stopPropagation()}>
-                <CircleButton type="close" onClick={onClose} />
+                <CircleBtn type="close" onClick={onClose} />
                 {task.cover && (
                     <div
                         className="cover"
