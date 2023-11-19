@@ -8,6 +8,9 @@
         0px 1px 1px #091e4240,
         0px 0px 1px #091e424f
     );
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
 
     .header {
         padding-inline-start: 12px;
@@ -30,10 +33,23 @@
     }
 
     .task-list {
-        margin-top: 10px;
-        margin-bottom: 2px;
         display: flex;
         flex-direction: column;
         gap: 8px;
+    }
+
+    .add-btn {
+        padding-top: 6px;
+        padding-bottom: 6px;
+        padding-inline-start: 8px;
+        padding-inline-end: 12px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        column-gap: 8px;
+
+        &:hover {
+            background-color: var(--bg-neutral-hovered);
+        }
     }
 }

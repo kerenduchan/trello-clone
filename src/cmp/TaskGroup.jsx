@@ -1,5 +1,4 @@
 import { Icon } from './Icon'
-import { SecondaryBtn } from './SecondaryBtn'
 import { TaskPreview } from './TaskPreview'
 
 // Represents a group of tasks (a list in the UI) in a board
@@ -9,7 +8,7 @@ export function TaskGroup({ board, taskGroup }) {
             <header className="header">
                 <h2>{taskGroup.title}</h2>
                 <button className="more-btn">
-                    <Icon type="more" size="xs"></Icon>
+                    <Icon type="more"></Icon>
                 </button>
             </header>
 
@@ -20,6 +19,11 @@ export function TaskGroup({ board, taskGroup }) {
                     </li>
                 ))}
             </ol>
+
+            <button className="add-btn">
+                <Icon type="add"></Icon>
+                <span>Add a card</span>
+            </button>
         </section>
     )
 }
