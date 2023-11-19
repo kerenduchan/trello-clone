@@ -63,3 +63,7 @@
         background-color: $pressed;
     }
 }
+
+@mixin outline-emphasis() {
+    outline: 2px solid var(--outline-emphasis-color);
+}

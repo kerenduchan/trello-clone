@@ -7,12 +7,12 @@ export function TaskDetailsLabels({ labels }) {
                     <ul>
                         {labels.map((label) => (
                             <li key={label._id}>
-                                <div
+                                <button
                                     className="label"
                                     style={{ backgroundColor: label.color }}
                                 >
                                     {label.title}
-                                </div>
+                                </button>
                             </li>
                         ))}
                     </ul>

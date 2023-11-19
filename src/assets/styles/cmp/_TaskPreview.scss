@@ -12,7 +12,7 @@
     grid-template-columns: 12px 1fr 12px;
 
     &:hover {
-        outline: 2px solid var(--task-preview-hover-outline-color);
+        @include outline-emphasis();
     }
 
     .cover {

@@ -21,5 +21,9 @@
         padding-inline-end: 12px;
         line-height: 32px;
         cursor: pointer;
+
+        &:active {
+            @include outline-emphasis();
+        }
     }
 }
