@@ -75,6 +75,13 @@ function _createBoards() {
                         colorName: 'Yellow',
                     },
                 ],
+                members: [
+                    {
+                        _id: 'u101',
+                        fullname: 'Tal Tarablus',
+                        imgUrl: 'https://www.google.com',
+                    },
+                ],
                 taskGroups: [
                     {
                         _id: 'g101',
@@ -84,6 +91,7 @@ function _createBoards() {
                             {
                                 _id: 'c101',
                                 title: 'Design Web API',
+                                archivedAt: null,
                                 cover: {
                                     bgColor: '#98b5a0',
                                 },
@@ -131,6 +139,7 @@ function _createBoards() {
                             {
                                 _id: 'c102',
                                 title: 'Install nodeJS',
+                                archivedAt: null,
                             },
                         ],
                     },
@@ -142,12 +151,26 @@ function _createBoards() {
                             {
                                 _id: 'c103',
                                 title: 'Log out functionality',
+                                archivedAt: null,
                                 description:
                                     'Allow a logged-in user to log out',
+                                comments: [
+                                    {
+                                        id: 'ZdPnm',
+                                        txt: 'also @yaronb please CR this',
+                                        createdAt: 1590999817436,
+                                        byMember: {
+                                            _id: 'u101',
+                                            fullname: 'Tal Tarablus',
+                                            imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                                        },
+                                    },
+                                ],
                             },
                             {
                                 _id: 'c104',
                                 title: 'Filter products',
+                                archivedAt: null,
                                 cover: {
                                     bgColor: '#e774bb',
                                 },
