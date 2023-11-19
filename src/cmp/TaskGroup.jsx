@@ -1,4 +1,5 @@
 import { Icon } from './Icon'
+import { SquareIconBtn } from './SquareIconBtn'
 import { TaskPreview } from './TaskPreview'
 
 // Represents a group of tasks (a list in the UI) in a board
@@ -7,9 +8,7 @@ export function TaskGroup({ board, taskGroup }) {
         <section className="task-group">
             <header className="header">
                 <h2>{taskGroup.title}</h2>
-                <button className="more-btn">
-                    <Icon type="more"></Icon>
-                </button>
+                <SquareIconBtn className="more-btn" icon="more" />
             </header>
 
             <ol className="task-list">

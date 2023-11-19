@@ -17,19 +17,6 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-
-        .more-btn {
-            @include square(32px);
-            padding: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-
-            &:hover {
-                background-color: var(--bg-neutral-hovered);
-            }
-        }
     }
 
     .task-list {

@@ -1,0 +1,10 @@
+.square-icon-btn {
+    @include square(32px);
+    padding: 8px;
+    border-radius: 8px;
+    @include flex-center();
+
+    &:hover {
+        background-color: var(--bg-neutral-hovered);
+    }
+}

@@ -45,3 +45,9 @@
     height: $size;
     width: $size;
 }
+
+@mixin flex-center() {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
