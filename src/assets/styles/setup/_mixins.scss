@@ -51,3 +51,15 @@
     align-items: center;
     justify-content: center;
 }
+
+@mixin button-bg($normal, $hovered, $pressed) {
+    background-color: $normal;
+
+    &:hover {
+        background-color: $hovered;
+    }
+
+    &:active {
+        background-color: $pressed;
+    }
+}
