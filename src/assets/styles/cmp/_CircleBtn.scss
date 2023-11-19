@@ -1,11 +1,12 @@
 .circle-btn {
+    @include button-bg(
+        transparent,
+        var(--bg-neutral-subtle-hovered),
+        var(--bg-neutral-subtle-pressed)
+    );
     border-radius: 50%;
     @include square(40px);
     display: flex;
     justify-content: center;
     align-items: center;
-
-    &:hover {
-        background-color: rgba(0, 0, 0, 0.08);
-    }
 }

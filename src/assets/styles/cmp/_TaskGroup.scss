@@ -1,6 +1,6 @@
 .task-group {
     width: 272px;
-    background-color: var(--task-group-bg-color);
+    background-color: var(--bg-2);
     border-radius: 12px;
     padding: 8px;
     box-shadow: var(
@@ -26,6 +26,12 @@
     }
 
     .add-btn {
+        @include button-bg(
+            transparent,
+            var(--bg-neutral-hovered),
+            var(--bg-neutral-pressed)
+        );
+
         padding-top: 6px;
         padding-bottom: 6px;
         padding-inline-start: 8px;
@@ -34,10 +40,6 @@
         display: flex;
         align-items: center;
         column-gap: 8px;
-
-        &:hover {
-            background-color: var(--bg-neutral-hovered);
-        }
     }
 
     .footer {

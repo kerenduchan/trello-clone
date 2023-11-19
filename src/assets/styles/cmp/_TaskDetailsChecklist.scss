@@ -17,20 +17,22 @@
     }
 
     .item-title {
+        @include button-bg(
+            transparent,
+            var(--bg-neutral-hovered),
+            var(--bg-neutral-pressed)
+        );
+
         grid-area: 1 / 3;
         margin-inline-start: -16px;
         padding-inline-start: 16px;
         padding-top: 6px;
         padding-bottom: 6px;
+        border-radius: 10px;
         @include font-p();
 
         &.done {
             text-decoration: line-through;
-        }
-
-        &:hover {
-            background-color: var(--slight-dark-overlay-color);
-            border-radius: 10px;
         }
     }
 

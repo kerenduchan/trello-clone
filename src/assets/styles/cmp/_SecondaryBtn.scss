@@ -1,13 +1,14 @@
 .secondary-btn {
-    background-color: var(--slight-dark-overlay-color);
+    @include button-bg(
+        var(--bg-neutral),
+        var(--bg-neutral-hovered),
+        var(--bg-neutral-pressed)
+    );
+
     padding: 8px 12px;
     font-weight: 500;
     border-radius: 3px;
     display: flex;
     align-items: center;
     gap: 6px;
-
-    &:hover {
-        background-color: rgba(9, 30, 66, 0.15);
-    }
 }

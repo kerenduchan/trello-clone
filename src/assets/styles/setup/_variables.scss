@@ -1,22 +1,35 @@
 :root {
-    // colors
-    --board-index-header-bg-color: #ffffff;
-    --board-index-header-border-bottom-color: rgba(23, 43, 77, 0.16);
-    --text-color: #172b4d;
-    --text-color-light: #ffffff;
-    --primary-button-text-color: #ffffff;
-    --board-header-bg-color: #ffffff3d;
-    --task-group-bg-color: #f1f2f4;
-    --task-preview-bg-color: #ffffff;
-    --task-details-bg-color: #f1f2f4;
-    --task-preview-hover-outline-color: #000000;
-    --ds-shadow-raised: 0px 1px 1px #091e4240, 0px 0px 1px #091e424f;
-    --slight-dark-overlay-color: rgba(9, 30, 66, 0.06);
+    // COLORS
+
+    // generic bg colors
+    --bg-1: #ffffff;
+    --bg-2: #f1f2f4;
+
+    // neutral background (semi-transparent)
+    --bg-neutral: #091e420f;
     --bg-neutral-hovered: #091e4224;
     --bg-neutral-pressed: #091e424f;
 
-    // primary button: normal, hovered, pressed
+    // text color
+    --text-color: #172b4d;
+    --text-color-light: #ffffff;
+
+    // neutral subtle background
+    --bg-neutral-subtle: #00000000;
+    --bg-neutral-subtle-hovered: #091e420f;
+    --bg-neutral-subtle-pressed: #091e4224;
+
+    // primary button
     --bg-primary-btn: #0c66e4;
     --bg-primary-btn-hovered: #0055cc;
     --bg-primary-btn-pressed: #15326b;
+    --text-color-primary-btn: #ffffff;
+
+    // components
+    --bg-board-header: #ffffff3d;
+    --board-index-header-border-bottom-color: rgba(23, 43, 77, 0.16);
+    --task-preview-hover-outline-color: #000000;
+
+    // misc
+    --ds-shadow-raised: 0px 1px 1px #091e4240, 0px 0px 1px #091e424f;
 }
