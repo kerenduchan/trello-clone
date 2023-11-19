@@ -1,15 +1,3 @@
-.primary-btn {
-    background-color: var(--primary-button-bg-color);
-    color: var(--primary-button-text-color);
-    height: 32px;
-    padding-inline-start: 12px;
-    padding-inline-end: 12px;
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
-    @include font(14px, 32px, 500);
-}
-
 .app-content {
     grid-area: 2 / 1;
 }

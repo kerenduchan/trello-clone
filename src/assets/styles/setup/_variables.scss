@@ -4,7 +4,6 @@
     --board-index-header-border-bottom-color: rgba(23, 43, 77, 0.16);
     --text-color: #172b4d;
     --text-color-light: #ffffff;
-    --primary-button-bg-color: #0c66e4;
     --primary-button-text-color: #ffffff;
     --board-header-bg-color: #ffffff3d;
     --task-group-bg-color: #f1f2f4;
@@ -15,4 +14,9 @@
     --slight-dark-overlay-color: rgba(9, 30, 66, 0.06);
     --bg-neutral-hovered: #091e4224;
     --bg-neutral-pressed: #091e424f;
+
+    // primary button: normal, hovered, pressed
+    --bg-primary-btn: #0c66e4;
+    --bg-primary-btn-hovered: #0055cc;
+    --bg-primary-btn-pressed: #15326b;
 }

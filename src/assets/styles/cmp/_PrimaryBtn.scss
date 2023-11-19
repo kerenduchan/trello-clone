@@ -1,0 +1,19 @@
+.primary-btn {
+    background-color: var(--bg-primary-btn);
+    color: var(--primary-button-text-color);
+    height: 32px;
+    padding-inline-start: 12px;
+    padding-inline-end: 12px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    @include font(14px, 32px, 500);
+
+    &:hover {
+        background-color: var(--bg-primary-btn-hovered);
+    }
+
+    &:active {
+        background-color: var(--bg-primary-btn-pressed);
+    }
+}
