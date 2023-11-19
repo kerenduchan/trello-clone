@@ -24,4 +24,5 @@ const _typeToMaterialSymbol = {
     description: 'subject',
     card: 'credit_card',
     star: 'star',
+    more: 'more_horiz',
 }

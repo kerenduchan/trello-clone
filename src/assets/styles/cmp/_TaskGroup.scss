@@ -9,9 +9,25 @@
         0px 0px 1px #091e424f
     );
 
-    .task-group-header {
-        padding-top: 6px;
+    .header {
         padding-inline-start: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .more-btn {
+            height: 32px;
+            width: 32px;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+
+            &:hover {
+                background-color: var(--bg-neutral-hovered);
+            }
+        }
     }
 
     .task-list {
