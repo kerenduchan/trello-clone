@@ -7,4 +7,8 @@
     &:hover {
         background-color: var(--bg-neutral-hovered);
     }
+
+    &:active {
+        background-color: var(--bg-neutral-pressed);
+    }
 }
