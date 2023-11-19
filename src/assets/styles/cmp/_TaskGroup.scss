@@ -39,4 +39,9 @@
             background-color: var(--bg-neutral-hovered);
         }
     }
+
+    .footer {
+        display: grid;
+        grid-template-columns: 1fr auto;
+    }
 }

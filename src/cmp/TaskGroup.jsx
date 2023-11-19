@@ -19,10 +19,13 @@ export function TaskGroup({ board, taskGroup }) {
                 ))}
             </ol>
 
-            <button className="add-btn">
-                <Icon type="add"></Icon>
-                <span>Add a card</span>
-            </button>
+            <div className="footer">
+                <button className="add-btn">
+                    <Icon type="add"></Icon>
+                    <span>Add a card</span>
+                </button>
+                <SquareIconBtn className="template-btn" icon="template" />
+            </div>
         </section>
     )
 }
