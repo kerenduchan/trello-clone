@@ -1,0 +1,29 @@
+.progress {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    grid-template-areas: 'label bar';
+    align-items: center;
+
+    .label {
+        grid-area: label;
+        @include font(11px, 10px, 400);
+
+        &::after {
+            content: '%';
+        }
+    }
+
+    .bar {
+        grid-area: bar;
+        height: 8px;
+        border-radius: 4px;
+        background-color: #091e420f;
+        overflow: hidden;
+
+        .completed {
+            background-color: #579dff;
+            height: 100%;
+            transition: width 0.2s;
+        }
+    }
+}
