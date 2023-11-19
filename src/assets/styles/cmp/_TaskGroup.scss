@@ -16,8 +16,7 @@
         align-items: center;
 
         .more-btn {
-            height: 32px;
-            width: 32px;
+            @include square(32px);
             padding: 8px;
             display: flex;
             align-items: center;
