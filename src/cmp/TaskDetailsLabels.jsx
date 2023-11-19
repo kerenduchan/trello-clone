@@ -8,11 +8,12 @@ export function TaskDetailsLabels({ labels }) {
                         {labels.map((label) => (
                             <li key={label._id}>
                                 <button
-                                    className="label"
+                                    className="label-btn"
                                     style={{ backgroundColor: label.color }}
                                 >
                                     {label.title}
                                 </button>
+                                <div className="overlay" />
                             </li>
                         ))}
                     </ul>
