@@ -33,6 +33,10 @@ p {
     @include font-p();
 }
 
+input {
+    @include font-family();
+}
+
 button {
     cursor: pointer;
     @include font-family();
