@@ -1,7 +1,7 @@
-import { Icon } from './Icon'
-import { SecondaryBtn } from './SecondaryBtn'
+import { Icon } from '../Icon'
+import { SecondaryBtn } from '../SecondaryBtn'
 
-export function TaskDetailsDescription({ task }) {
+export function Description({ task }) {
     return (
         <div className="task-details-description">
             <Icon type="description" size="md" />

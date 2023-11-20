@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { SecondaryBtn } from './SecondaryBtn'
-import { Icon } from './Icon'
-import { ProgressBar } from './ProgressBar'
+import { SecondaryBtn } from '../SecondaryBtn'
+import { Icon } from '../Icon'
+import { ProgressBar } from '../ProgressBar'
 
-export function TaskDetailsActivity({ task }) {
+export function Activity({ task }) {
     const [showDetails, setShowDetails] = useState(false)
 
     return (
