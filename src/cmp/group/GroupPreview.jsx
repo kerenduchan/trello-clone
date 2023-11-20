@@ -1,6 +1,6 @@
 import { Icon } from '../general/Icon'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
-import { TaskPreview } from '../task/TaskPreview'
+import { TaskList } from '../task/TaskList'
 
 // Represents a group of tasks (a list in the UI) in a board
 export function GroupPreview({ board, group }) {
@@ -11,14 +11,7 @@ export function GroupPreview({ board, group }) {
                 <SquareIconBtn className="more-btn" icon="more" />
             </header>
 
-            <ol className="task-list">
-                {group.tasks.map((t) => (
-                    <li key={t._id}>
-                        <TaskPreview board={board} task={t} />
-                    </li>
-                ))}
-            </ol>
-
+            <TaskList board={board} tasks={group.tasks} />
             <div className="footer">
                 <button className="add-btn">
                     <Icon type="add"></Icon>
