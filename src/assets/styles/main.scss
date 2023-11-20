@@ -30,7 +30,8 @@
 @import 'cmp/general/ProgressBar';
 
 // group
-@import 'cmp/group/Group';
+@import 'cmp/group/GroupList';
+@import 'cmp/group/GroupPreview';
 
 // task
 @import 'cmp/task/TaskDetailsActivity';
@@ -38,6 +39,7 @@
 @import 'cmp/task/TaskDetailsDescription';
 @import 'cmp/task/TaskDetailsLabels';
 @import 'cmp/task/TaskDetailsSidebar';
+@import 'cmp/task/TaskList';
 @import 'cmp/task/TaskPreview';
 
 // misc

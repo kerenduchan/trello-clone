@@ -5,7 +5,7 @@ import { TaskList } from '../task/TaskList'
 // Represents a group of tasks (a list in the UI) in a board
 export function GroupPreview({ board, group }) {
     return (
-        <section className="group">
+        <section className="group-preview">
             <header className="header">
                 <h2>{group.title}</h2>
                 <SquareIconBtn className="more-btn" icon="more" />
