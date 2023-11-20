@@ -26,7 +26,7 @@ h2 {
 }
 
 h3 {
-    @include font(12px, 20px, 600);
+    @include h3();
 }
 
 p {

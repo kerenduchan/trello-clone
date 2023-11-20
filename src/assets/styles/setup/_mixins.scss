@@ -8,6 +8,10 @@
     @include font(14px, 20px, 400);
 }
 
+@mixin h3() {
+    @include font(12px, 20px, 600);
+}
+
 @mixin prevent-select() {
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */

@@ -1,0 +1,21 @@
+.board-create-form {
+    display: flex;
+    flex-direction: column;
+
+    label {
+        @include h3();
+    }
+
+    input {
+        box-shadow: var(--box-shadow-input);
+        border-radius: 3px;
+        padding: 8px 12px;
+        margin-top: 2px;
+        @include font-family();
+        @include font-p();
+    }
+
+    .create-btn {
+        margin-top: 16px;
+    }
+}

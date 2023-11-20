@@ -17,6 +17,7 @@
 // COMPONENTS
 
 // board
+@import 'cmp/board/BoardCreate';
 @import 'cmp/board/BoardDetailsTopbar';
 @import 'cmp/board/BoardList';
 @import 'cmp/board/BoardPreview';
@@ -27,6 +28,7 @@
 @import 'cmp/general/btn/SecondaryBtn';
 @import 'cmp/general/btn/SquareIconBtn';
 @import 'cmp/general/Icon';
+@import 'cmp/general/Popover';
 @import 'cmp/general/ProgressBar';
 
 // group

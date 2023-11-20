@@ -12,6 +12,7 @@
 
     // text color
     --text-color: #172b4d;
+    --text-color-subtle: #44546f;
     --text-color-light: #ffffff;
 
     // neutral subtle background
@@ -33,5 +34,7 @@
     --outline-emphasis-color: #000000;
 
     // BOX SHADOW
-    --ds-shadow-raised: 0px 1px 1px #091e4240, 0px 0px 1px #091e424f;
+    --box-shadow-subtle: 0px 1px 1px #091e4240, 0px 0px 1px #091e424f;
+    --box-shadow-strong: 0px 8px 12px #091e4226, 0px 0px 1px #091e424f;
+    --box-shadow-input: inset 0 0 0 2px #091e4224;
 }

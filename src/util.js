@@ -1,4 +1,4 @@
-export { getMaterialSymbol }
+export { getMaterialSymbol, buildClassName }
 
 function getMaterialSymbol(type) {
     const symbol = _typeToMaterialSymbol[type]
@@ -25,4 +25,13 @@ const _typeToMaterialSymbol = {
     card: 'credit_card',
     star: 'star',
     more: 'more_horiz',
+}
+
+function buildClassName(...names) {
+    return names.reduce((acc, name) => {
+        if (name) {
+            acc += ' ' + name
+        }
+        return acc
+    })
 }
