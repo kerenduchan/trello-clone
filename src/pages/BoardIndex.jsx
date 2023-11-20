@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useParams } from 'react-router'
 import { useSelector } from 'react-redux'
 import { loadBoards } from '../store/actions/board.actions'
-import { BoardList } from '../cmp/BoardList'
+import { BoardList } from '../cmp/board/BoardList'
 
 export function BoardIndex() {
     const params = useParams()

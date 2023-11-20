@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { boardService } from '../services/board.service'
-import { Group } from '../cmp/Group'
-import { BoardDetailsTopbar } from '../cmp/BoardDetailsTopbar'
+import { Group } from '../cmp/group/Group'
+import { BoardDetailsTopbar } from '../cmp/board/BoardDetailsTopbar'
 import { TaskDetails } from './TaskDetails'
 
 export function BoardDetails() {

@@ -1,11 +1,11 @@
 import { useNavigate, useParams } from 'react-router'
-import { CircleBtn } from '../cmp/general/btn/CircleBtn'
-import { Description } from '../cmp/task-details/Description'
-import { Activity } from '../cmp/task-details/Activity'
-import { Sidebar } from '../cmp/task-details/Sidebar'
 import { Icon } from '../cmp/general/Icon'
-import { Checklists } from '../cmp/task-details/Checklists'
-import { Labels } from '../cmp/task-details/Labels'
+import { CircleBtn } from '../cmp/general/btn/CircleBtn'
+import { TaskDetailsDescription } from '../cmp/task/TaskDetailsDescription'
+import { TaskDetailsActivity } from '../cmp/task/TaskDetailsActivity'
+import { TaskDetailsSidebar } from '../cmp/task/TaskDetailsSidebar'
+import { TaskDetailsChecklists } from '../cmp/task/TaskDetailsChecklists'
+import { TaskDetailsLabels } from '../cmp/task/TaskDetailsLabels'
 
 export function TaskDetails({ task }) {
     const navigate = useNavigate()
@@ -36,12 +36,12 @@ export function TaskDetails({ task }) {
                     </p>
                 </div>
                 <div className="main">
-                    <Labels labels={task.labels} />
-                    <Description task={task} />
-                    <Checklists checklists={task.checklists} />
-                    <Activity task={task} />
+                    <TaskDetailsLabels labels={task.labels} />
+                    <TaskDetailsDescription task={task} />
+                    <TaskDetailsChecklists checklists={task.checklists} />
+                    <TaskDetailsActivity task={task} />
                 </div>
-                <Sidebar />
+                <TaskDetailsSidebar />
             </div>
         </div>
     )

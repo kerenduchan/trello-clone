@@ -3,7 +3,7 @@ import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 import { Icon } from '../general/Icon'
 import { ProgressBar } from '../general/ProgressBar'
 
-export function Activity({ task }) {
+export function TaskDetailsActivity({ task }) {
     const [showDetails, setShowDetails] = useState(false)
 
     return (

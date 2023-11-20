@@ -1,4 +1,4 @@
-export function Labels({ labels }) {
+export function TaskDetailsLabels({ labels }) {
     return (
         <section className="task-details-labels">
             {labels && labels.length > 0 && (

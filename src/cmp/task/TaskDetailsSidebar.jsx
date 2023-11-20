@@ -1,6 +1,6 @@
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 
-export function Sidebar() {
+export function TaskDetailsSidebar() {
     return (
         <div className="task-details-sidebar">
             <section>

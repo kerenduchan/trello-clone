@@ -1,7 +1,7 @@
 import { Icon } from '../general/Icon'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 
-export function Checklist({ checklist }) {
+export function TaskDetailsChecklist({ checklist }) {
     return (
         <div className="task-details-checklist">
             <Icon type="checklist" size="md" />

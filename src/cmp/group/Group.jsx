@@ -1,6 +1,6 @@
-import { Icon } from './general/Icon'
-import { SquareIconBtn } from './general/btn/SquareIconBtn'
-import { TaskPreview } from './TaskPreview'
+import { Icon } from '../general/Icon'
+import { SquareIconBtn } from '../general/btn/SquareIconBtn'
+import { TaskPreview } from '../task/TaskPreview'
 
 // Represents a group of tasks (a list in the UI) in a board
 export function Group({ board, group }) {
