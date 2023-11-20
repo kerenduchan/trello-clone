@@ -1,11 +1,7 @@
 .task-preview {
     background-color: var(--bg-1);
     border-radius: 8px;
-    box-shadow: var(
-        --ds-shadow-raised,
-        0px 1px 1px #091e4240,
-        0px 0px 1px #091e424f
-    );
+    box-shadow: var(--ds-shadow-raised);
     overflow: hidden;
 
     display: grid;
