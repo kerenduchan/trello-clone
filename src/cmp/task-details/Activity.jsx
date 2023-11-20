@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { SecondaryBtn } from '../SecondaryBtn'
-import { Icon } from '../Icon'
-import { ProgressBar } from '../ProgressBar'
+import { SecondaryBtn } from '../general/btn/SecondaryBtn'
+import { Icon } from '../general/Icon'
+import { ProgressBar } from '../general/ProgressBar'
 
 export function Activity({ task }) {
     const [showDetails, setShowDetails] = useState(false)

@@ -1,9 +1,9 @@
 import { useNavigate, useParams } from 'react-router'
-import { CircleBtn } from '../cmp/CircleBtn'
+import { CircleBtn } from '../cmp/general/btn/CircleBtn'
 import { Description } from '../cmp/task-details/Description'
 import { Activity } from '../cmp/task-details/Activity'
 import { Sidebar } from '../cmp/task-details/Sidebar'
-import { Icon } from '../cmp/Icon'
+import { Icon } from '../cmp/general/Icon'
 import { Checklists } from '../cmp/task-details/Checklists'
 import { Labels } from '../cmp/task-details/Labels'
 

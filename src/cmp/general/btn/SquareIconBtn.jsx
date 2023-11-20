@@ -1,4 +1,4 @@
-import { Icon } from './Icon'
+import { Icon } from '../Icon'
 
 export function SquareIconBtn({ icon, className, onClick }) {
     return (

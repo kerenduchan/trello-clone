@@ -1,4 +1,4 @@
-import { PrimaryBtn } from './PrimaryBtn'
+import { PrimaryBtn } from './general/btn/PrimaryBtn'
 
 export function AppHeader({ user }) {
     return (

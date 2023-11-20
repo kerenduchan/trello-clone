@@ -1,4 +1,4 @@
-import { getMaterialSymbol } from '../util'
+import { getMaterialSymbol } from '../../util'
 
 export function Icon({ type, size = 'sm', className, onClick }) {
     return (

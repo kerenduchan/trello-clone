@@ -1,5 +1,5 @@
-import { Icon } from '../Icon'
-import { SecondaryBtn } from '../SecondaryBtn'
+import { Icon } from '../general/Icon'
+import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 
 export function Checklist({ checklist }) {
     return (

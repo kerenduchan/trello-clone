@@ -15,20 +15,23 @@
 @import 'pages/TaskDetails';
 
 // COMPONENTS
-@import 'cmp/AppHeader';
-@import 'cmp/BoardDetailsTopbar';
-@import 'cmp/BoardList';
-@import 'cmp/BoardPreview';
-@import 'cmp/CircleBtn';
-@import 'cmp/Icon';
-@import 'cmp/PrimaryBtn';
-@import 'cmp/ProgressBar';
-@import 'cmp/SecondaryBtn';
-@import 'cmp/SquareIconBtn';
+@import 'cmp/general/btn/CircleBtn';
+@import 'cmp/general/btn/PrimaryBtn';
+@import 'cmp/general/btn/SecondaryBtn';
+@import 'cmp/general/btn/SquareIconBtn';
+
+@import 'cmp/general/Icon';
+@import 'cmp/general/ProgressBar';
+
 @import 'cmp/task-details/Activity';
 @import 'cmp/task-details/Checklist';
 @import 'cmp/task-details/Description';
 @import 'cmp/task-details/Labels';
 @import 'cmp/task-details/Sidebar';
+
+@import 'cmp/AppHeader';
+@import 'cmp/BoardDetailsTopbar';
+@import 'cmp/BoardList';
+@import 'cmp/BoardPreview';
 @import 'cmp/Group';
 @import 'cmp/TaskPreview';

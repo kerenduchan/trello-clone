@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Icon } from './Icon'
+import { Icon } from './general/Icon'
 
 export function BoardPreview({ board }) {
     return (

@@ -1,4 +1,4 @@
-import { Icon } from './Icon'
+import { Icon } from '../Icon'
 
 export function CircleBtn({ type, onClick }) {
     return (

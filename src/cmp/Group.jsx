@@ -1,5 +1,5 @@
-import { Icon } from './Icon'
-import { SquareIconBtn } from './SquareIconBtn'
+import { Icon } from './general/Icon'
+import { SquareIconBtn } from './general/btn/SquareIconBtn'
 import { TaskPreview } from './TaskPreview'
 
 // Represents a group of tasks (a list in the UI) in a board

@@ -1,4 +1,4 @@
-import { SecondaryBtn } from '../SecondaryBtn'
+import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 
 export function Sidebar() {
     return (
