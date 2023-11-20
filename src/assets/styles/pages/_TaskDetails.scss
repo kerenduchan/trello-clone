@@ -56,7 +56,7 @@
             .subtitle {
                 grid-area: 4 / 2;
 
-                .task-group-title {
+                .group-title {
                     text-decoration: underline;
                     @include font-p();
                     cursor: pointer;

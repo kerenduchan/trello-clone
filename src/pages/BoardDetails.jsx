@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { boardService } from '../services/board.service'
-import { TaskGroup } from '../cmp/TaskGroup'
+import { Group } from '../cmp/Group'
 import { BoardDetailsTopbar } from '../cmp/BoardDetailsTopbar'
 import { TaskDetails } from './TaskDetails'
 
@@ -23,17 +23,17 @@ export function BoardDetails() {
     }
 
     function findTaskById(taskId) {
-        for (let i = 0; i < board.taskGroups.length; i++) {
-            const taskGroup = board.taskGroups[i]
-            for (let j = 0; j < taskGroup.tasks.length; ++j) {
-                const task = taskGroup.tasks[j]
+        for (let i = 0; i < board.groups.length; i++) {
+            const group = board.groups[i]
+            for (let j = 0; j < group.tasks.length; ++j) {
+                const task = group.tasks[j]
                 if (task._id === taskId) {
                     // add more data onto the task that's needed for rendering the task
                     return {
                         ...task,
-                        taskGroup: {
-                            _id: taskGroup._id,
-                            title: taskGroup.title,
+                        group: {
+                            _id: group._id,
+                            title: group.title,
                         },
                         labels: task.labelIds
                             ? task.labelIds.map((labelId) => {
@@ -61,10 +61,10 @@ export function BoardDetails() {
             <BoardDetailsTopbar board={board} />
 
             <section className="board-canvas">
-                <ol className="task-group-list">
-                    {board.taskGroups.map((g) => (
+                <ol className="group-list">
+                    {board.groups.map((g) => (
                         <li key={g._id}>
-                            <TaskGroup board={board} taskGroup={g} />
+                            <Group board={board} group={g} />
                         </li>
                     ))}
                 </ol>

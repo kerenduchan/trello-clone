@@ -32,9 +32,7 @@ export function TaskDetails({ task }) {
                     <h1 className="title">{task.title}</h1>
                     <p className="subtitle">
                         in list{' '}
-                        <span className="task-group-title">
-                            {task.taskGroup.title}
-                        </span>
+                        <span className="group-title">{task.group.title}</span>
                     </p>
                 </div>
                 <div className="main">

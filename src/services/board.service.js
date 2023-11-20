@@ -82,7 +82,7 @@ function _createBoards() {
                         imgUrl: 'https://www.google.com',
                     },
                 ],
-                taskGroups: [
+                groups: [
                     {
                         _id: 'g101',
                         title: 'Backlog: Server',
@@ -184,7 +184,7 @@ function _createBoards() {
                 title: 'Personal Board',
                 isStarred: false,
                 archivedAt: null,
-                taskGroups: [],
+                groups: [],
                 createdBy: {
                     _id: 'u102',
                     fullname: 'Yigal Shalom',
