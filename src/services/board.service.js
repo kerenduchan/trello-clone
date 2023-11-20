@@ -7,6 +7,7 @@ export const boardService = {
     save,
     remove,
     create,
+    getBackgroundImages,
 }
 
 const STORAGE_KEY = 'boards'
@@ -196,4 +197,13 @@ function _createBoards() {
         ]
         utilService.saveToStorage(STORAGE_KEY, boards)
     }
+}
+
+function getBackgroundImages() {
+    return [
+        { _id: 'bg1', url: 'images/backgrounds/tree.jpg' },
+        { _id: 'bg2', url: 'images/backgrounds/mountain.jpg' },
+        { _id: 'bg3', url: 'images/backgrounds/tree.jpg' },
+        { _id: 'bg4', url: 'images/backgrounds/mountain.jpg' },
+    ]
 }
