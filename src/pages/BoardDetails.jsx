@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { boardService } from '../services/board.service'
-import { Group } from '../cmp/group/Group'
+import { GroupList } from '../cmp/group/GroupList'
 import { BoardDetailsTopbar } from '../cmp/board/BoardDetailsTopbar'
 import { TaskDetails } from './TaskDetails'
 
@@ -61,13 +61,7 @@ export function BoardDetails() {
             <BoardDetailsTopbar board={board} />
 
             <section className="board-canvas">
-                <ol className="group-list">
-                    {board.groups.map((g) => (
-                        <li key={g._id}>
-                            <Group board={board} group={g} />
-                        </li>
-                    ))}
-                </ol>
+                <GroupList board={board} groups={board.groups} />
             </section>
 
             {params.taskId && (

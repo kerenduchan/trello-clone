@@ -3,7 +3,7 @@ import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 import { TaskPreview } from '../task/TaskPreview'
 
 // Represents a group of tasks (a list in the UI) in a board
-export function Group({ board, group }) {
+export function GroupPreview({ board, group }) {
     return (
         <section className="group">
             <header className="header">
