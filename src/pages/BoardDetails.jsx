@@ -55,7 +55,7 @@ export function BoardDetails() {
         <div
             className="board-details"
             style={{
-                backgroundImage: `url(${board.style.backgroundImage})`,
+                backgroundImage: `url(${board.style?.backgroundImage})`,
             }}
         >
             <BoardDetailsTopbar board={board} />

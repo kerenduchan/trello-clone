@@ -7,7 +7,7 @@ export function BoardPreview({ board }) {
             to={`/b/${board._id}`}
             className="board-preview"
             style={{
-                backgroundImage: `url(${board.style.backgroundImage})`,
+                backgroundImage: `url(${board.style?.backgroundImage})`,
             }}
         >
             <div className="board-preview-contents">

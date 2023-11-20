@@ -4,7 +4,7 @@ export const REMOVE_BOARD = 'REMOVE_BOARD'
 export const UPDATE_BOARD = 'UPDATE_BOARD'
 
 const initialState = {
-    boards: null,
+    boards: [],
 }
 
 export function boardReducer(state = initialState, action = {}) {

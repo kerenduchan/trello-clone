@@ -1,4 +1,5 @@
 import { useForm } from '../../customHooks/useForm'
+import { saveBoard } from '../../store/actions/board.actions'
 import { Popover } from '../general/Popover'
 import { PrimaryBtn } from '../general/btn/PrimaryBtn'
 
@@ -7,7 +8,7 @@ export function BoardCreate({ onClose }) {
 
     function onSubmit(e) {
         e.preventDefault()
-        console.log('create board ', draft)
+        saveBoard(draft)
     }
 
     return (
