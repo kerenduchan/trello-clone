@@ -52,8 +52,7 @@ function _createBoards() {
                     imgUrl: 'http://some-img',
                 },
                 style: {
-                    backgroundImage:
-                        'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/74f86385ffe74500fbb085bdcc036411/photo-1699393393028-d44da72dba1d.jpg',
+                    backgroundImage: 'images/backgrounds/tree.jpg',
                 },
                 labels: [
                     {
@@ -191,8 +190,7 @@ function _createBoards() {
                     imgUrl: 'http://some-img',
                 },
                 style: {
-                    backgroundImage:
-                        'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1281x1920/efadbb633bd12e458df6f40484b34d14/photo-1699116548123-73affe0987b7.jpg',
+                    backgroundImage: 'images/backgrounds/mountain.jpg',
                 },
             },
         ]
