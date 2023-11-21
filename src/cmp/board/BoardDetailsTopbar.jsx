@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { buildClassName } from '../../util'
 import { saveBoard } from '../../store/actions/board.actions'
 import { TitleEditForm } from '../general/TitleEditForm'
+import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 
 export function BoardDetailsTopbar({ board }) {
     const [showForm, setShowForm] = useState(false)
@@ -27,6 +28,7 @@ export function BoardDetailsTopbar({ board }) {
             {showForm && (
                 <TitleEditForm title={board.title} onSubmit={onSubmit} />
             )}
+            <SquareIconBtn icon="more" />
         </header>
     )
 }
