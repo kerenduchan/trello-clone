@@ -10,9 +10,10 @@ export function BoardDetailsTopbar({ board }) {
         setShowForm(true)
     }
 
-    async function onSubmit(draft) {
-        await saveBoard({ ...board, ...draft })
+    function onSubmit(draft) {
+        board.title = draft.title
         setShowForm(false)
+        saveBoard({ ...board, ...draft })
     }
 
     return (
