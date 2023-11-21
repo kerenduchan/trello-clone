@@ -34,6 +34,7 @@ export function BoardDetailsTopbar({ board }) {
                     name="title"
                     onChange={handleChange}
                     value={draft.title}
+                    onBlur={onSubmit}
                 />
             </form>
         </header>
