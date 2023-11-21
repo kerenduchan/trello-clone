@@ -40,7 +40,7 @@ export function BoardCreate({ onClose }) {
                         <li
                             className="background-item"
                             key={img._id}
-                            style={{ backgroundImage: `url(${img.url})` }}
+                            style={{ backgroundImage: `url(${img.url}?w=400)` }}
                             onClick={() => onBackgroundClick(img)}
                         >
                             <div className="overlay"></div>

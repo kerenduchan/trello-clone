@@ -201,9 +201,21 @@ function _createBoards() {
 
 function getBackgroundImages() {
     return [
-        { _id: 'bg1', url: 'images/backgrounds/tree.jpg' },
-        { _id: 'bg2', url: 'images/backgrounds/mountain.jpg' },
-        { _id: 'bg3', url: 'images/backgrounds/lighthouse.jpg' },
-        { _id: 'bg4', url: 'images/backgrounds/boat.jpg' },
+        {
+            _id: 'bg1',
+            url: 'https://images.unsplash.com/photo-1699393393028-d44da72dba1d',
+        },
+        {
+            _id: 'bg2',
+            url: 'https://images.unsplash.com/photo-1699116548123-73affe0987b7',
+        },
+        {
+            _id: 'bg3',
+            url: 'https://images.unsplash.com/photo-1694111356884-45781a164220',
+        },
+        {
+            _id: 'bg4',
+            url: 'https://images.unsplash.com/photo-1695667937079-b59c63660cfc',
+        },
     ]
 }
