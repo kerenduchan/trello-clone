@@ -34,6 +34,7 @@ async function saveBoard(board) {
         const type = board.id ? UPDATE_BOARD : ADD_BOARD
         const boardToSave = await boardService.save(board)
         store.dispatch({ type, board: boardToSave })
+        return boardToSave
     } catch (err) {
         console.error('Failed to save board:', err)
         throw err

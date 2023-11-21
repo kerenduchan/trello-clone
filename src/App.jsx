@@ -9,9 +9,9 @@ import { TaskDetails } from './pages/TaskDetails'
 function App() {
     return (
         <div id="app">
-            <AppHeader />
-            <div className="app-content">
-                <Router>
+            <Router>
+                <AppHeader />
+                <div className="app-content">
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/login" element={<Login />} />
@@ -23,8 +23,8 @@ function App() {
                             ></Route>
                         </Route>
                     </Routes>
-                </Router>
-            </div>
+                </div>
+            </Router>
         </div>
     )
 }

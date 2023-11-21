@@ -5,26 +5,32 @@ import { boardService } from '../../services/board.service'
 import { Popover } from '../general/Popover'
 import { PrimaryBtn } from '../general/btn/PrimaryBtn'
 import { Icon } from '../general/Icon'
+import { useNavigate } from 'react-router'
 
 export function BoardCreate({ onClose }) {
+    const navigate = useNavigate()
+
     const [draft, handleChange, setDraft] = useForm({
         title: '',
-        backgroundId: 'bg1',
+        style: {
+            backgroundImage: '',
+        },
     })
 
-    function onSubmit(e) {
+    async function onSubmit(e) {
         e.preventDefault()
-        saveBoard(draft)
+        const board = await saveBoard(draft)
+        onClose()
+        navigate(`/b/${board._id}`)
     }
 
-    function onBackgroundClick(backgroundId) {
-        setDraft({ ...draft, backgroundId })
+    function onBackgroundClick(img) {
+        setDraft({ ...draft, style: { backgroundImage: img.url } })
     }
 
-    function isBackgroundSelected(backgroundId) {
-        return draft.backgroundId === backgroundId
+    function isBackgroundSelected(img) {
+        return draft.style.backgroundImage === img.url
     }
-
     return (
         <Popover onClose={onClose} title="Create Board">
             <form className="board-create-form" onSubmit={onSubmit}>
@@ -35,15 +41,13 @@ export function BoardCreate({ onClose }) {
                             className="background-item"
                             key={img._id}
                             style={{ backgroundImage: `url(${img.url})` }}
-                            onClick={() => onBackgroundClick(img._id)}
+                            onClick={() => onBackgroundClick(img)}
                         >
                             <div className="overlay"></div>
                             <Icon
                                 type="check"
                                 className={
-                                    isBackgroundSelected(img._id)
-                                        ? ''
-                                        : 'hidden'
+                                    isBackgroundSelected(img) ? '' : 'hidden'
                                 }
                             />
                         </li>
