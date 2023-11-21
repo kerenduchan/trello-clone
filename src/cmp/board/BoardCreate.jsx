@@ -6,6 +6,7 @@ import { Popover } from '../general/Popover'
 import { PrimaryBtn } from '../general/btn/PrimaryBtn'
 import { Icon } from '../general/Icon'
 import { useNavigate } from 'react-router'
+import { buildClassName } from '../../util'
 
 export function BoardCreate({ onClose }) {
     const navigate = useNavigate()
@@ -38,18 +39,16 @@ export function BoardCreate({ onClose }) {
                 <ul className="backgrounds">
                     {boardService.getBackgroundImages().map((img) => (
                         <li
-                            className="background-item"
                             key={img._id}
+                            className={buildClassName(
+                                'background-item',
+                                isBackgroundSelected(img) ? 'selected' : ''
+                            )}
                             style={{ backgroundImage: `url(${img.url}?w=400)` }}
                             onClick={() => onBackgroundClick(img)}
                         >
                             <div className="overlay"></div>
-                            <Icon
-                                type="check"
-                                className={
-                                    isBackgroundSelected(img) ? '' : 'hidden'
-                                }
-                            />
+                            <Icon type="check" />
                         </li>
                     ))}
                 </ul>

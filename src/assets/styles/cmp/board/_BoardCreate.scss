@@ -20,12 +20,6 @@
 
         .overlay {
             grid-area: 1 / 1;
-            background-color: var(--bg-neutral-subtle-hovered);
-            display: none;
-        }
-
-        &:hover .overlay {
-            display: unset;
         }
 
         .check-icon {
@@ -33,8 +27,19 @@
             color: var(--text-color-light);
             align-self: center;
             justify-self: center;
-            &.hidden {
-                display: none;
+            display: none;
+        }
+
+        &:hover .overlay {
+            background-color: var(--bg-neutral-hovered);
+        }
+
+        &.selected {
+            .overlay {
+                background-color: var(--bg-neutral-subtle-hovered);
+            }
+            .check-icon {
+                display: unset;
             }
         }
     }
