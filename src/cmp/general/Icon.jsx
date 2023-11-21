@@ -1,11 +1,15 @@
-import { getMaterialSymbol } from '../../util'
+import { buildClassName, getMaterialSymbol } from '../../util'
 
 export function Icon({ type, size = 'sm', className, onClick }) {
     return (
         <span
-            className={`icon ${size} material-symbols-outlined${
-                className ? ` ${className}` : ''
-            }`}
+            className={buildClassName(
+                'icon',
+                `${type}-icon`,
+                size,
+                'material-symbols-outlined',
+                className
+            )}
             onClick={onClick}
         >
             {getMaterialSymbol(type)}

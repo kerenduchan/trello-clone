@@ -9,12 +9,34 @@
         justify-content: space-between;
         column-gap: 8px;
     }
-    .background-btn {
+    .background-item {
         width: 64px;
         height: 40px;
         border-radius: 3px;
         background-size: cover;
         background-position: center center;
+        cursor: pointer;
+        display: grid;
+
+        .overlay {
+            grid-area: 1 / 1;
+            background-color: var(--bg-neutral-subtle-hovered);
+            display: none;
+        }
+
+        &:hover .overlay {
+            display: unset;
+        }
+
+        .check-icon {
+            grid-area: 1 / 1;
+            color: var(--text-color-light);
+            align-self: center;
+            justify-self: center;
+            &.hidden {
+                display: none;
+            }
+        }
     }
 
     label {
