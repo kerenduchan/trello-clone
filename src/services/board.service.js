@@ -53,7 +53,8 @@ function _createBoards() {
                     imgUrl: 'http://some-img',
                 },
                 style: {
-                    backgroundImage: 'images/backgrounds/tree.jpg',
+                    backgroundImage:
+                        'https://images.unsplash.com/photo-1699393393028-d44da72dba1d',
                 },
                 labels: [
                     {
@@ -191,7 +192,8 @@ function _createBoards() {
                     imgUrl: 'http://some-img',
                 },
                 style: {
-                    backgroundImage: 'images/backgrounds/mountain.jpg',
+                    backgroundImage:
+                        'https://images.unsplash.com/photo-1699116548123-73affe0987b7',
                 },
             },
         ]
@@ -201,21 +203,9 @@ function _createBoards() {
 
 function getBackgroundImages() {
     return [
-        {
-            _id: 'bg1',
-            url: 'https://images.unsplash.com/photo-1699393393028-d44da72dba1d',
-        },
-        {
-            _id: 'bg2',
-            url: 'https://images.unsplash.com/photo-1699116548123-73affe0987b7',
-        },
-        {
-            _id: 'bg3',
-            url: 'https://images.unsplash.com/photo-1694111356884-45781a164220',
-        },
-        {
-            _id: 'bg4',
-            url: 'https://images.unsplash.com/photo-1695667937079-b59c63660cfc',
-        },
+        'https://images.unsplash.com/photo-1699393393028-d44da72dba1d',
+        'https://images.unsplash.com/photo-1699116548123-73affe0987b7',
+        'https://images.unsplash.com/photo-1694111356884-45781a164220',
+        'https://images.unsplash.com/photo-1695667937079-b59c63660cfc',
     ]
 }
