@@ -1,9 +1,13 @@
-import { useState } from 'react'
+import { useToggle } from '../customHooks/useToggle'
 import { PrimaryBtn } from './general/btn/PrimaryBtn'
 import { BoardCreate } from './board/BoardCreate'
 
-export function AppHeader({ user }) {
-    const [showCreateBoardPopover, setShowCreateBoardPopover] = useState(false)
+export function AppHeader() {
+    const [
+        showCreateBoardPopover,
+        toggleShowCreateBoardPopover,
+        setShowCreateBoardPopover,
+    ] = useToggle()
 
     return (
         <>
@@ -11,7 +15,7 @@ export function AppHeader({ user }) {
                 <div className="logo">{'<Krello Logo>'}</div>
                 <PrimaryBtn
                     text="Create Board"
-                    onClick={() => setShowCreateBoardPopover((prev) => !prev)}
+                    onClick={() => toggleShowCreateBoardPopover()}
                 ></PrimaryBtn>
                 <div className="avatar">{'<User Avatar>'}</div>
             </header>
