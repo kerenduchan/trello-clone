@@ -11,5 +11,5 @@ export function useToggle(initialState = false) {
         }
     }
 
-    return [isOn, onToggle]
+    return [isOn, onToggle, setIsOn]
 }
