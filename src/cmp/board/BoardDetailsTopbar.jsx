@@ -4,7 +4,6 @@ import { buildClassName } from '../../util'
 import { saveBoard } from '../../store/actions/board.actions'
 
 export function BoardDetailsTopbar({ board }) {
-    console.log(board)
     const [draft, handleChange, setDraft] = useForm({
         ...board,
     })
@@ -18,7 +17,6 @@ export function BoardDetailsTopbar({ board }) {
     async function onSubmit(e) {
         e.preventDefault()
         await saveBoard(draft)
-        console.log('board', draft)
         setShowForm(false)
     }
 

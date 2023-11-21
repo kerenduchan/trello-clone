@@ -1,13 +1,14 @@
 import { boardService } from '../../services/board.service'
 import {
     SET_BOARDS,
+    SET_BOARD,
     ADD_BOARD,
     REMOVE_BOARD,
     UPDATE_BOARD,
 } from '../reducers/board.reducer'
 import { store } from '../store'
 
-export { loadBoards, removeBoard, saveBoard }
+export { loadBoards, loadBoard, removeBoard, saveBoard }
 
 async function loadBoards() {
     try {
@@ -15,6 +16,16 @@ async function loadBoards() {
         store.dispatch({ type: SET_BOARDS, boards })
     } catch (err) {
         console.error('Failed to load boards:', err)
+        throw err
+    }
+}
+
+async function loadBoard(boardId) {
+    try {
+        const board = await boardService.getById(boardId)
+        store.dispatch({ type: SET_BOARD, board })
+    } catch (err) {
+        console.error('Failed to load board:', err)
         throw err
     }
 }

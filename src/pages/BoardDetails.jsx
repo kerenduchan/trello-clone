@@ -1,26 +1,18 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useParams } from 'react-router'
-import { boardService } from '../services/board.service'
+import { useSelector } from 'react-redux'
+import { loadBoard } from '../store/actions/board.actions'
 import { GroupList } from '../cmp/group/GroupList'
 import { BoardDetailsTopbar } from '../cmp/board/BoardDetailsTopbar'
 import { TaskDetails } from './TaskDetails'
 
 export function BoardDetails() {
-    const [board, setBoard] = useState(null)
     const params = useParams()
+    const board = useSelector((storeState) => storeState.boardModule.curBoard)
 
     useEffect(() => {
-        loadBoard()
+        loadBoard(params.boardId)
     }, [params.boardId])
-
-    async function loadBoard() {
-        try {
-            const board = await boardService.getById(params.boardId)
-            setBoard(board)
-        } catch (err) {
-            console.error('Failed to load board:', err)
-        }
-    }
 
     function findTaskById(taskId) {
         for (let i = 0; i < board.groups.length; i++) {
