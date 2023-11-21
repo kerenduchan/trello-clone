@@ -1,6 +1,6 @@
 .board-list {
     display: grid;
     grid-template-columns: repeat(6, min-content);
-    column-gap: 12px;
+    gap: 12px;
     align-content: start;
 }
