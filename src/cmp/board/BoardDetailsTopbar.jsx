@@ -1,22 +1,17 @@
 import { useState } from 'react'
-import { useForm } from '../../customHooks/useForm'
 import { buildClassName } from '../../util'
 import { saveBoard } from '../../store/actions/board.actions'
+import { TitleEditForm } from '../general/TitleEditForm'
 
 export function BoardDetailsTopbar({ board }) {
-    const [draft, handleChange, setDraft] = useForm({
-        ...board,
-    })
-
     const [showForm, setShowForm] = useState(false)
 
     function onTitleClick() {
         setShowForm(true)
     }
 
-    async function onSubmit(e) {
-        e.preventDefault()
-        await saveBoard(draft)
+    async function onSubmit(draft) {
+        await saveBoard({ ...board, ...draft })
         setShowForm(false)
     }
 
@@ -28,15 +23,9 @@ export function BoardDetailsTopbar({ board }) {
             )}
         >
             <h1 onClick={onTitleClick}>{board.title}</h1>
-            <form onSubmit={onSubmit}>
-                <input
-                    type="text"
-                    name="title"
-                    onChange={handleChange}
-                    value={draft.title}
-                    onBlur={onSubmit}
-                />
-            </form>
+            {showForm && (
+                <TitleEditForm title={board.title} onSubmit={onSubmit} />
+            )}
         </header>
     )
 }
