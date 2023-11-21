@@ -2,6 +2,20 @@
     height: 100%;
     background-position: 50%;
     background-size: cover;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr auto;
+
+    header {
+        grid-area: 1 / 1 / span 1 / -1;
+        padding-inline-start: 16px;
+        padding-inline-end: 10px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        background-color: var(--bg-board-header);
+    }
 
     .board-canvas {
         margin-top: 12px;

@@ -2,13 +2,17 @@ import { useEffect } from 'react'
 import { useParams } from 'react-router'
 import { useSelector } from 'react-redux'
 import { loadBoard } from '../store/actions/board.actions'
+import { useToggle } from '../customHooks/useToggle'
 import { GroupList } from '../cmp/group/GroupList'
 import { BoardDetailsTopbar } from '../cmp/board/BoardDetailsTopbar'
 import { TaskDetails } from './TaskDetails'
+import { BoardDetailsMenu } from '../cmp/board/BoardDetailsMenu'
+import { SquareIconBtn } from '../cmp/general/btn/SquareIconBtn'
 
 export function BoardDetails() {
     const params = useParams()
     const board = useSelector((storeState) => storeState.boardModule.curBoard)
+    const [showMenu, toggleShowMenu, setShowMenu] = useToggle()
 
     useEffect(() => {
         loadBoard(params.boardId)
@@ -50,8 +54,16 @@ export function BoardDetails() {
                 backgroundImage: `url(${board.style?.backgroundImage})`,
             }}
         >
-            <BoardDetailsTopbar board={board} />
-
+            <header>
+                <BoardDetailsTopbar board={board} />
+                <SquareIconBtn icon="more" onClick={toggleShowMenu} />
+            </header>
+            {showMenu && (
+                <BoardDetailsMenu
+                    board={board}
+                    onClose={() => setShowMenu(false)}
+                />
+            )}
             <section className="board-canvas">
                 <GroupList board={board} groups={board.groups} />
             </section>

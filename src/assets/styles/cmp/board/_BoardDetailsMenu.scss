@@ -1,0 +1,14 @@
+.board-details-menu {
+    grid-area: 1 / 2 / -1 / span 1;
+    box-sizing: border-box;
+    width: 400px;
+    align-self: stretch;
+    background-color: var(--bg-1);
+    display: grid;
+
+    padding: 12px;
+
+    .close-btn {
+        justify-self: end;
+    }
+}
