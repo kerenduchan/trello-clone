@@ -1,7 +1,43 @@
+import { useState } from 'react'
+import { useForm } from '../../customHooks/useForm'
+import { buildClassName } from '../../util'
+import { saveBoard } from '../../store/actions/board.actions'
+
 export function BoardDetailsTopbar({ board }) {
+    console.log(board)
+    const [draft, handleChange, setDraft] = useForm({
+        ...board,
+    })
+
+    const [showForm, setShowForm] = useState(false)
+
+    function onTitleClick() {
+        setShowForm(true)
+    }
+
+    async function onSubmit(e) {
+        e.preventDefault()
+        await saveBoard(draft)
+        console.log('board', draft)
+        setShowForm(false)
+    }
+
     return (
-        <header className="board-details-topbar">
-            <h1>{board.title}</h1>
+        <header
+            className={buildClassName(
+                'board-details-topbar',
+                showForm ? ' edit' : ''
+            )}
+        >
+            <h1 onClick={onTitleClick}>{board.title}</h1>
+            <form onSubmit={onSubmit}>
+                <input
+                    type="text"
+                    name="title"
+                    onChange={handleChange}
+                    value={draft.title}
+                />
+            </form>
         </header>
     )
 }

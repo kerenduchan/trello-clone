@@ -3,4 +3,17 @@
     padding-inline-start: 16px;
     padding-top: 12px;
     padding-bottom: 12px;
+
+    & > form {
+        display: none;
+    }
+
+    &.edit {
+        & > form {
+            display: unset;
+        }
+        & > h1 {
+            display: none;
+        }
+    }
 }

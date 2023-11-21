@@ -31,7 +31,7 @@ async function removeBoard(boardId) {
 
 async function saveBoard(board) {
     try {
-        const type = board.id ? UPDATE_BOARD : ADD_BOARD
+        const type = board._id ? UPDATE_BOARD : ADD_BOARD
         const boardToSave = await boardService.save(board)
         store.dispatch({ type, board: boardToSave })
         return boardToSave

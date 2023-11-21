@@ -27,7 +27,7 @@ function remove(id) {
 }
 
 function save(boardToSave) {
-    if (boardToSave.id) {
+    if (boardToSave._id) {
         return storageService.put(STORAGE_KEY, boardToSave)
     } else {
         return storageService.post(STORAGE_KEY, boardToSave)
