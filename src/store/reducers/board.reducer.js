@@ -31,7 +31,7 @@ export function boardReducer(state = initialState, action = {}) {
             return {
                 ...state,
                 boards: state.boards.filter(
-                    (board) => board.id !== action.boardId
+                    (board) => board._id !== action.boardId
                 ),
             }
         case UPDATE_BOARD:
