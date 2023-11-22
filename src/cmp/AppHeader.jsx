@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useToggle } from '../customHooks/useToggle'
 import { PrimaryBtn } from './general/btn/PrimaryBtn'
 import { BoardCreate } from './board/BoardCreate'
@@ -13,6 +14,8 @@ export function AppHeader() {
         <>
             <header className="app-header">
                 <div className="logo">{'<Krello Logo>'}</div>
+
+                <Link to="/boards">Boards</Link>
                 <PrimaryBtn
                     text="Create Board"
                     onClick={() => toggleShowCreateBoardPopover()}
