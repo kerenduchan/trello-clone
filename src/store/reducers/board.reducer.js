@@ -38,9 +38,12 @@ export function boardReducer(state = initialState, action = {}) {
             return {
                 ...state,
                 boards: state.boards.map((board) =>
-                    board.id === action.board.id ? action.board : board
+                    board._id === action.board._id ? action.board : board
                 ),
-                curBoard: action.board,
+                curBoard:
+                    state.curBoard._id === action.board._id
+                        ? { ...action.board }
+                        : state.curBoard,
             }
         default:
             return state

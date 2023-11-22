@@ -1,3 +1,4 @@
+import { updateBoard } from '../../store/actions/board.actions'
 import { EditableTitle } from '../general/EditableTitle'
 import { Icon } from '../general/Icon'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
@@ -7,6 +8,8 @@ import { TaskList } from '../task/TaskList'
 export function GroupPreview({ board, group }) {
     function onTitleChange(title) {
         console.log('on title change', title)
+        group.title = title
+        updateBoard(board)
     }
 
     return (
