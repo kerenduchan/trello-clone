@@ -1,20 +1,16 @@
 .group-create {
     align-self: start;
-    padding: 12px;
-    border-radius: 12px;
-    width: 272px;
-    @include prevent-select();
-    @include button-bg(
-        var(--bg-group-create),
-        var(--bg-neutral-hovered),
-        var(--bg-neutral-pressed)
-    );
 
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 8px;
+    .group-create-btn {
+        padding: 12px;
+        border-radius: 12px;
+        width: 272px;
+        @include button-bg(
+            var(--bg-group-create),
+            var(--bg-neutral-hovered),
+            var(--bg-neutral-pressed)
+        );
 
-    .title {
-        @include font(14px, 20px, 500);
+        gap: 8px;
     }
 }

@@ -1,10 +1,13 @@
-import { Icon } from '../general/Icon'
+import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 
 export function GroupCreate() {
     return (
         <div className="group-create">
-            <Icon type="add"></Icon>
-            <p className="title">Add another list</p>
+            <SecondaryBtn
+                className="group-create-btn"
+                icon="add"
+                text="Add another list"
+            />
         </div>
     )
 }
