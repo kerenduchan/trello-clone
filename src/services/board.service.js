@@ -2,6 +2,7 @@ import { storageService } from './async-storage.service'
 import { utilService } from './util.service'
 
 export const boardService = {
+    getEmptyBoard,
     getEmptyGroup,
     query,
     getById,
@@ -14,6 +15,15 @@ export const boardService = {
 const STORAGE_KEY = 'boards'
 
 _createBoards()
+
+function getEmptyBoard() {
+    return {
+        title: '',
+        style: {
+            backgroundImage: '',
+        },
+    }
+}
 
 function getEmptyGroup() {
     return {

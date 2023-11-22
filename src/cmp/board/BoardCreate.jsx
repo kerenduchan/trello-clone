@@ -9,12 +9,9 @@ import { ImgSelect } from '../general/ImgSelect'
 export function BoardCreate({ onClose }) {
     const navigate = useNavigate()
 
-    const [draft, handleChange, setDraft] = useForm({
-        title: '',
-        style: {
-            backgroundImage: '',
-        },
-    })
+    const [draft, handleChange, setDraft] = useForm(
+        boardService.getEmptyBoard()
+    )
 
     async function onSubmit(e) {
         e.preventDefault()
