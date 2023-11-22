@@ -13,4 +13,35 @@
 
         gap: 8px;
     }
+
+    form {
+        @include group-preview();
+        display: grid;
+        grid-template-rows: auto 1fr;
+        grid-template-columns: auto 1fr;
+        gap: 8px;
+        justify-items: start;
+
+        input {
+            grid-area: 1 / 1 / span 1 / -1;
+            padding: 6px 12px;
+            justify-self: stretch;
+            outline: none;
+            border-radius: 4px;
+
+            &:hover {
+                background-color: var(--bg-input-hovered);
+                box-shadow: var(--box-shadow-input);
+            }
+
+            &:focus {
+                background-color: unset;
+                box-shadow: var(--box-shadow-input-focused);
+            }
+        }
+
+        .add-btn {
+            width: 74px;
+        }
+    }
 }

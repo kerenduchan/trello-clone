@@ -1,9 +1,5 @@
 .group-preview {
-    width: 272px;
-    background-color: var(--bg-2);
-    border-radius: 12px;
-    padding: 8px;
-    box-shadow: var(--box-shadow-subtle);
+    @include group-preview();
     display: flex;
     flex-direction: column;
     row-gap: 10px;
