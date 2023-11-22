@@ -5,7 +5,6 @@ const initialState = {
 }
 
 export function appReducer(state = initialState, action = {}) {
-    console.log('app reducer', state, action)
     switch (action.type) {
         case SET_MODAL:
             return {
