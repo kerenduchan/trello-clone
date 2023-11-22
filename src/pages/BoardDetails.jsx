@@ -8,6 +8,7 @@ import { BoardDetailsTopbar } from '../cmp/board/BoardDetailsTopbar'
 import { TaskDetails } from './TaskDetails'
 import { BoardDetailsMenu } from '../cmp/board/BoardDetailsMenu'
 import { SquareIconBtn } from '../cmp/general/btn/SquareIconBtn'
+import { GroupCreate } from '../cmp/group/GroupCreate'
 
 export function BoardDetails() {
     const params = useParams()
@@ -66,6 +67,7 @@ export function BoardDetails() {
             )}
             <section className="board-canvas">
                 <GroupList board={board} groups={board.groups} />
+                <GroupCreate board={board} />
             </section>
 
             {params.taskId && (
