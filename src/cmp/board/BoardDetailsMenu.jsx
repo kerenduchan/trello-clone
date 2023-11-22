@@ -1,21 +1,43 @@
-import { useNavigate } from 'react-router'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
-import { PrimaryBtn } from '../general/btn/PrimaryBtn'
-import { removeBoard } from '../../store/actions/board.actions'
+import { BoardDetailsMenuItem } from './BoardDetailsMenuItem'
+import { useToggle } from '../../customHooks/useToggle'
+import { Popover } from '../general/Popover'
+import { BoardDelete } from './BoardDelete'
 
 export function BoardDetailsMenu({ board, onClose }) {
-    const navigate = useNavigate()
-
-    async function onDeleteBoard() {
-        await removeBoard(board._id)
-        navigate('/boards')
-    }
+    const [
+        showDeleteBoardPopover,
+        toggleShowDeleteBoardPopover,
+        setShowDeleteBoardPopover,
+    ] = useToggle()
 
     return (
         <div className="board-details-menu">
-            <SquareIconBtn icon="close" onClick={onClose} />
+            <header>
+                <div className="title">Menu</div>
+                <SquareIconBtn icon="close" onClick={onClose} />
+                <hr className="divider" />
+            </header>
 
-            <PrimaryBtn text="Delete Board" onClick={onDeleteBoard} />
+            <div className="content">
+                <ul>
+                    <li>
+                        <BoardDetailsMenuItem
+                            icon="remove"
+                            title="Close Board"
+                            onClick={() => toggleShowDeleteBoardPopover()}
+                        />
+                    </li>
+                </ul>
+            </div>
+            {showDeleteBoardPopover && (
+                <Popover
+                    title="Delete Board?"
+                    onClose={() => setShowDeleteBoardPopover(false)}
+                >
+                    <BoardDelete board={board} />
+                </Popover>
+            )}
         </div>
     )
 }

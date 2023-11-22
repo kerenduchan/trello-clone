@@ -15,6 +15,10 @@
     --text-color-subtle: #44546f;
     --text-color-light: #ffffff;
 
+    // icon color
+    --icon-color: #44546f;
+    --icon-color-subtle: #626f86;
+
     // neutral subtle background
     --bg-neutral-subtle: #00000000;
     --bg-neutral-subtle-hovered: #091e420f;
@@ -26,12 +30,18 @@
     --bg-primary-btn-pressed: #15326b;
     --text-color-primary-btn: #ffffff;
 
+    // primary button - danger
+    --bg-primary-btn-danger: #c9372c;
+    --bg-primary-btn-danger-hovered: #ae2e24;
+    --bg-primary-btn-danger-pressed: #5d1f1a;
+
     // components
     --bg-board-header: #ffffff3d;
     --board-index-header-border-bottom-color: rgba(23, 43, 77, 0.16);
 
     // misc
     --outline-emphasis-color: #000000;
+    --bg-divider: #091e4224;
 
     // BOX SHADOW
     --box-shadow-subtle: 0px 1px 1px #091e4240, 0px 0px 1px #091e424f;

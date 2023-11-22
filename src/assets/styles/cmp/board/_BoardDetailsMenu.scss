@@ -1,14 +1,42 @@
 .board-details-menu {
     grid-area: 1 / 2 / -1 / span 1;
     box-sizing: border-box;
-    width: 400px;
+    width: 339px;
     align-self: stretch;
     background-color: var(--bg-1);
-    display: grid;
 
-    padding: 12px;
+    header {
+        display: grid;
+        align-items: center;
+        padding-inline-start: 12px;
+        padding-inline-end: 12px;
 
-    .close-btn {
-        justify-self: end;
+        .title {
+            grid-area: 1 / 1;
+            justify-self: center;
+            padding: 18px 0;
+            @include font(16px, 20px, 500);
+        }
+
+        .close-btn {
+            grid-area: 1 / 1;
+            justify-self: end;
+        }
+    }
+
+    .content {
+        padding: 12px;
+        display: grid;
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+    }
+
+    .divider {
+        height: 1px;
+        background-color: var(--bg-divider);
     }
 }

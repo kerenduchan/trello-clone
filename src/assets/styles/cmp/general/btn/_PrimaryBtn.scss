@@ -13,4 +13,8 @@
     align-items: center;
     justify-content: center;
     @include font(14px, 32px, 500);
+
+    &.danger {
+        @include primary-btn-danger();
+    }
 }

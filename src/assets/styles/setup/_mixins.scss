@@ -75,3 +75,11 @@
 @mixin outline-emphasis() {
     outline: 2px solid var(--outline-emphasis-color);
 }
+
+@mixin primary-btn-danger() {
+    @include button-bg(
+        var(--bg-primary-btn-danger),
+        var(--bg-primary-btn-danger-hovered),
+        var(--bg-primary-btn-danger-pressed)
+    );
+}
