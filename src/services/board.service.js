@@ -2,6 +2,7 @@ import { storageService } from './async-storage.service'
 import { utilService } from './util.service'
 
 export const boardService = {
+    getEmptyGroup,
     query,
     getById,
     save,
@@ -13,6 +14,14 @@ export const boardService = {
 const STORAGE_KEY = 'boards'
 
 _createBoards()
+
+function getEmptyGroup() {
+    return {
+        _id: utilService.makeId(),
+        title: '',
+        tasks: [],
+    }
+}
 
 async function query() {
     return await storageService.query(STORAGE_KEY)
