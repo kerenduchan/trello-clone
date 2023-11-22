@@ -1,4 +1,4 @@
-import { showModal } from '../../store/actions/app.actions'
+import { toggleModal } from '../../store/actions/app.actions'
 import { updateBoard } from '../../store/actions/board.actions'
 import { EditableTitle } from '../general/EditableTitle'
 import { Icon } from '../general/Icon'
@@ -14,7 +14,7 @@ export function GroupPreview({ board, group }) {
     }
 
     function onMoreClick() {
-        showModal('List Actions', <GroupPreviewMenu />, 'list-actions')
+        toggleModal('List Actions', <GroupPreviewMenu />, 'list-actions')
     }
 
     return (
