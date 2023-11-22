@@ -1,5 +1,6 @@
 .group-preview-menu {
     .group-preview-menu-item {
+        @include prevent-select();
         padding: 6px 12px;
         margin: 0 -12px;
         width: 280px;

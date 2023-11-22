@@ -17,7 +17,7 @@ export function GroupPreview({ board, group }) {
         toggleModal(
             `group-preview-${group._id}`,
             'List Actions',
-            <GroupPreviewMenu />,
+            <GroupPreviewMenu board={board} group={group} />,
             'list-actions'
         )
     }
