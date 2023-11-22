@@ -1,11 +1,11 @@
 .editable-title {
     display: grid;
     grid-template-columns: 1fr auto;
-    justify-items: start;
 
     .title {
         grid-area: 1 / 1;
         display: inline-block;
+        cursor: pointer;
     }
 
     form {
@@ -22,7 +22,7 @@
 
     &.edit {
         & > form {
-            display: unset;
+            display: grid;
         }
         & > h1 {
             display: none;

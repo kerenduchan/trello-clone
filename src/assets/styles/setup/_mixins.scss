@@ -93,3 +93,12 @@
     padding: 0px 10px;
     @include h1();
 }
+
+// reuse for .title and for input
+@mixin group-editable-title {
+    padding-inline-start: 12px;
+    padding-inline-end: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    @include h2();
+}

@@ -8,15 +8,22 @@
     flex-direction: column;
     row-gap: 10px;
 
-    .editable-title .title {
-        @include h2();
-    }
-
     .header {
-        padding-inline-start: 12px;
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: 1fr auto;
         align-items: center;
+        gap: 4px;
+
+        .editable-title {
+            .title {
+                @include group-editable-title();
+            }
+
+            input {
+                @include group-editable-title();
+                border-radius: 8px;
+            }
+        }
     }
 
     .add-btn {
