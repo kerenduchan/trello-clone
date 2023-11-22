@@ -109,5 +109,8 @@
     border-radius: 12px;
     padding: 8px;
     box-shadow: var(--box-shadow-subtle);
+}
 
+@mixin backdrop-blur() {
+    backdrop-filter: blur(4px);
 }

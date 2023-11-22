@@ -10,6 +10,7 @@
             var(--bg-neutral-hovered),
             var(--bg-neutral-pressed)
         );
+        @include backdrop-blur();
 
         gap: 8px;
     }
