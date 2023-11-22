@@ -1,9 +1,10 @@
-import { onSetModal } from '../../store/actions/app.actions'
+import { showModal } from '../../store/actions/app.actions'
 import { updateBoard } from '../../store/actions/board.actions'
 import { EditableTitle } from '../general/EditableTitle'
 import { Icon } from '../general/Icon'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 import { TaskList } from '../task/TaskList'
+import { GroupPreviewMenu } from './GroupPreviewMenu'
 
 // Represents a group of tasks (a list in the UI) in a board
 export function GroupPreview({ board, group }) {
@@ -13,7 +14,7 @@ export function GroupPreview({ board, group }) {
     }
 
     function onMoreClick() {
-        onSetModal(<div>A</div>)
+        showModal('List Actions', <GroupPreviewMenu />, 'list-actions')
     }
 
     return (
