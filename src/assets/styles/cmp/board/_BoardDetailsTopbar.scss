@@ -1,42 +1,47 @@
 .board-details-topbar {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    justify-items: start;
+    display: flex;
+    gap: 6px;
 
-    & > h1 {
-        grid-area: 1 / 1;
-        display: inline-block;
-        padding: 0px 10px;
-        border-radius: 3px;
+    .title {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        justify-items: start;
 
-        &:hover {
-            background-color: var(--bg-neutral-hovered);
-        }
-    }
-
-    & > form {
-        grid-area: 1 / 1;
-        display: none;
-
-        & > input {
-            background-color: var(--bg-1);
+        & > h1 {
+            grid-area: 1 / 1;
+            display: inline-block;
             padding: 0px 10px;
             border-radius: 3px;
-            box-shadow: var(--box-shadow-input-focused);
-            @include h1();
-        }
-    }
 
-    &.edit {
+            &:hover {
+                background-color: var(--bg-neutral-hovered);
+            }
+        }
+
         & > form {
-            display: unset;
-        }
-        & > h1 {
+            grid-area: 1 / 1;
             display: none;
-        }
-    }
 
-    .more-icon {
-        grid-area: 1 / 2;
+            & > input {
+                background-color: var(--bg-1);
+                padding: 0px 10px;
+                border-radius: 3px;
+                box-shadow: var(--box-shadow-input-focused);
+                @include h1();
+            }
+        }
+
+        &.edit {
+            & > form {
+                display: unset;
+            }
+            & > h1 {
+                display: none;
+            }
+        }
+
+        .more-icon {
+            grid-area: 1 / 2;
+        }
     }
 }
