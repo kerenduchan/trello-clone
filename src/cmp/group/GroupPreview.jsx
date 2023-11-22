@@ -1,13 +1,18 @@
+import { EditableTitle } from '../general/EditableTitle'
 import { Icon } from '../general/Icon'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 import { TaskList } from '../task/TaskList'
 
 // Represents a group of tasks (a list in the UI) in a board
 export function GroupPreview({ board, group }) {
+    function onTitleChange(title) {
+        console.log('on title change', title)
+    }
+
     return (
         <section className="group-preview">
             <header className="header">
-                <h2>{group.title}</h2>
+                <EditableTitle title={group.title} onChange={onTitleChange} />
                 <SquareIconBtn className="more-btn" icon="more" />
             </header>
 

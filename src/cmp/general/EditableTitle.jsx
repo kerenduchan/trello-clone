@@ -15,13 +15,10 @@ export function EditableTitle({ title, onChange }) {
     }
 
     return (
-        <div
-            className={buildClassName(
-                'editable-title',
-                showForm ? ' edit' : ''
-            )}
-        >
-            <h1 onClick={onTitleClick}>{title}</h1>
+        <div className={buildClassName('editable-title', showForm && 'edit')}>
+            <span className="title" onClick={onTitleClick}>
+                {title}
+            </span>
             {showForm && <TitleEditForm title={title} onSubmit={onSubmit} />}
         </div>
     )

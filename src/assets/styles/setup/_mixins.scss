@@ -12,6 +12,10 @@
     @include font(18px, 32px, bold);
 }
 
+@mixin h2() {
+    @include font(14px, 20px, 600);
+}
+
 @mixin h3() {
     @include font(12px, 20px, 600);
 }
@@ -82,4 +86,10 @@
         var(--bg-primary-btn-danger-hovered),
         var(--bg-primary-btn-danger-pressed)
     );
+}
+
+// reuse for .title and for input
+@mixin board-details-editable-title {
+    padding: 0px 10px;
+    @include h1();
 }

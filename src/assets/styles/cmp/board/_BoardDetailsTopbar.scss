@@ -1,4 +1,19 @@
 .board-details-topbar {
     display: flex;
     gap: 6px;
+
+    .editable-title {
+        .title {
+            border-radius: 3px;
+            @include board-details-editable-title();
+
+            &:hover {
+                background-color: var(--bg-neutral-hovered);
+            }
+        }
+
+        input {
+            @include board-details-editable-title();
+        }
+    }
 }

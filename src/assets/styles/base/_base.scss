@@ -22,7 +22,7 @@ h1 {
 }
 
 h2 {
-    @include font(14px, 20px, 600);
+    @include h2();
 }
 
 h3 {

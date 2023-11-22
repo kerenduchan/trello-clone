@@ -3,27 +3,20 @@
     grid-template-columns: 1fr auto;
     justify-items: start;
 
-    & > h1 {
+    .title {
         grid-area: 1 / 1;
         display: inline-block;
-        padding: 0px 10px;
-        border-radius: 3px;
-
-        &:hover {
-            background-color: var(--bg-neutral-hovered);
-        }
     }
 
-    & > form {
+    form {
         grid-area: 1 / 1;
         display: none;
 
         & > input {
             background-color: var(--bg-1);
-            padding: 0px 10px;
             border-radius: 3px;
             box-shadow: var(--box-shadow-input-focused);
-            @include h1();
+            outline: none;
         }
     }
 
