@@ -7,7 +7,6 @@ import { TaskList } from '../task/TaskList'
 // Represents a group of tasks (a list in the UI) in a board
 export function GroupPreview({ board, group }) {
     function onTitleChange(title) {
-        console.log('on title change', title)
         group.title = title
         updateBoard(board)
     }
