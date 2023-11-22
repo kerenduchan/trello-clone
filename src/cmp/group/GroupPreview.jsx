@@ -14,7 +14,12 @@ export function GroupPreview({ board, group }) {
     }
 
     function onMoreClick() {
-        toggleModal('List Actions', <GroupPreviewMenu />, 'list-actions')
+        toggleModal(
+            `group-preview-${group._id}`,
+            'List Actions',
+            <GroupPreviewMenu />,
+            'list-actions'
+        )
     }
 
     return (

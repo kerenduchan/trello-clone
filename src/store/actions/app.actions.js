@@ -3,18 +3,17 @@ import { SET_MODAL } from './../reducers/app.reducer'
 
 export { showModal, hideModal, toggleModal }
 
-function showModal(title, content, className = null) {
-    setModal({ title, className, content })
+function showModal(parent, title, content, className = null) {
+    setModal({ parent, title, className, content })
 }
 
-function toggleModal(title, content, className = null) {
-    store.getState().appModule.modal
+function toggleModal(parent, title, content, className = null) {
+    store.getState().appModule.modal?.parent === parent
         ? hideModal()
-        : showModal(title, content, className)
+        : showModal(parent, title, content, className)
 }
 
 function hideModal() {
-    console.log()
     setModal(null)
 }
 

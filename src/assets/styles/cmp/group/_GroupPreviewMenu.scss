@@ -1,0 +1,13 @@
+.group-preview-menu {
+    .group-preview-menu-item {
+        padding: 6px 12px;
+        margin: 0 -12px;
+        width: 280px;
+        @include font-p();
+        @include button-bg(
+            transparent,
+            var(--bg-neutral-hovered),
+            var(--bg-neutral-pressed)
+        );
+    }
+}
