@@ -17,13 +17,17 @@
         grid-template-rows: 8px auto 20px 12px;
         grid-template-columns: 8px 1fr 20px 12px;
 
+        .link {
+            grid-area: 1 / 1 / -1 / -1;
+        }
+
         .board-title {
             grid-area: 2 / 2 / span 1 / span 2;
             color: var(--text-color-light);
             @include font(16px, 20px, 700);
         }
 
-        .star {
+        .star-icon {
             grid-area: 3 / 3;
             margin-inline-end: -70px;
             align-self: center;
@@ -31,9 +35,10 @@
             color: white;
             transition: margin-inline-end 0.2s, font-size 0.2s;
             font-size: 16px;
+            z-index: 20;
         }
 
-        .star:hover {
+        .star-icon:hover {
             font-size: 20px;
         }
 
@@ -41,7 +46,7 @@
             background-color: rgba(0, 0, 0, 0.4);
         }
 
-        &:hover .star {
+        &:hover .star-icon {
             margin-inline-end: 0;
         }
     }

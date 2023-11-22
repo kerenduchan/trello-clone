@@ -1,10 +1,14 @@
 import { Link } from 'react-router-dom'
 import { Icon } from '../general/Icon'
+import { updateBoard } from '../../store/actions/board.actions'
 
 export function BoardPreview({ board }) {
+    function onStarClick(e) {
+        updateBoard({ ...board, isStarred: !board.isStarred })
+    }
+
     return (
-        <Link
-            to={`/b/${board._id}`}
+        <div
             className="board-preview"
             style={{
                 backgroundImage: `url(${board.style?.backgroundImage})`,
@@ -12,8 +16,15 @@ export function BoardPreview({ board }) {
         >
             <div className="board-preview-contents">
                 <h1 className="board-title">{board.title}</h1>
-                <Icon className="star" type="star" />
+                <Link to={`/b/${board._id}`} className="link"></Link>
+
+                <Icon
+                    className="star"
+                    type="star"
+                    full={board.isStarred}
+                    onClick={onStarClick}
+                />
             </div>
-        </Link>
+        </div>
     )
 }
