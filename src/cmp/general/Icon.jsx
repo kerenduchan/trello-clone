@@ -1,6 +1,6 @@
 import { buildClassName, getMaterialSymbol } from '../../util'
 
-export function Icon({ type, size = 'sm', className, onClick }) {
+export function Icon({ type, size = 'sm', full = false, className, onClick }) {
     return (
         <span
             className={buildClassName(
@@ -8,6 +8,7 @@ export function Icon({ type, size = 'sm', className, onClick }) {
                 `${type}-icon`,
                 size,
                 'material-symbols-outlined',
+                full ? 'full' : '',
                 className
             )}
             onClick={onClick}

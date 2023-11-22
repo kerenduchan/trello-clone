@@ -8,7 +8,7 @@ import {
 } from '../reducers/board.reducer'
 import { store } from '../store'
 
-export { loadBoards, loadBoard, removeBoard, saveBoard }
+export { loadBoards, loadBoard, removeBoard, saveBoard, updateBoard }
 
 async function loadBoards() {
     try {
@@ -36,6 +36,17 @@ async function removeBoard(boardId) {
         await boardService.remove(boardId)
     } catch (err) {
         console.error('Failed to remove board:', err)
+        throw err
+    }
+}
+
+async function updateBoard(board) {
+    try {
+        store.dispatch({ type: UPDATE_BOARD, board: board })
+        const boardToSave = await boardService.save(board)
+        return boardToSave
+    } catch (err) {
+        console.error('Failed to update board:', err)
         throw err
     }
 }

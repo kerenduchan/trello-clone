@@ -1,6 +1,6 @@
 import { Icon } from '../Icon'
 
-export function SquareIconBtn({ icon, className, onClick }) {
+export function SquareIconBtn({ icon, full = false, className, onClick }) {
     return (
         <button
             className={`square-icon-btn ${icon}-btn${
@@ -8,7 +8,7 @@ export function SquareIconBtn({ icon, className, onClick }) {
             }`}
             onClick={onClick}
         >
-            <Icon type={icon}></Icon>
+            <Icon type={icon} full={full}></Icon>
         </button>
     )
 }

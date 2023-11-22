@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { buildClassName } from '../../util'
-import { saveBoard } from '../../store/actions/board.actions'
+import { updateBoard } from '../../store/actions/board.actions'
 import { TitleEditForm } from '../general/TitleEditForm'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 
@@ -12,13 +12,13 @@ export function BoardDetailsTopbar({ board }) {
     }
 
     function onStarClick() {
-        saveBoard({ ...board, isStarred: !board.isStarred })
+        updateBoard({ ...board, isStarred: !board.isStarred })
     }
 
     function onSubmit(draft) {
         board.title = draft.title
         setShowForm(false)
-        saveBoard({ ...board, ...draft })
+        updateBoard({ ...board, ...draft })
     }
 
     return (
@@ -29,7 +29,11 @@ export function BoardDetailsTopbar({ board }) {
                     <TitleEditForm title={board.title} onSubmit={onSubmit} />
                 )}
             </div>
-            <SquareIconBtn icon="star" onClick={onStarClick} />
+            <SquareIconBtn
+                icon="star"
+                full={board.isStarred}
+                onClick={onStarClick}
+            />
         </div>
     )
 }
