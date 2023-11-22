@@ -1,3 +1,4 @@
+import { onSetModal } from '../../store/actions/app.actions'
 import { updateBoard } from '../../store/actions/board.actions'
 import { EditableTitle } from '../general/EditableTitle'
 import { Icon } from '../general/Icon'
@@ -11,11 +12,19 @@ export function GroupPreview({ board, group }) {
         updateBoard(board)
     }
 
+    function onMoreClick() {
+        onSetModal(<div>A</div>)
+    }
+
     return (
         <section className="group-preview">
             <header className="header">
                 <EditableTitle title={group.title} onChange={onTitleChange} />
-                <SquareIconBtn className="more-btn" icon="more" />
+                <SquareIconBtn
+                    className="more-btn"
+                    icon="more"
+                    onClick={onMoreClick}
+                />
             </header>
 
             <TaskList board={board} tasks={group.tasks} />

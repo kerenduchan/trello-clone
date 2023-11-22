@@ -5,6 +5,7 @@ import { Login } from './pages/Login'
 import { BoardIndex } from './pages/BoardIndex'
 import { BoardDetails } from './pages/BoardDetails'
 import { TaskDetails } from './pages/TaskDetails'
+import { AppModal } from './cmp/general/AppModal'
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                         </Route>
                     </Routes>
                 </div>
+                <AppModal />
             </Router>
         </div>
     )
