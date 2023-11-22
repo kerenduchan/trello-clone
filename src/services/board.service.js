@@ -4,6 +4,7 @@ import { utilService } from './util.service'
 export const boardService = {
     getEmptyBoard,
     getEmptyGroup,
+    getEmptyTask,
     query,
     getById,
     save,
@@ -30,6 +31,14 @@ function getEmptyGroup() {
         _id: utilService.makeId(),
         title: '',
         tasks: [],
+    }
+}
+
+function getEmptyTask() {
+    return {
+        _id: utilService.makeId(),
+        title: '',
+        archivedAt: null,
     }
 }
 
