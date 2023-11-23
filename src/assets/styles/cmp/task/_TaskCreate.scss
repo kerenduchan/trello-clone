@@ -1,21 +1,28 @@
-.task-create {
-    form {
-        display: grid;
-        gap: 8px;
+.task-create-form {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: auto 1fr;
+    gap: 8px;
+    justify-items: start;
 
-        input {
-            background-color: var(--bg-1);
-            border-radius: 8px;
-            box-shadow: var(--box-shadow-subtle);
-            overflow: hidden;
-            padding-bottom: 50px;
-            @include font-p();
-            padding: 8px 12px;
-            outline: none;
-        }
+    input {
+        grid-area: 1 / 1 / span 1 / -1;
+        justify-self: stretch;
+        background-color: var(--bg-1);
+        border-radius: 8px;
+        box-shadow: var(--box-shadow-subtle);
+        overflow: hidden;
+        padding-bottom: 50px;
+        @include font-p();
+        padding: 8px 12px;
+        outline: none;
     }
 
-    &.hidden {
-        visibility: hidden;
+    .add-btn {
+        grid-area: 2 / 1;
+    }
+
+    .close-btn {
+        grid-area: 2 / 2;
     }
 }

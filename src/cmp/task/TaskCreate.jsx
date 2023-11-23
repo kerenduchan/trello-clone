@@ -15,19 +15,17 @@ export function TaskCreate({ board, group, onClose }) {
     }
 
     return (
-        <div className="task-create">
-            <form onSubmit={onSubmit}>
-                <input
-                    autoFocus
-                    id="title"
-                    name="title"
-                    placeholder="Enter a title for this card..."
-                    onChange={handleChange}
-                    value={draft.title}
-                />
-                <PrimaryBtn className="add-btn" text="Add card" />
-            </form>
+        <form className="task-create-form" onSubmit={onSubmit}>
+            <input
+                autoFocus
+                id="title"
+                name="title"
+                placeholder="Enter a title for this card..."
+                onChange={handleChange}
+                value={draft.title}
+            />
+            <PrimaryBtn className="add-btn" text="Add card" />
             <SquareIconBtn icon="close" onClick={onClose} />
-        </div>
+        </form>
     )
 }
