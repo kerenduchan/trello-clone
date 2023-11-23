@@ -23,6 +23,7 @@ function getEmptyBoard() {
         style: {
             backgroundImage: '',
         },
+        groups: [],
         labels: [
             {
                 _id: 'l101',
