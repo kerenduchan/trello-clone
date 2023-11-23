@@ -7,7 +7,6 @@
     background-position: 50%;
     display: flex;
     overflow: hidden;
-    @include prevent-select();
     cursor: pointer;
 
     .board-preview-contents {

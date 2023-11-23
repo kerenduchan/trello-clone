@@ -20,10 +20,18 @@
     @include font(12px, 20px, 600);
 }
 
+@mixin set-select($val) {
+    -webkit-user-select: $val; /* Safari */
+    -ms-user-select: $val; /* IE 10 and IE 11 */
+    user-select: $val; /* Standard syntax */
+}
+
 @mixin prevent-select() {
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
+    @include set-select(none);
+}
+
+@mixin allow-select() {
+    @include set-select(unset);
 }
 
 @mixin task-details-main-subsection {

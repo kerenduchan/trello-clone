@@ -15,6 +15,7 @@
 
 body {
     @include font-family();
+    @include prevent-select();
 }
 
 h1 {

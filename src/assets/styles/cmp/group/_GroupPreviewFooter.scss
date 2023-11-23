@@ -1,5 +1,4 @@
 .group-preview-footer {
-    @include prevent-select();
     display: grid;
     grid-template-columns: 1fr auto;
 
