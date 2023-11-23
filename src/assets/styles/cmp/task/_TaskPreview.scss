@@ -1,10 +1,17 @@
 .task-preview {
+    position: relative;
     background-color: var(--bg-1);
     border-radius: 8px;
     box-shadow: var(--box-shadow-subtle);
     overflow: hidden;
     display: grid;
+    grid-template-rows: repeat(2, auto);
     align-items: center;
+
+    .cover {
+        grid-area: 1 / 1;
+        height: 36px;
+    }
 
     .link {
         grid-area: 1 / 1 / -1 / -1;
@@ -12,10 +19,12 @@
     }
 
     .edit-btn {
-        grid-area: 1 / 1;
-        justify-self: end;
+        position: absolute;
+        top: 0;
+        right: 0;
         display: none;
         @include square(30px);
+        margin-top: 3px;
         margin-inline-end: 3px;
 
         .icon {
@@ -31,12 +40,8 @@
         }
     }
 
-    .cover {
-        height: 36px;
-    }
-
     .title {
-        grid-area: 1 / 1;
+        grid-area: 2 / 1;
         padding: 8px 12px;
     }
 }
