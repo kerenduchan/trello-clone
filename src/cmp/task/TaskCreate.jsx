@@ -1,6 +1,7 @@
 import { useForm } from '../../customHooks/useForm'
 import { boardService } from '../../services/board.service'
 import { updateBoard } from '../../store/actions/board.actions'
+import { deepClone } from '../../util'
 import { PrimaryBtn } from '../general/btn/PrimaryBtn'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 
@@ -9,8 +10,12 @@ export function TaskCreate({ board, group, onClose }) {
 
     async function onSubmit(e) {
         e.preventDefault()
-        group.tasks = [...group.tasks, draft]
-        updateBoard(board)
+        const boardClone = deepClone(board)
+        const boardCloneGroup = boardClone.groups.filter(
+            (g) => g._id === group._id
+        )[0]
+        boardCloneGroup.tasks.push(draft)
+        updateBoard(boardClone)
         onClose()
     }
 

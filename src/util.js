@@ -1,4 +1,4 @@
-export { getMaterialSymbol, buildClassName }
+export { getMaterialSymbol, buildClassName, deepClone }
 
 function getMaterialSymbol(type) {
     const symbol = _typeToMaterialSymbol[type]
@@ -34,4 +34,8 @@ function buildClassName(...names) {
         }
         return acc
     })
+}
+
+function deepClone(obj) {
+    return JSON.parse(JSON.stringify(obj))
 }

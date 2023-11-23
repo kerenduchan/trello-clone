@@ -42,7 +42,7 @@ export function boardReducer(state = initialState, action = {}) {
                 ),
                 curBoard:
                     state.curBoard?._id === action.board._id
-                        ? { ...action.board }
+                        ? action.board
                         : state.curBoard,
             }
         default:
