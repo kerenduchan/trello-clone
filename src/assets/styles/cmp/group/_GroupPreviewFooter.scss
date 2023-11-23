@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 1fr auto;
 
-    .add-btn {
+    .show-add-form-btn {
         @include button-bg(
             transparent,
             var(--bg-neutral-hovered),
