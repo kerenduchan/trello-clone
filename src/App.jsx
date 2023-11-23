@@ -9,11 +9,8 @@ import { AppModal } from './cmp/general/AppModal'
 import { hideModal } from './store/actions/app.actions'
 
 function App() {
-    function onAppClick() {
-        // TODO hideModal()
-    }
     return (
-        <div id="app" onClick={onAppClick}>
+        <div id="app" onClick={hideModal}>
             <Router>
                 <AppHeader />
                 <div className="app-content">

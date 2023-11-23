@@ -6,10 +6,6 @@ import { SquareIconBtn } from './btn/SquareIconBtn'
 export function AppModal() {
     const modal = useSelector((storeState) => storeState.appModule.modal)
 
-    function onClose() {
-        hideModal()
-    }
-
     function calcPosition() {
         if (!modal) return null
         const rect = modal.el.getBoundingClientRect()
@@ -29,11 +25,12 @@ export function AppModal() {
         <div
             className={buildClassName('app-modal', modal.className)}
             style={calcPosition()}
+            onClick={(e) => e.stopPropagation()}
         >
             <div>
                 <header>
                     <h2>{modal.title}</h2>
-                    <SquareIconBtn onClick={onClose} icon="close" />
+                    <SquareIconBtn onClick={hideModal} icon="close" />
                 </header>
                 <div className="content">{modal.content}</div>
             </div>
