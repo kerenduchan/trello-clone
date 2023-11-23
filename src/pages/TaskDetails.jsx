@@ -8,7 +8,7 @@ import { TaskDetailsChecklists } from '../cmp/task/TaskDetailsChecklists'
 import { TaskDetailsLabels } from '../cmp/task/TaskDetailsLabels'
 import { TaskDetailsHeader } from '../cmp/task/TaskDetailsHeader'
 
-export function TaskDetails({ task }) {
+export function TaskDetails({ board, task }) {
     const navigate = useNavigate()
     const params = useParams()
 
@@ -26,7 +26,7 @@ export function TaskDetails({ task }) {
                     <TaskDetailsChecklists checklists={task.checklists} />
                     <TaskDetailsActivity task={task} />
                 </div>
-                <TaskDetailsSidebar />
+                <TaskDetailsSidebar board={board} task={task} />
             </div>
         </div>
     )

@@ -1,6 +1,18 @@
+import { toggleModal } from '../../store/actions/app.actions'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
+import { TaskLabelsMenu } from './TaskLabelsMenu'
 
-export function TaskDetailsSidebar() {
+export function TaskDetailsSidebar({ board, task }) {
+    function onLabelsClick(e) {
+        toggleModal(
+            'task-details-sidebar-labels',
+            'Labels',
+            <TaskLabelsMenu board={board} task={task} />,
+            'task-details-sidebar-labels',
+            e
+        )
+    }
+
     return (
         <div className="task-details-sidebar">
             <section>
@@ -14,7 +26,11 @@ export function TaskDetailsSidebar() {
                 <h3>Add to card</h3>
                 <div className="content">
                     <SecondaryBtn icon="member" text="Members" />
-                    <SecondaryBtn icon="label" text="Labels" />
+                    <SecondaryBtn
+                        icon="label"
+                        text="Labels"
+                        onClick={onLabelsClick}
+                    />
                     <SecondaryBtn icon="checklist" text="Checklist" />
                     <SecondaryBtn icon="date" text="Dates" />
                     <SecondaryBtn icon="attachment" text="Attachment" />

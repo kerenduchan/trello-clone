@@ -23,6 +23,44 @@ function getEmptyBoard() {
         style: {
             backgroundImage: '',
         },
+        labels: [
+            {
+                _id: 'l101',
+                title: null,
+                color: '#4bce97',
+                colorName: 'Green',
+            },
+            {
+                _id: 'l102',
+                title: null,
+                color: '#f5cd47',
+                colorName: 'Yellow',
+            },
+            {
+                _id: 'l103',
+                title: null,
+                color: '#fea362',
+                colorName: 'Orange',
+            },
+            {
+                _id: 'l104',
+                title: null,
+                color: '#f87168',
+                colorName: 'Red',
+            },
+            {
+                _id: 'l105',
+                title: null,
+                color: '#f87168',
+                colorName: 'Purple',
+            },
+            {
+                _id: 'l106',
+                title: null,
+                color: '#579dff',
+                colorName: 'Blue',
+            },
+        ],
     }
 }
 

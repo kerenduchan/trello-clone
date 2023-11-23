@@ -10,7 +10,7 @@ import { hideModal } from './store/actions/app.actions'
 
 function App() {
     function onAppClick() {
-        hideModal()
+        // TODO hideModal()
     }
     return (
         <div id="app" onClick={onAppClick}>
