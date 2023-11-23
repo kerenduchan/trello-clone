@@ -1,7 +1,11 @@
 import { Icon } from '../general/Icon'
 import { CircleBtn } from '../general/btn/CircleBtn'
+import { EditableTitle } from '../general/EditableTitle'
 
 export function TaskDetailsHeader({ task, onClose }) {
+    function onTitleChange() {
+        console.log('on title change')
+    }
     return (
         <>
             <CircleBtn type="close" onClick={onClose} />
@@ -16,7 +20,7 @@ export function TaskDetailsHeader({ task, onClose }) {
 
             <div className="task-details-header">
                 <Icon type="card" size="md" />
-                <h1 className="title">{task.title}</h1>
+                <EditableTitle title={task.title} onChange={onTitleChange} />
                 <p className="subtitle">
                     in list{' '}
                     <span className="group-title">{task.group.title}</span>

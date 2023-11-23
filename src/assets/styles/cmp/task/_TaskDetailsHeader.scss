@@ -10,9 +10,13 @@
         justify-self: center;
     }
 
-    .title {
+    .editable-title {
         grid-area: 2 / 2;
-        @include font(20px, 24px, 600);
+
+        .title,
+        textarea {
+            @include task-details-editable-title();
+        }
     }
 
     .subtitle {

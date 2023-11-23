@@ -96,19 +96,30 @@
     );
 }
 
-// reuse for .title and for input
+// reuse for .title and for textarea of editable title for board details
 @mixin board-details-editable-title {
     padding: 0px 10px;
     @include h1();
 }
 
-// reuse for .title and for input
+// reuse for .title and for textarea of editable title for group preview
 @mixin group-editable-title {
     padding-inline-start: 12px;
     padding-inline-end: 8px;
     padding-top: 6px;
     padding-bottom: 6px;
     @include h2();
+}
+
+// reuse for .title and for textarea of editable title for task details
+@mixin task-details-editable-title {
+    padding-inline-start: 10px;
+    padding-inline-end: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    margin-inline-start: -10px;
+    margin-inline-end: -10px;
+    @include font(20px, 24px, 600);
 }
 
 @mixin group-preview {
