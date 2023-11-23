@@ -13,7 +13,7 @@ export function AppHeader() {
     return (
         <>
             <header className="app-header">
-                <div className="logo">{'<Krello Logo>'}</div>
+                <img className="logo" src="krello.svg" />
 
                 <Link to="/boards">Boards</Link>
                 <PrimaryBtn
