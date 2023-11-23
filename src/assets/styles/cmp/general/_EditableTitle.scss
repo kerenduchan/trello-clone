@@ -1,10 +1,12 @@
 .editable-title {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: min-content;
 
     .title {
         grid-area: 1 / 1;
-        display: inline-block;
+        justify-self: stretch;
+        @include prevent-select();
+        display: block;
         cursor: pointer;
     }
 
@@ -12,20 +14,19 @@
         grid-area: 1 / 1;
         display: none;
 
-        & > input {
+        textarea {
             background-color: var(--bg-1);
             border-radius: 3px;
             box-shadow: var(--box-shadow-input-focused);
             outline: none;
+            resize: none;
+            overflow: hidden;
         }
     }
 
     &.edit {
-        & > form {
+        form {
             display: grid;
-        }
-        & > h1 {
-            display: none;
         }
     }
 }
