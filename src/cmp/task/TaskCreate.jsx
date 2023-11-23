@@ -12,10 +12,10 @@ export function TaskCreate({ board, group, onClose }) {
         e.preventDefault()
         // add the new task to this group in the board
         const boardClone = deepClone(board)
-        const boardCloneGroup = boardClone.groups.filter(
+        const groupClone = boardClone.groups.filter(
             (g) => g._id === group._id
         )[0]
-        boardCloneGroup.tasks.push(draft)
+        groupClone.tasks.push(draft)
         updateBoard(boardClone)
         onClose()
     }

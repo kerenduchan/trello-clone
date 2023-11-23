@@ -8,7 +8,7 @@ import { TaskDetailsChecklists } from '../cmp/task/TaskDetailsChecklists'
 import { TaskDetailsLabels } from '../cmp/task/TaskDetailsLabels'
 import { TaskDetailsHeader } from '../cmp/task/TaskDetailsHeader'
 
-export function TaskDetails({ board, task }) {
+export function TaskDetails({ board, group, task }) {
     const navigate = useNavigate()
     const params = useParams()
 
@@ -19,7 +19,12 @@ export function TaskDetails({ board, task }) {
     return (
         <div className="task-details-bg" onClick={onClose}>
             <div className="task-details" onClick={(e) => e.stopPropagation()}>
-                <TaskDetailsHeader task={task} onClose={onClose} />
+                <TaskDetailsHeader
+                    board={board}
+                    group={group}
+                    task={task}
+                    onClose={onClose}
+                />
                 <div className="main">
                     <TaskDetailsLabels labels={task.labels} />
                     <TaskDetailsDescription task={task} />

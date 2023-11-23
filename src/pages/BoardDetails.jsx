@@ -21,27 +21,13 @@ export function BoardDetails() {
         return () => unloadBoard()
     }, [params.boardId])
 
-    function findTaskById(taskId) {
+    function findGroupAndTask(taskId) {
         for (let i = 0; i < board.groups.length; i++) {
             const group = board.groups[i]
             for (let j = 0; j < group.tasks.length; ++j) {
                 const task = group.tasks[j]
                 if (task._id === taskId) {
-                    // add more data onto the task that's needed for rendering the task
-                    return {
-                        ...task,
-                        group: {
-                            _id: group._id,
-                            title: group.title,
-                        },
-                        labels: task.labelIds
-                            ? task.labelIds.map((labelId) => {
-                                  return board.labels.filter(
-                                      (l) => l._id === labelId
-                                  )[0]
-                              })
-                            : [],
-                    }
+                    return { group, task }
                 }
             }
         }
@@ -49,6 +35,8 @@ export function BoardDetails() {
     }
 
     if (!board) return <div>Loading..</div>
+
+    const groupAndTask = params.taskId ? findGroupAndTask(params.taskId) : null
 
     return (
         <div
@@ -73,7 +61,11 @@ export function BoardDetails() {
             </section>
 
             {params.taskId && (
-                <TaskDetails board={board} task={findTaskById(params.taskId)} />
+                <TaskDetails
+                    board={board}
+                    group={groupAndTask.group}
+                    task={groupAndTask.task}
+                />
             )}
         </div>
     )

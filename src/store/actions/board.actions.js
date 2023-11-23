@@ -51,9 +51,10 @@ async function removeBoard(boardId) {
     }
 }
 
+// the given board MUST have no shared pointers with the store's board!
 async function updateBoard(board) {
     try {
-        store.dispatch({ type: UPDATE_BOARD, board: board })
+        store.dispatch({ type: UPDATE_BOARD, board })
         const boardToSave = await boardService.save(board)
         return boardToSave
     } catch (err) {

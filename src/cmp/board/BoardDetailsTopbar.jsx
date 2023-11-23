@@ -1,15 +1,21 @@
 import { updateBoard } from '../../store/actions/board.actions'
+import { deepClone } from '../../util'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 import { EditableTitle } from '../general/EditableTitle'
 
 export function BoardDetailsTopbar({ board }) {
     function onStarClick() {
-        updateBoard({ ...board, isStarred: !board.isStarred })
+        // star / unstar the board
+        const boardClone = deepClone(board)
+        boardClone.isStarred = !boardClone.isStarred
+        updateBoard(boardClone)
     }
 
     function onTitleChange(title) {
-        board.title = title
-        updateBoard({ ...board, title })
+        // change the board's title
+        const boardClone = deepClone(board)
+        boardClone.title = title
+        updateBoard(boardClone)
     }
 
     return (

@@ -1,13 +1,19 @@
 import { toggleModal } from '../../store/actions/app.actions'
 import { updateBoard } from '../../store/actions/board.actions'
+import { deepClone } from '../../util'
 import { EditableTitle } from '../general/EditableTitle'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 import { GroupPreviewMenu } from './GroupPreviewMenu'
 
 export function GroupPreviewHeader({ group, board }) {
     function onTitleChange(title) {
-        group.title = title
-        updateBoard(board)
+        // change the title of this group in the board
+        const boardClone = deepClone(board)
+        const groupClone = boardClone.groups.filter(
+            (g) => g._id === group._id
+        )[0]
+        groupClone.title = title
+        updateBoard(boardClone)
     }
 
     function onMoreClick(e) {

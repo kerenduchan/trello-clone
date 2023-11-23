@@ -1,10 +1,14 @@
 import { Link } from 'react-router-dom'
 import { Icon } from '../general/Icon'
 import { updateBoard } from '../../store/actions/board.actions'
+import { deepClone } from '../../util'
 
 export function BoardPreview({ board }) {
-    function onStarClick(e) {
-        updateBoard({ ...board, isStarred: !board.isStarred })
+    function onStarClick() {
+        // star / unstar the board
+        const boardClone = deepClone(board)
+        boardClone.isStarred = !boardClone.isStarred
+        updateBoard(boardClone)
     }
 
     return (
