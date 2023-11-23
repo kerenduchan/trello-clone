@@ -10,12 +10,13 @@ export function GroupPreviewHeader({ group, board }) {
         updateBoard(board)
     }
 
-    function onMoreClick() {
+    function onMoreClick(e) {
         toggleModal(
             `group-preview-${group._id}`,
             'List Actions',
             <GroupPreviewMenu board={board} group={group} />,
-            'list-actions'
+            'list-actions',
+            e
         )
     }
 

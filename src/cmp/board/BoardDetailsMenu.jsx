@@ -4,12 +4,13 @@ import { BoardDelete } from './BoardDelete'
 import { hideModal, toggleModal } from '../../store/actions/app.actions'
 
 export function BoardDetailsMenu({ board, onClose }) {
-    function onDeleteBoardClick() {
+    function onDeleteBoardClick(e) {
         toggleModal(
             `app-header-delete-board`,
             'Delete Board?',
             <BoardDelete board={board} onClose={hideModal} />,
-            'board-delete'
+            'board-delete',
+            e
         )
     }
 

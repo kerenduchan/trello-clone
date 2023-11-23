@@ -4,12 +4,13 @@ import { BoardCreate } from './board/BoardCreate'
 import { hideModal, toggleModal } from '../store/actions/app.actions'
 
 export function AppHeader() {
-    function onCreateBoardClick() {
+    function onCreateBoardClick(e) {
         toggleModal(
             `app-header-create-board`,
             'Create Board',
             <BoardCreate onClose={hideModal} />,
-            'board-create'
+            'board-create',
+            e
         )
     }
 

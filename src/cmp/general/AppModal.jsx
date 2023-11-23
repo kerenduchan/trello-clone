@@ -10,9 +10,19 @@ export function AppModal() {
         hideModal()
     }
 
+    function calcPosition() {
+        if (!modal) return null
+
+        const rect = modal.event.target.getBoundingClientRect()
+        return { top: rect.top + rect.height + 6, left: rect.left }
+    }
+
     if (!modal) return <></>
     return (
-        <div className={buildClassName('app-modal', modal.className)}>
+        <div
+            className={buildClassName('app-modal', modal.className)}
+            style={calcPosition()}
+        >
             <div>
                 <header>
                     <h2>{modal.title}</h2>
