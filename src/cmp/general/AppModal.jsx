@@ -13,7 +13,7 @@ export function AppModal() {
     function calcPosition() {
         if (!modal) return null
 
-        const rect = modal.event.target.getBoundingClientRect()
+        const rect = modal.el.getBoundingClientRect()
         return { top: rect.top + rect.height + 6, left: rect.left }
     }
 
