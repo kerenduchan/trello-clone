@@ -36,13 +36,14 @@
 
 @mixin task-details-main-subsection {
     display: grid;
-    grid-template-columns: 56px 1fr;
+    grid-template-columns: 40px 1fr;
     grid-template-rows: 16px auto 12px auto;
     align-items: center;
 
     .icon {
         grid-area: 2 / 1;
         justify-self: center;
+        padding-inline-end: 6px;
     }
 
     .title {
@@ -115,10 +116,7 @@
 @mixin task-details-editable-title {
     padding-inline-start: 10px;
     padding-inline-end: 10px;
-    padding-top: 6px;
-    padding-bottom: 6px;
     margin-inline-start: -10px;
-    margin-inline-end: -10px;
     @include font(20px, 24px, 600);
 }
 

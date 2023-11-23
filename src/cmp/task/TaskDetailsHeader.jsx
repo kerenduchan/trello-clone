@@ -19,7 +19,7 @@ export function TaskDetailsHeader({ task, onClose }) {
             )}
 
             <div className="task-details-header">
-                <Icon type="card" size="md" />
+                <Icon type="card" />
                 <EditableTitle title={task.title} onChange={onTitleChange} />
                 <p className="subtitle">
                     in list{' '}

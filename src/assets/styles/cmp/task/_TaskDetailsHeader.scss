@@ -1,29 +1,40 @@
 .task-details-header {
     position: relative;
     grid-area: header;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-inline-start: 56px;
-    padding-inline-end: 52px;
+    display: grid;
+    grid-template-columns: 40px 1fr 40px;
+    grid-template-rows: 20px repeat(2, auto);
+    align-items: center;
 
     .icon {
-        position: absolute;
-        left: 16px;
-        top: 16px;
+        grid-area: 2 / 1;
+        justify-self: center;
+        padding-inline-end: 6px;
     }
 
     .editable-title {
-        grid-template-columns: auto;
         grid-area: 2 / 2;
+        grid-template-columns: auto;
 
         .title,
         textarea {
             @include task-details-editable-title();
         }
+
+        textarea {
+            padding-top: 6px;
+            padding-bottom: 6px;
+            margin-top: -6px;
+            margin-bottom: -6px;
+        }
     }
 
     .subtitle {
-        grid-area: 4 / 2;
+        grid-area: 3 / 2;
+        margin-inline-start: 2px;
+        margin-inline-end: 8px;
+        margin-top: 4px;
+        margin-bottom: 4px;
 
         .group-title {
             text-decoration: underline;

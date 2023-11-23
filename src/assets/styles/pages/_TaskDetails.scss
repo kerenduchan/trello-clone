@@ -13,14 +13,14 @@
 
     .task-details {
         position: relative;
-        border-radius: 8px;
+        border-radius: 12px;
         width: 768px;
         background-color: var(--bg-2);
         overflow: hidden;
         display: grid;
         grid-template-columns: 16px 1fr 16px 168px 16px;
         grid-template-rows: repeat(3, auto);
-        align-content: start;
+        align-content: start; 
 
         grid-template-areas:
             'cover cover  cover  cover   cover'
