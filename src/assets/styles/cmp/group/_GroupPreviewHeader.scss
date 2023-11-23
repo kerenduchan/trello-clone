@@ -1,0 +1,17 @@
+.group-preview-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 4px;
+
+    .editable-title {
+        .title {
+            @include group-editable-title();
+        }
+
+        input {
+            @include group-editable-title();
+            border-radius: 8px;
+        }
+    }
+}
