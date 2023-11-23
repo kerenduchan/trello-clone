@@ -6,7 +6,6 @@ export function EditableTitle({ title, onChange }) {
     const [showForm, setShowForm] = useState(false)
     const [draft, handleChange] = useForm({ title })
     const textareaRef = useRef(null)
-    const titleRef = useRef(null)
 
     useEffect(() => {
         if (showForm) {
@@ -28,11 +27,8 @@ export function EditableTitle({ title, onChange }) {
 
     return (
         <div className={buildClassName('editable-title', showForm && 'edit')}>
-            <span
-                className="title"
-                ref={titleRef}
-                onClick={() => setShowForm(true)}
-            >
+            <span className="title" onClick={() => setShowForm(true)}>
+                {/* using draft.title for auto-resize of textarea in grid */}
                 {draft.title}
             </span>
             <form onSubmit={onSubmit}>
