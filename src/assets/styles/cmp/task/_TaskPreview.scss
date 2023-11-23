@@ -3,11 +3,32 @@
     border-radius: 8px;
     box-shadow: var(--box-shadow-subtle);
     overflow: hidden;
-
     display: grid;
+    align-items: center;
+
+    .link {
+        grid-area: 1 / 1 / -1 / -1;
+        align-self: stretch;
+    }
+
+    .edit-btn {
+        grid-area: 1 / 1;
+        justify-self: end;
+        display: none;
+        @include square(30px);
+        margin-inline-end: 3px;
+
+        .icon {
+            font-size: 16px;
+        }
+    }
 
     &:hover {
         @include outline-emphasis();
+
+        .edit-btn {
+            display: flex;
+        }
     }
 
     .cover {
@@ -15,6 +36,7 @@
     }
 
     .title {
+        grid-area: 1 / 1;
         padding: 8px 12px;
     }
 }
