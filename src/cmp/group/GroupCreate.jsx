@@ -1,10 +1,11 @@
 import { useForm } from '../../customHooks/useForm'
 import { useToggle } from '../../customHooks/useToggle'
-import { saveBoard } from '../../store/actions/board.actions'
+import { updateBoard } from '../../store/actions/board.actions'
 import { boardService } from '../../services/board.service'
 import { PrimaryBtn } from '../general/btn/PrimaryBtn'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
+import { deepClone } from '../../util'
 
 export function GroupCreate({ board }) {
     const [showForm, toggleShowForm, setShowForm] = useToggle()
@@ -14,9 +15,11 @@ export function GroupCreate({ board }) {
     )
 
     async function onSubmit(e) {
+        // add the new group to the board
         e.preventDefault()
-        board.groups = [...board.groups, draft]
-        await saveBoard(board)
+        const boardClone = deepClone(board)
+        boardClone.groups.push(draft)
+        updateBoard(boardClone)
         setShowForm(false)
         setDraft(boardService.getEmptyGroup())
     }
