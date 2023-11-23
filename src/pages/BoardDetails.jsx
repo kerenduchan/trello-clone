@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router'
 import { useSelector } from 'react-redux'
-import { loadBoard } from '../store/actions/board.actions'
+import { loadBoard, unloadBoard } from '../store/actions/board.actions'
 import { useToggle } from '../customHooks/useToggle'
 import { GroupList } from '../cmp/group/GroupList'
 import { BoardDetailsTopbar } from '../cmp/board/BoardDetailsTopbar'
@@ -17,6 +17,8 @@ export function BoardDetails() {
 
     useEffect(() => {
         loadBoard(params.boardId)
+
+        return () => unloadBoard()
     }, [params.boardId])
 
     function findTaskById(taskId) {

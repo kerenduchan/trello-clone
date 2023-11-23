@@ -8,7 +8,14 @@ import {
 } from '../reducers/board.reducer'
 import { store } from '../store'
 
-export { loadBoards, loadBoard, removeBoard, saveBoard, updateBoard }
+export {
+    loadBoards,
+    loadBoard,
+    unloadBoard,
+    removeBoard,
+    saveBoard,
+    updateBoard,
+}
 
 async function loadBoards() {
     try {
@@ -28,6 +35,10 @@ async function loadBoard(boardId) {
         console.error('Failed to load board:', err)
         throw err
     }
+}
+
+function unloadBoard() {
+    store.dispatch({ type: SET_BOARD, board: null })
 }
 
 async function removeBoard(boardId) {

@@ -1,30 +1,28 @@
 import { Link } from 'react-router-dom'
-import { useToggle } from '../customHooks/useToggle'
 import { PrimaryBtn } from './general/btn/PrimaryBtn'
 import { BoardCreate } from './board/BoardCreate'
+import { hideModal, toggleModal } from '../store/actions/app.actions'
 
 export function AppHeader() {
-    const [
-        showCreateBoardPopover,
-        toggleShowCreateBoardPopover,
-        setShowCreateBoardPopover,
-    ] = useToggle()
+    function onCreateBoardClick() {
+        toggleModal(
+            `app-header-create-board`,
+            'Create Board',
+            <BoardCreate onClose={hideModal} />,
+            'board-create'
+        )
+    }
 
     return (
-        <>
-            <header className="app-header">
-                <img className="logo" src="krello.svg" />
+        <header className="app-header">
+            <img className="logo" src="krello.svg" />
 
-                <Link to="/boards">Boards</Link>
-                <PrimaryBtn
-                    text="Create Board"
-                    onClick={() => toggleShowCreateBoardPopover()}
-                ></PrimaryBtn>
-                <div className="avatar">{'<User Avatar>'}</div>
-            </header>
-            {showCreateBoardPopover && (
-                <BoardCreate onClose={() => setShowCreateBoardPopover(false)} />
-            )}
-        </>
+            <Link to="/boards">Boards</Link>
+            <PrimaryBtn
+                text="Create Board"
+                onClick={onCreateBoardClick}
+            ></PrimaryBtn>
+            <div className="avatar">{'<User Avatar>'}</div>
+        </header>
     )
 }
