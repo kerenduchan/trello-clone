@@ -1,0 +1,27 @@
+.task-details-header {
+    grid-area: header;
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    grid-template-rows: 20px auto 4px auto;
+    align-items: center;
+
+    .icon {
+        grid-area: 2 / 1;
+        justify-self: center;
+    }
+
+    .title {
+        grid-area: 2 / 2;
+        @include font(20px, 24px, 600);
+    }
+
+    .subtitle {
+        grid-area: 4 / 2;
+
+        .group-title {
+            text-decoration: underline;
+            @include font-p();
+            cursor: pointer;
+        }
+    }
+}

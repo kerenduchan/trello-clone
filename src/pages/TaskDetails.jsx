@@ -6,6 +6,7 @@ import { TaskDetailsActivity } from '../cmp/task/TaskDetailsActivity'
 import { TaskDetailsSidebar } from '../cmp/task/TaskDetailsSidebar'
 import { TaskDetailsChecklists } from '../cmp/task/TaskDetailsChecklists'
 import { TaskDetailsLabels } from '../cmp/task/TaskDetailsLabels'
+import { TaskDetailsHeader } from '../cmp/task/TaskDetailsHeader'
 
 export function TaskDetails({ task }) {
     const navigate = useNavigate()
@@ -18,23 +19,7 @@ export function TaskDetails({ task }) {
     return (
         <div className="task-details-bg" onClick={onClose}>
             <div className="task-details" onClick={(e) => e.stopPropagation()}>
-                <CircleBtn type="close" onClick={onClose} />
-                {task.cover && (
-                    <div
-                        className="cover"
-                        style={{
-                            backgroundColor: task.cover.bgColor,
-                        }}
-                    ></div>
-                )}
-                <div className="header">
-                    <Icon type="card" size="md" />
-                    <h1 className="title">{task.title}</h1>
-                    <p className="subtitle">
-                        in list{' '}
-                        <span className="group-title">{task.group.title}</span>
-                    </p>
-                </div>
+                <TaskDetailsHeader task={task} onClose={onClose} />
                 <div className="main">
                     <TaskDetailsLabels labels={task.labels} />
                     <TaskDetailsDescription task={task} />
