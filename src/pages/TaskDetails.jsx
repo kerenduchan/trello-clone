@@ -1,6 +1,4 @@
 import { useNavigate, useParams } from 'react-router'
-import { Icon } from '../cmp/general/Icon'
-import { CircleBtn } from '../cmp/general/btn/CircleBtn'
 import { TaskDetailsDescription } from '../cmp/task/TaskDetailsDescription'
 import { TaskDetailsActivity } from '../cmp/task/TaskDetailsActivity'
 import { TaskDetailsSidebar } from '../cmp/task/TaskDetailsSidebar'
