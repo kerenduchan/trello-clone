@@ -4,8 +4,18 @@ import { SET_MODAL } from './../reducers/app.reducer'
 export { showModal, hideModal, toggleModal }
 
 function showModal(parent, title, content, className = null, e) {
+    // stop propagation, otherwise the app will close the modal
     e.stopPropagation()
-    setModal({ parent, title, className, content, el: e.currentTarget })
+
+    // save the current target because it becomes null once the event handling
+    // is done
+    setModal({
+        parent,
+        title,
+        className,
+        content,
+        el: e.currentTarget,
+    })
 }
 
 function toggleModal(parent, title, content, className = null, e) {

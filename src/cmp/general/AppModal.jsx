@@ -12,9 +12,16 @@ export function AppModal() {
 
     function calcPosition() {
         if (!modal) return null
-
         const rect = modal.el.getBoundingClientRect()
-        return { top: rect.top + rect.height + 6, left: rect.left }
+
+        let left = rect.left
+        const overflowY = left + 400 - window.innerWidth
+
+        if (overflowY > 0) {
+            left -= overflowY
+        }
+
+        return { top: rect.top + rect.height + 6, left }
     }
 
     if (!modal) return <></>
