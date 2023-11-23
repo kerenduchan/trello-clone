@@ -1,21 +1,13 @@
-import { useToggle } from '../../customHooks/useToggle'
 import { toggleModal } from '../../store/actions/app.actions'
 import { updateBoard } from '../../store/actions/board.actions'
 import { EditableTitle } from '../general/EditableTitle'
-import { Icon } from '../general/Icon'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
-import { TaskCreate } from '../task/TaskCreate'
 import { TaskList } from '../task/TaskList'
+import { GroupPreviewFooter } from './GroupPreviewFooter'
 import { GroupPreviewMenu } from './GroupPreviewMenu'
 
 // Represents a group of tasks (a list in the UI) in a board
 export function GroupPreview({ board, group }) {
-    const [
-        showTaskCreateForm,
-        toggleShowTaskCreateForm,
-        setShowTaskCreateForm,
-    ] = useToggle()
-
     function onTitleChange(title) {
         group.title = title
         updateBoard(board)
@@ -42,29 +34,7 @@ export function GroupPreview({ board, group }) {
             </header>
 
             <TaskList board={board} tasks={group.tasks} />
-            <div className="footer">
-                {showTaskCreateForm ? (
-                    <TaskCreate
-                        board={board}
-                        group={group}
-                        onClose={() => setShowTaskCreateForm(false)}
-                    />
-                ) : (
-                    <>
-                        <button
-                            className="add-btn"
-                            onClick={toggleShowTaskCreateForm}
-                        >
-                            <Icon type="add"></Icon>
-                            <span>Add a card</span>
-                        </button>
-                        <SquareIconBtn
-                            className="template-btn"
-                            icon="template"
-                        />
-                    </>
-                )}
-            </div>
+            <GroupPreviewFooter board={board} group={group} />
         </section>
     )
 }

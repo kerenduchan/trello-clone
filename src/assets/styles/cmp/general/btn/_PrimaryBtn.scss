@@ -1,4 +1,5 @@
 .primary-btn {
+    @include prevent-select();
     @include button-bg(
         var(--bg-primary-btn),
         var(--bg-primary-btn-hovered),

@@ -5,20 +5,20 @@ import { PrimaryBtn } from '../general/btn/PrimaryBtn'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 
 export function TaskCreate({ board, group, onClose }) {
-    const [draft, handleChange, setDraft] = useForm(boardService.getEmptyTask())
+    const [draft, handleChange] = useForm(boardService.getEmptyTask())
 
     async function onSubmit(e) {
         e.preventDefault()
         group.tasks = [...group.tasks, draft]
-        await updateBoard(board)
+        updateBoard(board)
         onClose()
     }
 
     return (
-        <>
-            <form className="task-create" onSubmit={onSubmit}>
+        <div className="task-create">
+            <form onSubmit={onSubmit}>
                 <input
-                    type="text"
+                    autoFocus
                     id="title"
                     name="title"
                     placeholder="Enter a title for this card..."
@@ -28,6 +28,6 @@ export function TaskCreate({ board, group, onClose }) {
                 <PrimaryBtn className="add-btn" text="Add card" />
             </form>
             <SquareIconBtn icon="close" onClick={onClose} />
-        </>
+        </div>
     )
 }

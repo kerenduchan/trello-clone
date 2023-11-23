@@ -1,0 +1,21 @@
+.task-create {
+    form {
+        display: grid;
+        gap: 8px;
+
+        input {
+            background-color: var(--bg-1);
+            border-radius: 8px;
+            box-shadow: var(--box-shadow-subtle);
+            overflow: hidden;
+            padding-bottom: 50px;
+            @include font-p();
+            padding: 8px 12px;
+            outline: none;
+        }
+    }
+
+    &.hidden {
+        visibility: hidden;
+    }
+}

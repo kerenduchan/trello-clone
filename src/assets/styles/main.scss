@@ -41,9 +41,11 @@
 @import 'cmp/group/GroupCreate';
 @import 'cmp/group/GroupList';
 @import 'cmp/group/GroupPreview';
+@import 'cmp/group/GroupPreviewFooter';
 @import 'cmp/group/GroupPreviewMenu';
 
 // task
+@import 'cmp/task/TaskCreate';
 @import 'cmp/task/TaskDetailsActivity';
 @import 'cmp/task/TaskDetailsChecklist';
 @import 'cmp/task/TaskDetailsDescription';
