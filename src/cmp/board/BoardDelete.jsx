@@ -2,11 +2,12 @@ import { useNavigate } from 'react-router'
 import { PrimaryBtn } from '../general/btn/PrimaryBtn'
 import { removeBoard } from '../../store/actions/board.actions'
 
-export function BoardDelete({ board }) {
+export function BoardDelete({ board, onClose }) {
     const navigate = useNavigate()
 
     async function onDeleteBoard() {
         await removeBoard(board._id)
+        onClose()
         navigate('/boards')
     }
 
