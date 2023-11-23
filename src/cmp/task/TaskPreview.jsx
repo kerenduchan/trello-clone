@@ -3,7 +3,7 @@ import { CircleBtn } from '../general/btn/CircleBtn'
 
 export function TaskPreview({ board, task }) {
     function onEditClick() {
-        console.log('edit')
+        // TODO
     }
 
     return (
