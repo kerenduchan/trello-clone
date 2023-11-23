@@ -31,7 +31,7 @@ export function TaskDetails({ board, group, task }) {
                     <TaskDetailsChecklists checklists={task.checklists} />
                     <TaskDetailsActivity task={task} />
                 </div>
-                <TaskDetailsSidebar board={board} task={task} />
+                <TaskDetailsSidebar board={board} group={group} task={task} />
             </div>
         </div>
     )

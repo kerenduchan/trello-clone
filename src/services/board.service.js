@@ -24,44 +24,7 @@ function getEmptyBoard() {
             backgroundImage: '',
         },
         groups: [],
-        labels: [
-            {
-                _id: 'l101',
-                title: null,
-                color: '#4bce97',
-                colorName: 'Green',
-            },
-            {
-                _id: 'l102',
-                title: null,
-                color: '#f5cd47',
-                colorName: 'Yellow',
-            },
-            {
-                _id: 'l103',
-                title: null,
-                color: '#fea362',
-                colorName: 'Orange',
-            },
-            {
-                _id: 'l104',
-                title: null,
-                color: '#f87168',
-                colorName: 'Red',
-            },
-            {
-                _id: 'l105',
-                title: null,
-                color: '#9f8fef',
-                colorName: 'Purple',
-            },
-            {
-                _id: 'l106',
-                title: null,
-                color: '#579dff',
-                colorName: 'Blue',
-            },
-        ],
+        labels: _getDefaultLabels(),
     }
 }
 
@@ -78,6 +41,7 @@ function getEmptyTask() {
         _id: utilService.makeId(),
         title: '',
         archivedAt: null,
+        labelIds: [],
     }
 }
 
@@ -252,6 +216,7 @@ function _createBoards() {
                 title: 'Personal Board',
                 isStarred: false,
                 archivedAt: null,
+                labels: _getDefaultLabels(),
                 groups: [],
                 createdBy: {
                     _id: 'u102',
@@ -274,5 +239,46 @@ function getBackgroundImages() {
         'https://images.unsplash.com/photo-1699116548123-73affe0987b7',
         'https://images.unsplash.com/photo-1694111356884-45781a164220',
         'https://images.unsplash.com/photo-1695667937079-b59c63660cfc',
+    ]
+}
+
+function _getDefaultLabels() {
+    return [
+        {
+            _id: 'l101',
+            title: null,
+            color: '#4bce97',
+            colorName: 'Green',
+        },
+        {
+            _id: 'l102',
+            title: null,
+            color: '#f5cd47',
+            colorName: 'Yellow',
+        },
+        {
+            _id: 'l103',
+            title: null,
+            color: '#fea362',
+            colorName: 'Orange',
+        },
+        {
+            _id: 'l104',
+            title: null,
+            color: '#f87168',
+            colorName: 'Red',
+        },
+        {
+            _id: 'l105',
+            title: null,
+            color: '#9f8fef',
+            colorName: 'Purple',
+        },
+        {
+            _id: 'l106',
+            title: null,
+            color: '#579dff',
+            colorName: 'Blue',
+        },
     ]
 }

@@ -2,12 +2,12 @@ import { toggleModal } from '../../store/actions/app.actions'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 import { TaskLabelsMenu } from './TaskLabelsMenu'
 
-export function TaskDetailsSidebar({ board, task }) {
+export function TaskDetailsSidebar({ board, group, task }) {
     function onLabelsClick(e) {
         toggleModal(
             'task-details-sidebar-labels',
             'Labels',
-            <TaskLabelsMenu board={board} task={task} />,
+            <TaskLabelsMenu board={board} group={group} task={task} />,
             'task-details-sidebar-labels',
             e
         )

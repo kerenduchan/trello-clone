@@ -1,6 +1,6 @@
 import { TaskLabelsMenuItem } from './TaskLabelsMenuItem'
 
-export function TaskLabelsMenu({ board, task }) {
+export function TaskLabelsMenu({ board, group, task }) {
     return (
         <div className="task-labels-menu">
             <ul>
@@ -8,6 +8,7 @@ export function TaskLabelsMenu({ board, task }) {
                     <li key={label._id}>
                         <TaskLabelsMenuItem
                             board={board}
+                            group={group}
                             task={task}
                             label={label}
                         />
