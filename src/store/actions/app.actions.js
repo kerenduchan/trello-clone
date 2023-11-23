@@ -4,6 +4,7 @@ import { SET_MODAL } from './../reducers/app.reducer'
 export { showModal, hideModal, toggleModal }
 
 function showModal(parent, title, content, className = null, e) {
+    e.stopPropagation()
     setModal({ parent, title, className, content, el: e.currentTarget })
 }
 

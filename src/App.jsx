@@ -6,10 +6,14 @@ import { BoardIndex } from './pages/BoardIndex'
 import { BoardDetails } from './pages/BoardDetails'
 import { TaskDetails } from './pages/TaskDetails'
 import { AppModal } from './cmp/general/AppModal'
+import { hideModal } from './store/actions/app.actions'
 
 function App() {
+    function onAppClick() {
+        hideModal()
+    }
     return (
-        <div id="app">
+        <div id="app" onClick={onAppClick}>
             <Router>
                 <AppHeader />
                 <div className="app-content">
