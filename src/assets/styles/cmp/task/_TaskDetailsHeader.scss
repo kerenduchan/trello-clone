@@ -1,16 +1,19 @@
 .task-details-header {
+    position: relative;
     grid-area: header;
-    display: grid;
-    grid-template-columns: 56px 1fr;
-    grid-template-rows: 20px auto 4px auto;
-    align-items: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-inline-start: 56px;
+    padding-inline-end: 52px;
 
     .icon {
-        grid-area: 2 / 1;
-        justify-self: center;
+        position: absolute;
+        left: 16px;
+        top: 16px;
     }
 
     .editable-title {
+        grid-template-columns: auto;
         grid-area: 2 / 2;
 
         .title,
