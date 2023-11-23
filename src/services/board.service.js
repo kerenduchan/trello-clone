@@ -52,7 +52,7 @@ function getEmptyBoard() {
             {
                 _id: 'l105',
                 title: null,
-                color: '#f87168',
+                color: '#9f8fef',
                 colorName: 'Purple',
             },
             {
