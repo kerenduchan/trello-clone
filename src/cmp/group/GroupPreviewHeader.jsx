@@ -17,13 +17,13 @@ export function GroupPreviewHeader({ group, board }) {
     }
 
     function onMoreClick(e) {
-        togglePopover(
-            `group-preview-${group._id}`,
-            'List Actions',
-            <GroupPreviewMenu board={board} group={group} />,
-            'list-actions',
-            e
-        )
+        togglePopover({
+            event: e,
+            el: e.currentTarget,
+            title: 'List Actions',
+            content: <GroupPreviewMenu board={board} group={group} />,
+            className: 'list-actions',
+        })
     }
 
     return (

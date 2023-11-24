@@ -3,32 +3,26 @@ import { SET_POPOVER } from './../reducers/app.reducer'
 
 export { showPopover, hidePopover, togglePopover }
 
-function showPopover(parent, title, content, className = null, e) {
+function showPopover(popover) {
     // stop propagation, otherwise the app will close the popover
-    e.stopPropagation()
+    popover.event.stopPropagation()
 
     // save the current target because it becomes null once the event handling
     // is done
-    setPopover({
-        parent,
-        title,
-        className,
-        content,
-        el: e.currentTarget,
-    })
+    _setPopover(popover)
 }
 
-function togglePopover(parent, title, content, className = null, e) {
-    store.getState().appModule.popover?.parent === parent
+function togglePopover(popover) {
+    store.getState().appModule.popover?.el === popover.el
         ? hidePopover()
-        : showPopover(parent, title, content, className, e)
+        : showPopover(popover)
 }
 
 function hidePopover() {
-    setPopover(null)
+    _setPopover(null)
 }
 
-function setPopover(popover = null) {
+function _setPopover(popover = null) {
     store.dispatch({
         type: SET_POPOVER,
         popover,

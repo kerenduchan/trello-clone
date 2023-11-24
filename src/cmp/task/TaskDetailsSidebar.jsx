@@ -4,13 +4,12 @@ import { TaskLabelsMenu } from './TaskLabelsMenu'
 
 export function TaskDetailsSidebar({ board, group, task }) {
     function onLabelsClick(e) {
-        togglePopover(
-            'task-details-sidebar-labels',
-            'Labels',
-            <TaskLabelsMenu board={board} group={group} task={task} />,
-            'task-details-sidebar-labels',
-            e
-        )
+        togglePopover({
+            event: e,
+            el: e.currentTarget,
+            title: 'List Actions',
+            content: <TaskLabelsMenu board={board} group={group} task={task} />,
+        })
     }
 
     return (
