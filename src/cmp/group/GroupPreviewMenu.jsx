@@ -1,4 +1,4 @@
-import { hideModal } from '../../store/actions/app.actions'
+import { hidePopover } from '../../store/actions/app.actions'
 import { updateBoard } from '../../store/actions/board.actions'
 import { deepClone } from '../../util'
 
@@ -8,7 +8,7 @@ export function GroupPreviewMenu({ board, group }) {
         const boardClone = deepClone(board)
         boardClone.groups = boardClone.groups.filter((g) => g._id !== group._id)
         updateBoard(boardClone)
-        hideModal()
+        hidePopover()
     }
 
     return (

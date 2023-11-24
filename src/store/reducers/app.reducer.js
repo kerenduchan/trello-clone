@@ -1,15 +1,15 @@
-export const SET_MODAL = 'SET_MODAL'
+export const SET_POPOVER = 'SET_POPOVER'
 
 const initialState = {
-    modal: null,
+    popover: null,
 }
 
 export function appReducer(state = initialState, action = {}) {
     switch (action.type) {
-        case SET_MODAL:
+        case SET_POPOVER:
             return {
                 ...state,
-                modal: action.modal,
+                popover: action.popover,
             }
 
         default:

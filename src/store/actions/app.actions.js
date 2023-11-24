@@ -1,15 +1,15 @@
 import { store } from './../store'
-import { SET_MODAL } from './../reducers/app.reducer'
+import { SET_POPOVER } from './../reducers/app.reducer'
 
-export { showModal, hideModal, toggleModal }
+export { showPopover, hidePopover, togglePopover }
 
-function showModal(parent, title, content, className = null, e) {
-    // stop propagation, otherwise the app will close the modal
+function showPopover(parent, title, content, className = null, e) {
+    // stop propagation, otherwise the app will close the popover
     e.stopPropagation()
 
     // save the current target because it becomes null once the event handling
     // is done
-    setModal({
+    setPopover({
         parent,
         title,
         className,
@@ -18,19 +18,19 @@ function showModal(parent, title, content, className = null, e) {
     })
 }
 
-function toggleModal(parent, title, content, className = null, e) {
-    store.getState().appModule.modal?.parent === parent
-        ? hideModal()
-        : showModal(parent, title, content, className, e)
+function togglePopover(parent, title, content, className = null, e) {
+    store.getState().appModule.popover?.parent === parent
+        ? hidePopover()
+        : showPopover(parent, title, content, className, e)
 }
 
-function hideModal() {
-    setModal(null)
+function hidePopover() {
+    setPopover(null)
 }
 
-function setModal(modal = null) {
+function setPopover(popover = null) {
     store.dispatch({
-        type: SET_MODAL,
-        modal,
+        type: SET_POPOVER,
+        popover,
     })
 }

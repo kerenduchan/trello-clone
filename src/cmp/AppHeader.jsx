@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom'
 import { PrimaryBtn } from './general/btn/PrimaryBtn'
 import { BoardCreate } from './board/BoardCreate'
-import { hideModal, toggleModal } from '../store/actions/app.actions'
+import { hidePopover, togglePopover } from '../store/actions/app.actions'
 
 export function AppHeader() {
     function onCreateBoardClick(e) {
-        toggleModal(
+        togglePopover(
             `app-header-create-board`,
             'Create Board',
-            <BoardCreate onClose={hideModal} />,
+            <BoardCreate onClose={hidePopover} />,
             'board-create',
             e
         )

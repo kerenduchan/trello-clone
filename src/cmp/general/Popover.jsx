@@ -1,14 +1,14 @@
 import { useSelector } from 'react-redux'
-import { hideModal } from '../../store/actions/app.actions'
+import { hidePopover } from '../../store/actions/app.actions'
 import { buildClassName } from '../../util'
 import { SquareIconBtn } from './btn/SquareIconBtn'
 
-export function AppModal() {
-    const modal = useSelector((storeState) => storeState.appModule.modal)
+export function Popover() {
+    const popover = useSelector((storeState) => storeState.appModule.popover)
 
     function calcPosition() {
-        if (!modal) return null
-        const rect = modal.el.getBoundingClientRect()
+        if (!popover) return null
+        const rect = popover.el.getBoundingClientRect()
 
         let left = rect.left
         const overflowY = left + 400 - window.innerWidth
@@ -20,19 +20,19 @@ export function AppModal() {
         return { top: rect.top + rect.height + 6, left }
     }
 
-    if (!modal) return <></>
+    if (!popover) return <></>
     return (
         <div
-            className={buildClassName('app-modal', modal.className)}
+            className={buildClassName('popover', popover.className)}
             style={calcPosition()}
             onClick={(e) => e.stopPropagation()}
         >
             <div>
                 <header>
-                    <h2>{modal.title}</h2>
-                    <SquareIconBtn onClick={hideModal} icon="close" />
+                    <h2>{popover.title}</h2>
+                    <SquareIconBtn onClick={hidePopover} icon="close" />
                 </header>
-                <div className="content">{modal.content}</div>
+                <div className="content">{popover.content}</div>
             </div>
         </div>
     )

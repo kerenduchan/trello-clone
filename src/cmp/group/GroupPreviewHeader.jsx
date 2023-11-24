@@ -1,4 +1,4 @@
-import { toggleModal } from '../../store/actions/app.actions'
+import { togglePopover } from '../../store/actions/app.actions'
 import { updateBoard } from '../../store/actions/board.actions'
 import { deepClone } from '../../util'
 import { EditableTitle } from '../general/EditableTitle'
@@ -17,7 +17,7 @@ export function GroupPreviewHeader({ group, board }) {
     }
 
     function onMoreClick(e) {
-        toggleModal(
+        togglePopover(
             `group-preview-${group._id}`,
             'List Actions',
             <GroupPreviewMenu board={board} group={group} />,

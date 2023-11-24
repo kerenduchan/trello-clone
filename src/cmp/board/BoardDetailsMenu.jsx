@@ -1,14 +1,14 @@
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 import { BoardDetailsMenuItem } from './BoardDetailsMenuItem'
 import { BoardDelete } from './BoardDelete'
-import { hideModal, toggleModal } from '../../store/actions/app.actions'
+import { hidePopover, togglePopover } from '../../store/actions/app.actions'
 
 export function BoardDetailsMenu({ board, onClose }) {
     function onDeleteBoardClick(e) {
-        toggleModal(
+        togglePopover(
             `app-header-delete-board`,
             'Delete Board?',
-            <BoardDelete board={board} onClose={hideModal} />,
+            <BoardDelete board={board} onClose={hidePopover} />,
             'board-delete',
             e
         )
