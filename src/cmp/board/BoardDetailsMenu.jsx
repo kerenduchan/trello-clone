@@ -5,9 +5,7 @@ import { hidePopover, togglePopover } from '../../store/actions/app.actions'
 
 export function BoardDetailsMenu({ board, onClose }) {
     function onDeleteBoardClick(e) {
-        togglePopover({
-            event: e,
-            el: e.currentTarget,
+        togglePopover(e, {
             title: 'Delete Board?',
             content: <BoardDelete board={board} onClose={hidePopover} />,
             className: 'board-delete',

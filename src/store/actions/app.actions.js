@@ -12,7 +12,9 @@ function showPopover(popover) {
     _setPopover(popover)
 }
 
-function togglePopover(popover) {
+function togglePopover(e, popover) {
+    popover = { ...popover, event: e, el: e.currentTarget }
+
     store.getState().appModule.popover?.el === popover.el
         ? hidePopover()
         : showPopover(popover)

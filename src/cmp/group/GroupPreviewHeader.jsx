@@ -17,9 +17,7 @@ export function GroupPreviewHeader({ group, board }) {
     }
 
     function onMoreClick(e) {
-        togglePopover({
-            event: e,
-            el: e.currentTarget,
+        togglePopover(e, {
             title: 'List Actions',
             content: <GroupPreviewMenu board={board} group={group} />,
             className: 'list-actions',

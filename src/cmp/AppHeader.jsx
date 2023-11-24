@@ -5,9 +5,7 @@ import { hidePopover, togglePopover } from '../store/actions/app.actions'
 
 export function AppHeader() {
     function onCreateBoardClick(e) {
-        togglePopover({
-            event: e,
-            el: e.currentTarget,
+        togglePopover(e, {
             title: 'Create Board',
             content: <BoardCreate onClose={hidePopover} />,
             className: 'board-create',
