@@ -13,6 +13,10 @@ export function TaskLabelsMenu({ board, group, task, labelsMenu }) {
         setPage('edit')
     }
 
+    function onBackClick() {
+        setPage('main')
+    }
+
     const contents = {
         main: (
             <PopoverMenu title="Labels" {...labelsMenu.popover}>
@@ -29,7 +33,7 @@ export function TaskLabelsMenu({ board, group, task, labelsMenu }) {
             <PopoverMenu
                 title="Edit Label"
                 {...labelsMenu.popover}
-                onBack={() => setPage('main')}
+                onBack={onBackClick}
             >
                 <TaskLabelsMenuEdit
                     board={board}
@@ -37,6 +41,7 @@ export function TaskLabelsMenu({ board, group, task, labelsMenu }) {
                     task={task}
                     label={labelToEdit}
                     onClose={labelsMenu.onClose}
+                    onBack={onBackClick}
                 />
             </PopoverMenu>
         ),
