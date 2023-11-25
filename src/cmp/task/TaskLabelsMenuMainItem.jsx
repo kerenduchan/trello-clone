@@ -39,7 +39,7 @@ export function TaskLabelsMenuMainItem({
             <div className="label" style={{ backgroundColor: label.color }}>
                 {label.title}
             </div>
-            <SquareIconBtn icon="edit" onClick={onEditClick} />
+            <SquareIconBtn icon="edit" onClick={() => onEditClick(label)} />
         </div>
     )
 }

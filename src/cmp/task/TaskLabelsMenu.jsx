@@ -6,6 +6,12 @@ import { TaskLabelsMenuMain } from './TaskLabelsMenuMain'
 export function TaskLabelsMenu({ board, group, task, labelsMenu }) {
     // current page in the labels menu popover: main or edit
     const [page, setPage] = useState('main')
+    const [labelToEdit, setLabelToEdit] = useState(null)
+
+    function onEditClick(label) {
+        setLabelToEdit(label)
+        setPage('edit')
+    }
 
     const contents = {
         main: (
@@ -15,18 +21,22 @@ export function TaskLabelsMenu({ board, group, task, labelsMenu }) {
                     group={group}
                     task={task}
                     onClose={labelsMenu.onClose}
-                    onEditClick={() => setPage('edit')}
+                    onEditClick={onEditClick}
                 />
             </PopoverMenu>
         ),
         edit: (
-            <PopoverMenu title="Edit Label" {...labelsMenu.popover}>
+            <PopoverMenu
+                title="Edit Label"
+                {...labelsMenu.popover}
+                onBack={() => setPage('main')}
+            >
                 <TaskLabelsMenuEdit
                     board={board}
                     group={group}
                     task={task}
+                    label={labelToEdit}
                     onClose={labelsMenu.onClose}
-                    onBackClick={() => setPage('main')}
                 />
             </PopoverMenu>
         ),

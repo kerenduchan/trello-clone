@@ -25,6 +25,7 @@ const _typeToMaterialSymbol = {
     card: 'credit_card',
     star: 'star',
     more: 'more_horiz',
+    back: 'arrow_back_ios_new',
 }
 
 function buildClassName(...names) {
