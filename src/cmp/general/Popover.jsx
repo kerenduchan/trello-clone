@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { usePopper } from 'react-popper'
+import { buildClassName } from '../../util'
 
-export function Popover({ refEl, onClose, children }) {
+export function Popover({ refEl, className, onClose, children }) {
     const wrapperEl = useRef(null)
     const [popperEl, setPopperEl] = useState(null)
     const { styles, attributes } = usePopper(refEl, popperEl, {
@@ -40,7 +41,7 @@ export function Popover({ refEl, onClose, children }) {
     return createPortal(
         <div className="popover-wrapper" ref={wrapperEl}>
             <div
-                className="popover"
+                className={buildClassName('popover', className)}
                 ref={setPopperEl}
                 style={styles.popper}
                 {...attributes.popper}
