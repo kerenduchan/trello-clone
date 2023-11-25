@@ -5,12 +5,10 @@ import { Login } from './pages/Login'
 import { BoardIndex } from './pages/BoardIndex'
 import { BoardDetails } from './pages/BoardDetails'
 import { TaskDetails } from './pages/TaskDetails'
-import { Popover } from './cmp/general/Popover'
-import { hidePopover } from './store/actions/app.actions'
 
 function App() {
     return (
-        <div id="app" onClick={hidePopover}>
+        <div id="app">
             <Router>
                 <AppHeader />
                 <div className="app-content">
@@ -26,7 +24,6 @@ function App() {
                         </Route>
                     </Routes>
                 </div>
-                <Popover />
             </Router>
         </div>
     )

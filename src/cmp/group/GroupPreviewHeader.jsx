@@ -1,11 +1,14 @@
-import { togglePopover } from '../../store/actions/app.actions'
+import { usePopoverState } from '../../customHooks/usePopoverState'
 import { updateBoard } from '../../store/actions/board.actions'
 import { deepClone } from '../../util'
 import { EditableTitle } from '../general/EditableTitle'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 import { GroupPreviewMenu } from './GroupPreviewMenu'
+import { PopoverMenu } from '../general/PopoverMenu'
 
 export function GroupPreviewHeader({ group, board }) {
+    const listActionsMenu = usePopoverState()
+
     function onTitleChange(title) {
         // change the title of this group in the board
         const boardClone = deepClone(board)
@@ -16,22 +19,27 @@ export function GroupPreviewHeader({ group, board }) {
         updateBoard(boardClone)
     }
 
-    function onMoreClick(e) {
-        togglePopover(e, {
-            title: 'List Actions',
-            content: <GroupPreviewMenu board={board} group={group} />,
-            className: 'list-actions',
-        })
-    }
-
     return (
-        <header className="group-preview-header">
-            <EditableTitle title={group.title} onChange={onTitleChange} />
-            <SquareIconBtn
-                className="more-btn"
-                icon="more"
-                onClick={onMoreClick}
-            />
-        </header>
+        <>
+            <header className="group-preview-header">
+                <EditableTitle title={group.title} onChange={onTitleChange} />
+                <SquareIconBtn
+                    {...listActionsMenu.trigger}
+                    className="more-btn"
+                    icon="more"
+                />
+            </header>
+
+            {/* List Actions menu */}
+            {listActionsMenu.show && (
+                <PopoverMenu title="List Actions" {...listActionsMenu.popover}>
+                    <GroupPreviewMenu
+                        board={board}
+                        group={group}
+                        onClose={listActionsMenu.onClose}
+                    />
+                </PopoverMenu>
+            )}
+        </>
     )
 }

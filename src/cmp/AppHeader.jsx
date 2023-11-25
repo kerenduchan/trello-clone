@@ -1,27 +1,31 @@
 import { Link } from 'react-router-dom'
+import { usePopoverState } from '../customHooks/usePopoverState'
 import { PrimaryBtn } from './general/btn/PrimaryBtn'
 import { BoardCreate } from './board/BoardCreate'
-import { hidePopover, togglePopover } from '../store/actions/app.actions'
+import { PopoverMenu } from './general/PopoverMenu'
 
 export function AppHeader() {
-    function onCreateBoardClick(e) {
-        togglePopover(e, {
-            title: 'Create Board',
-            content: <BoardCreate onClose={hidePopover} />,
-            className: 'board-create',
-        })
-    }
+    const createBoardMenu = usePopoverState()
 
     return (
-        <header className="app-header">
-            <img className="logo" src="krello.svg" />
+        <>
+            <header className="app-header">
+                <img className="logo" src="krello.svg" />
 
-            <Link to="/boards">Boards</Link>
-            <PrimaryBtn
-                text="Create Board"
-                onClick={onCreateBoardClick}
-            ></PrimaryBtn>
-            <div className="avatar">{'<User Avatar>'}</div>
-        </header>
+                <Link to="/boards">Boards</Link>
+                <PrimaryBtn
+                    {...createBoardMenu.trigger}
+                    text="Create Board"
+                ></PrimaryBtn>
+                <div className="avatar">{'<User Avatar>'}</div>
+            </header>
+
+            {/* Create Board menu */}
+            {createBoardMenu.show && (
+                <PopoverMenu title="Create Board" {...createBoardMenu.popover}>
+                    <BoardCreate onClose={createBoardMenu.onClose} />
+                </PopoverMenu>
+            )}
+        </>
     )
 }

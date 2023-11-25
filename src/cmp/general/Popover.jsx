@@ -1,39 +1,53 @@
-import { useSelector } from 'react-redux'
-import { hidePopover } from '../../store/actions/app.actions'
-import { buildClassName } from '../../util'
-import { SquareIconBtn } from './btn/SquareIconBtn'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
+import { usePopper } from 'react-popper'
 
-export function Popover() {
-    const popover = useSelector((storeState) => storeState.appModule.popover)
+export function Popover({ refEl, onClose, children }) {
+    const wrapperEl = useRef(null)
+    const [popperEl, setPopperEl] = useState(null)
+    const { styles, attributes } = usePopper(refEl, popperEl, {
+        placement: 'bottom-start',
+        modifiers: [
+            {
+                name: 'offset',
+                options: {
+                    offset: [0, 10],
+                },
+            },
+        ],
+    })
 
-    function calcPosition() {
-        if (!popover) return null
-        const rect = popover.el.getBoundingClientRect()
-
-        let left = rect.left
-        const overflowY = left + 400 - window.innerWidth
-
-        if (overflowY > 0) {
-            left -= overflowY
+    const mouseDownListener = useCallback((e) => {
+        if (
+            wrapperEl.current &&
+            !wrapperEl.current.contains(e.target) &&
+            !refEl.contains(e.target)
+        ) {
+            // clicked outside of popover
+            // and not on button that opened the popover
+            onClose()
         }
+    })
 
-        return { top: rect.top + rect.height + 6, left }
-    }
+    useEffect(() => {
+        document.addEventListener('mousedown', mouseDownListener)
 
-    if (!popover) return <></>
-    return (
-        <div
-            className={buildClassName('popover', popover.className)}
-            style={calcPosition()}
-            onClick={(e) => e.stopPropagation()}
-        >
-            <div>
-                <header>
-                    <h2>{popover.title}</h2>
-                    <SquareIconBtn onClick={hidePopover} icon="close" />
-                </header>
-                <div className="content">{popover.content}</div>
+        return () => {
+            document.removeEventListener('mousedown', mouseDownListener)
+        }
+    })
+
+    return createPortal(
+        <div className="popover-wrapper" ref={wrapperEl}>
+            <div
+                className="popover"
+                ref={setPopperEl}
+                style={styles.popper}
+                {...attributes.popper}
+            >
+                {children}
             </div>
-        </div>
+        </div>,
+        document.body
     )
 }

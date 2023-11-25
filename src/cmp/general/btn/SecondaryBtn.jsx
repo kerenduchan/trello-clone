@@ -1,8 +1,11 @@
+import { forwardRef } from 'react'
 import { Icon } from '../Icon'
 
-export function SecondaryBtn({ icon, text, className, onClick }) {
+export const SecondaryBtn = forwardRef(function SecondaryBtn(props, ref) {
+    const { icon, text, className, onClick } = props
     return (
         <button
+            ref={ref}
             className={`secondary-btn ${className ? ` ${className}` : ''}`}
             onClick={onClick}
         >
@@ -10,4 +13,4 @@ export function SecondaryBtn({ icon, text, className, onClick }) {
             <span>{text}</span>
         </button>
     )
-}
+})

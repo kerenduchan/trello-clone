@@ -172,6 +172,7 @@ function _createBoards() {
                                 _id: 'c102',
                                 title: 'Install nodeJS',
                                 archivedAt: null,
+                                labelIds: [],
                             },
                         ],
                     },
@@ -179,11 +180,13 @@ function _createBoards() {
                         _id: 'g102',
                         title: 'Backlog: Client',
                         archivedAt: null,
+                        labelIds: [],
                         tasks: [
                             {
                                 _id: 'c103',
                                 title: 'Log out functionality',
                                 archivedAt: null,
+                                labelIds: [],
                                 description:
                                     'Allow a logged-in user to log out',
                                 comments: [
@@ -203,6 +206,7 @@ function _createBoards() {
                                 _id: 'c104',
                                 title: 'Filter products',
                                 archivedAt: null,
+                                labelIds: [],
                                 cover: {
                                     bgColor: '#e774bb',
                                 },
