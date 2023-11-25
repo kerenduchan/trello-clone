@@ -2,9 +2,11 @@ import { usePopoverState } from '../../customHooks/usePopoverState'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 import { TaskLabelsMenu } from './TaskLabelsMenu'
 import { PopoverMenu } from '../general/PopoverMenu'
+import { TaskDelete } from './TaskDelete'
 
 export function TaskDetailsSidebar({ board, group, task }) {
     const labelsMenu = usePopoverState()
+    const deleteTaskMenu = usePopoverState()
 
     return (
         <>
@@ -39,7 +41,11 @@ export function TaskDetailsSidebar({ board, group, task }) {
                         <SecondaryBtn icon="move" text="Move" />
                         <SecondaryBtn icon="copy" text="Copy" />
                         <SecondaryBtn icon="template" text="Make Template" />
-                        <SecondaryBtn icon="archive" text="Archive" />
+                        <SecondaryBtn
+                            {...deleteTaskMenu.trigger}
+                            icon="archive"
+                            text="Archive"
+                        />
                         <SecondaryBtn icon="share" text="Share" />
                     </div>
                 </section>
@@ -53,6 +59,18 @@ export function TaskDetailsSidebar({ board, group, task }) {
                         group={group}
                         task={task}
                         onClose={labelsMenu.onClose}
+                    />
+                </PopoverMenu>
+            )}
+
+            {/* Delete task menu */}
+            {deleteTaskMenu.show && (
+                <PopoverMenu title="Delete Card?" {...deleteTaskMenu.popover}>
+                    <TaskDelete
+                        board={board}
+                        group={group}
+                        task={task}
+                        onClose={deleteTaskMenu.onClose}
                     />
                 </PopoverMenu>
             )}
