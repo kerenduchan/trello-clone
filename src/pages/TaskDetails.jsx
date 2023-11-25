@@ -24,7 +24,7 @@ export function TaskDetails({ board, group, task }) {
                     onClose={onClose}
                 />
                 <div className="main">
-                    <TaskDetailsLabels labels={task.labels} />
+                    <TaskDetailsLabels board={board} task={task} />
                     <TaskDetailsDescription task={task} />
                     <TaskDetailsChecklists checklists={task.checklists} />
                     <TaskDetailsActivity task={task} />

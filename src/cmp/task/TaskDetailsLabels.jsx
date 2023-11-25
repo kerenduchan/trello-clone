@@ -1,4 +1,8 @@
-export function TaskDetailsLabels({ labels }) {
+import { boardService } from '../../services/board.service'
+
+export function TaskDetailsLabels({ board, task }) {
+    const labels = boardService.getTaskLabels(board, task)
+
     return (
         <section className="task-details-labels">
             {labels && labels.length > 0 && (
