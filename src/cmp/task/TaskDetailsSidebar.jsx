@@ -1,8 +1,8 @@
 import { usePopoverState } from '../../customHooks/usePopoverState'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
-import { TaskLabelsMenu } from './TaskLabelsMenu'
 import { PopoverMenu } from '../general/PopoverMenu'
 import { TaskDelete } from './TaskDelete'
+import { TaskLabelsMenu } from './TaskLabelsMenu'
 
 export function TaskDetailsSidebar({ board, group, task }) {
     const labelsMenu = usePopoverState()
@@ -53,14 +53,12 @@ export function TaskDetailsSidebar({ board, group, task }) {
 
             {/* Labels menu */}
             {labelsMenu.show && (
-                <PopoverMenu title="Labels" {...labelsMenu.popover}>
-                    <TaskLabelsMenu
-                        board={board}
-                        group={group}
-                        task={task}
-                        onClose={labelsMenu.onClose}
-                    />
-                </PopoverMenu>
+                <TaskLabelsMenu
+                    board={board}
+                    group={group}
+                    task={task}
+                    labelsMenu={labelsMenu}
+                />
             )}
 
             {/* Delete task menu */}

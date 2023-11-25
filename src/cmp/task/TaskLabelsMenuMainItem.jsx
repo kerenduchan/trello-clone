@@ -2,7 +2,13 @@ import { updateBoard } from '../../store/actions/board.actions'
 import { deepClone } from '../../util'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 
-export function TaskLabelsMenuItem({ board, group, task, label }) {
+export function TaskLabelsMenuMainItem({
+    board,
+    group,
+    task,
+    label,
+    onEditClick,
+}) {
     function onCheckboxChange(e) {
         // add/remove the label in this task in the group in the board
         const boardClone = deepClone(board)
@@ -33,7 +39,7 @@ export function TaskLabelsMenuItem({ board, group, task, label }) {
             <div className="label" style={{ backgroundColor: label.color }}>
                 {label.title}
             </div>
-            <SquareIconBtn icon="edit" />
+            <SquareIconBtn icon="edit" onClick={onEditClick} />
         </div>
     )
 }
