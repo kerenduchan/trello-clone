@@ -10,11 +10,14 @@ export function TaskCreate({ board, group, onClose }) {
 
     async function onSubmit(e) {
         e.preventDefault()
-        // add the new task to this group in the board
-        const boardClone = deepClone(board)
-        const groupClone = boardService.getGroupById(boardClone, group._id)
-        groupClone.tasks.push(draft)
-        updateBoard(boardClone)
+
+        if (draft.title.length > 0) {
+            // add the new task to this group in the board
+            const boardClone = deepClone(board)
+            const groupClone = boardService.getGroupById(boardClone, group._id)
+            groupClone.tasks.push(draft)
+            updateBoard(boardClone)
+        }
         onClose()
     }
 
