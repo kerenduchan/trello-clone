@@ -27,6 +27,11 @@ export function GroupCreate({ board }) {
         }
     }
 
+    function onClose() {
+        setDraft(boardService.getEmptyGroup())
+        setShowForm(false)
+    }
+
     return (
         <div className="group-create">
             {showForm ? (
@@ -40,7 +45,7 @@ export function GroupCreate({ board }) {
                         value={draft.title}
                     />
                     <PrimaryBtn className="add-btn" text="Add list" />
-                    <SquareIconBtn icon="close" />
+                    <SquareIconBtn icon="close" onClick={onClose} />
                 </form>
             ) : (
                 <SecondaryBtn
