@@ -1,12 +1,12 @@
-export function LabelBtn({ label, onClick }) {
+export function LabelBtn({ label, size = 'lg', onClick }) {
     return (
-        <div className="label-btn-container">
+        <div className={`label-btn-container ${size}`}>
             <button
-                className="label-btn"
+                className={`label-btn ${size}`}
                 onClick={onClick}
                 style={{ backgroundColor: label.color }}
             >
-                {label.title}
+                <span className="title">{label.title}</span>
             </button>
             <div className="overlay" />
         </div>

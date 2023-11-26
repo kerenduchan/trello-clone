@@ -1,14 +1,9 @@
 .task-preview-labels {
+    z-index: 2;
     ul {
         display: grid;
         grid-template-columns: repeat(5, min-content);
         gap: 4px;
         align-content: start;
-
-        .label {
-            width: 40px;
-            height: 8px;
-            border-radius: 4px;
-        }
     }
 }
