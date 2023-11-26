@@ -1,6 +1,7 @@
 import { updateBoard } from '../../store/actions/board.actions'
 import { deepClone } from '../../util'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
+import { useToggle } from '../../customHooks/useToggle'
 
 export function TaskLabelsMenuMainItem({
     board,
@@ -9,7 +10,11 @@ export function TaskLabelsMenuMainItem({
     label,
     onEditClick,
 }) {
-    function onCheckboxChange(e) {
+    const [isChecked, toggleIsChecked] = useToggle(
+        task.labelIds.includes(label._id)
+    )
+
+    function onClick(e) {
         // add/remove the label in this task in the group in the board
         const boardClone = deepClone(board)
         const groupClone = boardClone.groups.filter(
@@ -17,14 +22,16 @@ export function TaskLabelsMenuMainItem({
         )[0]
         const taskClone = groupClone.tasks.filter((t) => t._id === task._id)[0]
 
-        if (e.target.checked) {
-            // add label to task
-            taskClone.labelIds.push(label._id)
-        } else {
+        if (isChecked) {
             taskClone.labelIds = taskClone.labelIds.filter(
                 (lId) => lId !== label._id
             )
+        } else {
+            // add label to task
+            taskClone.labelIds.push(label._id)
         }
+
+        toggleIsChecked()
         updateBoard(boardClone)
     }
 
@@ -33,10 +40,14 @@ export function TaskLabelsMenuMainItem({
             <input
                 className="checkbox"
                 type="checkbox"
-                checked={task.labelIds.includes(label._id)}
-                onChange={onCheckboxChange}
+                checked={isChecked}
+                onChange={onClick}
             />
-            <div className="label" style={{ backgroundColor: label.color }}>
+            <div
+                className="label"
+                style={{ backgroundColor: label.color }}
+                onClick={onClick}
+            >
                 {label.title}
             </div>
             <SquareIconBtn icon="edit" onClick={() => onEditClick(label)} />
