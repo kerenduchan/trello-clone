@@ -9,10 +9,18 @@ export function usePopoverState() {
         return setShow(false)
     }
 
+    // triggers opening / closing the popover
+    const trigger = { onClick: toggleShow }
+
+    // target determines the position of the popover
+    const target = { ref: setEl }
+
     return {
         show,
         onClose,
-        trigger: { ref: setEl, onClick: toggleShow },
+        trigger,
+        target,
+        triggerAndTarget: { ...target, ...trigger },
         popover: { refEl: el, onClose, show },
     }
 }

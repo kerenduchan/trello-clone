@@ -1,7 +1,11 @@
-export function LabelBtn({ label, size = 'lg', onClick }) {
+import { forwardRef } from 'react'
+
+export const LabelBtn = forwardRef(function LabelBtn(props, ref) {
+    const { label, size = 'lg', onClick } = props
     return (
         <div className={`label-btn-container ${size}`} onClick={onClick}>
             <button
+                ref={ref}
                 className={`label-btn ${size}`}
                 style={{ backgroundColor: label.color }}
             >
@@ -10,4 +14,4 @@ export function LabelBtn({ label, size = 'lg', onClick }) {
             <div className="overlay" />
         </div>
     )
-}
+})

@@ -20,7 +20,7 @@ export function BoardDetailsMenu({ board, onClose }) {
                     <ul>
                         <li>
                             <BoardDetailsMenuItem
-                                {...deleteBoardMenu.trigger}
+                                {...deleteBoardMenu.triggerAndTarget}
                                 icon="remove"
                                 title="Close Board"
                             />

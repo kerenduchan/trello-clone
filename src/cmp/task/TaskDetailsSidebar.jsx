@@ -23,7 +23,7 @@ export function TaskDetailsSidebar({ board, group, task }) {
                     <div className="content">
                         <SecondaryBtn icon="member" text="Members" />
                         <SecondaryBtn
-                            {...labelsMenu.trigger}
+                            {...labelsMenu.triggerAndTarget}
                             icon="label"
                             text="Labels"
                         />
@@ -42,7 +42,7 @@ export function TaskDetailsSidebar({ board, group, task }) {
                         <SecondaryBtn icon="copy" text="Copy" />
                         <SecondaryBtn icon="template" text="Make Template" />
                         <SecondaryBtn
-                            {...deleteTaskMenu.trigger}
+                            {...deleteTaskMenu.triggerAndTarget}
                             icon="archive"
                             text="Archive"
                         />

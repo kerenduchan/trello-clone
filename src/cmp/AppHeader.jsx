@@ -14,7 +14,7 @@ export function AppHeader() {
 
                 <Link to="/boards">Boards</Link>
                 <PrimaryBtn
-                    {...createBoardMenu.trigger}
+                    {...createBoardMenu.triggerAndTarget}
                     text="Create Board"
                 ></PrimaryBtn>
                 <div className="avatar">{'<User Avatar>'}</div>
