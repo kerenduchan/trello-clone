@@ -2,41 +2,68 @@ import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 import { TaskDetailsChecklistItem } from './TaskDetailsChecklistItem'
 import { ProgressBar } from '../general/ProgressBar'
 import { TaskDetailsSubsectionHeader } from './TaskDetailsSubsectionHeader'
+import { usePopoverState } from '../../customHooks/usePopoverState'
+import { DeleteMenu } from '../general/DeleteMenu'
 
 export function TaskDetailsChecklist({ board, group, task, checklist }) {
+    const deleteChecklistMenu = usePopoverState()
+
     function getPercent() {
         const doneCount = checklist.items.reduce((acc, item) => {
             return acc + (item.isDone ? 1 : 0)
         }, 0)
         return Math.round((100 * doneCount) / checklist.items.length)
     }
+
+    function onDelete() {
+        console.log('delete')
+        deleteChecklistMenu.onClose()
+    }
+
     return (
-        <div className="task-details-checklist">
-            <TaskDetailsSubsectionHeader
-                icon="checklist"
-                title={checklist.title}
-            >
-                <SecondaryBtn className="title-btn" text="Delete" />
-            </TaskDetailsSubsectionHeader>
+        <>
+            <div className="task-details-checklist">
+                <TaskDetailsSubsectionHeader
+                    icon="checklist"
+                    title={checklist.title}
+                >
+                    <SecondaryBtn
+                        className="title-btn"
+                        text="Delete"
+                        {...deleteChecklistMenu.triggerAndTarget}
+                    />
+                </TaskDetailsSubsectionHeader>
 
-            <div className="content">
-                <ProgressBar percent={getPercent()} />
+                <div className="content">
+                    <ProgressBar percent={getPercent()} />
 
-                <ol className="items">
-                    {checklist.items.map((item) => (
-                        <li key={item._id}>
-                            <TaskDetailsChecklistItem
-                                board={board}
-                                group={group}
-                                task={task}
-                                checklist={checklist}
-                                item={item}
-                            />
-                        </li>
-                    ))}
-                </ol>
-                <SecondaryBtn className="add-btn" text="Add an item" />
+                    <ol className="items">
+                        {checklist.items.map((item) => (
+                            <li key={item._id}>
+                                <TaskDetailsChecklistItem
+                                    board={board}
+                                    group={group}
+                                    task={task}
+                                    checklist={checklist}
+                                    item={item}
+                                />
+                            </li>
+                        ))}
+                    </ol>
+                    <SecondaryBtn className="add-btn" text="Add an item" />
+                </div>
             </div>
-        </div>
+
+            {/* Delete checklist menu */}
+            {deleteChecklistMenu.show && (
+                <DeleteMenu
+                    deleteMenu={deleteChecklistMenu}
+                    title={`Delete ${checklist.title}?`}
+                    text="Deleting a checklist is permanent and there is no way to get it back."
+                    btnText="Delete checklist"
+                    onDelete={onDelete}
+                />
+            )}
+        </>
     )
 }
