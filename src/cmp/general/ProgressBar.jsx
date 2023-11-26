@@ -1,6 +1,6 @@
 export function ProgressBar({ percent }) {
     return (
-        <div className="progress">
+        <div className="progress-bar">
             <span className="label">{percent}</span>
             <div className="bar">
                 <div
