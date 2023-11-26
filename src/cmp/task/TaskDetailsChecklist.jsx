@@ -4,6 +4,9 @@ import { ProgressBar } from '../general/ProgressBar'
 import { TaskDetailsSubsectionHeader } from './TaskDetailsSubsectionHeader'
 import { usePopoverState } from '../../customHooks/usePopoverState'
 import { DeleteMenu } from '../general/DeleteMenu'
+import { deepClone } from '../../util'
+import { boardService } from '../../services/board.service'
+import { updateBoard } from '../../store/actions/board.actions'
 
 export function TaskDetailsChecklist({ board, group, task, checklist }) {
     const deleteChecklistMenu = usePopoverState()
@@ -15,8 +18,17 @@ export function TaskDetailsChecklist({ board, group, task, checklist }) {
         return Math.round((100 * doneCount) / checklist.items.length)
     }
 
-    function onDelete() {
-        console.log('delete')
+    function onDeleteChecklist() {
+        const boardClone = deepClone(board)
+        const taskClone = boardService.getTaskById(
+            boardClone,
+            group._id,
+            task._id
+        )
+        taskClone.checklists = taskClone.checklists.filter(
+            (c) => c._id !== checklist._id
+        )
+        updateBoard(boardClone)
         deleteChecklistMenu.onClose()
     }
 
@@ -61,7 +73,7 @@ export function TaskDetailsChecklist({ board, group, task, checklist }) {
                     title={`Delete ${checklist.title}?`}
                     text="Deleting a checklist is permanent and there is no way to get it back."
                     btnText="Delete checklist"
-                    onDelete={onDelete}
+                    onDelete={onDeleteChecklist}
                 />
             )}
         </>
