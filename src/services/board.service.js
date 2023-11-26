@@ -265,37 +265,37 @@ function _getDefaultLabels() {
     return [
         {
             _id: 'l101',
-            title: null,
+            title: '',
             color: '#4bce97',
             colorName: 'Green',
         },
         {
             _id: 'l102',
-            title: null,
+            title: '',
             color: '#f5cd47',
             colorName: 'Yellow',
         },
         {
             _id: 'l103',
-            title: null,
+            title: '',
             color: '#fea362',
             colorName: 'Orange',
         },
         {
             _id: 'l104',
-            title: null,
+            title: '',
             color: '#f87168',
             colorName: 'Red',
         },
         {
             _id: 'l105',
-            title: null,
+            title: '',
             color: '#9f8fef',
             colorName: 'Purple',
         },
         {
             _id: 'l106',
-            title: null,
+            title: '',
             color: '#579dff',
             colorName: 'Blue',
         },
