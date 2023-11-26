@@ -15,13 +15,16 @@ export function GroupCreate({ board }) {
     )
 
     async function onSubmit(e) {
-        // add the new group to the board
         e.preventDefault()
-        const boardClone = deepClone(board)
-        boardClone.groups.push(draft)
-        updateBoard(boardClone)
-        setShowForm(false)
-        setDraft(boardService.getEmptyGroup())
+
+        if (draft.title.length > 0) {
+            // add the new group to the board
+            const boardClone = deepClone(board)
+            boardClone.groups.push(draft)
+            updateBoard(boardClone)
+            setShowForm(false)
+            setDraft(boardService.getEmptyGroup())
+        }
     }
 
     return (
