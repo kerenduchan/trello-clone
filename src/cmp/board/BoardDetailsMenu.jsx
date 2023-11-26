@@ -1,11 +1,19 @@
+import { useNavigate } from 'react-router'
 import { usePopoverState } from '../../customHooks/usePopoverState'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 import { BoardDetailsMenuItem } from './BoardDetailsMenuItem'
-import { BoardDelete } from './BoardDelete'
-import { PopoverMenu } from '../general/PopoverMenu'
+import { DeleteMenu } from '../general/DeleteMenu'
+import { removeBoard } from '../../store/actions/board.actions'
 
 export function BoardDetailsMenu({ board, onClose }) {
+    const navigate = useNavigate()
     const deleteBoardMenu = usePopoverState()
+
+    async function onDeleteBoard() {
+        await removeBoard(board._id)
+        deleteBoardMenu.onClose()
+        navigate('/boards')
+    }
 
     return (
         <>
@@ -28,14 +36,15 @@ export function BoardDetailsMenu({ board, onClose }) {
                     </ul>
                 </div>
             </div>
-            {/* Delete Board menu */}
+
+            {/* Delete board menu */}
             {deleteBoardMenu.show && (
-                <PopoverMenu title="Delete Board?" {...deleteBoardMenu.popover}>
-                    <BoardDelete
-                        board={board}
-                        onClose={deleteBoardMenu.onClose}
-                    />
-                </PopoverMenu>
+                <DeleteMenu
+                    deleteMenu={deleteBoardMenu}
+                    title="Delete Board?"
+                    text="All lists, cards and actions will be deleted, and you won't be able to re-open the board. There is no undo."
+                    onDelete={onDeleteBoard}
+                />
             )}
         </>
     )
