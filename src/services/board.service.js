@@ -12,6 +12,7 @@ export const boardService = {
     create,
     getBackgroundImages,
     getTaskLabels,
+    getLabelById,
 }
 
 const STORAGE_KEY = 'boards'
@@ -254,6 +255,10 @@ function getTaskLabels(board, task) {
             return found ? found[0] : null
         })
         .filter((label) => label !== null)
+}
+
+function getLabelById(board, labelId) {
+    return board.labels.filter((label) => label._id === labelId)[0]
 }
 
 function _getDefaultLabels() {
