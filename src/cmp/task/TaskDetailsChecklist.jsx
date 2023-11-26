@@ -1,5 +1,6 @@
 import { Icon } from '../general/Icon'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
+import { TaskDetailsChecklistItem } from './TaskDetailsChecklistItem'
 
 export function TaskDetailsChecklist({ checklist }) {
     return (
@@ -11,19 +12,7 @@ export function TaskDetailsChecklist({ checklist }) {
             <ol className="items">
                 {checklist.items.map((item) => (
                     <li key={item._id}>
-                        <input
-                            className="item-checkbox"
-                            type="checkbox"
-                            checked={item.isDone}
-                            onChange={() => {}}
-                        />
-                        <span
-                            className={`item-title ${
-                                item.isDone ? 'done' : ''
-                            }`}
-                        >
-                            {item.title}
-                        </span>
+                        <TaskDetailsChecklistItem item={item} />
                     </li>
                 ))}
             </ol>
