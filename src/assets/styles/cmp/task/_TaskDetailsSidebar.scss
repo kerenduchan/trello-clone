@@ -2,6 +2,7 @@
     grid-area: sidebar;
 
     display: grid;
+    grid-template-rows: min-content;
     row-gap: 16px;
 
     section > .content {

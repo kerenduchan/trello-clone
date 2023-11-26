@@ -1,17 +1,31 @@
 .task-details-checklist {
-    @include task-details-main-subsection();
+    .content {
+        @include task-details-subsection-grid();
 
-    .progress-bar {
-        grid-area: 4 / 1 / span 1 / span 2;
-    }
+        .progress-bar {
+            grid-area: 1 / 1 / span 1 / -1;
+            @include task-details-subsection-grid();
+            align-items: center;
+            margin-bottom: 8px;
 
-    .items {
-        grid-area: 5 / 1 / span 1 / span 2;
-    }
+            .label {
+                justify-self: center;
+            }
 
-    .add-btn {
-        grid-area: 6 / 2;
-        margin-top: 8px;
-        justify-self: start;
+            .bar {
+                grid-column: 3;
+            }
+        }
+
+        .items {
+            grid-area: 2 / 1 / span 1 / -1;
+        }
+
+        .add-btn {
+            grid-area: 3 / 3;
+
+            margin-top: 8px;
+            justify-self: start;
+        }
     }
 }

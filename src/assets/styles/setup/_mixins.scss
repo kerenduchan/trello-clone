@@ -34,25 +34,29 @@
     @include set-select(unset);
 }
 
+@mixin task-details-subsection-grid() {
+    display: grid;
+    grid-template-columns: 32px 8px 1fr;
+}
+
 @mixin task-details-main-subsection {
     display: grid;
-    grid-template-columns: 40px 1fr;
+    grid-template-columns: 32px 8px 1fr;
     grid-template-rows: 16px auto 12px auto;
     align-items: center;
 
     .icon {
         grid-area: 2 / 1;
         justify-self: center;
-        padding-inline-end: 6px;
     }
 
     .title {
-        grid-area: 2 / 2;
+        grid-area: 2 / 3;
         font-size: 16px;
     }
 
     .title-btn {
-        grid-area: 2 / 2;
+        grid-area: 2 / 3;
         justify-self: end;
     }
 }

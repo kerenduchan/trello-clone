@@ -1,9 +1,5 @@
 .task-details-activity {
-    @include task-details-main-subsection();
-
-    .progress {
-        grid-area: 3 / 2 / span 1 / -1;
-        margin-inline-start: -40px;
-        margin-top: 12px;
+    .content {
+        @include task-details-subsection-grid();
     }
 }
