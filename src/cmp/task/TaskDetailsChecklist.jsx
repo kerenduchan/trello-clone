@@ -12,10 +12,10 @@ export function TaskDetailsChecklist({ board, group, task, checklist }) {
     const deleteChecklistMenu = usePopoverState()
 
     function getPercent() {
-        const doneCount = checklist.items.reduce((acc, item) => {
-            return acc + (item.isDone ? 1 : 0)
-        }, 0)
-        return Math.round((100 * doneCount) / checklist.items.length)
+        return Math.round(
+            (100 * boardService.countDoneItemsInChecklist(checklist)) /
+                checklist.items.length
+        )
     }
 
     function onDeleteChecklist() {
