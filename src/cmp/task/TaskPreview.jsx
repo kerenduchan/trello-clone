@@ -6,7 +6,9 @@ import { TaskPreviewLabels } from './TaskPreviewLabels'
 export function TaskPreview({ board, task }) {
     const navigate = useNavigate()
 
-    function onEditClick() {
+    function onEditClick(e) {
+        // stop propagation so that task details doesn't open
+        e.stopPropagation()
         // TODO
     }
 
@@ -17,8 +19,6 @@ export function TaskPreview({ board, task }) {
     return (
         <section className="task-preview" onClick={onClick}>
             <TaskPreviewCover task={task} />
-
-            {/* <Link className="link" to={`/b/${board._id}/c/${task._id}`} /> */}
             <CircleBtn type="edit" onClick={onEditClick} />
 
             <div className="content">
