@@ -29,7 +29,8 @@ A [Trello](https://trello.com/) clone implementation in React.
 -   Show labels in task preview - narrow and expanded on click
 -   Add/remove a label to/from a task
 -   Rename label
--   _TODO: create label_
+-   _TODO: change label color_
+-   _TODO: create a new label_
 -   _TODO: delete label_
 
 ### Description
