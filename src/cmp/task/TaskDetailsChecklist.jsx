@@ -3,7 +3,7 @@ import { TaskDetailsChecklistItem } from './TaskDetailsChecklistItem'
 import { ProgressBar } from '../general/ProgressBar'
 import { TaskDetailsSubsectionHeader } from './TaskDetailsSubsectionHeader'
 
-export function TaskDetailsChecklist({ checklist }) {
+export function TaskDetailsChecklist({ board, group, task, checklist }) {
     function getPercent() {
         const doneCount = checklist.items.reduce((acc, item) => {
             return acc + (item.isDone ? 1 : 0)
@@ -25,7 +25,13 @@ export function TaskDetailsChecklist({ checklist }) {
                 <ol className="items">
                     {checklist.items.map((item) => (
                         <li key={item._id}>
-                            <TaskDetailsChecklistItem item={item} />
+                            <TaskDetailsChecklistItem
+                                board={board}
+                                group={group}
+                                task={task}
+                                checklist={checklist}
+                                item={item}
+                            />
                         </li>
                     ))}
                 </ol>

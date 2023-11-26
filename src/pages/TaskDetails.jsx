@@ -30,7 +30,11 @@ export function TaskDetails({ board, group, task }) {
                         task={task}
                     />
                     <TaskDetailsDescription task={task} />
-                    <TaskDetailsChecklists checklists={task.checklists} />
+                    <TaskDetailsChecklists
+                        board={board}
+                        group={group}
+                        task={task}
+                    />
                     <TaskDetailsActivity task={task} />
                 </div>
                 <TaskDetailsSidebar board={board} group={group} task={task} />
