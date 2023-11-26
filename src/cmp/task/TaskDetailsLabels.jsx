@@ -1,4 +1,5 @@
 import { boardService } from '../../services/board.service'
+import { LabelBtn } from '../label/LabelBtn'
 
 export function TaskDetailsLabels({ board, task }) {
     const labels = boardService.getTaskLabels(board, task)
@@ -11,13 +12,7 @@ export function TaskDetailsLabels({ board, task }) {
                     <ul>
                         {labels.map((label) => (
                             <li key={label._id}>
-                                <button
-                                    className="label-btn"
-                                    style={{ backgroundColor: label.color }}
-                                >
-                                    {label.title}
-                                </button>
-                                <div className="overlay" />
+                                <LabelBtn label={label} />
                             </li>
                         ))}
                     </ul>
