@@ -1,0 +1,11 @@
+.task-preview-checklists {
+    display: grid;
+    grid-template-columns: repeat(2, min-content);
+    column-gap: 2px;
+    align-items: center;
+
+    .label {
+        @include font(12px, 20px, 400);
+        color: var(--text-color-subtle);
+    }
+}

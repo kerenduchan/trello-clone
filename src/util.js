@@ -9,7 +9,7 @@ function getMaterialSymbol(type) {
 const _typeToMaterialSymbol = {
     member: 'person',
     label: 'sell',
-    checklist: 'checklist',
+    checklist: 'select_check_box',
     date: 'schedule',
     attachment: 'attachment',
     cover: 'keyboard_full',

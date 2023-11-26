@@ -18,6 +18,8 @@ export const boardService = {
     getChecklistById,
     getChecklistItemById,
     countDoneItemsInChecklist,
+    countDoneItemsInAllChecklists,
+    countItemsInAllChecklists,
 }
 
 const STORAGE_KEY = 'boards'
@@ -330,6 +332,18 @@ function getChecklistItemById(board, groupId, taskId, checklistId, itemId) {
 function countDoneItemsInChecklist(checklist) {
     return checklist.items.reduce((acc, item) => {
         return acc + (item.isDone ? 1 : 0)
+    }, 0)
+}
+
+function countItemsInAllChecklists(task) {
+    return task.checklists.reduce((acc, c) => {
+        return acc + c.items.length
+    }, 0)
+}
+
+function countDoneItemsInAllChecklists(task) {
+    return task.checklists.reduce((acc, c) => {
+        return acc + countDoneItemsInChecklist(c)
     }, 0)
 }
 
