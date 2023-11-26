@@ -5,6 +5,7 @@ import { EditableTitle } from '../general/EditableTitle'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 import { GroupPreviewMenu } from './GroupPreviewMenu'
 import { PopoverMenu } from '../general/PopoverMenu'
+import { boardService } from '../../services/board.service'
 
 export function GroupPreviewHeader({ group, board }) {
     const listActionsMenu = usePopoverState()
@@ -12,9 +13,7 @@ export function GroupPreviewHeader({ group, board }) {
     function onTitleChange(title) {
         // change the title of this group in the board
         const boardClone = deepClone(board)
-        const groupClone = boardClone.groups.filter(
-            (g) => g._id === group._id
-        )[0]
+        const groupClone = boardService.getGroupById(boardClone, group._id)
         groupClone.title = title
         updateBoard(boardClone)
     }

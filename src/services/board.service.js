@@ -13,6 +13,10 @@ export const boardService = {
     getBackgroundImages,
     getTaskLabels,
     getLabelById,
+    getGroupById,
+    getTaskById,
+    getChecklistById,
+    getChecklistItemById,
 }
 
 const STORAGE_KEY = 'boards'
@@ -300,4 +304,39 @@ function _getDefaultLabels() {
             colorName: 'Blue',
         },
     ]
+}
+
+function getGroupById(board, groupId) {
+    const found = board.groups.filter((g) => g._id === groupId)
+    return found ? found[0] : null
+}
+
+function getTaskById(board, groupId, taskId) {
+    const group = getGroupById(board, groupId)
+    return group ? _getTaskByIdInGroup(group, taskId) : null
+}
+
+function getChecklistById(board, groupId, taskId, checklistId) {
+    const task = getTaskById(board, groupId, taskId)
+    return task ? _getChecklistByIdInTask(task, checklistId) : null
+}
+
+function getChecklistItemById(board, groupId, taskId, checklistId, itemId) {
+    const checklist = getChecklistById(board, groupId, taskId, checklistId)
+    return checklist ? _getItemByIdInChecklist(checklist, itemId) : null
+}
+
+function _getTaskByIdInGroup(group, taskId) {
+    const found = group.tasks.filter((t) => t._id === taskId)
+    return found ? found[0] : null
+}
+
+function _getChecklistByIdInTask(task, checklistId) {
+    const found = task.checklists.filter((c) => c._id === checklistId)
+    return found ? found[0] : null
+}
+
+function _getItemByIdInChecklist(checklist, itemId) {
+    const found = checklist.items.filter((i) => i._id === itemId)
+    return found ? found[0] : null
 }

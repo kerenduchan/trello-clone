@@ -3,15 +3,17 @@ import { CircleBtn } from '../general/btn/CircleBtn'
 import { EditableTitle } from '../general/EditableTitle'
 import { deepClone } from '../../util'
 import { updateBoard } from '../../store/actions/board.actions'
+import { boardService } from '../../services/board.service'
 
 export function TaskDetailsHeader({ board, group, task, onClose }) {
     function onTitleChange(title) {
         // update the title of this task in the group in the board
         const boardClone = deepClone(board)
-        const groupClone = boardClone.groups.filter(
-            (g) => g._id === group._id
-        )[0]
-        const taskClone = groupClone.tasks.filter((t) => t._id === task._id)[0]
+        const taskClone = boardService.getTaskById(
+            boardClone,
+            group._id,
+            task._id
+        )
         taskClone.title = title
         updateBoard(boardClone)
     }

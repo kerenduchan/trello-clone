@@ -2,6 +2,7 @@ import { updateBoard } from '../../store/actions/board.actions'
 import { deepClone } from '../../util'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 import { useToggle } from '../../customHooks/useToggle'
+import { boardService } from '../../services/board.service'
 
 export function TaskLabelsMenuMainItem({
     board,
@@ -17,12 +18,14 @@ export function TaskLabelsMenuMainItem({
     function onClick(e) {
         // add/remove the label in this task in the group in the board
         const boardClone = deepClone(board)
-        const groupClone = boardClone.groups.filter(
-            (g) => g._id === group._id
-        )[0]
-        const taskClone = groupClone.tasks.filter((t) => t._id === task._id)[0]
+        const taskClone = boardService.getTaskById(
+            boardClone,
+            group._id,
+            task._id
+        )
 
         if (isChecked) {
+            // remove label from task
             taskClone.labelIds = taskClone.labelIds.filter(
                 (lId) => lId !== label._id
             )

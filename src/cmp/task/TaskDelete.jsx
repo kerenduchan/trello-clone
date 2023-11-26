@@ -2,6 +2,7 @@ import { PrimaryBtn } from '../general/btn/PrimaryBtn'
 import { updateBoard } from '../../store/actions/board.actions'
 import { deepClone } from '../../util'
 import { useNavigate } from 'react-router'
+import { boardService } from '../../services/board.service'
 
 export function TaskDelete({ board, group, task, onClose }) {
     const navigate = useNavigate()
@@ -9,9 +10,7 @@ export function TaskDelete({ board, group, task, onClose }) {
     async function onDeleteTask() {
         // remove this task from the group in the board
         const boardClone = deepClone(board)
-        const groupClone = boardClone.groups.filter(
-            (g) => g._id === group._id
-        )[0]
+        const groupClone = boardService.getGroupById(boardClone, group._id)
         groupClone.tasks = groupClone.tasks.filter((t) => t._id !== task._id)
         updateBoard(boardClone)
         onClose()
