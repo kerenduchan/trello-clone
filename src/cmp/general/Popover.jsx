@@ -38,8 +38,6 @@ export function Popover({ refEl, className, onClose, children }) {
         }
     })
 
-
-
     return createPortal(
         <div className="popover-wrapper" ref={wrapperEl}>
             <div
