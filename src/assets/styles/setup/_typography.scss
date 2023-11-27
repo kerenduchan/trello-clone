@@ -8,10 +8,19 @@
 @font-face {
     font-family: 'Segoe UI';
     font-style: normal;
-    font-weight: 500 700;
+    font-weight: 500 600;
     src: local('Segoe UI Semibold'),
         url('/src/assets/fonts/SegoeUI-SemiBold.woff') format('woff');
 }
+
+@font-face {
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 700 900;
+    src: local('Segoe UI Bold'),
+        url('/src/assets/fonts/SegoeUI-Bold.woff') format('woff');
+}
+
 @font-face {
     font-family: 'Roboto';
     src: url('/src/assets/fonts/Roboto-Regular.ttf');
