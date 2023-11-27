@@ -20,6 +20,11 @@
     @include font(12px, 20px, 600);
 }
 
+@mixin font-size-and-line-height($size) {
+    font-size: $size;
+    line-height: $size;
+}
+
 @mixin set-select($val) {
     -webkit-user-select: $val; /* Safari */
     -ms-user-select: $val; /* IE 10 and IE 11 */

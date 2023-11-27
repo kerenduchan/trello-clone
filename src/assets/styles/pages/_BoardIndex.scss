@@ -1,12 +1,38 @@
 .board-index {
-    .board-list-container {
-        padding-inline-start: 16px;
-        padding-inline-end: 16px;
-        padding-top: 20px;
-    }
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
 
-    .board-list-title {
-        text-transform: uppercase;
-        padding-bottom: 20px;
+    .boards-sections {
+        width: 825px;
+        margin-top: 40px;
+
+        .boards-section {
+            margin-bottom: 32px;
+            .header {
+                display: grid;
+                grid-template-columns: 40px 1fr;
+                align-items: center;
+                margin-bottom: 11px;
+
+                .icon {
+                    grid-column: 1;
+                }
+                .title {
+                    grid-column: 2;
+                    @include font(16px, 24px, 700);
+                }
+            }
+        }
+
+        .your-boards-section {
+            .title {
+                text-transform: uppercase;
+                padding-top: 20px;
+                padding-bottom: 20px;
+                color: var(--text-color-subtle);
+            }
+        }
     }
 }
