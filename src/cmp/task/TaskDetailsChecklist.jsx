@@ -4,7 +4,6 @@ import { ProgressBar } from '../general/ProgressBar'
 import { TaskDetailsSubsectionHeader } from './TaskDetailsSubsectionHeader'
 import { usePopoverState } from '../../customHooks/usePopoverState'
 import { DeleteMenu } from '../general/DeleteMenu'
-import { deepClone } from '../../util'
 import { boardService } from '../../services/board.service'
 import { updateBoard } from '../../store/actions/board.actions'
 
@@ -19,7 +18,7 @@ export function TaskDetailsChecklist({ board, group, task, checklist }) {
     }
 
     function onDeleteChecklist() {
-        const boardClone = deepClone(board)
+        const boardClone = structuredClone(board)
         const taskClone = boardService.getTaskById(
             boardClone,
             group._id,

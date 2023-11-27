@@ -2,7 +2,6 @@ import { useEffect, useRef, useCallback } from 'react'
 import { useForm } from '../../customHooks/useForm'
 import { boardService } from '../../services/board.service'
 import { updateBoard } from '../../store/actions/board.actions'
-import { deepClone } from '../../util'
 import { PrimaryBtn } from '../general/btn/PrimaryBtn'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 
@@ -23,7 +22,7 @@ export function TaskCreate({ board, group, onClose }) {
 
         if (draft.title.length > 0) {
             // add the new task to this group in the board
-            const boardClone = deepClone(board)
+            const boardClone = structuredClone(board)
             const groupClone = boardService.getGroupById(boardClone, group._id)
             groupClone.tasks.push(draft)
             updateBoard(boardClone)

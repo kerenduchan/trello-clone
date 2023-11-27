@@ -6,7 +6,6 @@ import { boardService } from '../../services/board.service'
 import { PrimaryBtn } from '../general/btn/PrimaryBtn'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
-import { deepClone } from '../../util'
 
 export function GroupCreate({ board }) {
     const [showForm, toggleShowForm, setShowForm] = useToggle()
@@ -29,7 +28,7 @@ export function GroupCreate({ board }) {
 
         if (draft.title.length > 0) {
             // add the new group to the board
-            const boardClone = deepClone(board)
+            const boardClone = structuredClone(board)
             boardClone.groups.push(draft)
             updateBoard(boardClone)
             setDraft(boardService.getEmptyGroup())

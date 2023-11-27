@@ -1,6 +1,5 @@
 import { boardService } from '../../services/board.service'
 import { updateBoard } from '../../store/actions/board.actions'
-import { deepClone } from '../../util'
 
 export function TaskDetailsChecklistItem({
     board,
@@ -10,7 +9,7 @@ export function TaskDetailsChecklistItem({
     item,
 }) {
     function onCheckboxClick() {
-        const boardClone = deepClone(board)
+        const boardClone = structuredClone(board)
         const itemClone = boardService.getChecklistItemById(
             boardClone,
             group._id,

@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Icon } from '../general/Icon'
 import { updateBoard } from '../../store/actions/board.actions'
-import { deepClone } from '../../util'
 
 export function BoardPreview({ board }) {
     function onStarClick() {

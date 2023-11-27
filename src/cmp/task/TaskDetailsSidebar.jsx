@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router'
 import { usePopoverState } from '../../customHooks/usePopoverState'
 import { boardService } from '../../services/board.service'
 import { updateBoard } from '../../store/actions/board.actions'
-import { deepClone } from '../../util'
 import { DeleteMenu } from '../general/DeleteMenu'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 import { TaskLabelsMenu } from './TaskLabelsMenu'
@@ -14,7 +13,7 @@ export function TaskDetailsSidebar({ board, group, task }) {
 
     function onDeleteTask() {
         // remove this task from the group in the board
-        const boardClone = deepClone(board)
+        const boardClone = structuredClone(board)
         const groupClone = boardService.getGroupById(boardClone, group._id)
         groupClone.tasks = groupClone.tasks.filter((t) => t._id !== task._id)
         updateBoard(boardClone)

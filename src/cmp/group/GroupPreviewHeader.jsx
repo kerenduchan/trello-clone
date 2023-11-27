@@ -1,6 +1,5 @@
 import { usePopoverState } from '../../customHooks/usePopoverState'
 import { updateBoard } from '../../store/actions/board.actions'
-import { deepClone } from '../../util'
 import { EditableTitle } from '../general/EditableTitle'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 import { GroupPreviewMenu } from './GroupPreviewMenu'
@@ -12,7 +11,7 @@ export function GroupPreviewHeader({ group, board }) {
 
     function onTitleChange(title) {
         // change the title of this group in the board
-        const boardClone = deepClone(board)
+        const boardClone = structuredClone(board)
         const groupClone = boardService.getGroupById(boardClone, group._id)
         groupClone.title = title
         updateBoard(boardClone)

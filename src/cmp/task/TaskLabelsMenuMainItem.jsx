@@ -1,5 +1,4 @@
 import { updateBoard } from '../../store/actions/board.actions'
-import { deepClone } from '../../util'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 import { useToggle } from '../../customHooks/useToggle'
 import { boardService } from '../../services/board.service'
@@ -17,7 +16,7 @@ export function TaskLabelsMenuMainItem({
 
     function onClick(e) {
         // add/remove the label in this task in the group in the board
-        const boardClone = deepClone(board)
+        const boardClone = structuredClone(board)
         const taskClone = boardService.getTaskById(
             boardClone,
             group._id,
