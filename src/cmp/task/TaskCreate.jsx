@@ -1,3 +1,4 @@
+import { useEffect, useRef, useCallback } from 'react'
 import { useForm } from '../../customHooks/useForm'
 import { boardService } from '../../services/board.service'
 import { updateBoard } from '../../store/actions/board.actions'
@@ -6,8 +7,17 @@ import { PrimaryBtn } from '../general/btn/PrimaryBtn'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 
 export function TaskCreate({ board, group, onClose }) {
-    const [draft, handleChange] = useForm(boardService.getEmptyTask())
+    const [draft, handleChange, setDraft] = useForm(boardService.getEmptyTask())
+    const formEl = useRef()
 
+    useEffect(() => {
+        document.addEventListener('mousedown', mouseDownListener)
+
+        return () => {
+            document.removeEventListener('mousedown', mouseDownListener)
+        }
+    })
+    
     async function onSubmit(e) {
         e.preventDefault()
 
@@ -17,12 +27,22 @@ export function TaskCreate({ board, group, onClose }) {
             const groupClone = boardService.getGroupById(boardClone, group._id)
             groupClone.tasks.push(draft)
             updateBoard(boardClone)
+            setDraft(boardService.getEmptyTask())
         }
-        onClose()
     }
 
+    const mouseDownListener = useCallback((e) => {
+        if (
+            formEl.current &&
+            !formEl.current.contains(e.target)
+        ) {
+            // clicked outside of form
+            onClose()
+        }
+    })
+
     return (
-        <form className="task-create-form" onSubmit={onSubmit}>
+        <form className="task-create-form" onSubmit={onSubmit} ref={formEl}>
             <input
                 autoFocus
                 id="title"
