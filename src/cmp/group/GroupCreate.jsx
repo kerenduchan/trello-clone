@@ -22,7 +22,6 @@ export function GroupCreate({ board }) {
             const boardClone = deepClone(board)
             boardClone.groups.push(draft)
             updateBoard(boardClone)
-            setShowForm(false)
             setDraft(boardService.getEmptyGroup())
         }
     }
@@ -37,6 +36,7 @@ export function GroupCreate({ board }) {
             {showForm ? (
                 <form onSubmit={onSubmit}>
                     <input
+                        autoFocus
                         type="text"
                         id="title"
                         name="title"
