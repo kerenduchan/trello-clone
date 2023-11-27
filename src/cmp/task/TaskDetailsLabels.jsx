@@ -10,7 +10,7 @@ export function TaskDetailsLabels({ board, group, task }) {
     return (
         <>
             <section className="task-details-labels">
-                {labels && labels.length > 0 && (
+                {!!labels?.length && (
                     <>
                         <h3>Labels</h3>
                         <ul {...labelsMenu.target}>

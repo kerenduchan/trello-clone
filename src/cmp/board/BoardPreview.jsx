@@ -6,10 +6,11 @@ import { deepClone } from '../../util'
 export function BoardPreview({ board }) {
     function onStarClick() {
         // star / unstar the board
-        const boardClone = deepClone(board)
+        const boardClone = structuredClone(board)
         boardClone.isStarred = !boardClone.isStarred
         updateBoard(boardClone)
     }
+    
 
     return (
         <div

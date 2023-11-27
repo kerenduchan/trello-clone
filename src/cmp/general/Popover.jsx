@@ -18,6 +18,14 @@ export function Popover({ refEl, className, onClose, children }) {
         ],
     })
 
+    useEffect(() => {
+        document.addEventListener('mousedown', mouseDownListener)
+
+        return () => {
+            document.removeEventListener('mousedown', mouseDownListener)
+        }
+    })
+    
     const mouseDownListener = useCallback((e) => {
         if (
             wrapperEl.current &&
@@ -30,13 +38,7 @@ export function Popover({ refEl, className, onClose, children }) {
         }
     })
 
-    useEffect(() => {
-        document.addEventListener('mousedown', mouseDownListener)
 
-        return () => {
-            document.removeEventListener('mousedown', mouseDownListener)
-        }
-    })
 
     return createPortal(
         <div className="popover-wrapper" ref={wrapperEl}>
