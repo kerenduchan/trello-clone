@@ -1,4 +1,4 @@
-export { getMaterialSymbol, buildClassName }
+export { getMaterialSymbol }
 
 function getMaterialSymbol(type) {
     const symbol = _typeToMaterialSymbol[type]
@@ -26,13 +26,4 @@ const _typeToMaterialSymbol = {
     star: 'star',
     more: 'more_horiz',
     back: 'arrow_back_ios_new',
-}
-
-function buildClassName(...names) {
-    return names.reduce((acc, name) => {
-        if (name) {
-            acc += ' ' + name
-        }
-        return acc
-    })
 }

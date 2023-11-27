@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { buildClassName } from '../../util'
 import { useForm } from '../../customHooks/useForm'
 
 export function EditableTitle({ title, onChange }) {
@@ -26,7 +25,7 @@ export function EditableTitle({ title, onChange }) {
     }
 
     return (
-        <div className={buildClassName('editable-title', showForm && 'edit')}>
+        <div className={`editable-title ${showForm ? 'edit' : ''}`}>
             <span className="title" onClick={() => setShowForm(true)}>
                 {/* using draft.title for auto-resize of textarea in grid */}
                 {draft.title}
