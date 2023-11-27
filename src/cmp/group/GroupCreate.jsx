@@ -1,3 +1,4 @@
+import { useEffect, useRef, useCallback } from 'react'
 import { useForm } from '../../customHooks/useForm'
 import { useToggle } from '../../customHooks/useToggle'
 import { updateBoard } from '../../store/actions/board.actions'
@@ -13,6 +14,15 @@ export function GroupCreate({ board }) {
     const [draft, handleChange, setDraft] = useForm(
         boardService.getEmptyGroup()
     )
+    const formEl = useRef()
+
+    useEffect(() => {
+        document.addEventListener('mousedown', mouseDownListener)
+
+        return () => {
+            document.removeEventListener('mousedown', mouseDownListener)
+        }
+    })
 
     async function onSubmit(e) {
         e.preventDefault()
@@ -31,10 +41,20 @@ export function GroupCreate({ board }) {
         setShowForm(false)
     }
 
+    const mouseDownListener = useCallback((e) => {
+        if (
+            formEl.current &&
+            !formEl.current.contains(e.target)
+        ) {
+            // clicked outside of form
+            onClose()
+        }
+    })
+
     return (
         <div className="group-create">
             {showForm ? (
-                <form onSubmit={onSubmit}>
+                <form onSubmit={onSubmit} ref={formEl}>
                     <input
                         autoFocus
                         type="text"
