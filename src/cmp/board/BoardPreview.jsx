@@ -10,7 +10,6 @@ export function BoardPreview({ board }) {
         boardClone.isStarred = !boardClone.isStarred
         updateBoard(boardClone)
     }
-    
 
     return (
         <div
@@ -24,7 +23,9 @@ export function BoardPreview({ board }) {
                 <Link to={`/b/${board._id}`} className="link"></Link>
 
                 <Icon
-                    className="star"
+                    className={`star ${
+                        board.isStarred ? 'starred' : 'unstarred'
+                    }`}
                     type="star"
                     full={board.isStarred}
                     onClick={onStarClick}

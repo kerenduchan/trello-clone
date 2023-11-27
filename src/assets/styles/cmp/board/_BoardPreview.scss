@@ -35,10 +35,15 @@
             transition: margin-inline-end 0.2s, font-size 0.2s;
             font-size: 16px;
             z-index: 20;
-        }
 
-        .star-icon:hover {
-            font-size: 20px;
+            &.starred {
+                color: var(--icon-star);
+                margin-inline-end: 0;
+            }
+
+            &:hover {
+                font-size: 20px;
+            }
         }
 
         &:hover {
