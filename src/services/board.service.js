@@ -256,16 +256,13 @@ function getBackgroundImages() {
 }
 
 function getTaskLabels(board, task) {
-    return task.labelIds
-        .map((labelId) => {
-            const found = board.labels.filter((label) => label._id === labelId)
-            return found ? found[0] : null
-        })
-        .filter((label) => label !== null)
+    return task.labelIds.map((labelId) =>
+        board.labels.find((label) => label._id === labelId)
+    )
 }
 
 function getLabelById(board, labelId) {
-    return board.labels.filter((label) => label._id === labelId)[0]
+    return board.labels.find((label) => label._id === labelId)
 }
 
 function _getDefaultLabels() {
@@ -310,23 +307,23 @@ function _getDefaultLabels() {
 }
 
 function getGroupById(board, groupId) {
-    const found = board.groups.filter((g) => g._id === groupId)
-    return found ? found[0] : null
+    return board.groups.find((g) => g._id === groupId)
 }
 
 function getTaskById(board, groupId, taskId) {
-    const group = getGroupById(board, groupId)
-    return group ? _getTaskByIdInGroup(group, taskId) : null
+    return getGroupById(board, groupId)?.tasks.find((t) => t._id === taskId)
 }
 
 function getChecklistById(board, groupId, taskId, checklistId) {
-    const task = getTaskById(board, groupId, taskId)
-    return task ? _getChecklistByIdInTask(task, checklistId) : null
+    return getTaskById(board, groupId, taskId)?.checklists.find(
+        (c) => c._id === checklistId
+    )
 }
 
 function getChecklistItemById(board, groupId, taskId, checklistId, itemId) {
-    const checklist = getChecklistById(board, groupId, taskId, checklistId)
-    return checklist ? _getItemByIdInChecklist(checklist, itemId) : null
+    return getChecklistById(board, groupId, taskId, checklistId)?.items.find(
+        (i) => i._id === itemId
+    )
 }
 
 function countDoneItemsInChecklist(checklist) {
@@ -345,19 +342,4 @@ function countDoneItemsInAllChecklists(task) {
     return task.checklists.reduce((acc, c) => {
         return acc + countDoneItemsInChecklist(c)
     }, 0)
-}
-
-function _getTaskByIdInGroup(group, taskId) {
-    const found = group.tasks.filter((t) => t._id === taskId)
-    return found ? found[0] : null
-}
-
-function _getChecklistByIdInTask(task, checklistId) {
-    const found = task.checklists.filter((c) => c._id === checklistId)
-    return found ? found[0] : null
-}
-
-function _getItemByIdInChecklist(checklist, itemId) {
-    const found = checklist.items.filter((i) => i._id === itemId)
-    return found ? found[0] : null
 }
