@@ -3,9 +3,28 @@
     grid-template-columns: repeat(2, min-content);
     column-gap: 2px;
     align-items: center;
+    padding: 2px;
+    border-radius: 3px;
 
     .label {
         @include font(12px, 20px, 400);
         color: var(--text-color-subtle);
+        padding-inline-end: 4px;
+    }
+
+    .icon {
+        @include square(20px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &.done {
+        background-color: var(--bg-success-bold);
+
+        .label,
+        .icon {
+            color: var(--text-color-light);
+        }
     }
 }

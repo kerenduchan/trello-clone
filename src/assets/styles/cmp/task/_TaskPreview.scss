@@ -37,5 +37,10 @@
         padding-bottom: 8px;
         display: grid;
         row-gap: 4px;
+
+        .badges {
+            display: grid;
+            justify-content: start;
+        }
     }
 }

@@ -3,12 +3,19 @@ import { Icon } from '../general/Icon'
 
 export function TaskPreviewChecklists({ task }) {
     if (!task.checklists || task.checklists?.length === 0) return <></>
+
+    const doneCount = boardService.countDoneItemsInAllChecklists(task)
+    const allCount = boardService.countItemsInAllChecklists(task)
+
     return (
-        <div className="task-preview-checklists">
+        <div
+            className={`task-preview-checklists ${
+                doneCount === allCount ? 'done' : ''
+            }`}
+        >
             <Icon type="checklist" size="xs" />
             <span className="label">
-                {boardService.countDoneItemsInAllChecklists(task)}/
-                {boardService.countItemsInAllChecklists(task)}
+                {doneCount}/{allCount}
             </span>
         </div>
     )
