@@ -16,7 +16,6 @@ export function GroupPreviewFooter({ board, group }) {
                 <TaskCreate
                     board={board}
                     group={group}
-                    onClose={() => setShowTaskCreateForm(false)}
                 />
             ) : (
                 <>
