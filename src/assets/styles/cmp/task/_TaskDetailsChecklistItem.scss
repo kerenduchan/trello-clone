@@ -6,6 +6,7 @@
         grid-column: 1;
         @include square(16px);
         justify-self: center;
+        padding-bottom: 4px;
     }
 
     .title {
