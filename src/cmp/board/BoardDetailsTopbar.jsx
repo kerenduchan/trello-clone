@@ -4,17 +4,16 @@ import { EditableTitle } from '../general/EditableTitle'
 
 export function BoardDetailsTopbar({ board }) {
     function onStarClick() {
-        // star / unstar the board
-        const boardClone = structuredClone(board)
-        boardClone.isStarred = !boardClone.isStarred
-        updateBoard(boardClone)
+        updateBoard(board, { isStarred: !board.isStarred })
     }
 
     function onTitleChange(title) {
-        // change the board's title
-        const boardClone = structuredClone(board)
-        boardClone.title = title
-        updateBoard(boardClone)
+        try {
+            updateBoard(board, { title })
+        } catch (err) {
+            console.error(err)
+            // TODO: show an error dialog
+        }
     }
 
     return (

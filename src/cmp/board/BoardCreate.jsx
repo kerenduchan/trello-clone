@@ -1,6 +1,6 @@
 import { useForm } from '../../customHooks/useForm'
 import { useNavigate } from 'react-router'
-import { saveBoard } from '../../store/actions/board.actions'
+import { createBoard } from '../../store/actions/board.actions'
 import { boardService } from '../../services/board.service'
 import { PrimaryBtn } from '../general/btn/PrimaryBtn'
 import { ImgSelect } from '../general/ImgSelect'
@@ -14,9 +14,14 @@ export function BoardCreate({ onClose }) {
 
     async function onSubmit(e) {
         e.preventDefault()
-        const board = await saveBoard(draft)
-        onClose()
-        navigate(`/b/${board._id}`)
+        try {
+            const board = await createBoard(draft)
+            onClose()
+            navigate(`/b/${board._id}`)
+        } catch (err) {
+            console.error(err)
+            // TODO: show an error dialog
+        }
     }
 
     function onImgSelect(img) {

@@ -1,12 +1,14 @@
-import { updateBoard } from '../../store/actions/board.actions'
+import { deleteGroup } from '../../store/actions/board.actions'
 
 export function GroupPreviewMenu({ board, group, onClose }) {
     function onDeleteClick() {
-        // delete the group from the board
-        const boardClone = structuredClone(board)
-        boardClone.groups = boardClone.groups.filter((g) => g._id !== group._id)
-        updateBoard(boardClone)
-        onClose()
+        try {
+            deleteGroup(board, group)
+            onClose()
+        } catch (err) {
+            console.error(err)
+            // TODO: show an error dialog
+        }
     }
 
     return (

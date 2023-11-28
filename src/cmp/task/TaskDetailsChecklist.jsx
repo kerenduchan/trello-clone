@@ -5,7 +5,7 @@ import { TaskDetailsSubsectionHeader } from './TaskDetailsSubsectionHeader'
 import { usePopoverState } from '../../customHooks/usePopoverState'
 import { DeleteMenu } from '../general/DeleteMenu'
 import { boardService } from '../../services/board.service'
-import { updateBoard } from '../../store/actions/board.actions'
+import { deleteChecklist } from '../../store/actions/board.actions'
 
 export function TaskDetailsChecklist({ board, group, task, checklist }) {
     const deleteChecklistMenu = usePopoverState()
@@ -18,17 +18,13 @@ export function TaskDetailsChecklist({ board, group, task, checklist }) {
     }
 
     function onDeleteChecklist() {
-        const boardClone = structuredClone(board)
-        const taskClone = boardService.getTaskById(
-            boardClone,
-            group._id,
-            task._id
-        )
-        taskClone.checklists = taskClone.checklists.filter(
-            (c) => c._id !== checklist._id
-        )
-        updateBoard(boardClone)
-        deleteChecklistMenu.onClose()
+        try {
+            deleteChecklist(board, group, task, checklist)
+            deleteChecklistMenu.onClose()
+        } catch (err) {
+            console.error(err)
+            // TODO: show an error dialog
+        }
     }
 
     return (

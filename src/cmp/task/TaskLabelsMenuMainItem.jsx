@@ -1,7 +1,9 @@
-import { updateBoard } from '../../store/actions/board.actions'
+import {
+    removeTaskLabel,
+    addTaskLabel,
+} from '../../store/actions/board.actions'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 import { useToggle } from '../../customHooks/useToggle'
-import { boardService } from '../../services/board.service'
 
 export function TaskLabelsMenuMainItem({
     board,
@@ -14,27 +16,20 @@ export function TaskLabelsMenuMainItem({
         task.labelIds.includes(label._id)
     )
 
-    function onClick(e) {
-        // add/remove the label in this task in the group in the board
-        const boardClone = structuredClone(board)
-        const taskClone = boardService.getTaskById(
-            boardClone,
-            group._id,
-            task._id
-        )
-
-        if (isChecked) {
-            // remove label from task
-            taskClone.labelIds = taskClone.labelIds.filter(
-                (lId) => lId !== label._id
-            )
-        } else {
-            // add label to task
-            taskClone.labelIds.push(label._id)
+    function onClick() {
+        try {
+            if (isChecked) {
+                // remove label from task
+                removeTaskLabel(board, group, task, label)
+            } else {
+                // add label to task
+                addTaskLabel(board, group, task, label)
+            }
+            toggleIsChecked()
+        } catch (err) {
+            console.error(err)
+            // TODO: show an error dialog
         }
-
-        toggleIsChecked()
-        updateBoard(boardClone)
     }
 
     return (

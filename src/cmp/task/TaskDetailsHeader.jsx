@@ -1,20 +1,16 @@
 import { Icon } from '../general/Icon'
 import { CircleBtn } from '../general/btn/CircleBtn'
 import { EditableTitle } from '../general/EditableTitle'
-import { updateBoard } from '../../store/actions/board.actions'
-import { boardService } from '../../services/board.service'
+import { updateTask } from '../../store/actions/board.actions'
 
 export function TaskDetailsHeader({ board, group, task, onClose }) {
     function onTitleChange(title) {
-        // update the title of this task in the group in the board
-        const boardClone = structuredClone(board)
-        const taskClone = boardService.getTaskById(
-            boardClone,
-            group._id,
-            task._id
-        )
-        taskClone.title = title
-        updateBoard(boardClone)
+        try {
+            updateTask(board, group, task, { title })
+        } catch (err) {
+            console.error(err)
+            // TODO: show an error dialog
+        }
     }
 
     return (

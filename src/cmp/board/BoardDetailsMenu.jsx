@@ -3,16 +3,21 @@ import { usePopoverState } from '../../customHooks/usePopoverState'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 import { BoardDetailsMenuItem } from './BoardDetailsMenuItem'
 import { DeleteMenu } from '../general/DeleteMenu'
-import { removeBoard } from '../../store/actions/board.actions'
+import { deleteBoard } from '../../store/actions/board.actions'
 
 export function BoardDetailsMenu({ board, onClose }) {
     const navigate = useNavigate()
     const deleteBoardMenu = usePopoverState()
 
     async function onDeleteBoard() {
-        await removeBoard(board._id)
-        deleteBoardMenu.onClose()
-        navigate('/boards')
+        try {
+            await deleteBoard(board)
+            deleteBoardMenu.onClose()
+            navigate('/boards')
+        } catch (err) {
+            console.error(err)
+            // TODO: show an error dialog
+        }
     }
 
     return (

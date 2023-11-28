@@ -1,6 +1,5 @@
 import { useForm } from '../../customHooks/useForm'
-import { boardService } from '../../services/board.service'
-import { updateBoard } from '../../store/actions/board.actions'
+import { updateBoardLabel } from '../../store/actions/board.actions'
 import { PrimaryBtn } from '../general/btn/PrimaryBtn'
 
 export function TaskLabelsMenuEdit({
@@ -15,12 +14,13 @@ export function TaskLabelsMenuEdit({
 
     async function onSubmit(e) {
         e.preventDefault()
-        // edit the label title at the board level
-        const boardClone = structuredClone(board)
-        const labelClone = boardService.getLabelById(boardClone, label._id)
-        labelClone.title = draft.title
-        updateBoard(boardClone)
-        onBack()
+        try {
+            updateBoardLabel(board, label, { title: draft.title })
+            onBack()
+        } catch (err) {
+            console.error(err)
+            // TODO: show an error dialog
+        }
     }
 
     return (

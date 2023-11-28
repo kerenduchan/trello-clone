@@ -1,5 +1,4 @@
-import { boardService } from '../../services/board.service'
-import { updateBoard } from '../../store/actions/board.actions'
+import { updateChecklistItem } from '../../store/actions/board.actions'
 
 export function TaskDetailsChecklistItem({
     board,
@@ -9,16 +8,14 @@ export function TaskDetailsChecklistItem({
     item,
 }) {
     function onCheckboxClick() {
-        const boardClone = structuredClone(board)
-        const itemClone = boardService.getChecklistItemById(
-            boardClone,
-            group._id,
-            task._id,
-            checklist._id,
-            item._id
-        )
-        itemClone.isDone = !itemClone.isDone
-        updateBoard(boardClone)
+        try {
+            updateChecklistItem(board, group, task, checklist, item, {
+                isDone: !item.isDone,
+            })
+        } catch (err) {
+            console.error(err)
+            // TODO: show an error dialog
+        }
     }
 
     return (

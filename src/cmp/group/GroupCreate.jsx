@@ -1,7 +1,7 @@
 import { useEffect, useRef, useCallback } from 'react'
 import { useForm } from '../../customHooks/useForm'
 import { useToggle } from '../../customHooks/useToggle'
-import { updateBoard } from '../../store/actions/board.actions'
+import { createGroup } from '../../store/actions/board.actions'
 import { boardService } from '../../services/board.service'
 import { PrimaryBtn } from '../general/btn/PrimaryBtn'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
@@ -27,11 +27,13 @@ export function GroupCreate({ board }) {
         e.preventDefault()
 
         if (draft.title.length > 0) {
-            // add the new group to the board
-            const boardClone = structuredClone(board)
-            boardClone.groups.push(draft)
-            updateBoard(boardClone)
-            setDraft(boardService.getEmptyGroup())
+            try {
+                createGroup(board, draft)
+                setDraft(boardService.getEmptyGroup())
+            } catch (err) {
+                console.error(err)
+                // TODO: show an error dialog
+            }
         }
     }
 
@@ -41,10 +43,7 @@ export function GroupCreate({ board }) {
     }
 
     const mouseDownListener = useCallback((e) => {
-        if (
-            formEl.current &&
-            !formEl.current.contains(e.target)
-        ) {
+        if (formEl.current && !formEl.current.contains(e.target)) {
             // clicked outside of form
             onClose()
         }

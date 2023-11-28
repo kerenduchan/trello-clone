@@ -4,10 +4,12 @@ import { updateBoard } from '../../store/actions/board.actions'
 
 export function BoardPreview({ board }) {
     function onStarClick() {
-        // star / unstar the board
-        const boardClone = structuredClone(board)
-        boardClone.isStarred = !boardClone.isStarred
-        updateBoard(boardClone)
+        try {
+            updateBoard(board, { isStarred: !board.isStarred })
+        } catch (err) {
+            console.error(err)
+            // TODO: show an error dialog
+        }
     }
 
     return (
