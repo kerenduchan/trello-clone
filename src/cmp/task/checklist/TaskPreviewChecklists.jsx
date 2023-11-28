@@ -1,5 +1,5 @@
-import { boardService } from '../../services/board.service'
-import { Icon } from '../general/Icon'
+import { boardService } from '../../../services/board.service'
+import { Icon } from '../../general/Icon'
 
 export function TaskPreviewChecklists({ task }) {
     if (!task.checklists || task.checklists?.length === 0) return <></>

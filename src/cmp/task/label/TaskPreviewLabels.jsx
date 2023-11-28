@@ -1,5 +1,5 @@
-import { boardService } from '../../services/board.service'
-import { useToggle } from '../../customHooks/useToggle'
+import { boardService } from '../../../services/board.service'
+import { useToggle } from '../../../customHooks/useToggle'
 import { LabelBtn } from '../label/LabelBtn'
 
 export function TaskPreviewLabels({ board, task }) {

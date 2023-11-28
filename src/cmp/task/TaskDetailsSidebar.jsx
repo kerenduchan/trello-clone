@@ -3,8 +3,8 @@ import { usePopoverState } from '../../customHooks/usePopoverState'
 import { deleteTask } from '../../store/actions/board.actions'
 import { DeleteMenu } from '../general/DeleteMenu'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
-import { TaskLabelsMenu } from './TaskLabelsMenu'
-import { TaskChecklistMenu } from './TaskChecklistMenu'
+import { TaskLabelsMenu } from './label/TaskLabelsMenu'
+import { TaskChecklistMenu } from './checklist/TaskChecklistMenu'
 
 export function TaskDetailsSidebar({ board, group, task }) {
     const navigate = useNavigate()

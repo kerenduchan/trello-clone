@@ -1,6 +1,6 @@
-import { updateChecklistItem } from '../../store/actions/board.actions'
-import { usePopoverState } from '../../customHooks/usePopoverState'
-import { CircleBtn } from '../general/btn/CircleBtn'
+import { updateChecklistItem } from '../../../store/actions/board.actions'
+import { usePopoverState } from '../../../customHooks/usePopoverState'
+import { CircleBtn } from '../../general/btn/CircleBtn'
 import { ChecklistItemActionsMenu } from './ChecklistItemActionsMenu'
 
 export function TaskDetailsChecklistItem({

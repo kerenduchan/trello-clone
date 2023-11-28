@@ -1,6 +1,6 @@
-import { deleteChecklistItem } from '../../store/actions/board.actions'
-import { PopoverMenu } from '../general/PopoverMenu'
-import { SecondaryBtn } from '../general/btn/SecondaryBtn'
+import { deleteChecklistItem } from '../../../store/actions/board.actions'
+import { PopoverMenu } from '../../general/PopoverMenu'
+import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 
 export function ChecklistItemActionsMenu({
     board,

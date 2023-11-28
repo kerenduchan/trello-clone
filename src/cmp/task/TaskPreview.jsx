@@ -1,8 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { CircleBtn } from '../general/btn/CircleBtn'
 import { TaskPreviewCover } from './TaskPreviewCover'
-import { TaskPreviewLabels } from './TaskPreviewLabels'
-import { TaskPreviewChecklists } from './TaskPreviewChecklists'
+import { TaskPreviewLabels } from './label/TaskPreviewLabels'
+import { TaskPreviewChecklists } from './checklist/TaskPreviewChecklists'
 
 export function TaskPreview({ board, task }) {
     const navigate = useNavigate()

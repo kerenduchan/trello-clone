@@ -1,9 +1,9 @@
 import {
     removeTaskLabel,
     addTaskLabel,
-} from '../../store/actions/board.actions'
-import { SquareIconBtn } from '../general/btn/SquareIconBtn'
-import { useToggle } from '../../customHooks/useToggle'
+} from '../../../store/actions/board.actions'
+import { SquareIconBtn } from '../../general/btn/SquareIconBtn'
+import { useToggle } from '../../../customHooks/useToggle'
 
 export function TaskLabelsMenuMainItem({
     board,

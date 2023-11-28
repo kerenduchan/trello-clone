@@ -1,6 +1,6 @@
-import { useForm } from '../../customHooks/useForm'
-import { updateBoardLabel } from '../../store/actions/board.actions'
-import { PrimaryBtn } from '../general/btn/PrimaryBtn'
+import { useForm } from '../../../customHooks/useForm'
+import { updateBoardLabel } from '../../../store/actions/board.actions'
+import { PrimaryBtn } from '../../general/btn/PrimaryBtn'
 
 export function TaskLabelsMenuEdit({
     board,

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { PopoverMenu } from '../general/PopoverMenu'
+import { PopoverMenu } from '../../general/PopoverMenu'
 import { TaskLabelsMenuEdit } from './TaskLabelsMenuEdit'
 import { TaskLabelsMenuMain } from './TaskLabelsMenuMain'
 

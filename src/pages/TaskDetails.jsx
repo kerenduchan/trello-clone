@@ -2,8 +2,8 @@ import { useNavigate, useParams } from 'react-router'
 import { TaskDetailsDescription } from '../cmp/task/TaskDetailsDescription'
 import { TaskDetailsActivity } from '../cmp/task/TaskDetailsActivity'
 import { TaskDetailsSidebar } from '../cmp/task/TaskDetailsSidebar'
-import { TaskDetailsChecklists } from '../cmp/task/TaskDetailsChecklists'
-import { TaskDetailsLabels } from '../cmp/task/TaskDetailsLabels'
+import { TaskDetailsChecklists } from '../cmp/task/checklist/TaskDetailsChecklists'
+import { TaskDetailsLabels } from '../cmp/task/label/TaskDetailsLabels'
 import { TaskDetailsHeader } from '../cmp/task/TaskDetailsHeader'
 
 export function TaskDetails({ board, group, task }) {

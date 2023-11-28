@@ -1,5 +1,5 @@
-import { boardService } from '../../services/board.service'
-import { usePopoverState } from '../../customHooks/usePopoverState'
+import { boardService } from '../../../services/board.service'
+import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { LabelBtn } from '../label/LabelBtn'
 import { TaskLabelsMenu } from './TaskLabelsMenu'
 

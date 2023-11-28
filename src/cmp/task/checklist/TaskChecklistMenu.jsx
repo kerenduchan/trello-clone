@@ -1,8 +1,8 @@
-import { useForm } from '../../customHooks/useForm'
-import { boardService } from '../../services/board.service'
-import { addChecklist } from '../../store/actions/board.actions'
-import { PopoverMenu } from '../general/PopoverMenu'
-import { PrimaryBtn } from '../general/btn/PrimaryBtn'
+import { useForm } from '../../../customHooks/useForm'
+import { boardService } from '../../../services/board.service'
+import { addChecklist } from '../../../store/actions/board.actions'
+import { PopoverMenu } from '../../general/PopoverMenu'
+import { PrimaryBtn } from '../../general/btn/PrimaryBtn'
 
 export function TaskChecklistMenu({ board, group, task, checklistMenu }) {
     const [draft, handleChange] = useForm(boardService.getEmptyChecklist())

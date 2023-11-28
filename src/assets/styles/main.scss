@@ -45,27 +45,29 @@
 @import 'cmp/group/GroupPreviewHeader';
 @import 'cmp/group/GroupPreviewMenu';
 
-// label
-@import 'cmp/label/LabelBtn';
-
 // task
 @import 'cmp/task/TaskCreate';
 @import 'cmp/task/TaskDetailsActivity';
-@import 'cmp/task/TaskDetailsChecklist';
-@import 'cmp/task/TaskDetailsChecklistItem';
 @import 'cmp/task/TaskDetailsDescription';
 @import 'cmp/task/TaskDetailsHeader';
-@import 'cmp/task/TaskDetailsLabels';
 @import 'cmp/task/TaskDetailsSidebar';
 @import 'cmp/task/TaskDetailsSubsectionHeader';
-@import 'cmp/task/TaskLabelsMenuEdit';
-@import 'cmp/task/TaskLabelsMenuMain';
-@import 'cmp/task/TaskLabelsMenuMainItem';
 @import 'cmp/task/TaskList';
 @import 'cmp/task/TaskPreview';
-@import 'cmp/task/TaskPreviewChecklists';
 @import 'cmp/task/TaskPreviewCover';
-@import 'cmp/task/TaskPreviewLabels';
+
+// task/checklist
+@import 'cmp/task/checklist/TaskDetailsChecklist';
+@import 'cmp/task/checklist/TaskDetailsChecklistItem';
+@import 'cmp/task/checklist/TaskPreviewChecklists';
+
+// task/label
+@import 'cmp/task/label/LabelBtn';
+@import 'cmp/task/label/TaskDetailsLabels';
+@import 'cmp/task/label/TaskLabelsMenuEdit';
+@import 'cmp/task/label/TaskLabelsMenuMain';
+@import 'cmp/task/label/TaskLabelsMenuMainItem';
+@import 'cmp/task/label/TaskPreviewLabels';
 
 // misc
 @import 'cmp/AppHeader';
