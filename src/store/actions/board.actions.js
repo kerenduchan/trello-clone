@@ -69,6 +69,10 @@ async function createBoard(board) {
     }
 }
 
+async function updateBoard(board, fieldsToUpdate) {
+    return _updateBoard({ ...board, ...fieldsToUpdate })
+}
+
 async function deleteBoard(board) {
     const boardId = board._id
     try {
@@ -85,68 +89,69 @@ async function deleteBoard(board) {
     }
 }
 
-async function updateBoard(board, fieldsToUpdate) {
-    return _updateBoard({ ...structuredClone(board), ...fieldsToUpdate })
+// BOARD LABEL
+
+async function updateBoardLabel(board, label, fieldsToUpdate) {
+    const boardToUpdate = { ...board }
+    boardToUpdate.labels = board.labels.map((l) =>
+        l._id === label._id ? { ...label, ...fieldsToUpdate } : l
+    )
+    console.log('board to update', boardToUpdate)
+    return _updateBoard(boardToUpdate)
 }
 
 // GROUP
 
 async function createGroup(board, group) {
-    const boardClone = structuredClone(board)
-    boardClone.groups.push(group)
-    return _updateBoard(boardClone)
+    const boardToUpdate = { ...board }
+    boardToUpdate.groups = [...board.groups, group]
+    return _updateBoard(boardToUpdate)
 }
 
 async function deleteGroup(board, group) {
-    const boardClone = structuredClone(board)
-    boardClone.groups = boardClone.groups.filter((g) => g._id !== group._id)
-    return _updateBoard(boardClone)
+    const boardToUpdate = { ...board }
+    boardToUpdate.groups = board.groups.filter((g) => g._id !== group._id)
+    return _updateBoard(boardToUpdate)
 }
 
 async function updateGroup(board, group, fieldsToUpdate) {
-    const boardClone = structuredClone(board)
-    boardClone.groups = boardClone.groups.map((g) =>
-        g._id === group._id
-            ? { ...structuredClone(group), ...fieldsToUpdate }
-            : g
+    const boardToUpdate = { ...board }
+    boardToUpdate.groups = board.groups.map((g) =>
+        g._id === group._id ? { ...group, ...fieldsToUpdate } : g
     )
-    return _updateBoard(boardClone)
+    return _updateBoard(boardToUpdate)
 }
 
 // TASK
 
 async function createTask(board, group, task) {
-    const boardClone = structuredClone(board)
-    const groupClone = boardService.getGroupById(boardClone, group._id)
-    groupClone.tasks.push(task)
-    return _updateBoard(boardClone)
+    const groupToUpdate = { ...group }
+    groupToUpdate.tasks = [...group.tasks, task]
+    return _updateGroup(board, groupToUpdate)
 }
 
 async function deleteTask(board, group, task) {
-    const boardClone = structuredClone(board)
-    const groupClone = boardService.getGroupById(boardClone, group._id)
-    groupClone.tasks = groupClone.tasks.filter((t) => t._id !== task._id)
-    return _updateBoard(boardClone)
+    const groupToUpdate = { ...g }
+    groupToUpdate.tasks = group.tasks.filter((t) => t._id !== task._id)
+    return _updateGroup(board, groupToUpdate)
 }
 
 async function updateTask(board, group, task, fieldsToUpdate) {
-    const boardClone = structuredClone(board)
-    const groupClone = boardService.getGroupById(boardClone, group._id)
-    groupClone.tasks = groupClone.tasks.map((t) =>
-        t._id === task._id ? { ...structuredClone(task), ...fieldsToUpdate } : t
+    const groupToUpdate = { ...g }
+    groupToUpdate.tasks = group.tasks.map((t) =>
+        t._id === task._id ? { ...task, ...fieldsToUpdate } : t
     )
-    return _updateBoard(boardClone)
+    return _updateGroup(board, groupToUpdate)
 }
 
 // CHEKCLIST
 
 async function deleteChecklist(board, group, task, checklist) {
-    const boardClone = structuredClone(board)
-    const taskClone = boardService.getTaskById(boardClone, group._id, task._id)
-    taskClone.checklists = taskClone.checklists.filter(
+    const taskToUpdate = { ...task }
+    taskToUpdate.checklists = task.checklists.filter(
         (c) => c._id !== checklist._id
     )
-    return _updateBoard(boardClone)
+    return _updateTask(board, group, taskToUpdate)
 }
 
 async function updateChecklistItem(
@@ -157,48 +162,28 @@ async function updateChecklistItem(
     item,
     fieldsToUpdate
 ) {
-    const boardClone = structuredClone(board)
-    const checklistClone = boardService.getChecklistById(
-        boardClone,
-        group._id,
-        task._id,
-        checklist._id
+    const checklistToUpdate = { ...checklist }
+    checklistToUpdate.items = checklist.items.map((i) =>
+        i._id === item._id ? { ...item, ...fieldsToUpdate } : i
     )
-    checklistClone.items = checklistClone.items.map((i) =>
-        i._id === item._id ? { ...structuredClone(item), ...fieldsToUpdate } : i
-    )
-    return _updateBoard(boardClone)
+    _updateChecklist(board, group, task, checklistToUpdate)
 }
 
-// LABEL
-
-async function updateBoardLabel(board, label, fieldsToUpdate) {
-    const boardClone = structuredClone(board)
-    boardClone.labels = boardClone.labels.map((l) =>
-        l._id === label._id
-            ? { ...structuredClone(label), ...fieldsToUpdate }
-            : l
-    )
-    return _updateBoard(boardClone)
-}
-
+// TASK LABEL
 async function addTaskLabel(board, group, task, label) {
-    const boardClone = structuredClone(board)
-    const taskClone = boardService.getTaskById(boardClone, group._id, task._id)
-    taskClone.labelIds.push(label._id)
-    return _updateBoard(boardClone)
+    const taskToUpdate = { ...task }
+    taskToUpdate.labelIds = [...task.labelIds, label._id]
+    return _updateTask(board, group, taskToUpdate)
 }
 
 async function removeTaskLabel(board, group, task, label) {
-    const boardClone = structuredClone(board)
-    const taskClone = boardService.getTaskById(boardClone, group._id, task._id)
-    taskClone.labelIds = taskClone.labelIds.filter((lId) => lId !== label._id)
-    return _updateBoard(boardClone)
+    const taskToUpdate = { ...task }
+    taskToUpdate.labelIds = task.labelIds.filter((lId) => lId !== label._id)
+    return _updateTask(board, group, taskToUpdate)
 }
 
 // PRIVATE HELPER FUNCTIONS
 
-// the given board MUST have no shared pointers with the store's board!
 async function _updateBoard(board) {
     try {
         // optimistic update
@@ -209,4 +194,28 @@ async function _updateBoard(board) {
         // TODO: undo the store change
         throw err
     }
+}
+
+async function _updateGroup(board, groupToUpdate) {
+    const boardToUpdate = { ...board }
+    boardToUpdate.groups = board.groups.map((g) =>
+        g._id === groupToUpdate._id ? groupToUpdate : g
+    )
+    return _updateBoard(boardToUpdate)
+}
+
+async function _updateTask(board, group, taskToUpdate) {
+    const groupToUpdate = { ...group }
+    groupToUpdate.tasks = group.tasks.map((t) =>
+        t._id === taskToUpdate._id ? taskToUpdate : t
+    )
+    _updateGroup(board, groupToUpdate)
+}
+
+async function _updateChecklist(board, group, task, checklistToUpdate) {
+    const taskToUpdate = { ...task }
+    taskToUpdate.checklists = task.checklists.map((c) =>
+        c._id === checklistToUpdate._id ? checklistToUpdate : c
+    )
+    _updateTask(board, group, taskToUpdate)
 }
