@@ -49,7 +49,9 @@ async function loadBoard(boardId) {
 }
 
 function unloadBoard() {
-    store.dispatch({ type: SET_BOARD, board: null })
+    if (store.getState().boardModule.curBoard !== null) {
+        store.dispatch({ type: SET_BOARD, board: null })
+    }
 }
 
 // BOARD

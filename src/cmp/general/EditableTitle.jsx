@@ -5,6 +5,7 @@ export function EditableTitle({ title, onChange }) {
     const [showForm, setShowForm] = useState(false)
     const [draft, handleChange] = useForm({ title })
     const textareaRef = useRef(null)
+    const isSubmitted = useRef(false)
 
     useEffect(() => {
         if (showForm) {
@@ -13,9 +14,13 @@ export function EditableTitle({ title, onChange }) {
     }, [showForm])
 
     function onSubmit(e) {
-        e.preventDefault()
-        onChange(draft.title)
-        setShowForm(false)
+        // prevent a double-submit in case of Enter + blur
+        if (!isSubmitted.current) {
+            e.preventDefault()
+            onChange(draft.title)
+            setShowForm(false)
+        }
+        isSubmitted.current = true
     }
 
     function onKeyDown(e) {
@@ -24,9 +29,14 @@ export function EditableTitle({ title, onChange }) {
         }
     }
 
+    function onTitleClick() {
+        isSubmitted.current = false
+        setShowForm(true)
+    }
+
     return (
         <div className={`editable-title ${showForm ? 'edit' : ''}`}>
-            <span className="title" onClick={() => setShowForm(true)}>
+            <span className="title" onClick={() => onTitleClick()}>
                 {/* using draft.title for auto-resize of textarea in grid */}
                 {draft.title}
             </span>
