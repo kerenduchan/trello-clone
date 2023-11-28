@@ -1,8 +1,8 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { CircleBtn } from '../general/btn/CircleBtn'
 import { TaskPreviewCover } from './TaskPreviewCover'
 import { TaskPreviewLabels } from './label/TaskPreviewLabels'
-import { TaskPreviewChecklists } from './checklist/TaskPreviewChecklists'
+import { ChecklistBadge } from './checklist/ChecklistBadge'
 
 export function TaskPreview({ board, task }) {
     const navigate = useNavigate()
@@ -26,7 +26,7 @@ export function TaskPreview({ board, task }) {
                 <TaskPreviewLabels board={board} task={task} />
                 <p className="title">{task.title}</p>
                 <div className="badges">
-                    <TaskPreviewChecklists task={task} />
+                    <ChecklistBadge task={task} />
                 </div>
             </div>
         </section>

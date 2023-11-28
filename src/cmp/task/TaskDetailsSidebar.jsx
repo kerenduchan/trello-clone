@@ -4,7 +4,7 @@ import { deleteTask } from '../../store/actions/board.actions'
 import { DeleteMenu } from '../general/DeleteMenu'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 import { TaskLabelsMenu } from './label/TaskLabelsMenu'
-import { TaskChecklistMenu } from './checklist/TaskChecklistMenu'
+import { ChecklistMenu } from './checklist/ChecklistMenu'
 
 export function TaskDetailsSidebar({ board, group, task }) {
     const navigate = useNavigate()
@@ -82,7 +82,7 @@ export function TaskDetailsSidebar({ board, group, task }) {
 
             {/* Checklist menu */}
             {checklistMenu.show && (
-                <TaskChecklistMenu
+                <ChecklistMenu
                     board={board}
                     group={group}
                     task={task}

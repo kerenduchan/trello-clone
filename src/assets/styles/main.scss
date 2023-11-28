@@ -57,9 +57,9 @@
 @import 'cmp/task/TaskPreviewCover';
 
 // task/checklist
-@import 'cmp/task/checklist/TaskDetailsChecklist';
-@import 'cmp/task/checklist/TaskDetailsChecklistItem';
-@import 'cmp/task/checklist/TaskPreviewChecklists';
+@import 'cmp/task/checklist/Checklist';
+@import 'cmp/task/checklist/ChecklistBadge';
+@import 'cmp/task/checklist/ChecklistItem';
 
 // task/label
 @import 'cmp/task/label/LabelBtn';

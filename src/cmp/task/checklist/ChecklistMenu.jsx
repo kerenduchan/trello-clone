@@ -4,7 +4,7 @@ import { addChecklist } from '../../../store/actions/board.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { PrimaryBtn } from '../../general/btn/PrimaryBtn'
 
-export function TaskChecklistMenu({ board, group, task, checklistMenu }) {
+export function ChecklistMenu({ board, group, task, checklistMenu }) {
     const [draft, handleChange] = useForm(boardService.getEmptyChecklist())
 
     async function onSubmit(e) {
@@ -19,7 +19,7 @@ export function TaskChecklistMenu({ board, group, task, checklistMenu }) {
     }
     return (
         <PopoverMenu title="Add checklist" {...checklistMenu.popover}>
-            <div className="task-checklist-menu">
+            <div className="checklist-menu">
                 <form onSubmit={onSubmit}>
                     <label htmlFor="title">Title</label>
                     <input

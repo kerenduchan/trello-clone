@@ -3,13 +3,7 @@ import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { CircleBtn } from '../../general/btn/CircleBtn'
 import { ChecklistItemActionsMenu } from './ChecklistItemActionsMenu'
 
-export function TaskDetailsChecklistItem({
-    board,
-    group,
-    task,
-    checklist,
-    item,
-}) {
+export function ChecklistItem({ board, group, task, checklist, item }) {
     const actionsMenu = usePopoverState()
 
     function onCheckboxClick() {
@@ -25,7 +19,7 @@ export function TaskDetailsChecklistItem({
 
     return (
         <>
-            <div className="task-details-checklist-item">
+            <div className="checklist-item">
                 <input
                     className="checkbox"
                     type="checkbox"

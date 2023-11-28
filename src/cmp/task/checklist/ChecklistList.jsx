@@ -1,13 +1,13 @@
-import { TaskDetailsChecklist } from './TaskDetailsChecklist'
+import { Checklist } from './Checklist'
 
-export function TaskDetailsChecklists({ board, group, task }) {
+export function ChecklistList({ board, group, task }) {
     return (
-        <div className="task-details-checklists">
+        <div className="checklist-list">
             {task.checklists && (
                 <ol>
                     {task.checklists.map((checklist) => (
                         <li key={checklist._id}>
-                            <TaskDetailsChecklist
+                            <Checklist
                                 board={board}
                                 group={group}
                                 task={task}

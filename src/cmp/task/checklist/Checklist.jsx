@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
-import { TaskDetailsChecklistItem } from './TaskDetailsChecklistItem'
+import { ChecklistItem } from './ChecklistItem'
 import { ProgressBar } from '../../general/ProgressBar'
 import { TaskDetailsSubsectionHeader } from '../TaskDetailsSubsectionHeader'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
@@ -9,7 +9,7 @@ import { boardService } from '../../../services/board.service'
 import { deleteChecklist } from '../../../store/actions/board.actions'
 import { ChecklistItemCreateForm } from './ChecklistItemCreateForm'
 
-export function TaskDetailsChecklist({ board, group, task, checklist }) {
+export function Checklist({ board, group, task, checklist }) {
     const [showForm, setShowForm] = useState()
     const deleteChecklistMenu = usePopoverState()
 
@@ -35,7 +35,7 @@ export function TaskDetailsChecklist({ board, group, task, checklist }) {
 
     return (
         <>
-            <div className="task-details-checklist">
+            <div className="checklist">
                 <TaskDetailsSubsectionHeader
                     icon="checklist"
                     title={checklist.title}
@@ -53,7 +53,7 @@ export function TaskDetailsChecklist({ board, group, task, checklist }) {
                     <ol className="items">
                         {checklist.items.map((item) => (
                             <li key={item._id}>
-                                <TaskDetailsChecklistItem
+                                <ChecklistItem
                                     board={board}
                                     group={group}
                                     task={task}
