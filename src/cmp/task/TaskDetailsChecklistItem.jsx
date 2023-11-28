@@ -44,7 +44,14 @@ export function TaskDetailsChecklistItem({
                     </div>
                 </div>
             </div>
-            <ChecklistItemActionsMenu popoverState={actionsMenu} />
+            <ChecklistItemActionsMenu
+                board={board}
+                group={group}
+                task={task}
+                checklist={checklist}
+                item={item}
+                popoverState={actionsMenu}
+            />
         </>
     )
 }

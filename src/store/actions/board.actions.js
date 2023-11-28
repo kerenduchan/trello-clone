@@ -25,6 +25,7 @@ export {
     deleteChecklist,
     addChecklistItem,
     updateChecklistItem,
+    deleteChecklistItem,
     updateBoardLabel,
     removeTaskLabel,
     addTaskLabel,
@@ -164,7 +165,6 @@ async function deleteChecklist(board, group, task, checklist) {
 async function addChecklistItem(board, group, task, checklist, item) {
     const checklistToUpdate = { ...checklist }
     checklistToUpdate.items = [...checklist.items, item]
-    console.log(checklistToUpdate)
     _updateChecklist(board, group, task, checklistToUpdate)
 }
 
@@ -180,6 +180,12 @@ async function updateChecklistItem(
     checklistToUpdate.items = checklist.items.map((i) =>
         i._id === item._id ? { ...item, ...fieldsToUpdate } : i
     )
+    _updateChecklist(board, group, task, checklistToUpdate)
+}
+
+async function deleteChecklistItem(board, group, task, checklist, item) {
+    const checklistToUpdate = { ...checklist }
+    checklistToUpdate.items = checklist.items.filter((i) => i._id !== item._id)
     _updateChecklist(board, group, task, checklistToUpdate)
 }
 
