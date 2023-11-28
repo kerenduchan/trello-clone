@@ -1,7 +1,6 @@
 import { TaskLabelsMenuMainItem } from './TaskLabelsMenuMainItem'
 
 export function TaskLabelsMenuMain({ board, group, task, onEditClick }) {
-    console.log('board', board)
     return (
         <div className="task-labels-menu-main">
             <ul>

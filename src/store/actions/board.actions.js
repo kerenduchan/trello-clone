@@ -96,7 +96,6 @@ async function updateBoardLabel(board, label, fieldsToUpdate) {
     boardToUpdate.labels = board.labels.map((l) =>
         l._id === label._id ? { ...label, ...fieldsToUpdate } : l
     )
-    console.log('board to update', boardToUpdate)
     return _updateBoard(boardToUpdate)
 }
 
