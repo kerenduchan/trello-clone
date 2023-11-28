@@ -21,6 +21,7 @@ export {
     createTask,
     deleteTask,
     updateTask,
+    addChecklist,
     deleteChecklist,
     updateChecklistItem,
     updateBoardLabel,
@@ -145,6 +146,12 @@ async function updateTask(board, group, task, fieldsToUpdate) {
 
 // CHEKCLIST
 
+async function addChecklist(board, group, task, checklist) {
+    const taskToUpdate = { ...task }
+    taskToUpdate.checklists = [...task.checklists, checklist]
+    return _updateTask(board, group, taskToUpdate)
+}
+
 async function deleteChecklist(board, group, task, checklist) {
     const taskToUpdate = { ...task }
     taskToUpdate.checklists = task.checklists.filter(
@@ -169,6 +176,7 @@ async function updateChecklistItem(
 }
 
 // TASK LABEL
+
 async function addTaskLabel(board, group, task, label) {
     const taskToUpdate = { ...task }
     taskToUpdate.labelIds = [...task.labelIds, label._id]

@@ -5,6 +5,7 @@ export const boardService = {
     getEmptyBoard,
     getEmptyGroup,
     getEmptyTask,
+    getEmptyChecklist,
     query,
     getById,
     save,
@@ -51,6 +52,15 @@ function getEmptyTask() {
         title: '',
         archivedAt: null,
         labelIds: [],
+        checklists: [],
+    }
+}
+
+function getEmptyChecklist() {
+    return {
+        _id: utilService.makeId(),
+        title: '',
+        items: [],
     }
 }
 
@@ -196,6 +206,7 @@ function _createBoards() {
                                 title: 'Log out functionality',
                                 archivedAt: null,
                                 labelIds: [],
+                                checklists: [],
                                 description:
                                     'Allow a logged-in user to log out',
                                 comments: [
@@ -216,6 +227,7 @@ function _createBoards() {
                                 title: 'Filter products',
                                 archivedAt: null,
                                 labelIds: [],
+                                checklists: [],
                                 cover: {
                                     bgColor: '#e774bb',
                                 },
