@@ -17,8 +17,11 @@ export function ChecklistItemCreateForm({
     const textareaRef = useRef(null)
 
     function onSubmit(e) {
-        // TODO: prevent a double-submit in case of Enter + blur
         e.preventDefault()
+        // TODO: prevent a double-submit in case of Enter + blur
+        if (draft.title.length === 0) {
+            return
+        }
         addChecklistItem(board, group, task, checklist, draft)
         setDraft(boardService.getEmptyChecklistItem())
         onClose()
