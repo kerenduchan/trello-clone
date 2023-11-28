@@ -3,7 +3,7 @@ import { usePopoverState } from '../../customHooks/usePopoverState'
 import { deleteTask } from '../../store/actions/board.actions'
 import { DeleteMenu } from '../general/DeleteMenu'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
-import { TaskLabelsMenu } from './label/TaskLabelsMenu'
+import { LabelsMenu } from './label/LabelsMenu'
 import { ChecklistMenu } from './checklist/ChecklistMenu'
 
 export function TaskDetailsSidebar({ board, group, task }) {
@@ -72,7 +72,7 @@ export function TaskDetailsSidebar({ board, group, task }) {
 
             {/* Labels menu */}
             {labelsMenu.show && (
-                <TaskLabelsMenu
+                <LabelsMenu
                     board={board}
                     group={group}
                     task={task}

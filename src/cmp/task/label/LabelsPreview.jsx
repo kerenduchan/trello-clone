@@ -1,8 +1,8 @@
 import { boardService } from '../../../services/board.service'
 import { useToggle } from '../../../customHooks/useToggle'
-import { LabelBtn } from '../label/LabelBtn'
+import { LabelBtn } from './LabelBtn'
 
-export function TaskPreviewLabels({ board, task }) {
+export function LabelsPreview({ board, task }) {
     const [isZoomedIn, toggleIsZoomedIn] = useToggle()
 
     function onLabelClick(e) {
@@ -15,7 +15,7 @@ export function TaskPreviewLabels({ board, task }) {
     if (!task.labelIds?.length) return <></>
 
     return (
-        <div className="task-preview-labels">
+        <div className="labels-preview">
             <ul>
                 {task.labelIds.map((labelId) => (
                     <li key={labelId}>

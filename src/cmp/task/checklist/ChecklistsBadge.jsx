@@ -1,7 +1,7 @@
 import { boardService } from '../../../services/board.service'
 import { Icon } from '../../general/Icon'
 
-export function ChecklistBadge({ task }) {
+export function ChecklistsBadge({ task }) {
     if (!task.checklists || task.checklists?.length === 0) return <></>
 
     const doneCount = boardService.countDoneItemsInAllChecklists(task)
@@ -11,7 +11,7 @@ export function ChecklistBadge({ task }) {
 
     return (
         <div
-            className={`checklist-badge ${
+            className={`checklists-badge ${
                 doneCount === allCount ? 'done' : ''
             }`}
         >

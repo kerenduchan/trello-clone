@@ -25,10 +25,6 @@
 @import 'cmp/board/BoardPreview';
 
 // general
-@import 'cmp/general/btn/CircleBtn';
-@import 'cmp/general/btn/PrimaryBtn';
-@import 'cmp/general/btn/SecondaryBtn';
-@import 'cmp/general/btn/SquareIconBtn';
 @import 'cmp/general/Popover';
 @import 'cmp/general/PopoverMenu';
 @import 'cmp/general/DeleteMenu';
@@ -36,6 +32,12 @@
 @import 'cmp/general/Icon';
 @import 'cmp/general/ImgSelect';
 @import 'cmp/general/ProgressBar';
+
+// general/btn
+@import 'cmp/general/btn/CircleBtn';
+@import 'cmp/general/btn/PrimaryBtn';
+@import 'cmp/general/btn/SecondaryBtn';
+@import 'cmp/general/btn/SquareIconBtn';
 
 // group
 @import 'cmp/group/GroupCreate';
@@ -58,16 +60,16 @@
 
 // task/checklist
 @import 'cmp/task/checklist/Checklist';
-@import 'cmp/task/checklist/ChecklistBadge';
 @import 'cmp/task/checklist/ChecklistItem';
+@import 'cmp/task/checklist/ChecklistsBadge';
 
 // task/label
 @import 'cmp/task/label/LabelBtn';
-@import 'cmp/task/label/TaskDetailsLabels';
-@import 'cmp/task/label/TaskLabelsMenuEdit';
-@import 'cmp/task/label/TaskLabelsMenuMain';
-@import 'cmp/task/label/TaskLabelsMenuMainItem';
-@import 'cmp/task/label/TaskPreviewLabels';
+@import 'cmp/task/label/LabelList';
+@import 'cmp/task/label/LabelsMenuEdit';
+@import 'cmp/task/label/LabelsMenuMain';
+@import 'cmp/task/label/LabelsMenuMainItem';
+@import 'cmp/task/label/LabelsPreview';
 
 // misc
 @import 'cmp/AppHeader';

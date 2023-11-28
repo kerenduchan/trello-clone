@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { PopoverMenu } from '../../general/PopoverMenu'
-import { TaskLabelsMenuEdit } from './TaskLabelsMenuEdit'
-import { TaskLabelsMenuMain } from './TaskLabelsMenuMain'
+import { LabelsMenuEdit } from './LabelsMenuEdit'
+import { LabelsMenuMain } from './LabelsMenuMain'
 
-export function TaskLabelsMenu({ board, group, task, labelsMenu }) {
+export function LabelsMenu({ board, group, task, labelsMenu }) {
     // current page in the labels menu popover: main or edit
     const [page, setPage] = useState('main')
     const [labelToEdit, setLabelToEdit] = useState(null)
@@ -20,7 +20,7 @@ export function TaskLabelsMenu({ board, group, task, labelsMenu }) {
     const contents = {
         main: (
             <PopoverMenu title="Labels" {...labelsMenu.popover}>
-                <TaskLabelsMenuMain
+                <LabelsMenuMain
                     board={board}
                     group={group}
                     task={task}
@@ -35,7 +35,7 @@ export function TaskLabelsMenu({ board, group, task, labelsMenu }) {
                 {...labelsMenu.popover}
                 onBack={onBackClick}
             >
-                <TaskLabelsMenuEdit
+                <LabelsMenuEdit
                     board={board}
                     group={group}
                     task={task}

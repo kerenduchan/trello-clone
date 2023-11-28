@@ -1,12 +1,12 @@
-import { TaskLabelsMenuMainItem } from './TaskLabelsMenuMainItem'
+import { LabelsMenuMainItem } from './LabelsMenuMainItem'
 
-export function TaskLabelsMenuMain({ board, group, task, onEditClick }) {
+export function LabelsMenuMain({ board, group, task, onEditClick }) {
     return (
-        <div className="task-labels-menu-main">
+        <div className="labels-menu-main">
             <ul>
                 {board.labels.map((label) => (
                     <li key={label._id}>
-                        <TaskLabelsMenuMainItem
+                        <LabelsMenuMainItem
                             board={board}
                             group={group}
                             task={task}

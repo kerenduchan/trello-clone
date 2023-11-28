@@ -5,13 +5,7 @@ import {
 import { SquareIconBtn } from '../../general/btn/SquareIconBtn'
 import { useToggle } from '../../../customHooks/useToggle'
 
-export function TaskLabelsMenuMainItem({
-    board,
-    group,
-    task,
-    label,
-    onEditClick,
-}) {
+export function LabelsMenuMainItem({ board, group, task, label, onEditClick }) {
     const [isChecked, toggleIsChecked] = useToggle(
         task.labelIds.includes(label._id)
     )
@@ -33,7 +27,7 @@ export function TaskLabelsMenuMainItem({
     }
 
     return (
-        <div className="task-labels-menu-item">
+        <div className="labels-menu-item">
             <input
                 className="checkbox"
                 type="checkbox"

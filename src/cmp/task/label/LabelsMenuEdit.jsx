@@ -2,14 +2,7 @@ import { useForm } from '../../../customHooks/useForm'
 import { updateBoardLabel } from '../../../store/actions/board.actions'
 import { PrimaryBtn } from '../../general/btn/PrimaryBtn'
 
-export function TaskLabelsMenuEdit({
-    board,
-    group,
-    task,
-    label,
-    onClose,
-    onBack,
-}) {
+export function LabelsMenuEdit({ board, group, task, label, onClose, onBack }) {
     const [draft, handleChange] = useForm({ ...label })
 
     async function onSubmit(e) {
@@ -24,7 +17,7 @@ export function TaskLabelsMenuEdit({
     }
 
     return (
-        <div className="task-labels-menu-edit">
+        <div className="labels-menu-edit">
             <div className="preview-container">
                 <div
                     className="preview"

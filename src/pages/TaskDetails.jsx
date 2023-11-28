@@ -3,7 +3,7 @@ import { TaskDetailsDescription } from '../cmp/task/TaskDetailsDescription'
 import { TaskDetailsActivity } from '../cmp/task/TaskDetailsActivity'
 import { TaskDetailsSidebar } from '../cmp/task/TaskDetailsSidebar'
 import { ChecklistList } from '../cmp/task/checklist/ChecklistList'
-import { TaskDetailsLabels } from '../cmp/task/label/TaskDetailsLabels'
+import { LabelList } from '../cmp/task/label/LabelList'
 import { TaskDetailsHeader } from '../cmp/task/TaskDetailsHeader'
 
 export function TaskDetails({ board, group, task }) {
@@ -24,11 +24,7 @@ export function TaskDetails({ board, group, task }) {
                     onClose={onClose}
                 />
                 <div className="main">
-                    <TaskDetailsLabels
-                        board={board}
-                        group={group}
-                        task={task}
-                    />
+                    <LabelList board={board} group={group} task={task} />
                     <TaskDetailsDescription task={task} />
                     <ChecklistList board={board} group={group} task={task} />
                     <TaskDetailsActivity task={task} />

@@ -1,15 +1,15 @@
 import { boardService } from '../../../services/board.service'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
-import { LabelBtn } from '../label/LabelBtn'
-import { TaskLabelsMenu } from './TaskLabelsMenu'
+import { LabelBtn } from './LabelBtn'
+import { LabelsMenu } from './LabelsMenu'
 
-export function TaskDetailsLabels({ board, group, task }) {
+export function LabelList({ board, group, task }) {
     const labels = boardService.getTaskLabels(board, task)
     const labelsMenu = usePopoverState()
 
     return (
         <>
-            <section className="task-details-labels">
+            <section className="label-list">
                 {!!labels?.length && (
                     <>
                         <h3>Labels</h3>
@@ -29,7 +29,7 @@ export function TaskDetailsLabels({ board, group, task }) {
 
             {/* Labels menu */}
             {labelsMenu.show && (
-                <TaskLabelsMenu
+                <LabelsMenu
                     board={board}
                     group={group}
                     task={task}
