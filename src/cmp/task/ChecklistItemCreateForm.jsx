@@ -3,6 +3,7 @@ import { useForm } from '../../customHooks/useForm'
 import { boardService } from '../../services/board.service'
 import { addChecklistItem } from '../../store/actions/board.actions'
 import { PrimaryBtn } from '../general/btn/PrimaryBtn'
+import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 
 export function ChecklistItemCreateForm({
     board,
@@ -45,6 +46,11 @@ export function ChecklistItemCreateForm({
                 onBlur={onSubmit}
             />
             <PrimaryBtn text="Add" onClick={onSubmit} />
+            <SecondaryBtn
+                className="cancel-btn"
+                text="Cancel"
+                onClick={onClose}
+            />
         </div>
     )
 }
