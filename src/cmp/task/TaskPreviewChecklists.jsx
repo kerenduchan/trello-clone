@@ -7,6 +7,8 @@ export function TaskPreviewChecklists({ task }) {
     const doneCount = boardService.countDoneItemsInAllChecklists(task)
     const allCount = boardService.countItemsInAllChecklists(task)
 
+    if (allCount === 0) return <></>
+
     return (
         <div
             className={`task-preview-checklists ${

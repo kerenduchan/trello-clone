@@ -192,6 +192,7 @@ function _createBoards() {
                                 title: 'Install nodeJS',
                                 archivedAt: null,
                                 labelIds: [],
+                                checklists: [],
                             },
                         ],
                     },
