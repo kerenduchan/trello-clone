@@ -4,10 +4,12 @@ import { deleteTask } from '../../store/actions/board.actions'
 import { DeleteMenu } from '../general/DeleteMenu'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 import { TaskLabelsMenu } from './TaskLabelsMenu'
+import { TaskChecklistMenu } from './TaskChecklistMenu'
 
 export function TaskDetailsSidebar({ board, group, task }) {
     const navigate = useNavigate()
     const labelsMenu = usePopoverState()
+    const checklistMenu = usePopoverState()
     const deleteTaskMenu = usePopoverState()
 
     function onDeleteTask() {
@@ -40,7 +42,11 @@ export function TaskDetailsSidebar({ board, group, task }) {
                             icon="label"
                             text="Labels"
                         />
-                        <SecondaryBtn icon="checklist" text="Checklist" />
+                        <SecondaryBtn
+                            {...checklistMenu.triggerAndTarget}
+                            icon="checklist"
+                            text="Checklist"
+                        />
                         <SecondaryBtn icon="date" text="Dates" />
                         <SecondaryBtn icon="attachment" text="Attachment" />
                         <SecondaryBtn icon="cover" text="Cover" />
@@ -71,6 +77,16 @@ export function TaskDetailsSidebar({ board, group, task }) {
                     group={group}
                     task={task}
                     labelsMenu={labelsMenu}
+                />
+            )}
+
+            {/* Checklist menu */}
+            {checklistMenu.show && (
+                <TaskChecklistMenu
+                    board={board}
+                    group={group}
+                    task={task}
+                    checklistMenu={checklistMenu}
                 />
             )}
 
