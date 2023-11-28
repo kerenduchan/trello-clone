@@ -26,20 +26,6 @@
 
             margin-top: 8px;
             justify-self: start;
-
-            .add-btn {
-                display: none;
-            }
-
-            &.hide-form {
-                .add-btn {
-                    display: unset;
-                }
-
-                .checklist-item-create-form {
-                    display: none;
-                }
-            }
         }
     }
 }

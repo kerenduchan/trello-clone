@@ -1,5 +1,3 @@
-import { useRef } from 'react'
-import { useForm } from '../../../customHooks/useForm'
 import { boardService } from '../../../services/board.service'
 import { addChecklistItem } from '../../../store/actions/board.actions'
 import { PrimaryBtn } from '../../general/btn/PrimaryBtn'
@@ -11,13 +9,12 @@ export function ChecklistItemCreateForm({
     task,
     checklist,
     onClose,
+    draft,
+    handleChange,
+    setDraft,
 }) {
-    const [draft, handleChange, setDraft] = useForm(
-        boardService.getEmptyChecklistItem()
-    )
-    const textareaRef = useRef(null)
-
     function onSubmit(e) {
+        console.log('on submit')
         e.preventDefault()
         // TODO: prevent a double-submit in case of Enter + blur
         if (draft.title.length === 0) {
@@ -37,13 +34,12 @@ export function ChecklistItemCreateForm({
     return (
         <div className="checklist-item-create-form">
             <textarea
-                ref={textareaRef}
+                autoFocus
                 type="text"
                 name="title"
                 onChange={handleChange}
                 onKeyDown={onKeyDown}
                 value={draft.title}
-                onBlur={onSubmit}
             />
             <PrimaryBtn text="Add" onClick={onSubmit} />
             <SecondaryBtn

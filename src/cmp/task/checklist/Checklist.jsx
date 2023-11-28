@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useForm } from '../../../customHooks/useForm'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 import { ChecklistItem } from './ChecklistItem'
 import { ProgressBar } from '../../general/ProgressBar'
@@ -11,6 +12,12 @@ import { ChecklistItemCreateForm } from './ChecklistItemCreateForm'
 
 export function Checklist({ board, group, task, checklist }) {
     const [showForm, setShowForm] = useState()
+
+    // When create checklist item form is closed, need to retain draft
+    const [draft, handleChange, setDraft] = useForm(
+        boardService.getEmptyChecklistItem()
+    )
+
     const deleteChecklistMenu = usePopoverState()
 
     function getPercent() {
@@ -64,20 +71,26 @@ export function Checklist({ board, group, task, checklist }) {
                         ))}
                     </ol>
 
-                    <div className={`add-item ${showForm ? '' : 'hide-form'}`}>
-                        <SecondaryBtn
-                            className="add-btn"
-                            text="Add an item"
-                            onClick={() => setShowForm(true)}
-                        />
+                    {showForm ? (
                         <ChecklistItemCreateForm
                             board={board}
                             group={group}
                             task={task}
                             checklist={checklist}
                             onClose={() => setShowForm(false)}
+                            draft={draft}
+                            handleChange={handleChange}
+                            setDraft={setDraft}
                         />
-                    </div>
+                    ) : (
+                        <div className="add-item">
+                            <SecondaryBtn
+                                className="add-btn"
+                                text="Add an item"
+                                onClick={() => setShowForm(true)}
+                            />
+                        </div>
+                    )}
                 </div>
             </div>
 
