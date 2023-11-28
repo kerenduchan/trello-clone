@@ -1,5 +1,7 @@
 import { updateChecklistItem } from '../../store/actions/board.actions'
+import { usePopoverState } from '../../customHooks/usePopoverState'
 import { CircleBtn } from '../general/btn/CircleBtn'
+import { ChecklistItemActionsMenu } from './ChecklistItemActionsMenu'
 
 export function TaskDetailsChecklistItem({
     board,
@@ -8,6 +10,8 @@ export function TaskDetailsChecklistItem({
     checklist,
     item,
 }) {
+    const actionsMenu = usePopoverState()
+
     function onCheckboxClick() {
         try {
             updateChecklistItem(board, group, task, checklist, item, {
@@ -20,21 +24,27 @@ export function TaskDetailsChecklistItem({
     }
 
     return (
-        <div className="task-details-checklist-item">
-            <input
-                className="checkbox"
-                type="checkbox"
-                checked={item.isDone}
-                onChange={onCheckboxClick}
-            />
-            <div className="title-container">
-                <span className={`title ${item.isDone ? 'done' : ''}`}>
-                    {item.title}
-                </span>
-                <div className="actions">
-                    <CircleBtn type="more" />
+        <>
+            <div className="task-details-checklist-item">
+                <input
+                    className="checkbox"
+                    type="checkbox"
+                    checked={item.isDone}
+                    onChange={onCheckboxClick}
+                />
+                <div className="title-container">
+                    <span className={`title ${item.isDone ? 'done' : ''}`}>
+                        {item.title}
+                    </span>
+                    <div className="actions">
+                        <CircleBtn
+                            type="more"
+                            {...actionsMenu.triggerAndTarget}
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
+            <ChecklistItemActionsMenu popoverState={actionsMenu} />
+        </>
     )
 }

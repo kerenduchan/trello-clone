@@ -1,9 +1,15 @@
+import { forwardRef } from 'react'
 import { Icon } from '../Icon'
 
-export function CircleBtn({ type, onClick }) {
+export const CircleBtn = forwardRef(function CircleBtn(props, ref) {
+    const { type, onClick } = props
     return (
-        <button className={`circle-btn ${type}-btn`} onClick={onClick}>
+        <button
+            ref={ref}
+            className={`circle-btn ${type}-btn`}
+            onClick={onClick}
+        >
             <Icon type={type} size="sm" />
         </button>
     )
-}
+})
