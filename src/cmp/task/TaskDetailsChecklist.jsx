@@ -70,7 +70,13 @@ export function TaskDetailsChecklist({ board, group, task, checklist }) {
                             text="Add an item"
                             onClick={() => setShowForm(true)}
                         />
-                        <ChecklistItemCreateForm />
+                        <ChecklistItemCreateForm
+                            board={board}
+                            group={group}
+                            task={task}
+                            checklist={checklist}
+                            onClose={() => setShowForm(false)}
+                        />
                     </div>
                 </div>
             </div>

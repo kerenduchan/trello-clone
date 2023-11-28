@@ -6,6 +6,7 @@ export const boardService = {
     getEmptyGroup,
     getEmptyTask,
     getEmptyChecklist,
+    getEmptyChecklistItem,
     query,
     getById,
     save,
@@ -61,6 +62,14 @@ function getEmptyChecklist() {
         _id: utilService.makeId(),
         title: '',
         items: [],
+    }
+}
+
+function getEmptyChecklistItem() {
+    return {
+        _id: utilService.makeId(),
+        title: '',
+        isDone: false,
     }
 }
 

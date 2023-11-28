@@ -23,6 +23,7 @@ export {
     updateTask,
     addChecklist,
     deleteChecklist,
+    addChecklistItem,
     updateChecklistItem,
     updateBoardLabel,
     removeTaskLabel,
@@ -158,6 +159,13 @@ async function deleteChecklist(board, group, task, checklist) {
         (c) => c._id !== checklist._id
     )
     return _updateTask(board, group, taskToUpdate)
+}
+
+async function addChecklistItem(board, group, task, checklist, item) {
+    const checklistToUpdate = { ...checklist }
+    checklistToUpdate.items = [...checklist.items, item]
+    console.log(checklistToUpdate)
+    _updateChecklist(board, group, task, checklistToUpdate)
 }
 
 async function updateChecklistItem(
