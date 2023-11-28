@@ -1,4 +1,5 @@
 import { updateChecklistItem } from '../../store/actions/board.actions'
+import { CircleBtn } from '../general/btn/CircleBtn'
 
 export function TaskDetailsChecklistItem({
     board,
@@ -26,9 +27,14 @@ export function TaskDetailsChecklistItem({
                 checked={item.isDone}
                 onChange={onCheckboxClick}
             />
-            <span className={`title ${item.isDone ? 'done' : ''}`}>
-                {item.title}
-            </span>
+            <div className="title-container">
+                <span className={`title ${item.isDone ? 'done' : ''}`}>
+                    {item.title}
+                </span>
+                <div className="actions">
+                    <CircleBtn type="more" />
+                </div>
+            </div>
         </div>
     )
 }
