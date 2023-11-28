@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 import { TaskDetailsChecklistItem } from './TaskDetailsChecklistItem'
 import { ProgressBar } from '../general/ProgressBar'
@@ -6,8 +7,10 @@ import { usePopoverState } from '../../customHooks/usePopoverState'
 import { DeleteMenu } from '../general/DeleteMenu'
 import { boardService } from '../../services/board.service'
 import { deleteChecklist } from '../../store/actions/board.actions'
+import { ChecklistItemCreateForm } from './ChecklistItemCreateForm'
 
 export function TaskDetailsChecklist({ board, group, task, checklist }) {
+    const [showForm, setShowForm] = useState()
     const deleteChecklistMenu = usePopoverState()
 
     function getPercent() {
@@ -60,7 +63,15 @@ export function TaskDetailsChecklist({ board, group, task, checklist }) {
                             </li>
                         ))}
                     </ol>
-                    <SecondaryBtn className="add-btn" text="Add an item" />
+
+                    <div className={`add-item ${showForm ? '' : 'hide-form'}`}>
+                        <SecondaryBtn
+                            className="add-btn"
+                            text="Add an item"
+                            onClick={() => setShowForm(true)}
+                        />
+                        <ChecklistItemCreateForm />
+                    </div>
                 </div>
             </div>
 
