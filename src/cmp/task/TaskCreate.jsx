@@ -48,7 +48,11 @@ export function TaskCreate({ board, group, onClose }) {
                 onChange={handleChange}
                 value={draft.title}
             />
-            <PrimaryBtn className="add-btn" text="Add card" />
+            <PrimaryBtn
+                className="add-btn"
+                text="Add card"
+                onClick={onSubmit}
+            />
             <SquareIconBtn icon="close" onClick={onClose} />
         </form>
     )

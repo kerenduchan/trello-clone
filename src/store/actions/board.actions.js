@@ -133,7 +133,7 @@ async function createTask(board, group, task) {
 }
 
 async function deleteTask(board, group, task) {
-    const groupToUpdate = { ...g }
+    const groupToUpdate = { ...group }
     groupToUpdate.tasks = group.tasks.filter((t) => t._id !== task._id)
     return _updateGroup(board, groupToUpdate)
 }
