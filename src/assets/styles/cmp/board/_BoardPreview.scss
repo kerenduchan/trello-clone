@@ -34,7 +34,7 @@
             color: white;
             transition: margin-inline-end 0.2s, font-size 0.2s;
             font-size: 16px;
-            z-index: 20;
+            z-index: 2;
 
             &.starred {
                 color: var(--icon-star);
