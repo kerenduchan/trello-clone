@@ -20,16 +20,6 @@ export function Checklist({ board, group, task, checklist }) {
 
     const deleteChecklistMenu = usePopoverState()
 
-    function getPercent() {
-        if (checklist.items.length === 0) {
-            return 0
-        }
-        return Math.round(
-            (100 * boardService.countDoneItemsInChecklist(checklist)) /
-                checklist.items.length
-        )
-    }
-
     function onDeleteChecklist() {
         try {
             deleteChecklist(board, group, task, checklist)
@@ -55,7 +45,9 @@ export function Checklist({ board, group, task, checklist }) {
                 </TaskDetailsSubsectionHeader>
 
                 <div className="content">
-                    <ProgressBar percent={getPercent()} />
+                    <ProgressBar
+                        percent={boardService.getChecklistPercent(checklist)}
+                    />
 
                     <ol className="items">
                         {checklist.items.map((item) => (

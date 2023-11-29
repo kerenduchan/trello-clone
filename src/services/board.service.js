@@ -22,6 +22,7 @@ export const boardService = {
     countDoneItemsInChecklist,
     countDoneItemsInAllChecklists,
     countItemsInAllChecklists,
+    getChecklistPercent,
 }
 
 const STORAGE_KEY = 'boards'
@@ -364,4 +365,13 @@ function countDoneItemsInAllChecklists(task) {
     return task.checklists.reduce((acc, c) => {
         return acc + countDoneItemsInChecklist(c)
     }, 0)
+}
+
+function getChecklistPercent(checklist) {
+    if (checklist.items.length === 0) {
+        return 0
+    }
+    return Math.round(
+        (100 * countDoneItemsInChecklist(checklist)) / checklist.items.length
+    )
 }
