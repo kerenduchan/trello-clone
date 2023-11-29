@@ -1,6 +1,9 @@
 import { useEffect, useRef } from 'react'
 import { useForm } from '../../../customHooks/useForm'
-import { updateChecklistItem } from '../../../store/actions/board.actions'
+import {
+    deleteChecklistItem,
+    updateChecklistItem,
+} from '../../../store/actions/board.actions'
 import { PrimaryBtn } from '../../general/btn/PrimaryBtn'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 import { SquareIconBtn } from '../../general/btn/SquareIconBtn'
@@ -22,9 +25,13 @@ export function ChecklistItemEditForm({
 
     function onSubmit(e) {
         e.preventDefault()
-        updateChecklistItem(board, group, task, checklist, item, {
-            title: draft.title,
-        })
+        if (draft.title.length === 0) {
+            deleteChecklistItem(board, group, task, checklist, item)
+        } else {
+            updateChecklistItem(board, group, task, checklist, item, {
+                title: draft.title,
+            })
+        }
         onClose()
     }
 
