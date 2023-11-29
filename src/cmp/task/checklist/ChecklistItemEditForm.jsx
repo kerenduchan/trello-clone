@@ -17,7 +17,7 @@ export function ChecklistItemEditForm({
     onClose,
 }) {
     const textareaRef = useRef(null)
-    const [draft, handleChange, setDraft] = useForm({ title: item.title })
+    const [draft, handleChange] = useForm({ title: item.title })
 
     useEffect(() => {
         textareaRef.current.select()
