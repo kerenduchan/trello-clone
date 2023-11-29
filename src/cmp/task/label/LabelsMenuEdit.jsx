@@ -36,11 +36,7 @@ export function LabelsMenuEdit({ board, group, task, label, onClose, onBack }) {
                     onChange={handleChange}
                     value={draft.title}
                 />
-                <PrimaryBtn
-                    className="save-btn"
-                    text="Save"
-                    onClick={onSubmit}
-                />
+                <PrimaryBtn className="save-btn" text="Save" />
             </form>
         </div>
     )

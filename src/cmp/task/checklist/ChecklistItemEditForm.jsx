@@ -57,11 +57,7 @@ export function ChecklistItemEditForm({
                     value={draft.title}
                     onKeyDown={onKeyDown}
                 ></textarea>
-                <PrimaryBtn
-                    className="save-btn"
-                    text="Save"
-                    onClick={onSubmit}
-                />
+                <PrimaryBtn className="save-btn" text="Save" />
                 <SquareIconBtn icon="close" onClick={onClose} />
                 <SecondaryBtn
                     className="assign-btn"
