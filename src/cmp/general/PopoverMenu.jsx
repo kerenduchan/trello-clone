@@ -6,10 +6,15 @@ export function PopoverMenu({
     onClose,
     title,
     onBack = null,
+    className,
     children,
 }) {
     return (
-        <Popover className="popover-menu" refEl={refEl} onClose={onClose}>
+        <Popover
+            className={`popover-menu ${className}`}
+            refEl={refEl}
+            onClose={onClose}
+        >
             <header>
                 {onBack && <SquareIconBtn onClick={onBack} icon="back" />}
                 <h2>{title}</h2>

@@ -25,14 +25,21 @@ export function ChecklistItemActionsMenu({
 
     return (
         popoverState.show && (
-            <PopoverMenu title="Item actions" {...popoverState.popover}>
-                <div className="checklist-item-actions-menu">
-                    <SecondaryBtn
-                        text="Convert to card"
-                        onClick={onConvertToCard}
-                    />
-                    <SecondaryBtn text="Delete" onClick={onDelete} />
-                </div>
+            <PopoverMenu
+                className="checklist-item-actions-menu"
+                title="Item actions"
+                {...popoverState.popover}
+            >
+                <SecondaryBtn
+                    className="actions-menu-btn"
+                    text="Convert to card"
+                    onClick={onConvertToCard}
+                />
+                <SecondaryBtn
+                    className="actions-menu-btn"
+                    text="Delete"
+                    onClick={onDelete}
+                />
             </PopoverMenu>
         )
     )

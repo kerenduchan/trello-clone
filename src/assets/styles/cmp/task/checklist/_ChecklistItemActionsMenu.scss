@@ -1,0 +1,20 @@
+.checklist-item-actions-menu {
+    .content {
+        padding: 0px;
+        padding-bottom: 8px;
+    }
+    .actions-menu-btn {
+        width: 304px;
+
+        @include button-bg(
+            transparent,
+            var(--bg-neutral-hovered),
+            var(--bg-neutral-pressed)
+        );
+        padding: 6px 12px;
+
+        .label {
+            @include font-p();
+        }
+    }
+}
