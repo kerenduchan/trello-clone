@@ -5,7 +5,7 @@ export const PrimaryBtn = forwardRef(function PrimaryBtn(props, ref) {
     return (
         <button
             ref={ref}
-            className={`primary-btn ${className}`}
+            className={`primary-btn ${className ? className : ''}`}
             onClick={onClick}
         >
             {text}

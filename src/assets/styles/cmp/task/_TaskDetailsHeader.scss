@@ -1,3 +1,10 @@
+.task-details-close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+}
+
 .task-details-header {
     position: relative;
     grid-area: header;

@@ -27,13 +27,6 @@
             '.     header header header  .    '
             '.     main   .      sidebar .    ';
 
-        .close-btn {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            z-index: 2;
-        }
-
         .cover {
             height: 116px;
             grid-area: cover;

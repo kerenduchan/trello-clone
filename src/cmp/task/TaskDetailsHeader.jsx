@@ -15,7 +15,11 @@ export function TaskDetailsHeader({ board, group, task, onClose }) {
 
     return (
         <>
-            <CircleBtn type="close" onClick={onClose} />
+            <CircleBtn
+                type="close"
+                className="task-details-close-btn"
+                onClick={onClose}
+            />
             {task.cover && (
                 <div
                     className="cover"

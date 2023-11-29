@@ -41,7 +41,10 @@ export function ChecklistItem({ board, group, task, checklist, item }) {
                 />
 
                 {showForm ? (
-                    <ChecklistItemEditForm />
+                    <ChecklistItemEditForm
+                        title={item.title}
+                        onClose={() => setShowForm(false)}
+                    />
                 ) : (
                     <div
                         className="title-container"

@@ -26,4 +26,6 @@ const _typeToMaterialSymbol = {
     star: 'star',
     more: 'more_horiz',
     back: 'arrow_back_ios_new',
+    emoji: 'sentiment_satisfied',
+    mention: 'alternate_email',
 }
