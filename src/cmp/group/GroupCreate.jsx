@@ -62,7 +62,11 @@ export function GroupCreate({ board }) {
                         onChange={handleChange}
                         value={draft.title}
                     />
-                    <PrimaryBtn className="add-btn" text="Add list" />
+                    <PrimaryBtn
+                        className="add-btn"
+                        text="Add list"
+                        onClick={onSubmit}
+                    />
                     <SquareIconBtn icon="close" onClick={onClose} />
                 </form>
             ) : (
