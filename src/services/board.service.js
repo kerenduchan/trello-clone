@@ -17,6 +17,7 @@ export const boardService = {
     getLabelById,
     getGroupById,
     getTaskById,
+    getGroupAndTaskByTaskId,
     getChecklistById,
     getChecklistItemById,
     countDoneItemsInChecklist,
@@ -335,6 +336,19 @@ function getGroupById(board, groupId) {
 
 function getTaskById(board, groupId, taskId) {
     return getGroupById(board, groupId)?.tasks.find((t) => t._id === taskId)
+}
+
+function getGroupAndTaskByTaskId(board, taskId) {
+    for (let i = 0; i < board.groups.length; i++) {
+        const group = board.groups[i]
+        for (let j = 0; j < group.tasks.length; ++j) {
+            const task = group.tasks[j]
+            if (task._id === taskId) {
+                return { group, task }
+            }
+        }
+    }
+    return null
 }
 
 function getChecklistById(board, groupId, taskId, checklistId) {

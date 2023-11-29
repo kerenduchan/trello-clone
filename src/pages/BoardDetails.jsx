@@ -9,6 +9,7 @@ import { TaskDetails } from './TaskDetails'
 import { BoardDetailsMenu } from '../cmp/board/BoardDetailsMenu'
 import { SquareIconBtn } from '../cmp/general/btn/SquareIconBtn'
 import { GroupCreate } from '../cmp/group/GroupCreate'
+import { boardService } from '../services/board.service'
 
 export function BoardDetails() {
     const params = useParams()
@@ -23,22 +24,11 @@ export function BoardDetails() {
         }
     }, [params.boardId])
 
-    function findGroupAndTask(taskId) {
-        for (let i = 0; i < board.groups.length; i++) {
-            const group = board.groups[i]
-            for (let j = 0; j < group.tasks.length; ++j) {
-                const task = group.tasks[j]
-                if (task._id === taskId) {
-                    return { group, task }
-                }
-            }
-        }
-        return null
-    }
-
     if (!board) return <div>Loading..</div>
 
-    const groupAndTask = params.taskId ? findGroupAndTask(params.taskId) : null
+    const groupAndTask = params.taskId
+        ? boardService.getGroupAndTaskByTaskId(board, params.taskId)
+        : null
 
     return (
         <div
