@@ -140,3 +140,48 @@
 @mixin backdrop-blur() {
     backdrop-filter: blur(4px);
 }
+
+@mixin textarea-styling() {
+    background-color: var(--bg-1);
+    border-radius: 3px;
+    box-shadow: var(--box-shadow-input-focused);
+    outline: none;
+    resize: none;
+    overflow: hidden;
+}
+
+@mixin secondary-btn-version-2() {
+    padding: 6px 8px;
+    column-gap: 0px;
+
+    @include button-bg(
+        transparent,
+        var(--bg-neutral-hovered),
+        var(--bg-neutral-pressed)
+    );
+
+    .icon {
+        font-size: 16px;
+        line-height: 20px;
+        width: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .label {
+        @include font-p();
+    }
+}
+
+@mixin icon-btn-version-2() {
+    padding: 6px 8px;
+    border-radius: 3px;
+    width: 36px;
+    height: 32px;
+    box-sizing: border-box;
+    .icon {
+        font-size: 16px;
+        line-height: 20px;
+    }
+}

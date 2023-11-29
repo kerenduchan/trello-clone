@@ -4,10 +4,15 @@
     display: grid;
     grid-template-columns: repeat(2, auto) 1fr repeat(5, auto);
     grid-template-rows: repeat(2, auto);
+    row-gap: 12px;
+    column-gap: 4px;
+    align-items: center;
 
-    .title {
+    textarea.title {
         grid-area: 1 / 1 / span 1 / -1;
-        resize: none;
+        @include textarea-styling();
+        padding: 8px 12px;
+        @include font-p();
     }
 
     .save-btn {
@@ -16,25 +21,38 @@
 
     .close-btn {
         grid-area: 2 / 2;
+        @include square(32px);
+
+        @include button-bg(transparent, transparent, transparent);
+
+        .icon {
+            @include font-size-and-line-height(26px);
+        }
     }
 
     .assign-btn {
         grid-area: 2 / 4;
+        @include secondary-btn-version-2();
     }
 
     .due-date-btn {
         grid-area: 2 / 5;
+        @include secondary-btn-version-2();
+        min-width: 96px;
     }
 
     .emoji-btn {
         grid-area: 2 / 6;
+        @include icon-btn-version-2();
     }
 
     .mention-btn {
         grid-area: 2 / 7;
+        @include icon-btn-version-2();
     }
 
     .more-btn {
         grid-area: 2 / 8;
+        @include icon-btn-version-2();
     }
 }

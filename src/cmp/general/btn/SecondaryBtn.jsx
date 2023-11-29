@@ -11,7 +11,7 @@ export const SecondaryBtn = forwardRef(function SecondaryBtn(props, ref) {
             onClick={onClick}
         >
             {icon && <Icon type={icon} size="sm"></Icon>}
-            <span>{text}</span>
+            <span className="label">{text}</span>
         </button>
     )
 })

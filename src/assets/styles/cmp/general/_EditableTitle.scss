@@ -15,12 +15,7 @@
         display: none;
 
         textarea {
-            background-color: var(--bg-1);
-            border-radius: 3px;
-            box-shadow: var(--box-shadow-input-focused);
-            outline: none;
-            resize: none;
-            overflow: hidden;
+            @include textarea-styling();
         }
     }
 

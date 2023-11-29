@@ -48,7 +48,11 @@ export function ChecklistItemEditForm({
             ></textarea>
             <PrimaryBtn className="save-btn" text="Save" onClick={onSubmit} />
             <SquareIconBtn icon="close" onClick={onClose} />
-            <SecondaryBtn className="assign-btn" icon="member" text="Assign" />
+            <SecondaryBtn
+                className="assign-btn"
+                icon="add_member"
+                text="Assign"
+            />
             <SecondaryBtn
                 className="due-date-btn"
                 icon="date"

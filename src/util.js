@@ -8,6 +8,7 @@ function getMaterialSymbol(type) {
 // translate krello's type to the corresponding material symbol
 const _typeToMaterialSymbol = {
     member: 'person',
+    add_member: 'person_add',
     label: 'sell',
     checklist: 'select_check_box',
     date: 'schedule',
