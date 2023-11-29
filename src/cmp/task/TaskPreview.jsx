@@ -20,8 +20,11 @@ export function TaskPreview({ board, task }) {
     return (
         <section className="task-preview" onClick={onClick}>
             <TaskPreviewCover task={task} />
-            <CircleBtn type="edit" onClick={onEditClick} />
 
+            <div className="edit-btn-container">
+                <div className="edit-btn-bg" />
+                <CircleBtn type="edit" onClick={onEditClick} />
+            </div>
             <div className="content">
                 <LabelsPreview board={board} task={task} />
                 <p className="title">{task.title}</p>
