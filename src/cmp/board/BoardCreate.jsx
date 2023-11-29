@@ -44,7 +44,7 @@ export function BoardCreate({ onClose }) {
                 onChange={handleChange}
                 value={draft.title}
             />
-            <PrimaryBtn className="create-btn" text="Create" />
+            <PrimaryBtn className="create-btn" text="Create" onClick={onSubmit}/>
         </form>
     )
 }

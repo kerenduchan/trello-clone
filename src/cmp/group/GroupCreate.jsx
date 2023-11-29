@@ -69,7 +69,11 @@ export function GroupCreate({ board }) {
                 <SecondaryBtn
                     className="group-create-btn"
                     icon="add"
-                    text="Add another list"
+                    text={
+                        board.groups.length === 0
+                            ? 'Add a list'
+                            : 'Add another list'
+                    }
                     onClick={toggleShowForm}
                 />
             )}
