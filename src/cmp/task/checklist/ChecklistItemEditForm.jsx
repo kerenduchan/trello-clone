@@ -1,10 +1,20 @@
 import { useEffect, useRef } from 'react'
+import { useForm } from '../../../customHooks/useForm'
+import { updateChecklistItem } from '../../../store/actions/board.actions'
 import { PrimaryBtn } from '../../general/btn/PrimaryBtn'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 import { SquareIconBtn } from '../../general/btn/SquareIconBtn'
 
-export function ChecklistItemEditForm({ title, onClose }) {
+export function ChecklistItemEditForm({
+    board,
+    group,
+    task,
+    checklist,
+    item,
+    onClose,
+}) {
     const textareaRef = useRef(null)
+    const [draft, handleChange, setDraft] = useForm({ title: item.title })
 
     useEffect(() => {
         textareaRef.current.select()
@@ -12,6 +22,16 @@ export function ChecklistItemEditForm({ title, onClose }) {
 
     function onSubmit(e) {
         e.preventDefault()
+        updateChecklistItem(board, group, task, checklist, item, {
+            title: draft.title,
+        })
+        onClose()
+    }
+
+    function onKeyDown(e) {
+        if (e.key === 'Enter') {
+            onSubmit(e)
+        }
     }
 
     return (
@@ -22,10 +42,11 @@ export function ChecklistItemEditForm({ title, onClose }) {
                 className="title"
                 name="title"
                 id="title"
-            >
-                {title}
-            </textarea>
-            <PrimaryBtn className="save-btn" text="Save" />
+                onChange={handleChange}
+                value={draft.title}
+                onKeyDown={onKeyDown}
+            ></textarea>
+            <PrimaryBtn className="save-btn" text="Save" onClick={onSubmit} />
             <SquareIconBtn icon="close" onClick={onClose} />
             <SecondaryBtn className="assign-btn" icon="member" text="Assign" />
             <SecondaryBtn

@@ -5,6 +5,7 @@ export const SecondaryBtn = forwardRef(function SecondaryBtn(props, ref) {
     const { icon, text, className, onClick } = props
     return (
         <button
+            type="button"
             ref={ref}
             className={`secondary-btn ${className ? ` ${className}` : ''}`}
             onClick={onClick}

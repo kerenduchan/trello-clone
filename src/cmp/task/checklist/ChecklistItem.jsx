@@ -42,7 +42,11 @@ export function ChecklistItem({ board, group, task, checklist, item }) {
 
                 {showForm ? (
                     <ChecklistItemEditForm
-                        title={item.title}
+                        board={board}
+                        group={group}
+                        task={task}
+                        checklist={checklist}
+                        item={item}
                         onClose={() => setShowForm(false)}
                     />
                 ) : (
