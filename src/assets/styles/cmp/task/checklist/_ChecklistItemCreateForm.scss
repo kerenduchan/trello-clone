@@ -1,0 +1,18 @@
+.checklist-item-create-form {
+    grid-area: 3 / 3;
+    display: grid;
+    grid-template-columns: repeat(2, auto) 1fr;
+    column-gap: 4px;
+    row-gap: 8px;
+
+    textarea {
+        grid-area: 1 / 1 / span 1 / -1;
+        @include textarea-styling();
+        padding: 8px 12px;
+        @include font-p();
+    }
+
+    button {
+        padding: 6px 12px;
+    }
+}

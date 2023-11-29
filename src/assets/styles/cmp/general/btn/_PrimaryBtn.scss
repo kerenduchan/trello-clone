@@ -5,14 +5,15 @@
         var(--bg-primary-btn-pressed)
     );
     color: var(--text-color-primary-btn);
-    height: 32px;
-    padding-inline-start: 12px;
-    padding-inline-end: 12px;
+    padding: 6px 12px;
     border-radius: 3px;
     display: flex;
     align-items: center;
     justify-content: center;
-    @include font(14px, 32px, 500);
+
+    .label {
+        @include font(14px, 20px, 500);
+    }
 
     &.danger {
         @include primary-btn-danger();
