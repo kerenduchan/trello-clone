@@ -13,6 +13,7 @@ export const boardService = {
     remove,
     create,
     getBackgroundImages,
+    getTaskMembers,
     getTaskLabels,
     getLabelById,
     getGroupById,
@@ -283,6 +284,16 @@ function getBackgroundImages() {
         'https://images.unsplash.com/photo-1694111356884-45781a164220',
         'https://images.unsplash.com/photo-1695667937079-b59c63660cfc',
     ]
+}
+
+function getTaskMembers(hierarchy) {
+    const { board, task } = hierarchy
+    if (!task.memberIds) {
+        return []
+    }
+    return task.memberIds.map((memberId) =>
+        board.members.find((member) => member._id === memberId)
+    )
 }
 
 function getTaskLabels(hierarchy) {

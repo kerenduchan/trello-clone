@@ -6,6 +6,7 @@ import { ChecklistList } from '../cmp/task/checklist/ChecklistList'
 import { LabelList } from '../cmp/task/label/LabelList'
 import { TaskDetailsHeader } from '../cmp/task/TaskDetailsHeader'
 import { setNewChecklist } from '../store/actions/app.actions'
+import { TaskMembers } from '../cmp/task/members/TaskMembers'
 
 export function TaskDetails({ hierarchy }) {
     const navigate = useNavigate()
@@ -22,6 +23,7 @@ export function TaskDetails({ hierarchy }) {
                 <TaskDetailsHeader hierarchy={hierarchy} onClose={onClose} />
                 <div className="main">
                     <LabelList hierarchy={hierarchy} />
+                    <TaskMembers hierarchy={hierarchy} />
                     <TaskDescription hierarchy={hierarchy} />
                     <ChecklistList hierarchy={hierarchy} />
                     <TaskDetailsActivity hierarchy={hierarchy} />
