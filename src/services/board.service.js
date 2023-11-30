@@ -143,6 +143,11 @@ function _createBoards() {
                         fullname: 'Yigal Shalom',
                         imgUrl: 'images/yigal-avatar.jpg',
                     },
+                    {
+                        _id: 'u102',
+                        fullname: 'Keren Duchan',
+                        imgUrl: 'images/keren-avatar.jpg',
+                    },
                 ],
                 groups: [
                     {
@@ -197,6 +202,7 @@ function _createBoards() {
                                     },
                                 ],
                                 labelIds: ['l101', 'l102'],
+                                memberIds: ['u102'],
                             },
                             {
                                 _id: 'c102',

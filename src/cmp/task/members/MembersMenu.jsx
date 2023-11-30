@@ -1,7 +1,8 @@
 import { PopoverMenu } from '../../general/PopoverMenu'
-import { MembersList } from './MembersList'
+import { MemberBtn } from './MemberBtn'
 
 export function MembersMenu({ hierarchy, popoverState }) {
+    const { board } = hierarchy
     return (
         <PopoverMenu
             className="members-menu"
@@ -10,7 +11,13 @@ export function MembersMenu({ hierarchy, popoverState }) {
         >
             <h3>Board members</h3>
 
-            <MembersList hierarchy={hierarchy} />
+            <ul>
+                {board.members.map((member) => (
+                    <li key={member._id}>
+                        <MemberBtn hierarchy={hierarchy} member={member} />
+                    </li>
+                ))}
+            </ul>
         </PopoverMenu>
     )
 }

@@ -4,7 +4,7 @@
     padding: 4px;
     border-radius: 3px;
     @include button-bg(
-        var(--bg-neutral-hovered),
+        var(transparent),
         var(--bg-neutral-hovered),
         var(--bg-neutral-pressed)
     );

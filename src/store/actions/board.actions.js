@@ -22,6 +22,8 @@ export {
     createTask,
     deleteTask,
     updateTask,
+    addTaskMember,
+    removeTaskMember,
     addChecklist,
     deleteChecklist,
     addChecklistItem,
@@ -147,6 +149,22 @@ async function updateTask(hierarchy, fieldsToUpdate) {
         t._id === task._id ? { ...task, ...fieldsToUpdate } : t
     )
     return _updateGroup(board, groupToUpdate)
+}
+
+// TASK MEMBER
+
+async function addTaskMember(hierarchy, member) {
+    const { board, group, task } = hierarchy
+    const taskToUpdate = { ...task }
+    taskToUpdate.memberIds = [...task.memberIds, member._id]
+    return _updateTask(board, group, taskToUpdate)
+}
+
+async function removeTaskMember(hierarchy, member) {
+    const { board, group, task } = hierarchy
+    const taskToUpdate = { ...task }
+    taskToUpdate.memberIds = task.memberIds.filter((id) => id !== member._id)
+    return _updateTask(board, group, taskToUpdate)
 }
 
 // CHEKCLIST
