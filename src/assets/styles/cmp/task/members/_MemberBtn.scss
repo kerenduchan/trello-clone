@@ -8,11 +8,18 @@
         var(--bg-neutral-hovered),
         var(--bg-neutral-pressed)
     );
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, auto) 1fr;
     gap: 8px;
     align-items: center;
 
     .title {
         @include font-p();
+    }
+
+    .check-icon {
+        justify-self: end;
+        padding-inline-start: 11px;
+        padding-inline-end: 11px;
     }
 }

@@ -9,7 +9,7 @@ export function MembersMenu({ hierarchy, popoverState }) {
             title="Members"
             {...popoverState.popover}
         >
-            <h3>Board members</h3>
+            <h4>Board members</h4>
 
             <ul>
                 {board.members.map((member) => (

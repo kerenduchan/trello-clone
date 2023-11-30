@@ -1,5 +1,13 @@
 .members-menu {
-    width: 280px;
+    .content {
+        width: 280px;
+    }
+
+    h4 {
+        @include font(12px, 16px, 600);
+        margin-top: 4px;
+        margin-bottom: 8px;
+    }
 
     ul {
         display: flex;
