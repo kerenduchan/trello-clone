@@ -5,11 +5,13 @@ import { DeleteMenu } from '../general/DeleteMenu'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 import { LabelsMenu } from './label/LabelsMenu'
 import { ChecklistMenu } from './checklist/ChecklistMenu'
+import { MembersMenu } from './members/MembersMenu'
 
 export function TaskDetailsSidebar({ hierarchy }) {
     const { board } = hierarchy
 
     const navigate = useNavigate()
+    const membersMenu = usePopoverState()
     const labelsMenu = usePopoverState()
     const checklistMenu = usePopoverState()
     const deleteTaskMenu = usePopoverState()
@@ -38,7 +40,11 @@ export function TaskDetailsSidebar({ hierarchy }) {
                 <section>
                     <h3>Add to card</h3>
                     <div className="content">
-                        <SecondaryBtn icon="member" text="Members" />
+                        <SecondaryBtn
+                            {...membersMenu.triggerAndTarget}
+                            icon="member"
+                            text="Members"
+                        />
                         <SecondaryBtn
                             {...labelsMenu.triggerAndTarget}
                             icon="label"
@@ -71,6 +77,11 @@ export function TaskDetailsSidebar({ hierarchy }) {
                     </div>
                 </section>
             </div>
+
+            {/* Members menu */}
+            {membersMenu.show && (
+                <MembersMenu hierarchy={hierarchy} popoverState={membersMenu} />
+            )}
 
             {/* Labels menu */}
             {labelsMenu.show && (
