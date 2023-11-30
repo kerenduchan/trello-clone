@@ -156,7 +156,12 @@ async function updateTask(hierarchy, fieldsToUpdate) {
 async function addTaskMember(hierarchy, member) {
     const { board, group, task } = hierarchy
     const taskToUpdate = { ...task }
-    taskToUpdate.memberIds = [...task.memberIds, member._id]
+    if (taskToUpdate.memberIds) {
+        taskToUpdate.memberIds = [...task.memberIds, member._id]
+    } else {
+        taskToUpdate.memberIds = [member._id]
+    }
+
     return _updateTask(board, group, taskToUpdate)
 }
 

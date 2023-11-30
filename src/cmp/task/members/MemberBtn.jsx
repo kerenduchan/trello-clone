@@ -9,7 +9,7 @@ export function MemberBtn({ hierarchy, member }) {
     const { task } = hierarchy
 
     function isTaskMember() {
-        return task.memberIds.includes(member._id)
+        return task.memberIds?.includes(member._id)
     }
 
     function onClick() {
