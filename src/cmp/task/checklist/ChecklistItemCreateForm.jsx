@@ -44,7 +44,6 @@ export function ChecklistItemCreateForm({
                 onChange={handleChange}
                 onKeyDown={onKeyDown}
                 value={draft.title}
-                onBlur={onClose}
             />
             <PrimaryBtn text="Add" onClick={onSubmit} />
             <SecondaryBtn
