@@ -1,22 +1,22 @@
 import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { boardService } from '../../../services/board.service'
 import { MembersMenu } from './MembersMenu'
-import { TaskMemberBtn } from './TaskMemberBtn'
+import { MembersWidgetItem } from './MembersWidgetItem'
 
-export function TaskMembers({ hierarchy }) {
+export function MembersWidget({ hierarchy }) {
     const members = boardService.getTaskMembers(hierarchy)
     const membersMenu = usePopoverState()
 
     return (
         <>
-            <section className="task-members">
+            <section className="members-widget">
                 {!!members?.length && (
                     <>
                         <h3>Members</h3>
                         <ul>
                             {members.map((member) => (
                                 <li key={member._id}>
-                                    <TaskMemberBtn
+                                    <MembersWidgetItem
                                         hierarchy={hierarchy}
                                         member={member}
                                     />

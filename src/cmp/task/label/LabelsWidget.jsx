@@ -3,13 +3,13 @@ import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { LabelBtn } from './LabelBtn'
 import { LabelsMenu } from './LabelsMenu'
 
-export function LabelList({ hierarchy }) {
+export function LabelsWidget({ hierarchy }) {
     const labels = boardService.getTaskLabels(hierarchy)
     const labelsMenu = usePopoverState()
 
     return (
         <>
-            <section className="label-list">
+            <section className="labels-widget">
                 {!!labels?.length && (
                     <>
                         <h3>Labels</h3>

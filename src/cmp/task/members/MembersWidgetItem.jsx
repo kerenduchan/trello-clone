@@ -1,8 +1,8 @@
 import { Avatar } from '../../general/Avatar'
 
-export function TaskMemberBtn({ hierarchy, member }) {
+export function MembersWidgetItem({ hierarchy, member }) {
     return (
-        <button className="task-member-btn">
+        <button className="members-widget-item">
             <Avatar imgSrc={member.imgUrl} />
         </button>
     )

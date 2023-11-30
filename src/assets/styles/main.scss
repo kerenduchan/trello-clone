@@ -73,7 +73,7 @@
 
 // task/label
 @import 'cmp/task/label/LabelBtn';
-@import 'cmp/task/label/LabelList';
+@import 'cmp/task/label/LabelsWidget';
 @import 'cmp/task/label/LabelsMenuEdit';
 @import 'cmp/task/label/LabelsMenuMain';
 @import 'cmp/task/label/LabelsMenuMainItem';
@@ -82,6 +82,7 @@
 // task/members
 @import 'cmp/task/members/MemberBtn';
 @import 'cmp/task/members/MembersMenu';
+@import 'cmp/task/members/MembersWidget';
 
 // misc
 @import 'cmp/AppHeader';
