@@ -1,11 +1,11 @@
 import { TaskPreview } from '../task/TaskPreview'
 
-export function TaskList({ board, tasks }) {
+export function TaskList({ board, group }) {
     return (
         <ol className="task-list">
-            {tasks.map((t) => (
-                <li key={t._id}>
-                    <TaskPreview board={board} task={t} />
+            {group.tasks.map((task) => (
+                <li key={task._id}>
+                    <TaskPreview hierarchy={{ board, group, task }} />
                 </li>
             ))}
         </ol>

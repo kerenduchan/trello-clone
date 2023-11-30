@@ -1,7 +1,9 @@
 import { boardService } from '../../../services/board.service'
 import { Icon } from '../../general/Icon'
 
-export function ChecklistsBadge({ task }) {
+export function ChecklistsBadge({ hierarchy }) {
+    const { task } = hierarchy
+
     if (!task.checklists || task.checklists?.length === 0) return <></>
 
     const doneCount = boardService.countDoneItemsInAllChecklists(task)

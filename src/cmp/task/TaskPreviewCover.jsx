@@ -1,4 +1,6 @@
-export function TaskPreviewCover({ task }) {
+export function TaskPreviewCover({ hierarchy }) {
+    const { task } = hierarchy
+
     if (!task.cover) return <></>
 
     return (

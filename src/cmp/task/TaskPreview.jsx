@@ -5,7 +5,9 @@ import { LabelsPreview } from './label/LabelsPreview'
 import { ChecklistsBadge } from './checklist/ChecklistsBadge'
 import { Icon } from '../general/Icon'
 
-export function TaskPreview({ board, task }) {
+export function TaskPreview({ hierarchy }) {
+    const { board, task } = hierarchy
+
     const navigate = useNavigate()
 
     function onEditClick(e) {
@@ -20,14 +22,14 @@ export function TaskPreview({ board, task }) {
 
     return (
         <section className="task-preview" onClick={onClick}>
-            <TaskPreviewCover task={task} />
+            <TaskPreviewCover hierarchy={hierarchy} />
 
             <div className="edit-btn-container">
                 <div className="edit-btn-bg" />
                 <CircleBtn type="edit" onClick={onEditClick} />
             </div>
             <div className="content">
-                <LabelsPreview board={board} task={task} />
+                <LabelsPreview hierarchy={hierarchy} />
                 <p className="title">{task.title}</p>
                 <div className="badges">
                     {task.description && (
@@ -35,7 +37,7 @@ export function TaskPreview({ board, task }) {
                             <Icon type="description" size="xs" />
                         </span>
                     )}
-                    <ChecklistsBadge task={task} />
+                    <ChecklistsBadge hierarchy={hierarchy} />
                 </div>
             </div>
         </section>

@@ -2,7 +2,8 @@ import { boardService } from '../../../services/board.service'
 import { useToggle } from '../../../customHooks/useToggle'
 import { LabelBtn } from './LabelBtn'
 
-export function LabelsPreview({ board, task }) {
+export function LabelsPreview({ hierarchy }) {
+    const { board, task } = hierarchy
     const [isZoomedIn, toggleIsZoomedIn] = useToggle()
 
     function onLabelClick(e) {

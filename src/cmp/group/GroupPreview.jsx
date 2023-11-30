@@ -7,7 +7,7 @@ export function GroupPreview({ board, group }) {
     return (
         <section className="group-preview">
             <GroupPreviewHeader board={board} group={group} />
-            <TaskList board={board} tasks={group.tasks} />
+            <TaskList board={board} group={group} />
             <GroupPreviewFooter board={board} group={group} />
         </section>
     )
