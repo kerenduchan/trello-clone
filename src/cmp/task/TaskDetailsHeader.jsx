@@ -3,10 +3,12 @@ import { CircleBtn } from '../general/btn/CircleBtn'
 import { EditableTitle } from '../general/EditableTitle'
 import { updateTask } from '../../store/actions/board.actions'
 
-export function TaskDetailsHeader({ board, group, task, onClose }) {
+export function TaskDetailsHeader({ hierarchy, onClose }) {
+    const { group, task } = hierarchy
+
     function onTitleChange(title) {
         try {
-            updateTask(board, group, task, { title })
+            updateTask(hierarchy, { title })
         } catch (err) {
             console.error(err)
             // TODO: show an error dialog

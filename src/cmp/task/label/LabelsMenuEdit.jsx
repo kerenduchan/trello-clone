@@ -2,13 +2,13 @@ import { useForm } from '../../../customHooks/useForm'
 import { updateBoardLabel } from '../../../store/actions/board.actions'
 import { PrimaryBtn } from '../../general/btn/PrimaryBtn'
 
-export function LabelsMenuEdit({ board, group, task, label, onClose, onBack }) {
+export function LabelsMenuEdit({ hierarchy, label, onBack }) {
     const [draft, handleChange] = useForm({ ...label })
 
     async function onSubmit(e) {
         e.preventDefault()
         try {
-            updateBoardLabel(board, label, { title: draft.title })
+            updateBoardLabel(hierarchy.board, label, { title: draft.title })
             onBack()
         } catch (err) {
             console.error(err)

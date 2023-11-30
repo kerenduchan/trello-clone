@@ -3,8 +3,8 @@ import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { LabelBtn } from './LabelBtn'
 import { LabelsMenu } from './LabelsMenu'
 
-export function LabelList({ board, group, task }) {
-    const labels = boardService.getTaskLabels(board, task)
+export function LabelList({ hierarchy }) {
+    const labels = boardService.getTaskLabels(hierarchy)
     const labelsMenu = usePopoverState()
 
     return (
@@ -29,12 +29,7 @@ export function LabelList({ board, group, task }) {
 
             {/* Labels menu */}
             {labelsMenu.show && (
-                <LabelsMenu
-                    board={board}
-                    group={group}
-                    task={task}
-                    labelsMenu={labelsMenu}
-                />
+                <LabelsMenu hierarchy={hierarchy} labelsMenu={labelsMenu} />
             )}
         </>
     )

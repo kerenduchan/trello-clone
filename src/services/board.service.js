@@ -279,7 +279,8 @@ function getBackgroundImages() {
     ]
 }
 
-function getTaskLabels(board, task) {
+function getTaskLabels(hierarchy) {
+    const { board, task } = hierarchy
     return task.labelIds.map((labelId) =>
         board.labels.find((label) => label._id === labelId)
     )

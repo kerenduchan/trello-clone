@@ -10,14 +10,7 @@ import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 import { SquareIconBtn } from '../../general/btn/SquareIconBtn'
 import { ChecklistItemActionsMenu } from './ChecklistItemActionsMenu'
 
-export function ChecklistItemEditForm({
-    board,
-    group,
-    task,
-    checklist,
-    item,
-    onClose,
-}) {
+export function ChecklistItemEditForm({ hierarchy, checklist, item, onClose }) {
     const textareaRef = useRef(null)
     const [draft, handleChange] = useForm({ title: item.title })
     const actionsMenu = usePopoverState()
@@ -29,9 +22,9 @@ export function ChecklistItemEditForm({
     function onSubmit(e) {
         e.preventDefault()
         if (draft.title.length === 0) {
-            deleteChecklistItem(board, group, task, checklist, item)
+            deleteChecklistItem(hierarchy, checklist, item)
         } else {
-            updateChecklistItem(board, group, task, checklist, item, {
+            updateChecklistItem(hierarchy, checklist, item, {
                 title: draft.title,
             })
         }
@@ -76,9 +69,7 @@ export function ChecklistItemEditForm({
 
             {/* Actions menu */}
             <ChecklistItemActionsMenu
-                board={board}
-                group={group}
-                task={task}
+                hierarchy={hierarchy}
                 checklist={checklist}
                 item={item}
                 popoverState={actionsMenu}

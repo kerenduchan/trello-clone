@@ -6,7 +6,8 @@ import { ChecklistList } from '../cmp/task/checklist/ChecklistList'
 import { LabelList } from '../cmp/task/label/LabelList'
 import { TaskDetailsHeader } from '../cmp/task/TaskDetailsHeader'
 
-export function TaskDetails({ board, group, task }) {
+export function TaskDetails({ hierarchy }) {
+    const { board, group, task } = hierarchy
     const navigate = useNavigate()
     const params = useParams()
 
@@ -17,19 +18,14 @@ export function TaskDetails({ board, group, task }) {
     return (
         <div className="task-details-bg" onClick={onClose}>
             <div className="task-details" onClick={(e) => e.stopPropagation()}>
-                <TaskDetailsHeader
-                    board={board}
-                    group={group}
-                    task={task}
-                    onClose={onClose}
-                />
+                <TaskDetailsHeader hierarchy={hierarchy} onClose={onClose} />
                 <div className="main">
-                    <LabelList board={board} group={group} task={task} />
+                    <LabelList hierarchy={hierarchy} />
                     <TaskDetailsDescription task={task} />
-                    <ChecklistList board={board} group={group} task={task} />
-                    <TaskDetailsActivity task={task} />
+                    <ChecklistList hierarchy={hierarchy} />
+                    <TaskDetailsActivity hierarchy={hierarchy} />
                 </div>
-                <TaskDetailsSidebar board={board} group={group} task={task} />
+                <TaskDetailsSidebar hierarchy={hierarchy} />
             </div>
         </div>
     )

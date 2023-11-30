@@ -5,9 +5,7 @@ import { PrimaryBtn } from '../../general/btn/PrimaryBtn'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 
 export function ChecklistItemCreateForm({
-    board,
-    group,
-    task,
+    hierarchy,
     checklist,
     onClose,
     draft,
@@ -25,7 +23,7 @@ export function ChecklistItemCreateForm({
         if (draft.title.length === 0) {
             return
         }
-        addChecklistItem(board, group, task, checklist, draft)
+        addChecklistItem(hierarchy, checklist, draft)
         setDraft(boardService.getEmptyChecklistItem())
     }
 

@@ -3,7 +3,7 @@ import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 import { Icon } from '../general/Icon'
 import { TaskDetailsSubsectionHeader } from './TaskDetailsSubsectionHeader'
 
-export function TaskDetailsActivity({ task }) {
+export function TaskDetailsActivity({ hierarchy }) {
     const [showDetails, toggleShowDetails] = useToggle()
 
     return (

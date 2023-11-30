@@ -4,13 +4,13 @@ import { addChecklist } from '../../../store/actions/board.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { PrimaryBtn } from '../../general/btn/PrimaryBtn'
 
-export function ChecklistMenu({ board, group, task, checklistMenu }) {
+export function ChecklistMenu({ hierarchy, checklistMenu }) {
     const [draft, handleChange] = useForm(boardService.getEmptyChecklist())
 
     async function onSubmit(e) {
         e.preventDefault()
         try {
-            addChecklist(board, group, task, draft)
+            addChecklist(hierarchy, draft)
             checklistMenu.onClose()
         } catch (err) {
             console.error(err)

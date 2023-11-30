@@ -1,6 +1,7 @@
 import { Checklist } from './Checklist'
 
-export function ChecklistList({ board, group, task }) {
+export function ChecklistList({ hierarchy }) {
+    const { task } = hierarchy
     return (
         <div className="checklist-list">
             {task.checklists && (
@@ -8,9 +9,7 @@ export function ChecklistList({ board, group, task }) {
                     {task.checklists.map((checklist) => (
                         <li key={checklist._id}>
                             <Checklist
-                                board={board}
-                                group={group}
-                                task={task}
+                                hierarchy={hierarchy}
                                 checklist={checklist}
                             />
                         </li>

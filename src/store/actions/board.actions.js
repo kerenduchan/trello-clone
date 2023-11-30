@@ -132,14 +132,16 @@ async function createTask(board, group, task) {
     return _updateGroup(board, groupToUpdate)
 }
 
-async function deleteTask(board, group, task) {
+async function deleteTask(hierarchy) {
+    const { board, group, task } = hierarchy
     const groupToUpdate = { ...group }
     groupToUpdate.tasks = group.tasks.filter((t) => t._id !== task._id)
     return _updateGroup(board, groupToUpdate)
 }
 
-async function updateTask(board, group, task, fieldsToUpdate) {
-    const groupToUpdate = { ...g }
+async function updateTask(hierarchy, fieldsToUpdate) {
+    const { board, group, task } = hierarchy
+    const groupToUpdate = { ...group }
     groupToUpdate.tasks = group.tasks.map((t) =>
         t._id === task._id ? { ...task, ...fieldsToUpdate } : t
     )
@@ -148,13 +150,15 @@ async function updateTask(board, group, task, fieldsToUpdate) {
 
 // CHEKCLIST
 
-async function addChecklist(board, group, task, checklist) {
+async function addChecklist(hierarchy, checklist) {
+    const { board, group, task } = hierarchy
     const taskToUpdate = { ...task }
     taskToUpdate.checklists = [...task.checklists, checklist]
     return _updateTask(board, group, taskToUpdate)
 }
 
-async function deleteChecklist(board, group, task, checklist) {
+async function deleteChecklist(hierarchy, checklist) {
+    const { board, group, task } = hierarchy
     const taskToUpdate = { ...task }
     taskToUpdate.checklists = task.checklists.filter(
         (c) => c._id !== checklist._id
@@ -162,42 +166,37 @@ async function deleteChecklist(board, group, task, checklist) {
     return _updateTask(board, group, taskToUpdate)
 }
 
-async function addChecklistItem(board, group, task, checklist, item) {
+async function addChecklistItem(hierarchy, checklist, item) {
     const checklistToUpdate = { ...checklist }
     checklistToUpdate.items = [...checklist.items, item]
-    _updateChecklist(board, group, task, checklistToUpdate)
+    _updateChecklist(hierarchy, checklistToUpdate)
 }
 
-async function updateChecklistItem(
-    board,
-    group,
-    task,
-    checklist,
-    item,
-    fieldsToUpdate
-) {
+async function updateChecklistItem(hierarchy, checklist, item, fieldsToUpdate) {
     const checklistToUpdate = { ...checklist }
     checklistToUpdate.items = checklist.items.map((i) =>
         i._id === item._id ? { ...item, ...fieldsToUpdate } : i
     )
-    _updateChecklist(board, group, task, checklistToUpdate)
+    _updateChecklist(hierarchy, checklistToUpdate)
 }
 
-async function deleteChecklistItem(board, group, task, checklist, item) {
+async function deleteChecklistItem(hierarchy, checklist, item) {
     const checklistToUpdate = { ...checklist }
     checklistToUpdate.items = checklist.items.filter((i) => i._id !== item._id)
-    _updateChecklist(board, group, task, checklistToUpdate)
+    _updateChecklist(hierarchy, checklistToUpdate)
 }
 
 // TASK LABEL
 
-async function addTaskLabel(board, group, task, label) {
+async function addTaskLabel(hierarchy, label) {
+    const { board, group, task } = hierarchy
     const taskToUpdate = { ...task }
     taskToUpdate.labelIds = [...task.labelIds, label._id]
     return _updateTask(board, group, taskToUpdate)
 }
 
-async function removeTaskLabel(board, group, task, label) {
+async function removeTaskLabel(hierarchy, label) {
+    const { board, group, task } = hierarchy
     const taskToUpdate = { ...task }
     taskToUpdate.labelIds = task.labelIds.filter((lId) => lId !== label._id)
     return _updateTask(board, group, taskToUpdate)
@@ -233,7 +232,8 @@ async function _updateTask(board, group, taskToUpdate) {
     _updateGroup(board, groupToUpdate)
 }
 
-async function _updateChecklist(board, group, task, checklistToUpdate) {
+async function _updateChecklist(hierarchy, checklistToUpdate) {
+    const { board, group, task } = hierarchy
     const taskToUpdate = { ...task }
     taskToUpdate.checklists = task.checklists.map((c) =>
         c._id === checklistToUpdate._id ? checklistToUpdate : c

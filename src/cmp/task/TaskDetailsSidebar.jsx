@@ -6,7 +6,9 @@ import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 import { LabelsMenu } from './label/LabelsMenu'
 import { ChecklistMenu } from './checklist/ChecklistMenu'
 
-export function TaskDetailsSidebar({ board, group, task }) {
+export function TaskDetailsSidebar({ hierarchy }) {
+    const { board } = hierarchy
+
     const navigate = useNavigate()
     const labelsMenu = usePopoverState()
     const checklistMenu = usePopoverState()
@@ -14,7 +16,7 @@ export function TaskDetailsSidebar({ board, group, task }) {
 
     function onDeleteTask() {
         try {
-            deleteTask(board, group, task)
+            deleteTask(hierarchy)
             deleteTaskMenu.onClose()
             navigate(`/b/${board._id}`)
         } catch (err) {
@@ -72,20 +74,13 @@ export function TaskDetailsSidebar({ board, group, task }) {
 
             {/* Labels menu */}
             {labelsMenu.show && (
-                <LabelsMenu
-                    board={board}
-                    group={group}
-                    task={task}
-                    labelsMenu={labelsMenu}
-                />
+                <LabelsMenu hierarchy={hierarchy} labelsMenu={labelsMenu} />
             )}
 
             {/* Checklist menu */}
             {checklistMenu.show && (
                 <ChecklistMenu
-                    board={board}
-                    group={group}
-                    task={task}
+                    hierarchy={hierarchy}
                     checklistMenu={checklistMenu}
                 />
             )}

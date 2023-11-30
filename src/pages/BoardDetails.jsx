@@ -54,9 +54,10 @@ export function BoardDetails() {
 
             {params.taskId && (
                 <TaskDetails
-                    board={board}
-                    group={groupAndTask.group}
-                    task={groupAndTask.task}
+                    hierarchy={{
+                        board,
+                        ...groupAndTask,
+                    }}
                 />
             )}
         </div>

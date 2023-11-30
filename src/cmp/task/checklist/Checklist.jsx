@@ -10,7 +10,7 @@ import { boardService } from '../../../services/board.service'
 import { deleteChecklist } from '../../../store/actions/board.actions'
 import { ChecklistItemCreateForm } from './ChecklistItemCreateForm'
 
-export function Checklist({ board, group, task, checklist }) {
+export function Checklist({ hierarchy, checklist }) {
     const [showForm, setShowForm] = useState()
 
     // When create checklist item form is closed, need to retain draft
@@ -22,7 +22,7 @@ export function Checklist({ board, group, task, checklist }) {
 
     function onDeleteChecklist() {
         try {
-            deleteChecklist(board, group, task, checklist)
+            deleteChecklist(hierarchy, checklist)
             deleteChecklistMenu.onClose()
         } catch (err) {
             console.error(err)
@@ -53,9 +53,7 @@ export function Checklist({ board, group, task, checklist }) {
                         {checklist.items.map((item) => (
                             <li key={item._id}>
                                 <ChecklistItem
-                                    board={board}
-                                    group={group}
-                                    task={task}
+                                    hierarchy={hierarchy}
                                     checklist={checklist}
                                     item={item}
                                 />
@@ -65,9 +63,7 @@ export function Checklist({ board, group, task, checklist }) {
 
                     {showForm ? (
                         <ChecklistItemCreateForm
-                            board={board}
-                            group={group}
-                            task={task}
+                            hierarchy={hierarchy}
                             checklist={checklist}
                             onClose={() => setShowForm(false)}
                             draft={draft}

@@ -3,9 +3,7 @@ import { PopoverMenu } from '../../general/PopoverMenu'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 
 export function ChecklistItemActionsMenu({
-    board,
-    group,
-    task,
+    hierarchy,
     checklist,
     item,
     popoverState,
@@ -16,7 +14,7 @@ export function ChecklistItemActionsMenu({
 
     function onDelete() {
         try {
-            deleteChecklistItem(board, group, task, checklist, item)
+            deleteChecklistItem(hierarchy, checklist, item)
         } catch (err) {
             console.error(err)
             // TODO: show an error dialog

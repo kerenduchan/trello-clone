@@ -5,7 +5,7 @@ import { CircleBtn } from '../../general/btn/CircleBtn'
 import { ChecklistItemActionsMenu } from './ChecklistItemActionsMenu'
 import { ChecklistItemEditForm } from './ChecklistItemEditForm'
 
-export function ChecklistItem({ board, group, task, checklist, item }) {
+export function ChecklistItem({ hierarchy, checklist, item }) {
     const actionsMenu = usePopoverState()
     const [showForm, setShowForm] = useState(false)
 
@@ -15,14 +15,7 @@ export function ChecklistItem({ board, group, task, checklist, item }) {
 
     function onUpdate(fieldsToUpdate) {
         try {
-            updateChecklistItem(
-                board,
-                group,
-                task,
-                checklist,
-                item,
-                fieldsToUpdate
-            )
+            updateChecklistItem(hierarchy, checklist, item, fieldsToUpdate)
         } catch (err) {
             console.error(err)
             // TODO: show an error dialog
@@ -42,9 +35,7 @@ export function ChecklistItem({ board, group, task, checklist, item }) {
 
                 {showForm ? (
                     <ChecklistItemEditForm
-                        board={board}
-                        group={group}
-                        task={task}
+                        hierarchy={hierarchy}
                         checklist={checklist}
                         item={item}
                         onClose={() => setShowForm(false)}
@@ -71,9 +62,7 @@ export function ChecklistItem({ board, group, task, checklist, item }) {
             </div>
             {/* Actions menu */}
             <ChecklistItemActionsMenu
-                board={board}
-                group={group}
-                task={task}
+                hierarchy={hierarchy}
                 checklist={checklist}
                 item={item}
                 popoverState={actionsMenu}

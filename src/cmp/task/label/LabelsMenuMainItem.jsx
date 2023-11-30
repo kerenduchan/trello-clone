@@ -5,7 +5,8 @@ import {
 import { SquareIconBtn } from '../../general/btn/SquareIconBtn'
 import { useToggle } from '../../../customHooks/useToggle'
 
-export function LabelsMenuMainItem({ board, group, task, label, onEditClick }) {
+export function LabelsMenuMainItem({ hierarchy, label, onEditClick }) {
+    const { task } = hierarchy
     const [isChecked, toggleIsChecked] = useToggle(
         task.labelIds.includes(label._id)
     )
@@ -14,10 +15,10 @@ export function LabelsMenuMainItem({ board, group, task, label, onEditClick }) {
         try {
             if (isChecked) {
                 // remove label from task
-                removeTaskLabel(board, group, task, label)
+                removeTaskLabel(hierarchy, label)
             } else {
                 // add label to task
-                addTaskLabel(board, group, task, label)
+                addTaskLabel(hierarchy, label)
             }
             toggleIsChecked()
         } catch (err) {

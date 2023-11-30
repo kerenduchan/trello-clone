@@ -3,7 +3,7 @@ import { PopoverMenu } from '../../general/PopoverMenu'
 import { LabelsMenuEdit } from './LabelsMenuEdit'
 import { LabelsMenuMain } from './LabelsMenuMain'
 
-export function LabelsMenu({ board, group, task, labelsMenu }) {
+export function LabelsMenu({ hierarchy, labelsMenu }) {
     // current page in the labels menu popover: main or edit
     const [page, setPage] = useState('main')
     const [labelToEdit, setLabelToEdit] = useState(null)
@@ -21,9 +21,7 @@ export function LabelsMenu({ board, group, task, labelsMenu }) {
         main: (
             <PopoverMenu title="Labels" {...labelsMenu.popover}>
                 <LabelsMenuMain
-                    board={board}
-                    group={group}
-                    task={task}
+                    hierarchy={hierarchy}
                     onClose={labelsMenu.onClose}
                     onEditClick={onEditClick}
                 />
@@ -36,9 +34,7 @@ export function LabelsMenu({ board, group, task, labelsMenu }) {
                 onBack={onBackClick}
             >
                 <LabelsMenuEdit
-                    board={board}
-                    group={group}
-                    task={task}
+                    hierarchy={hierarchy}
                     label={labelToEdit}
                     onClose={labelsMenu.onClose}
                     onBack={onBackClick}
