@@ -23,8 +23,8 @@ export function TaskDetails({ hierarchy }) {
                 <TaskDetailsHeader hierarchy={hierarchy} onClose={onClose} />
                 <div className="main">
                     <div className="widgets">
-                        <LabelsWidget hierarchy={hierarchy} />
                         <MembersWidget hierarchy={hierarchy} />
+                        <LabelsWidget hierarchy={hierarchy} />
                     </div>
                     <TaskDescription hierarchy={hierarchy} />
                     <ChecklistList hierarchy={hierarchy} />
