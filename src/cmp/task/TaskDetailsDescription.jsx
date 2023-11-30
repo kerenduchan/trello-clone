@@ -3,17 +3,27 @@ import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 import { TaskDetailsSubsectionHeader } from './TaskDetailsSubsectionHeader'
 import { TaskDetailsDescriptionForm } from './TaskDetailsDescriptionForm'
 
-export function TaskDetailsDescription({ task }) {
+export function TaskDetailsDescription({ hierarchy }) {
+    const { task } = hierarchy
     const [showForm, setShowForm] = useState(false)
 
     // the content is either the task description, the edit form, or the
     // large add description button
     function getContent() {
         if (showForm) {
-            return <TaskDetailsDescriptionForm />
+            return (
+                <TaskDetailsDescriptionForm
+                    hierarchy={hierarchy}
+                    onClose={() => setShowForm(false)}
+                />
+            )
         }
         if (task.description) {
-            return <p className="text">{task.description}</p>
+            return (
+                <p className="text" onClick={() => setShowForm(true)}>
+                    {task.description}
+                </p>
+            )
         }
         return (
             <SecondaryBtn
@@ -28,7 +38,11 @@ export function TaskDetailsDescription({ task }) {
         <div className="task-details-description">
             <TaskDetailsSubsectionHeader icon="description" title="Description">
                 {task.description && !showForm && (
-                    <SecondaryBtn className="title-btn" text="Edit" />
+                    <SecondaryBtn
+                        className="title-btn"
+                        text="Edit"
+                        onClick={() => setShowForm(true)}
+                    />
                 )}
             </TaskDetailsSubsectionHeader>
 
