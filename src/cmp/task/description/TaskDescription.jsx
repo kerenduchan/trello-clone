@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { SecondaryBtn } from '../general/btn/SecondaryBtn'
-import { TaskDetailsSubsectionHeader } from './TaskDetailsSubsectionHeader'
-import { TaskDetailsDescriptionForm } from './TaskDetailsDescriptionForm'
+import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
+import { TaskDetailsSubsectionHeader } from '../TaskDetailsSubsectionHeader'
+import { TaskDescriptionForm } from './TaskDescriptionForm'
 
-export function TaskDetailsDescription({ hierarchy }) {
+export function TaskDescription({ hierarchy }) {
     const { task } = hierarchy
     const [showForm, setShowForm] = useState(false)
 
@@ -12,7 +12,7 @@ export function TaskDetailsDescription({ hierarchy }) {
     function getContent() {
         if (showForm) {
             return (
-                <TaskDetailsDescriptionForm
+                <TaskDescriptionForm
                     hierarchy={hierarchy}
                     onClose={() => setShowForm(false)}
                 />
@@ -35,7 +35,7 @@ export function TaskDetailsDescription({ hierarchy }) {
     }
 
     return (
-        <div className="task-details-description">
+        <div className="task-description">
             <TaskDetailsSubsectionHeader icon="description" title="Description">
                 {task.description && !showForm && (
                     <SecondaryBtn

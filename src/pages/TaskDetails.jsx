@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router'
-import { TaskDetailsDescription } from '../cmp/task/TaskDetailsDescription'
+import { TaskDescription } from '../cmp/task/description/TaskDescription'
 import { TaskDetailsActivity } from '../cmp/task/TaskDetailsActivity'
 import { TaskDetailsSidebar } from '../cmp/task/TaskDetailsSidebar'
 import { ChecklistList } from '../cmp/task/checklist/ChecklistList'
@@ -22,7 +22,7 @@ export function TaskDetails({ hierarchy }) {
                 <TaskDetailsHeader hierarchy={hierarchy} onClose={onClose} />
                 <div className="main">
                     <LabelList hierarchy={hierarchy} />
-                    <TaskDetailsDescription hierarchy={hierarchy} />
+                    <TaskDescription hierarchy={hierarchy} />
                     <ChecklistList hierarchy={hierarchy} />
                     <TaskDetailsActivity hierarchy={hierarchy} />
                 </div>

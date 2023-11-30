@@ -1,9 +1,9 @@
-import { useForm } from '../../customHooks/useForm'
-import { updateTask } from '../../store/actions/board.actions'
-import { PrimaryBtn } from '../general/btn/PrimaryBtn'
-import { SecondaryBtn } from '../general/btn/SecondaryBtn'
+import { useForm } from '../../../customHooks/useForm'
+import { updateTask } from '../../../store/actions/board.actions'
+import { PrimaryBtn } from '../../general/btn/PrimaryBtn'
+import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 
-export function TaskDetailsDescriptionForm({ hierarchy, onClose }) {
+export function TaskDescriptionForm({ hierarchy, onClose }) {
     const { task } = hierarchy
     const [draft, handleChange] = useForm({ description: task.description })
 
@@ -14,7 +14,7 @@ export function TaskDetailsDescriptionForm({ hierarchy, onClose }) {
     }
 
     return (
-        <form className="task-details-description-form" onSubmit={onSubmit}>
+        <form className="task-description-form" onSubmit={onSubmit}>
             <textarea
                 autoFocus
                 id="description"

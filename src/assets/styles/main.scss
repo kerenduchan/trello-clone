@@ -50,14 +50,16 @@
 // task
 @import 'cmp/task/TaskCreate';
 @import 'cmp/task/TaskDetailsActivity';
-@import 'cmp/task/TaskDetailsDescription';
-@import 'cmp/task/TaskDetailsDescriptionForm';
 @import 'cmp/task/TaskDetailsHeader';
 @import 'cmp/task/TaskDetailsSidebar';
 @import 'cmp/task/TaskDetailsSubsectionHeader';
 @import 'cmp/task/TaskList';
 @import 'cmp/task/TaskPreview';
 @import 'cmp/task/TaskPreviewCover';
+
+// task/description
+@import 'cmp/task/description/TaskDescription';
+@import 'cmp/task/description/TaskDescriptionForm';
 
 // task/checklist
 @import 'cmp/task/checklist/Checklist';
