@@ -1,0 +1,18 @@
+.member-btn {
+    height: 40px;
+    width: 100%;
+    padding: 4px;
+    border-radius: 3px;
+    @include button-bg(
+        var(--bg-neutral-hovered),
+        var(--bg-neutral-hovered),
+        var(--bg-neutral-pressed)
+    );
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    .title {
+        @include font-p();
+    }
+}

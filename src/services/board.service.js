@@ -140,8 +140,8 @@ function _createBoards() {
                 members: [
                     {
                         _id: 'u101',
-                        fullname: 'Tal Tarablus',
-                        imgUrl: 'https://www.google.com',
+                        fullname: 'Yigal Shalom',
+                        imgUrl: 'images/yigal-avatar.jpg',
                     },
                 ],
                 groups: [

@@ -1,0 +1,21 @@
+.avatar {
+    @include square(32px);
+    border-radius: 50%;
+    overflow: hidden;
+    display: grid;
+
+    .overlay {
+        grid-area: 1 / 1;
+
+        &:hover {
+            background-color: var(--bg-light-overlay);
+        }
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        grid-area: 1 / 1;
+        object-fit: contain;
+    }
+}

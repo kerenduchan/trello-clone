@@ -25,6 +25,7 @@
 @import 'cmp/board/BoardPreview';
 
 // general
+@import 'cmp/general/Avatar';
 @import 'cmp/general/Popover';
 @import 'cmp/general/PopoverMenu';
 @import 'cmp/general/DeleteMenu';
@@ -77,6 +78,10 @@
 @import 'cmp/task/label/LabelsMenuMain';
 @import 'cmp/task/label/LabelsMenuMainItem';
 @import 'cmp/task/label/LabelsPreview';
+
+// task/members
+@import 'cmp/task/members/MemberBtn';
+@import 'cmp/task/members/MembersMenu';
 
 // misc
 @import 'cmp/AppHeader';
