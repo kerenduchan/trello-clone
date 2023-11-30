@@ -1,6 +1,6 @@
-export function Avatar({ imgSrc }) {
+export function Avatar({ imgSrc, size = 'sm' }) {
     return (
-        <div className="avatar">
+        <div className={`avatar ${size}`}>
             <img src={imgSrc} />
             <div className="overlay" />
         </div>

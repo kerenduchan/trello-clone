@@ -1,8 +1,15 @@
 .avatar {
-    @include square(32px);
     border-radius: 50%;
     overflow: hidden;
     display: grid;
+
+    &.xs {
+        @include square(24px);
+    }
+
+    &.sm {
+        @include square(32px);
+    }
 
     .overlay {
         grid-area: 1 / 1;

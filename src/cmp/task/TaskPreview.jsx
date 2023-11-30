@@ -4,6 +4,7 @@ import { TaskPreviewCover } from './TaskPreviewCover'
 import { LabelsPreview } from './label/LabelsPreview'
 import { ChecklistsBadge } from './checklist/ChecklistsBadge'
 import { Icon } from '../general/Icon'
+import { MembersBadge } from './members/MembersBadge'
 
 export function TaskPreview({ hierarchy }) {
     const { board, task } = hierarchy
@@ -31,6 +32,7 @@ export function TaskPreview({ hierarchy }) {
             <div className="content">
                 <LabelsPreview hierarchy={hierarchy} />
                 <p className="title">{task.title}</p>
+
                 <div className="badges">
                     {task.description && (
                         <span className="description-badge">
@@ -38,6 +40,7 @@ export function TaskPreview({ hierarchy }) {
                         </span>
                     )}
                     <ChecklistsBadge hierarchy={hierarchy} />
+                    <MembersBadge hierarchy={hierarchy} />
                 </div>
             </div>
         </section>

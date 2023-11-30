@@ -1,0 +1,8 @@
+.members-badge {
+    grid-area: 1 / -1;
+    justify-self: end;
+    ul {
+        display: flex;
+        column-gap: 4px;
+    }
+}

@@ -55,10 +55,10 @@
         }
 
         .badges {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(5, auto) 1fr;
             justify-content: start;
             align-items: center;
-            column-gap: 4px;
 
             .description-badge {
                 display: flex;
@@ -67,6 +67,7 @@
                 @include square(20px);
                 padding: 2px;
                 margin-bottom: 4px;
+                margin-inline-end: 4px;
             }
         }
     }
