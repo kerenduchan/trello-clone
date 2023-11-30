@@ -20,9 +20,9 @@ export function TaskDetailsDescription({ hierarchy }) {
         }
         if (task.description) {
             return (
-                <p className="text" onClick={() => setShowForm(true)}>
+                <pre className="text" onClick={() => setShowForm(true)}>
                     {task.description}
-                </p>
+                </pre>
             )
         }
         return (

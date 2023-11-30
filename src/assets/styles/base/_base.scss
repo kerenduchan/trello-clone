@@ -30,12 +30,14 @@ h3 {
     @include h3();
 }
 
-p {
+p,
+pre {
     @include font-p();
 }
 
 input,
-textarea {
+textarea,
+pre {
     @include font-family();
 }
 
