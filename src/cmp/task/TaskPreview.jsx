@@ -3,6 +3,7 @@ import { CircleBtn } from '../general/btn/CircleBtn'
 import { TaskPreviewCover } from './TaskPreviewCover'
 import { LabelsPreview } from './label/LabelsPreview'
 import { ChecklistsBadge } from './checklist/ChecklistsBadge'
+import { Icon } from '../general/Icon'
 
 export function TaskPreview({ board, task }) {
     const navigate = useNavigate()
@@ -29,6 +30,11 @@ export function TaskPreview({ board, task }) {
                 <LabelsPreview board={board} task={task} />
                 <p className="title">{task.title}</p>
                 <div className="badges">
+                    {task.description && (
+                        <span className="description-badge">
+                            <Icon type="description" size="xs" />
+                        </span>
+                    )}
                     <ChecklistsBadge task={task} />
                 </div>
             </div>
