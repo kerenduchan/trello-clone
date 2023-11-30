@@ -9,9 +9,14 @@ import { DeleteMenu } from '../../general/DeleteMenu'
 import { boardService } from '../../../services/board.service'
 import { deleteChecklist } from '../../../store/actions/board.actions'
 import { ChecklistItemCreateForm } from './ChecklistItemCreateForm'
+import { useSelector } from 'react-redux'
 
 export function Checklist({ hierarchy, checklist }) {
-    const [showForm, setShowForm] = useState()
+    const newChecklistId = useSelector(
+        (storeState) => storeState.appModule.newChecklistId
+    )
+
+    const [showForm, setShowForm] = useState(newChecklistId === checklist._id)
 
     // When create checklist item form is closed, need to retain draft
     const [draft, handleChange, setDraft] = useForm(

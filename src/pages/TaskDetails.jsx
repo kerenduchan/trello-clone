@@ -5,6 +5,7 @@ import { TaskDetailsSidebar } from '../cmp/task/TaskDetailsSidebar'
 import { ChecklistList } from '../cmp/task/checklist/ChecklistList'
 import { LabelList } from '../cmp/task/label/LabelList'
 import { TaskDetailsHeader } from '../cmp/task/TaskDetailsHeader'
+import { setNewChecklist } from '../store/actions/app.actions'
 
 export function TaskDetails({ hierarchy }) {
     const { task } = hierarchy
@@ -12,6 +13,7 @@ export function TaskDetails({ hierarchy }) {
     const params = useParams()
 
     function onClose() {
+        setNewChecklist(null)
         navigate(`/b/${params.boardId}`)
     }
 

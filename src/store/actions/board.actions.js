@@ -7,6 +7,7 @@ import {
     UPDATE_BOARD,
 } from '../reducers/board.reducer'
 import { store } from '../store'
+import { setNewChecklist } from './app.actions'
 
 export {
     loadBoards,
@@ -154,6 +155,7 @@ async function addChecklist(hierarchy, checklist) {
     const { board, group, task } = hierarchy
     const taskToUpdate = { ...task }
     taskToUpdate.checklists = [...task.checklists, checklist]
+    setNewChecklist(checklist._id)
     return _updateTask(board, group, taskToUpdate)
 }
 
