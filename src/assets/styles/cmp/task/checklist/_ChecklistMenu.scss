@@ -1,0 +1,27 @@
+.checklist-menu {
+    form {
+        label {
+            display: block;
+            @include font(12px, 16px, 700);
+            color: var(--text-color-subtle);
+            margin-bottom: 4px;
+            margin-top: 4px;
+        }
+
+        input {
+            display: block;
+            width: 280px;
+            margin-top: 4px;
+            margin-bottom: 12px;
+            padding: 8px 12px;
+            box-shadow: var(--box-shadow-input);
+            border-radius: 3px;
+            @include font-p();
+        }
+
+        .add-btn {
+            margin-top: 8px;
+            padding: 6px 24px;
+        }
+    }
+}

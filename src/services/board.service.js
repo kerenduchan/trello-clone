@@ -62,7 +62,7 @@ function getEmptyTask() {
 function getEmptyChecklist() {
     return {
         _id: utilService.makeId(),
-        title: '',
+        title: 'Checklist',
         items: [],
     }
 }
