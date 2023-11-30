@@ -7,7 +7,7 @@ import { LabelList } from '../cmp/task/label/LabelList'
 import { TaskDetailsHeader } from '../cmp/task/TaskDetailsHeader'
 
 export function TaskDetails({ hierarchy }) {
-    const { board, group, task } = hierarchy
+    const { task } = hierarchy
     const navigate = useNavigate()
     const params = useParams()
 
