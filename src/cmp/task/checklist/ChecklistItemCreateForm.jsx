@@ -25,6 +25,7 @@ export function ChecklistItemCreateForm({
         }
         addChecklistItem(hierarchy, checklist, draft)
         setDraft(boardService.getEmptyChecklistItem())
+        textareaRef.current.select()
     }
 
     function onKeyDown(e) {
