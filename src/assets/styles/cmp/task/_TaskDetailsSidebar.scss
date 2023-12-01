@@ -2,8 +2,8 @@
     grid-area: sidebar;
 
     display: grid;
-    grid-template-rows: min-content;
     row-gap: 16px;
+    align-content: start;
 
     section > .content {
         display: grid;
