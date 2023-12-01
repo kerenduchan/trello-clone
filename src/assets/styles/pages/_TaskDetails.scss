@@ -5,18 +5,16 @@
     top: 0;
     @include square(100%);
     z-index: 5;
-    display: flex;
-    justify-content: center;
     padding-top: 48px;
     padding-bottom: 48px;
     overflow: auto;
 
     .task-details {
         position: relative;
+        margin: auto;
         border-radius: 12px;
         width: 768px;
         background-color: var(--bg-2);
-        overflow: hidden;
         display: grid;
         grid-template-columns: 16px 1fr 16px 168px 16px;
         grid-template-rows: repeat(3, auto);
