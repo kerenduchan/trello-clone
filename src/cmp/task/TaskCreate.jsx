@@ -9,8 +9,10 @@ import { useKeyDownListener } from '../../customHooks/useKeyDownListener'
 
 export function TaskCreate({ board, group, onClose }) {
     const [draft, handleChange, setDraft] = useForm(boardService.getEmptyTask())
-    const formEl = useRef()
-    useClickedOutListener([formEl], onClose)
+    const formElRef = useRef()
+    const inputRef = useRef()
+
+    useClickedOutListener([formElRef], onClose)
     useKeyDownListener(['Escape'], onClose)
 
     async function onSubmit(e) {
@@ -20,6 +22,7 @@ export function TaskCreate({ board, group, onClose }) {
             try {
                 createTask(board, group, draft)
                 setDraft(boardService.getEmptyTask())
+                inputRef.current.focus()
             } catch (err) {
                 console.error(err)
                 // TODO: show an error dialog
@@ -28,8 +31,9 @@ export function TaskCreate({ board, group, onClose }) {
     }
 
     return (
-        <form className="task-create-form" onSubmit={onSubmit} ref={formEl}>
+        <form className="task-create-form" onSubmit={onSubmit} ref={formElRef}>
             <input
+                ref={inputRef}
                 autoFocus
                 id="title"
                 name="title"
