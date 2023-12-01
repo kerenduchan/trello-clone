@@ -18,7 +18,13 @@ export function TaskDescription({ hierarchy }) {
     const [draft, handleChange, setDraft] = useForm(null)
 
     useKeyDownListener(['Escape'], onHideForm)
-    useClickedOutListener([elRef], onSubmitForm)
+    useClickedOutListener([elRef], onClickedOutside)
+
+    function onClickedOutside() {
+        if (showForm) {
+            onSubmitForm()
+        }
+    }
 
     function onHideForm() {
         setShowForm(false)
