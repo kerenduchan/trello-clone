@@ -1,9 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { usePopper } from 'react-popper'
+import { useClickedOutListener } from '../../customHooks/useClickedOutListener'
 
 export function Popover({ refEl, className, onClose, children }) {
     const wrapperEl = useRef(null)
+    const refRefEl = useRef(refEl)
     const [popperEl, setPopperEl] = useState(null)
     const { styles, attributes } = usePopper(refEl, popperEl, {
         placement: 'bottom-start',
@@ -17,25 +19,7 @@ export function Popover({ refEl, className, onClose, children }) {
         ],
     })
 
-    useEffect(() => {
-        document.addEventListener('mousedown', mouseDownListener)
-
-        return () => {
-            document.removeEventListener('mousedown', mouseDownListener)
-        }
-    })
-    
-    const mouseDownListener = useCallback((e) => {
-        if (
-            wrapperEl.current &&
-            !wrapperEl.current.contains(e.target) &&
-            !refEl.contains(e.target)
-        ) {
-            // clicked outside of popover
-            // and not on button that opened the popover
-            onClose()
-        }
-    })
+    useClickedOutListener([wrapperEl, refRefEl], onClose)
 
     return createPortal(
         <div className="popover-wrapper" ref={wrapperEl}>

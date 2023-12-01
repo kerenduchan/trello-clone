@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react'
+import { useRef } from 'react'
 import { useForm } from '../../customHooks/useForm'
 import { useToggle } from '../../customHooks/useToggle'
 import { createGroup } from '../../store/actions/board.actions'
@@ -6,6 +6,7 @@ import { boardService } from '../../services/board.service'
 import { PrimaryBtn } from '../general/btn/PrimaryBtn'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
+import { useClickedOutListener } from '../../customHooks/useClickedOutListener'
 
 export function GroupCreate({ board }) {
     const [showForm, toggleShowForm, setShowForm] = useToggle()
@@ -15,13 +16,7 @@ export function GroupCreate({ board }) {
     )
     const formEl = useRef()
 
-    useEffect(() => {
-        document.addEventListener('mousedown', mouseDownListener)
-
-        return () => {
-            document.removeEventListener('mousedown', mouseDownListener)
-        }
-    })
+    useClickedOutListener([formEl], onClose)
 
     async function onSubmit(e) {
         e.preventDefault()
@@ -41,13 +36,6 @@ export function GroupCreate({ board }) {
         setDraft(boardService.getEmptyGroup())
         setShowForm(false)
     }
-
-    const mouseDownListener = useCallback((e) => {
-        if (formEl.current && !formEl.current.contains(e.target)) {
-            // clicked outside of form
-            onClose()
-        }
-    })
 
     return (
         <div className="group-create">

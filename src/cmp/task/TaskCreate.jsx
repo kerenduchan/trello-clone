@@ -1,21 +1,15 @@
-import { useEffect, useRef, useCallback } from 'react'
+import { useRef } from 'react'
 import { useForm } from '../../customHooks/useForm'
 import { boardService } from '../../services/board.service'
 import { createTask } from '../../store/actions/board.actions'
 import { PrimaryBtn } from '../general/btn/PrimaryBtn'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
+import { useClickedOutListener } from '../../customHooks/useClickedOutListener'
 
 export function TaskCreate({ board, group, onClose }) {
     const [draft, handleChange, setDraft] = useForm(boardService.getEmptyTask())
     const formEl = useRef()
-
-    useEffect(() => {
-        document.addEventListener('mousedown', mouseDownListener)
-
-        return () => {
-            document.removeEventListener('mousedown', mouseDownListener)
-        }
-    })
+    useClickedOutListener([formEl], onClose)
 
     async function onSubmit(e) {
         e.preventDefault()
@@ -30,13 +24,6 @@ export function TaskCreate({ board, group, onClose }) {
             }
         }
     }
-
-    const mouseDownListener = useCallback((e) => {
-        if (formEl.current && !formEl.current.contains(e.target)) {
-            // clicked outside of form
-            onClose()
-        }
-    })
 
     return (
         <form className="task-create-form" onSubmit={onSubmit} ref={formEl}>
