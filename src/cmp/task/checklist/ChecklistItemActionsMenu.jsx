@@ -1,4 +1,7 @@
-import { deleteChecklistItem } from '../../../store/actions/board.actions'
+import {
+    convertChecklistItemToTask,
+    deleteChecklistItem,
+} from '../../../store/actions/board.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 
@@ -8,8 +11,13 @@ export function ChecklistItemActionsMenu({
     item,
     popoverState,
 }) {
-    function onConvertToCard() {
-        // TODO
+    async function onConvertToTask() {
+        try {
+            convertChecklistItemToTask(hierarchy, checklist, item)
+        } catch (err) {
+            // TODO: show an error dialog
+            console.error(err)
+        }
     }
 
     function onDelete() {
@@ -31,7 +39,7 @@ export function ChecklistItemActionsMenu({
                 <SecondaryBtn
                     className="actions-menu-btn"
                     text="Convert to card"
-                    onClick={onConvertToCard}
+                    onClick={onConvertToTask}
                 />
                 <SecondaryBtn
                     className="actions-menu-btn"

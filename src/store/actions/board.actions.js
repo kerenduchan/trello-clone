@@ -29,6 +29,7 @@ export {
     addChecklistItem,
     updateChecklistItem,
     deleteChecklistItem,
+    convertChecklistItemToTask,
     updateBoardLabel,
     removeTaskLabel,
     addTaskLabel,
@@ -209,6 +210,33 @@ async function deleteChecklistItem(hierarchy, checklist, item) {
     const checklistToUpdate = { ...checklist }
     checklistToUpdate.items = checklist.items.filter((i) => i._id !== item._id)
     _updateChecklist(hierarchy, checklistToUpdate)
+}
+
+async function convertChecklistItemToTask(hierarchy, checklist, item) {
+    const { board, group, task } = hierarchy
+
+    const groupToUpdate = { ...group }
+
+    // Add a new task to the group
+    const newTask = boardService.getEmptyTask(item.title)
+    groupToUpdate.tasks = [...group.tasks, newTask]
+
+    // remove the checklist item from the checklist
+    const checklistToUpdate = { ...checklist }
+    checklistToUpdate.items = checklist.items.filter((i) => i._id !== item._id)
+
+    // update the checklists in the task
+    const taskToUpdate = { ...task }
+    taskToUpdate.checklists = task.checklists.map((c) =>
+        c._id === checklistToUpdate._id ? checklistToUpdate : c
+    )
+
+    // update the task in the updated group
+    groupToUpdate.tasks = groupToUpdate.tasks.map((t) =>
+        t._id === taskToUpdate._id ? taskToUpdate : t
+    )
+
+    _updateGroup(board, groupToUpdate)
 }
 
 // TASK LABEL

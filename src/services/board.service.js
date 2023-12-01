@@ -50,10 +50,10 @@ function getEmptyGroup() {
     }
 }
 
-function getEmptyTask() {
+function getEmptyTask(title = '') {
     return {
         _id: utilService.makeId(),
-        title: '',
+        title,
         archivedAt: null,
         labelIds: [],
         checklists: [],
