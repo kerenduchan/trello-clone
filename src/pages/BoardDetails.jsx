@@ -1,7 +1,7 @@
+import { useEffect } from 'react'
 import { useParams } from 'react-router'
 import { useSelector } from 'react-redux'
 import { loadBoard, unloadBoard } from '../store/actions/board.actions'
-import { useEffectUpdate } from '../customHooks/useEffectUpdate'
 import { useToggle } from '../customHooks/useToggle'
 import { GroupList } from '../cmp/group/GroupList'
 import { BoardDetailsTopbar } from '../cmp/board/BoardDetailsTopbar'
@@ -16,7 +16,7 @@ export function BoardDetails() {
     const board = useSelector((storeState) => storeState.boardModule.curBoard)
     const [showMenu, toggleShowMenu, setShowMenu] = useToggle()
 
-    useEffectUpdate(() => {
+    useEffect(() => {
         loadBoard(params.boardId)
 
         return () => {
