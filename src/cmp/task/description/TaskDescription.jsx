@@ -15,19 +15,17 @@ export function TaskDescription({ hierarchy }) {
 
     // Need this here and not in the form component because clicking out
     // of the component (and not just the form) needs to save the draft
-    const [draft, handleChange, setDraft] = useForm({
-        description: task.description,
-    })
+    const [draft, handleChange, setDraft] = useForm(null)
 
     useKeyDownListener(['Escape'], onHideForm)
     useClickedOutListener([elRef], onSubmitForm)
 
     function onHideForm() {
-        setDraft({ description: task.description })
         setShowForm(false)
     }
 
     function onShowForm() {
+        setDraft({ description: task.description })
         setShowForm(true)
     }
 
