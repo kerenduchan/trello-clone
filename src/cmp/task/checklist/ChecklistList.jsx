@@ -3,29 +3,18 @@ import {
     setCurChecklist,
     setCurChecklistItem,
 } from '../../../store/actions/app.actions'
+import { useClickedOutListener } from '../../../customHooks/useClickedOutListener'
 import { Checklist } from './Checklist'
-import { useEffect } from 'react'
-import { useCallback } from 'react'
 
 export function ChecklistList({ hierarchy }) {
     const { task } = hierarchy
     const listElRef = useRef()
+    useClickedOutListener([listElRef], onClickedOutside)
 
-    useEffect(() => {
-        document.addEventListener('mousedown', mouseDownListener)
-
-        return () => {
-            document.removeEventListener('mousedown', mouseDownListener)
-        }
-    })
-
-    const mouseDownListener = useCallback((e) => {
-        if (listElRef.current && !listElRef.current.contains(e.target)) {
-            // clicked outside of list
-            setCurChecklist(null)
-            setCurChecklistItem(null)
-        }
-    })
+    function onClickedOutside() {
+        setCurChecklist(null)
+        setCurChecklistItem(null)
+    }
 
     return (
         <div className="checklist-list" ref={listElRef}>
