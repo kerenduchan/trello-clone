@@ -16,6 +16,7 @@ export function GroupCreate({ board }) {
         boardService.getEmptyGroup()
     )
     const formEl = useRef()
+    const inputRef = useRef()
 
     useClickedOutListener([formEl], onClose)
     useKeyDownListener(['Escape'], onClose)
@@ -27,6 +28,7 @@ export function GroupCreate({ board }) {
             try {
                 createGroup(board, draft)
                 setDraft(boardService.getEmptyGroup())
+                inputRef.current.focus()
             } catch (err) {
                 console.error(err)
                 // TODO: show an error dialog
@@ -44,6 +46,7 @@ export function GroupCreate({ board }) {
             {showForm ? (
                 <form onSubmit={onSubmit} ref={formEl}>
                     <input
+                        ref={inputRef}
                         autoFocus
                         type="text"
                         id="title"
