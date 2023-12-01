@@ -12,16 +12,10 @@
 
     form {
         grid-area: 1 / 1;
-        display: none;
+        display: grid;
 
         textarea {
             @include textarea-styling();
-        }
-    }
-
-    &.edit {
-        form {
-            display: grid;
         }
     }
 }

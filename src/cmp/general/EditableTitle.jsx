@@ -1,11 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from '../../customHooks/useForm'
+import { useKeyDownListener } from '../../customHooks/useKeyDownListener'
+import { useClickedOutListener } from '../../customHooks/useClickedOutListener'
 
 export function EditableTitle({ title, onChange }) {
     const [showForm, setShowForm] = useState(false)
-    const [draft, handleChange] = useForm({ title })
+    const [draft, handleChange, setDraft] = useForm({ title })
     const textareaRef = useRef(null)
-    const isSubmitted = useRef(false)
+    const elRef = useRef(null)
+
+    useClickedOutListener([elRef, textareaRef], onSubmit)
+    useKeyDownListener(['Escape'], onCancel)
 
     useEffect(() => {
         if (showForm) {
@@ -14,13 +19,9 @@ export function EditableTitle({ title, onChange }) {
     }, [showForm])
 
     function onSubmit(e) {
-        // prevent a double-submit in case of Enter + blur
-        if (!isSubmitted.current) {
-            e.preventDefault()
-            onChange(draft.title)
-            setShowForm(false)
-        }
-        isSubmitted.current = true
+        if (e) e.preventDefault()
+        onChange(draft.title)
+        setShowForm(false)
     }
 
     function onKeyDown(e) {
@@ -30,29 +31,35 @@ export function EditableTitle({ title, onChange }) {
     }
 
     function onTitleClick() {
-        isSubmitted.current = false
         setShowForm(true)
     }
 
+    function onCancel() {
+        setDraft({ title })
+        setShowForm(false)
+    }
+
     return (
-        <div className={`editable-title ${showForm ? 'edit' : ''}`}>
+        <div className="editable-title" ref={elRef}>
             <span className="title" onClick={() => onTitleClick()}>
                 {/* using draft.title for auto-resize of textarea in grid */}
                 {draft.title}
             </span>
-            <form onSubmit={onSubmit}>
-                {/* using a textarea and not an input for more robust styling */}
-                <textarea
-                    rows="1"
-                    ref={textareaRef}
-                    type="text"
-                    name="title"
-                    onChange={handleChange}
-                    onKeyDown={onKeyDown}
-                    value={draft.title}
-                    onBlur={onSubmit}
-                />
-            </form>
+            {showForm && (
+                <form onSubmit={onSubmit}>
+                    {/* using a textarea and not an input for more robust styling */}
+                    <textarea
+                        autoFocus
+                        rows="1"
+                        ref={textareaRef}
+                        type="text"
+                        name="title"
+                        onChange={handleChange}
+                        onKeyDown={onKeyDown}
+                        value={draft.title}
+                    />
+                </form>
+            )}
         </div>
     )
 }
