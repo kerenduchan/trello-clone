@@ -31,13 +31,6 @@ export function TaskDetailsSidebar({ hierarchy }) {
         <>
             <div className="task-details-sidebar">
                 <section>
-                    <h3>Suggested</h3>
-                    <div className="content">
-                        <SecondaryBtn icon="member" text="Join" />
-                    </div>
-                </section>
-
-                <section>
                     <h3>Add to card</h3>
                     <div className="content">
                         <SecondaryBtn

@@ -1,12 +1,16 @@
 .task-details-sidebar {
     grid-area: sidebar;
+    width: 168px;
+    padding-inline-end: 16px;
+    padding-inline-start: 8px;
+    padding-bottom: 8px;
 
-    display: grid;
-    row-gap: 16px;
-    align-content: start;
+    section {
+        margin-bottom: 24px;
 
-    section > .content {
-        display: grid;
-        row-gap: 8px;
+        .content {
+            display: grid;
+            row-gap: 8px;
+        }
     }
 }

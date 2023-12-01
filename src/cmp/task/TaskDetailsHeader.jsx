@@ -32,7 +32,9 @@ export function TaskDetailsHeader({ hierarchy, onClose }) {
             )}
 
             <div className="task-details-header">
-                <Icon type="card" />
+                <div className="icon-container">
+                    <Icon type="card" />
+                </div>
                 <EditableTitle title={task.title} onChange={onTitleChange} />
                 <p className="subtitle">
                     in list <span className="group-title">{group.title}</span>
