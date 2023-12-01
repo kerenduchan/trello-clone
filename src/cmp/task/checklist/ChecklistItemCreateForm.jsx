@@ -34,7 +34,7 @@ export function ChecklistItemCreateForm({
     }
 
     return (
-        <form className="checklist-item-create-form" onBlur={onClose}>
+        <form className="checklist-item-create-form">
             <textarea
                 ref={textareaRef}
                 autoFocus

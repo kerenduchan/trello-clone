@@ -5,7 +5,7 @@ import { TaskDetailsSidebar } from '../cmp/task/TaskDetailsSidebar'
 import { ChecklistList } from '../cmp/task/checklist/ChecklistList'
 import { LabelsWidget } from '../cmp/task/label/LabelsWidget'
 import { TaskDetailsHeader } from '../cmp/task/TaskDetailsHeader'
-import { setNewChecklist } from '../store/actions/app.actions'
+import { setCurChecklist } from '../store/actions/app.actions'
 import { MembersWidget } from '../cmp/task/members/MembersWidget'
 
 export function TaskDetails({ hierarchy }) {
@@ -13,7 +13,7 @@ export function TaskDetails({ hierarchy }) {
     const params = useParams()
 
     function onClose() {
-        setNewChecklist(null)
+        setCurChecklist(null)
         navigate(`/b/${params.boardId}`)
     }
 

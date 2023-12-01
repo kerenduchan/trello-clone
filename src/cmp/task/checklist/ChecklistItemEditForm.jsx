@@ -39,11 +39,7 @@ export function ChecklistItemEditForm({ hierarchy, checklist, item, onClose }) {
 
     return (
         <>
-            <form
-                className="checklist-item-edit-form"
-                onSubmit={onSubmit}
-                onBlur={onClose}
-            >
+            <form className="checklist-item-edit-form" onSubmit={onSubmit}>
                 <textarea
                     ref={textareaRef}
                     autoFocus

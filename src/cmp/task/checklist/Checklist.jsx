@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useForm } from '../../../customHooks/useForm'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 import { ChecklistItem } from './ChecklistItem'
@@ -9,14 +10,12 @@ import { DeleteMenu } from '../../general/DeleteMenu'
 import { boardService } from '../../../services/board.service'
 import { deleteChecklist } from '../../../store/actions/board.actions'
 import { ChecklistItemCreateForm } from './ChecklistItemCreateForm'
-import { useSelector } from 'react-redux'
+import { setCurChecklist } from '../../../store/actions/app.actions'
 
 export function Checklist({ hierarchy, checklist }) {
-    const newChecklistId = useSelector(
-        (storeState) => storeState.appModule.newChecklistId
+    const curChecklistId = useSelector(
+        (storeState) => storeState.appModule.curChecklistId
     )
-
-    const [showForm, setShowForm] = useState(newChecklistId === checklist._id)
 
     // When create checklist item form is closed, need to retain draft
     const [draft, handleChange, setDraft] = useForm(
@@ -33,6 +32,18 @@ export function Checklist({ hierarchy, checklist }) {
             console.error(err)
             // TODO: show an error dialog
         }
+    }
+
+    function onShowForm() {
+        setCurChecklist(checklist._id)
+    }
+
+    function onHideForm() {
+        setCurChecklist(null)
+    }
+
+    function isShowForm() {
+        return curChecklistId === checklist._id
     }
 
     return (
@@ -66,11 +77,11 @@ export function Checklist({ hierarchy, checklist }) {
                         ))}
                     </ol>
 
-                    {showForm ? (
+                    {isShowForm() ? (
                         <ChecklistItemCreateForm
                             hierarchy={hierarchy}
                             checklist={checklist}
-                            onClose={() => setShowForm(false)}
+                            onClose={onHideForm}
                             draft={draft}
                             handleChange={handleChange}
                             setDraft={setDraft}
@@ -80,7 +91,7 @@ export function Checklist({ hierarchy, checklist }) {
                             <SecondaryBtn
                                 className="add-btn"
                                 text="Add an item"
-                                onClick={() => setShowForm(true)}
+                                onClick={onShowForm}
                             />
                         </div>
                     )}

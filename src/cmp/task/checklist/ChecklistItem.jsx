@@ -1,13 +1,17 @@
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { updateChecklistItem } from '../../../store/actions/board.actions'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { CircleBtn } from '../../general/btn/CircleBtn'
 import { ChecklistItemActionsMenu } from './ChecklistItemActionsMenu'
 import { ChecklistItemEditForm } from './ChecklistItemEditForm'
+import { setCurChecklistItem } from '../../../store/actions/app.actions'
 
 export function ChecklistItem({ hierarchy, checklist, item }) {
+    const curChecklistItemId = useSelector(
+        (storeState) => storeState.appModule.curChecklistItemId
+    )
     const actionsMenu = usePopoverState()
-    const [showForm, setShowForm] = useState(false)
 
     function onCheckboxClick() {
         onUpdate({ isDone: !item.isDone })
@@ -22,6 +26,18 @@ export function ChecklistItem({ hierarchy, checklist, item }) {
         }
     }
 
+    function onShowForm() {
+        setCurChecklistItem(item._id)
+    }
+
+    function onHideForm() {
+        setCurChecklistItem(null)
+    }
+
+    function isShowForm() {
+        return curChecklistItemId === item._id
+    }
+
     return (
         <>
             <div className="checklist-item">
@@ -33,18 +49,15 @@ export function ChecklistItem({ hierarchy, checklist, item }) {
                     onChange={onCheckboxClick}
                 />
 
-                {showForm ? (
+                {isShowForm() ? (
                     <ChecklistItemEditForm
                         hierarchy={hierarchy}
                         checklist={checklist}
                         item={item}
-                        onClose={() => setShowForm(false)}
+                        onClose={onHideForm}
                     />
                 ) : (
-                    <div
-                        className="title-container"
-                        onClick={() => setShowForm(true)}
-                    >
+                    <div className="title-container" onClick={onShowForm}>
                         {/* Title */}
                         <span className={`title ${item.isDone ? 'done' : ''}`}>
                             {item.title}
