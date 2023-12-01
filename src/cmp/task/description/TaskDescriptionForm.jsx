@@ -1,20 +1,19 @@
-import { useForm } from '../../../customHooks/useForm'
-import { updateTask } from '../../../store/actions/board.actions'
 import { PrimaryBtn } from '../../general/btn/PrimaryBtn'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 
-export function TaskDescriptionForm({ hierarchy, onClose }) {
-    const { task } = hierarchy
-    const [draft, handleChange] = useForm({ description: task.description })
-
-    function onSubmit(e) {
+export function TaskDescriptionForm({
+    draft,
+    handleChange,
+    onClose,
+    onSubmit,
+}) {
+    function onSubmitInternal(e) {
         e.preventDefault()
-        updateTask(hierarchy, draft)
-        onClose()
+        onSubmit()
     }
 
     return (
-        <form className="task-description-form" onSubmit={onSubmit}>
+        <form className="task-description-form" onSubmit={onSubmitInternal}>
             <textarea
                 autoFocus
                 id="description"
