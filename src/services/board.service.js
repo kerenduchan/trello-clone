@@ -25,6 +25,7 @@ export const boardService = {
     countDoneItemsInAllChecklists,
     countItemsInAllChecklists,
     getChecklistPercent,
+    getCoverColors,
 }
 
 const STORAGE_KEY = 'boards'
@@ -348,6 +349,21 @@ function _getDefaultLabels() {
             color: '#579dff',
             colorName: 'Blue',
         },
+    ]
+}
+
+function getCoverColors() {
+    return [
+        { _id: 'green', color: '#4bce97' },
+        { _id: 'yellow', color: '#f5cd47' },
+        { _id: 'orange', color: '#fea362' },
+        { _id: 'red', color: '#f97168' },
+        { _id: 'purple', color: '#9f8fef' },
+        { _id: 'blue', color: '#579dff' },
+        { _id: 'teal', color: '#6cc3e0' },
+        { _id: 'lime', color: '#95c748' },
+        { _id: 'magenta', color: '#e774bb' },
+        { _id: 'gray', color: '#8490a2' },
     ]
 }
 

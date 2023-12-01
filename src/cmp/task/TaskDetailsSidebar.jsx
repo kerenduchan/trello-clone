@@ -6,6 +6,7 @@ import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 import { LabelsMenu } from './label/LabelsMenu'
 import { ChecklistMenu } from './checklist/ChecklistMenu'
 import { MembersMenu } from './members/MembersMenu'
+import { TaskCoverMenu } from './cover/TaskCoverMenu'
 
 export function TaskDetailsSidebar({ hierarchy }) {
     const { board } = hierarchy
@@ -14,6 +15,7 @@ export function TaskDetailsSidebar({ hierarchy }) {
     const membersMenu = usePopoverState()
     const labelsMenu = usePopoverState()
     const checklistMenu = usePopoverState()
+    const coverMenu = usePopoverState()
     const deleteTaskMenu = usePopoverState()
 
     function onDeleteTask() {
@@ -33,24 +35,40 @@ export function TaskDetailsSidebar({ hierarchy }) {
                 <section>
                     <h3>Add to card</h3>
                     <div className="content">
+                        {/* Members */}
                         <SecondaryBtn
                             {...membersMenu.triggerAndTarget}
                             icon="member"
                             text="Members"
                         />
+
+                        {/* Labels */}
                         <SecondaryBtn
                             {...labelsMenu.triggerAndTarget}
                             icon="label"
                             text="Labels"
                         />
+
+                        {/* Checklist */}
                         <SecondaryBtn
                             {...checklistMenu.triggerAndTarget}
                             icon="checklist"
                             text="Checklist"
                         />
+
+                        {/* Dates */}
                         <SecondaryBtn icon="date" text="Dates" />
+
+                        {/* Attachment */}
                         <SecondaryBtn icon="attachment" text="Attachment" />
-                        <SecondaryBtn icon="cover" text="Cover" />
+
+                        {/* Cover */}
+                        <SecondaryBtn
+                            {...coverMenu.triggerAndTarget}
+                            icon="cover"
+                            text="Cover"
+                        />
+
                         <SecondaryBtn icon="customField" text="Custom Fields" />
                     </div>
                 </section>
@@ -87,6 +105,11 @@ export function TaskDetailsSidebar({ hierarchy }) {
                     hierarchy={hierarchy}
                     checklistMenu={checklistMenu}
                 />
+            )}
+
+            {/* Cover menu */}
+            {coverMenu.show && (
+                <TaskCoverMenu hierarchy={hierarchy} popoverState={coverMenu} />
             )}
 
             {/* Delete task menu */}
