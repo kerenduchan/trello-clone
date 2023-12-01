@@ -1,0 +1,15 @@
+.task-dates-menu {
+    h4 {
+        @include font(12px, 16px, 700);
+        color: var(--text-color-subtle);
+        margin-bottom: 4px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+        margin-top: 4px;
+        padding: 6px 12px;
+        width: 280px;
+        justify-content: center;
+    }
+}

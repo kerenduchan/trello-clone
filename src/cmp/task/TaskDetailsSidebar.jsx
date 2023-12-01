@@ -7,6 +7,7 @@ import { LabelsMenu } from './label/LabelsMenu'
 import { ChecklistMenu } from './checklist/ChecklistMenu'
 import { MembersMenu } from './members/MembersMenu'
 import { TaskCoverMenu } from './cover/TaskCoverMenu'
+import { TaskDatesMenu } from './dates/TaskDatesMenu'
 
 export function TaskDetailsSidebar({ hierarchy }) {
     const { board } = hierarchy
@@ -15,6 +16,7 @@ export function TaskDetailsSidebar({ hierarchy }) {
     const membersMenu = usePopoverState()
     const labelsMenu = usePopoverState()
     const checklistMenu = usePopoverState()
+    const datesMenu = usePopoverState()
     const coverMenu = usePopoverState()
     const deleteTaskMenu = usePopoverState()
 
@@ -57,7 +59,11 @@ export function TaskDetailsSidebar({ hierarchy }) {
                         />
 
                         {/* Dates */}
-                        <SecondaryBtn icon="date" text="Dates" />
+                        <SecondaryBtn
+                            {...datesMenu.triggerAndTarget}
+                            icon="date"
+                            text="Dates"
+                        />
 
                         {/* Attachment */}
                         <SecondaryBtn icon="attachment" text="Attachment" />
@@ -105,6 +111,11 @@ export function TaskDetailsSidebar({ hierarchy }) {
                     hierarchy={hierarchy}
                     checklistMenu={checklistMenu}
                 />
+            )}
+
+            {/* Dates menu */}
+            {datesMenu.show && (
+                <TaskDatesMenu hierarchy={hierarchy} popoverState={datesMenu} />
             )}
 
             {/* Cover menu */}
