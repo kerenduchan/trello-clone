@@ -26,32 +26,34 @@ A [Trello](https://trello.com/) clone implementation in React.
 ### Labels
 
 -   Show labels in task details
--   Show labels in task preview - narrow and expanded on click
 -   Add/remove a label to/from a task
 -   Rename label
 -   _TODO: change label color_
 -   _TODO: create a new label_
 -   _TODO: delete label_
+-   Show labels in task preview - narrow and expanded on click
 
 ### Description
 
 -   Show description in task details
--   _TODO: Edit description_
--   _TODO: show description badge in task preview_
+-   Edit description
+-   Show description badge in task preview
 
 ### Checklists
 
 -   Show checklists in task details, including progress bar
 -   Check/uncheck an item in a checklist
--   Show checklists badge in task preview
 -   Delete checklist
--   _TODO: Add checklist to task_
--   _TODO: Add item to checklist_
--   _TODO: Delete checklist item_
+-   Add checklist to task
+-   Add item to checklist
+-   Delete item from checklist
+-   Convert checklist item to task
+-   Show checklists badge in task preview
 
 ### Members
 
--   _TODO_
+-   Add/remove members to/from task
+-   Show members badge in task preview
 
 ### Dates
 
