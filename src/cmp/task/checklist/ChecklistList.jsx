@@ -5,13 +5,15 @@ import {
 } from '../../../store/actions/app.actions'
 import { useClickedOutListener } from '../../../customHooks/useClickedOutListener'
 import { Checklist } from './Checklist'
+import { useKeyDownListener } from '../../../customHooks/useKeyDownListener'
 
 export function ChecklistList({ hierarchy }) {
     const { task } = hierarchy
     const listElRef = useRef()
-    useClickedOutListener([listElRef], onClickedOutside)
+    useClickedOutListener([listElRef], onClose)
+    useKeyDownListener(['Escape'], onClose)
 
-    function onClickedOutside() {
+    function onClose() {
         setCurChecklist(null)
         setCurChecklistItem(null)
     }

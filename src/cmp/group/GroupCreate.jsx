@@ -7,6 +7,7 @@ import { PrimaryBtn } from '../general/btn/PrimaryBtn'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 import { useClickedOutListener } from '../../customHooks/useClickedOutListener'
+import { useKeyDownListener } from '../../customHooks/useKeyDownListener'
 
 export function GroupCreate({ board }) {
     const [showForm, toggleShowForm, setShowForm] = useToggle()
@@ -17,6 +18,7 @@ export function GroupCreate({ board }) {
     const formEl = useRef()
 
     useClickedOutListener([formEl], onClose)
+    useKeyDownListener(['Escape'], onClose)
 
     async function onSubmit(e) {
         e.preventDefault()

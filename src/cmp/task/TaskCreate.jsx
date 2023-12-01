@@ -5,11 +5,13 @@ import { createTask } from '../../store/actions/board.actions'
 import { PrimaryBtn } from '../general/btn/PrimaryBtn'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 import { useClickedOutListener } from '../../customHooks/useClickedOutListener'
+import { useKeyDownListener } from '../../customHooks/useKeyDownListener'
 
 export function TaskCreate({ board, group, onClose }) {
     const [draft, handleChange, setDraft] = useForm(boardService.getEmptyTask())
     const formEl = useRef()
     useClickedOutListener([formEl], onClose)
+    useKeyDownListener(['Escape'], onClose)
 
     async function onSubmit(e) {
         e.preventDefault()

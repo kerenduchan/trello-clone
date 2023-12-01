@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { usePopper } from 'react-popper'
 import { useClickedOutListener } from '../../customHooks/useClickedOutListener'
+import { useKeyDownListener } from '../../customHooks/useKeyDownListener'
 
 export function Popover({ refEl, className, onClose, children }) {
     const wrapperEl = useRef(null)
@@ -20,6 +21,7 @@ export function Popover({ refEl, className, onClose, children }) {
     })
 
     useClickedOutListener([wrapperEl, refRefEl], onClose)
+    useKeyDownListener(['Escape'], onClose)
 
     return createPortal(
         <div className="popover-wrapper" ref={wrapperEl}>
