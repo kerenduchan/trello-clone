@@ -58,13 +58,6 @@
 @import 'cmp/task/TaskPreview';
 @import 'cmp/task/TaskPreviewCover';
 
-// task/dates
-@import 'cmp/task/dates/TaskDatesMenu';
-
-// task/description
-@import 'cmp/task/description/TaskDescription';
-@import 'cmp/task/description/TaskDescriptionForm';
-
 // task/checklist
 @import 'cmp/task/checklist/Checklist';
 @import 'cmp/task/checklist/ChecklistItem';
@@ -74,8 +67,18 @@
 @import 'cmp/task/checklist/ChecklistMenu';
 @import 'cmp/task/checklist/ChecklistsBadge';
 
+// task/comments
+@import 'cmp/task/comments/TaskComments';
+
 // task/cover
 @import 'cmp/task/cover/TaskCoverMenu';
+
+// task/dates
+@import 'cmp/task/dates/TaskDatesMenu';
+
+// task/description
+@import 'cmp/task/description/TaskDescription';
+@import 'cmp/task/description/TaskDescriptionForm';
 
 // task/label
 @import 'cmp/task/label/LabelBtn';

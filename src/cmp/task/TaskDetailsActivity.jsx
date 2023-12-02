@@ -1,6 +1,6 @@
 import { useToggle } from '../../customHooks/useToggle'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
-import { Icon } from '../general/Icon'
+import { TaskComments } from './comments/TaskComments'
 import { TaskDetailsSubsectionHeader } from './TaskDetailsSubsectionHeader'
 
 export function TaskDetailsActivity({ hierarchy }) {
@@ -15,7 +15,9 @@ export function TaskDetailsActivity({ hierarchy }) {
                     onClick={() => toggleShowDetails()}
                 ></SecondaryBtn>
             </TaskDetailsSubsectionHeader>
-            <div className="content"></div>
+            <div className="content">
+                <TaskComments hierarchy={hierarchy} />
+            </div>
         </div>
     )
 }

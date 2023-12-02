@@ -1,0 +1,17 @@
+.task-comments {
+    grid-area: 1 / 3;
+
+    .create-btn {
+        width: 100%;
+        height: 36px;
+        padding: 8px 12px;
+        box-shadow: var(--box-shadow-subtle);
+        background-color: var(--bg-1);
+        border-radius: 8px;
+        @include font-p();
+
+        &:hover {
+            background-color: var(--bg-input-hovered);
+        }
+    }
+}
