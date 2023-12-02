@@ -7,9 +7,9 @@ import { GroupList } from '../cmp/group/GroupList'
 import { BoardDetailsTopbar } from '../cmp/board/BoardDetailsTopbar'
 import { TaskDetails } from './TaskDetails'
 import { BoardDetailsMenu } from '../cmp/board/BoardDetailsMenu'
-import { SquareIconBtn } from '../cmp/general/btn/SquareIconBtn'
 import { GroupCreate } from '../cmp/group/GroupCreate'
 import { boardService } from '../services/board.service'
+import { Icon } from '../cmp/general/Icon'
 
 export function BoardDetails() {
     const params = useParams()
@@ -39,8 +39,15 @@ export function BoardDetails() {
         >
             <header>
                 <BoardDetailsTopbar board={board} />
-                <SquareIconBtn icon="more" onClick={toggleShowMenu} />
+
+                <button
+                    className="btn-square btn-more"
+                    onClick={toggleShowMenu}
+                >
+                    <Icon type="more" />
+                </button>
             </header>
+
             {showMenu && (
                 <BoardDetailsMenu
                     board={board}

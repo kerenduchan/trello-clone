@@ -1,5 +1,5 @@
+import { Icon } from './Icon'
 import { Popover } from './Popover'
-import { SquareIconBtn } from './btn/SquareIconBtn'
 
 export function PopoverMenu({
     refEl,
@@ -16,9 +16,15 @@ export function PopoverMenu({
             onClose={onClose}
         >
             <header>
-                {onBack && <SquareIconBtn onClick={onBack} icon="back" />}
+                {onBack && (
+                    <button className="btn-square btn-back" onClick={onBack}>
+                        <Icon type="back" />
+                    </button>
+                )}
                 <h2>{title}</h2>
-                <SquareIconBtn onClick={onClose} icon="close" />
+                <button className="btn-square btn-close" onClick={onClose}>
+                    <Icon type="close" />
+                </button>
             </header>
             <div className="content">{children}</div>
         </Popover>

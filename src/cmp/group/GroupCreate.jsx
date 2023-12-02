@@ -4,9 +4,9 @@ import { useToggle } from '../../customHooks/useToggle'
 import { createGroup } from '../../store/actions/board.actions'
 import { boardService } from '../../services/board.service'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
-import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 import { useClickedOutListener } from '../../customHooks/useClickedOutListener'
 import { useKeyDownListener } from '../../customHooks/useKeyDownListener'
+import { Icon } from '../general/Icon'
 
 export function GroupCreate({ board }) {
     const [showForm, toggleShowForm, setShowForm] = useToggle()
@@ -55,7 +55,14 @@ export function GroupCreate({ board }) {
                         value={draft.title}
                     />
                     <button className="btn-primary btn-add">Add list</button>
-                    <SquareIconBtn icon="close" onClick={onClose} />
+
+                    <button
+                        type="button"
+                        className="btn-square-sharp btn-close"
+                        onClick={onClose}
+                    >
+                        <Icon type="close" />
+                    </button>
                 </form>
             ) : (
                 <SecondaryBtn

@@ -5,9 +5,8 @@ import {
     deleteChecklistItem,
     updateChecklistItem,
 } from '../../../store/actions/board.actions'
-import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
-import { SquareIconBtn } from '../../general/btn/SquareIconBtn'
 import { ChecklistItemActionsMenu } from './ChecklistItemActionsMenu'
+import { Icon } from '../../general/Icon'
 
 export function ChecklistItemEditForm({ hierarchy, checklist, item, onClose }) {
     const textareaRef = useRef(null)
@@ -50,20 +49,22 @@ export function ChecklistItemEditForm({ hierarchy, checklist, item, onClose }) {
                     onKeyDown={onKeyDown}
                 ></textarea>
                 <button className="btn-primary btn-save">Save</button>
-                <SquareIconBtn icon="close" onClick={onClose} />
-                <SecondaryBtn
-                    className="btn-assign"
-                    icon="add_member"
-                    text="Assign"
-                />
-                <SecondaryBtn
-                    className="btn-due-date"
-                    icon="date"
-                    text="Due date"
-                />
-                <SquareIconBtn icon="mention" />
-                <SquareIconBtn icon="emoji" />
-                <SquareIconBtn icon="more" {...actionsMenu.triggerAndTarget} />
+
+                <button
+                    type="button"
+                    className="btn-square btn-close"
+                    onClick={onClose}
+                >
+                    <Icon type="close" />
+                </button>
+
+                <button
+                    type="button"
+                    className="btn-square btn-more"
+                    {...actionsMenu.triggerAndTarget}
+                >
+                    <Icon type="more" />
+                </button>
             </form>
 
             {/* Actions menu */}

@@ -21,3 +21,12 @@
 .btn-circle {
     @include btn-circle();
 }
+
+.btn-square {
+    @include btn-square();
+}
+
+.btn-square-sharp {
+    @include btn-square();
+    border-radius: 3px;
+}

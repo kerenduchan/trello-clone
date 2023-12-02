@@ -25,7 +25,8 @@
         display: grid;
         grid-template-rows: auto 1fr;
         grid-template-columns: auto 1fr;
-        gap: 8px;
+        row-gap: 8px;
+        column-gap: 4px;
         justify-items: start;
 
         input {

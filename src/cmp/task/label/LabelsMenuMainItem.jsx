@@ -2,8 +2,8 @@ import {
     removeTaskLabel,
     addTaskLabel,
 } from '../../../store/actions/board.actions'
-import { SquareIconBtn } from '../../general/btn/SquareIconBtn'
 import { useToggle } from '../../../customHooks/useToggle'
+import { Icon } from '../../general/Icon'
 
 export function LabelsMenuMainItem({ hierarchy, label, onEditClick }) {
     const { task } = hierarchy
@@ -42,7 +42,13 @@ export function LabelsMenuMainItem({ hierarchy, label, onEditClick }) {
             >
                 {label.title}
             </div>
-            <SquareIconBtn icon="edit" onClick={() => onEditClick(label)} />
+
+            <button
+                className="btn-square-sharp btn-edit"
+                onClick={() => onEditClick(label)}
+            >
+                <Icon type="edit" size="xs" />
+            </button>
         </div>
     )
 }

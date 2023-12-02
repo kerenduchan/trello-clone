@@ -1,6 +1,6 @@
 import { updateBoard } from '../../store/actions/board.actions'
-import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 import { EditableTitle } from '../general/EditableTitle'
+import { Icon } from '../general/Icon'
 
 export function BoardDetailsTopbar({ board }) {
     function onStarClick() {
@@ -19,11 +19,9 @@ export function BoardDetailsTopbar({ board }) {
     return (
         <div className="board-details-topbar">
             <EditableTitle onChange={onTitleChange} title={board.title} />
-            <SquareIconBtn
-                icon="star"
-                full={board.isStarred}
-                onClick={onStarClick}
-            />
+            <button className="btn-square btn-star" onClick={onStarClick}>
+                <Icon type="star" full={board.isStarred} />
+            </button>
         </div>
     )
 }

@@ -1,9 +1,9 @@
 import { usePopoverState } from '../../customHooks/usePopoverState'
 import { updateGroup } from '../../store/actions/board.actions'
 import { EditableTitle } from '../general/EditableTitle'
-import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 import { GroupPreviewMenu } from './GroupPreviewMenu'
 import { PopoverMenu } from '../general/PopoverMenu'
+import { Icon } from '../general/Icon'
 
 export function GroupPreviewHeader({ group, board }) {
     const listActionsMenu = usePopoverState()
@@ -21,11 +21,13 @@ export function GroupPreviewHeader({ group, board }) {
         <>
             <header className="group-preview-header">
                 <EditableTitle title={group.title} onChange={onTitleChange} />
-                <SquareIconBtn
+
+                <button
+                    className="btn-square btn-more"
                     {...listActionsMenu.triggerAndTarget}
-                    className="btn-more"
-                    icon="more"
-                />
+                >
+                    <Icon type="more" />
+                </button>
             </header>
 
             {/* List Actions menu */}

@@ -33,27 +33,6 @@
         }
     }
 
-    .btn-assign {
-        grid-area: 2 / 4;
-        @include secondary-btn-version-2();
-    }
-
-    .btn-due-date {
-        grid-area: 2 / 5;
-        @include secondary-btn-version-2();
-        min-width: 96px;
-    }
-
-    .btn-emoji {
-        grid-area: 2 / 6;
-        @include icon-btn-version-2();
-    }
-
-    .btn-mention {
-        grid-area: 2 / 7;
-        @include icon-btn-version-2();
-    }
-
     .btn-more {
         grid-area: 2 / 8;
         @include icon-btn-version-2();

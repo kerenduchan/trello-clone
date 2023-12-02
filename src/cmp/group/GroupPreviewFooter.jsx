@@ -1,6 +1,6 @@
 import { useToggle } from '../../customHooks/useToggle'
+import { Icon } from '../general/Icon'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
-import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 import { TaskCreate } from '../task/TaskCreate'
 
 export function GroupPreviewFooter({ board, group }) {
@@ -26,7 +26,10 @@ export function GroupPreviewFooter({ board, group }) {
                         className="btn-show-add-form"
                         onClick={toggleShowTaskCreateForm}
                     ></SecondaryBtn>
-                    <SquareIconBtn className="btn-template" icon="template" />
+
+                    <button className="btn-square">
+                        <Icon type="template" />
+                    </button>
                 </>
             )}
         </div>

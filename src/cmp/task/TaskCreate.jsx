@@ -2,9 +2,9 @@ import { useRef } from 'react'
 import { useForm } from '../../customHooks/useForm'
 import { boardService } from '../../services/board.service'
 import { createTask } from '../../store/actions/board.actions'
-import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 import { useClickedOutListener } from '../../customHooks/useClickedOutListener'
 import { useKeyDownListener } from '../../customHooks/useKeyDownListener'
+import { Icon } from '../general/Icon'
 
 export function TaskCreate({ board, group, onClose }) {
     const [draft, handleChange, setDraft] = useForm(boardService.getEmptyTask())
@@ -41,7 +41,14 @@ export function TaskCreate({ board, group, onClose }) {
                 value={draft.title}
             />
             <button className="btn-primary btn-add">Add card</button>
-            <SquareIconBtn icon="close" onClick={onClose} />
+
+            <button
+                type="button"
+                className="btn-square-sharp btn-close"
+                onClick={onClose}
+            >
+                <Icon type="close" />
+            </button>
         </form>
     )
 }

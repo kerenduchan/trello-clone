@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router'
 import { usePopoverState } from '../../customHooks/usePopoverState'
-import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 import { BoardDetailsMenuItem } from './BoardDetailsMenuItem'
 import { DeleteMenu } from '../general/DeleteMenu'
 import { deleteBoard } from '../../store/actions/board.actions'
+import { Icon } from '../general/Icon'
 
 export function BoardDetailsMenu({ board, onClose }) {
     const navigate = useNavigate()
@@ -25,7 +25,9 @@ export function BoardDetailsMenu({ board, onClose }) {
             <div className="board-details-menu">
                 <header>
                     <div className="title">Menu</div>
-                    <SquareIconBtn icon="close" onClick={onClose} />
+                    <button className="btn-square btn-close" onClick={onClose}>
+                        <Icon type="close" />
+                    </button>
                     <hr className="divider" />
                 </header>
 

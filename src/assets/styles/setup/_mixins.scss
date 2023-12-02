@@ -225,3 +225,15 @@
     justify-content: center;
     align-items: center;
 }
+
+@mixin btn-square() {
+    @include button-bg(
+        transparent,
+        var(--bg-neutral-hovered),
+        var(--bg-neutral-pressed)
+    );
+    @include square(32px);
+    padding: 8px;
+    border-radius: 8px;
+    @include flex-center();
+}
