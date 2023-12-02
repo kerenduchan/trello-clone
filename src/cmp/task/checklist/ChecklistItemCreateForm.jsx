@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { boardService } from '../../../services/board.service'
 import { addChecklistItem } from '../../../store/actions/board.actions'
-import { PrimaryBtn } from '../../general/btn/PrimaryBtn'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 
 export function ChecklistItemCreateForm({
@@ -35,7 +34,7 @@ export function ChecklistItemCreateForm({
     }
 
     return (
-        <form className="checklist-item-create-form">
+        <form className="checklist-item-create-form" onSubmit={onSubmit}>
             <textarea
                 ref={textareaRef}
                 autoFocus
@@ -46,7 +45,7 @@ export function ChecklistItemCreateForm({
                 onKeyDown={onKeyDown}
                 value={draft.title}
             />
-            <PrimaryBtn text="Add" onClick={onSubmit} />
+            <button className="btn-primary">Add</button>
             <SecondaryBtn
                 className="cancel-btn"
                 text="Cancel"

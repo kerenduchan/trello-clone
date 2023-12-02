@@ -2,7 +2,6 @@ import { useForm } from '../../customHooks/useForm'
 import { useNavigate } from 'react-router'
 import { createBoard } from '../../store/actions/board.actions'
 import { boardService } from '../../services/board.service'
-import { PrimaryBtn } from '../general/btn/PrimaryBtn'
 import { ImgSelect } from '../general/ImgSelect'
 
 export function BoardCreate({ onClose }) {
@@ -44,7 +43,7 @@ export function BoardCreate({ onClose }) {
                 onChange={handleChange}
                 value={draft.title}
             />
-            <PrimaryBtn className="create-btn" text="Create" />
+            <button className="btn-primary btn-create">Create</button>
         </form>
     )
 }

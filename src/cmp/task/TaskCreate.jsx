@@ -2,7 +2,6 @@ import { useRef } from 'react'
 import { useForm } from '../../customHooks/useForm'
 import { boardService } from '../../services/board.service'
 import { createTask } from '../../store/actions/board.actions'
-import { PrimaryBtn } from '../general/btn/PrimaryBtn'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 import { useClickedOutListener } from '../../customHooks/useClickedOutListener'
 import { useKeyDownListener } from '../../customHooks/useKeyDownListener'
@@ -41,7 +40,7 @@ export function TaskCreate({ board, group, onClose }) {
                 onChange={handleChange}
                 value={draft.title}
             />
-            <PrimaryBtn className="add-btn" text="Add card" />
+            <button className="btn-primary add-btn">Add card</button>
             <SquareIconBtn icon="close" onClick={onClose} />
         </form>
     )

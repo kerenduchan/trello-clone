@@ -5,7 +5,6 @@ import {
     deleteChecklistItem,
     updateChecklistItem,
 } from '../../../store/actions/board.actions'
-import { PrimaryBtn } from '../../general/btn/PrimaryBtn'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 import { SquareIconBtn } from '../../general/btn/SquareIconBtn'
 import { ChecklistItemActionsMenu } from './ChecklistItemActionsMenu'
@@ -50,7 +49,7 @@ export function ChecklistItemEditForm({ hierarchy, checklist, item, onClose }) {
                     value={draft.title}
                     onKeyDown={onKeyDown}
                 ></textarea>
-                <PrimaryBtn className="save-btn" text="Save" />
+                <button className="btn-primary save-btn">Save</button>
                 <SquareIconBtn icon="close" onClick={onClose} />
                 <SecondaryBtn
                     className="assign-btn"

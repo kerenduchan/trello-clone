@@ -98,14 +98,6 @@
     outline: 2px solid var(--outline-emphasis-color);
 }
 
-@mixin primary-btn-danger() {
-    @include button-bg(
-        var(--bg-primary-btn-danger),
-        var(--bg-primary-btn-danger-hovered),
-        var(--bg-primary-btn-danger-pressed)
-    );
-}
-
 // reuse for .title and for textarea of editable title for board details
 @mixin board-details-editable-title {
     padding: 0px 10px;
@@ -196,11 +188,11 @@
 
 @mixin btn-primary() {
     @include button-bg(
-        var(--bg-primary-btn),
-        var(--bg-primary-btn-hovered),
-        var(--bg-primary-btn-pressed)
+        var(--bg-brand-bold),
+        var(--bg-brand-bold-hovered),
+        var(--bg-brand-bold-pressed)
     );
-    color: var(--text-color-primary-btn);
+    color: var(--text-inverse);
     padding: 6px 12px;
     border-radius: 3px;
     display: flex;
@@ -210,4 +202,13 @@
     &:disabled {
         @include btn-disabled();
     }
+}
+
+@mixin btn-danger() {
+    @include btn-primary();
+    @include button-bg(
+        var(--bg-danger-bold),
+        var(--bg-danger-bold-hovered),
+        var(--bg-danger-bold-pressed)
+    );
 }

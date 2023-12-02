@@ -3,7 +3,6 @@ import { useForm } from '../../../customHooks/useForm'
 import { boardService } from '../../../services/board.service'
 import { addChecklist } from '../../../store/actions/board.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
-import { PrimaryBtn } from '../../general/btn/PrimaryBtn'
 
 export function ChecklistMenu({ hierarchy, checklistMenu }) {
     const [draft, handleChange] = useForm(boardService.getEmptyChecklist())
@@ -40,7 +39,7 @@ export function ChecklistMenu({ hierarchy, checklistMenu }) {
                     onChange={handleChange}
                     value={draft.title}
                 />
-                <PrimaryBtn className="add-btn" text="Add" />
+                <button className="btn-primary add-btn">Add</button>
             </form>
         </PopoverMenu>
     )

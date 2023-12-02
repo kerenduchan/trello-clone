@@ -3,7 +3,6 @@ import { useForm } from '../../customHooks/useForm'
 import { useToggle } from '../../customHooks/useToggle'
 import { createGroup } from '../../store/actions/board.actions'
 import { boardService } from '../../services/board.service'
-import { PrimaryBtn } from '../general/btn/PrimaryBtn'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 import { SquareIconBtn } from '../general/btn/SquareIconBtn'
 import { useClickedOutListener } from '../../customHooks/useClickedOutListener'
@@ -55,7 +54,7 @@ export function GroupCreate({ board }) {
                         onChange={handleChange}
                         value={draft.title}
                     />
-                    <PrimaryBtn className="add-btn" text="Add list" />
+                    <button className="btn-primary add-btn">Add list</button>
                     <SquareIconBtn icon="close" onClick={onClose} />
                 </form>
             ) : (

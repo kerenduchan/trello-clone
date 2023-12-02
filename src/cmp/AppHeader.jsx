@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import { usePopoverState } from '../customHooks/usePopoverState'
-import { PrimaryBtn } from './general/btn/PrimaryBtn'
 import { BoardCreate } from './board/BoardCreate'
 import { PopoverMenu } from './general/PopoverMenu'
 
@@ -13,10 +12,12 @@ export function AppHeader() {
                 <img className="logo" src="krello.svg" />
 
                 <Link to="/boards">Boards</Link>
-                <PrimaryBtn
+                <button
+                    className="btn-primary"
                     {...createBoardMenu.triggerAndTarget}
-                    text="Create Board"
-                ></PrimaryBtn>
+                >
+                    Create Board
+                </button>
                 <div className="avatar">{'<User Avatar>'}</div>
             </header>
 

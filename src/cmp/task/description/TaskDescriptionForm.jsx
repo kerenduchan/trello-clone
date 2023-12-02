@@ -1,4 +1,3 @@
-import { PrimaryBtn } from '../../general/btn/PrimaryBtn'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 
 export function TaskDescriptionForm({
@@ -22,7 +21,7 @@ export function TaskDescriptionForm({
                 value={draft.description}
             />
             <div className="actions">
-                <PrimaryBtn className="save-btn" text="Save" />
+                <button className="btn-primary save-btn">Save</button>
                 <SecondaryBtn
                     className="cancel-btn"
                     text="Cancel"

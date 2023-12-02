@@ -1,6 +1,5 @@
 import { useForm } from '../../../customHooks/useForm'
 import { updateBoardLabel } from '../../../store/actions/board.actions'
-import { PrimaryBtn } from '../../general/btn/PrimaryBtn'
 
 export function LabelsMenuEdit({ hierarchy, label, onBack }) {
     const [draft, handleChange] = useForm({ ...label })
@@ -36,7 +35,7 @@ export function LabelsMenuEdit({ hierarchy, label, onBack }) {
                     onChange={handleChange}
                     value={draft.title}
                 />
-                <PrimaryBtn className="save-btn" text="Save" />
+                <button className="btn-primary save-btn">Save</button>
             </form>
         </div>
     )

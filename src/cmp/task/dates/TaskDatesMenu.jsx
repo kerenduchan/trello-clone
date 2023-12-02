@@ -2,7 +2,6 @@ import moment from 'moment/moment'
 import { useForm } from '../../../customHooks/useForm'
 import { updateTask } from '../../../store/actions/board.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
-import { PrimaryBtn } from '../../general/btn/PrimaryBtn'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 import { useEffect } from 'react'
 
@@ -101,8 +100,12 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
                     value={draft.dueDate}
                     onChange={handleChange}
                 />
-                <PrimaryBtn text="Save" />
-                <SecondaryBtn text="Remove" onClick={onRemove} />
+                <button className="btn-primary btn-save">Save</button>
+                <SecondaryBtn
+                    className="btn-remove"
+                    text="Remove"
+                    onClick={onRemove}
+                />
             </form>
         </PopoverMenu>
     )

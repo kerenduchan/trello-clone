@@ -1,5 +1,4 @@
 import { PopoverMenu } from './PopoverMenu'
-import { PrimaryBtn } from './btn/PrimaryBtn'
 
 export function DeleteMenu({
     deleteMenu,
@@ -12,11 +11,9 @@ export function DeleteMenu({
         <PopoverMenu title={title} {...deleteMenu.popover}>
             <div className="delete-menu">
                 <p>{text}</p>
-                <PrimaryBtn
-                    className="delete-btn danger"
-                    text={btnText}
-                    onClick={onDelete}
-                />
+                <button className="btn-danger btn-delete" onClick={onDelete}>
+                    {btnText}
+                </button>
             </div>
         </PopoverMenu>
     )
