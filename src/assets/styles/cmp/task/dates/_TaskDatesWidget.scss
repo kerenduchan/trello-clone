@@ -3,20 +3,39 @@
         margin-bottom: 4px;
     }
 
-    button {
-        padding: 6px 12px;
-        @include button-bg(
-            var(--bg-neutral),
-            var(--bg-neutral-hovered),
-            var(--bg-neutral-pressed)
-        );
-        border-radius: 3px;
+    .content {
         display: flex;
         align-items: center;
 
-        .icon {
-            margin-inline-start: 4px;
-            margin-inline-end: -4px;
+        .is-complete-checkbox {
+            margin-inline-end: 4px;
+        }
+
+        button {
+            padding: 6px 12px;
+            @include button-bg(
+                var(--bg-neutral),
+                var(--bg-neutral-hovered),
+                var(--bg-neutral-pressed)
+            );
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+
+            .complete-label {
+                padding-inline-start: 4px;
+                padding-inline-end: 4px;
+                margin-inline-start: 8px;
+                border-radius: 2px;
+                background-color: var(--bg-success-bold);
+                color: var(--text-color-light);
+                @include font(12px, 16px, 500);
+            }
+
+            .icon {
+                margin-inline-start: 4px;
+                margin-inline-end: -4px;
+            }
         }
     }
 }

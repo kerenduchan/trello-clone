@@ -22,14 +22,19 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
     }
 
     function onRemove() {
-        updateTask(hierarchy, { dates: { startDate: null, dueDate: null } })
+        updateTask(hierarchy, { dates: null })
         popoverState.onClose()
     }
 
     function convertDraftToTaskDates() {
+        if (!draft.hasStartDate && !draft.hasDueDate) {
+            return null
+        }
+
         return {
             startDate: draft.hasStartDate ? draft.startDate : null,
             dueDate: draft.hasDueDate ? moment(draft.dueDate).unix() : null,
+            isComplete: Boolean(draft.hasDueDate && task.dates?.isComplete),
         }
     }
 
@@ -41,23 +46,18 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
             dueDate: '',
         }
 
-        if (task.dates.startDate) {
+        if (task.dates?.startDate) {
             res.hasStartDate = true
             res.startDate = task.dates.startDate
         }
 
-        if (task.dates.dueDate) {
+        if (task.dates?.dueDate) {
             res.hasDueDate = true
             res.dueDate = moment
                 .unix(task.dates.dueDate)
                 .format('YYYY-MM-DDTHH:mm')
         }
-        console.log('convertTaskDatesToDraft', task.dates, res)
         return res
-    }
-
-    function isStartDateDisabled() {
-        return draft.hasStartDate === false
     }
 
     return (

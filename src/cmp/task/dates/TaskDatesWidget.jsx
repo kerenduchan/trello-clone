@@ -1,12 +1,30 @@
+import { useEffect } from 'react'
 import moment from 'moment'
+import { useToggle } from '../../../customHooks/useToggle'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { TaskDatesMenu } from './TaskDatesMenu'
 import { Icon } from '../../general/Icon'
+import { updateTask } from '../../../store/actions/board.actions'
 
 export function TaskDatesWidget({ hierarchy }) {
     const { task } = hierarchy
     const dates = task.dates
+    const [isComplete, toggleIsComplete, setIsComplete] = useToggle(
+        dates?.isComplete || false
+    )
+
     const datesMenu = usePopoverState()
+
+    useEffect(() => {
+        setIsComplete(dates?.isComplete || false)
+    }, [task])
+
+    function onCheckboxChange() {
+        toggleIsComplete()
+        updateTask(hierarchy, {
+            dates: { ...task.dates, isComplete: !isComplete },
+        })
+    }
 
     function hasDates() {
         return Boolean(dates && (dates.startDate || dates.dueDate))
@@ -43,10 +61,25 @@ export function TaskDatesWidget({ hierarchy }) {
             {hasDates() && (
                 <section className="task-dates-widget">
                     <h3>{getTitle()}</h3>
-                    <button {...datesMenu.triggerAndTarget}>
-                        {getButtonText()}
-                        <Icon type="expand_more" />
-                    </button>
+                    <div className="content">
+                        {dates.dueDate && (
+                            <input
+                                className="is-complete-checkbox"
+                                type="checkbox"
+                                name="isComplete"
+                                id="isComplete"
+                                checked={isComplete}
+                                onChange={onCheckboxChange}
+                            />
+                        )}
+                        <button {...datesMenu.triggerAndTarget}>
+                            <span>{getButtonText()}</span>
+                            {dates.isComplete && (
+                                <span className="complete-label">Complete</span>
+                            )}
+                            <Icon type="expand_more" />
+                        </button>
+                    </div>
                 </section>
             )}
 
