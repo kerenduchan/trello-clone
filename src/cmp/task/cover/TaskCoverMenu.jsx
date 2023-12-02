@@ -26,7 +26,7 @@ export function TaskCoverMenu({ hierarchy, popoverState }) {
                 {boardService.getCoverColors().map((c) => (
                     <li key={c._id}>
                         <div
-                            className="color-btn"
+                            className="btn-color"
                             style={{ backgroundColor: c.color }}
                             onClick={() => onColorClick(c)}
                         />

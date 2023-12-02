@@ -21,9 +21,9 @@ export function TaskDescriptionForm({
                 value={draft.description}
             />
             <div className="actions">
-                <button className="btn-primary save-btn">Save</button>
+                <button className="btn-primary btn-save">Save</button>
                 <SecondaryBtn
-                    className="cancel-btn"
+                    className="btn-cancel"
                     text="Cancel"
                     onClick={onClose}
                 />

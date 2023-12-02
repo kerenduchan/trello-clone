@@ -49,15 +49,15 @@ export function ChecklistItemEditForm({ hierarchy, checklist, item, onClose }) {
                     value={draft.title}
                     onKeyDown={onKeyDown}
                 ></textarea>
-                <button className="btn-primary save-btn">Save</button>
+                <button className="btn-primary btn-save">Save</button>
                 <SquareIconBtn icon="close" onClick={onClose} />
                 <SecondaryBtn
-                    className="assign-btn"
+                    className="btn-assign"
                     icon="add_member"
                     text="Assign"
                 />
                 <SecondaryBtn
-                    className="due-date-btn"
+                    className="btn-due-date"
                     icon="date"
                     text="Due date"
                 />

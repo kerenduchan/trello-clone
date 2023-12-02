@@ -10,7 +10,7 @@ export function TaskDetailsActivity({ hierarchy }) {
         <div className="task-details-activity">
             <TaskDetailsSubsectionHeader icon="activity" title="Activity">
                 <SecondaryBtn
-                    className="title-btn"
+                    className="btn-title"
                     text={`${showDetails ? 'Hide' : 'Show'} details`}
                     onClick={() => toggleShowDetails()}
                 ></SecondaryBtn>

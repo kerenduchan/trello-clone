@@ -37,12 +37,12 @@ export function ChecklistItemActionsMenu({
                 {...popoverState.popover}
             >
                 <SecondaryBtn
-                    className="actions-menu-btn"
+                    className="btn-actions-menu"
                     text="Convert to card"
                     onClick={onConvertToTask}
                 />
                 <SecondaryBtn
-                    className="actions-menu-btn"
+                    className="btn-actions-menu"
                     text="Delete"
                     onClick={onDelete}
                 />

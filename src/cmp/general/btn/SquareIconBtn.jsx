@@ -7,7 +7,7 @@ export const SquareIconBtn = forwardRef(function SquareIconBtn(props, ref) {
         <button
             type="button"
             ref={ref}
-            className={`square-icon-btn ${icon}-btn${
+            className={`btn-square-icon btn-${icon}${
                 className ? ` ${className}` : ''
             }`}
             onClick={onClick}

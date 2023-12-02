@@ -35,7 +35,7 @@ export function LabelsMenuEdit({ hierarchy, label, onBack }) {
                     onChange={handleChange}
                     value={draft.title}
                 />
-                <button className="btn-primary save-btn">Save</button>
+                <button className="btn-primary btn-save">Save</button>
             </form>
         </div>
     )

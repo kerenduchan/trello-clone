@@ -23,10 +23,10 @@ export function GroupPreviewFooter({ board, group }) {
                     <SecondaryBtn
                         text="Add a card"
                         icon="add"
-                        className="show-add-form-btn"
+                        className="btn-show-add-form"
                         onClick={toggleShowTaskCreateForm}
                     ></SecondaryBtn>
-                    <SquareIconBtn className="template-btn" icon="template" />
+                    <SquareIconBtn className="btn-template" icon="template" />
                 </>
             )}
         </div>

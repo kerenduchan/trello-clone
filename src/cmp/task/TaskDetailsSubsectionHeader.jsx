@@ -5,7 +5,7 @@ export function TaskDetailsSubsectionHeader({ icon, title, children }) {
         <div className="task-details-subsection-header">
             <Icon type={icon} size="md" />
             <h2 className="title">{title}</h2>
-            <div className="title-btn">{children}</div>
+            <div className="btn-title">{children}</div>
         </div>
     )
 }

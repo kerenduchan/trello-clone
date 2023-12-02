@@ -47,7 +47,7 @@ export function ChecklistItemCreateForm({
             />
             <button className="btn-primary">Add</button>
             <SecondaryBtn
-                className="cancel-btn"
+                className="btn-cancel"
                 text="Cancel"
                 onClick={onClose}
             />

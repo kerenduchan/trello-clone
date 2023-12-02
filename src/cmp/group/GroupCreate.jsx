@@ -54,12 +54,12 @@ export function GroupCreate({ board }) {
                         onChange={handleChange}
                         value={draft.title}
                     />
-                    <button className="btn-primary add-btn">Add list</button>
+                    <button className="btn-primary btn-add">Add list</button>
                     <SquareIconBtn icon="close" onClick={onClose} />
                 </form>
             ) : (
                 <SecondaryBtn
-                    className="group-create-btn"
+                    className="btn-group-create"
                     icon="add"
                     text={
                         board.groups.length === 0

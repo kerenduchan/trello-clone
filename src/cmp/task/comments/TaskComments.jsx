@@ -38,7 +38,7 @@ export function TaskComments({ hierarchy }) {
                     onSubmit={onSubmitForm}
                 />
             ) : (
-                <button className="create-btn" onClick={onShowForm}>
+                <button className="btn-create" onClick={onShowForm}>
                     Write a comment...
                 </button>
             )}

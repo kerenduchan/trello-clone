@@ -3,10 +3,10 @@ import { forwardRef } from 'react'
 export const LabelBtn = forwardRef(function LabelBtn(props, ref) {
     const { label, size = 'lg', onClick } = props
     return (
-        <div className={`label-btn-container ${size}`} onClick={onClick}>
+        <div className={`container-btn-label ${size}`} onClick={onClick}>
             <button
                 ref={ref}
-                className={`label-btn ${size}`}
+                className={`btn-label ${size}`}
                 style={{ backgroundColor: label.color }}
             >
                 <span className="title">{label.title}</span>

@@ -39,7 +39,7 @@ export function ChecklistMenu({ hierarchy, checklistMenu }) {
                     onChange={handleChange}
                     value={draft.title}
                 />
-                <button className="btn-primary add-btn">Add</button>
+                <button className="btn-primary btn-add">Add</button>
             </form>
         </PopoverMenu>
     )

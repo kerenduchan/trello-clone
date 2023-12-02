@@ -18,11 +18,11 @@
         @include font-p();
     }
 
-    .save-btn {
+    .btn-save {
         grid-area: 2 / 1;
     }
 
-    .close-btn {
+    .btn-close {
         grid-area: 2 / 2;
         @include square(32px);
 
@@ -33,28 +33,28 @@
         }
     }
 
-    .assign-btn {
+    .btn-assign {
         grid-area: 2 / 4;
         @include secondary-btn-version-2();
     }
 
-    .due-date-btn {
+    .btn-due-date {
         grid-area: 2 / 5;
         @include secondary-btn-version-2();
         min-width: 96px;
     }
 
-    .emoji-btn {
+    .btn-emoji {
         grid-area: 2 / 6;
         @include icon-btn-version-2();
     }
 
-    .mention-btn {
+    .btn-mention {
         grid-area: 2 / 7;
         @include icon-btn-version-2();
     }
 
-    .more-btn {
+    .btn-more {
         grid-area: 2 / 8;
         @include icon-btn-version-2();
     }

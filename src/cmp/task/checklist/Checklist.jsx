@@ -54,7 +54,7 @@ export function Checklist({ hierarchy, checklist }) {
                     title={checklist.title}
                 >
                     <SecondaryBtn
-                        className="title-btn"
+                        className="btn-title"
                         text="Delete"
                         {...deleteChecklistMenu.triggerAndTarget}
                     />
@@ -89,7 +89,7 @@ export function Checklist({ hierarchy, checklist }) {
                     ) : (
                         <div className="add-item">
                             <SecondaryBtn
-                                className="add-btn"
+                                className="btn-add"
                                 text="Add an item"
                                 onClick={onShowForm}
                             />

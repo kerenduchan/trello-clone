@@ -7,7 +7,7 @@
     display: grid;
     grid-template-rows: repeat(2, auto);
 
-    .edit-btn-container {
+    .container-btn-edit {
         visibility: hidden;
         position: absolute;
         top: 2px;
@@ -17,14 +17,14 @@
         align-items: center;
         justify-content: center;
 
-        .edit-btn-bg {
+        .bg-btn-edit {
             grid-area: 1/ 1;
             background-color: var(--bg-1);
             border-radius: 50%;
             @include square(32px);
         }
 
-        .edit-btn {
+        .btn-edit {
             grid-area: 1/ 1;
             @include square(32px);
 
@@ -37,7 +37,7 @@
     &:hover {
         @include outline-emphasis();
 
-        .edit-btn-container {
+        .container-btn-edit {
             visibility: visible;
         }
     }

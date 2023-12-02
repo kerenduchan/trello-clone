@@ -6,7 +6,7 @@
         align-items: center;
         justify-items: center;
 
-        .back-btn {
+        .btn-back {
             grid-area: 1 / 1;
             .icon {
                 color: var(--icon-color-subtle);
@@ -19,7 +19,7 @@
             color: var(--text-color-subtle);
             @include font(14px, 40px, 600);
         }
-        .close-btn {
+        .btn-close {
             grid-area: 1 / 3;
             .icon {
                 color: var(--icon-color-subtle);

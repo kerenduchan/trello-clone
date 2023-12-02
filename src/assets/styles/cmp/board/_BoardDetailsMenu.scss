@@ -19,7 +19,7 @@
             @include font(16px, 20px, 500);
         }
 
-        .close-btn {
+        .btn-close {
             grid-area: 1 / 1;
             justify-self: end;
         }

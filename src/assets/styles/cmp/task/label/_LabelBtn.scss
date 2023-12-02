@@ -1,4 +1,4 @@
-.label-btn-container {
+.container-btn-label {
     display: grid;
     overflow: hidden;
     cursor: pointer;
@@ -8,7 +8,7 @@
         border-radius: 3px;
     }
 
-    .label-btn {
+    .btn-label {
         grid-area: 1 / 1;
         transition: height 0.5s;
         display: flex;

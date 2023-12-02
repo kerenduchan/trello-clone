@@ -41,7 +41,7 @@
             visibility: hidden;
             justify-self: end;
 
-            .circle-btn {
+            .btn-circle {
                 @include button-bg(
                     var(--bg-neutral),
                     var(--bg-neutral-hovered),

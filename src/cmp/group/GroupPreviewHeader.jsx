@@ -23,7 +23,7 @@ export function GroupPreviewHeader({ group, board }) {
                 <EditableTitle title={group.title} onChange={onTitleChange} />
                 <SquareIconBtn
                     {...listActionsMenu.triggerAndTarget}
-                    className="more-btn"
+                    className="btn-more"
                     icon="more"
                 />
             </header>

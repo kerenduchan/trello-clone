@@ -62,7 +62,7 @@ export function TaskDescription({ hierarchy }) {
         }
         return (
             <SecondaryBtn
-                className="add-btn"
+                className="btn-add"
                 text="Add a more detailed description..."
                 onClick={onShowForm}
             />
@@ -74,7 +74,7 @@ export function TaskDescription({ hierarchy }) {
             <TaskDetailsSubsectionHeader icon="description" title="Description">
                 {task.description && !showForm && (
                     <SecondaryBtn
-                        className="title-btn"
+                        className="btn-title"
                         text="Edit"
                         onClick={() => setShowForm(true)}
                     />

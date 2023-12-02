@@ -6,7 +6,7 @@ export const CircleBtn = forwardRef(function CircleBtn(props, ref) {
     return (
         <button
             ref={ref}
-            className={`circle-btn ${type}-btn ${className ? className : ''}`}
+            className={`btn-circle btn-${type} ${className ? className : ''}`}
             onClick={onClick}
         >
             <Icon type={type} size="sm" />

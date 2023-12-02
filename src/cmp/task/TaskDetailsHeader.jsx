@@ -19,7 +19,7 @@ export function TaskDetailsHeader({ hierarchy, onClose }) {
         <>
             <CircleBtn
                 type="close"
-                className="task-details-close-btn"
+                className="btn-task-details-close"
                 onClick={onClose}
             />
             {task.cover && (

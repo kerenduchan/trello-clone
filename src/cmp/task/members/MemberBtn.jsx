@@ -21,7 +21,7 @@ export function MemberBtn({ hierarchy, member }) {
     }
 
     return (
-        <button className="member-btn" onClick={onClick}>
+        <button className="btn-member" onClick={onClick}>
             <Avatar imgSrc={member.imgUrl} />
             <div className="title">{member.fullname}</div>
             {isTaskMember() && <Icon type="check" size="xs" />}

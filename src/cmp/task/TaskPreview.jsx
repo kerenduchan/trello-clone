@@ -25,8 +25,8 @@ export function TaskPreview({ hierarchy }) {
         <section className="task-preview" onClick={onClick}>
             <TaskPreviewCover hierarchy={hierarchy} />
 
-            <div className="edit-btn-container">
-                <div className="edit-btn-bg" />
+            <div className="container-btn-edit">
+                <div className="bg-btn-edit" />
                 <CircleBtn type="edit" onClick={onEditClick} />
             </div>
             <div className="content">
