@@ -11,5 +11,12 @@
             var(--bg-neutral-pressed)
         );
         border-radius: 3px;
+        display: flex;
+        align-items: center;
+
+        .icon {
+            margin-inline-start: 4px;
+            margin-inline-end: -4px;
+        }
     }
 }

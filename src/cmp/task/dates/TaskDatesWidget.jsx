@@ -1,6 +1,7 @@
 import moment from 'moment'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { TaskDatesMenu } from './TaskDatesMenu'
+import { Icon } from '../../general/Icon'
 
 export function TaskDatesWidget({ hierarchy }) {
     const { task } = hierarchy
@@ -34,6 +35,7 @@ export function TaskDatesWidget({ hierarchy }) {
                     <h3>{getTitle()}</h3>
                     <button {...datesMenu.triggerAndTarget}>
                         {getStartDate()}
+                        <Icon type="expand_more" />
                     </button>
                 </section>
             )}
