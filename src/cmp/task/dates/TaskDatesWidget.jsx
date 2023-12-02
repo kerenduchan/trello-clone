@@ -23,9 +23,19 @@ export function TaskDatesWidget({ hierarchy }) {
         return 'Due Date'
     }
 
-    function getStartDate() {
+    function getButtonText() {
         // TODO: different format if not in the current year
-        return moment(dates.startDate).format('MMM DD')
+        let res = ''
+        if (dates.startDate) {
+            res += moment(dates.startDate).format('MMM DD')
+            if (dates.dueDate) {
+                res += ' - '
+            }
+        }
+        if (dates.dueDate) {
+            res += moment.unix(task.dates.dueDate).format('MMM DD [at] HH:mm A')
+        }
+        return res
     }
 
     return (
@@ -34,7 +44,7 @@ export function TaskDatesWidget({ hierarchy }) {
                 <section className="task-dates-widget">
                     <h3>{getTitle()}</h3>
                     <button {...datesMenu.triggerAndTarget}>
-                        {getStartDate()}
+                        {getButtonText()}
                         <Icon type="expand_more" />
                     </button>
                 </section>
