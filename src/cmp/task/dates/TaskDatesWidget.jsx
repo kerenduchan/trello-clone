@@ -5,6 +5,7 @@ import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { TaskDatesMenu } from './TaskDatesMenu'
 import { Icon } from '../../general/Icon'
 import { updateTask } from '../../../store/actions/board.actions'
+import { boardService } from '../../../services/board.service'
 
 export function TaskDatesWidget({ hierarchy }) {
     const { task } = hierarchy
@@ -56,6 +57,8 @@ export function TaskDatesWidget({ hierarchy }) {
         return res
     }
 
+    const status = boardService.getTaskDateStatus(task)
+
     return (
         <>
             {hasDates() && (
@@ -74,8 +77,12 @@ export function TaskDatesWidget({ hierarchy }) {
                         )}
                         <button {...datesMenu.triggerAndTarget}>
                             <span>{getButtonText()}</span>
-                            {dates.isComplete && (
-                                <span className="complete-label">Complete</span>
+                            {status && (
+                                <span
+                                    className={`status-label ${status.className}`}
+                                >
+                                    {status.text}
+                                </span>
                             )}
                             <Icon type="expand_more" />
                         </button>

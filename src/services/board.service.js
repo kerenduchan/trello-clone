@@ -26,6 +26,7 @@ export const boardService = {
     countItemsInAllChecklists,
     getChecklistPercent,
     getCoverColors,
+    getTaskDateStatus,
 }
 
 const STORAGE_KEY = 'boards'
@@ -425,4 +426,43 @@ function getChecklistPercent(checklist) {
     return Math.round(
         (100 * countDoneItemsInChecklist(checklist)) / checklist.items.length
     )
+}
+
+function getTaskDateStatus(task) {
+    const statuses = {
+        complete: {
+            className: 'complete',
+            text: 'Complete',
+        },
+        dueSoon: {
+            className: 'due-soon',
+            text: 'Due soon',
+        },
+        recentlyOverdue: {
+            className: 'recently-overdue',
+            text: 'Overdue',
+        },
+        pastDue: {
+            className: 'past-due',
+            text: 'Overdue',
+        },
+    }
+
+    // number of seconds per hour
+    const SECONDS_PER_HOUR = 3600
+
+    if (task.dates.isComplete) {
+        return statuses.complete
+    }
+    const delta = task.dates.dueDate - Math.floor(Date.now() / 1000)
+    if (delta > 0 && delta < 24 * SECONDS_PER_HOUR) {
+        return statuses.dueSoon
+    }
+    if (delta < 0) {
+        if (Math.abs(delta) < 36 * SECONDS_PER_HOUR) {
+            return statuses.recentlyOverdue
+        }
+        return statuses.pastDue
+    }
+    return null
 }

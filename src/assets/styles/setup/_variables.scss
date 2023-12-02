@@ -14,6 +14,9 @@
     --text-color: #172b4d;
     --text-color-subtle: #44546f;
     --text-color-light: #ffffff;
+    --text-inverse: #ffffff;
+    --text-warning-inverse: #172b4d;
+    --text-danger: #ae2a19;
 
     // icon color
     --icon-color: #44546f;
@@ -24,7 +27,11 @@
     --bg-neutral-subtle-hovered: #091e420f;
     --bg-neutral-subtle-pressed: #091e4224;
 
-    --bg-light-overlay: #ffffff3d;
+    // backgrounds for success, warning, danger
+    --bg-success-bold: #1f845a;
+    --bg-warning-bold: #e2b203;
+    --bg-danger-bold: #ca3521;
+    --bg-danger: #ffedeb;
 
     // sunken background
     --bg-sunken: #f7f8f9;
@@ -50,7 +57,7 @@
     --bg-divider: #091e4224;
     --bg-input-hovered: #f7f8f9;
     --bg-accent-blue-subtle: #579dff;
-    --bg-success-bold: #1f845a;
+    --bg-light-overlay: #ffffff3d;
 
     // BOX SHADOW
     --box-shadow-subtle: 0px 1px 1px #091e4240, 0px 0px 1px #091e424f;
