@@ -429,6 +429,10 @@ function getChecklistPercent(checklist) {
 }
 
 function getTaskDateStatus(task) {
+    if (!task.dates) {
+        return null
+    }
+
     const statuses = {
         complete: {
             className: 'complete',
