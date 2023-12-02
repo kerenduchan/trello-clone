@@ -142,6 +142,8 @@
 }
 
 @mixin textarea-styling() {
+    box-sizing: border-box;
+    padding: 8px 12px;
     background-color: var(--bg-1);
     border-radius: 3px;
     box-shadow: var(--box-shadow-input-focused);
@@ -183,5 +185,29 @@
     .icon {
         font-size: 16px;
         line-height: 20px;
+    }
+}
+
+@mixin btn-disabled() {
+    background-color: var(--bg-disabled);
+    color: var(--text-disabled);
+    cursor: not-allowed;
+}
+
+@mixin btn-primary() {
+    @include button-bg(
+        var(--bg-primary-btn),
+        var(--bg-primary-btn-hovered),
+        var(--bg-primary-btn-pressed)
+    );
+    color: var(--text-color-primary-btn);
+    padding: 6px 12px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:disabled {
+        @include btn-disabled();
     }
 }

@@ -1,0 +1,11 @@
+.task-comments-form {
+    textarea {
+        width: 100%;
+        @include textarea-styling();
+        @include font-p();
+    }
+
+    .btn-save {
+        margin-top: 8px;
+    }
+}
