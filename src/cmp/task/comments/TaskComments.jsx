@@ -3,6 +3,7 @@ import { TaskCommentsForm } from './TaskCommentsForm'
 import { useForm } from '../../../customHooks/useForm'
 import { boardService } from '../../../services/board.service'
 import { useKeyDownListener } from '../../../customHooks/useKeyDownListener'
+import { addTaskComment } from '../../../store/actions/board.actions'
 
 export function TaskComments({ hierarchy }) {
     const { task } = hierarchy
@@ -10,7 +11,9 @@ export function TaskComments({ hierarchy }) {
     // TODO: show form and comment if comment draft exists on the task
     const [showForm, setShowForm] = useState(false)
 
-    const [draft, handleChange, setDraft] = useForm({ text: '' })
+    const [draft, handleChange, setDraft] = useForm(
+        boardService.getEmptyComment()
+    )
 
     useKeyDownListener(['Escape'], onHideForm)
 
@@ -23,8 +26,8 @@ export function TaskComments({ hierarchy }) {
     }
 
     function onSubmitForm() {
-        // addComment(hierarchy, draft)
-        setDraft({ text: '' })
+        addTaskComment(hierarchy, { ...draft, createdAt: Date.now() })
+        setDraft(boardService.getEmptyComment())
         onHideForm()
     }
 

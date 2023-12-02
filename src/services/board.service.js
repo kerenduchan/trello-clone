@@ -7,6 +7,7 @@ export const boardService = {
     getEmptyTask,
     getEmptyChecklist,
     getEmptyChecklistItem,
+    getEmptyComment,
     query,
     getById,
     save,
@@ -75,6 +76,15 @@ function getEmptyChecklistItem() {
         _id: utilService.makeId(),
         title: '',
         isDone: false,
+    }
+}
+
+function getEmptyComment() {
+    return {
+        _id: utilService.makeId(),
+        text: '',
+        createdBy: 'u101',
+        createdAt: null,
     }
 }
 
