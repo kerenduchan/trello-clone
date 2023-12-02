@@ -8,7 +8,6 @@ import { useEffect } from 'react'
 
 export function TaskDatesMenu({ hierarchy, popoverState }) {
     const { task } = hierarchy
-    console.log('render', task.date)
     const [draft, handleChange, setDraft] = useForm(convertTaskDateToDraft())
 
     useEffect(() => {
