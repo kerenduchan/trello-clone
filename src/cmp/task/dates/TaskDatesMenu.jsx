@@ -8,50 +8,56 @@ import { useEffect } from 'react'
 
 export function TaskDatesMenu({ hierarchy, popoverState }) {
     const { task } = hierarchy
-    const [draft, handleChange, setDraft] = useForm(convertTaskDateToDraft())
+    const [draft, handleChange, setDraft] = useForm(convertTaskDatesToDraft())
 
     useEffect(() => {
-        setDraft(convertTaskDateToDraft())
+        setDraft(convertTaskDatesToDraft())
     }, [task])
 
     function onSubmit(e) {
         e.preventDefault()
-        const date = convertDraftToTaskDate()
-        updateTask(hierarchy, { date })
+        const dates = convertDraftToTaskDates()
+        updateTask(hierarchy, { dates })
+        popoverState.onClose()
     }
 
     function onRemove() {
-        updateTask(hierarchy, { date: { startDate: null, endDate: null } })
+        updateTask(hierarchy, { dates: { startDate: null, dueDate: null } })
+        popoverState.onClose()
     }
 
-    function convertDraftToTaskDate() {
+    function convertDraftToTaskDates() {
         return {
             startDate: draft.hasStartDate ? draft.startDate : null,
-            endDate: draft.hasEndDate ? moment(draft.endDate).unix() : null,
+            dueDate: draft.hasDueDate ? moment(draft.dueDate).unix() : null,
         }
     }
 
-    function convertTaskDateToDraft() {
+    function convertTaskDatesToDraft() {
         const res = {
             hasStartDate: false,
             startDate: '',
-            hasEndDate: false,
-            endDate: '',
+            hasDueDate: false,
+            dueDate: '',
         }
 
-        if (task.date.startDate) {
+        if (task.dates.startDate) {
             res.hasStartDate = true
             res.startDate = task.date.startDate
         }
 
-        if (task.date.endDate) {
-            res.hasEndDate = true
-            res.endDate = moment
-                .unix(task.date.endDate)
+        if (task.dates.dueDate) {
+            res.hasDueDate = true
+            res.dueDate = moment
+                .unix(task.date.dueDate)
                 .format('YYYY-MM-DDTHH:mm')
         }
 
         return res
+    }
+
+    function isStartDateDisabled() {
+        return draft.hasStartDate === false
     }
 
     return (
@@ -74,6 +80,7 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
                     type="date"
                     id="startDate"
                     name="startDate"
+                    disabled={!draft.hasStartDate}
                     value={draft.startDate}
                     onChange={handleChange}
                 />
@@ -81,16 +88,17 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
                 <h4>Due date</h4>
                 <input
                     type="checkbox"
-                    id="hasEndDate"
-                    name="hasEndDate"
-                    checked={draft.hasEndDate}
+                    id="hasDueDate"
+                    name="hasDueDate"
+                    checked={draft.hasDueDate}
                     onChange={handleChange}
                 />
                 <input
                     type="datetime-local"
-                    id="endDate"
-                    name="endDate"
-                    value={draft.endDate}
+                    id="dueDate"
+                    name="dueDate"
+                    disabled={!draft.hasDueDate}
+                    value={draft.dueDate}
                     onChange={handleChange}
                 />
                 <PrimaryBtn text="Save" />

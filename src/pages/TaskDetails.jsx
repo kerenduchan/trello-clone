@@ -7,6 +7,7 @@ import { LabelsWidget } from '../cmp/task/label/LabelsWidget'
 import { TaskDetailsHeader } from '../cmp/task/TaskDetailsHeader'
 import { setCurChecklist } from '../store/actions/app.actions'
 import { MembersWidget } from '../cmp/task/members/MembersWidget'
+import { TaskDatesWidget } from '../cmp/task/dates/TaskDatesWidget'
 
 export function TaskDetails({ hierarchy }) {
     const navigate = useNavigate()
@@ -25,6 +26,7 @@ export function TaskDetails({ hierarchy }) {
                     <div className="widgets">
                         <MembersWidget hierarchy={hierarchy} />
                         <LabelsWidget hierarchy={hierarchy} />
+                        <TaskDatesWidget hierarchy={hierarchy} />
                     </div>
                     <TaskDescription hierarchy={hierarchy} />
                     <ChecklistList hierarchy={hierarchy} />
