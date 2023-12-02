@@ -2,4 +2,14 @@
     h3 {
         margin-bottom: 4px;
     }
+
+    button {
+        padding: 6px 12px;
+        @include button-bg(
+            var(--bg-neutral),
+            var(--bg-neutral-hovered),
+            var(--bg-neutral-pressed)
+        );
+        border-radius: 3px;
+    }
 }

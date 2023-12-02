@@ -1,3 +1,4 @@
+import moment from 'moment'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { TaskDatesMenu } from './TaskDatesMenu'
 
@@ -21,11 +22,19 @@ export function TaskDatesWidget({ hierarchy }) {
         return 'Due Date'
     }
 
+    function getStartDate() {
+        // TODO: different format if not in the current year
+        return moment(dates.startDate).format('MMM DD')
+    }
+
     return (
         <>
             {hasDates() && (
                 <section className="task-dates-widget">
                     <h3>{getTitle()}</h3>
+                    <button {...datesMenu.triggerAndTarget}>
+                        {getStartDate()}
+                    </button>
                 </section>
             )}
 

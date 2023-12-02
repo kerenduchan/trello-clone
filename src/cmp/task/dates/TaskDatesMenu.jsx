@@ -43,16 +43,16 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
 
         if (task.dates.startDate) {
             res.hasStartDate = true
-            res.startDate = task.date.startDate
+            res.startDate = task.dates.startDate
         }
 
         if (task.dates.dueDate) {
             res.hasDueDate = true
             res.dueDate = moment
-                .unix(task.date.dueDate)
+                .unix(task.dates.dueDate)
                 .format('YYYY-MM-DDTHH:mm')
         }
-
+        console.log('convertTaskDatesToDraft', task.dates, res)
         return res
     }
 
