@@ -1,5 +1,4 @@
 import { Icon } from '../general/Icon'
-import { CircleBtn } from '../general/btn/CircleBtn'
 import { EditableTitle } from '../general/EditableTitle'
 import { updateTask } from '../../store/actions/board.actions'
 
@@ -17,11 +16,12 @@ export function TaskDetailsHeader({ hierarchy, onClose }) {
 
     return (
         <>
-            <CircleBtn
-                type="close"
-                className="btn-task-details-close"
+            <button
+                className="btn-circle btn-task-details-close"
                 onClick={onClose}
-            />
+            >
+                <Icon type="close" />
+            </button>
             {task.cover && (
                 <div
                     className="cover"

@@ -212,3 +212,16 @@
         var(--bg-danger-bold-pressed)
     );
 }
+
+@mixin btn-circle() {
+    @include button-bg(
+        transparent,
+        var(--bg-neutral-subtle-hovered),
+        var(--bg-neutral-subtle-pressed)
+    );
+    border-radius: 50%;
+    @include square(40px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

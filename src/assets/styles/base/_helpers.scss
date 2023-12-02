@@ -17,3 +17,7 @@
 .btn-danger {
     @include btn-danger();
 }
+
+.btn-circle {
+    @include btn-circle();
+}

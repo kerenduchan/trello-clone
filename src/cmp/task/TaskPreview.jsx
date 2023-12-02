@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom'
-import { CircleBtn } from '../general/btn/CircleBtn'
 import { TaskPreviewCover } from './TaskPreviewCover'
 import { LabelsPreview } from './label/LabelsPreview'
 import { ChecklistsBadge } from './checklist/ChecklistsBadge'
@@ -27,7 +26,9 @@ export function TaskPreview({ hierarchy }) {
 
             <div className="container-btn-edit">
                 <div className="bg-btn-edit" />
-                <CircleBtn type="edit" onClick={onEditClick} />
+                <button className="btn-circle btn-edit" onClick={onEditClick}>
+                    <Icon type="edit" />
+                </button>
             </div>
             <div className="content">
                 <LabelsPreview hierarchy={hierarchy} />

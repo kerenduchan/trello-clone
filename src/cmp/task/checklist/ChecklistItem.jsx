@@ -1,11 +1,10 @@
-import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { updateChecklistItem } from '../../../store/actions/board.actions'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
-import { CircleBtn } from '../../general/btn/CircleBtn'
 import { ChecklistItemActionsMenu } from './ChecklistItemActionsMenu'
 import { ChecklistItemEditForm } from './ChecklistItemEditForm'
 import { setCurChecklistItem } from '../../../store/actions/app.actions'
+import { Icon } from '../../general/Icon'
 
 export function ChecklistItem({ hierarchy, checklist, item }) {
     const curChecklistItemId = useSelector(
@@ -65,10 +64,12 @@ export function ChecklistItem({ hierarchy, checklist, item }) {
 
                         {/* Actions button(s) */}
                         <div className="actions">
-                            <CircleBtn
-                                type="more"
+                            <button
+                                className="btn-circle"
                                 {...actionsMenu.triggerAndTarget}
-                            />
+                            >
+                                <Icon type="more" />
+                            </button>
                         </div>
                     </div>
                 )}
