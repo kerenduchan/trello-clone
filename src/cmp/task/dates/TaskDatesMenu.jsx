@@ -4,11 +4,16 @@ import { updateTask } from '../../../store/actions/board.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { PrimaryBtn } from '../../general/btn/PrimaryBtn'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
+import { useEffect } from 'react'
 
 export function TaskDatesMenu({ hierarchy, popoverState }) {
     const { task } = hierarchy
+    console.log('render', task.date)
+    const [draft, handleChange, setDraft] = useForm(convertTaskDateToDraft())
 
-    const [draft, handleChange] = useForm(convertTaskDateToDraft())
+    useEffect(() => {
+        setDraft(convertTaskDateToDraft())
+    }, [task])
 
     function onSubmit(e) {
         e.preventDefault()
