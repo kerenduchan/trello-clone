@@ -10,9 +10,14 @@
             var(--bg-neutral-hovered),
             var(--bg-neutral-pressed)
         );
-        @include backdrop-blur();
+        color: var(--dynamic-text);
 
+        @include backdrop-blur();
         gap: 8px;
+
+        .icon {
+            color: var(--dynamic-text);
+        }
     }
 
     form {
