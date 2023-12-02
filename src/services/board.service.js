@@ -429,7 +429,7 @@ function getChecklistPercent(checklist) {
 }
 
 function getTaskDateStatus(task) {
-    if (!task.dates) {
+    if (!task.dates || !task.dates.dueDate) {
         return null
     }
 
