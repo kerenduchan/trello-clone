@@ -1,0 +1,24 @@
+.task-comments-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    margin-bottom: 4px;
+
+    .icon {
+        @include square(20px);
+        font-size: 14px;
+        line-height: 14px;
+        margin-bottom: -3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .label {
+        @include font(12px, 20px, 400);
+        color: var(--text-color-subtle);
+        padding-inline-start: 2px;
+        padding-inline-end: 4px;
+    }
+}

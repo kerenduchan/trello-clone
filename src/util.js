@@ -29,4 +29,5 @@ const _typeToMaterialSymbol = {
     back: 'arrow_back_ios_new',
     emoji: 'sentiment_satisfied',
     mention: 'alternate_email',
+    comment: 'chat_bubble',
 }

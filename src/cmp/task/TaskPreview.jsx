@@ -4,6 +4,7 @@ import { LabelsPreview } from './label/LabelsPreview'
 import { ChecklistsBadge } from './checklist/ChecklistsBadge'
 import { Icon } from '../general/Icon'
 import { MembersBadge } from './members/MembersBadge'
+import { TaskCommentsBadge } from './comments/TaskCommentsBadge'
 
 export function TaskPreview({ hierarchy }) {
     const { board, task } = hierarchy
@@ -40,6 +41,8 @@ export function TaskPreview({ hierarchy }) {
                             <Icon type="description" size="xs" />
                         </span>
                     )}
+
+                    <TaskCommentsBadge hierarchy={hierarchy} />
                     <ChecklistsBadge hierarchy={hierarchy} />
                     <MembersBadge hierarchy={hierarchy} />
                 </div>
