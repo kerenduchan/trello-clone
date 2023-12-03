@@ -7,35 +7,68 @@ import { boardService } from '../../../services/board.service'
 
 export function TaskDatesBadge({ hierarchy }) {
     const { task } = hierarchy
+    const dates = task.dates
 
     const [isComplete, toggleIsComplete, setIsComplete] = useToggle(
-        task.dates?.isComplete
+        dates?.isComplete
     )
 
     useEffect(() => {
-        setIsComplete(task.dates?.isComplete || false)
+        setIsComplete(dates?.isComplete || false)
     }, [task])
 
     function onClick(e) {
+        if (!isAllowComplete()) {
+            return
+        }
+
         e.stopPropagation()
 
         updateTask(hierarchy, {
-            dates: { ...task.dates, isComplete: !isComplete },
+            dates: { ...dates, isComplete: !isComplete },
         })
         toggleIsComplete()
     }
 
+    function getText() {
+        // TODO: different format if not in the current year
+
+        let res = ''
+        if (dates.startDate) {
+            if (!dates.dueDate) {
+                res += 'Started: '
+            }
+            res += moment(dates.startDate).format('MMM DD')
+            if (dates.dueDate) {
+                res += ' - '
+            }
+        }
+        if (dates.dueDate) {
+            res += moment.unix(task.dates.dueDate).format('MMM DD')
+        }
+        return res
+    }
+
+    function isAllowComplete() {
+        return Boolean(dates.dueDate)
+    }
+
     const status = boardService.getTaskDateStatus(task)
 
-    if (!task.dates || !task.dates.dueDate) return <></>
+    if (!dates || (!dates.dueDate && !dates.startDate)) return <></>
 
     return (
         <div
             className={`task-dates-badge ${status ? status.className : ''}`}
             onClick={onClick}
         >
-            <span className="icon-container">
+            <span
+                className={`icon-container ${
+                    isAllowComplete() ? 'show-checkbox-on-hover' : ''
+                }`}
+            >
                 <Icon type="schedule" size="xs" />
+
                 <Icon
                     className="checkbox-icon"
                     type={
@@ -44,9 +77,7 @@ export function TaskDatesBadge({ hierarchy }) {
                     size="xs"
                 />
             </span>
-            <span className="due-date">
-                {moment(task.dates.dueDate).format('MMM DD')}
-            </span>
+            <span className="due-date">{getText()}</span>
         </div>
     )
 }
