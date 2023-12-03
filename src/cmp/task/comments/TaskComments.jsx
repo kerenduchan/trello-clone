@@ -5,7 +5,7 @@ import { addTaskComment } from '../../../store/actions/board.actions'
 import { useForm } from '../../../customHooks/useForm'
 import { useKeyDownListener } from '../../../customHooks/useKeyDownListener'
 import { TaskCommentCreateForm } from './TaskCommentCreateForm'
-import { TaskCommentsItem } from './TaskCommentsItem'
+import { TaskComment } from './TaskComment'
 import { Avatar } from '../../general/Avatar'
 
 export function TaskComments({ hierarchy }) {
@@ -57,7 +57,7 @@ export function TaskComments({ hierarchy }) {
             <ul className="comments-list">
                 {task.comments?.map((c) => (
                     <li key={c._id}>
-                        <TaskCommentsItem
+                        <TaskComment
                             hierarchy={hierarchy}
                             comment={c}
                             isSelected={selectedItemId === c._id}

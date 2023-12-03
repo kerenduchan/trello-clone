@@ -7,7 +7,7 @@ import { deleteTaskComment } from '../../../store/actions/board.actions'
 import { useState } from 'react'
 import { TaskCommentEditForm } from './TaskCommentEditForm'
 
-export function TaskCommentsItem({ hierarchy, comment, isSelected, onClick }) {
+export function TaskComment({ hierarchy, comment, isSelected, onClick }) {
     const { board } = hierarchy
 
     const [showEditForm, setShowEditForm] = useState(false)
@@ -33,7 +33,7 @@ export function TaskCommentsItem({ hierarchy, comment, isSelected, onClick }) {
     const createdBy = getCreatedBy()
 
     return (
-        <div className={`task-comments-item ${isSelected ? 'selected' : ''}`}>
+        <div className={`task-comment ${isSelected ? 'selected' : ''}`}>
             <div className="created-by-avatar">
                 <Avatar imgSrc={createdBy.imgUrl} />
             </div>
