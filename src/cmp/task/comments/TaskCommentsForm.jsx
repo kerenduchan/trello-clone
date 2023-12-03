@@ -6,6 +6,7 @@ export function TaskCommentsForm({ draft, handleChange, onClose, onSubmit }) {
     return (
         <form className="task-comments-form" onSubmit={onSubmitInternal}>
             <textarea
+                autoFocus
                 type="text"
                 name="text"
                 onChange={handleChange}
