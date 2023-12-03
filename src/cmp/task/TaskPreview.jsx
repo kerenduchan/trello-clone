@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { TaskPreviewCover } from './TaskPreviewCover'
 import { LabelsPreview } from './label/LabelsPreview'
 import { ChecklistsBadge } from './checklist/ChecklistsBadge'
+import { TaskDatesBadge } from './dates/TaskDatesBadge'
 import { Icon } from '../general/Icon'
 import { MembersBadge } from './members/MembersBadge'
 import { TaskCommentsBadge } from './comments/TaskCommentsBadge'
@@ -36,6 +37,8 @@ export function TaskPreview({ hierarchy }) {
                 <p className="title">{task.title}</p>
 
                 <div className="badges">
+                    <TaskDatesBadge hierarchy={hierarchy} />
+
                     {task.description && (
                         <span className="description-badge">
                             <Icon type="description" size="xs" />

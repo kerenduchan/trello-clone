@@ -1,0 +1,31 @@
+.task-dates-badge {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+    margin-inline-end: 4px;
+
+    .icon-container {
+        @include square(20px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .checkbox-icon {
+            display: none;
+        }
+
+        &:hover {
+            .schedule-icon {
+                display: none;
+            }
+
+            .checkbox-icon {
+                display: block;
+            }
+        }
+    }
+
+    .due-date {
+        @include font(12px, 20px, 400);
+    }
+}
