@@ -8,6 +8,7 @@ import { TaskCommentsItem } from './TaskCommentsItem'
 
 export function TaskComments({ hierarchy }) {
     const { task } = hierarchy
+    const [selectedItemId, setSelectedItemId] = useState()
 
     // TODO: show form and comment if comment draft exists on the task
     const [showForm, setShowForm] = useState(false)
@@ -50,7 +51,12 @@ export function TaskComments({ hierarchy }) {
             <ul className="comments-list">
                 {task.comments?.map((c) => (
                     <li key={c._id}>
-                        <TaskCommentsItem hierarchy={hierarchy} item={c} />
+                        <TaskCommentsItem
+                            hierarchy={hierarchy}
+                            item={c}
+                            isSelected={selectedItemId === c._id}
+                            onClick={() => setSelectedItemId(c._id)}
+                        />
                     </li>
                 ))}
             </ul>
