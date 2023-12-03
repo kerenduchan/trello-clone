@@ -4,6 +4,7 @@ import { useForm } from '../../../customHooks/useForm'
 import { boardService } from '../../../services/board.service'
 import { useKeyDownListener } from '../../../customHooks/useKeyDownListener'
 import { addTaskComment } from '../../../store/actions/board.actions'
+import { TaskCommentsItem } from './TaskCommentsItem'
 
 export function TaskComments({ hierarchy }) {
     const { task } = hierarchy
@@ -45,6 +46,14 @@ export function TaskComments({ hierarchy }) {
                     Write a comment...
                 </button>
             )}
+
+            <ul className="comments-list">
+                {task.comments?.map((c) => (
+                    <li key={c._id}>
+                        <TaskCommentsItem hierarchy={hierarchy} item={c} />
+                    </li>
+                ))}
+            </ul>
         </div>
     )
 }

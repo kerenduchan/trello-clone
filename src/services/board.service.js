@@ -19,6 +19,7 @@ export const boardService = {
     getLabelById,
     getGroupById,
     getTaskById,
+    getBoardFieldItemById,
     getGroupAndTaskByTaskId,
     getChecklistById,
     getChecklistItemById,
@@ -320,6 +321,10 @@ function getTaskLabels(hierarchy) {
 
 function getLabelById(board, labelId) {
     return board.labels.find((label) => label._id === labelId)
+}
+
+function getBoardFieldItemById(board, field, itemId) {
+    return board[field].find((item) => item._id === itemId)
 }
 
 function _getDefaultLabels() {

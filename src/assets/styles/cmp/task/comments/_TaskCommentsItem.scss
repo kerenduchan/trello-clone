@@ -1,0 +1,31 @@
+.task-comments-item {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-inline-start: 4px;
+    position: relative;
+
+    .created-by-avatar {
+    }
+
+    .heading {
+        .created-by-fullname {
+            @include font(14px, 20px, 700);
+            margin-inline-end: 4px;
+        }
+
+        .created-at {
+            @include font(12px, 14px, 400);
+        }
+    }
+
+    .text {
+        padding: 8px 12px;
+        margin-top: 4px;
+        margin-bottom: 4px;
+        margin-inline-end: 2px;
+        border-radius: 8px;
+        @include font-p();
+        box-shadow: var(--box-shadow-subtle);
+        background-color: var(--bg-input);
+    }
+}
