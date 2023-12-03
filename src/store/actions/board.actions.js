@@ -25,6 +25,7 @@ export {
     addTaskMember,
     removeTaskMember,
     addTaskComment,
+    deleteTaskComment,
     addChecklist,
     deleteChecklist,
     addChecklistItem,
@@ -185,6 +186,15 @@ async function addTaskComment(hierarchy, comment) {
         taskToUpdate.comments = [comment]
     }
 
+    return _updateTask(board, group, taskToUpdate)
+}
+
+async function deleteTaskComment(hierarchy, comment) {
+    const { board, group, task } = hierarchy
+    const taskToUpdate = { ...task }
+    taskToUpdate.comments = taskToUpdate.comments.filter(
+        (c) => c._id !== comment._id
+    )
     return _updateTask(board, group, taskToUpdate)
 }
 

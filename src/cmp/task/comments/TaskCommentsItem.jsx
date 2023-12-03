@@ -1,11 +1,18 @@
 import moment from 'moment/moment'
 import { boardService } from '../../../services/board.service'
 import { Avatar } from '../../general/Avatar'
+import { usePopoverState } from '../../../customHooks/usePopoverState'
+import { DeleteMenu } from '../../general/DeleteMenu'
+import { deleteTaskComment } from '../../../store/actions/board.actions'
 
 export function TaskCommentsItem({ hierarchy, item, isSelected, onClick }) {
     const { board } = hierarchy
+    const deleteCommentMenu = usePopoverState()
 
-    function onDelete() {}
+    function onDeleteComment() {
+        deleteTaskComment(hierarchy, item)
+        deleteCommentMenu.onClose()
+    }
 
     function onEdit() {}
 
@@ -40,8 +47,19 @@ export function TaskCommentsItem({ hierarchy, item, isSelected, onClick }) {
             <div className="actions">
                 <button onClick={onEdit}>Edit</button>
                 <span> • </span>
-                <button onClick={onDelete}>Delete</button>
+                <button {...deleteCommentMenu.triggerAndTarget}>Delete</button>
             </div>
+
+            {/* Delete comment menu */}
+            {deleteCommentMenu.show && (
+                <DeleteMenu
+                    deleteMenu={deleteCommentMenu}
+                    title="Delete comment?"
+                    text="Deleting a comment is forever. There is no undo."
+                    btnText="Delete comment"
+                    onDelete={onDeleteComment}
+                />
+            )}
         </div>
     )
 }
