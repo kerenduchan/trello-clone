@@ -39,7 +39,6 @@ export function TaskComments({ hierarchy }) {
                 <TaskCommentsForm
                     draft={draft}
                     handleChange={handleChange}
-                    onClose={onHideForm}
                     onSubmit={onSubmitForm}
                 />
             ) : (

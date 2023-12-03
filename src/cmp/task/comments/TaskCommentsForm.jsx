@@ -1,4 +1,4 @@
-export function TaskCommentsForm({ draft, handleChange, onClose, onSubmit }) {
+export function TaskCommentsForm({ draft, handleChange, onSubmit }) {
     function onSubmitInternal(e) {
         e.preventDefault()
         onSubmit()
