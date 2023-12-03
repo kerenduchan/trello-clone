@@ -4,24 +4,30 @@ import { Avatar } from '../../general/Avatar'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { DeleteMenu } from '../../general/DeleteMenu'
 import { deleteTaskComment } from '../../../store/actions/board.actions'
+import { useState } from 'react'
+import { TaskCommentEditForm } from './TaskCommentEditForm'
 
-export function TaskCommentsItem({ hierarchy, item, isSelected, onClick }) {
+export function TaskCommentsItem({ hierarchy, comment, isSelected, onClick }) {
     const { board } = hierarchy
+
+    const [showEditForm, setShowEditForm] = useState(false)
     const deleteCommentMenu = usePopoverState()
 
     function onDeleteComment() {
-        deleteTaskComment(hierarchy, item)
+        deleteTaskComment(hierarchy, comment)
         deleteCommentMenu.onClose()
     }
 
-    function onEdit() {}
+    function onEdit() {
+        setShowEditForm(true)
+    }
 
     function getCreatedBy() {
-        return boardService.getItemById(board, 'members', item.createdBy)
+        return boardService.getItemById(board, 'members', comment.createdBy)
     }
 
     function getCreatedAt() {
-        return moment(item.createdAt).fromNow()
+        return moment(comment.createdAt).fromNow()
     }
 
     const createdBy = getCreatedBy()
@@ -31,20 +37,33 @@ export function TaskCommentsItem({ hierarchy, item, isSelected, onClick }) {
             <div className="created-by-avatar">
                 <Avatar imgSrc={createdBy.imgUrl} />
             </div>
-            <div className="heading">
-                <span className="created-by-fullname">
-                    {createdBy.fullname}
-                </span>
-                <span className="created-at" onClick={onClick}>
-                    {getCreatedAt()}
-                </span>
-            </div>
-            <div className="text">{item.text}</div>
-            <div className="actions">
-                <button onClick={onEdit}>Edit</button>
-                <span> • </span>
-                <button {...deleteCommentMenu.triggerAndTarget}>Delete</button>
-            </div>
+
+            {showEditForm ? (
+                <TaskCommentEditForm
+                    hierarchy={hierarchy}
+                    comment={comment}
+                    onClose={() => setShowEditForm(false)}
+                />
+            ) : (
+                <>
+                    <div className="heading">
+                        <span className="created-by-fullname">
+                            {createdBy.fullname}
+                        </span>
+                        <span className="created-at" onClick={onClick}>
+                            {getCreatedAt()}
+                        </span>
+                    </div>
+                    <div className="text">{comment.text}</div>
+                    <div className="actions">
+                        <button onClick={onEdit}>Edit</button>
+                        <span> • </span>
+                        <button {...deleteCommentMenu.triggerAndTarget}>
+                            Delete
+                        </button>
+                    </div>
+                </>
+            )}
 
             {/* Delete comment menu */}
             {deleteCommentMenu.show && (

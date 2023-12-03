@@ -59,7 +59,7 @@ export function TaskComments({ hierarchy }) {
                     <li key={c._id}>
                         <TaskCommentsItem
                             hierarchy={hierarchy}
-                            item={c}
+                            comment={c}
                             isSelected={selectedItemId === c._id}
                             onClick={() => setSelectedItemId(c._id)}
                         />
