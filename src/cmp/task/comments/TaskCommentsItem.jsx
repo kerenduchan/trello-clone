@@ -17,11 +17,7 @@ export function TaskCommentsItem({ hierarchy, item, isSelected, onClick }) {
     function onEdit() {}
 
     function getCreatedBy() {
-        return boardService.getBoardFieldItemById(
-            board,
-            'members',
-            item.createdBy
-        )
+        return boardService.getItemById(board, 'members', item.createdBy)
     }
 
     function getCreatedAt() {

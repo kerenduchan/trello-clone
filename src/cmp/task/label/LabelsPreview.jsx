@@ -21,7 +21,11 @@ export function LabelsPreview({ hierarchy }) {
                 {task.labelIds.map((labelId) => (
                     <li key={labelId}>
                         <LabelBtn
-                            label={boardService.getLabelById(board, labelId)}
+                            label={boardService.getItemById(
+                                board,
+                                'labels',
+                                labelId
+                            )}
                             size={isZoomedIn ? 'md' : 'sm'}
                             onClick={onLabelClick}
                         />

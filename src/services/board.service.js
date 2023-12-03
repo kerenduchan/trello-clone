@@ -16,10 +16,8 @@ export const boardService = {
     getBackgroundImages,
     getTaskMembers,
     getTaskLabels,
-    getLabelById,
-    getGroupById,
     getTaskById,
-    getBoardFieldItemById,
+    getItemById,
     getGroupAndTaskByTaskId,
     getChecklistById,
     getChecklistItemById,
@@ -243,14 +241,10 @@ function _createBoards() {
                                     'Allow a logged-in user to log out',
                                 comments: [
                                     {
-                                        id: 'ZdPnm',
-                                        txt: 'also @yaronb please CR this',
+                                        _id: 'ZdPnm',
+                                        text: 'please CR this',
                                         createdAt: 1590999817436,
-                                        byMember: {
-                                            _id: 'u101',
-                                            fullname: 'Tal Tarablus',
-                                            imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-                                        },
+                                        createdBy: 'u101',
                                     },
                                 ],
                             },
@@ -305,7 +299,7 @@ function getTaskMembers(hierarchy) {
         return []
     }
     return task.memberIds.map((memberId) =>
-        board.members.find((member) => member._id === memberId)
+        getItemById(board, 'members', memberId)
     )
 }
 
@@ -314,16 +308,10 @@ function getTaskLabels(hierarchy) {
     if (!task.labelIds) {
         return []
     }
-    return task.labelIds.map((labelId) =>
-        board.labels.find((label) => label._id === labelId)
-    )
+    return task.labelIds.map((labelId) => getItemById(board, 'labels', labelId))
 }
 
-function getLabelById(board, labelId) {
-    return board.labels.find((label) => label._id === labelId)
-}
-
-function getBoardFieldItemById(board, field, itemId) {
+function getItemById(board, field, itemId) {
     return board[field].find((item) => item._id === itemId)
 }
 
@@ -383,12 +371,10 @@ function getCoverColors() {
     ]
 }
 
-function getGroupById(board, groupId) {
-    return board.groups.find((g) => g._id === groupId)
-}
-
 function getTaskById(board, groupId, taskId) {
-    return getGroupById(board, groupId)?.tasks.find((t) => t._id === taskId)
+    return getItemById(board, 'groups', groupId)?.tasks.find(
+        (t) => t._id === taskId
+    )
 }
 
 function getGroupAndTaskByTaskId(board, taskId) {
