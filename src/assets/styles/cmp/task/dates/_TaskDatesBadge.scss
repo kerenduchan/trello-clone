@@ -6,14 +6,13 @@
     display: flex;
     align-items: center;
 
-    &.complete {
-        background-color: var(--bg-success-bold);
-        color: var(--text-inverse);
+    &.task-dates-status-past-due {
+        background-color: var(--bg-accent-red-subtler);
+        color: var(--text-accent-red);
+    }
 
-        &:hover {
-            background-color: var(--bg-success-bold-hovered);
-            color: var(--text-success-bold-hovered);
-        }
+    &:hover {
+        filter: saturate(85%) brightness(85%);
     }
 
     .icon-container {

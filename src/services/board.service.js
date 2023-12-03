@@ -436,19 +436,19 @@ function getTaskDateStatus(task) {
 
     const statuses = {
         complete: {
-            className: 'complete',
+            className: 'task-dates-status-complete',
             text: 'Complete',
         },
         dueSoon: {
-            className: 'due-soon',
+            className: 'task-dates-status-due-soon',
             text: 'Due soon',
         },
         recentlyOverdue: {
-            className: 'recently-overdue',
+            className: 'task-dates-status-recently-overdue',
             text: 'Overdue',
         },
         pastDue: {
-            className: 'past-due',
+            className: 'task-dates-status-past-due',
             text: 'Overdue',
         },
     }

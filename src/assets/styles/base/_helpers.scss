@@ -30,3 +30,25 @@
     @include btn-square();
     border-radius: 3px;
 }
+
+.task-dates-status {
+    &-complete {
+        background-color: var(--bg-success-bold);
+        color: var(--text-inverse);
+    }
+
+    &-due-soon {
+        background-color: var(--bg-warning-bold);
+        color: var(--text-warning-inverse);
+    }
+
+    &-recently-overdue {
+        background-color: var(--bg-danger-bold);
+        color: var(--text-inverse);
+    }
+
+    &-past-due {
+        background-color: var(--bg-danger);
+        color: var(--text-danger);
+    }
+}

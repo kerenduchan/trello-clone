@@ -3,6 +3,7 @@ import { updateTask } from '../../../store/actions/board.actions'
 import { useToggle } from '../../../customHooks/useToggle'
 import moment from 'moment/moment'
 import { Icon } from '../../general/Icon'
+import { boardService } from '../../../services/board.service'
 
 export function TaskDatesBadge({ hierarchy }) {
     const { task } = hierarchy
@@ -24,11 +25,13 @@ export function TaskDatesBadge({ hierarchy }) {
         toggleIsComplete()
     }
 
+    const status = boardService.getTaskDateStatus(task)
+
     if (!task.dates || !task.dates.dueDate) return <></>
 
     return (
         <div
-            className={`task-dates-badge ${isComplete ? 'complete' : ''}`}
+            className={`task-dates-badge ${status ? status.className : ''}`}
             onClick={onClick}
         >
             <span className="icon-container">
