@@ -182,6 +182,9 @@ async function addTaskComment(hierarchy, comment) {
     const taskToUpdate = { ...task }
     if (taskToUpdate.comments) {
         taskToUpdate.comments = [...task.comments, comment]
+        taskToUpdate.comments.sort((c1, c2) =>
+            c1.createdAt < c2.createdAt ? 1 : -1
+        )
     } else {
         taskToUpdate.comments = [comment]
     }
