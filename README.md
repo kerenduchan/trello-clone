@@ -55,10 +55,25 @@ A [Trello](https://trello.com/) clone implementation in React.
 -   Add/remove members to/from task
 -   Show members badge in task preview
 
+### Comments
+
+-   Add a comment to a task
+-   Edit/delete comment
+-   Show comments badge in task preview
+
 ### Dates
 
--   _TODO_
+-   Add a start date / due date to a task
+-   Edit/remove task dates
+-   Show dates widget in task details, including Overdue, Due soon indicators
+-   Mark task as complete
+-   Show dates badge in task preview
 
 ### Cover
+
+-   Add cover to a task
+-   Remove cover from a task
+
+### Activity
 
 -   _TODO_
