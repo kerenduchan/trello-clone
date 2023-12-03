@@ -1,10 +1,14 @@
 .task-comments {
-    grid-area: 1 / 3;
+    grid-area: 1 / 1 / span 1 / -1;
+    @include task-details-subsection-grid();
 
     .btn-create {
+        grid-area: 1 / 3;
+
         width: 100%;
         height: 36px;
         padding: 8px 12px;
+        margin-bottom: 8px;
         box-shadow: var(--box-shadow-subtle);
         background-color: var(--bg-1);
         border-radius: 8px;
@@ -13,5 +17,9 @@
         &:hover {
             background-color: var(--bg-input-hovered);
         }
+    }
+
+    ul {
+        grid-area: 2 / 1 / span 1 / -1;
     }
 }

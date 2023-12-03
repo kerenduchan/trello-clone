@@ -1,4 +1,6 @@
 .task-comments-form {
+    grid-area: 1 / 3;
+
     textarea {
         width: 100%;
         @include textarea-styling();
