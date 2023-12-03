@@ -31,4 +31,5 @@ const _typeToMaterialSymbol = {
     mention: 'alternate_email',
     comment: 'chat_bubble',
     'checkbox-unchecked': 'check_box_outline_blank',
+    'checkbox-checked': 'select_check_box',
 }

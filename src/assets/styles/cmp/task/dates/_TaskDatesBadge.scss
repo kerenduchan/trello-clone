@@ -1,31 +1,51 @@
 .task-dates-badge {
-    display: flex;
-    align-items: center;
+    padding: 2px;
+    border-radius: 3px;
     margin-bottom: 4px;
     margin-inline-end: 4px;
+    display: flex;
+    align-items: center;
+
+    &.complete {
+        background-color: var(--bg-success-bold);
+        color: var(--text-inverse);
+
+        &:hover {
+            background-color: var(--bg-success-bold-hovered);
+            color: var(--text-success-bold-hovered);
+        }
+    }
 
     .icon-container {
         @include square(20px);
         display: flex;
         align-items: center;
         justify-content: center;
+        color: currentColor;
+
+        .icon {
+            color: currentColor;
+        }
 
         .checkbox-icon {
             display: none;
         }
+    }
 
-        &:hover {
-            .schedule-icon {
-                display: none;
-            }
+    &:hover {
+        .schedule-icon {
+            display: none;
+        }
 
-            .checkbox-icon {
-                display: block;
-            }
+        .checkbox-icon {
+            display: block;
         }
     }
 
     .due-date {
+        padding-inline-start: 2px;
+        padding-inline-end: 4px;
         @include font(12px, 20px, 400);
+        color: currentColor;
     }
 }
