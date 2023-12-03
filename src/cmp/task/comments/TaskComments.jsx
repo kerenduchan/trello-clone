@@ -4,7 +4,7 @@ import { userService } from '../../../services/user.service'
 import { addTaskComment } from '../../../store/actions/board.actions'
 import { useForm } from '../../../customHooks/useForm'
 import { useKeyDownListener } from '../../../customHooks/useKeyDownListener'
-import { TaskCommentsForm } from './TaskCommentsForm'
+import { TaskCommentCreateForm } from './TaskCommentCreateForm'
 import { TaskCommentsItem } from './TaskCommentsItem'
 import { Avatar } from '../../general/Avatar'
 
@@ -43,7 +43,7 @@ export function TaskComments({ hierarchy }) {
                 <Avatar imgSrc={user.imgUrl} />
             </div>
             {showForm ? (
-                <TaskCommentsForm
+                <TaskCommentCreateForm
                     draft={draft}
                     handleChange={handleChange}
                     onSubmit={onSubmitForm}

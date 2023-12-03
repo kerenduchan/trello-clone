@@ -1,10 +1,10 @@
-export function TaskCommentsForm({ draft, handleChange, onSubmit }) {
+export function TaskCommentCreateForm({ draft, handleChange, onSubmit }) {
     function onSubmitInternal(e) {
         e.preventDefault()
         onSubmit()
     }
     return (
-        <form className="task-comments-form" onSubmit={onSubmitInternal}>
+        <form className="task-comment-create-form" onSubmit={onSubmitInternal}>
             <textarea
                 autoFocus
                 type="text"
