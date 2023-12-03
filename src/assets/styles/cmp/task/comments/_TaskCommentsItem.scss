@@ -42,4 +42,14 @@
         background-color: var(--bg-information);
         border-color: var(--border-information);
     }
+
+    .actions {
+        button {
+            @include font(12px, 24px, 400);
+            &:hover {
+                text-decoration: underline;
+                cursor: pointer;
+            }
+        }
+    }
 }

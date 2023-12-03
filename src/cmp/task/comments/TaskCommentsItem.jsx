@@ -5,6 +5,10 @@ import { Avatar } from '../../general/Avatar'
 export function TaskCommentsItem({ hierarchy, item, isSelected, onClick }) {
     const { board } = hierarchy
 
+    function onDelete() {}
+
+    function onEdit() {}
+
     function getCreatedBy() {
         return boardService.getBoardFieldItemById(
             board,
@@ -33,7 +37,11 @@ export function TaskCommentsItem({ hierarchy, item, isSelected, onClick }) {
                 </span>
             </div>
             <div className="text">{item.text}</div>
-            <div className="actions"></div>
+            <div className="actions">
+                <button onClick={onEdit}>Edit</button>
+                <span> • </span>
+                <button onClick={onDelete}>Delete</button>
+            </div>
         </div>
     )
 }
