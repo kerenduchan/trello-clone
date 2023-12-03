@@ -6,6 +6,7 @@
     overflow: hidden;
     display: grid;
     grid-template-rows: repeat(2, auto);
+    cursor: pointer;
 
     .container-btn-edit {
         visibility: hidden;
