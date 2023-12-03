@@ -1,10 +1,12 @@
 import { useState } from 'react'
-import { TaskCommentsForm } from './TaskCommentsForm'
-import { useForm } from '../../../customHooks/useForm'
 import { boardService } from '../../../services/board.service'
-import { useKeyDownListener } from '../../../customHooks/useKeyDownListener'
+import { userService } from '../../../services/user.service'
 import { addTaskComment } from '../../../store/actions/board.actions'
+import { useForm } from '../../../customHooks/useForm'
+import { useKeyDownListener } from '../../../customHooks/useKeyDownListener'
+import { TaskCommentsForm } from './TaskCommentsForm'
 import { TaskCommentsItem } from './TaskCommentsItem'
+import { Avatar } from '../../general/Avatar'
 
 export function TaskComments({ hierarchy }) {
     const { task } = hierarchy
@@ -33,8 +35,13 @@ export function TaskComments({ hierarchy }) {
         onHideForm()
     }
 
+    const user = userService.getLoggedInUser()
+
     return (
         <div className="task-comments">
+            <div className="logged-in-user-avatar">
+                <Avatar imgSrc={user.imgUrl} />
+            </div>
             {showForm ? (
                 <TaskCommentsForm
                     draft={draft}

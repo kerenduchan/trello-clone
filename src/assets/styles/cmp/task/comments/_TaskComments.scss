@@ -2,6 +2,10 @@
     grid-area: 1 / 1 / span 1 / -1;
     @include task-details-subsection-grid();
 
+    .logged-in-user-avatar .overlay {
+        display: none;
+    }
+
     .btn-create {
         grid-area: 1 / 3;
 
