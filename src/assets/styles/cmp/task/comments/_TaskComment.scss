@@ -25,6 +25,10 @@
                 cursor: pointer;
             }
         }
+
+        .is-edited {
+            @include font(12px, 14px, 400);
+        }
     }
 
     .text {

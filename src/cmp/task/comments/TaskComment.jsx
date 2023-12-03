@@ -53,6 +53,9 @@ export function TaskComment({ hierarchy, comment, isSelected, onClick }) {
                         <span className="created-at" onClick={onClick}>
                             {getCreatedAt()}
                         </span>
+                        {comment.isEdited && (
+                            <span className="is-edited"> (edited)</span>
+                        )}
                     </div>
                     <div className="text">{comment.text}</div>
                     <div className="actions">
