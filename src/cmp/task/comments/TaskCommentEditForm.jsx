@@ -20,18 +20,21 @@ export function TaskCommentEditForm({ hierarchy, comment, onClose }) {
                 onChange={handleChange}
                 value={draft.text}
             />
-            <button
-                className="btn-primary btn-save"
-                disabled={draft.text.length === 0}
-            >
-                Save
-            </button>
 
-            <SecondaryBtn
-                className="btn-discard-changes"
-                text="Discard changes"
-                onClick={onClose}
-            />
+            <div className="edit-form-actions">
+                <button
+                    className="btn-primary btn-save"
+                    disabled={draft.text.length === 0}
+                >
+                    Save
+                </button>
+
+                <SecondaryBtn
+                    className="btn-discard-changes"
+                    text="Discard changes"
+                    onClick={onClose}
+                />
+            </div>
         </form>
     )
 }
