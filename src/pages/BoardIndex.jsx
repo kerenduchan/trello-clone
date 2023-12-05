@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { loadBoards } from '../store/actions/board.actions'
 import { BoardList } from '../cmp/board/BoardList'
 import { Icon } from '../cmp/general/Icon'
+import { BoardIndexHeader } from '../cmp/board/BoardIndexHeader'
 
 export function BoardIndex() {
     const boards = useSelector((storeState) => storeState.boardModule.boards)
@@ -20,6 +21,8 @@ export function BoardIndex() {
 
     return (
         <div className="board-index">
+            <BoardIndexHeader />
+
             <div className="boards-sections">
                 {/* Starred boards */}
                 {!!starredBoards?.length && (

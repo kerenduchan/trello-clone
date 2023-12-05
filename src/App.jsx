@@ -1,5 +1,4 @@
 import { Route, HashRouter as Router, Routes } from 'react-router-dom'
-import { AppHeader } from './cmp/AppHeader'
 import { Home } from './pages/Home'
 import { Login } from './pages/Login'
 import { BoardIndex } from './pages/BoardIndex'
@@ -10,7 +9,6 @@ function App() {
     return (
         <div id="app">
             <Router>
-                <AppHeader />
                 <div className="app-content">
                     <Routes>
                         <Route path="/" element={<Home />} />

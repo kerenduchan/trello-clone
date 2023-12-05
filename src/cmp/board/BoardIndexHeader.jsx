@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom'
-import { usePopoverState } from '../customHooks/usePopoverState'
-import { BoardCreate } from './board/BoardCreate'
-import { PopoverMenu } from './general/PopoverMenu'
+import { usePopoverState } from '../../customHooks/usePopoverState'
+import { BoardCreate } from './BoardCreate'
+import { PopoverMenu } from '../general/PopoverMenu'
 
-export function AppHeader() {
+export function BoardIndexHeader() {
     const createBoardMenu = usePopoverState()
 
     return (
         <>
-            <header className="app-header">
+            <header className="board-index-header">
                 <img className="logo" src="krello.svg" />
 
                 <Link to="/boards">Boards</Link>
