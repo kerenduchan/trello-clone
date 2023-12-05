@@ -1,13 +1,12 @@
-import { Link } from 'react-router-dom'
 import { HomeHeader } from '../cmp/home/HomeHeader'
+import { HomeTopSection } from '../cmp/home/HomeTopSection'
 
 export function Home() {
     return (
         <div id="home">
             <HomeHeader />
             <section className="content">
-                <h1>Home page</h1>
-                <Link to="/login">Log In</Link>
+                <HomeTopSection />
             </section>
         </div>
     )

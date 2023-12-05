@@ -1,0 +1,44 @@
+.home-top-section {
+    display: grid;
+    grid-template-columns: 1fr minmax(992px, 1320px) 1fr;
+
+    .bg {
+        grid-area: 1 / 1 / span 1 / -1;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+
+        background: linear-gradient(60deg, rgb(82, 67, 170), rgb(237, 80, 180))
+            0% 0% / auto repeat scroll padding-box border-box rgb(82, 67, 170);
+    }
+
+    & > .content {
+        grid-area: 1 / 2;
+        box-sizing: border-box;
+        padding-inline-start: 16px;
+        padding-inline-end: 16px;
+        text-align: left;
+        width: 1140px;
+        display: flex;
+    }
+
+    .column-1 {
+        padding: 128px 16px;
+        width: 570px;
+
+        h1 {
+            margin-bottom: 8px;
+            letter-spacing: -1px;
+        }
+
+        p {
+            margin-bottom: 24px;
+        }
+    }
+
+    .collage {
+        object-fit: contain;
+    }
+
+    background-color: #5243aa;
+}
