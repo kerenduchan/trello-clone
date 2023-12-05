@@ -43,7 +43,7 @@ pre {
 
 button {
     cursor: pointer;
-    @include font-family();
+    font-family: inherit;
 }
 
 #app {

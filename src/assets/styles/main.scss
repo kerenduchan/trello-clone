@@ -13,6 +13,7 @@
 @import 'pages/BoardDetails';
 @import 'pages/BoardIndex';
 @import 'pages/TaskDetails';
+@import 'pages/Home';
 
 // COMPONENTS
 
@@ -96,6 +97,9 @@
 @import 'cmp/task/members/MembersBadge';
 @import 'cmp/task/members/MembersMenu';
 @import 'cmp/task/members/MembersWidget';
+
+// home
+@import 'cmp/home/HomeHeader';
 
 // misc
 @import 'cmp/AppHeader';
