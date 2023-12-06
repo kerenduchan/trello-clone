@@ -26,37 +26,40 @@ export function Home101() {
     ]
 
     return (
-        <section className="home-101">
-            <p className="home-section-title">Krello 101</p>
-            <h2>A productivity powerhouse</h2>
-            <p>
-                Simple, flexible, and powerful. All it takes are boards, lists,
-                and cards to get a clear view of who's doing what and what needs
-                to get done. Learn more in our <a>guide for getting started</a>.
-            </p>
+        <section className="home-101-bg">
+            <div className="home-101">
+                <p className="home-section-title">Krello 101</p>
+                <h2>A productivity powerhouse</h2>
+                <p>
+                    Simple, flexible, and powerful. All it takes are boards,
+                    lists, and cards to get a clear view of who's doing what and
+                    what needs to get done. Learn more in our{' '}
+                    <a>guide for getting started</a>.
+                </p>
 
-            <div className="carousel-and-btns">
-                <div className="carousel-btns">
-                    {btns.map((btn, idx) => (
-                        <div
-                            className={`carousel-btn ${
-                                idx === itemIdx ? 'selected' : ''
-                            }`}
-                            onClick={() => setItemIdx(idx)}
-                        >
-                            <h3>{btn.title}</h3>
-                            <p>{btn.text}</p>
-                            <div className="marker" />
-                        </div>
-                    ))}
+                <div className="carousel-and-btns">
+                    <div className="carousel-btns">
+                        {btns.map((btn, idx) => (
+                            <div
+                                className={`carousel-btn ${
+                                    idx === itemIdx ? 'selected' : ''
+                                }`}
+                                onClick={() => setItemIdx(idx)}
+                            >
+                                <h3>{btn.title}</h3>
+                                <p>{btn.text}</p>
+                                <div className="marker" />
+                            </div>
+                        ))}
+                    </div>
+
+                    <Carousel
+                        width={728}
+                        height={488}
+                        items={items}
+                        itemIdx={itemIdx}
+                    />
                 </div>
-
-                <Carousel
-                    width={728}
-                    height={488}
-                    items={items}
-                    itemIdx={itemIdx}
-                />
             </div>
         </section>
     )
