@@ -19,13 +19,12 @@ export function Carousel({ width, height, gap = 20, items, itemIdx }) {
                     }}
                 >
                     {items.map((item, idx) => (
-                        <div
+                        <img
+                            src={item}
                             className="one-item"
                             key={idx}
                             style={{ width, height }}
-                        >
-                            {item}
-                        </div>
+                        />
                     ))}
                 </div>
             </div>

@@ -20,9 +20,9 @@ export function Home101() {
     ]
 
     const items = [
-        <img src="images/carousel-boards.png" />,
-        <img src="images/carousel-lists.png" />,
-        <img src="images/carousel-cards.png" />,
+        'images/carousel-boards.png',
+        'images/carousel-lists.png',
+        'images/carousel-cards.png',
     ]
 
     return (
