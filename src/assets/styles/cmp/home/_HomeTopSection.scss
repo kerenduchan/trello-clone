@@ -1,6 +1,6 @@
 .home-top-section {
     display: grid;
-    grid-template-columns: 1fr minmax(992px, 1320px) 1fr;
+    grid-template-columns: 1fr 1140px 1fr;
 
     .bg {
         grid-area: 1 / 1 / span 1 / -1;
