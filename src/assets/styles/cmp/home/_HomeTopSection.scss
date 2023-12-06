@@ -20,6 +20,11 @@
         text-align: left;
         width: 1140px;
         display: flex;
+
+        p,
+        h1 {
+            color: var(--text-inverse);
+        }
     }
 
     .column-1 {

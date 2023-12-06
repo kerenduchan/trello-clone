@@ -8,15 +8,36 @@
 
     & > .content {
         grid-area: content;
+        color: #091e42;
 
         h1 {
-            color: var(--text-inverse);
             @include font(48px, 60px, 500);
         }
 
-        p {
-            color: var(--text-inverse);
+        h2 {
+            @include font(24px, 32px, 500);
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+        }
+
+        p,
+        a {
             @include font(20px, 30px, 400);
+        }
+
+        a {
+            text-decoration: underline;
+            color: #0052cc;
+
+            &:hover {
+                color: #0747a6;
+            }
+        }
+
+        .home-section-title {
+            @include font(16px, 20px, 500);
+            text-transform: uppercase;
+            margin-bottom: 8px;
         }
     }
 }
