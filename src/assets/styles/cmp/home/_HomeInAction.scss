@@ -1,0 +1,18 @@
+.home-in-action {
+    margin-top: 48px;
+    width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        gap: 32px;
+        padding-bottom: 32px;
+    }
+
+    .bottom-text {
+        padding: 16px;
+        padding-bottom: 80px;
+    }
+}

@@ -1,0 +1,40 @@
+.home-in-action-card {
+    border-radius: 8px;
+    overflow: hidden;
+    height: 244px;
+    box-shadow: rgba(9, 30, 66, 0.15) 0px 0.5rem 1rem 0px;
+    position: relative;
+
+    .top-color-bar {
+        height: 48px;
+    }
+
+    .card-icon {
+        box-sizing: border-box;
+        background-color: var(--bg-1);
+        background-position: 50%;
+        background-repeat: no-repeat;
+        border-radius: 8px;
+        @include square(48px);
+        position: absolute;
+        top: 24px;
+        left: 16px;
+        background-size: contain;
+        border: 8px solid transparent;
+    }
+
+    .content {
+        padding: 24px;
+        padding-top: 36px;
+
+        h3.title {
+            @include font(24px, 32px, 500);
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+        }
+
+        p.text {
+            @include font(16px, 24px, 400);
+        }
+    }
+}
