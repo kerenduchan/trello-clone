@@ -1,4 +1,30 @@
+import { useState } from 'react'
+import { Carousel } from '../general/Carousel'
+
 export function Home101() {
+    const [itemIdx, setItemIdx] = useState(0)
+
+    const btns = [
+        {
+            title: 'Boards',
+            text: 'Krello boards keep tasks organized and work moving forward. In a glance, see everything from “things to do” to “aww yeah, we did it!”',
+        },
+        {
+            title: 'Lists',
+            text: 'The different stages of a task. Start as simple as To Do, Doing or Done—or build a workflow custom fit to your team’s needs. There’s no wrong way to Krello.',
+        },
+        {
+            title: 'Cards',
+            text: 'Cards represent tasks and ideas and hold all the information to get the job done. As you make progress, move cards across lists to show their status.',
+        },
+    ]
+
+    const items = [
+        <img src="images/carousel-boards.png" />,
+        <img src="images/carousel-lists.png" />,
+        <img src="images/carousel-cards.png" />,
+    ]
+
     return (
         <section className="home-101">
             <p className="home-section-title">Krello 101</p>
@@ -8,6 +34,21 @@ export function Home101() {
                 and cards to get a clear view of who's doing what and what needs
                 to get done. Learn more in our <a>guide for getting started</a>.
             </p>
+
+            <div></div>
+
+            {btns.map((btn, idx) => (
+                <div className="carousel-btn" onClick={() => setItemIdx(idx)}>
+                    {btn.title}
+                </div>
+            ))}
+
+            <Carousel
+                width={728}
+                height={488}
+                items={items}
+                itemIdx={itemIdx}
+            />
         </section>
     )
 }

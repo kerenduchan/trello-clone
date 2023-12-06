@@ -1,0 +1,15 @@
+.carousel {
+    .view {
+        overflow: hidden;
+    }
+
+    .all-items {
+        display: flex;
+        transition: margin-inline-start 0.4s;
+
+        .one-item > * {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
