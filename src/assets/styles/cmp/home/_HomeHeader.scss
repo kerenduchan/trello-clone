@@ -1,26 +1,36 @@
-.home-header {
+.home-header-bg {
+    position: fixed;
+    z-index: 1;
     width: 100%;
-    grid-area: header;
     height: 60px;
     margin: 0px auto;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: stretch;
-    justify-content: space-between;
+    background-color: var(--bg-1);
 
-    .logo {
-        box-sizing: border-box;
-        padding: 16px;
-    }
-
-    .btn-go-to-your-boards {
-        box-sizing: border-box;
-        display: flex;
-        align-items: center;
-        padding: 8px 24px;
+    .home-header {
+        min-width: 992px;
+        max-width: 1320px;
         height: 100%;
-        @include button-bg(#172b4d, #505f79, #7a869a);
-        color: var(--text-inverse);
-        @include font(19.2px, 28.8px, 400);
+        margin-inline-start: auto;
+        margin-inline-end: auto;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: stretch;
+        justify-content: space-between;
+
+        .logo {
+            box-sizing: border-box;
+            padding: 16px;
+        }
+
+        .btn-go-to-your-boards {
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            padding: 8px 24px;
+            height: 100%;
+            @include button-bg(#172b4d, #505f79, #7a869a);
+            color: var(--text-inverse);
+            @include font(19.2px, 28.8px, 400);
+        }
     }
 }
