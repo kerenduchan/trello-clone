@@ -4,7 +4,7 @@ import { HomeTopSection } from '../cmp/home/HomeTopSection'
 
 export function Home() {
     return (
-        <div id="home">
+        <div className="home">
             <HomeHeader />
             <section className="content">
                 <HomeTopSection />

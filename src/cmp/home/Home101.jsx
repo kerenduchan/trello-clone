@@ -35,20 +35,29 @@ export function Home101() {
                 to get done. Learn more in our <a>guide for getting started</a>.
             </p>
 
-            <div></div>
-
-            {btns.map((btn, idx) => (
-                <div className="carousel-btn" onClick={() => setItemIdx(idx)}>
-                    {btn.title}
+            <div className="carousel-and-btns">
+                <div className="carousel-btns">
+                    {btns.map((btn, idx) => (
+                        <div
+                            className={`carousel-btn ${
+                                idx === itemIdx ? 'selected' : ''
+                            }`}
+                            onClick={() => setItemIdx(idx)}
+                        >
+                            <h3>{btn.title}</h3>
+                            <p>{btn.text}</p>
+                            <div className="marker" />
+                        </div>
+                    ))}
                 </div>
-            ))}
 
-            <Carousel
-                width={728}
-                height={488}
-                items={items}
-                itemIdx={itemIdx}
-            />
+                <Carousel
+                    width={728}
+                    height={488}
+                    items={items}
+                    itemIdx={itemIdx}
+                />
+            </div>
         </section>
     )
 }

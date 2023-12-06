@@ -1,4 +1,59 @@
 .home-101 {
     background: linear-gradient(0deg, rgb(230, 252, 255), rgb(255, 255, 255)) 0%
         0% / auto repeat scroll padding-box border-box rgb(178, 212, 255);
+
+    .carousel-and-btns {
+        padding: 16px;
+        padding-bottom: 80px;
+        display: flex;
+
+        .carousel-btns {
+            box-sizing: border-box;
+            width: 380px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .carousel-btn {
+            padding: 16px;
+            padding-inline-start: 24px;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+
+            h3 {
+                @include font(16px, 21.3px, 500);
+                margin-bottom: 8px;
+            }
+
+            p {
+                @include font(16px, 24px, 400);
+            }
+
+            .marker {
+                background-color: rgb(0, 199, 229);
+                width: 8px;
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                display: none;
+            }
+
+            &.selected {
+                background-color: var(--bg-1);
+                box-shadow: rgba(9, 30, 66, 0.15) 0px 0.5rem 1rem 0px;
+
+                .marker {
+                    display: block;
+                }
+            }
+        }
+
+        .carousel {
+            padding: 16px;
+        }
+    }
 }
