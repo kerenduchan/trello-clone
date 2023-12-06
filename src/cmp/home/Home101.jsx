@@ -43,6 +43,7 @@ export function Home101() {
                     <div className="carousel-btns">
                         {btns.map((btn, idx) => (
                             <div
+                                key={idx}
                                 className={`carousel-btn ${
                                     idx === itemIdx ? 'selected' : ''
                                 }`}

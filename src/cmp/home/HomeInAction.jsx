@@ -48,8 +48,8 @@ export function HomeInAction() {
             </div>
 
             <div className="cards">
-                {cards.map((card) => (
-                    <HomeInActionCard card={card} />
+                {cards.map((card, idx) => (
+                    <HomeInActionCard key={idx} card={card} />
                 ))}
             </div>
             <p className="bottom-text">

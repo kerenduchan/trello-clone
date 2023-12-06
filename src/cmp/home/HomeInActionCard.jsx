@@ -1,6 +1,5 @@
 export function HomeInActionCard({ card }) {
     const { backgroundColor, img, title, text } = card
-    console.log({ backgroundImage: img })
     return (
         <div className="home-in-action-card">
             <div className="top-color-bar" style={{ backgroundColor }} />
