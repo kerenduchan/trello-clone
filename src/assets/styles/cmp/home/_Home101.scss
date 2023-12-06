@@ -7,6 +7,11 @@
         margin-left: auto;
         margin-right: auto;
 
+        .intro {
+            padding: 16px;
+            width: 633px;
+        }
+
         .carousel-and-btns {
             padding: 16px;
             padding-bottom: 80px;
@@ -15,7 +20,7 @@
             .carousel-btns {
                 box-sizing: border-box;
                 width: 380px;
-                padding: 16px;
+                padding-inline-end: 16px;
                 display: flex;
                 flex-direction: column;
                 gap: 16px;
