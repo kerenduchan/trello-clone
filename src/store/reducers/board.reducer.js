@@ -49,7 +49,7 @@ export function boardReducer(state = initialState, action = {}) {
                 b._id === action.board._id ? action.board : b
             )
 
-            if (newState.curBoard._id === action.board._id) {
+            if (newState.curBoard?._id === action.board._id) {
                 newState.curBoard = action.board
             }
             break
