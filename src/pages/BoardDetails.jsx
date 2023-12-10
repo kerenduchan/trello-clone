@@ -10,6 +10,7 @@ import { BoardDetailsMenu } from '../cmp/board/BoardDetailsMenu'
 import { GroupCreate } from '../cmp/group/GroupCreate'
 import { boardService } from '../services/board.service'
 import { Icon } from '../cmp/general/Icon'
+import { BoardIndexHeader } from '../cmp/board/BoardIndexHeader'
 
 export function BoardDetails() {
     const params = useParams()
@@ -24,8 +25,6 @@ export function BoardDetails() {
         }
     }, [params.boardId])
 
-    if (!board) return <div>Loading..</div>
-
     const groupAndTask = params.taskId
         ? boardService.getGroupAndTaskByTaskId(board, params.taskId)
         : null
@@ -34,38 +33,46 @@ export function BoardDetails() {
         <div
             className="board-details"
             style={{
-                backgroundImage: `url(${board.style?.backgroundImage})`,
+                backgroundImage: `url(${board?.style?.backgroundImage})`,
             }}
         >
-            <header>
-                <BoardDetailsTopbar board={board} />
+            <BoardIndexHeader />
 
-                <button
-                    className="btn-square btn-more"
-                    onClick={toggleShowMenu}
-                >
-                    <Icon type="more" />
-                </button>
-            </header>
+            {board ? (
+                <>
+                    <header className="board-details-header">
+                        <BoardDetailsTopbar board={board} />
 
-            {showMenu && (
-                <BoardDetailsMenu
-                    board={board}
-                    onClose={() => setShowMenu(false)}
-                />
-            )}
-            <section className="board-canvas">
-                <GroupList board={board} groups={board.groups} />
-                <GroupCreate board={board} />
-            </section>
+                        <button
+                            className="btn-square btn-more"
+                            onClick={toggleShowMenu}
+                        >
+                            <Icon type="more" />
+                        </button>
+                    </header>
 
-            {params.taskId && (
-                <TaskDetails
-                    hierarchy={{
-                        board,
-                        ...groupAndTask,
-                    }}
-                />
+                    {showMenu && (
+                        <BoardDetailsMenu
+                            board={board}
+                            onClose={() => setShowMenu(false)}
+                        />
+                    )}
+                    <section className="board-canvas">
+                        <GroupList board={board} groups={board.groups} />
+                        <GroupCreate board={board} />
+                    </section>
+
+                    {params.taskId && (
+                        <TaskDetails
+                            hierarchy={{
+                                board,
+                                ...groupAndTask,
+                            }}
+                        />
+                    )}
+                </>
+            ) : (
+                <div>Loading..</div>
             )}
         </div>
     )
