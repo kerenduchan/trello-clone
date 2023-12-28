@@ -378,6 +378,9 @@ function getTaskById(board, groupId, taskId) {
 }
 
 function getGroupAndTaskByTaskId(board, taskId) {
+    if (!board) {
+        return
+    }
     for (let i = 0; i < board.groups.length; i++) {
         const group = board.groups[i]
         for (let j = 0; j < group.tasks.length; ++j) {
