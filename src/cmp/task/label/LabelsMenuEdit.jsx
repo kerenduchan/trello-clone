@@ -1,17 +1,26 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from '../../../customHooks/useForm'
-import { updateBoardLabel } from '../../../store/actions/board.actions'
-import { LabelColorSelect } from './LabelColorSelect'
+import {
+    createBoardLabel,
+    updateBoardLabel,
+} from '../../../store/actions/board.actions'
 import { boardService } from '../../../services/board.service'
+import { LabelColorSelect } from './LabelColorSelect'
+import { Icon } from '../../general/Icon'
 
-export function LabelsMenuEdit({ hierarchy, label, onBack }) {
-    const [selectedLabelColor, setSelectedLabelColor] = useState(null)
-
+export function LabelsMenuEdit({ hierarchy, label, onBack, onDelete }) {
+    const [selectedLabelColor, setSelectedLabelColor] = useState(label?.color)
     const labelColors = boardService.getLabelColors()
+
+    const isEdit = Boolean(label)
 
     if (!label) {
         // create
         label = boardService.getEmptyLabel()
+    }
+
+    function onRemoveColorClick() {
+        setSelectedLabelColor(null)
     }
 
     const [draft, handleChange] = useForm({ ...label })
@@ -19,7 +28,19 @@ export function LabelsMenuEdit({ hierarchy, label, onBack }) {
     async function onSubmit(e) {
         e.preventDefault()
         try {
-            updateBoardLabel(hierarchy.board, label, { title: draft.title })
+            if (isEdit) {
+                updateBoardLabel(hierarchy.board, label, { title: draft.title })
+            } else {
+                const newLabel = {
+                    ...label,
+                    color: selectedLabelColor.color,
+                    colorName: selectedLabelColor.colorName,
+                    title: draft.title,
+                }
+
+                createBoardLabel(hierarchy.board, newLabel)
+            }
+
             onBack()
         } catch (err) {
             console.error(err)
@@ -60,7 +81,33 @@ export function LabelsMenuEdit({ hierarchy, label, onBack }) {
                     onSelect={(lc) => setSelectedLabelColor(lc)}
                 />
 
-                <button className="btn-primary btn-save">Save</button>
+                <button
+                    type="button"
+                    className="btn-secondary-centered btn-remove-color"
+                    onClick={onRemoveColorClick}
+                    disabled={!selectedLabelColor}
+                >
+                    <Icon type="close" size="xxs"></Icon>
+                    Remove color
+                </button>
+
+                <hr />
+
+                <div className="actions">
+                    <button className="btn-primary btn-save">
+                        {isEdit ? 'Save' : 'Create'}
+                    </button>
+
+                    {isEdit && (
+                        <button
+                            type="button"
+                            className="btn-danger btn-delete"
+                            onClick={onDelete}
+                        >
+                            Delete
+                        </button>
+                    )}
+                </div>
             </form>
         </div>
     )

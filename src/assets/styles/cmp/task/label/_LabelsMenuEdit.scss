@@ -2,14 +2,16 @@
     width: 280px;
 
     .preview-container {
-        padding: 32px;
+        height: 100px;
         background-color: var(--bg-sunken);
         margin-inline-start: -12px;
         margin-inline-end: -12px;
+        @include flex-center-center();
 
         .preview {
             padding-inline-start: 12px;
             padding-inline-end: 12px;
+            width: 216px;
             height: 32px;
             @include font(14px, 32px, 500);
             border-radius: 3px;
@@ -35,12 +37,31 @@
             box-shadow: var(--box-shadow-input);
             border-radius: 3px;
             padding: 8px 12px;
-            margin-top: 2px;
             @include font-p();
         }
 
-        .btn-save {
-            margin-top: 16px;
+        .label-color-select {
+            margin-bottom: 8px;
+        }
+
+        .btn-remove-color {
+            margin-bottom: 8px;
+
+            & > .icon {
+                margin-inline-end: 8px;
+            }
+        }
+
+        hr {
+            background-color: var(--bg-divider);
+            height: 1px;
+            margin: 16px 0;
+            width: 100%;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-between;
         }
     }
 

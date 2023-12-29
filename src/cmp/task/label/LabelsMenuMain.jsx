@@ -41,10 +41,7 @@ export function LabelsMenuMain({ hierarchy, onEditClick, onCreateClick }) {
                     </li>
                 ))}
             </ul>
-            <button
-                className="btn-secondary btn-create"
-                onClick={onCreateClick}
-            >
+            <button className="btn-secondary-centered" onClick={onCreateClick}>
                 Create a new label
             </button>
         </div>

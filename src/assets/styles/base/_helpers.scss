@@ -14,6 +14,10 @@
     @include btn-primary();
 }
 
+.btn-secondary-centered {
+    @include btn-secondary-centered();
+}
+
 .btn-danger {
     @include btn-danger();
 }

@@ -237,3 +237,33 @@
     border-radius: 8px;
     @include flex-center();
 }
+
+@mixin flex-center-center() {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin btn-secondary-centered() {
+    @include button-bg(
+        var(--bg-neutral),
+        var(--bg-neutral-hovered),
+        var(--bg-neutral-pressed)
+    );
+
+    @include flex-center-center();
+    width: 100%;
+    padding: 6px 12px;
+    border-radius: 3px;
+    font-weight: 500;
+
+    &:disabled {
+        background-color: var(--bg-disabled);
+        color: var(--text-disabled);
+        cursor: not-allowed;
+
+        & .icon {
+            color: var(--text-disabled);
+        }
+    }
+}

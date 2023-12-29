@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { LabelsMenuEdit } from './LabelsMenuEdit'
 import { LabelsMenuMain } from './LabelsMenuMain'
+import { LabelsMenuDelete } from './LabelsMenuDelete'
 
 export function LabelsMenu({ hierarchy, labelsMenu }) {
     // current page in the labels menu popover: main or edit
@@ -19,6 +20,15 @@ export function LabelsMenu({ hierarchy, labelsMenu }) {
 
     function onCreateClick() {
         setPage('create')
+    }
+
+    function onDelete() {
+        setPage('delete')
+    }
+
+    function onDeleteConfirm() {
+        console.log('on delete confirm')
+        onBackClick()
     }
 
     const contents = {
@@ -43,6 +53,7 @@ export function LabelsMenu({ hierarchy, labelsMenu }) {
                     label={labelToEdit}
                     onClose={labelsMenu.onClose}
                     onBack={onBackClick}
+                    onDelete={onDelete}
                 />
             </PopoverMenu>
         ),
@@ -58,6 +69,15 @@ export function LabelsMenu({ hierarchy, labelsMenu }) {
                     onClose={labelsMenu.onClose}
                     onBack={onBackClick}
                 />
+            </PopoverMenu>
+        ),
+        delete: (
+            <PopoverMenu
+                title="Delete Label"
+                {...labelsMenu.popover}
+                onBack={() => setPage('edit')}
+            >
+                <LabelsMenuDelete onDelete={onDeleteConfirm} />
             </PopoverMenu>
         ),
     }

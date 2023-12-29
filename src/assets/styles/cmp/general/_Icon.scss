@@ -1,6 +1,10 @@
 .icon {
     color: var(--icon-color);
 
+    &.xxs {
+        @include font-size-and-line-height(14px);
+    }
+
     &.xs {
         @include font-size-and-line-height(16px);
     }

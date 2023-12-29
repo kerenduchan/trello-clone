@@ -35,6 +35,7 @@ export {
     deleteChecklistItem,
     convertChecklistItemToTask,
     updateBoardLabel,
+    createBoardLabel,
     removeTaskLabel,
     addTaskLabel,
 }
@@ -107,6 +108,14 @@ async function updateBoardLabel(board, label, fieldsToUpdate) {
     boardToUpdate.labels = board.labels.map((l) =>
         l._id === label._id ? { ...label, ...fieldsToUpdate } : l
     )
+    return _updateBoard(boardToUpdate)
+}
+
+async function createBoardLabel(board, label) {
+    const boardToUpdate = { ...board }
+    boardToUpdate.labels = [...board.labels, label]
+    console.log('createBoardLabel', label)
+
     return _updateBoard(boardToUpdate)
 }
 
