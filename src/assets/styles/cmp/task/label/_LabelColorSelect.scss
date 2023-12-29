@@ -1,0 +1,31 @@
+.label-color-select {
+    .options {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 4px;
+
+        .option-container {
+            box-sizing: border-box;
+            width: 52.8px;
+            height: 35.2px;
+            border-radius: 3px;
+            @include flex-center-center();
+
+            .option {
+                width: 49.6px;
+                height: 32px;
+                border-radius: 3px;
+            }
+
+            &.selected {
+                border: 1.6px var(--border-selected) solid;
+
+                & .option {
+                    width: 46.4px;
+                    height: 28.8px;
+                    border-radius: 0;
+                }
+            }
+        }
+    }
+}

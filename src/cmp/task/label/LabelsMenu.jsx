@@ -17,6 +17,10 @@ export function LabelsMenu({ hierarchy, labelsMenu }) {
         setPage('main')
     }
 
+    function onCreateClick() {
+        setPage('create')
+    }
+
     const contents = {
         main: (
             <PopoverMenu title="Labels" {...labelsMenu.popover}>
@@ -24,6 +28,7 @@ export function LabelsMenu({ hierarchy, labelsMenu }) {
                     hierarchy={hierarchy}
                     onClose={labelsMenu.onClose}
                     onEditClick={onEditClick}
+                    onCreateClick={onCreateClick}
                 />
             </PopoverMenu>
         ),
@@ -36,6 +41,20 @@ export function LabelsMenu({ hierarchy, labelsMenu }) {
                 <LabelsMenuEdit
                     hierarchy={hierarchy}
                     label={labelToEdit}
+                    onClose={labelsMenu.onClose}
+                    onBack={onBackClick}
+                />
+            </PopoverMenu>
+        ),
+        create: (
+            <PopoverMenu
+                title="Create Label"
+                {...labelsMenu.popover}
+                onBack={onBackClick}
+            >
+                <LabelsMenuEdit
+                    hierarchy={hierarchy}
+                    label={null}
                     onClose={labelsMenu.onClose}
                     onBack={onBackClick}
                 />

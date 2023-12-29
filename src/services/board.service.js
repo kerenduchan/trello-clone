@@ -8,6 +8,7 @@ export const boardService = {
     getEmptyChecklist,
     getEmptyChecklistItem,
     getEmptyComment,
+    getEmptyLabel,
     query,
     getById,
     save,
@@ -26,6 +27,7 @@ export const boardService = {
     countItemsInAllChecklists,
     getChecklistPercent,
     getCoverColors,
+    getLabelColors,
     getTaskDateStatus,
 }
 
@@ -59,6 +61,15 @@ function getEmptyTask(title = '') {
         archivedAt: null,
         labelIds: [],
         checklists: [],
+    }
+}
+
+function getEmptyLabel(title = '') {
+    return {
+        _id: utilService.makeId(),
+        title,
+        color: '#6cc3e0',
+        colorName: 'sky',
     }
 }
 
@@ -368,6 +379,46 @@ function getCoverColors() {
         { _id: 'lime', color: '#95c748' },
         { _id: 'magenta', color: '#e774bb' },
         { _id: 'gray', color: '#8490a2' },
+    ]
+}
+
+function getLabelColors() {
+    return [
+        { _id: 'subtle green', color: '#baf3db', textColor: '#164b35' },
+        { _id: 'subtle yellow', color: '#f8e6a0', textColor: '#533f04' },
+        { _id: 'subtle orange', color: '#fedec8', textColor: '#702e00' },
+        { _id: 'subtle red', color: '#ffd5d2', textColor: '#5d1f1a' },
+        { _id: 'subtle purple', color: '#dfd8fd', textColor: '#352c63' },
+
+        { _id: 'green', color: '#4bce97', textColor: '#164b35' },
+        { _id: 'yellow', color: '#f5cd47', textColor: '#533f04' },
+        { _id: 'orange', color: '#fea362', textColor: '#702e00' },
+        { _id: 'red', color: '#f87168', textColor: '#5d1f1a' },
+        { _id: 'purple', color: '#9f8fef', textColor: '#352c63' },
+
+        { _id: 'bold green', color: '#1f845a', textColor: '#ffffff' },
+        { _id: 'bold yellow', color: '#946f00', textColor: '#ffffff' },
+        { _id: 'bold orange', color: '#c25100', textColor: '#ffffff' },
+        { _id: 'bold red', color: '#c9372c', textColor: '#ffffff' },
+        { _id: 'bold purple', color: '#6e5dc6', textColor: '#ffffff' },
+
+        { _id: 'subtle blue', color: '#cce0ff', textColor: '#09326c' },
+        { _id: 'subtle sky', color: '#c6edfb', textColor: '#164555' },
+        { _id: 'subtle lime', color: '#d3f1a7', textColor: '#37471f' },
+        { _id: 'subtle pink', color: '#fdd0ec', textColor: '#50253f' },
+        { _id: 'subtle black', color: '#dcdfe4', textColor: '#091e42' },
+
+        { _id: 'blue', color: '#579dff', textColor: '#09326c' },
+        { _id: 'sky', color: '#6cc3e0', textColor: '#164555' },
+        { _id: 'lime', color: '#94c748', textColor: '#37471f' },
+        { _id: 'pink', color: '#e774bb', textColor: '#50253f' },
+        { _id: 'black', color: '#8590a2', textColor: '#091e42' },
+
+        { _id: 'bold blue', color: '#0c66e4', textColor: '#ffffff' },
+        { _id: 'bold sky', color: '#227d9b', textColor: '#ffffff' },
+        { _id: 'bold lime', color: '#5b7f24', textColor: '#ffffff' },
+        { _id: 'bold pink', color: '#ae4787', textColor: '#ffffff' },
+        { _id: 'bold black', color: '#626f86', textColor: '#ffffff' },
     ]
 }
 
