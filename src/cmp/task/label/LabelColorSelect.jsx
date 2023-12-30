@@ -1,4 +1,4 @@
-export function LabelColorSelect({ labelColors, selected, onSelect }) {
+export function LabelColorSelect({ labelColors, selectedId, onSelect }) {
     return (
         <div className="label-color-select">
             <div className="options">
@@ -6,13 +6,13 @@ export function LabelColorSelect({ labelColors, selected, onSelect }) {
                     <div
                         key={labelColor._id}
                         className={`option-container ${
-                            selected?._id === labelColor._id ? 'selected' : ''
+                            selectedId === labelColor._id ? 'selected' : ''
                         }`}
-                        onClick={() => onSelect(labelColor)}
+                        onClick={() => onSelect(labelColor._id)}
                     >
                         <div
                             className="option"
-                            style={{ backgroundColor: labelColor.color }}
+                            style={{ backgroundColor: labelColor.bgColor }}
                         />
                     </div>
                 ))}

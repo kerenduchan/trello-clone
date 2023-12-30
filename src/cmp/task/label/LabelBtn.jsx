@@ -7,7 +7,10 @@ export const LabelBtn = forwardRef(function LabelBtn(props, ref) {
             <button
                 ref={ref}
                 className={`btn-label ${size}`}
-                style={{ backgroundColor: label.color }}
+                style={{
+                    backgroundColor: label.color.bgColor,
+                    color: label.color.textColor,
+                }}
             >
                 <span className="title">{label.title}</span>
             </button>

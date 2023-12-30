@@ -5,7 +5,7 @@ import {
 import { useToggle } from '../../../customHooks/useToggle'
 import { Icon } from '../../general/Icon'
 
-export function LabelsMenuMainItem({ hierarchy, label, onEditClick }) {
+export function LabelsMenuMainItem({ hierarchy, label, onEdit }) {
     const { task } = hierarchy
     const [isChecked, toggleIsChecked] = useToggle(
         task.labelIds.includes(label._id)
@@ -37,7 +37,7 @@ export function LabelsMenuMainItem({ hierarchy, label, onEditClick }) {
             />
             <div
                 className="label"
-                style={{ backgroundColor: label.color }}
+                style={{ backgroundColor: label.color.bgColor }}
                 onClick={onClick}
             >
                 {label.title}
@@ -45,7 +45,7 @@ export function LabelsMenuMainItem({ hierarchy, label, onEditClick }) {
 
             <button
                 className="btn-square-sharp btn-edit"
-                onClick={() => onEditClick(label)}
+                onClick={() => onEdit(label)}
             >
                 <Icon type="edit" size="xs" />
             </button>

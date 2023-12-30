@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { LabelsMenuMainItem } from './LabelsMenuMainItem'
 
-export function LabelsMenuMain({ hierarchy, onEditClick, onCreateClick }) {
+export function LabelsMenuMain({ hierarchy, onEdit, onCreate }) {
     const { board } = hierarchy
 
     const [filteredLabels, setFilteredLabels] = useState(board.labels)
@@ -36,12 +36,12 @@ export function LabelsMenuMain({ hierarchy, onEditClick, onCreateClick }) {
                         <LabelsMenuMainItem
                             hierarchy={hierarchy}
                             label={label}
-                            onEditClick={onEditClick}
+                            onEdit={onEdit}
                         />
                     </li>
                 ))}
             </ul>
-            <button className="btn-secondary-centered" onClick={onCreateClick}>
+            <button className="btn-secondary-centered" onClick={onCreate}>
                 Create a new label
             </button>
         </div>

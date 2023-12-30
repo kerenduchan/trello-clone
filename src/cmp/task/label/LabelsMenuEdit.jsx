@@ -1,63 +1,53 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from '../../../customHooks/useForm'
-import {
-    createBoardLabel,
-    updateBoardLabel,
-} from '../../../store/actions/board.actions'
 import { boardService } from '../../../services/board.service'
 import { LabelColorSelect } from './LabelColorSelect'
 import { Icon } from '../../general/Icon'
 
-export function LabelsMenuEdit({ hierarchy, label, onBack, onDelete }) {
-    const [selectedLabelColor, setSelectedLabelColor] = useState(label?.color)
-    const labelColors = boardService.getLabelColors()
+export function LabelsMenuEdit({ label, onSave, onDelete }) {
+    const [draft, handleChange, setDraft] = useForm(
+        label || boardService.getEmptyLabel()
+    )
 
-    const isEdit = Boolean(label)
+    console.log(draft)
 
-    if (!label) {
-        // create
-        label = boardService.getEmptyLabel()
-    }
+    useEffect(() => {
+        // flesh out the color in the draft, based on colorId
+        setDraft((prev) => ({
+            ...prev,
+            color: boardService.getLabelColorById(prev.colorId),
+        }))
+    }, [draft.colorId])
 
     function onRemoveColorClick() {
-        setSelectedLabelColor(null)
+        onColorSelect(boardService.getNoLabelColor()._id)
     }
 
-    const [draft, handleChange] = useForm({ ...label })
+    function onColorSelect(colorId) {
+        setDraft((prev) => ({ ...prev, colorId }))
+    }
 
     async function onSubmit(e) {
         e.preventDefault()
-        try {
-            if (isEdit) {
-                updateBoardLabel(hierarchy.board, label, { title: draft.title })
-            } else {
-                const newLabel = {
-                    ...label,
-                    color: selectedLabelColor.color,
-                    colorName: selectedLabelColor.colorName,
-                    title: draft.title,
-                }
+        onSave(draft)
+    }
 
-                createBoardLabel(hierarchy.board, newLabel)
-            }
+    function isEdit() {
+        return label !== null
+    }
 
-            onBack()
-        } catch (err) {
-            console.error(err)
-            // TODO: show an error dialog
-        }
+    function isRemoveColorDisabled() {
+        return draft.colorId === boardService.getNoLabelColor()._id
     }
 
     return (
         <div className="labels-menu-edit">
             <div className="preview-container">
                 <div
-                    className={`preview ${
-                        selectedLabelColor ? '' : 'no-label-color'
-                    }`}
+                    className="preview"
                     style={{
-                        backgroundColor: selectedLabelColor?.color,
-                        color: selectedLabelColor?.textColor,
+                        backgroundColor: draft.color.bgColor,
+                        color: draft.color.textColor,
                     }}
                 >
                     {draft.title}
@@ -76,16 +66,16 @@ export function LabelsMenuEdit({ hierarchy, label, onBack, onDelete }) {
 
                 <h3 className="title">Select a color</h3>
                 <LabelColorSelect
-                    labelColors={labelColors}
-                    selected={selectedLabelColor}
-                    onSelect={(lc) => setSelectedLabelColor(lc)}
+                    labelColors={boardService.getLabelColors()}
+                    selectedId={draft.colorId}
+                    onSelect={onColorSelect}
                 />
 
                 <button
                     type="button"
                     className="btn-secondary-centered btn-remove-color"
                     onClick={onRemoveColorClick}
-                    disabled={!selectedLabelColor}
+                    disabled={isRemoveColorDisabled()}
                 >
                     <Icon type="close" size="xxs"></Icon>
                     Remove color
@@ -95,10 +85,10 @@ export function LabelsMenuEdit({ hierarchy, label, onBack, onDelete }) {
 
                 <div className="actions">
                     <button className="btn-primary btn-save">
-                        {isEdit ? 'Save' : 'Create'}
+                        {isEdit() ? 'Save' : 'Create'}
                     </button>
 
-                    {isEdit && (
+                    {isEdit() && (
                         <button
                             type="button"
                             className="btn-danger btn-delete"

@@ -27,7 +27,9 @@ export const boardService = {
     countItemsInAllChecklists,
     getChecklistPercent,
     getCoverColors,
+    getLabelColorById,
     getLabelColors,
+    getNoLabelColor,
     getTaskDateStatus,
 }
 
@@ -64,12 +66,13 @@ function getEmptyTask(title = '') {
     }
 }
 
-function getEmptyLabel(title = '') {
+function getEmptyLabel() {
+    const colorId = _getDefaultLabelColorId()
     return {
         _id: utilService.makeId(),
-        title,
-        color: '#6cc3e0',
-        colorName: 'sky',
+        title: '',
+        colorId,
+        color: getLabelColorById(colorId),
     }
 }
 
@@ -140,26 +143,7 @@ function _createBoards() {
                     backgroundImage:
                         'https://images.unsplash.com/photo-1699393393028-d44da72dba1d',
                 },
-                labels: [
-                    {
-                        _id: 'l101',
-                        title: 'Done',
-                        color: '#61bd4f',
-                        colorName: 'Green',
-                    },
-                    {
-                        _id: 'l102',
-                        title: 'Progress',
-                        color: '#db60a2',
-                        colorName: 'Pink',
-                    },
-                    {
-                        _id: 'l103',
-                        title: '',
-                        color: '#f2ea74',
-                        colorName: 'Yellow',
-                    },
-                ],
+                labels: _getDefaultLabels(),
                 members: [
                     {
                         _id: 'u101',
@@ -327,44 +311,21 @@ function getItemById(board, field, itemId) {
 }
 
 function _getDefaultLabels() {
-    return [
-        {
-            _id: 'l101',
-            title: '',
-            color: '#4bce97',
-            colorName: 'Green',
-        },
-        {
-            _id: 'l102',
-            title: '',
-            color: '#f5cd47',
-            colorName: 'Yellow',
-        },
-        {
-            _id: 'l103',
-            title: '',
-            color: '#fea362',
-            colorName: 'Orange',
-        },
-        {
-            _id: 'l104',
-            title: '',
-            color: '#f87168',
-            colorName: 'Red',
-        },
-        {
-            _id: 'l105',
-            title: '',
-            color: '#9f8fef',
-            colorName: 'Purple',
-        },
-        {
-            _id: 'l106',
-            title: '',
-            color: '#579dff',
-            colorName: 'Blue',
-        },
+    const defaultColorIds = [
+        'lc106',
+        'lc107',
+        'lc108',
+        'lc109',
+        'lc110',
+        'lc121',
     ]
+
+    return defaultColorIds.map((colorId, idx) => ({
+        _id: `l10${idx}`,
+        title: '',
+        colorId,
+        color: getLabelColorById(colorId),
+    }))
 }
 
 function getCoverColors() {
@@ -382,44 +343,65 @@ function getCoverColors() {
     ]
 }
 
+function getLabelColorById(id) {
+    const noLabelColor = getNoLabelColor()
+    if (id === noLabelColor._id) {
+        return noLabelColor
+    }
+
+    return getLabelColors().find((lc) => lc._id === id)
+}
+
+function _getDefaultLabelColorId() {
+    return getLabelColors().find((lc) => lc.name === 'sky')._id
+}
+
+function _getLabelColor(_id, name, bgColor, textColor) {
+    return { _id, name, bgColor, textColor }
+}
+
 function getLabelColors() {
     return [
-        { _id: 'subtle green', color: '#baf3db', textColor: '#164b35' },
-        { _id: 'subtle yellow', color: '#f8e6a0', textColor: '#533f04' },
-        { _id: 'subtle orange', color: '#fedec8', textColor: '#702e00' },
-        { _id: 'subtle red', color: '#ffd5d2', textColor: '#5d1f1a' },
-        { _id: 'subtle purple', color: '#dfd8fd', textColor: '#352c63' },
+        _getLabelColor('lc101', 'subtle green', '#baf3db', '#164b35'),
+        _getLabelColor('lc102', 'subtle yellow', '#f8e6a0', '#533f04'),
+        _getLabelColor('lc103', 'subtle orange', '#fedec8', '#702e00'),
+        _getLabelColor('lc104', 'subtle red', '#ffd5d2', '#5d1f1a'),
+        _getLabelColor('lc105', 'subtle purple', '#dfd8fd', '#352c63'),
 
-        { _id: 'green', color: '#4bce97', textColor: '#164b35' },
-        { _id: 'yellow', color: '#f5cd47', textColor: '#533f04' },
-        { _id: 'orange', color: '#fea362', textColor: '#702e00' },
-        { _id: 'red', color: '#f87168', textColor: '#5d1f1a' },
-        { _id: 'purple', color: '#9f8fef', textColor: '#352c63' },
+        _getLabelColor('lc106', 'green', '#4bce97', '#164b35'),
+        _getLabelColor('lc107', 'yellow', '#f5cd47', '#533f04'),
+        _getLabelColor('lc108', 'orange', '#fea362', '#702e00'),
+        _getLabelColor('lc109', 'red', '#f87168', '#5d1f1a'),
+        _getLabelColor('lc110', 'purple', '#9f8fef', '#352c63'),
 
-        { _id: 'bold green', color: '#1f845a', textColor: '#ffffff' },
-        { _id: 'bold yellow', color: '#946f00', textColor: '#ffffff' },
-        { _id: 'bold orange', color: '#c25100', textColor: '#ffffff' },
-        { _id: 'bold red', color: '#c9372c', textColor: '#ffffff' },
-        { _id: 'bold purple', color: '#6e5dc6', textColor: '#ffffff' },
+        _getLabelColor('lc111', 'bold green', '#1f845a', '#ffffff'),
+        _getLabelColor('lc112', 'bold yellow', '#946f00', '#ffffff'),
+        _getLabelColor('lc113', 'bold orange', '#c25100', '#ffffff'),
+        _getLabelColor('lc114', 'bold red', '#c9372c', '#ffffff'),
+        _getLabelColor('lc115', 'bold purple', '#6e5dc6', '#ffffff'),
 
-        { _id: 'subtle blue', color: '#cce0ff', textColor: '#09326c' },
-        { _id: 'subtle sky', color: '#c6edfb', textColor: '#164555' },
-        { _id: 'subtle lime', color: '#d3f1a7', textColor: '#37471f' },
-        { _id: 'subtle pink', color: '#fdd0ec', textColor: '#50253f' },
-        { _id: 'subtle black', color: '#dcdfe4', textColor: '#091e42' },
+        _getLabelColor('lc116', 'subtle blue', '#cce0ff', '#09326c'),
+        _getLabelColor('lc117', 'subtle sky', '#c6edfb', '#164555'),
+        _getLabelColor('lc118', 'subtle lime', '#d3f1a7', '#37471f'),
+        _getLabelColor('lc119', 'subtle pink', '#fdd0ec', '#50253f'),
+        _getLabelColor('lc120', 'subtle black', '#dcdfe4', '#091e42'),
 
-        { _id: 'blue', color: '#579dff', textColor: '#09326c' },
-        { _id: 'sky', color: '#6cc3e0', textColor: '#164555' },
-        { _id: 'lime', color: '#94c748', textColor: '#37471f' },
-        { _id: 'pink', color: '#e774bb', textColor: '#50253f' },
-        { _id: 'black', color: '#8590a2', textColor: '#091e42' },
+        _getLabelColor('lc121', 'blue', '#579dff', '#09326c'),
+        _getLabelColor('lc122', 'sky', '#6cc3e0', '#164555'),
+        _getLabelColor('lc123', 'lime', '#94c748', '#37471f'),
+        _getLabelColor('lc124', 'pink', '#e774bb', '#50253f'),
+        _getLabelColor('lc125', 'black', '#8590a2', '#091e42'),
 
-        { _id: 'bold blue', color: '#0c66e4', textColor: '#ffffff' },
-        { _id: 'bold sky', color: '#227d9b', textColor: '#ffffff' },
-        { _id: 'bold lime', color: '#5b7f24', textColor: '#ffffff' },
-        { _id: 'bold pink', color: '#ae4787', textColor: '#ffffff' },
-        { _id: 'bold black', color: '#626f86', textColor: '#ffffff' },
+        _getLabelColor('lc126', 'bold blue', '#0c66e4', '#ffffff'),
+        _getLabelColor('lc127', 'bold sky', '#227d9b', '#ffffff'),
+        _getLabelColor('lc128', 'bold lime', '#5b7f24', '#ffffff'),
+        _getLabelColor('lc129', 'bold pink', '#ae4787', '#ffffff'),
+        _getLabelColor('lc130', 'bold black', '#626f86', '#ffffff'),
     ]
+}
+
+function getNoLabelColor() {
+    return _getLabelColor('lc000', 'none', '#091e420f', '#172b4d')
 }
 
 function getTaskById(board, groupId, taskId) {
