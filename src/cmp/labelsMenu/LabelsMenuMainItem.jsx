@@ -1,9 +1,9 @@
 import {
     removeTaskLabel,
     addTaskLabel,
-} from '../../../store/actions/board.actions'
-import { useToggle } from '../../../customHooks/useToggle'
-import { Icon } from '../../general/Icon'
+} from '../../store/actions/board.actions'
+import { useToggle } from '../../customHooks/useToggle'
+import { Icon } from '../general/Icon'
 
 export function LabelsMenuMainItem({ hierarchy, label, onEdit }) {
     const { task } = hierarchy

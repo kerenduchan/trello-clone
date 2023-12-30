@@ -1,7 +1,7 @@
 import { boardService } from '../../../services/board.service'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { LabelBtn } from './LabelBtn'
-import { LabelsMenu } from './LabelsMenu'
+import { LabelsMenu } from '../../labelsMenu/LabelsMenu'
 
 export function LabelsWidget({ hierarchy }) {
     const labels = boardService.getTaskLabels(hierarchy)

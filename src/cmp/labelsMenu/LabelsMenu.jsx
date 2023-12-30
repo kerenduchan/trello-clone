@@ -2,8 +2,8 @@ import { useState } from 'react'
 import {
     createBoardLabel,
     updateBoardLabel,
-} from '../../../store/actions/board.actions'
-import { PopoverMenu } from '../../general/PopoverMenu'
+} from '../../store/actions/board.actions'
+import { PopoverMenu } from '../general/PopoverMenu'
 import { LabelsMenuEdit } from './LabelsMenuEdit'
 import { LabelsMenuMain } from './LabelsMenuMain'
 import { LabelsMenuDelete } from './LabelsMenuDelete'

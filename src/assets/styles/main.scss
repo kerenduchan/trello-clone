@@ -48,6 +48,13 @@
 @import 'cmp/group/GroupPreviewHeader';
 @import 'cmp/group/GroupPreviewMenu';
 
+// labelsMenu
+@import 'cmp/labelsMenu/LabelColorSelect';
+@import 'cmp/labelsMenu/LabelsMenuDelete';
+@import 'cmp/labelsMenu/LabelsMenuEdit';
+@import 'cmp/labelsMenu/LabelsMenuMain';
+@import 'cmp/labelsMenu/LabelsMenuMainItem';
+
 // task
 @import 'cmp/task/TaskCreate';
 @import 'cmp/task/TaskDetailsActivity';
@@ -89,11 +96,6 @@
 // task/label
 @import 'cmp/task/label/LabelBtn';
 @import 'cmp/task/label/LabelsWidget';
-@import 'cmp/task/label/LabelColorSelect';
-@import 'cmp/task/label/LabelsMenuDelete';
-@import 'cmp/task/label/LabelsMenuEdit';
-@import 'cmp/task/label/LabelsMenuMain';
-@import 'cmp/task/label/LabelsMenuMainItem';
 @import 'cmp/task/label/LabelsPreview';
 
 // task/members
