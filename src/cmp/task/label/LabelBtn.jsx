@@ -9,10 +9,14 @@ export const LabelBtn = forwardRef(function LabelBtn(props, ref) {
                 className={`btn-label ${size}`}
                 style={{
                     backgroundColor: label.color.bgColor,
-                    color: label.color.textColor,
                 }}
             >
-                <span className="title">{label.title}</span>
+                <span
+                    className="title"
+                    style={{ color: label.color.textColor }}
+                >
+                    {label.title}
+                </span>
             </button>
             <div className="overlay" />
         </div>
