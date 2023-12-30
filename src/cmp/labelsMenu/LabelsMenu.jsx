@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import {
+    addTaskLabel,
     createBoardLabel,
     updateBoardLabel,
 } from '../../store/actions/board.actions'
@@ -45,9 +46,15 @@ export function LabelsMenu({ hierarchy, labelsMenu }) {
         }
     }
 
-    function onSaveAfterCreate(newLabel) {
+    async function onSaveAfterCreate(newLabel) {
         try {
-            createBoardLabel(hierarchy.board, newLabel)
+            const updatedBoard = await createBoardLabel(
+                hierarchy.board,
+                newLabel
+            )
+            const updatedHierarchy = { ...hierarchy, board: updatedBoard }
+
+            addTaskLabel(updatedHierarchy, newLabel)
             onNavToMain()
         } catch (err) {
             console.error(err)
