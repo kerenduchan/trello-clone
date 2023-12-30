@@ -34,8 +34,9 @@ export {
     updateChecklistItem,
     deleteChecklistItem,
     convertChecklistItemToTask,
-    updateBoardLabel,
     createBoardLabel,
+    updateBoardLabel,
+    deleteBoardLabel,
     removeTaskLabel,
     addTaskLabel,
 }
@@ -103,6 +104,12 @@ async function deleteBoard(board) {
 
 // BOARD LABEL
 
+async function createBoardLabel(board, label) {
+    const boardToUpdate = { ...board }
+    boardToUpdate.labels = [...board.labels, label]
+    return _updateBoard(boardToUpdate)
+}
+
 async function updateBoardLabel(board, label, fieldsToUpdate) {
     const boardToUpdate = { ...board }
     boardToUpdate.labels = board.labels.map((l) =>
@@ -111,9 +118,19 @@ async function updateBoardLabel(board, label, fieldsToUpdate) {
     return _updateBoard(boardToUpdate)
 }
 
-async function createBoardLabel(board, label) {
+async function deleteBoardLabel(board, label) {
     const boardToUpdate = { ...board }
-    boardToUpdate.labels = [...board.labels, label]
+    boardToUpdate.labels = board.labels.filter((l) => l._id !== label._id)
+
+    // also delete the label from all tasks that use it
+    boardToUpdate.groups = board.groups.map((group) => ({
+        ...group,
+        tasks: group.tasks.map((task) => ({
+            ...task,
+            labelIds: task.labelIds.filter((labelId) => labelId !== label._id),
+        })),
+    }))
+
     return _updateBoard(boardToUpdate)
 }
 

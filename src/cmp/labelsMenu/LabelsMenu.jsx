@@ -2,6 +2,7 @@ import { useState } from 'react'
 import {
     addTaskLabel,
     createBoardLabel,
+    deleteBoardLabel,
     updateBoardLabel,
 } from '../../store/actions/board.actions'
 import { PopoverMenu } from '../general/PopoverMenu'
@@ -10,36 +11,40 @@ import { LabelsMenuMain } from './LabelsMenuMain'
 import { LabelsMenuDelete } from './LabelsMenuDelete'
 
 export function LabelsMenu({ hierarchy, labelsMenu }) {
+    const { board } = hierarchy
+
     // current page in the labels menu popover: main/edit/create/delete
     const [page, setPage] = useState('main')
 
-    const [labelToEdit, setLabelToEdit] = useState(null)
+    // the label currently being edited / deleted
+    const [curLabel, setCurLabel] = useState(null)
 
     function onNavToEdit(label) {
-        setLabelToEdit(label)
+        setCurLabel(label)
         setPage('edit')
     }
 
     function onNavToMain() {
+        setCurLabel(null)
         setPage('main')
     }
 
     function onNavToCreate() {
-        setLabelToEdit(null)
         setPage('create')
     }
 
-    function onDelete() {
+    function onNavToDelete() {
         setPage('delete')
     }
 
-    function onDeleteConfirm() {
+    function onDelete() {
+        deleteBoardLabel(board, curLabel)
         onNavToMain()
     }
 
     function onSaveAfterEdit(updatedLabel) {
         try {
-            updateBoardLabel(hierarchy.board, updatedLabel)
+            updateBoardLabel(board, updatedLabel)
             onNavToMain()
         } catch (err) {
             console.error(err)
@@ -48,10 +53,7 @@ export function LabelsMenu({ hierarchy, labelsMenu }) {
 
     async function onSaveAfterCreate(newLabel) {
         try {
-            const updatedBoard = await createBoardLabel(
-                hierarchy.board,
-                newLabel
-            )
+            const updatedBoard = await createBoardLabel(board, newLabel)
             const updatedHierarchy = { ...hierarchy, board: updatedBoard }
 
             addTaskLabel(updatedHierarchy, newLabel)
@@ -79,9 +81,9 @@ export function LabelsMenu({ hierarchy, labelsMenu }) {
                 onBack={onNavToMain}
             >
                 <LabelsMenuEdit
-                    label={labelToEdit}
+                    label={curLabel}
                     onSave={onSaveAfterEdit}
-                    onDelete={onDelete}
+                    onDelete={onNavToDelete}
                 />
             </PopoverMenu>
         ),
@@ -100,7 +102,7 @@ export function LabelsMenu({ hierarchy, labelsMenu }) {
                 {...labelsMenu.popover}
                 onBack={() => setPage('edit')}
             >
-                <LabelsMenuDelete onDelete={onDeleteConfirm} />
+                <LabelsMenuDelete onDelete={onDelete} />
             </PopoverMenu>
         ),
     }
