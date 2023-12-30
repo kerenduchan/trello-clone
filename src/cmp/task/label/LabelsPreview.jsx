@@ -13,19 +13,23 @@ export function LabelsPreview({ hierarchy }) {
         e.stopPropagation()
     }
 
+    function getTaskLabels() {
+        return task.labelIds
+            .map((labelId) =>
+                boardService.getItemById(board, 'labels', labelId)
+            )
+            .filter((label) => label.color.name !== 'none')
+    }
+
     if (!task.labelIds?.length) return <></>
 
     return (
         <div className="labels-preview">
             <ul>
-                {task.labelIds.map((labelId) => (
-                    <li key={labelId}>
+                {getTaskLabels().map((label) => (
+                    <li key={label._id}>
                         <LabelBtn
-                            label={boardService.getItemById(
-                                board,
-                                'labels',
-                                labelId
-                            )}
+                            label={label}
                             size={isZoomedIn ? 'md' : 'sm'}
                             onClick={onLabelClick}
                         />
