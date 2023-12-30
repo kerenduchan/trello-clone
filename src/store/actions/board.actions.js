@@ -294,14 +294,25 @@ async function convertChecklistItemToTask(hierarchy, checklist, item) {
 async function addTaskLabel(hierarchy, label) {
     const { board, group, task } = hierarchy
     const taskToUpdate = { ...task }
-    taskToUpdate.labelIds = [...task.labelIds, label._id]
+    const taskLabelIds = [...task.labelIds, label._id]
+
+    // keep the same order of labels as in the board labels
+    taskToUpdate.labelIds = board.labels
+        .filter((l) => taskLabelIds.includes(l._id))
+        .map((l) => l._id)
+
     return _updateTask(board, group, taskToUpdate)
 }
 
 async function removeTaskLabel(hierarchy, label) {
     const { board, group, task } = hierarchy
     const taskToUpdate = { ...task }
-    taskToUpdate.labelIds = task.labelIds.filter((lId) => lId !== label._id)
+    const taskLabelIds = task.labelIds.filter((id) => id !== label._id)
+
+    // keep the same order of labels as in the board labels
+    taskToUpdate.labelIds = board.labels
+        .filter((l) => taskLabelIds.includes(l._id))
+        .map((l) => l._id)
     return _updateTask(board, group, taskToUpdate)
 }
 

@@ -307,7 +307,7 @@ function getTaskLabels(hierarchy) {
 }
 
 function getItemById(board, field, itemId) {
-    return board[field].find((item) => item._id === itemId)
+        return board[field].find((item) => item._id === itemId)
 }
 
 function _getDefaultLabels() {
@@ -321,7 +321,7 @@ function _getDefaultLabels() {
     ]
 
     return defaultColorIds.map((colorId, idx) => ({
-        _id: `l10${idx}`,
+        _id: `l10${idx + 1}`,
         title: '',
         colorId,
         color: getLabelColorById(colorId),
