@@ -9,8 +9,6 @@ export function LabelsMenuEdit({ label, onSave, onDelete }) {
         label || boardService.getEmptyLabel()
     )
 
-    console.log(draft)
-
     useEffect(() => {
         // flesh out the color in the draft, based on colorId
         setDraft((prev) => ({

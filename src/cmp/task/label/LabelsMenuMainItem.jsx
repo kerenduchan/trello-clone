@@ -37,7 +37,10 @@ export function LabelsMenuMainItem({ hierarchy, label, onEdit }) {
             />
             <div
                 className="label"
-                style={{ backgroundColor: label.color.bgColor }}
+                style={{
+                    backgroundColor: label.color.bgColor,
+                    color: label.color.textColor,
+                }}
                 onClick={onClick}
             >
                 {label.title}

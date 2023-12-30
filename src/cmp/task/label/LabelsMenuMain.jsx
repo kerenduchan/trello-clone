@@ -11,13 +11,12 @@ export function LabelsMenuMain({ hierarchy, onEdit, onCreate }) {
         const pattern = new RegExp(searchString, 'i')
         const res = board.labels.filter(
             (label) =>
-                pattern.test(label.title) || pattern.test(label.colorName)
+                pattern.test(label.title) || pattern.test(label.color.name)
         )
         setFilteredLabels(res)
     }, [searchString])
 
     function handleFilterChange(e) {
-        console.log(e.target.value)
         setSearchString(e.target.value)
     }
 

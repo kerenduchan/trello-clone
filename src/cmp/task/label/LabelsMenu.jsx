@@ -33,29 +33,22 @@ export function LabelsMenu({ hierarchy, labelsMenu }) {
     }
 
     function onDeleteConfirm() {
-        console.log('on delete confirm')
         onNavToMain()
     }
 
     function onSaveAfterEdit(updatedLabel) {
         try {
             updateBoardLabel(hierarchy.board, updatedLabel)
-            onBack()
+            onNavToMain()
         } catch (err) {
             console.error(err)
         }
     }
 
-    function onSaveAfterCreate() {
+    function onSaveAfterCreate(newLabel) {
         try {
-            const newLabel = {
-                ...labelToEdit,
-                color: selectedLabelColor.color,
-                colorName: selectedLabelColor.colorName,
-                title: draft.title,
-            }
-
             createBoardLabel(hierarchy.board, newLabel)
+            onNavToMain()
         } catch (err) {
             console.error(err)
         }

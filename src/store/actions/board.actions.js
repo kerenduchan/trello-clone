@@ -114,8 +114,6 @@ async function updateBoardLabel(board, label, fieldsToUpdate) {
 async function createBoardLabel(board, label) {
     const boardToUpdate = { ...board }
     boardToUpdate.labels = [...board.labels, label]
-    console.log('createBoardLabel', label)
-
     return _updateBoard(boardToUpdate)
 }
 
