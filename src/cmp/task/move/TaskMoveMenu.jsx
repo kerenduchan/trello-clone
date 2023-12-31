@@ -123,6 +123,13 @@ export function TaskMoveMenu({ hierarchy, popoverState }) {
         return positionOptions.length === 0
     }
 
+    function getOrigSelectedPositionId() {
+        if (selectedGroupId !== group._id) {
+            return null
+        }
+        return `${getIdxById(group.tasks, task._id) + 1}`
+    }
+
     return (
         <PopoverMenu
             className="task-move-menu"
@@ -156,7 +163,7 @@ export function TaskMoveMenu({ hierarchy, popoverState }) {
                     label="Position"
                     options={positionOptions}
                     selectedId={selectedPositionId}
-                    origSelectedId={`${getIdxById(group.tasks, task._id) + 1}`}
+                    origSelectedId={getOrigSelectedPositionId()}
                     onSelect={setSelectedPositionId}
                     textWhenNoOptions="N/A"
                 />
