@@ -196,6 +196,32 @@ async function moveTask(
             groupToUpdate.tasks = group.tasks.filter((t) => t._id !== task._id)
             groupToUpdate.tasks.splice(targetPositionId, 0, task)
             return _updateGroup(board, groupToUpdate)
+        } else {
+            // move task to a different group in the same board
+
+            const sourceGroupToUpdate = { ...group }
+
+            // remove task from source group
+            sourceGroupToUpdate.tasks = group.tasks.filter(
+                (t) => t._id !== task._id
+            )
+
+            const targetGroupToUpdate = board.groups.find(
+                (g) => g._id === targetGroupId
+            )
+            // insert task into target group
+            targetGroupToUpdate.tasks.splice(targetPositionId, 0, task)
+
+            const boardToUpdate = { ...board }
+            boardToUpdate.groups = board.groups.map((g) =>
+                g._id === targetGroupId
+                    ? targetGroupToUpdate
+                    : g._id === group._id
+                    ? sourceGroupToUpdate
+                    : g
+            )
+
+            return _updateBoard(boardToUpdate)
         }
     }
 
