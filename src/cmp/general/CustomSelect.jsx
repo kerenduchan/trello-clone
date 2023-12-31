@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useToggle } from '../../customHooks/useToggle'
 import { useClickedOutListener } from '../../customHooks/useClickedOutListener'
 
@@ -6,14 +6,19 @@ export function CustomSelect({
     className,
     label,
     options,
-    selected,
+    selectedId,
     onSelect,
 }) {
     const [showDropdown, toggleShowDropdown, setShowDropdown] = useToggle()
+    const [selectedLabel, setSelectedLabel] = useState('')
     const dropdownRef = useRef(null)
     const btnRef = useRef(null)
 
     useClickedOutListener(dropdownRef, onClickedOutside)
+
+    useEffect(() => {
+        setSelectedLabel(getLabel(selectedId))
+    }, [options, selectedId])
 
     function onBtnClick() {
         toggleShowDropdown()
@@ -21,16 +26,18 @@ export function CustomSelect({
 
     function onOptionClick(e) {
         setShowDropdown(false)
-        onSelect({
-            value: e.target.value,
-            text: e.target.innerHTML,
-        })
+        onSelect(e.target.value)
     }
 
     function onClickedOutside(e) {
         if (!btnRef.current.contains(e.target)) {
             setShowDropdown(false)
         }
+    }
+
+    function getLabel(id) {
+        const found = options.find((o) => o._id === id)
+        return found ? found.label : ''
     }
 
     return (
@@ -45,19 +52,17 @@ export function CustomSelect({
                 onClick={onBtnClick}
             >
                 <h4>{label}</h4>
-                <p className="selected-text">{selected?.text}</p>
+                <p className="selected-text">{selectedLabel}</p>
             </button>
             <div className="dropdown-content" ref={dropdownRef}>
                 {options.map((option) => (
                     <option
-                        className={
-                            selected.value === option.value ? 'selected' : ''
-                        }
-                        key={option.value}
-                        value={option.value}
+                        className={selectedId === option._id ? 'selected' : ''}
+                        key={option._id}
+                        value={option._id}
                         onClick={onOptionClick}
                     >
-                        {option.text}
+                        {option.label}
                     </option>
                 ))}
             </div>

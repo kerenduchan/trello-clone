@@ -12,7 +12,7 @@
             display: grid;
             gap: 8px;
             margin-bottom: 16px;
-            grid-template-columns: repeat(2, auto);
+            grid-template-columns: 3fr 1fr;
 
             .board-select {
                 grid-area: 1 / 1 / span 1 / -1;
