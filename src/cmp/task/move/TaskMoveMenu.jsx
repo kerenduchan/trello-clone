@@ -5,6 +5,7 @@ import { PopoverMenu } from '../../general/PopoverMenu'
 import { CustomSelect } from '../../general/CustomSelect'
 import { boardService } from '../../../services/board.service'
 import { SET_BOARDS } from '../../../store/reducers/board.reducer'
+import { moveTask } from '../../../store/actions/board.actions'
 
 export function TaskMoveMenu({ hierarchy, popoverState }) {
     const { board, group, task } = hierarchy
@@ -89,6 +90,16 @@ export function TaskMoveMenu({ hierarchy, popoverState }) {
         setSelectedPositionId(positionId)
     }, [groupOptions, selectedGroupId])
 
+    function onMove() {
+        moveTask(
+            hierarchy,
+            selectedBoardId,
+            selectedGroupId,
+            +selectedPositionId - 1
+        )
+        popoverState.onClose()
+    }
+
     async function loadBoards() {
         try {
             const boards = await boardService.query()
@@ -151,7 +162,11 @@ export function TaskMoveMenu({ hierarchy, popoverState }) {
                 />
             </div>
 
-            <button className="btn-primary" disabled={isMoveDisabled()}>
+            <button
+                className="btn-primary"
+                disabled={isMoveDisabled()}
+                onClick={onMove}
+            >
                 Move
             </button>
         </PopoverMenu>

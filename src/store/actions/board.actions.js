@@ -23,6 +23,7 @@ export {
     createTask,
     deleteTask,
     updateTask,
+    moveTask,
     addTaskMember,
     removeTaskMember,
     addTaskComment,
@@ -177,6 +178,29 @@ async function updateTask(hierarchy, fieldsToUpdate) {
     groupToUpdate.tasks = group.tasks.map((t) =>
         t._id === task._id ? { ...task, ...fieldsToUpdate } : t
     )
+    return _updateGroup(board, groupToUpdate)
+}
+
+async function moveTask(
+    hierarchy,
+    targetBoardId,
+    targetGroupId,
+    targetPositionId
+) {
+    const { board, group, task } = hierarchy
+
+    if (board._id === targetBoardId) {
+        if (group._id === targetGroupId) {
+            // move task in the same group
+            const groupToUpdate = { ...group }
+            groupToUpdate.tasks = group.tasks.filter((t) => t._id !== task._id)
+            groupToUpdate.tasks.splice(targetPositionId, 0, task)
+            return _updateGroup(board, groupToUpdate)
+        }
+    }
+
+    const groupToUpdate = { ...group }
+    groupToUpdate.tasks = [...group.tasks, task]
     return _updateGroup(board, groupToUpdate)
 }
 
