@@ -1,0 +1,70 @@
+/* Custom select container */
+.custom-select {
+    position: relative;
+    display: inline-block;
+
+    .btn-custom-select {
+        @include button-bg(
+            var(--bg-neutral),
+            var(--bg-neutral-hovered),
+            var(--bg-neutral-pressed)
+        );
+        box-sizing: border-box;
+        height: 50px;
+        border-radius: 3px;
+        padding: 6px 12px;
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: start;
+
+        & > h4 {
+            @include font(12px, 16px, 600);
+        }
+
+        & > p {
+            @include ellipsis();
+            @include font-p();
+        }
+
+        &:active {
+            & > h4 {
+                color: var(--bg-brand-bold);
+            }
+        }
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1;
+        background-color: var(--bg-1);
+        border: 1px solid black;
+        width: 100%;
+
+        & > option {
+            @include font-p();
+            padding-inline-start: 2px;
+            padding-inline-end: 2px;
+            padding-bottom: 1px;
+        }
+
+        .selected {
+            background-color: var(--bg-brand-bold);
+            color: var(--bg-1);
+        }
+
+        option:hover {
+            background-color: var(--bg-brand-bold);
+            color: var(--bg-1);
+        }
+    }
+
+    &.show-dropdown .dropdown-content {
+        display: block;
+    }
+}

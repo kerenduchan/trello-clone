@@ -8,6 +8,7 @@ import { ChecklistMenu } from './checklist/ChecklistMenu'
 import { MembersMenu } from './members/MembersMenu'
 import { TaskCoverMenu } from './cover/TaskCoverMenu'
 import { TaskDatesMenu } from './dates/TaskDatesMenu'
+import { TaskMoveMenu } from './move/TaskMoveMenu'
 
 export function TaskDetailsSidebar({ hierarchy }) {
     const { board } = hierarchy
@@ -18,6 +19,7 @@ export function TaskDetailsSidebar({ hierarchy }) {
     const checklistMenu = usePopoverState()
     const datesMenu = usePopoverState()
     const coverMenu = usePopoverState()
+    const moveMenu = usePopoverState()
     const deleteTaskMenu = usePopoverState()
 
     function onDeleteTask() {
@@ -82,7 +84,11 @@ export function TaskDetailsSidebar({ hierarchy }) {
                 <section>
                     <h3>Actions</h3>
                     <div className="content">
-                        <SecondaryBtn icon="move" text="Move" />
+                        <SecondaryBtn
+                            {...moveMenu.triggerAndTarget}
+                            icon="move"
+                            text="Move"
+                        />
                         <SecondaryBtn icon="copy" text="Copy" />
                         <SecondaryBtn icon="template" text="Make Template" />
                         <SecondaryBtn
@@ -121,6 +127,11 @@ export function TaskDetailsSidebar({ hierarchy }) {
             {/* Cover menu */}
             {coverMenu.show && (
                 <TaskCoverMenu hierarchy={hierarchy} popoverState={coverMenu} />
+            )}
+
+            {/* Move menu */}
+            {moveMenu.show && (
+                <TaskMoveMenu hierarchy={hierarchy} popoverState={moveMenu} />
             )}
 
             {/* Delete task menu */}

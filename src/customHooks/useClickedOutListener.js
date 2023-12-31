@@ -2,6 +2,8 @@ import { useCallback } from 'react'
 import { useEffect } from 'react'
 
 export function useClickedOutListener(elRefs, onClickOutside) {
+    elRefs = Array.isArray(elRefs) ? elRefs : [elRefs]
+
     useEffect(() => {
         document.addEventListener('mousedown', mouseDownListener)
 
@@ -17,7 +19,7 @@ export function useClickedOutListener(elRefs, onClickOutside) {
             )
         ) {
             // clicked outside of the given elements
-            onClickOutside()
+            onClickOutside(e)
         }
     })
 }
