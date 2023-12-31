@@ -126,6 +126,7 @@ export function TaskMoveMenu({ hierarchy, popoverState }) {
                     options={groupOptions}
                     selectedId={selectedGroupId}
                     onSelect={setSelectedGroupId}
+                    textWhenNoOptions="No Lists"
                 />
 
                 <CustomSelect
@@ -134,6 +135,7 @@ export function TaskMoveMenu({ hierarchy, popoverState }) {
                     options={positionOptions}
                     selectedId={selectedPositionId}
                     onSelect={setSelectedPositionId}
+                    textWhenNoOptions="N/A"
                 />
             </div>
 
