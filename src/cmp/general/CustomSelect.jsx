@@ -6,6 +6,7 @@ export function CustomSelect({
     className,
     label,
     options,
+    origSelectedId,
     selectedId,
     onSelect,
     textWhenNoOptions,
@@ -40,13 +41,13 @@ export function CustomSelect({
         }
     }
 
+    function onMouseEnterOption(e) {
+        setHighlightedId(e.target.value)
+    }
+
     function getLabel(id) {
         const found = options.find((o) => o._id === id)
         return found ? found.label : null
-    }
-
-    function onMouseEnterOption(e) {
-        setHighlightedId(e.target.value)
     }
 
     return (
@@ -80,7 +81,9 @@ export function CustomSelect({
                         onClick={onOptionClick}
                         onMouseEnter={onMouseEnterOption}
                     >
-                        {option.label}
+                        {`${option.label}${
+                            option._id === origSelectedId ? ' (current)' : ''
+                        }`}
                     </option>
                 ))}
             </div>

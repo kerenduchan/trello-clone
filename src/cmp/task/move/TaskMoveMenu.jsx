@@ -63,15 +63,20 @@ export function TaskMoveMenu({ hierarchy, popoverState }) {
         )
 
         if (!selectedGroup) {
+            setPositionOptions([])
             return
         }
 
-        const posOpts = [...Array(selectedGroup.tasks.length).keys()].map(
-            (idx) => ({
-                _id: `${idx + 1}`,
-                label: `${idx + 1}`,
-            })
-        )
+        let count = selectedGroup.tasks.length
+        if (selectedGroup._id !== group._id) {
+            // moving to a different group means there's one more option
+            count++
+        }
+
+        const posOpts = [...Array(count).keys()].map((idx) => ({
+            _id: `${idx + 1}`,
+            label: `${idx + 1}`,
+        }))
 
         setPositionOptions(posOpts)
 
@@ -103,6 +108,10 @@ export function TaskMoveMenu({ hierarchy, popoverState }) {
         return null
     }
 
+    function isMoveDisabled() {
+        return positionOptions.length === 0
+    }
+
     return (
         <PopoverMenu
             className="task-move-menu"
@@ -117,6 +126,7 @@ export function TaskMoveMenu({ hierarchy, popoverState }) {
                     label="Board"
                     options={boardOptions}
                     selectedId={selectedBoardId}
+                    origSelectedId={board._id}
                     onSelect={setSelectedBoardId}
                 />
 
@@ -125,6 +135,7 @@ export function TaskMoveMenu({ hierarchy, popoverState }) {
                     label="List"
                     options={groupOptions}
                     selectedId={selectedGroupId}
+                    origSelectedId={group._id}
                     onSelect={setSelectedGroupId}
                     textWhenNoOptions="No Lists"
                 />
@@ -134,12 +145,15 @@ export function TaskMoveMenu({ hierarchy, popoverState }) {
                     label="Position"
                     options={positionOptions}
                     selectedId={selectedPositionId}
+                    origSelectedId={`${getIdxById(group.tasks, task._id) + 1}`}
                     onSelect={setSelectedPositionId}
                     textWhenNoOptions="N/A"
                 />
             </div>
 
-            <button className="btn-primary">Move</button>
+            <button className="btn-primary" disabled={isMoveDisabled()}>
+                Move
+            </button>
         </PopoverMenu>
     )
 }
