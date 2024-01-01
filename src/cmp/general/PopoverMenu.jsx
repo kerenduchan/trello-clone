@@ -11,7 +11,7 @@ export function PopoverMenu({
 }) {
     return (
         <Popover
-            className={`popover-menu ${className}`}
+            className={`popover-menu ${className ? className : ''}`}
             refEl={refEl}
             onClose={onClose}
         >
