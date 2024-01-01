@@ -31,6 +31,13 @@ export function TaskDetailsHeader({ hierarchy, onClose }) {
                 ></div>
             )}
 
+            {task.archivedAt !== null && (
+                <div className="archive-banner">
+                    <Icon type="archived" size="md" />
+                    <p>This card is archived.</p>
+                </div>
+            )}
+
             <div className="task-details-header">
                 <div className="icon-container">
                     <Icon type="card" />

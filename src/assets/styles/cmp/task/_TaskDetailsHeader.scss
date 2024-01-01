@@ -5,6 +5,37 @@
     z-index: 2;
 }
 
+.archive-banner {
+    position: relative;
+    grid-area: archive;
+    padding: 16px;
+    padding-inline-start: 56px;
+    background-color: var(--bg-warning);
+    background-image: linear-gradient(
+        to bottom right,
+        var(--ds-background-neutral, rgba(0, 0, 0, 0.05)) 25%,
+        transparent 25%,
+        transparent 50%,
+        var(--ds-background-neutral, rgba(0, 0, 0, 0.05)) 50%,
+        var(--ds-background-neutral, rgba(0, 0, 0, 0.05)) 75%,
+        transparent 75%,
+        transparent
+    );
+    background-size: 14px 14px;
+    display: flex;
+    align-items: center;
+
+    .archived-icon {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+    }
+
+    & > p {
+        @include font(16px, 32px, 400);
+    }
+}
+
 .task-details-header {
     position: relative;
     grid-area: header;

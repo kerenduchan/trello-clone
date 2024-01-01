@@ -5,6 +5,13 @@
     padding-inline-start: 8px;
     padding-bottom: 8px;
 
+    hr {
+        height: 1px;
+        background-color: var(--bg-divider);
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+
     .btn-delete {
         @include button-bg(
             var(--bg-danger-bold),

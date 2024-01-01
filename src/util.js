@@ -30,6 +30,7 @@ const _typeToMaterialSymbol = {
     emoji: 'sentiment_satisfied',
     mention: 'alternate_email',
     comment: 'chat_bubble',
+    archived: 'inventory_2',
     'checkbox-unchecked': 'check_box_outline_blank',
     'checkbox-checked': 'select_check_box',
 }

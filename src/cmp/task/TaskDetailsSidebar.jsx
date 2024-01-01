@@ -105,6 +105,8 @@ export function TaskDetailsSidebar({ hierarchy }) {
                             text="Copy"
                         />
 
+                        <hr />
+
                         {task.archivedAt === null ? (
                             // Archive
                             <SecondaryBtn
