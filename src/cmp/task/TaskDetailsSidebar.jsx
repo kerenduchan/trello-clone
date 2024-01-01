@@ -20,6 +20,7 @@ export function TaskDetailsSidebar({ hierarchy }) {
     const datesMenu = usePopoverState()
     const coverMenu = usePopoverState()
     const moveMenu = usePopoverState()
+    const copyMenu = usePopoverState()
     const deleteTaskMenu = usePopoverState()
 
     function onDeleteTask() {
@@ -82,12 +83,21 @@ export function TaskDetailsSidebar({ hierarchy }) {
                 <section>
                     <h3>Actions</h3>
                     <div className="content">
+                        {/* Move */}
                         <SecondaryBtn
                             {...moveMenu.triggerAndTarget}
                             icon="move"
                             text="Move"
                         />
-                        <SecondaryBtn icon="copy" text="Copy" />
+
+                        {/* Copy */}
+                        <SecondaryBtn
+                            {...copyMenu.triggerAndTarget}
+                            icon="copy"
+                            text="Copy"
+                        />
+
+                        {/* Archive */}
                         <SecondaryBtn
                             {...deleteTaskMenu.triggerAndTarget}
                             icon="archive"
@@ -129,6 +139,15 @@ export function TaskDetailsSidebar({ hierarchy }) {
             {/* Move menu */}
             {moveMenu.show && (
                 <TaskMoveMenu hierarchy={hierarchy} popoverState={moveMenu} />
+            )}
+
+            {/* Copy menu */}
+            {copyMenu.show && (
+                <TaskMoveMenu
+                    hierarchy={hierarchy}
+                    popoverState={copyMenu}
+                    isCopy={true}
+                />
             )}
 
             {/* Delete task menu */}

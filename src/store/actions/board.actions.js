@@ -1,3 +1,4 @@
+import { utilService } from '../../services/util.service'
 import { boardService } from '../../services/board.service'
 import { userService } from '../../services/user.service'
 import {
@@ -25,6 +26,7 @@ export {
     deleteTask,
     updateTask,
     moveTask,
+    copyTask,
     addTaskMember,
     removeTaskMember,
     addTaskComment,
@@ -208,6 +210,26 @@ async function moveTask(
             targetPositionId
         )
     }
+}
+
+async function copyTask(
+    task,
+    newTitle,
+    targetBoardId,
+    targetGroupId,
+    targetPositionId
+) {
+    const allBoards = store.getState().boardModule.boards
+    const targetBoard = allBoards.find((b) => b._id === targetBoardId)
+    const targetGroup = targetBoard.groups.find((g) => g._id === targetGroupId)
+    const targetGroupToUpdate = { ...targetGroup }
+    const taskCopy = {
+        ...structuredClone(task),
+        _id: utilService.makeId(),
+        title: newTitle,
+    }
+    targetGroupToUpdate.tasks.splice(targetPositionId, 0, taskCopy)
+    _updateGroup(targetBoard, targetGroupToUpdate)
 }
 
 // TASK MEMBER

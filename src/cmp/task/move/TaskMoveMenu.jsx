@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { store } from '../../../store/store'
+import { SET_BOARDS } from '../../../store/reducers/board.reducer'
+import { moveTask, copyTask } from '../../../store/actions/board.actions'
+import { boardService } from '../../../services/board.service'
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { CustomSelect } from '../../general/CustomSelect'
-import { boardService } from '../../../services/board.service'
-import { SET_BOARDS } from '../../../store/reducers/board.reducer'
-import { moveTask } from '../../../store/actions/board.actions'
 
-export function TaskMoveMenu({ hierarchy, popoverState }) {
+export function TaskMoveMenu({ hierarchy, popoverState, isCopy }) {
     const { board, group, task } = hierarchy
 
     const allBoards = useSelector((storeState) => storeState.boardModule.boards)
@@ -19,7 +19,14 @@ export function TaskMoveMenu({ hierarchy, popoverState }) {
     const [selectedGroupId, setSelectedGroupId] = useState(group._id)
     const [selectedPositionId, setSelectedPositionId] = useState(1)
 
+    const [taskCopyTitle, setTaskCopyTitle] = useState(task.title)
+
+    const textareaRef = useRef(null)
+
     useEffect(() => {
+        if (isCopy) {
+            textareaRef.current.select()
+        }
         loadBoards()
     }, [])
 
@@ -99,6 +106,17 @@ export function TaskMoveMenu({ hierarchy, popoverState }) {
         popoverState.onClose()
     }
 
+    function onCopy() {
+        copyTask(
+            task,
+            taskCopyTitle,
+            selectedBoardId,
+            selectedGroupId,
+            +selectedPositionId - 1
+        )
+        popoverState.onClose()
+    }
+
     async function loadBoards() {
         try {
             const boards = await boardService.query()
@@ -118,7 +136,7 @@ export function TaskMoveMenu({ hierarchy, popoverState }) {
         return null
     }
 
-    function isMoveDisabled() {
+    function isMoveOrCopyDisabled() {
         return positionOptions.length === 0
     }
 
@@ -132,10 +150,28 @@ export function TaskMoveMenu({ hierarchy, popoverState }) {
     return (
         <PopoverMenu
             className="task-move-menu"
-            title="Move card"
+            title={`${isCopy ? 'Copy' : 'Move'} card`}
             {...popoverState.popover}
         >
-            <h4>Select destination</h4>
+            {isCopy && (
+                <>
+                    <h4 className="h4-title">Title</h4>
+
+                    <textarea
+                        ref={textareaRef}
+                        className="task-copy-title"
+                        autoFocus
+                        name="title"
+                        id="title"
+                        onChange={(e) => setTaskCopyTitle(e.target.value)}
+                        value={taskCopyTitle}
+                    />
+                </>
+            )}
+
+            <h4 className={`h4-destination-${isCopy ? 'copy' : 'move'}`}>
+                {isCopy ? 'Copy to...' : 'Select destination'}
+            </h4>
 
             <div className="destination">
                 <CustomSelect
@@ -170,10 +206,10 @@ export function TaskMoveMenu({ hierarchy, popoverState }) {
 
             <button
                 className="btn-primary"
-                disabled={isMoveDisabled()}
-                onClick={onMove}
+                disabled={isMoveOrCopyDisabled()}
+                onClick={isCopy ? onCopy : onMove}
             >
-                Move
+                {isCopy ? 'Create card' : 'Move'}
             </button>
         </PopoverMenu>
     )
