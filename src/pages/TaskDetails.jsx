@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import { TaskDescription } from '../cmp/task/description/TaskDescription'
 import { TaskDetailsActivity } from '../cmp/task/TaskDetailsActivity'
@@ -13,10 +14,19 @@ export function TaskDetails({ hierarchy }) {
     const navigate = useNavigate()
     const params = useParams()
 
+    useEffect(() => {
+        if (!hierarchy.task) {
+            // task was moved to a different board
+            onClose()
+        }
+    }, [])
+
     function onClose() {
         setCurChecklist(null)
         navigate(`/b/${params.boardId}`)
     }
+
+    if (!hierarchy.task) return <></>
 
     return (
         <div className="task-details-bg" onClick={onClose}>

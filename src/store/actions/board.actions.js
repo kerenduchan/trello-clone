@@ -6,6 +6,7 @@ import {
     ADD_BOARD,
     REMOVE_BOARD,
     UPDATE_BOARD,
+    UPDATE_BOARDS,
 } from '../reducers/board.reducer'
 import { store } from '../store'
 import { setCurChecklist } from './app.actions'
@@ -187,47 +188,26 @@ async function moveTask(
     targetGroupId,
     targetPositionId
 ) {
-    const { board, group, task } = hierarchy
+    const { board, group } = hierarchy
 
     if (board._id === targetBoardId) {
         if (group._id === targetGroupId) {
-            // move task in the same group
-            const groupToUpdate = { ...group }
-            groupToUpdate.tasks = group.tasks.filter((t) => t._id !== task._id)
-            groupToUpdate.tasks.splice(targetPositionId, 0, task)
-            return _updateGroup(board, groupToUpdate)
+            return _moveTaskInsideGroup(hierarchy, targetPositionId)
         } else {
-            // move task to a different group in the same board
-
-            const sourceGroupToUpdate = { ...group }
-
-            // remove task from source group
-            sourceGroupToUpdate.tasks = group.tasks.filter(
-                (t) => t._id !== task._id
+            return _moveTaskInsideBoard(
+                hierarchy,
+                targetGroupId,
+                targetPositionId
             )
-
-            const targetGroupToUpdate = board.groups.find(
-                (g) => g._id === targetGroupId
-            )
-            // insert task into target group
-            targetGroupToUpdate.tasks.splice(targetPositionId, 0, task)
-
-            const boardToUpdate = { ...board }
-            boardToUpdate.groups = board.groups.map((g) =>
-                g._id === targetGroupId
-                    ? targetGroupToUpdate
-                    : g._id === group._id
-                    ? sourceGroupToUpdate
-                    : g
-            )
-
-            return _updateBoard(boardToUpdate)
         }
+    } else {
+        return _moveTaskToDifferentBoard(
+            hierarchy,
+            targetBoardId,
+            targetGroupId,
+            targetPositionId
+        )
     }
-
-    const groupToUpdate = { ...group }
-    groupToUpdate.tasks = [...group.tasks, task]
-    return _updateGroup(board, groupToUpdate)
 }
 
 // TASK MEMBER
@@ -397,6 +377,18 @@ async function _updateBoard(board) {
     }
 }
 
+async function _updateBoards(boards) {
+    try {
+        // optimistic update
+        store.dispatch({ type: UPDATE_BOARDS, boards })
+        boards.forEach(async (b) => await boardService.save(b))
+    } catch (err) {
+        console.error('Failed to update boards:', err)
+        // TODO: undo the store change
+        throw err
+    }
+}
+
 async function _updateGroup(board, groupToUpdate) {
     const boardToUpdate = { ...board }
     boardToUpdate.groups = board.groups.map((g) =>
@@ -420,4 +412,75 @@ async function _updateChecklist(hierarchy, checklistToUpdate) {
         c._id === checklistToUpdate._id ? checklistToUpdate : c
     )
     _updateTask(board, group, taskToUpdate)
+}
+
+// move task in the same group
+async function _moveTaskInsideGroup(hierarchy, targetPositionId) {
+    const { board, group, task } = hierarchy
+
+    const groupToUpdate = { ...group }
+    groupToUpdate.tasks = group.tasks.filter((t) => t._id !== task._id)
+    groupToUpdate.tasks.splice(targetPositionId, 0, task)
+    return _updateGroup(board, groupToUpdate)
+}
+
+// move task to a different group in the same board
+async function _moveTaskInsideBoard(
+    hierarchy,
+    targetGroupId,
+    targetPositionId
+) {
+    const { board, group, task } = hierarchy
+
+    // remove task from source group
+    const sourceGroupToUpdate = { ...group }
+    sourceGroupToUpdate.tasks = group.tasks.filter((t) => t._id !== task._id)
+
+    // insert task into target group
+    const targetGroup = board.groups.find((g) => g._id === targetGroupId)
+    const targetGroupToUpdate = { ...targetGroup }
+    targetGroupToUpdate.tasks.splice(targetPositionId, 0, task)
+
+    const boardToUpdate = { ...board }
+    boardToUpdate.groups = board.groups.map((g) =>
+        g._id === targetGroupId
+            ? targetGroupToUpdate
+            : g._id === group._id
+            ? sourceGroupToUpdate
+            : g
+    )
+
+    return _updateBoard(boardToUpdate)
+}
+
+// move task to a different board
+async function _moveTaskToDifferentBoard(
+    hierarchy,
+    targetBoardId,
+    targetGroupId,
+    targetPositionId
+) {
+    const { board, group, task } = hierarchy
+
+    // remove task from source group
+    const sourceGroupToUpdate = { ...group }
+    sourceGroupToUpdate.tasks = group.tasks.filter((t) => t._id !== task._id)
+    const sourceBoardToUpdate = { ...board }
+    sourceBoardToUpdate.groups = board.groups.map((g) =>
+        g._id === group._id ? sourceGroupToUpdate : g
+    )
+
+    // insert task into target group in target board
+    const allBoards = store.getState().boardModule.boards
+    const targetBoard = allBoards.find((b) => b._id === targetBoardId)
+    const targetGroup = targetBoard.groups.find((g) => g._id === targetGroupId)
+    const targetGroupToUpdate = { ...targetGroup }
+    targetGroupToUpdate.tasks.splice(targetPositionId, 0, task)
+    const targetBoardToUpdate = { ...targetBoard }
+    targetBoardToUpdate.groups = targetBoard.groups.map((g) =>
+        g._id === targetGroupId ? targetGroupToUpdate : g
+    )
+
+    console.log('_updateBoards', sourceBoardToUpdate, targetBoardToUpdate)
+    return _updateBoards([sourceBoardToUpdate, targetBoardToUpdate])
 }

@@ -3,6 +3,7 @@ export const SET_BOARD = 'SET_BOARD'
 export const ADD_BOARD = 'ADD_BOARD'
 export const REMOVE_BOARD = 'REMOVE_BOARD'
 export const UPDATE_BOARD = 'UPDATE_BOARD'
+export const UPDATE_BOARDS = 'UPDATE_BOARDS'
 
 const initialState = {
     boards: [],
@@ -51,6 +52,25 @@ export function boardReducer(state = initialState, action = {}) {
 
             if (newState.curBoard?._id === action.board._id) {
                 newState.curBoard = action.board
+            }
+            break
+
+        case UPDATE_BOARDS:
+            const boardIdToBoardMap = {}
+            for (const b of action.boards) {
+                boardIdToBoardMap[b._id] = b
+            }
+
+            // new array containing pointers to old unmutated boards
+            // except for the updated boards which are new
+
+            newState.boards = newState.boards.map((b) =>
+                boardIdToBoardMap[b._id] ? boardIdToBoardMap[b._id] : b
+            )
+
+            const curBoardId = newState.curBoard?._id
+            if (boardIdToBoardMap[curBoardId]) {
+                newState.curBoard = boardIdToBoardMap[curBoardId]
             }
             break
 
