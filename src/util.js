@@ -18,7 +18,7 @@ const _typeToMaterialSymbol = {
     move: 'arrow_right_alt',
     copy: 'content_copy',
     template: 'copy_all',
-    archive: 'archive',
+    archive: 'inventory_2',
     share: 'share',
     close: 'close',
     activity: 'list',
