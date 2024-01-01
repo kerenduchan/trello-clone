@@ -47,9 +47,8 @@ export function TaskMoveMenu({ hierarchy, popoverState }) {
         if (selectedBoardId === board._id) {
             groupId = group._id
         } else {
-            groupId = groupOptions.length ? groupOptions[0]._id : null
+            groupId = groups.length ? groups[0]._id : null
         }
-
         setSelectedGroupId(groupId)
     }, [boardOptions, selectedBoardId])
 
