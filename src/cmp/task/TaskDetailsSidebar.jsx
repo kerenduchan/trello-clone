@@ -76,8 +76,6 @@ export function TaskDetailsSidebar({ hierarchy }) {
                             icon="cover"
                             text="Cover"
                         />
-
-                        <SecondaryBtn icon="customField" text="Custom Fields" />
                     </div>
                 </section>
 
@@ -90,7 +88,6 @@ export function TaskDetailsSidebar({ hierarchy }) {
                             text="Move"
                         />
                         <SecondaryBtn icon="copy" text="Copy" />
-                        <SecondaryBtn icon="template" text="Make Template" />
                         <SecondaryBtn
                             {...deleteTaskMenu.triggerAndTarget}
                             icon="archive"
