@@ -1,4 +1,6 @@
 .task-dates-menu {
+    width: 280px;
+
     h4 {
         @include font(12px, 16px, 700);
         color: var(--text-color-subtle);
@@ -7,7 +9,7 @@
 
     .btn-save,
     .btn-remove {
-        margin-top: 4px;
-        width: 280px;
+        width: 100%;
+        margin-bottom: 8px;
     }
 }
