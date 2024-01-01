@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router'
+import { updateTask, deleteTask } from '../../store/actions/board.actions'
 import { usePopoverState } from '../../customHooks/usePopoverState'
-import { deleteTask } from '../../store/actions/board.actions'
 import { DeleteMenu } from '../general/DeleteMenu'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 import { LabelsMenu } from '../labelsMenu/LabelsMenu'
@@ -11,7 +11,7 @@ import { TaskDatesMenu } from './dates/TaskDatesMenu'
 import { TaskMoveMenu } from './move/TaskMoveMenu'
 
 export function TaskDetailsSidebar({ hierarchy }) {
-    const { board } = hierarchy
+    const { task, board } = hierarchy
 
     const navigate = useNavigate()
     const membersMenu = usePopoverState()
@@ -32,6 +32,14 @@ export function TaskDetailsSidebar({ hierarchy }) {
             console.error(err)
             // TODO: show an error dialog
         }
+    }
+
+    function onArchive() {
+        updateTask(hierarchy, { archivedAt: Date.now() })
+    }
+
+    function onSendToBoard() {
+        updateTask(hierarchy, { archivedAt: null })
     }
 
     return (
@@ -97,12 +105,32 @@ export function TaskDetailsSidebar({ hierarchy }) {
                             text="Copy"
                         />
 
-                        {/* Archive */}
-                        <SecondaryBtn
-                            {...deleteTaskMenu.triggerAndTarget}
-                            icon="archive"
-                            text="Archive"
-                        />
+                        {task.archivedAt === null ? (
+                            // Archive
+                            <SecondaryBtn
+                                onClick={onArchive}
+                                icon="archive"
+                                text="Archive"
+                            />
+                        ) : (
+                            <>
+                                {/* Send to board */}
+                                <SecondaryBtn
+                                    onClick={onSendToBoard}
+                                    icon="settings_backup_restore"
+                                    text="Send to board"
+                                />
+                                {/* Delete */}
+                                <SecondaryBtn
+                                    {...deleteTaskMenu.triggerAndTarget}
+                                    className="btn-delete"
+                                    icon="remove"
+                                    text="Delete"
+                                />
+                            </>
+                        )}
+
+                        {/* Share */}
                         <SecondaryBtn icon="share" text="Share" />
                     </div>
                 </section>
@@ -150,7 +178,7 @@ export function TaskDetailsSidebar({ hierarchy }) {
                 />
             )}
 
-            {/* Delete task menu */}
+            {/* Archive task menu */}
             {deleteTaskMenu.show && (
                 <DeleteMenu
                     deleteMenu={deleteTaskMenu}

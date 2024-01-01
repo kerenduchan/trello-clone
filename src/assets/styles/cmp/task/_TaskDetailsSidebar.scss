@@ -5,6 +5,17 @@
     padding-inline-start: 8px;
     padding-bottom: 8px;
 
+    .btn-delete {
+        @include button-bg(
+            var(--bg-danger-bold),
+            var(--bg-danger-bold-hovered),
+            var(--bg-danger-bold-pressed)
+        );
+        & > * {
+            color: var(--text-inverse);
+        }
+    }
+
     section {
         margin-bottom: 24px;
 
