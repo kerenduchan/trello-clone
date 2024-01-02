@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import {
     archiveTasks,
+    moveGroup,
     moveTasks,
     updateGroup,
 } from '../../../store/actions/board.actions'
@@ -40,8 +41,8 @@ export function GroupMenu({
         onClose()
     }
 
-    function onMoveGroup() {
-        console.log('move group')
+    function onMoveGroup(targetBoardId, targetPositionId) {
+        moveGroup(board, group, targetBoardId, targetPositionId)
         onClose()
     }
 

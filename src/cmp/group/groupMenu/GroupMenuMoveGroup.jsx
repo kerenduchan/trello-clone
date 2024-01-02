@@ -96,7 +96,12 @@ export function GroupMenuMoveGroup({ board, group, onMoveGroup, isCopy }) {
                 />
             </div>
 
-            <button className="btn-primary btn-move" onClick={onMoveGroup}>
+            <button
+                className="btn-primary btn-move"
+                onClick={() =>
+                    onMoveGroup(selectedBoardId, +selectedPositionId - 1)
+                }
+            >
                 Move
             </button>
         </div>

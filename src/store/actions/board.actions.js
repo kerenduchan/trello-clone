@@ -22,6 +22,7 @@ export {
     createGroup,
     deleteGroup,
     updateGroup,
+    moveGroup,
     createTask,
     deleteTask,
     updateTask,
@@ -160,6 +161,25 @@ async function updateGroup(board, group, fieldsToUpdate) {
         g._id === group._id ? { ...group, ...fieldsToUpdate } : g
     )
     return _updateBoard(boardToUpdate)
+}
+
+async function moveGroup(board, group, targetBoardId, targetPositionId) {
+    // remove group from source board
+    const boardToUpdate = { ...board }
+    boardToUpdate.groups = board.groups.filter((g) => g._id !== group._id)
+
+    if (board._id === targetBoardId) {
+        // move group to a new position in the same board
+        boardToUpdate.groups.splice(targetPositionId, 0, group)
+        return _updateBoard(boardToUpdate)
+    }
+
+    // move group to a different board
+    const allBoards = store.getState().boardModule.boards
+    const targetBoard = allBoards.find((b) => b._id === targetBoardId)
+    const targetBoardToUpdate = { ...targetBoard }
+    targetBoardToUpdate.groups.splice(targetPositionId, 0, group)
+    return _updateBoards([boardToUpdate, targetBoardToUpdate])
 }
 
 // TASK
