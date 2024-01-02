@@ -32,6 +32,7 @@ export function GroupPreviewHeader({ board, group, onTaskCreate }) {
                 <GroupMenu
                     popoverState={groupMenu}
                     onTaskCreate={onTaskCreate}
+                    onClose={groupMenu.onClose}
                 />
             )}
         </header>

@@ -1,6 +1,13 @@
 import { deleteGroup } from '../../../store/actions/board.actions'
 
-export function GroupMenuMain({ board, group, onClose, onTaskCreate }) {
+export function GroupMenuMain({
+    board,
+    group,
+    onClose,
+    onTaskCreate,
+    onMoveAllTasks,
+    onArchiveAllTasks,
+}) {
     function onDelete() {
         try {
             deleteGroup(board, group)
@@ -19,10 +26,6 @@ export function GroupMenuMain({ board, group, onClose, onTaskCreate }) {
 
     function onMoveList() {}
 
-    function onMoveAllCards() {}
-
-    function onArchiveAllCards() {}
-
     function onArchiveList() {}
 
     return (
@@ -40,10 +43,10 @@ export function GroupMenuMain({ board, group, onClose, onTaskCreate }) {
                 <li>
                     <hr />
                 </li>
-                <li className="clickable" onClick={onMoveAllCards}>
+                <li className="clickable" onClick={onMoveAllTasks}>
                     Move all cards in this list
                 </li>
-                <li className="clickable" onClick={onArchiveAllCards}>
+                <li className="clickable" onClick={onArchiveAllTasks}>
                     Archive all cards in this list
                 </li>
                 <li>
