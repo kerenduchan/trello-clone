@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { TaskList } from '../task/TaskList'
-import { GroupPreviewFooter } from './GroupPreviewFooter'
 import { GroupPreviewHeader } from './GroupPreviewHeader'
+import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 
 // Represents a group of tasks (a list in the UI) in a board
 export function GroupPreview({ board, group }) {
@@ -18,14 +18,23 @@ export function GroupPreview({ board, group }) {
                 group={group}
                 onTaskCreate={onShowTaskCreateForm}
             />
+
             <TaskList
                 board={board}
                 group={group}
                 taskCreateFormPosition={taskCreateFormPosition}
                 onCloseTaskCreateForm={() => setTaskCreateFormPosition(null)}
             />
+
             {taskCreateFormPosition === null && (
-                <GroupPreviewFooter board={board} group={group} />
+                <SecondaryBtn
+                    text="Add a card"
+                    icon="add"
+                    className="btn-show-add-form"
+                    onClick={() =>
+                        setTaskCreateFormPosition(group.tasks.length)
+                    }
+                ></SecondaryBtn>
             )}
         </section>
     )
