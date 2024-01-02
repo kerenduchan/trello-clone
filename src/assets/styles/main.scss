@@ -46,7 +46,9 @@
 @import 'cmp/group/GroupList';
 @import 'cmp/group/GroupPreview';
 @import 'cmp/group/GroupPreviewHeader';
-@import 'cmp/group/GroupPreviewMenu';
+
+// groupMenu
+@import 'cmp/group/groupMenu/GroupMenuMoveTasks';
 
 // labelsMenu
 @import 'cmp/labelsMenu/LabelColorSelect';

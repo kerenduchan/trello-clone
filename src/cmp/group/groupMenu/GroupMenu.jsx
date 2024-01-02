@@ -6,7 +6,13 @@ import { GroupMenuCopyGroup } from './GroupMenuCopyGroup'
 import { GroupMenuMoveTasks } from './GroupMenuMoveTasks'
 import { GroupMenuMoveGroup } from './GroupMenuMoveGroup'
 
-export function GroupMenu({ hierarchy, popoverState, onTaskCreate, onClose }) {
+export function GroupMenu({
+    board,
+    group,
+    popoverState,
+    onTaskCreate,
+    onClose,
+}) {
     // current page in the group menu popover: main/archive
     const [page, setPage] = useState('main')
     const [title, setTitle] = useState('Group actions')
@@ -34,8 +40,8 @@ export function GroupMenu({ hierarchy, popoverState, onTaskCreate, onClose }) {
         onClose()
     }
 
-    function onMoveTasks() {
-        console.log('move tasks')
+    function onMoveTasks(targetGroupId) {
+        console.log('move tasks ', targetGroupId)
         onClose()
     }
 
@@ -78,7 +84,13 @@ export function GroupMenu({ hierarchy, popoverState, onTaskCreate, onClose }) {
 
         moveTasks: {
             title: 'Move all cards in list',
-            cmp: <GroupMenuMoveTasks onMoveTasks={onMoveTasks} />,
+            cmp: (
+                <GroupMenuMoveTasks
+                    board={board}
+                    group={group}
+                    onMoveTasks={onMoveTasks}
+                />
+            ),
             back: onNavToMain,
         },
 

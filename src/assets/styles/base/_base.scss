@@ -46,6 +46,13 @@ button {
     font-family: inherit;
 }
 
+hr {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    height: 1px;
+    background-color: var(--bg-divider);
+}
+
 #app {
     height: 100vh;
     display: grid;

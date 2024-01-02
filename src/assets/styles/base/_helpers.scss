@@ -66,3 +66,15 @@
         margin-bottom: 8px;
     }
 }
+
+.group-menu-clickable-item {
+    padding: 6px 12px;
+    margin: 0 -12px;
+    cursor: pointer;
+    @include font-p();
+    @include button-bg(
+        transparent,
+        var(--bg-neutral-hovered),
+        var(--bg-neutral-pressed)
+    );
+}

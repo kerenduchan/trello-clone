@@ -6,33 +6,37 @@ export function GroupMenuMain({
     onArchiveTasks,
     onArchiveGroup,
 }) {
+    const items = [
+        { id: 1, title: 'Add Card', onClick: onTaskCreate },
+        { id: 2, title: 'Copy list', onClick: onCopyGroup },
+        { id: 3, title: 'Move list', onClick: onMoveGroup },
+        { id: 4, hr: true },
+        { id: 5, title: 'Move all cards in this list', onClick: onMoveTasks },
+        {
+            id: 6,
+            title: 'Archive all cards in this list',
+            onClick: onArchiveTasks,
+        },
+        { id: 7, hr: true },
+        { id: 8, title: 'Archive this list', onClick: onArchiveGroup },
+    ]
+
     return (
         <div className="group-preview-menu">
             <ul>
-                <li className="clickable" onClick={onTaskCreate}>
-                    Add Card
-                </li>
-                <li className="clickable" onClick={onCopyGroup}>
-                    Copy list
-                </li>
-                <li className="clickable" onClick={onMoveGroup}>
-                    Move list
-                </li>
-                <li>
-                    <hr />
-                </li>
-                <li className="clickable" onClick={onMoveTasks}>
-                    Move all cards in this list
-                </li>
-                <li className="clickable" onClick={onArchiveTasks}>
-                    Archive all cards in this list
-                </li>
-                <li>
-                    <hr />
-                </li>
-                <li className="clickable" onClick={onArchiveGroup}>
-                    Archive this list
-                </li>
+                {items.map((item) =>
+                    item.hr ? (
+                        <hr key={item.id} />
+                    ) : (
+                        <li
+                            key={item.id}
+                            className="group-menu-clickable-item"
+                            onClick={item.onClick}
+                        >
+                            {item.title}
+                        </li>
+                    )
+                )}
             </ul>
         </div>
     )
