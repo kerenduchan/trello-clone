@@ -57,11 +57,9 @@ export function BoardDetails() {
                             onClose={() => setShowMenu(false)}
                         />
                     )}
-                    <section className="board-canvas-container">
-                        <div className="board-canvas">
-                            <GroupList board={board} groups={board.groups} />
-                            <GroupCreate board={board} />
-                        </div>
+                    <section className="board-canvas">
+                        <GroupList board={board} groups={board.groups} />
+                        <GroupCreate board={board} />
                     </section>
 
                     {params.taskId && (

@@ -22,21 +22,17 @@
         @include backdrop-blur();
     }
 
-    .board-canvas-container {
-        overflow: hidden;
+    .board-canvas {
+        height: calc(100% - 22px);
         padding-inline-start: 12px;
         padding-inline-end: 12px;
-        padding-bottom: 8px;
+        padding-bottom: 10px;
 
-        .board-canvas {
-            height: calc(100% - 12px);
-            box-sizing: border-box;
-            margin-top: 12px;
-            padding-bottom: 8px;
-            overflow-y: auto;
-            overflow-x: auto;
-            display: flex;
-            gap: 12px;
-        }
+        box-sizing: border-box;
+        margin-top: 12px;
+        overflow-y: auto;
+        overflow-x: auto;
+        display: flex;
+        gap: 12px;
     }
 }
