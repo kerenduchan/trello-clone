@@ -53,9 +53,9 @@ hr {
     background-color: var(--bg-divider);
 }
 
-/* For Chrome, Safari, and newer versions of Edge */
+/* Scrollbar - for Chrome, Safari, and newer versions of Edge */
 ::-webkit-scrollbar {
-    width: 8px; /* Set the width of the scrollbar */
+    width: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -66,6 +66,19 @@ hr {
 ::-webkit-scrollbar-track {
     background-color: #00000010;
     border-radius: 4px;
+}
+
+/* Horizontal scrollbar */
+::-webkit-scrollbar:horizontal {
+    height: 12px;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+    background-color: #ffffff40;
+}
+
+::-webkit-scrollbar-track:horizontal {
+    background-color: #00000010;
 }
 
 #app {
