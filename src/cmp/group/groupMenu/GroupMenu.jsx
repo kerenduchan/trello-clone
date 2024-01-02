@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { moveTasks } from '../../../store/actions/board.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { GroupMenuMain } from './GroupMenuMain'
 import { GroupMenuArchiveTasks } from './GroupMenuArchiveTasks'
@@ -41,7 +42,7 @@ export function GroupMenu({
     }
 
     function onMoveTasks(targetGroupId) {
-        console.log('move tasks ', targetGroupId)
+        moveTasks(board, group, targetGroupId)
         onClose()
     }
 

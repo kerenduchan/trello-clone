@@ -26,6 +26,7 @@ export {
     deleteTask,
     updateTask,
     moveTask,
+    moveTasks,
     copyTask,
     addTaskMember,
     removeTaskMember,
@@ -211,6 +212,31 @@ async function moveTask(
             targetPositionId
         )
     }
+}
+
+// move all the tasks from the source group to the bottom of the target group
+async function moveTasks(board, sourceGroup, targetGroupId) {
+    const tasksToMove = sourceGroup.tasks
+
+    // remove tasks from source group
+    const sourceGroupToUpdate = { ...sourceGroup }
+    sourceGroupToUpdate.tasks = []
+
+    // insert tasks into target group
+    const targetGroup = board.groups.find((g) => g._id === targetGroupId)
+    const targetGroupToUpdate = { ...targetGroup }
+    targetGroupToUpdate.tasks.push(...tasksToMove)
+
+    const boardToUpdate = { ...board }
+    boardToUpdate.groups = board.groups.map((g) =>
+        g._id === targetGroupId
+            ? targetGroupToUpdate
+            : g._id === sourceGroup._id
+            ? sourceGroupToUpdate
+            : g
+    )
+
+    return _updateBoard(boardToUpdate)
 }
 
 async function copyTask(

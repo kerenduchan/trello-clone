@@ -8,6 +8,7 @@ export function GroupMenuMoveTasks({ board, group, onMoveTasks }) {
             <ul>
                 {board.groups.map((g) => (
                     <li
+                        key={g._id}
                         className={
                             isClickable(g)
                                 ? 'group-menu-clickable-item'
