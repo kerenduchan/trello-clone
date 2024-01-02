@@ -1,12 +1,11 @@
-import { usePopoverState } from '../../customHooks/usePopoverState'
 import { updateGroup } from '../../store/actions/board.actions'
+import { usePopoverState } from '../../customHooks/usePopoverState'
 import { EditableTitle } from '../general/EditableTitle'
-import { GroupPreviewMenu } from './GroupPreviewMenu'
-import { PopoverMenu } from '../general/PopoverMenu'
 import { Icon } from '../general/Icon'
+import { GroupMenu } from './groupMenu/groupMenu'
 
 export function GroupPreviewHeader({ board, group, onTaskCreate }) {
-    const listActionsMenu = usePopoverState()
+    const groupMenu = usePopoverState()
 
     function onTitleChange(title) {
         try {
@@ -18,29 +17,23 @@ export function GroupPreviewHeader({ board, group, onTaskCreate }) {
     }
 
     return (
-        <>
-            <header className="group-preview-header">
-                <EditableTitle title={group.title} onChange={onTitleChange} />
+        <header className="group-preview-header">
+            <EditableTitle title={group.title} onChange={onTitleChange} />
 
-                <button
-                    className="btn-square btn-more"
-                    {...listActionsMenu.triggerAndTarget}
-                >
-                    <Icon type="more" />
-                </button>
-            </header>
+            <button
+                className="btn-square btn-more"
+                {...groupMenu.triggerAndTarget}
+            >
+                <Icon type="more" />
+            </button>
 
-            {/* List Actions menu */}
-            {listActionsMenu.show && (
-                <PopoverMenu title="List Actions" {...listActionsMenu.popover}>
-                    <GroupPreviewMenu
-                        board={board}
-                        group={group}
-                        onClose={listActionsMenu.onClose}
-                        onTaskCreate={() => onTaskCreate(0)}
-                    />
-                </PopoverMenu>
+            {/* Group menu */}
+            {groupMenu.show && (
+                <GroupMenu
+                    popoverState={groupMenu}
+                    onTaskCreate={onTaskCreate}
+                />
             )}
-        </>
+        </header>
     )
 }
