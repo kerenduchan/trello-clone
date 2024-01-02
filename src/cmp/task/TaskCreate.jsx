@@ -10,7 +10,7 @@ export function TaskCreate({ board, group, position, onCreate, onClose }) {
     const formElRef = useRef()
     const inputRef = useRef()
 
-    useClickedOutListener([formElRef], onClose)
+    useClickedOutListener([formElRef], onSubmit)
     useKeyDownListener(['Escape'], onClose)
 
     function onSubmit(e) {
@@ -20,6 +20,8 @@ export function TaskCreate({ board, group, position, onCreate, onClose }) {
             onCreate(board, group, draft, position)
             setDraft(boardService.getEmptyTask())
             inputRef.current.focus()
+        } else {
+            onClose()
         }
     }
 
