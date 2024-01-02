@@ -53,8 +53,21 @@ hr {
     background-color: var(--bg-divider);
 }
 
+/* For Chrome, Safari, and newer versions of Edge */
+::-webkit-scrollbar {
+    width: 8px; /* Set the width of the scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #00000020;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #00000010;
+    border-radius: 4px;
+}
+
 #app {
     height: 100vh;
-    display: grid;
-    grid-template-rows: auto 1fr;
 }
