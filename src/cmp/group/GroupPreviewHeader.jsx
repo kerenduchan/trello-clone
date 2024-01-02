@@ -5,7 +5,7 @@ import { GroupPreviewMenu } from './GroupPreviewMenu'
 import { PopoverMenu } from '../general/PopoverMenu'
 import { Icon } from '../general/Icon'
 
-export function GroupPreviewHeader({ group, board }) {
+export function GroupPreviewHeader({ board, group, onTaskCreate }) {
     const listActionsMenu = usePopoverState()
 
     function onTitleChange(title) {
@@ -37,6 +37,7 @@ export function GroupPreviewHeader({ group, board }) {
                         board={board}
                         group={group}
                         onClose={listActionsMenu.onClose}
+                        onTaskCreate={() => onTaskCreate(0)}
                     />
                 </PopoverMenu>
             )}

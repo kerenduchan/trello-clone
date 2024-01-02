@@ -1,15 +1,37 @@
 import { TaskPreview } from '../task/TaskPreview'
+import { TaskCreate } from './TaskCreate'
 
-export function TaskList({ board, group }) {
+export function TaskList({
+    board,
+    group,
+    taskCreateFormPosition,
+    onCloseTaskCreateForm,
+}) {
+    const TASK_CREATE_FORM_PLACEHOLDER = 'task-create-form'
+
+    const listItems = group.tasks.filter((task) => task.archivedAt === null)
+
+    if (taskCreateFormPosition !== null) {
+        listItems.splice(taskCreateFormPosition, 0, {
+            _id: TASK_CREATE_FORM_PLACEHOLDER,
+        })
+    }
+
     return (
         <ol className="task-list">
-            {group.tasks
-                .filter((task) => task.archivedAt === null)
-                .map((task) => (
-                    <li key={task._id}>
-                        <TaskPreview hierarchy={{ board, group, task }} />
-                    </li>
-                ))}
+            {listItems.map((item) => (
+                <li key={item._id}>
+                    {item._id === TASK_CREATE_FORM_PLACEHOLDER ? (
+                        <TaskCreate
+                            board={board}
+                            group={group}
+                            onClose={onCloseTaskCreateForm}
+                        />
+                    ) : (
+                        <TaskPreview hierarchy={{ board, group, task: item }} />
+                    )}
+                </li>
+            ))}
         </ol>
     )
 }
