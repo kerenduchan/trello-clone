@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { createTask } from '../../store/actions/board.actions'
 import { TaskList } from '../task/TaskList'
 import { GroupPreviewHeader } from './GroupPreviewHeader'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
@@ -9,6 +10,16 @@ export function GroupPreview({ board, group }) {
 
     function onShowTaskCreateForm(position) {
         setTaskCreateFormPosition(position)
+    }
+
+    async function onCreateTask(board, group, task, position) {
+        try {
+            createTask(board, group, task, position)
+            setTaskCreateFormPosition((prev) => prev + 1)
+        } catch (err) {
+            console.error(err)
+            // TODO: show an error dialog
+        }
     }
 
     return (
@@ -24,6 +35,7 @@ export function GroupPreview({ board, group }) {
                 group={group}
                 taskCreateFormPosition={taskCreateFormPosition}
                 onCloseTaskCreateForm={() => setTaskCreateFormPosition(null)}
+                onCreateTask={onCreateTask}
             />
 
             {taskCreateFormPosition === null && (

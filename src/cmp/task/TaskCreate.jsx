@@ -1,12 +1,11 @@
 import { useRef } from 'react'
 import { useForm } from '../../customHooks/useForm'
 import { boardService } from '../../services/board.service'
-import { createTask } from '../../store/actions/board.actions'
 import { useClickedOutListener } from '../../customHooks/useClickedOutListener'
 import { useKeyDownListener } from '../../customHooks/useKeyDownListener'
 import { Icon } from '../general/Icon'
 
-export function TaskCreate({ board, group, onClose }) {
+export function TaskCreate({ board, group, position, onCreate, onClose }) {
     const [draft, handleChange, setDraft] = useForm(boardService.getEmptyTask())
     const formElRef = useRef()
     const inputRef = useRef()
@@ -14,18 +13,13 @@ export function TaskCreate({ board, group, onClose }) {
     useClickedOutListener([formElRef], onClose)
     useKeyDownListener(['Escape'], onClose)
 
-    async function onSubmit(e) {
+    function onSubmit(e) {
         e.preventDefault()
 
         if (draft.title.length > 0) {
-            try {
-                createTask(board, group, draft)
-                setDraft(boardService.getEmptyTask())
-                inputRef.current.focus()
-            } catch (err) {
-                console.error(err)
-                // TODO: show an error dialog
-            }
+            onCreate(board, group, draft, position)
+            setDraft(boardService.getEmptyTask())
+            inputRef.current.focus()
         }
     }
 

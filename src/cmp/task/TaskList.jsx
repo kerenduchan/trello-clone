@@ -6,6 +6,7 @@ export function TaskList({
     group,
     taskCreateFormPosition,
     onCloseTaskCreateForm,
+    onCreateTask,
 }) {
     const TASK_CREATE_FORM_PLACEHOLDER = 'task-create-form'
 
@@ -25,6 +26,8 @@ export function TaskList({
                         <TaskCreate
                             board={board}
                             group={group}
+                            position={taskCreateFormPosition}
+                            onCreate={onCreateTask}
                             onClose={onCloseTaskCreateForm}
                         />
                     ) : (

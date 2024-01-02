@@ -162,9 +162,10 @@ async function updateGroup(board, group, fieldsToUpdate) {
 
 // TASK
 
-async function createTask(board, group, task) {
+async function createTask(board, group, task, position) {
     const groupToUpdate = { ...group }
-    groupToUpdate.tasks = [...group.tasks, task]
+    groupToUpdate.tasks = [...group.tasks]
+    groupToUpdate.tasks.splice(position, 0, task)
     return _updateGroup(board, groupToUpdate)
 }
 
