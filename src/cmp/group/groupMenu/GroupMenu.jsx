@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { GroupMenuMain } from './GroupMenuMain'
-import { GroupMenuArchiveAllTasks } from './GroupMenuArchiveAllTasks'
+import { GroupMenuArchiveTasks } from './GroupMenuArchiveTasks'
+import { GroupMenuCopyGroup } from './GroupMenuCopyGroup'
+import { GroupMenuMoveTasks } from './GroupMenuMoveTasks'
+import { GroupMenuMoveGroup } from './GroupMenuMoveGroup'
 
 export function GroupMenu({ hierarchy, popoverState, onTaskCreate, onClose }) {
     // current page in the group menu popover: main/archive
@@ -16,12 +19,33 @@ export function GroupMenu({ hierarchy, popoverState, onTaskCreate, onClose }) {
         setPage('main')
     }
 
-    function onNavToArchiveAllTasks() {
-        setPage('archiveAllTasks')
+    function onTaskCreateInternal() {
+        onTaskCreate(0)
+        onClose()
     }
 
-    function onArchiveAllTasks() {
+    function onCopyGroup() {
+        console.log('copy group')
+        onClose()
+    }
+
+    function onMoveGroup() {
+        console.log('move group')
+        onClose()
+    }
+
+    function onMoveTasks() {
+        console.log('move tasks')
+        onClose()
+    }
+
+    function onArchiveTasks() {
         console.log('archive all tasks')
+        onClose()
+    }
+
+    function onArchiveGroup() {
+        console.log('archive group')
         onClose()
     }
 
@@ -30,20 +54,37 @@ export function GroupMenu({ hierarchy, popoverState, onTaskCreate, onClose }) {
             title: 'Group actions',
             cmp: (
                 <GroupMenuMain
-                    hierarchy={hierarchy}
-                    onClose={popoverState.onClose}
-                    onTaskCreate={() => onTaskCreate(0)}
-                    onArchiveAllTasks={onNavToArchiveAllTasks}
+                    onTaskCreate={onTaskCreateInternal}
+                    onCopyGroup={() => setPage('copyGroup')}
+                    onMoveGroup={() => setPage('moveGroup')}
+                    onMoveTasks={() => setPage('moveTasks')}
+                    onArchiveTasks={() => setPage('archiveTasks')}
+                    onArchiveGroup={onArchiveGroup}
                 />
             ),
         },
-        archiveAllTasks: {
+
+        copyGroup: {
+            title: 'Copy list',
+            cmp: <GroupMenuCopyGroup onCopyGroup={onCopyGroup} />,
+            back: onNavToMain,
+        },
+
+        moveGroup: {
+            title: 'Move list',
+            cmp: <GroupMenuMoveGroup onMoveGroup={onMoveGroup} />,
+            back: onNavToMain,
+        },
+
+        moveTasks: {
+            title: 'Move all cards in list',
+            cmp: <GroupMenuMoveTasks onMoveTasks={onMoveTasks} />,
+            back: onNavToMain,
+        },
+
+        archiveTasks: {
             title: 'Archive all cards in this list?',
-            cmp: (
-                <GroupMenuArchiveAllTasks
-                    onArchiveAllTasks={onArchiveAllTasks}
-                />
-            ),
+            cmp: <GroupMenuArchiveTasks onArchiveTasks={onArchiveTasks} />,
             back: onNavToMain,
         },
     }

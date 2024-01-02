@@ -1,58 +1,36 @@
-import { deleteGroup } from '../../../store/actions/board.actions'
-
 export function GroupMenuMain({
-    board,
-    group,
-    onClose,
     onTaskCreate,
-    onMoveAllTasks,
-    onArchiveAllTasks,
+    onCopyGroup,
+    onMoveGroup,
+    onMoveTasks,
+    onArchiveTasks,
+    onArchiveGroup,
 }) {
-    function onDelete() {
-        try {
-            deleteGroup(board, group)
-            onClose()
-        } catch (err) {
-            console.error(err)
-            // TODO: show an error dialog
-        }
-    }
-
-    function onAddCard() {
-        onTaskCreate()
-        onClose()
-    }
-    function onCopyList() {}
-
-    function onMoveList() {}
-
-    function onArchiveList() {}
-
     return (
         <div className="group-preview-menu">
             <ul>
-                <li className="clickable" onClick={onAddCard}>
+                <li className="clickable" onClick={onTaskCreate}>
                     Add Card
                 </li>
-                <li className="clickable" onClick={onCopyList}>
+                <li className="clickable" onClick={onCopyGroup}>
                     Copy list
                 </li>
-                <li className="clickable" onClick={onMoveList}>
+                <li className="clickable" onClick={onMoveGroup}>
                     Move list
                 </li>
                 <li>
                     <hr />
                 </li>
-                <li className="clickable" onClick={onMoveAllTasks}>
+                <li className="clickable" onClick={onMoveTasks}>
                     Move all cards in this list
                 </li>
-                <li className="clickable" onClick={onArchiveAllTasks}>
+                <li className="clickable" onClick={onArchiveTasks}>
                     Archive all cards in this list
                 </li>
                 <li>
                     <hr />
                 </li>
-                <li className="clickable" onClick={onArchiveList}>
+                <li className="clickable" onClick={onArchiveGroup}>
                     Archive this list
                 </li>
             </ul>

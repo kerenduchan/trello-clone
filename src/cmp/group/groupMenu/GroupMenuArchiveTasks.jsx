@@ -1,4 +1,4 @@
-export function GroupMenuArchiveAllTasks({ onArchiveAllTasks }) {
+export function GroupMenuArchiveTasks({ onArchiveTasks }) {
     return (
         <div className="confirmation-menu">
             <p>
@@ -6,7 +6,7 @@ export function GroupMenuArchiveAllTasks({ onArchiveAllTasks }) {
                 view archived cards and bring them back to the board, click
                 “Menu” > “Archived Items.”`}
             </p>
-            <button className="btn-danger" onClick={onArchiveAllTasks}>
+            <button className="btn-danger" onClick={onArchiveTasks}>
                 Archive all
             </button>
         </div>
