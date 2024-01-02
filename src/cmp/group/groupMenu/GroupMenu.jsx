@@ -83,7 +83,13 @@ export function GroupMenu({
 
         moveGroup: {
             title: 'Move list',
-            cmp: <GroupMenuMoveGroup onMoveGroup={onMoveGroup} />,
+            cmp: (
+                <GroupMenuMoveGroup
+                    board={board}
+                    group={group}
+                    onMoveGroup={onMoveGroup}
+                />
+            ),
             back: onNavToMain,
         },
 

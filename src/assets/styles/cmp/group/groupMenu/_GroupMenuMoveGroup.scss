@@ -1,0 +1,12 @@
+.group-menu-move-group {
+    .destination {
+        display: grid;
+        gap: 8px;
+        padding-bottom: 16px;
+    }
+    .btn-move {
+        padding-inline-start: 24px;
+        padding-inline-end: 24px;
+        margin-bottom: 8px;
+    }
+}

@@ -58,7 +58,10 @@ export function BoardDetails() {
                         />
                     )}
                     <section className="board-canvas">
-                        <GroupList board={board} groups={board.groups} />
+                        <GroupList
+                            board={board}
+                            groups={board.groups.filter((g) => !g.archivedAt)}
+                        />
                         <GroupCreate board={board} />
                     </section>
 
