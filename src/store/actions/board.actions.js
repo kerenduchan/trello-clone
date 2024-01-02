@@ -27,6 +27,7 @@ export {
     updateTask,
     moveTask,
     moveTasks,
+    archiveTasks,
     copyTask,
     addTaskMember,
     removeTaskMember,
@@ -237,6 +238,17 @@ async function moveTasks(board, sourceGroup, targetGroupId) {
     )
 
     return _updateBoard(boardToUpdate)
+}
+
+// archive all tasks in the group
+async function archiveTasks(board, group) {
+    const groupToUpdate = { ...group }
+    groupToUpdate.tasks = group.tasks.map((task) => ({
+        ...task,
+        archivedAt: Date.now(),
+    }))
+
+    _updateGroup(board, groupToUpdate)
 }
 
 async function copyTask(

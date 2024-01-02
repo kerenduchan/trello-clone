@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react'
-import { moveTasks } from '../../../store/actions/board.actions'
+import {
+    archiveTasks,
+    moveTasks,
+    updateGroup,
+} from '../../../store/actions/board.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { GroupMenuMain } from './GroupMenuMain'
 import { GroupMenuArchiveTasks } from './GroupMenuArchiveTasks'
@@ -47,12 +51,12 @@ export function GroupMenu({
     }
 
     function onArchiveTasks() {
-        console.log('archive all tasks')
+        archiveTasks(board, group)
         onClose()
     }
 
     function onArchiveGroup() {
-        console.log('archive group')
+        updateGroup(board, group, { archivedAt: Date.now() })
         onClose()
     }
 

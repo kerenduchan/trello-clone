@@ -52,6 +52,7 @@ function getEmptyGroup() {
     return {
         _id: utilService.makeId(),
         title: '',
+        archivedAt: null,
         tasks: [],
     }
 }
@@ -307,7 +308,7 @@ function getTaskLabels(hierarchy) {
 }
 
 function getItemById(board, field, itemId) {
-        return board[field].find((item) => item._id === itemId)
+    return board[field].find((item) => item._id === itemId)
 }
 
 function _getDefaultLabels() {

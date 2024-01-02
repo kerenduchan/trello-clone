@@ -107,7 +107,7 @@ export function TaskDetailsSidebar({ hierarchy }) {
 
                         <hr />
 
-                        {task.archivedAt === null ? (
+                        {!task.archivedAt ? (
                             // Archive
                             <SecondaryBtn
                                 onClick={onArchive}

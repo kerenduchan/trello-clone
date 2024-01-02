@@ -10,7 +10,7 @@ export function TaskList({
 }) {
     const TASK_CREATE_FORM_PLACEHOLDER = 'task-create-form'
 
-    const listItems = group.tasks.filter((task) => task.archivedAt === null)
+    const listItems = group.tasks.filter((task) => !task.archivedAt)
 
     if (taskCreateFormPosition !== null) {
         listItems.splice(taskCreateFormPosition, 0, {
