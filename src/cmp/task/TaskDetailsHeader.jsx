@@ -1,9 +1,12 @@
 import { Icon } from '../general/Icon'
 import { EditableTitle } from '../general/EditableTitle'
 import { updateTask } from '../../store/actions/board.actions'
+import { usePopoverState } from '../../customHooks/usePopoverState'
+import { TaskMoveMenu } from './move/TaskMoveMenu'
 
 export function TaskDetailsHeader({ hierarchy, onClose }) {
     const { group, task } = hierarchy
+    const moveMenu = usePopoverState()
 
     function onTitleChange(title) {
         try {
@@ -44,9 +47,20 @@ export function TaskDetailsHeader({ hierarchy, onClose }) {
                 </div>
                 <EditableTitle title={task.title} onChange={onTitleChange} />
                 <p className="subtitle">
-                    in list <span className="group-title">{group.title}</span>
+                    in list{' '}
+                    <span
+                        className="group-title"
+                        {...moveMenu.triggerAndTarget}
+                    >
+                        {group.title}
+                    </span>
                 </p>
             </div>
+
+            {/* Move menu */}
+            {moveMenu.show && (
+                <TaskMoveMenu hierarchy={hierarchy} popoverState={moveMenu} />
+            )}
         </>
     )
 }
