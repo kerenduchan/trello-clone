@@ -234,7 +234,13 @@ async function moveTask(
     targetGroupId,
     targetPositionId
 ) {
-    const { board, group } = hierarchy
+    const { board, group, task } = hierarchy
+
+    // moving a task automatically unarchives it
+    const taskToUpdate = { ...task }
+    taskToUpdate.archivedAt = null
+
+    hierarchy.task = taskToUpdate
 
     if (board._id === targetBoardId) {
         if (group._id === targetGroupId) {
@@ -303,9 +309,12 @@ async function copyTask(
     const targetBoard = allBoards.find((b) => b._id === targetBoardId)
     const targetGroup = targetBoard.groups.find((g) => g._id === targetGroupId)
     const targetGroupToUpdate = { ...targetGroup }
+
+    // copying an archived task creates an unarchived task
     const taskCopy = {
         ...structuredClone(task),
         _id: utilService.makeId(),
+        archivedAt: null,
         title: newTitle,
     }
     targetGroupToUpdate.tasks.splice(targetPositionId, 0, taskCopy)
