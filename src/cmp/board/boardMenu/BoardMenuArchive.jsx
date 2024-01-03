@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { boardService } from '../../../services/board.service'
-import { updateTask } from '../../../store/actions/board.actions'
+import { deleteTask, updateTask } from '../../../store/actions/board.actions'
 import { ArchivedTaskPreview } from './ArchivedTaskPreview'
 
 export function BoardMenuArchive({ board }) {
@@ -24,7 +24,9 @@ export function BoardMenuArchive({ board }) {
         updateTask(hierarchy, { archivedAt: null })
     }
 
-    function onDeleteTask(task) {}
+    function onDeleteTask(hierarchy) {
+        deleteTask(hierarchy)
+    }
 
     if (!archivedTasksInfo) return 'Loading...'
 
