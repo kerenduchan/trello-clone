@@ -565,6 +565,5 @@ async function _moveTaskToDifferentBoard(
         g._id === targetGroupId ? targetGroupToUpdate : g
     )
 
-    console.log('_updateBoards', sourceBoardToUpdate, targetBoardToUpdate)
     return _updateBoards([sourceBoardToUpdate, targetBoardToUpdate])
 }
