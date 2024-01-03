@@ -1,9 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { useSelector } from 'react-redux'
-import { store } from '../../../store/store'
-import { SET_BOARDS } from '../../../store/reducers/board.reducer'
+import { loadBoards } from '../../../store/actions/board.actions'
 import { moveTask, copyTask } from '../../../store/actions/board.actions'
-import { boardService } from '../../../services/board.service'
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { CustomSelect } from '../../general/CustomSelect'
 
@@ -115,16 +113,6 @@ export function TaskMoveMenu({ hierarchy, popoverState, isCopy }) {
             +selectedPositionId - 1
         )
         popoverState.onClose()
-    }
-
-    async function loadBoards() {
-        try {
-            const boards = await boardService.query()
-            store.dispatch({ type: SET_BOARDS, boards })
-        } catch (err) {
-            console.error('Failed to load boards:', err)
-            throw err
-        }
     }
 
     function getIdxById(arr, id) {
