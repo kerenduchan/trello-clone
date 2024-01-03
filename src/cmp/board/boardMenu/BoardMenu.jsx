@@ -29,7 +29,7 @@ export function BoardMenu({ board, onClose }) {
         },
         archive: {
             title: 'Archive',
-            cmp: <BoardMenuArchive />,
+            cmp: <BoardMenuArchive board={board} />,
             onBack: onNavToMain,
         },
     }
@@ -42,7 +42,7 @@ export function BoardMenu({ board, onClose }) {
                         className="btn-square btn-back"
                         onClick={contents[page].onBack}
                     >
-                        <Icon type="back" />
+                        <Icon type="back" size="xs" />
                     </button>
                 )}
                 <div className="title">{title}</div>

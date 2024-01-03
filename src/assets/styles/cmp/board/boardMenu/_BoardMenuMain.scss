@@ -1,10 +1,10 @@
 .board-menu-main {
-    ul {
+    .board-menu-main-list {
         display: flex;
         flex-direction: column;
         gap: 8px;
 
-        li {
+        & > li {
             margin-bottom: 4px;
             @include button-bg(
                 transparent,

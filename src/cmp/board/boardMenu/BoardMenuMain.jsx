@@ -7,7 +7,7 @@ export function BoardMenuMain({ onArchive }) {
 
     return (
         <div className="board-menu-main">
-            <ul>
+            <ul className="board-menu-main-list">
                 {items.map((item) =>
                     item.hr ? (
                         <hr key={item.id} />

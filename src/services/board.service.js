@@ -31,6 +31,7 @@ export const boardService = {
     getLabelColors,
     getNoLabelColor,
     getTaskDateStatus,
+    getArchivedTasks,
 }
 
 const STORAGE_KEY = 'boards'
@@ -507,4 +508,15 @@ function getTaskDateStatus(task) {
         return statuses.pastDue
     }
     return null
+}
+
+function getArchivedTasks(board) {
+    const res = board.groups.reduce((acc, group) => {
+        const archivedTasksInfo = group.tasks
+            .filter((task) => task.archivedAt)
+            .map((task) => ({ group, task }))
+        acc.push(...archivedTasksInfo)
+        return acc
+    }, [])
+    return res
 }
