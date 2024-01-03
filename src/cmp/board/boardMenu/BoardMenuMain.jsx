@@ -14,7 +14,7 @@ export function BoardMenuMain({ onArchive }) {
                     ) : (
                         <li key={item.id} onClick={item.onClick}>
                             <Icon type={item.icon} />
-                            {item.title}
+                            <div className="title">{` ${item.title}`}</div>
                         </li>
                     )
                 )}

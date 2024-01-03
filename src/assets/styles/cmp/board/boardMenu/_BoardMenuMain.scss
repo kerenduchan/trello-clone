@@ -5,25 +5,27 @@
         gap: 8px;
 
         li {
+            margin-bottom: 4px;
             @include button-bg(
                 transparent,
                 var(--bg-neutral-subtle-hovered),
                 var(--bg-neutral-subtle-pressed)
             );
             border-radius: 8px;
-            padding-inline-start: 6px;
-            padding-inline-end: 6px;
             cursor: pointer;
-
             display: grid;
-            gap: 10px;
-            grid-template-columns: auto 1fr;
             align-items: center;
 
             .title {
+                grid-area: 1/1;
                 @include font(14px, 20px, 400);
-                padding-top: 6px;
-                padding-bottom: 6px;
+                padding: 6px;
+                padding-inline-start: 40px;
+            }
+
+            .icon {
+                grid-area: 1/1;
+                padding-inline-start: 12px;
             }
         }
     }
