@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import {
     archiveTasks,
+    copyGroup,
     moveGroup,
     moveTasks,
     updateGroup,
@@ -8,7 +9,6 @@ import {
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { GroupMenuMain } from './GroupMenuMain'
 import { GroupMenuArchiveTasks } from './GroupMenuArchiveTasks'
-import { GroupMenuCopyGroup } from './GroupMenuCopyGroup'
 import { GroupMenuMoveTasks } from './GroupMenuMoveTasks'
 import { GroupMenuMoveGroup } from './GroupMenuMoveGroup'
 
@@ -36,8 +36,8 @@ export function GroupMenu({
         onClose()
     }
 
-    function onCopyGroup() {
-        console.log('copy group')
+    function onCopyGroup(title, targetBoardId, targetPositionId) {
+        copyGroup(board, group, title, targetBoardId, targetPositionId)
         onClose()
     }
 
@@ -78,7 +78,14 @@ export function GroupMenu({
 
         copyGroup: {
             title: 'Copy list',
-            cmp: <GroupMenuCopyGroup onCopyGroup={onCopyGroup} />,
+            cmp: (
+                <GroupMenuMoveGroup
+                    board={board}
+                    group={group}
+                    onCopyGroup={onCopyGroup}
+                    isCopy={true}
+                />
+            ),
             back: onNavToMain,
         },
 

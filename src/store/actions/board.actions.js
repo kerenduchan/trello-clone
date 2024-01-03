@@ -23,6 +23,7 @@ export {
     deleteGroup,
     updateGroup,
     moveGroup,
+    copyGroup,
     createTask,
     deleteTask,
     updateTask,
@@ -180,6 +181,26 @@ async function moveGroup(board, group, targetBoardId, targetPositionId) {
     const targetBoardToUpdate = { ...targetBoard }
     targetBoardToUpdate.groups.splice(targetPositionId, 0, group)
     return _updateBoards([boardToUpdate, targetBoardToUpdate])
+}
+
+async function copyGroup(board, group, title, targetBoardId, targetPositionId) {
+    let targetBoard = board
+    if (targetBoardId != board._id) {
+        const allBoards = store.getState().boardModule.boards
+        targetBoard = allBoards.find((b) => b._id === targetBoardId)
+    }
+
+    const groupCopy = {
+        ...structuredClone(group),
+        _id: utilService.makeId(),
+        title,
+    }
+
+    groupCopy.tasks.forEach((task) => (task._id = utilService.makeId()))
+
+    const targetBoardToUpdate = { ...targetBoard }
+    targetBoardToUpdate.groups.splice(targetPositionId, 0, groupCopy)
+    _updateBoard(targetBoardToUpdate)
 }
 
 // TASK
