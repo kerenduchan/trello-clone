@@ -1,0 +1,20 @@
+.archived-group-preview {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .title {
+        padding: 8px;
+        @include font-p();
+    }
+
+    .btn-unarchive {
+        margin-top: 6px;
+        margin-bottom: 6px;
+        padding: 6px 12px;
+
+        .icon {
+            @include font-size-and-line-height(16px);
+        }
+    }
+}

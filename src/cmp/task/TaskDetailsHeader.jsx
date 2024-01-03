@@ -40,7 +40,7 @@ export function TaskDetailsHeader({ hierarchy, onClose }) {
             {/* Archive banner */}
             {(task.archivedAt || group.archivedAt) && (
                 <div className="archive-banner">
-                    <Icon type="archived" size="md" />
+                    <Icon type="archive" size="md" />
                     <p>
                         {task.archivedAt
                             ? 'This card is archived.'

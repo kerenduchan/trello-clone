@@ -25,9 +25,11 @@
 @import 'cmp/board/BoardPreview';
 
 // boardMenu
-@import 'cmp/board/boardMenu/BoardMenu';
-@import 'cmp/board/boardMenu/BoardMenuMain';
+@import 'cmp/board/boardMenu/ArchivedGroupPreview';
 @import 'cmp/board/boardMenu/ArchivedTaskPreview';
+@import 'cmp/board/boardMenu/BoardMenu';
+@import 'cmp/board/boardMenu/BoardMenuArchive';
+@import 'cmp/board/boardMenu/BoardMenuMain';
 
 // general
 @import 'cmp/general/Avatar';

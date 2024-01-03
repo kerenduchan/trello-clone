@@ -119,7 +119,7 @@ export function TaskDetailsSidebar({ hierarchy }) {
                                 {/* Send to board */}
                                 <SecondaryBtn
                                     onClick={onSendToBoard}
-                                    icon="settings_backup_restore"
+                                    icon="unarchive"
                                     text="Send to board"
                                 />
                                 {/* Delete */}

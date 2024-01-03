@@ -1,15 +1,22 @@
 import { useEffect, useState } from 'react'
 import { boardService } from '../../../services/board.service'
-import { deleteTask, updateTask } from '../../../store/actions/board.actions'
+import {
+    deleteTask,
+    updateGroup,
+    updateTask,
+} from '../../../store/actions/board.actions'
 import { ArchivedTaskPreview } from './ArchivedTaskPreview'
+import { ArchivedGroupPreview } from './ArchivedGroupPreview'
 
 export function BoardMenuArchive({ board }) {
     // tasks/groups
     const [entityType, setEntityType] = useState('tasks')
     const [archivedTasksInfo, setArchivedTasksInfo] = useState(null)
+    const [archivedGroups, setArchivedGroups] = useState(null)
 
     useEffect(() => {
         setArchivedTasksInfo(boardService.getArchivedTasks(board))
+        setArchivedGroups(boardService.getArchivedGroups(board))
     }, [board])
 
     function onToggleEntityType() {
@@ -28,27 +35,42 @@ export function BoardMenuArchive({ board }) {
         deleteTask(hierarchy)
     }
 
-    if (!archivedTasksInfo) return 'Loading...'
+    function onUnarchiveGroup(group) {
+        updateGroup(board, group, { archivedAt: null })
+    }
+
+    if (!archivedTasksInfo || !archivedGroups) return 'Loading...'
 
     return (
-        <div className="board-menu-main">
-            <button
-                className="btn-secondary-centered"
-                onClick={onToggleEntityType}
-            >
-                {getBtnLabel()}
-            </button>
+        <div className="board-menu-archive">
+            <div className="controls">
+                <button
+                    className="btn-secondary-centered"
+                    onClick={onToggleEntityType}
+                >
+                    {getBtnLabel()}
+                </button>
+            </div>
 
             <ul>
-                {archivedTasksInfo.map(({ group, task }) => (
-                    <li key={task._id}>
-                        <ArchivedTaskPreview
-                            hierarchy={{ board, group, task }}
-                            onUnarchive={onUnarchiveTask}
-                            onDelete={onDeleteTask}
-                        />
-                    </li>
-                ))}
+                {entityType === 'tasks'
+                    ? archivedTasksInfo.map(({ group, task }) => (
+                          <li className="archived-task-li" key={task._id}>
+                              <ArchivedTaskPreview
+                                  hierarchy={{ board, group, task }}
+                                  onUnarchive={onUnarchiveTask}
+                                  onDelete={onDeleteTask}
+                              />
+                          </li>
+                      ))
+                    : archivedGroups.map((group) => (
+                          <li className="archived-group-li" key={group._id}>
+                              <ArchivedGroupPreview
+                                  group={group}
+                                  onUnarchive={onUnarchiveGroup}
+                              />
+                          </li>
+                      ))}
             </ul>
         </div>
     )

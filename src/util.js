@@ -19,6 +19,7 @@ const _typeToMaterialSymbol = {
     copy: 'content_copy',
     template: 'copy_all',
     archive: 'inventory_2',
+    unarchive: 'settings_backup_restore',
     share: 'share',
     close: 'close',
     activity: 'list',
@@ -30,7 +31,6 @@ const _typeToMaterialSymbol = {
     emoji: 'sentiment_satisfied',
     mention: 'alternate_email',
     comment: 'chat_bubble',
-    archived: 'inventory_2',
     'checkbox-unchecked': 'check_box_outline_blank',
     'checkbox-checked': 'select_check_box',
 }

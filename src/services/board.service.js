@@ -32,6 +32,7 @@ export const boardService = {
     getNoLabelColor,
     getTaskDateStatus,
     getArchivedTasks,
+    getArchivedGroups,
 }
 
 const STORAGE_KEY = 'boards'
@@ -519,4 +520,8 @@ function getArchivedTasks(board) {
         return acc
     }, [])
     return res
+}
+
+function getArchivedGroups(board) {
+    return board.groups.filter((group) => group.archivedAt)
 }
