@@ -19,12 +19,14 @@
 
 // board
 @import 'cmp/board/BoardCreate';
-@import 'cmp/board/BoardDetailsMenu';
-@import 'cmp/board/BoardDetailsMenuItem';
 @import 'cmp/board/BoardDetailsTopbar';
 @import 'cmp/board/BoardIndexHeader';
 @import 'cmp/board/BoardList';
 @import 'cmp/board/BoardPreview';
+
+// boardMenu
+@import 'cmp/board/boardMenu/BoardMenu';
+@import 'cmp/board/boardMenu/BoardMenuMain';
 
 // general
 @import 'cmp/general/Avatar';

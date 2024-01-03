@@ -19,7 +19,7 @@ export function GroupMenu({
     onTaskCreate,
     onClose,
 }) {
-    // current page in the group menu popover: main/archive
+    // current page in the group menu popover
     const [page, setPage] = useState('main')
     const [title, setTitle] = useState('Group actions')
 

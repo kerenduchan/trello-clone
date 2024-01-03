@@ -6,7 +6,7 @@ import { useToggle } from '../customHooks/useToggle'
 import { GroupList } from '../cmp/group/GroupList'
 import { BoardDetailsTopbar } from '../cmp/board/BoardDetailsTopbar'
 import { TaskDetails } from './TaskDetails'
-import { BoardDetailsMenu } from '../cmp/board/BoardDetailsMenu'
+import { BoardMenu } from '../cmp/board/boardMenu/BoardMenu'
 import { GroupCreate } from '../cmp/group/GroupCreate'
 import { boardService } from '../services/board.service'
 import { Icon } from '../cmp/general/Icon'
@@ -52,7 +52,7 @@ export function BoardDetails() {
                     </header>
 
                     {showMenu && (
-                        <BoardDetailsMenu
+                        <BoardMenu
                             board={board}
                             onClose={() => setShowMenu(false)}
                         />
