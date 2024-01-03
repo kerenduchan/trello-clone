@@ -73,8 +73,8 @@ export function TaskMoveMenu({ hierarchy, popoverState, isCopy }) {
         }
 
         let count = selectedGroup.tasks.length
-        if (selectedGroup._id !== group._id) {
-            // moving to a different group means there's one more option
+        if (isCopy || selectedGroup._id !== group._id) {
+            // moving to a different group or copying means there's one more option
             count++
         }
 
