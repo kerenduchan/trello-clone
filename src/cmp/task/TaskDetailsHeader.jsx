@@ -19,12 +19,15 @@ export function TaskDetailsHeader({ hierarchy, onClose }) {
 
     return (
         <>
+            {/* Close button */}
             <button
                 className="btn-circle btn-task-details-close"
                 onClick={onClose}
             >
                 <Icon type="close" />
             </button>
+
+            {/* Task cover */}
             {task.cover && (
                 <div
                     className="cover"
@@ -34,13 +37,19 @@ export function TaskDetailsHeader({ hierarchy, onClose }) {
                 ></div>
             )}
 
-            {task.archivedAt && (
+            {/* Archive banner */}
+            {(task.archivedAt || group.archivedAt) && (
                 <div className="archive-banner">
                     <Icon type="archived" size="md" />
-                    <p>This card is archived.</p>
+                    <p>
+                        {task.archivedAt
+                            ? 'This card is archived.'
+                            : 'This card is in an archived list'}
+                    </p>
                 </div>
             )}
 
+            {/* Title, subtitle */}
             <div className="task-details-header">
                 <div className="icon-container">
                     <Icon type="card" />
