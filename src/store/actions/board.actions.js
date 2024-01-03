@@ -462,7 +462,10 @@ async function _updateBoards(boards) {
     try {
         // optimistic update
         store.dispatch({ type: UPDATE_BOARDS, boards })
-        boards.forEach(async (b) => await boardService.save(b))
+
+        for (const b of boards) {
+            await boardService.save(b)
+        }
     } catch (err) {
         console.error('Failed to update boards:', err)
         // TODO: undo the store change
