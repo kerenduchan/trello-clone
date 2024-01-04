@@ -12,7 +12,8 @@
     align-items: center;
     gap: 6px;
 
-    .icon {
-        color: var(--icon-color);
+    .icon,
+    .label {
+        color: inherit;
     }
 }
