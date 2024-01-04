@@ -139,9 +139,14 @@
     background-color: var(--bg-1);
     border-radius: 3px;
     box-shadow: var(--box-shadow-input-focused);
+    @include font-p();
     outline: none;
     resize: none;
     overflow: hidden;
+
+    &:hover:not(:focus) {
+        background-color: var(--bg-input-hovered);
+    }
 }
 
 @mixin secondary-btn-version-2() {

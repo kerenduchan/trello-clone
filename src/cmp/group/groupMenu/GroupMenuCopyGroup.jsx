@@ -11,7 +11,6 @@ export function GroupMenuCopyGroup({ board, group, onCopyGroup }) {
 
     function onCopy() {
         const position = utilService.getIdxById(board.groups, group._id)
-        console.log(position)
         onCopyGroup(groupCopyTitle, position + 1)
     }
 
