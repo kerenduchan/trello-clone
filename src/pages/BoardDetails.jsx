@@ -1,7 +1,12 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router'
 import { useSelector } from 'react-redux'
-import { loadBoard, unloadBoard } from '../store/actions/board.actions'
+import { DragDropContext } from 'react-beautiful-dnd'
+import {
+    loadBoard,
+    unloadBoard,
+    moveTask,
+} from '../store/actions/board.actions'
 import { useToggle } from '../customHooks/useToggle'
 import { GroupList } from '../cmp/group/GroupList'
 import { BoardDetailsTopbar } from '../cmp/board/BoardDetailsTopbar'
@@ -28,6 +33,30 @@ export function BoardDetails() {
     const groupAndTask = params.taskId
         ? boardService.getGroupAndTaskByTaskId(board, params.taskId)
         : null
+
+    function onDragEnd(result) {
+        const { destination, source, draggableId, type } = result
+        if (!destination) {
+            return
+        }
+
+        if (
+            destination.droppableId === source.droppableId &&
+            destination.index === source.index
+        ) {
+            return
+        }
+        if (type === 'task') {
+            const sourceGroup = board.groups.find(
+                (g) => g._id === source.droppableId
+            )
+            const targetGroupId = destination.droppableId
+            const task = sourceGroup.tasks.find((t) => t._id === draggableId)
+            const hierarchy = { board, group: sourceGroup, task }
+
+            moveTask(hierarchy, board._id, targetGroupId, destination.index)
+        }
+    }
 
     return (
         <div
@@ -58,10 +87,14 @@ export function BoardDetails() {
                         />
                     )}
                     <section className="board-canvas">
-                        <GroupList
-                            board={board}
-                            groups={board.groups.filter((g) => !g.archivedAt)}
-                        />
+                        <DragDropContext onDragEnd={onDragEnd}>
+                            <GroupList
+                                board={board}
+                                groups={board.groups.filter(
+                                    (g) => !g.archivedAt
+                                )}
+                            />
+                        </DragDropContext>
                         <GroupCreate board={board} />
                     </section>
 
