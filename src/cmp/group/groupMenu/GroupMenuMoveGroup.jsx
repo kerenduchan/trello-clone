@@ -4,13 +4,7 @@ import { loadBoards } from '../../../store/actions/board.actions'
 import { utilService } from '../../../services/util.service'
 import { useSelector } from 'react-redux'
 
-export function GroupMenuMoveGroup({
-    board,
-    group,
-    onMoveGroup,
-    onCopyGroup,
-    isCopy,
-}) {
+export function GroupMenuMoveGroup({ board, group, onMoveGroup }) {
     const allBoards = useSelector((storeState) => storeState.boardModule.boards)
 
     const [boardOptions, setBoardOptions] = useState([])
@@ -19,13 +13,7 @@ export function GroupMenuMoveGroup({
     const [selectedBoardId, setSelectedBoardId] = useState(board._id)
     const [selectedPositionId, setSelectedPositionId] = useState(1)
 
-    const [groupCopyTitle, setGroupCopyTitle] = useState(group.title)
-    const textareaRef = useRef(null)
-
     useEffect(() => {
-        if (isCopy) {
-            textareaRef.current.select()
-        }
         loadBoards()
     }, [])
 
@@ -47,8 +35,8 @@ export function GroupMenuMoveGroup({
         )
 
         let count = unarchivedGroups.length
-        if (isCopy || selectedBoard._id !== board._id) {
-            // moving to a different board, or copying, means there's one more option
+        if (selectedBoard._id !== board._id) {
+            // moving to a different board means there's one more option
             count++
         }
 
@@ -72,10 +60,6 @@ export function GroupMenuMoveGroup({
         onMoveGroup(selectedBoardId, +selectedPositionId - 1)
     }
 
-    function onCopy() {
-        onCopyGroup(groupCopyTitle, selectedBoardId, +selectedPositionId - 1)
-    }
-
     function getOrigSelectedPositionId() {
         if (selectedBoardId !== board._id) {
             return null
@@ -90,22 +74,6 @@ export function GroupMenuMoveGroup({
 
     return (
         <div className="group-menu-move-group">
-            {isCopy && (
-                <>
-                    <h4 className="h4-title">Name</h4>
-
-                    <textarea
-                        ref={textareaRef}
-                        className="group-copy-title"
-                        autoFocus
-                        name="title"
-                        id="title"
-                        onChange={(e) => setGroupCopyTitle(e.target.value)}
-                        value={groupCopyTitle}
-                    />
-                </>
-            )}
-
             <div className="destination">
                 <CustomSelect
                     className="board-select"
@@ -126,11 +94,8 @@ export function GroupMenuMoveGroup({
                 />
             </div>
 
-            <button
-                className="btn-primary btn-move"
-                onClick={isCopy ? onCopy : onMove}
-            >
-                {isCopy ? 'Create list' : 'Move'}
+            <button className="btn-primary btn-move" onClick={onMove}>
+                Move
             </button>
         </div>
     )
