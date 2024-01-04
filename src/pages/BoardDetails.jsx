@@ -7,6 +7,7 @@ import {
     unloadBoard,
     moveTask,
     moveGroup,
+    moveChecklist,
 } from '../store/actions/board.actions'
 import { useToggle } from '../customHooks/useToggle'
 import { GroupList } from '../cmp/group/GroupList'
@@ -47,7 +48,9 @@ export function BoardDetails() {
         ) {
             return
         }
+
         if (type === 'task') {
+            // drag-drop task
             const sourceGroup = board.groups.find(
                 (g) => g._id === source.droppableId
             )
@@ -57,9 +60,20 @@ export function BoardDetails() {
 
             moveTask(hierarchy, board._id, targetGroupId, destination.index)
         } else if (type === 'group') {
+            // drag-drop group
             const group = board.groups.find((g) => g._id === draggableId)
 
             moveGroup(board, group, board._id, destination.index)
+        } else if (type === 'checklist') {
+            // drag-drop checklist
+            const { group, task } = boardService.getGroupAndTaskByTaskId(
+                board,
+                source.droppableId
+            )
+
+            const hierarchy = { board, group, task }
+
+            moveChecklist(hierarchy, draggableId, destination.index)
         }
     }
 
@@ -114,16 +128,16 @@ export function BoardDetails() {
                                 </section>
                             )}
                         </Droppable>
-                    </DragDropContext>
 
-                    {params.taskId && (
-                        <TaskDetails
-                            hierarchy={{
-                                board,
-                                ...groupAndTask,
-                            }}
-                        />
-                    )}
+                        {params.taskId && (
+                            <TaskDetails
+                                hierarchy={{
+                                    board,
+                                    ...groupAndTask,
+                                }}
+                            />
+                        )}
+                    </DragDropContext>
                 </>
             ) : (
                 <div>Loading..</div>
