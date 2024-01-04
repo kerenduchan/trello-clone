@@ -1,11 +1,12 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router'
 import { useSelector } from 'react-redux'
-import { DragDropContext } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import {
     loadBoard,
     unloadBoard,
     moveTask,
+    moveGroup,
 } from '../store/actions/board.actions'
 import { useToggle } from '../customHooks/useToggle'
 import { GroupList } from '../cmp/group/GroupList'
@@ -55,6 +56,10 @@ export function BoardDetails() {
             const hierarchy = { board, group: sourceGroup, task }
 
             moveTask(hierarchy, board._id, targetGroupId, destination.index)
+        } else if (type === 'group') {
+            const group = board.groups.find((g) => g._id === draggableId)
+
+            moveGroup(board, group, board._id, destination.index)
         }
     }
 
@@ -86,17 +91,30 @@ export function BoardDetails() {
                             onClose={() => setShowMenu(false)}
                         />
                     )}
-                    <section className="board-canvas">
-                        <DragDropContext onDragEnd={onDragEnd}>
-                            <GroupList
-                                board={board}
-                                groups={board.groups.filter(
-                                    (g) => !g.archivedAt
-                                )}
-                            />
-                        </DragDropContext>
-                        <GroupCreate board={board} />
-                    </section>
+                    <DragDropContext onDragEnd={onDragEnd}>
+                        <Droppable
+                            droppableId={board._id}
+                            direction="horizontal"
+                            type="group"
+                        >
+                            {(provided) => (
+                                <section
+                                    className="board-canvas"
+                                    {...provided.droppableProps}
+                                    ref={provided.innerRef}
+                                >
+                                    <GroupList
+                                        board={board}
+                                        groups={board.groups.filter(
+                                            (g) => !g.archivedAt
+                                        )}
+                                    />
+                                    <GroupCreate board={board} />
+                                    {provided.placeholder}
+                                </section>
+                            )}
+                        </Droppable>
+                    </DragDropContext>
 
                     {params.taskId && (
                         <TaskDetails
