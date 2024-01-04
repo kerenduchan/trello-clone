@@ -35,7 +35,7 @@ export function GroupPreview({ board, group }) {
         }
     }
 
-    if (!index) return <></>
+    if (index === null) return <></>
 
     return (
         <Draggable draggableId={group._id} index={index}>

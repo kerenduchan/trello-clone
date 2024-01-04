@@ -36,7 +36,7 @@ export function TaskPreview({ hierarchy }) {
         navigate(`/b/${board._id}/c/${task._id}`)
     }
 
-    if (!index) return <></>
+    if (index === null) return <></>
 
     return (
         <Draggable draggableId={task._id} index={index}>
