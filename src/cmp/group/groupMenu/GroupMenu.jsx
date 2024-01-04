@@ -11,6 +11,7 @@ import { GroupMenuMain } from './GroupMenuMain'
 import { GroupMenuArchiveTasks } from './GroupMenuArchiveTasks'
 import { GroupMenuMoveTasks } from './GroupMenuMoveTasks'
 import { GroupMenuMoveGroup } from './GroupMenuMoveGroup'
+import { GroupMenuCopyGroup } from './GroupMenuCopyGroup'
 
 export function GroupMenu({
     board,
@@ -36,8 +37,8 @@ export function GroupMenu({
         onClose()
     }
 
-    function onCopyGroup(title, targetBoardId, targetPositionId) {
-        copyGroup(board, group, title, targetBoardId, targetPositionId)
+    function onCopyGroup(title, position) {
+        copyGroup(board, group, title, position)
         onClose()
     }
 
@@ -79,11 +80,10 @@ export function GroupMenu({
         copyGroup: {
             title: 'Copy list',
             cmp: (
-                <GroupMenuMoveGroup
+                <GroupMenuCopyGroup
                     board={board}
                     group={group}
                     onCopyGroup={onCopyGroup}
-                    isCopy={true}
                 />
             ),
             back: onNavToMain,

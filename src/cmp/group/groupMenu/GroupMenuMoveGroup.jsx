@@ -130,7 +130,7 @@ export function GroupMenuMoveGroup({
                 className="btn-primary btn-move"
                 onClick={isCopy ? onCopy : onMove}
             >
-                {isCopy ? 'Create group' : 'Move'}
+                {isCopy ? 'Create list' : 'Move'}
             </button>
         </div>
     )

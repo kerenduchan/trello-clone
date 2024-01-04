@@ -183,13 +183,7 @@ async function moveGroup(board, group, targetBoardId, targetPositionId) {
     return _updateBoards([boardToUpdate, targetBoardToUpdate])
 }
 
-async function copyGroup(board, group, title, targetBoardId, targetPositionId) {
-    let targetBoard = board
-    if (targetBoardId != board._id) {
-        const allBoards = store.getState().boardModule.boards
-        targetBoard = allBoards.find((b) => b._id === targetBoardId)
-    }
-
+async function copyGroup(board, group, title, targetPosition) {
     const groupCopy = {
         ...structuredClone(group),
         _id: utilService.makeId(),
@@ -198,9 +192,9 @@ async function copyGroup(board, group, title, targetBoardId, targetPositionId) {
 
     groupCopy.tasks.forEach((task) => (task._id = utilService.makeId()))
 
-    const targetBoardToUpdate = { ...targetBoard }
-    targetBoardToUpdate.groups.splice(targetPositionId, 0, groupCopy)
-    _updateBoard(targetBoardToUpdate)
+    const boardToUpdate = { ...board }
+    boardToUpdate.groups.splice(targetPosition, 0, groupCopy)
+    _updateBoard(boardToUpdate)
 }
 
 // TASK
