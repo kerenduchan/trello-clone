@@ -131,9 +131,6 @@ export function TaskDetailsSidebar({ hierarchy }) {
                                 />
                             </>
                         )}
-
-                        {/* Share */}
-                        <SecondaryBtn icon="share" text="Share" />
                     </div>
                 </section>
             </div>
