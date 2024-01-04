@@ -5,6 +5,8 @@
     align-self: stretch;
     background-color: var(--bg-1);
     z-index: 1;
+    display: flex;
+    flex-direction: column;
 
     header {
         display: grid;
@@ -37,6 +39,11 @@
 
     .content {
         padding: 12px;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar-track {
+            margin: 6px 0;
+        }
     }
 
     .divider {
