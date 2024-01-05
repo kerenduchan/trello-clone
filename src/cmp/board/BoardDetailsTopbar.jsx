@@ -20,6 +20,11 @@ export function BoardDetailsTopbar({ board }) {
         }
     }
 
+    function onFilterChange(filter) {
+
+    }
+
+    
     return (
         <div className="board-details-topbar">
             <div className="start-container">
@@ -44,7 +49,12 @@ export function BoardDetailsTopbar({ board }) {
             </div>
 
             {/* Filter menu */}
-            {filterMenu.show && <BoardFilterMenu popoverState={filterMenu} />}
+            {filterMenu.show && (
+                <BoardFilterMenu
+                    popoverState={filterMenu}
+                    onChange={onFilterChange}
+                />
+            )}
         </div>
     )
 }
