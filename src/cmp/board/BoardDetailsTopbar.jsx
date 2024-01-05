@@ -1,9 +1,12 @@
 import { updateBoard } from '../../store/actions/board.actions'
+import { usePopoverState } from '../../customHooks/usePopoverState'
 import { EditableTitle } from '../general/EditableTitle'
 import { Icon } from '../general/Icon'
-import { BoardFilter } from './filter/BoardFilter'
+import { BoardFilterMenu } from './filter/BoardFilterMenu'
 
 export function BoardDetailsTopbar({ board }) {
+    const filterMenu = usePopoverState()
+
     function onStarClick() {
         updateBoard(board, { isStarred: !board.isStarred })
     }
@@ -31,11 +34,17 @@ export function BoardDetailsTopbar({ board }) {
 
             <div className="end-container">
                 {/* Filter */}
-                <BoardFilter />
+                <button className="btn-filter" {...filterMenu.triggerAndTarget}>
+                    <Icon type="filter" size="xs" />
+                    <span className="label">Filters</span>
+                </button>
 
                 {/* Divider */}
                 <span className="separator" />
             </div>
+
+            {/* Filter menu */}
+            {filterMenu.show && <BoardFilterMenu popoverState={filterMenu} />}
         </div>
     )
 }
