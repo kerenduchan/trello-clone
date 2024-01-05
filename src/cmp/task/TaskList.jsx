@@ -10,7 +10,9 @@ export function TaskList({
 }) {
     const TASK_CREATE_FORM_PLACEHOLDER = 'task-create-form'
 
-    const listItems = group.tasks.filter((task) => !task.archivedAt)
+    const listItems = group.tasks
+        .filter((task) => !task.archivedAt)
+        .map((task, index) => ({ _id: task._id, task, index }))
 
     if (taskCreateFormPosition !== null) {
         listItems.splice(taskCreateFormPosition, 0, {
@@ -31,7 +33,10 @@ export function TaskList({
                             onClose={onCloseTaskCreateForm}
                         />
                     ) : (
-                        <TaskPreview hierarchy={{ board, group, task: item }} />
+                        <TaskPreview
+                            hierarchy={{ board, group, task: item.task }}
+                            index={item.index}
+                        />
                     )}
                 </li>
             ))}

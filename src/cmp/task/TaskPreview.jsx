@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { useNavigate } from 'react-router-dom'
 import { TaskPreviewCover } from './TaskPreviewCover'
@@ -8,23 +7,11 @@ import { TaskDatesBadge } from './dates/TaskDatesBadge'
 import { Icon } from '../general/Icon'
 import { MembersBadge } from './members/MembersBadge'
 import { TaskCommentsBadge } from './comments/TaskCommentsBadge'
-import { utilService } from '../../services/util.service'
 
-export function TaskPreview({ hierarchy }) {
-    const { board, group, task } = hierarchy
+export function TaskPreview({ hierarchy, index }) {
+    const { board, task } = hierarchy
 
     const navigate = useNavigate()
-    const [index, setIndex] = useState(null)
-
-    useEffect(() => {
-        // determine the index of the task in the group
-        setIndex(
-            utilService.getIdxById(
-                group.tasks.filter((task) => !task.archivedAt),
-                task._id
-            )
-        )
-    }, [hierarchy])
 
     function onEditClick(e) {
         // stop propagation so that task details doesn't open
@@ -35,8 +22,6 @@ export function TaskPreview({ hierarchy }) {
     function onClick() {
         navigate(`/b/${board._id}/c/${task._id}`)
     }
-
-    if (index === null) return <></>
 
     return (
         <Draggable draggableId={task._id} index={index}>
@@ -63,7 +48,9 @@ export function TaskPreview({ hierarchy }) {
                     </div>
                     <div className="content">
                         <LabelsPreview hierarchy={hierarchy} />
-                        <p className="title">{task.title}</p>
+                        <p className="title">
+                            {task.title} ({index})
+                        </p>
 
                         <div className="badges">
                             <TaskDatesBadge hierarchy={hierarchy} />

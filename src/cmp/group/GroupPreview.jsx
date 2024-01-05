@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react'
-import { utilService } from '../../services/util.service'
+import { useState } from 'react'
 import { createTask } from '../../store/actions/board.actions'
 import { TaskList } from '../task/TaskList'
 import { GroupPreviewHeader } from './GroupPreviewHeader'
@@ -7,19 +6,8 @@ import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
 
 // Represents a group of tasks (a list in the UI) in a board
-export function GroupPreview({ board, group }) {
+export function GroupPreview({ board, group, index }) {
     const [taskCreateFormPosition, setTaskCreateFormPosition] = useState(null)
-    const [index, setIndex] = useState(null)
-
-    useEffect(() => {
-        // determine the index of the task in the group
-        setIndex(
-            utilService.getIdxById(
-                board.groups.filter((group) => !group.archivedAt),
-                group._id
-            )
-        )
-    }, [board, group])
 
     function onShowTaskCreateForm(position) {
         setTaskCreateFormPosition(position)
@@ -34,8 +22,6 @@ export function GroupPreview({ board, group }) {
             // TODO: show an error dialog
         }
     }
-
-    if (index === null) return <></>
 
     return (
         <Draggable draggableId={group._id} index={index}>
