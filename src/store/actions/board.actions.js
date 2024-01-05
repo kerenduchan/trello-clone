@@ -38,6 +38,7 @@ export {
     updateTaskComment,
     addChecklist,
     deleteChecklist,
+    moveChecklist,
     addChecklistItem,
     updateChecklistItem,
     deleteChecklistItem,
@@ -391,6 +392,20 @@ async function deleteChecklist(hierarchy, checklist) {
     taskToUpdate.checklists = task.checklists.filter(
         (c) => c._id !== checklist._id
     )
+    return _updateTask(board, group, taskToUpdate)
+}
+
+async function moveChecklist(hierarchy, checklistId, targetPositionId) {
+    const { board, group, task } = hierarchy
+    const taskToUpdate = { ...task }
+
+    const checklistToMove = task.checklists.find((c) => c._id === checklistId)
+    taskToUpdate.checklists = [...task.checklists]
+    taskToUpdate.checklists = task.checklists.filter(
+        (c) => c._id !== checklistId
+    )
+
+    taskToUpdate.checklists.splice(targetPositionId, 0, checklistToMove)
     return _updateTask(board, group, taskToUpdate)
 }
 

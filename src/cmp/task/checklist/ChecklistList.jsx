@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { Droppable } from 'react-beautiful-dnd'
 import {
     setCurChecklist,
     setCurChecklistItem,
@@ -21,16 +22,28 @@ export function ChecklistList({ hierarchy }) {
     return (
         <div className="checklist-list" ref={listElRef}>
             {task.checklists && (
-                <ol>
-                    {task.checklists.map((checklist) => (
-                        <li key={checklist._id}>
-                            <Checklist
-                                hierarchy={hierarchy}
-                                checklist={checklist}
-                            />
-                        </li>
-                    ))}
-                </ol>
+                <Droppable droppableId={task._id} type="checklist">
+                    {(provided) => (
+                        <div
+                            className="droppable-checklist-list"
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}
+                        >
+                            <ol>
+                                {task.checklists.map((checklist, index) => (
+                                    <li key={checklist._id}>
+                                        <Checklist
+                                            hierarchy={hierarchy}
+                                            checklist={checklist}
+                                            index={index}
+                                        />
+                                    </li>
+                                ))}
+                            </ol>
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </Droppable>
             )}
         </div>
     )
