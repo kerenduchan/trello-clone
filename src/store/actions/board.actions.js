@@ -538,21 +538,22 @@ async function _updateChecklist(hierarchy, checklistToUpdate) {
 }
 
 // move task in the same group
-async function _moveTaskInsideGroup(hierarchy, targetPositionId) {
+async function _moveTaskInsideGroup(hierarchy, targetPosition) {
     const { board, group, task } = hierarchy
 
+    const updatedTasks = group.tasks.filter((t) => t._id != task._id)
+    updatedTasks.splice(targetPosition, 0, task)
+
     const groupToUpdate = { ...group }
-    groupToUpdate.tasks = group.tasks.filter((t) => t._id !== task._id)
-    groupToUpdate.tasks.splice(targetPositionId, 0, task)
+    groupToUpdate.tasks = updatedTasks
+
     return _updateGroup(board, groupToUpdate)
 }
 
 // move task to a different group in the same board
-async function _moveTaskInsideBoard(
-    hierarchy,
-    targetGroupId,
-    targetPositionId
-) {
+async function _moveTaskInsideBoard(hierarchy, targetGroupId, targetPosition) {
+    console.log('move task inside board')
+
     const { board, group, task } = hierarchy
 
     // remove task from source group
@@ -562,7 +563,7 @@ async function _moveTaskInsideBoard(
     // insert task into target group
     const targetGroup = board.groups.find((g) => g._id === targetGroupId)
     const targetGroupToUpdate = { ...targetGroup }
-    targetGroupToUpdate.tasks.splice(targetPositionId, 0, task)
+    targetGroupToUpdate.tasks.splice(targetPosition, 0, task)
 
     const boardToUpdate = { ...board }
     boardToUpdate.groups = board.groups.map((g) =>

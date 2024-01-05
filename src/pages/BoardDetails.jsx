@@ -38,13 +38,11 @@ export function BoardDetails() {
 
     function onDragEnd(result) {
         const { destination, source, draggableId, type } = result
-        if (!destination) {
-            return
-        }
 
         if (
-            destination.droppableId === source.droppableId &&
-            destination.index === source.index
+            !destination ||
+            (destination.droppableId === source.droppableId &&
+                destination.index === source.index)
         ) {
             return
         }
