@@ -16,6 +16,7 @@ export const utilService = {
     formatMailDate,
     getSymbolCurrency,
     getIdxById,
+    parseSearchParams,
 }
 
 function makeId(length = 6) {
@@ -190,4 +191,12 @@ function getIdxById(arr, id) {
         }
     }
     return null
+}
+
+function parseSearchParams(searchParams, defaultFilter) {
+    const filter = {}
+    Object.keys(defaultFilter).forEach((key) => {
+        filter[key] = searchParams.get(key) || defaultFilter[key]
+    })
+    return filter
 }

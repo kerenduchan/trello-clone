@@ -2,6 +2,8 @@ import { storageService } from './async-storage.service'
 import { utilService } from './util.service'
 
 export const boardService = {
+    getDefaultFilter,
+    getFilteredBoard,
     getEmptyBoard,
     getEmptyGroup,
     getEmptyTask,
@@ -38,6 +40,15 @@ export const boardService = {
 const STORAGE_KEY = 'boards'
 
 _createBoards()
+
+function getDefaultFilter() {
+    return { txt: '' }
+}
+
+function getFilteredBoard(board, filter) {
+    console.log('getFilteredBoard', filter)
+    return board
+}
 
 function getEmptyBoard() {
     return {

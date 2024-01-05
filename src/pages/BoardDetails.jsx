@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { useSelector } from 'react-redux'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
@@ -18,11 +18,17 @@ import { GroupCreate } from '../cmp/group/GroupCreate'
 import { boardService } from '../services/board.service'
 import { Icon } from '../cmp/general/Icon'
 import { BoardIndexHeader } from '../cmp/board/BoardIndexHeader'
+import { useSearchParams } from 'react-router-dom'
+import { utilService } from '../services/util.service'
 
 export function BoardDetails() {
     const params = useParams()
+    const [searchParams, setSearchParams] = useSearchParams()
     const board = useSelector((storeState) => storeState.boardModule.curBoard)
+    const [filteredBoard, setFilteredBoard] = useState()
+
     const [showMenu, toggleShowMenu, setShowMenu] = useToggle()
+    const [filter, setFilter] = useState(null)
 
     useEffect(() => {
         loadBoard(params.boardId)
@@ -31,6 +37,21 @@ export function BoardDetails() {
             unloadBoard()
         }
     }, [params.boardId])
+
+    // search params must be the single source of truth in order for
+    // "back" to work
+    useEffect(() => {
+        setFilter(
+            utilService.parseSearchParams(
+                searchParams,
+                boardService.getDefaultFilter()
+            )
+        )
+    }, [searchParams])
+
+    useEffect(() => {
+        setFilteredBoard(boardService.getFilteredBoard(board, filter))
+    }, [filter, board])
 
     const groupAndTask = params.taskId
         ? boardService.getGroupAndTaskByTaskId(board, params.taskId)
@@ -84,7 +105,7 @@ export function BoardDetails() {
         >
             <BoardIndexHeader />
 
-            {board ? (
+            {filteredBoard ? (
                 <>
                     <header className="board-details-header">
                         <BoardDetailsTopbar board={board} />
@@ -117,9 +138,7 @@ export function BoardDetails() {
                                 >
                                     <GroupList
                                         board={board}
-                                        groups={board.groups.filter(
-                                            (g) => !g.archivedAt
-                                        )}
+                                        groups={filteredBoard.groups}
                                     />
                                     <GroupCreate board={board} />
                                     {provided.placeholder}
