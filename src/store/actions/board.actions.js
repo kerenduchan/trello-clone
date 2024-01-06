@@ -705,8 +705,6 @@ function _isDatesMatchDue(due, dates) {
     // return true if the due date is overdue
     const delta = dates.dueDate - Math.floor(Date.now() / 1000)
 
-    console.log(delta)
-
     // number of seconds per hour
     const SECONDS_PER_HOUR = 3600
 
