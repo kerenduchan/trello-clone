@@ -643,9 +643,9 @@ function _isTaskMatchFilter(task, filter) {
 }
 
 function _isTaskMatchDate(task, filter) {
-    const { complete, notDue, overdue } = filter
+    const { complete, notDue, overdue, due } = filter
 
-    if (!complete && !notDue && !overdue) {
+    if (!complete && !notDue && !overdue && !due) {
         // no date-related filtering
         return true
     }
@@ -654,8 +654,9 @@ function _isTaskMatchDate(task, filter) {
     const isMatchComplete = _isDatesMatchComplete(complete, dates)
     const isMatchNotDue = _isDatesMatchNotDue(notDue, dates)
     const isMatchOverdue = _isDatesMatchOverdue(overdue, dates)
+    const isMatchDue = _isDatesMatchDue(due, dates)
 
-    return isMatchComplete || isMatchNotDue || isMatchOverdue
+    return isMatchComplete || isMatchNotDue || isMatchOverdue || isMatchDue
 }
 
 function _isDatesMatchComplete(complete, dates) {
@@ -694,4 +695,30 @@ function _isDatesMatchOverdue(overdue, dates) {
     const delta = dates.dueDate - Math.floor(Date.now() / 1000)
 
     return delta < 0
+}
+
+function _isDatesMatchDue(due, dates) {
+    if (!due || !dates || !dates.dueDate) {
+        // no filtering by due, or no due date
+        return false
+    }
+    // return true if the due date is overdue
+    const delta = dates.dueDate - Math.floor(Date.now() / 1000)
+
+    console.log(delta)
+
+    // number of seconds per hour
+    const SECONDS_PER_HOUR = 3600
+
+    if (due === 'day') {
+        return delta > 0 && delta < 24 * SECONDS_PER_HOUR
+    }
+
+    if (due === 'week') {
+        return delta > 0 && delta < 7 * 24 * SECONDS_PER_HOUR
+    }
+
+    if (due === 'month') {
+        return delta > 0 && delta < 30 * 24 * SECONDS_PER_HOUR
+    }
 }
