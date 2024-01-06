@@ -1,22 +1,13 @@
-import { useState } from 'react'
-import { useForm } from '../../../customHooks/useForm'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { boardService } from '../../../services/board.service'
 import { BoardFilterMenu } from './BoardFilterMenu'
 import { BoardFilterBtn } from './BoardFilterBtn'
 
-export function BoardFilter({ onFilterChange }) {
-    const [filter, handleChange, setFilter] = useForm({ txt: '' }, onChange)
-    const [isFilterEmpty, setIsFilterEmpty] = useState(true)
+export function BoardFilter({ filter, isFilterEmpty, onFilterChange }) {
     const filterMenu = usePopoverState()
 
-    function onChange(filter) {
-        setIsFilterEmpty(boardService.isFilterEmpty(filter))
-        onFilterChange(filter)
-    }
-
     function onClearFilter() {
-        setFilter(boardService.getDefaultFilter())
+        onFilterChange(boardService.getDefaultFilter())
     }
 
     return (
@@ -33,7 +24,7 @@ export function BoardFilter({ onFilterChange }) {
                 <BoardFilterMenu
                     popoverState={filterMenu}
                     filter={filter}
-                    onChange={handleChange}
+                    onChange={onFilterChange}
                 />
             )}
         </div>

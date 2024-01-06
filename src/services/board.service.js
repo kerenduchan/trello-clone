@@ -42,6 +42,8 @@ export const boardService = {
     getArchivedGroups,
     handleDragEnd,
     getTasksCount,
+    parseSearchParams,
+    buildSearchParams,
 }
 
 const STORAGE_KEY = 'boards'
@@ -49,7 +51,7 @@ const STORAGE_KEY = 'boards'
 _createBoards()
 
 function getDefaultFilter() {
-    return { txt: '' }
+    return { txt: '', date: new Set() }
 }
 
 function isFilterEmpty(filter) {
@@ -143,6 +145,20 @@ function save(boardToSave) {
 
 async function create(board) {
     return await storageService.post(STORAGE_KEY, board)
+}
+
+function parseSearchParams(searchParams) {
+    const defaultFilter = getDefaultFilter()
+    const fieldsThatAreASet = ['date']
+    return utilService.parseSearchParams(
+        searchParams,
+        defaultFilter,
+        fieldsThatAreASet
+    )
+}
+
+function buildSearchParams(filter) {
+    return utilService.buildSearchParams(filter, getDefaultFilter())
 }
 
 function _createBoards() {

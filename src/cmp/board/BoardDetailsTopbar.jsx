@@ -3,7 +3,12 @@ import { EditableTitle } from '../general/EditableTitle'
 import { Icon } from '../general/Icon'
 import { BoardFilter } from './filter/BoardFilter'
 
-export function BoardDetailsTopbar({ board, onFilterChange }) {
+export function BoardDetailsTopbar({
+    board,
+    filter,
+    isFilterEmpty,
+    onFilterChange,
+}) {
     function onStarClick() {
         updateBoard(board, { isStarred: !board.isStarred })
     }
@@ -31,7 +36,11 @@ export function BoardDetailsTopbar({ board, onFilterChange }) {
 
             <div className="end-container">
                 {/* Filter */}
-                <BoardFilter onFilterChange={onFilterChange} />
+                <BoardFilter
+                    onFilterChange={onFilterChange}
+                    isFilterEmpty={isFilterEmpty}
+                    filter={filter}
+                />
 
                 {/* Divider */}
                 <span className="separator" />

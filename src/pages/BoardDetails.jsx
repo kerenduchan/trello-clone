@@ -17,7 +17,6 @@ import { boardService } from '../services/board.service'
 import { Icon } from '../cmp/general/Icon'
 import { BoardIndexHeader } from '../cmp/board/BoardIndexHeader'
 import { useSearchParams } from 'react-router-dom'
-import { utilService } from '../services/util.service'
 
 export function BoardDetails() {
     const params = useParams()
@@ -41,12 +40,8 @@ export function BoardDetails() {
     // search params must be the single source of truth in order for
     // "back" to work
     useEffect(() => {
-        setFilter(
-            utilService.parseSearchParams(
-                searchParams,
-                boardService.getDefaultFilter()
-            )
-        )
+        const updatedFilter = boardService.parseSearchParams(searchParams)
+        setFilter(updatedFilter)
     }, [searchParams])
 
     useEffect(() => {
@@ -63,12 +58,8 @@ export function BoardDetails() {
 
     function onFilterChange(filter) {
         setIsFilterEmpty(boardService.isFilterEmpty(filter))
-        setSearchParams(
-            utilService.buildSearchParams(
-                filter,
-                boardService.getDefaultFilter()
-            )
-        )
+        const updatedSearchParams = boardService.buildSearchParams(filter)
+        setSearchParams(updatedSearchParams)
     }
 
     return (
@@ -85,6 +76,8 @@ export function BoardDetails() {
                     <header className="board-details-header">
                         <BoardDetailsTopbar
                             board={board}
+                            filter={filter}
+                            isFilterEmpty={isFilterEmpty}
                             onFilterChange={onFilterChange}
                         />
 
