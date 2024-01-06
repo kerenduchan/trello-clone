@@ -2,13 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { useSelector } from 'react-redux'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
-import {
-    loadBoard,
-    unloadBoard,
-    moveTask,
-    moveGroup,
-    moveChecklist,
-} from '../store/actions/board.actions'
+import { loadBoard, unloadBoard } from '../store/actions/board.actions'
 import { useToggle } from '../customHooks/useToggle'
 import { GroupList } from '../cmp/group/GroupList'
 import { BoardDetailsTopbar } from '../cmp/board/BoardDetailsTopbar'
@@ -58,42 +52,7 @@ export function BoardDetails() {
         : null
 
     function onDragEnd(result) {
-        const { destination, source, draggableId, type } = result
-
-        if (
-            !destination ||
-            (destination.droppableId === source.droppableId &&
-                destination.index === source.index)
-        ) {
-            return
-        }
-
-        if (type === 'task') {
-            // drag-drop task
-            const sourceGroup = board.groups.find(
-                (g) => g._id === source.droppableId
-            )
-            const targetGroupId = destination.droppableId
-            const task = sourceGroup.tasks.find((t) => t._id === draggableId)
-            const hierarchy = { board, group: sourceGroup, task }
-
-            moveTask(hierarchy, board._id, targetGroupId, destination.index)
-        } else if (type === 'group') {
-            // drag-drop group
-            const group = board.groups.find((g) => g._id === draggableId)
-
-            moveGroup(board, group, board._id, destination.index)
-        } else if (type === 'checklist') {
-            // drag-drop checklist
-            const { group, task } = boardService.getGroupAndTaskByTaskId(
-                board,
-                source.droppableId
-            )
-
-            const hierarchy = { board, group, task }
-
-            moveChecklist(hierarchy, draggableId, destination.index)
-        }
+        boardService.handleDragEnd(result, board)
     }
 
     return (

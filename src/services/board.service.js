@@ -1,5 +1,10 @@
 import { storageService } from './async-storage.service'
 import { utilService } from './util.service'
+import {
+    moveTask,
+    moveGroup,
+    moveChecklist,
+} from '../store/actions/board.actions'
 
 export const boardService = {
     getDefaultFilter,
@@ -35,6 +40,7 @@ export const boardService = {
     getTaskDateStatus,
     getArchivedTasks,
     getArchivedGroups,
+    handleDragEnd,
 }
 
 const STORAGE_KEY = 'boards'
@@ -535,4 +541,43 @@ function getArchivedTasks(board) {
 
 function getArchivedGroups(board) {
     return board.groups.filter((group) => group.archivedAt)
+}
+
+function handleDragEnd(result, board) {
+    const { destination, source, draggableId, type } = result
+
+    if (
+        !destination ||
+        (destination.droppableId === source.droppableId &&
+            destination.index === source.index)
+    ) {
+        return
+    }
+
+    if (type === 'task') {
+        // drag-drop task
+        const sourceGroup = board.groups.find(
+            (g) => g._id === source.droppableId
+        )
+        const targetGroupId = destination.droppableId
+        const task = sourceGroup.tasks.find((t) => t._id === draggableId)
+        const hierarchy = { board, group: sourceGroup, task }
+
+        moveTask(hierarchy, board._id, targetGroupId, destination.index)
+    } else if (type === 'group') {
+        // drag-drop group
+        const group = board.groups.find((g) => g._id === draggableId)
+
+        moveGroup(board, group, board._id, destination.index)
+    } else if (type === 'checklist') {
+        // drag-drop checklist
+        const { group, task } = boardService.getGroupAndTaskByTaskId(
+            board,
+            source.droppableId
+        )
+
+        const hierarchy = { board, group, task }
+
+        moveChecklist(hierarchy, draggableId, destination.index)
+    }
 }
