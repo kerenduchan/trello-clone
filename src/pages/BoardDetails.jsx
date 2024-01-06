@@ -63,7 +63,12 @@ export function BoardDetails() {
 
     function onFilterChange(filter) {
         setIsFilterEmpty(boardService.isFilterEmpty(filter))
-        setFilter(filter)
+        setSearchParams(
+            utilService.buildSearchParams(
+                filter,
+                boardService.getDefaultFilter()
+            )
+        )
     }
 
     return (

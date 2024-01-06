@@ -17,6 +17,7 @@ export const utilService = {
     getSymbolCurrency,
     getIdxById,
     parseSearchParams,
+    buildSearchParams,
 }
 
 function makeId(length = 6) {
@@ -199,4 +200,15 @@ function parseSearchParams(searchParams, defaultFilter) {
         filter[key] = searchParams.get(key) || defaultFilter[key]
     })
     return filter
+}
+
+function buildSearchParams(filter, defaultFilter) {
+    const params = {}
+
+    Object.keys(defaultFilter).forEach((key) => {
+        if (filter[key] !== defaultFilter[key]) {
+            params[key] = filter[key]
+        }
+    })
+    return params
 }
