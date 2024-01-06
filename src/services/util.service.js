@@ -18,6 +18,7 @@ export const utilService = {
     getIdxById,
     parseSearchParams,
     buildSearchParams,
+    simpleIsEqual,
 }
 
 function makeId(length = 6) {
@@ -220,4 +221,9 @@ function buildSearchParams(filter, defaultFilter) {
         }
     })
     return params
+}
+
+function simpleIsEqual(obj1, obj2) {
+    const found = Object.keys(obj1).find((key) => obj1[key] !== obj2[key])
+    return found === undefined
 }

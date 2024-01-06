@@ -18,6 +18,7 @@ export function BoardFilterMenu({ popoverState, filter, onChange }) {
             title="Filter"
             {...popoverState.popover}
         >
+            {/* Keyword */}
             <h4>Keyword</h4>
             <input
                 className="txt"
@@ -29,10 +30,16 @@ export function BoardFilterMenu({ popoverState, filter, onChange }) {
                 value={filter.txt}
             ></input>
             <p className="note">Search cards, members, labels, and more.</p>
+
+            {/* Members */}
             <h4>Members</h4>
+
+            {/* Due date */}
             <h4>Due date</h4>
-            <h4>Labels</h4>
             <BoardFilterDate filter={filter} onChange={onFilterFieldsChange} />
+
+            {/* Labels */}
+            <h4>Labels</h4>
         </PopoverMenu>
     )
 }

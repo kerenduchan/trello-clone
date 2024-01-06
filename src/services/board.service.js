@@ -56,7 +56,8 @@ function getDefaultFilter() {
 }
 
 function isFilterEmpty(filter) {
-    return filter.txt === ''
+    const defaultFilter = getDefaultFilter()
+    return utilService.simpleIsEqual(filter, defaultFilter)
 }
 
 function getEmptyBoard() {

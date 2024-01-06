@@ -631,5 +631,55 @@ function _applyBoardFilterToGroup(group, filter) {
 
 function _isTaskMatchFilter(task, filter) {
     const pattern = new RegExp(filter.txt, 'i')
-    return task.title.match(pattern)
+    if (!task.title.match(pattern)) {
+        return false
+    }
+
+    if (!_isTaskMatchDate(task, filter)) {
+        return false
+    }
+
+    return true
+}
+
+function _isTaskMatchDate(task, filter) {
+    const { complete, notDue } = filter
+
+    if (!complete && !notDue) {
+        // no date-related filtering
+        return true
+    }
+    const dates = task.dates
+
+    const isMatchComplete = _isDatesMatchComplete(complete, dates)
+    const isMatchNotDue = _isDatesMatchNotDue(notDue, dates)
+
+    return isMatchComplete || isMatchNotDue
+}
+
+function _isDatesMatchComplete(complete, dates) {
+    switch (complete) {
+        case null:
+            // no filtering by complete
+            return false
+        case true:
+            // return true if the dates are marked as complete
+            return Boolean(dates?.isComplete)
+        case false:
+            // return true if there are no dates or they are not marked as complete
+            return !dates || !dates.isComplete
+    }
+
+    // shouldn't reach here
+    console.error('Internal error: complete is', complete)
+    return false
+}
+
+function _isDatesMatchNotDue(notDue, dates) {
+    if (!notDue) {
+        // no filtering by not due
+        return false
+    }
+    // return true if there are no dates or if there is no due date
+    return !dates || !dates.dueDate
 }

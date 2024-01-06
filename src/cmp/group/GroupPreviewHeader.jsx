@@ -23,7 +23,10 @@ export function GroupPreviewHeader({
 
     function getFilteredCountText() {
         const count = group.tasks.length
-        return `${count} cards match${count === 1 ? 'es' : ''} filters`
+        if (count === 1) {
+            return '1 card matches filters'
+        }
+        return `${count} cards match filters`
     }
 
     return (
