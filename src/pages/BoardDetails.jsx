@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { useSelector } from 'react-redux'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
-import { loadBoard, unloadBoard } from '../store/actions/board.actions'
+import {
+    loadBoard,
+    unloadBoard,
+    applyBoardFilter,
+} from '../store/actions/board.actions'
 import { useToggle } from '../customHooks/useToggle'
 import { GroupList } from '../cmp/group/GroupList'
 import { BoardDetailsTopbar } from '../cmp/board/BoardDetailsTopbar'
@@ -19,7 +23,9 @@ export function BoardDetails() {
     const params = useParams()
     const [searchParams, setSearchParams] = useSearchParams()
     const board = useSelector((storeState) => storeState.boardModule.curBoard)
-    const [filteredBoard, setFilteredBoard] = useState()
+    const filteredBoard = useSelector(
+        (storeState) => storeState.boardModule.filteredBoard
+    )
 
     const [showMenu, toggleShowMenu, setShowMenu] = useToggle()
     const [filter, setFilter] = useState(null)
@@ -44,7 +50,7 @@ export function BoardDetails() {
     }, [searchParams])
 
     useEffect(() => {
-        setFilteredBoard(boardService.getFilteredBoard(board, filter))
+        applyBoardFilter(filter)
     }, [filter, board])
 
     const groupAndTask = params.taskId

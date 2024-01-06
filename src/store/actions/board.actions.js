@@ -8,6 +8,7 @@ import {
     REMOVE_BOARD,
     UPDATE_BOARD,
     UPDATE_BOARDS,
+    SET_FILTERED_BOARD,
 } from '../reducers/board.reducer'
 import { store } from '../store'
 import { setCurChecklist } from './app.actions'
@@ -16,6 +17,7 @@ export {
     loadBoards,
     loadBoard,
     unloadBoard,
+    applyBoardFilter,
     createBoard,
     deleteBoard,
     updateBoard,
@@ -74,6 +76,15 @@ function unloadBoard() {
     if (store.getState().boardModule.curBoard !== null) {
         store.dispatch({ type: SET_BOARD, board: null })
     }
+}
+
+function applyBoardFilter(filter) {
+    const board = store.getState().boardModule.curBoard
+    if (!board) {
+        return null
+    }
+    const filteredBoard = boardService.getFilteredBoard(board, filter)
+    store.dispatch({ type: SET_FILTERED_BOARD, filteredBoard })
 }
 
 // BOARD
@@ -552,8 +563,6 @@ async function _moveTaskInsideGroup(hierarchy, targetPosition) {
 
 // move task to a different group in the same board
 async function _moveTaskInsideBoard(hierarchy, targetGroupId, targetPosition) {
-    console.log('move task inside board')
-
     const { board, group, task } = hierarchy
 
     // remove task from source group
