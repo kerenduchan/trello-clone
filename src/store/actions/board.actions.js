@@ -710,15 +710,10 @@ function _isDatesMatchDue(due, dates) {
     // number of seconds per hour
     const SECONDS_PER_HOUR = 3600
 
-    if (due === 'day') {
-        return delta > 0 && delta < 24 * SECONDS_PER_HOUR
+    const maxDeltaDays = {
+        day: 1,
+        week: 7,
+        month: 30,
     }
-
-    if (due === 'week') {
-        return delta > 0 && delta < 7 * 24 * SECONDS_PER_HOUR
-    }
-
-    if (due === 'month') {
-        return delta > 0 && delta < 30 * 24 * SECONDS_PER_HOUR
-    }
+    return delta > 0 && delta < maxDeltaDays[due] * 24 * SECONDS_PER_HOUR
 }
