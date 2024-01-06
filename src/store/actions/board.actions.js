@@ -643,9 +643,9 @@ function _isTaskMatchFilter(task, filter) {
 }
 
 function _isTaskMatchDate(task, filter) {
-    const { complete, notDue } = filter
+    const { complete, notDue, overdue } = filter
 
-    if (!complete && !notDue) {
+    if (!complete && !notDue && !overdue) {
         // no date-related filtering
         return true
     }
@@ -653,8 +653,11 @@ function _isTaskMatchDate(task, filter) {
 
     const isMatchComplete = _isDatesMatchComplete(complete, dates)
     const isMatchNotDue = _isDatesMatchNotDue(notDue, dates)
+    const isMatchOverdue = _isDatesMatchOverdue(overdue, dates)
 
-    return isMatchComplete || isMatchNotDue
+    console.log(isMatchComplete, isMatchNotDue, isMatchOverdue)
+
+    return isMatchComplete || isMatchNotDue || isMatchOverdue
 }
 
 function _isDatesMatchComplete(complete, dates) {
@@ -682,4 +685,15 @@ function _isDatesMatchNotDue(notDue, dates) {
     }
     // return true if there are no dates or if there is no due date
     return !dates || !dates.dueDate
+}
+
+function _isDatesMatchOverdue(overdue, dates) {
+    if (!overdue || !dates || !dates.dueDate) {
+        // no filtering by overdue, or no due date
+        return false
+    }
+    // return true if the due date is overdue
+    const delta = dates.dueDate - Math.floor(Date.now() / 1000)
+
+    return delta < 0
 }
