@@ -52,7 +52,6 @@ function getDefaultFilter() {
 }
 
 function getFilteredBoard(board, filter) {
-    console.log('getFilteredBoard', filter)
     return board
 }
 
