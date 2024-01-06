@@ -35,6 +35,10 @@
     border-radius: 3px;
 }
 
+.btn-dynamic {
+    @include btn-dynamic();
+}
+
 .task-dates-status {
     &-complete {
         background-color: var(--bg-success-bold);

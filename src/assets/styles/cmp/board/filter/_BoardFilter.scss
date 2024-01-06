@@ -1,0 +1,20 @@
+.board-filter {
+    margin-inline-end: 4px;
+    display: flex;
+
+    .btn-filter-clear-all {
+        display: none;
+        border-start-start-radius: 0;
+        border-end-start-radius: 0;
+    }
+
+    &.show-btn-clear-all {
+        .btn-filter {
+            border-end-end-radius: 0;
+            border-start-end-radius: 0;
+        }
+        .btn-filter-clear-all {
+            display: inline-block;
+        }
+    }
+}

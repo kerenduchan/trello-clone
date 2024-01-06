@@ -1,9 +1,6 @@
 import { PopoverMenu } from '../../general/PopoverMenu'
-import { useForm } from '../../../customHooks/useForm'
 
-export function BoardFilterMenu({ popoverState, onChange }) {
-    const [draft, handleChange] = useForm({ txt: '' }, onChange)
-
+export function BoardFilterMenu({ popoverState, filter, onChange }) {
     return (
         <PopoverMenu
             className="board-filter-menu"
@@ -15,8 +12,8 @@ export function BoardFilterMenu({ popoverState, onChange }) {
                 type="text"
                 name="txt"
                 placeholder="Enter a keyword..."
-                onChange={handleChange}
-                value={draft.txt}
+                onChange={onChange}
+                value={filter.txt}
             ></input>
             <p className="note">Search cards, members, labels, and more.</p>
             <h4>Members</h4>

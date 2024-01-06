@@ -290,6 +290,33 @@
     }
 }
 
+@mixin btn-dynamic {
+    padding: 6px;
+    border-radius: 3px;
+    @include button-bg(
+        transparent,
+        var(--bg-neutral-hovered),
+        var(--bg-neutral-pressed)
+    );
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .icon,
+    .label {
+        color: inherit;
+    }
+
+    &.highlighted {
+        color: var(--dynamic-button-highlighted-text);
+        background-color: var(--dynamic-button-highlighted);
+
+        &:hover {
+            background-color: var(--dynamic-button-highlighted-hovered);
+        }
+    }
+}
+
 @mixin ellipsis() {
     text-overflow: ellipsis;
     overflow: hidden;
