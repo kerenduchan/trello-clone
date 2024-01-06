@@ -8,7 +8,6 @@ import {
 
 export const boardService = {
     getDefaultFilter,
-    getFilteredBoard,
     getEmptyBoard,
     getEmptyGroup,
     getEmptyTask,
@@ -49,10 +48,6 @@ _createBoards()
 
 function getDefaultFilter() {
     return { txt: '' }
-}
-
-function getFilteredBoard(board, filter) {
-    return board
 }
 
 function getEmptyBoard() {

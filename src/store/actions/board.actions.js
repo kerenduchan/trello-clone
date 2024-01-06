@@ -83,7 +83,12 @@ function applyBoardFilter(filter) {
     if (!board) {
         return null
     }
-    const filteredBoard = boardService.getFilteredBoard(board, filter)
+
+    const filteredGroups = board.groups.map((g) =>
+        _applyBoardFilterToGroup(g, filter)
+    )
+
+    const filteredBoard = { ...board, groups: filteredGroups }
     store.dispatch({ type: SET_FILTERED_BOARD, filteredBoard })
 }
 
@@ -615,4 +620,16 @@ async function _moveTaskToDifferentBoard(
     )
 
     return _updateBoards([sourceBoardToUpdate, targetBoardToUpdate])
+}
+
+function _applyBoardFilterToGroup(group, filter) {
+    const filteredTasks = group.tasks.filter((t) =>
+        _isTaskMatchFilter(t, filter)
+    )
+    return { ...group, tasks: filteredTasks }
+}
+
+function _isTaskMatchFilter(task, filter) {
+    const pattern = new RegExp(filter.txt, 'i')
+    return task.title.match(pattern)
 }

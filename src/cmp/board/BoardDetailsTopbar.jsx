@@ -4,7 +4,7 @@ import { EditableTitle } from '../general/EditableTitle'
 import { Icon } from '../general/Icon'
 import { BoardFilterMenu } from './filter/BoardFilterMenu'
 
-export function BoardDetailsTopbar({ board }) {
+export function BoardDetailsTopbar({ board, onFilterChange }) {
     const filterMenu = usePopoverState()
 
     function onStarClick() {
@@ -20,11 +20,6 @@ export function BoardDetailsTopbar({ board }) {
         }
     }
 
-    function onFilterChange(filter) {
-
-    }
-
-    
     return (
         <div className="board-details-topbar">
             <div className="start-container">

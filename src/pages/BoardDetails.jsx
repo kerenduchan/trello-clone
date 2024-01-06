@@ -26,7 +26,6 @@ export function BoardDetails() {
     const filteredBoard = useSelector(
         (storeState) => storeState.boardModule.filteredBoard
     )
-
     const [showMenu, toggleShowMenu, setShowMenu] = useToggle()
     const [filter, setFilter] = useState(null)
 
@@ -61,6 +60,10 @@ export function BoardDetails() {
         boardService.handleDragEnd(result, board)
     }
 
+    function onFilterChange(filter) {
+        setFilter(filter)
+    }
+
     return (
         <div
             className="board-details"
@@ -73,7 +76,10 @@ export function BoardDetails() {
             {filteredBoard ? (
                 <>
                     <header className="board-details-header">
-                        <BoardDetailsTopbar board={board} />
+                        <BoardDetailsTopbar
+                            board={board}
+                            onFilterChange={onFilterChange}
+                        />
 
                         <button
                             className="btn-square btn-more"
