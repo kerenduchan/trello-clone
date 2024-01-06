@@ -48,9 +48,7 @@ export function TaskPreview({ hierarchy, index }) {
                     </div>
                     <div className="content">
                         <LabelsPreview hierarchy={hierarchy} />
-                        <p className="title">
-                            {task.title} ({index})
-                        </p>
+                        <p className="title">{task.title}</p>
 
                         <div className="badges">
                             <TaskDatesBadge hierarchy={hierarchy} />

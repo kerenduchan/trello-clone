@@ -1,7 +1,14 @@
 import { storageService } from './async-storage.service'
 import { utilService } from './util.service'
+import {
+    moveTask,
+    moveGroup,
+    moveChecklist,
+} from '../store/actions/board.actions'
 
 export const boardService = {
+    getDefaultFilter,
+    isFilterEmpty,
     getEmptyBoard,
     getEmptyGroup,
     getEmptyTask,
@@ -33,11 +40,25 @@ export const boardService = {
     getTaskDateStatus,
     getArchivedTasks,
     getArchivedGroups,
+    handleDragEnd,
+    getTasksCount,
+    parseSearchParams,
+    buildSearchParams,
 }
 
 const STORAGE_KEY = 'boards'
 
 _createBoards()
+
+function getDefaultFilter() {
+    // careful with the 'complete' field - it can be true, false, or null
+    return { txt: '', notDue: false, overdue: false, due: null, complete: null }
+}
+
+function isFilterEmpty(filter) {
+    const defaultFilter = getDefaultFilter()
+    return utilService.simpleIsEqual(filter, defaultFilter)
+}
 
 function getEmptyBoard() {
     return {
@@ -126,6 +147,15 @@ function save(boardToSave) {
 
 async function create(board) {
     return await storageService.post(STORAGE_KEY, board)
+}
+
+function parseSearchParams(searchParams) {
+    const defaultFilter = getDefaultFilter()
+    return utilService.parseSearchParams(searchParams, defaultFilter)
+}
+
+function buildSearchParams(filter) {
+    return utilService.buildSearchParams(filter, getDefaultFilter())
 }
 
 function _createBoards() {
@@ -524,4 +554,47 @@ function getArchivedTasks(board) {
 
 function getArchivedGroups(board) {
     return board.groups.filter((group) => group.archivedAt)
+}
+
+function handleDragEnd(result, board) {
+    const { destination, source, draggableId, type } = result
+
+    if (
+        !destination ||
+        (destination.droppableId === source.droppableId &&
+            destination.index === source.index)
+    ) {
+        return
+    }
+
+    if (type === 'task') {
+        // drag-drop task
+        const sourceGroup = board.groups.find(
+            (g) => g._id === source.droppableId
+        )
+        const targetGroupId = destination.droppableId
+        const task = sourceGroup.tasks.find((t) => t._id === draggableId)
+        const hierarchy = { board, group: sourceGroup, task }
+
+        moveTask(hierarchy, board._id, targetGroupId, destination.index)
+    } else if (type === 'group') {
+        // drag-drop group
+        const group = board.groups.find((g) => g._id === draggableId)
+
+        moveGroup(board, group, board._id, destination.index)
+    } else if (type === 'checklist') {
+        // drag-drop checklist
+        const { group, task } = boardService.getGroupAndTaskByTaskId(
+            board,
+            source.droppableId
+        )
+
+        const hierarchy = { board, group, task }
+
+        moveChecklist(hierarchy, draggableId, destination.index)
+    }
+}
+
+function getTasksCount(board) {
+    return board.groups.reduce((acc, group) => acc + group.tasks.length, 0)
 }

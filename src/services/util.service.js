@@ -16,6 +16,9 @@ export const utilService = {
     formatMailDate,
     getSymbolCurrency,
     getIdxById,
+    parseSearchParams,
+    buildSearchParams,
+    simpleIsEqual,
 }
 
 function makeId(length = 6) {
@@ -190,4 +193,37 @@ function getIdxById(arr, id) {
         }
     }
     return null
+}
+
+function parseSearchParams(searchParams, defaultFilter) {
+    const filter = {}
+    Object.keys(defaultFilter).forEach((key) => {
+        let val = searchParams.get(key)
+        if (!val) {
+            val = defaultFilter[key]
+        } else if (val === 'true') {
+            val = true
+        } else if (val === 'false') {
+            val = false
+        }
+        filter[key] = val
+    })
+    return filter
+}
+
+function buildSearchParams(filter, defaultFilter) {
+    const params = {}
+
+    Object.keys(defaultFilter).forEach((key) => {
+        let value = filter[key]
+        if (value !== defaultFilter[key]) {
+            params[key] = value
+        }
+    })
+    return params
+}
+
+function simpleIsEqual(obj1, obj2) {
+    const found = Object.keys(obj1).find((key) => obj1[key] !== obj2[key])
+    return found === undefined
 }

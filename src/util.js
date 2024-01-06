@@ -31,6 +31,8 @@ const _typeToMaterialSymbol = {
     emoji: 'sentiment_satisfied',
     mention: 'alternate_email',
     comment: 'chat_bubble',
+    filter: 'filter_list',
+    calendar: 'calendar_month',
     'checkbox-unchecked': 'check_box_outline_blank',
     'checkbox-checked': 'select_check_box',
 }

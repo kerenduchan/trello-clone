@@ -6,7 +6,7 @@ import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
 
 // Represents a group of tasks (a list in the UI) in a board
-export function GroupPreview({ board, group, index }) {
+export function GroupPreview({ board, group, index, isFilterEmpty }) {
     const [taskCreateFormPosition, setTaskCreateFormPosition] = useState(null)
 
     function onShowTaskCreateForm(position) {
@@ -44,6 +44,7 @@ export function GroupPreview({ board, group, index }) {
                                         board={board}
                                         group={group}
                                         onTaskCreate={onShowTaskCreateForm}
+                                        isFilterEmpty={isFilterEmpty}
                                     />
                                 </div>
                                 <div

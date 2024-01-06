@@ -1,0 +1,39 @@
+.board-filter-btn {
+    margin-inline-end: 4px;
+    display: flex;
+
+    .btn-filter-clear-all {
+        display: none;
+        border-start-start-radius: 0;
+        border-end-start-radius: 0;
+    }
+
+    .matched-count {
+        padding-inline-start: 4px;
+        padding-inline-end: 6px;
+        color: inherit;
+        border-radius: 10px;
+        background-color: var(--dynamic-button-highlighted-hovered);
+        display: flex;
+        align-items: center;
+
+        &:before {
+            display: inline-block;
+            margin-inline-end: 6px;
+            content: '';
+            @include square(12px);
+            border-radius: 50%;
+            background-color: #579dff;
+        }
+    }
+
+    &.show-btn-clear-all {
+        .btn-filter {
+            border-end-end-radius: 0;
+            border-start-end-radius: 0;
+        }
+        .btn-filter-clear-all {
+            display: inline-block;
+        }
+    }
+}

@@ -149,6 +149,23 @@
     }
 }
 
+@mixin input-styling() {
+    box-sizing: border-box;
+    box-shadow: var(--box-shadow-input);
+    border-radius: 3px;
+    padding: 8px 12px;
+    outline: none;
+    @include font-p();
+
+    &:hover:not(:focus) {
+        background-color: var(--bg-input-hovered);
+    }
+
+    &:focus {
+        box-shadow: var(--box-shadow-input-focused);
+    }
+}
+
 @mixin secondary-btn-version-2() {
     padding: 6px 8px;
     column-gap: 0px;
@@ -269,6 +286,33 @@
 
         & .icon {
             color: var(--text-disabled);
+        }
+    }
+}
+
+@mixin btn-dynamic {
+    padding: 6px;
+    border-radius: 3px;
+    @include button-bg(
+        transparent,
+        var(--bg-neutral-hovered),
+        var(--bg-neutral-pressed)
+    );
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .icon,
+    .label {
+        color: inherit;
+    }
+
+    &.highlighted {
+        color: var(--dynamic-button-highlighted-text);
+        background-color: var(--dynamic-button-highlighted);
+
+        &:hover {
+            background-color: var(--dynamic-button-highlighted-hovered);
         }
     }
 }

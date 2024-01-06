@@ -1,13 +1,11 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { useSelector } from 'react-redux'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import {
     loadBoard,
     unloadBoard,
-    moveTask,
-    moveGroup,
-    moveChecklist,
+    applyBoardFilter,
 } from '../store/actions/board.actions'
 import { useToggle } from '../customHooks/useToggle'
 import { GroupList } from '../cmp/group/GroupList'
@@ -18,11 +16,18 @@ import { GroupCreate } from '../cmp/group/GroupCreate'
 import { boardService } from '../services/board.service'
 import { Icon } from '../cmp/general/Icon'
 import { BoardIndexHeader } from '../cmp/board/BoardIndexHeader'
+import { useSearchParams } from 'react-router-dom'
 
 export function BoardDetails() {
     const params = useParams()
+    const [searchParams, setSearchParams] = useSearchParams()
+    const [isFilterEmpty, setIsFilterEmpty] = useState(true)
     const board = useSelector((storeState) => storeState.boardModule.curBoard)
+    const filteredBoard = useSelector(
+        (storeState) => storeState.boardModule.filteredBoard
+    )
     const [showMenu, toggleShowMenu, setShowMenu] = useToggle()
+    const [filter, setFilter] = useState(null)
 
     useEffect(() => {
         loadBoard(params.boardId)
@@ -32,47 +37,30 @@ export function BoardDetails() {
         }
     }, [params.boardId])
 
+    // search params must be the single source of truth in order for
+    // "back" to work
+    useEffect(() => {
+        const updatedFilter = boardService.parseSearchParams(searchParams)
+        setFilter(updatedFilter)
+    }, [searchParams])
+
+    useEffect(() => {
+        if (!filter || !board) return
+        applyBoardFilter(filter)
+        setIsFilterEmpty(boardService.isFilterEmpty(filter))
+    }, [filter, board])
+
     const groupAndTask = params.taskId
         ? boardService.getGroupAndTaskByTaskId(board, params.taskId)
         : null
 
     function onDragEnd(result) {
-        const { destination, source, draggableId, type } = result
+        boardService.handleDragEnd(result, board)
+    }
 
-        if (
-            !destination ||
-            (destination.droppableId === source.droppableId &&
-                destination.index === source.index)
-        ) {
-            return
-        }
-
-        if (type === 'task') {
-            // drag-drop task
-            const sourceGroup = board.groups.find(
-                (g) => g._id === source.droppableId
-            )
-            const targetGroupId = destination.droppableId
-            const task = sourceGroup.tasks.find((t) => t._id === draggableId)
-            const hierarchy = { board, group: sourceGroup, task }
-
-            moveTask(hierarchy, board._id, targetGroupId, destination.index)
-        } else if (type === 'group') {
-            // drag-drop group
-            const group = board.groups.find((g) => g._id === draggableId)
-
-            moveGroup(board, group, board._id, destination.index)
-        } else if (type === 'checklist') {
-            // drag-drop checklist
-            const { group, task } = boardService.getGroupAndTaskByTaskId(
-                board,
-                source.droppableId
-            )
-
-            const hierarchy = { board, group, task }
-
-            moveChecklist(hierarchy, draggableId, destination.index)
-        }
+    function onFilterChange(filter) {
+        const updatedSearchParams = boardService.buildSearchParams(filter)
+        setSearchParams(updatedSearchParams)
     }
 
     return (
@@ -84,10 +72,15 @@ export function BoardDetails() {
         >
             <BoardIndexHeader />
 
-            {board ? (
+            {filteredBoard ? (
                 <>
                     <header className="board-details-header">
-                        <BoardDetailsTopbar board={board} />
+                        <BoardDetailsTopbar
+                            board={board}
+                            filter={filter}
+                            isFilterEmpty={isFilterEmpty}
+                            onFilterChange={onFilterChange}
+                        />
 
                         <button
                             className="btn-square btn-more"
@@ -117,9 +110,8 @@ export function BoardDetails() {
                                 >
                                     <GroupList
                                         board={board}
-                                        groups={board.groups.filter(
-                                            (g) => !g.archivedAt
-                                        )}
+                                        groups={filteredBoard.groups}
+                                        isFilterEmpty={isFilterEmpty}
                                     />
                                     <GroupCreate board={board} />
                                     {provided.placeholder}

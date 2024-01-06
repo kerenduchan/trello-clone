@@ -1,6 +1,17 @@
 .board-details-topbar {
     display: flex;
-    gap: 6px;
+    justify-content: space-between;
+
+    .start-container {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .end-container {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
 
     .editable-title {
         .title {
@@ -15,5 +26,12 @@
         textarea {
             @include board-details-editable-title();
         }
+    }
+
+    .separator {
+        border-left: 1px solid var(--dynamic-text-transparent);
+        height: 16px;
+        margin: 8px 4px 8px 4px;
+        display: inherit;
     }
 }
