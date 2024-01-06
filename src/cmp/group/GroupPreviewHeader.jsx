@@ -4,7 +4,12 @@ import { EditableTitle } from '../general/EditableTitle'
 import { Icon } from '../general/Icon'
 import { GroupMenu } from './groupMenu/groupMenu'
 
-export function GroupPreviewHeader({ board, group, onTaskCreate }) {
+export function GroupPreviewHeader({
+    board,
+    group,
+    onTaskCreate,
+    isFilterEmpty,
+}) {
     const groupMenu = usePopoverState()
 
     function onTitleChange(title) {
@@ -16,10 +21,17 @@ export function GroupPreviewHeader({ board, group, onTaskCreate }) {
         }
     }
 
+    function getFilteredCountText() {
+        const count = group.tasks.length
+        return `${count} cards match${count === 1 ? 'es' : ''} filters`
+    }
+
     return (
         <header className="group-preview-header">
             <EditableTitle title={group.title} onChange={onTitleChange} />
-
+            {!isFilterEmpty && (
+                <div className="filtered-count">{getFilteredCountText()}</div>
+            )}
             <button
                 className="btn-square btn-more"
                 {...groupMenu.triggerAndTarget}

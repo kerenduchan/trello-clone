@@ -22,6 +22,7 @@ import { utilService } from '../services/util.service'
 export function BoardDetails() {
     const params = useParams()
     const [searchParams, setSearchParams] = useSearchParams()
+    const [isFilterEmpty, setIsFilterEmpty] = useState(true)
     const board = useSelector((storeState) => storeState.boardModule.curBoard)
     const filteredBoard = useSelector(
         (storeState) => storeState.boardModule.filteredBoard
@@ -61,6 +62,7 @@ export function BoardDetails() {
     }
 
     function onFilterChange(filter) {
+        setIsFilterEmpty(boardService.isFilterEmpty(filter))
         setFilter(filter)
     }
 
@@ -110,6 +112,7 @@ export function BoardDetails() {
                                     <GroupList
                                         board={board}
                                         groups={filteredBoard.groups}
+                                        isFilterEmpty={isFilterEmpty}
                                     />
                                     <GroupCreate board={board} />
                                     {provided.placeholder}

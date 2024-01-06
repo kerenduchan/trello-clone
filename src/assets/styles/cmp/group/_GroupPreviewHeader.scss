@@ -16,4 +16,13 @@
             border-radius: 8px;
         }
     }
+
+    .filtered-count {
+        grid-area: 2 / 1 / span 1 / -1;
+        margin-top: 2px;
+        margin-bottom: 2px;
+        padding-inline-start: 12px;
+        color: var(--ds-text-subtlest);
+        @include font(14px, 16px, 400);
+    }
 }
