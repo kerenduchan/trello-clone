@@ -45,7 +45,9 @@ export function BoardDetails() {
     }, [searchParams])
 
     useEffect(() => {
+        if (!filter || !board) return
         applyBoardFilter(filter)
+        setIsFilterEmpty(boardService.isFilterEmpty(filter))
     }, [filter, board])
 
     const groupAndTask = params.taskId
@@ -57,7 +59,6 @@ export function BoardDetails() {
     }
 
     function onFilterChange(filter) {
-        setIsFilterEmpty(boardService.isFilterEmpty(filter))
         const updatedSearchParams = boardService.buildSearchParams(filter)
         setSearchParams(updatedSearchParams)
     }
