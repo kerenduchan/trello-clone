@@ -41,6 +41,7 @@ export const boardService = {
     getArchivedTasks,
     getArchivedGroups,
     handleDragEnd,
+    getTasksCount,
 }
 
 const STORAGE_KEY = 'boards'
@@ -579,4 +580,8 @@ function handleDragEnd(result, board) {
 
         moveChecklist(hierarchy, draggableId, destination.index)
     }
+}
+
+function getTasksCount(board) {
+    return board.groups.reduce((acc, group) => acc + group.tasks.length, 0)
 }

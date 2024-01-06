@@ -11,6 +11,7 @@ export function BoardFilterMenu({ popoverState, filter, onChange }) {
             <input
                 type="text"
                 name="txt"
+                autoFocus
                 placeholder="Enter a keyword..."
                 onChange={onChange}
                 value={filter.txt}

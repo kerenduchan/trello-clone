@@ -1,6 +1,18 @@
+import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { boardService } from '../../../services/board.service'
 import { Icon } from '../../general/Icon'
 
 export function BoardFilterBtn({ isFilterEmpty, filterMenu, onClearFilter }) {
+    const [matchedCount, setMatchedCount] = useState(null)
+    const filteredBoard = useSelector(
+        (storeState) => storeState.boardModule.filteredBoard
+    )
+
+    useEffect(() => {
+        setMatchedCount(boardService.getTasksCount(filteredBoard))
+    }, [filteredBoard])
+
     return (
         <div
             className={`board-filter-btn ${
@@ -15,6 +27,9 @@ export function BoardFilterBtn({ isFilterEmpty, filterMenu, onClearFilter }) {
             >
                 <Icon type="filter" size="xs" />
                 <span className="label">Filters</span>
+                {!isFilterEmpty && (
+                    <span className="matched-count">{matchedCount}</span>
+                )}
             </button>
             <button
                 className="btn-dynamic highlighted btn-filter-clear-all"
