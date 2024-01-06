@@ -194,14 +194,18 @@ function getIdxById(arr, id) {
     return null
 }
 
-function parseSearchParams(searchParams, defaultFilter, fieldsThatAreASet) {
+function parseSearchParams(searchParams, defaultFilter) {
     const filter = {}
     Object.keys(defaultFilter).forEach((key) => {
         let val = searchParams.get(key)
-        if (fieldsThatAreASet.includes(key) && val?.length) {
-            val = new Set(val?.split(','))
+        if (!val) {
+            val = defaultFilter[key]
+        } else if (val === 'true') {
+            val = true
+        } else if (val === 'false') {
+            val = false
         }
-        filter[key] = val || defaultFilter[key]
+        filter[key] = val
     })
     return filter
 }
@@ -211,10 +215,6 @@ function buildSearchParams(filter, defaultFilter) {
 
     Object.keys(defaultFilter).forEach((key) => {
         let value = filter[key]
-        if (value instanceof Set) {
-            value = Array.from(value).join(',')
-        }
-
         if (value !== defaultFilter[key]) {
             params[key] = value
         }

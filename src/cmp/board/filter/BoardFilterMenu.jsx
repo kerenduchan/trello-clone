@@ -2,12 +2,12 @@ import { PopoverMenu } from '../../general/PopoverMenu'
 import { BoardFilterDate } from './BoardFilterDate'
 
 export function BoardFilterMenu({ popoverState, filter, onChange }) {
-    function onDateChange(date) {
-        onChange({ ...filter, date })
+    function onFilterFieldsChange(fields) {
+        onChange({ ...filter, ...fields })
     }
 
     function onTxtChange(e) {
-        onChange({ ...filter, txt: e.target.value })
+        onFilterFieldsChange({ txt: e.target.value })
     }
 
     if (!filter) return <></>
@@ -32,7 +32,7 @@ export function BoardFilterMenu({ popoverState, filter, onChange }) {
             <h4>Members</h4>
             <h4>Due date</h4>
             <h4>Labels</h4>
-            <BoardFilterDate date={filter.date} onChange={onDateChange} />
+            <BoardFilterDate filter={filter} onChange={onFilterFieldsChange} />
         </PopoverMenu>
     )
 }

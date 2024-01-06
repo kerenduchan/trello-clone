@@ -1,42 +1,58 @@
-export function BoardFilterDate({ board, date, onChange }) {
+export function BoardFilterDate({ board, filter, onChange }) {
     const items = [
-        { id: 'no-dates', label: 'No dates' },
-        { id: 'overdue', label: 'Overdue' },
-        { id: 'day', label: 'Due in the next day' },
-        { id: 'week', label: 'Due in the next week' },
-        { id: 'month', label: 'Due in the next month' },
-        { id: 'complete', label: 'Marked as complete' },
-        { id: 'not-complete', label: 'Not marked as complete' },
+        { id: 'notDue', label: 'No dates', isChecked: () => filter.notDue },
+        { id: 'overdue', label: 'Overdue', isChecked: () => filter.overdue },
+        {
+            id: 'day',
+            label: 'Due in the next day',
+            isChecked: () => filter.due === 'day',
+        },
+        {
+            id: 'week',
+            label: 'Due in the next week',
+            isChecked: () => filter.due === 'week',
+        },
+        {
+            id: 'month',
+            label: 'Due in the next month',
+            isChecked: () => filter.due === 'month',
+        },
+        {
+            id: 'complete',
+            label: 'Marked as complete',
+            isChecked: () => filter.complete === true,
+        },
+        {
+            id: 'notComplete',
+            label: 'Not marked as complete',
+            isChecked: () => filter.complete === false,
+        },
     ]
 
-    const checkboxGroups = [
-        ['day', 'week', 'month'],
-        ['complete', 'not-complete'],
-    ]
-
-    function onClick(key) {
-        const res = new Set(date)
-
-        if (res.has(key)) {
-            // changed from checked to unchecked
-            res.delete(key)
-
-            onChange(res)
-            return
+    function onClick(id) {
+        switch (id) {
+            case 'notDue':
+            case 'overdue':
+                onChange({ [id]: !filter[id] })
+                break
+            case 'day':
+            case 'week':
+            case 'month':
+                onChange({ due: filter.due === id ? null : id })
+                break
+            case 'complete':
+            case 'notComplete':
+                const val = id === 'complete' ? true : false
+                onChange({ complete: filter.complete === val ? null : val })
+                break
         }
-
-        // changed from unchecked to checked
-        const checkboxGroup = checkboxGroups.find((g) => g.includes(key))
-        if (checkboxGroup?.includes(key)) {
-            // there can be only one
-            checkboxGroup.forEach((item) => res.delete(item))
-        }
-
-        res.add(key)
-        onChange(res)
     }
 
-    if (!date) return <></>
+    function isChecked(id) {
+        return items.find((item) => item.id === id).isChecked()
+    }
+
+    if (!filter) return <></>
 
     return (
         <div className="board-filter-due-date">
@@ -47,7 +63,7 @@ export function BoardFilterDate({ board, date, onChange }) {
                         name={id}
                         value={id}
                         onChange={() => {}}
-                        checked={date.has(id)}
+                        checked={isChecked(id)}
                     />
                     <label htmlFor={id}>{label}</label>
                 </div>

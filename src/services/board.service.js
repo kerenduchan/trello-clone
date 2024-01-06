@@ -51,7 +51,8 @@ const STORAGE_KEY = 'boards'
 _createBoards()
 
 function getDefaultFilter() {
-    return { txt: '', date: new Set() }
+    // careful with the 'complete' field - it can be true, false, or null
+    return { txt: '', notDue: false, overdue: false, due: null, complete: null }
 }
 
 function isFilterEmpty(filter) {
@@ -149,12 +150,7 @@ async function create(board) {
 
 function parseSearchParams(searchParams) {
     const defaultFilter = getDefaultFilter()
-    const fieldsThatAreASet = ['date']
-    return utilService.parseSearchParams(
-        searchParams,
-        defaultFilter,
-        fieldsThatAreASet
-    )
+    return utilService.parseSearchParams(searchParams, defaultFilter)
 }
 
 function buildSearchParams(filter) {
