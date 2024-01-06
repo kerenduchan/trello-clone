@@ -1,21 +1,36 @@
+import { Icon } from '../../general/Icon'
+
 export function BoardFilterDate({ board, filter, onChange }) {
     const items = [
-        { id: 'notDue', label: 'No dates', isChecked: () => filter.notDue },
-        { id: 'overdue', label: 'Overdue', isChecked: () => filter.overdue },
+        {
+            id: 'notDue',
+            label: 'No dates',
+            isChecked: () => filter.notDue,
+            icon: 'calendar',
+        },
+        {
+            id: 'overdue',
+            label: 'Overdue',
+            isChecked: () => filter.overdue,
+            icon: 'schedule',
+        },
         {
             id: 'day',
             label: 'Due in the next day',
             isChecked: () => filter.due === 'day',
+            icon: 'schedule',
         },
         {
             id: 'week',
             label: 'Due in the next week',
             isChecked: () => filter.due === 'week',
+            icon: 'schedule',
         },
         {
             id: 'month',
             label: 'Due in the next month',
             isChecked: () => filter.due === 'month',
+            icon: 'schedule',
         },
         {
             id: 'complete',
@@ -48,26 +63,31 @@ export function BoardFilterDate({ board, filter, onChange }) {
         }
     }
 
-    function isChecked(id) {
-        return items.find((item) => item.id === id).isChecked()
-    }
-
     if (!filter) return <></>
 
     return (
-        <div className="board-filter-due-date">
-            {items.map(({ id, label }) => (
-                <div key={id} className="field" onClick={() => onClick(id)}>
-                    <input
-                        type="checkbox"
-                        name={id}
-                        value={id}
-                        onChange={() => {}}
-                        checked={isChecked(id)}
-                    />
-                    <label htmlFor={id}>{label}</label>
-                </div>
-            ))}
+        <div className="board-filter-date">
+            <ul>
+                {items.map(({ id, label, icon, isChecked }) => (
+                    <li key={id} className="field" onClick={() => onClick(id)}>
+                        <input
+                            type="checkbox"
+                            name={id}
+                            value={id}
+                            onChange={() => {}}
+                            checked={isChecked()}
+                        />
+                        <span className="field-content">
+                            {icon && (
+                                <span className={`icon-bg icon-bg-${id}`}>
+                                    <Icon type={icon} />
+                                </span>
+                            )}
+                            <span className="label">{label}</span>
+                        </span>
+                    </li>
+                ))}
+            </ul>
         </div>
     )
 }

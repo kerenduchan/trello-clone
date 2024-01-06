@@ -655,8 +655,6 @@ function _isTaskMatchDate(task, filter) {
     const isMatchNotDue = _isDatesMatchNotDue(notDue, dates)
     const isMatchOverdue = _isDatesMatchOverdue(overdue, dates)
 
-    console.log(isMatchComplete, isMatchNotDue, isMatchOverdue)
-
     return isMatchComplete || isMatchNotDue || isMatchOverdue
 }
 

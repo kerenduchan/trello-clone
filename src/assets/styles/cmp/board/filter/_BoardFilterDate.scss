@@ -1,0 +1,54 @@
+.board-filter-date {
+    .field {
+        padding-inline-start: 8px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+
+        & > input[type='checkbox'] {
+            @include square(16px);
+        }
+
+        & > .field-content {
+            margin-inline-start: 16px;
+            display: flex;
+            align-items: center;
+
+            .icon-bg {
+                @include square(24px);
+                background-color: var(--bg-neutral);
+                border-radius: 50%;
+                @include flex-center-center();
+
+                .icon {
+                    @include font-size-and-line-height(16px);
+                }
+
+                &-overdue {
+                    background-color: var(--bg-danger-bold);
+
+                    .icon {
+                        color: var(--text-color-light);
+                    }
+                }
+
+                &-day {
+                    background-color: var(--bg-warning-bold);
+
+                    .icon {
+                        color: var(--text-color-light);
+                    }
+                }
+            }
+
+            .label {
+                margin-inline-start: 8px;
+                color: var(--text-color-subtle);
+                @include font-p();
+            }
+        }
+    }
+}
