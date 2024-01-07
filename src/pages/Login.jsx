@@ -1,17 +1,21 @@
 import { useNavigate } from 'react-router'
 import { authService } from '../services/auth.service'
+import { useContext } from 'react'
+import { LoginContext } from '../contexts/LoginContext'
 
 export function Login() {
+    const { setLoggedinUser } = useContext(LoginContext)
     const navigate = useNavigate()
 
     async function onSubmit(e) {
         e.preventDefault()
-        await authService.login({
+        const user = await authService.login({
             _id: 'u101',
             username: 'keren',
             fullname: 'Keren Duchan',
+            imgUrl: 'images/keren-avatar.jpg',
         })
-
+        setLoggedinUser(user)
         navigate(`/boards`)
     }
 

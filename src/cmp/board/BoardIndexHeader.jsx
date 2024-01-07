@@ -1,10 +1,15 @@
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { usePopoverState } from '../../customHooks/usePopoverState'
+import { LoginContext } from '../../contexts/LoginContext'
 import { BoardCreate } from './BoardCreate'
 import { PopoverMenu } from '../general/PopoverMenu'
 
 export function BoardIndexHeader() {
+    const { loggedinUser } = useContext(LoginContext)
     const createBoardMenu = usePopoverState()
+
+    console.log(loggedinUser)
 
     return (
         <>
@@ -20,7 +25,9 @@ export function BoardIndexHeader() {
                 >
                     Create Board
                 </button>
-                <div className="avatar">{'<User Avatar>'}</div>
+                <button className="user-avatar">
+                    <img src={loggedinUser.imgUrl} />
+                </button>
             </header>
 
             {/* Create Board menu */}

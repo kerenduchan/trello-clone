@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { LoginContext } from '../../contexts/LoginContext'
 
 export function HomeHeader() {
-    const { loggedinUser, setLoggedinUser } = useContext(LoginContext)
+    const { loggedinUser } = useContext(LoginContext)
 
     return (
         <header className="home-header-bg">

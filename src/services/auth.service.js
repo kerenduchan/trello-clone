@@ -9,6 +9,7 @@ const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 
 async function login(user) {
     _saveLoggedinUser(user)
+    return user
 }
 
 async function logout() {}
