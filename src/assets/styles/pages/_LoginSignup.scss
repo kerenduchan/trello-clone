@@ -1,0 +1,39 @@
+.login-signup {
+    @include flex-center-center();
+    height: 100%;
+
+    & > .content {
+        box-sizing: border-box;
+        width: 400px;
+        padding: 32px 40px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
+
+        .header {
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            h5 {
+                padding-top: 24px;
+                @include font(16px, 20px, 600);
+            }
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            input {
+                @include input-styling();
+                width: 100%;
+                margin-bottom: 8px;
+            }
+
+            .btn-continue {
+                width: 100%;
+            }
+        }
+    }
+}

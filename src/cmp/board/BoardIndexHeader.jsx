@@ -9,7 +9,9 @@ export function BoardIndexHeader() {
     return (
         <>
             <header className="board-index-header">
-                <img className="logo" src="krello.svg" />
+                <Link to="/">
+                    <img className="logo" src="krello.svg" />
+                </Link>
 
                 <Link to="/boards">Boards</Link>
                 <button
