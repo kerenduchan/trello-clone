@@ -84,7 +84,17 @@ function applyBoardFilter(filter) {
         return null
     }
 
-    const filteredGroups = board.groups.map((g) =>
+    // filter out archived groups
+    // and filter out archived tasks from each group
+    const unarchivedGroups = board.groups
+        .filter((g) => !g.archivedAt)
+        .map((g) => ({
+            ...g,
+            tasks: g.tasks.filter((t) => !t.archivedAt),
+        }))
+
+    // apply the filter
+    const filteredGroups = unarchivedGroups.map((g) =>
         _applyBoardFilterToGroup(g, filter)
     )
 
