@@ -1,5 +1,6 @@
 import { storageService } from './async-storage.service'
 import { utilService } from './util.service'
+import { authService } from './auth.service'
 import {
     moveTask,
     moveGroup,
@@ -126,7 +127,12 @@ function getEmptyComment() {
 }
 
 async function query() {
-    return await storageService.query(STORAGE_KEY)
+    // return only the boards that this user is authorized to view
+    const allboards = await storageService.query(STORAGE_KEY)
+    const loggedinUser = authService.getLoggedinUser()
+    return allboards.filter((b) =>
+        b.members.find((member) => member._id === loggedinUser._id)
+    )
 }
 
 function getById(id) {
@@ -297,6 +303,13 @@ function _createBoards() {
                 archivedAt: null,
                 labels: _getDefaultLabels(),
                 groups: [],
+                members: [
+                    {
+                        _id: 'u101',
+                        fullname: 'Keren Duchan',
+                        imgUrl: 'images/keren-avatar.jpg',
+                    },
+                ],
                 createdBy: {
                     _id: 'u102',
                     fullname: 'Yigal Shalom',
@@ -326,9 +339,9 @@ function getTaskMembers(hierarchy) {
     if (!task.memberIds) {
         return []
     }
-    return task.memberIds.map((memberId) =>
-        getItemById(board, 'members', memberId)
-    )
+    return task.memberIds
+        .map((memberId) => getItemById(board, 'members', memberId))
+        .filter((m) => m !== undefined)
 }
 
 function getTaskLabels(hierarchy) {
