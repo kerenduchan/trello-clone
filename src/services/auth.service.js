@@ -23,7 +23,10 @@ async function logout() {
     sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
 }
 
-async function signup(user) {}
+async function signup(user) {
+    const savedUser = await userService.save(user)
+    return login(savedUser)
+}
 
 function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))

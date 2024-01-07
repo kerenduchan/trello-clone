@@ -1,11 +1,17 @@
 import { useContext, useState } from 'react'
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
+import { Link } from 'react-router-dom'
 import { authService } from '../services/auth.service'
 import { useForm } from '../customHooks/useForm'
 import { LoginContext } from '../contexts/LoginContext'
 
 export function LoginSignup() {
-    const [draft, handleChange] = useForm({ username: '', password: '' })
+    const location = useLocation()
+    const [draft, handleChange] = useForm({
+        username: '',
+        password: '',
+        fullname: '',
+    })
     const [errorMsg, setErrorMsg] = useState(null)
 
     const { setLoggedinUser } = useContext(LoginContext)
@@ -14,7 +20,9 @@ export function LoginSignup() {
     async function onSubmit(e) {
         e.preventDefault()
         try {
-            const user = await authService.login(draft)
+            const user = isLogin()
+                ? await authService.login(draft)
+                : await authService.signup(draft)
             setLoggedinUser(user)
             navigate(`/boards`)
         } catch (err) {
@@ -23,26 +31,58 @@ export function LoginSignup() {
         }
     }
 
+    function isLogin() {
+        return location.pathname === '/login'
+    }
+
     return (
         <div className="login-signup">
             <div className="content">
                 <div className="header">
                     <img className="logo" src="krello.svg" />
-                    <h5>Log in to continue</h5>
+                    <h5>{isLogin() ? 'Log in' : 'Sign up'} to continue</h5>
                 </div>
                 <form onSubmit={onSubmit}>
+                    {!isLogin() && (
+                        <input
+                            type="text"
+                            name="fullname"
+                            placeholder="Enter your full name"
+                            value={draft.fullname}
+                            onChange={handleChange}
+                        />
+                    )}
                     <input
                         type="text"
                         name="username"
                         placeholder="Enter your username"
                         value={draft.username}
                         onChange={handleChange}
-                    ></input>
+                    />
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        value={draft.password}
+                        onChange={handleChange}
+                    />
                     <button className="btn-primary btn-continue">
                         Continue
                     </button>
                     {errorMsg && <div className="error">{errorMsg}</div>}
                 </form>
+
+                <div className="switch-login-signup">
+                    {isLogin() ? (
+                        <Link className="link" to="/signup">
+                            Create an account
+                        </Link>
+                    ) : (
+                        <Link className="link" to="/login">
+                            Already have an account? Log in
+                        </Link>
+                    )}
+                </div>
             </div>
         </div>
     )
