@@ -39,8 +39,32 @@ export function BoardMenu({ board, onClose }) {
         },
         changeBackground: {
             title: 'Change background',
-            cmp: <BoardMenuChangeBackground board={board} />,
+            cmp: (
+                <BoardMenuChangeBackground
+                    board={board}
+                    onPhotosClick={() => {
+                        setPage('changeBackgroundPhoto')
+                    }}
+                    onColorsClick={() => {
+                        setPage('changeBackgroundColor')
+                    }}
+                />
+            ),
             onBack: onNavToMain,
+        },
+
+        changeBackgroundPhoto: {
+            title: 'Photos',
+            onBack: () => {
+                setPage('changeBackground')
+            },
+        },
+
+        changeBackgroundColor: {
+            title: 'Colors',
+            onBack: () => {
+                setPage('changeBackground')
+            },
         },
     }
 
