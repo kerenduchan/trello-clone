@@ -22,15 +22,23 @@
             padding: 16px;
         }
 
-        .btn-go-to-your-boards {
-            box-sizing: border-box;
+        .actions-container {
             display: flex;
-            align-items: center;
-            padding: 8px 24px;
-            height: 100%;
-            @include button-bg(#172b4d, #505f79, #7a869a);
-            color: var(--text-inverse);
-            @include font(19.2px, 28.8px, 400);
+            .btn-go-to-your-boards {
+                @include btn-login-signup-base();
+                @include button-bg(#172b4d, #505f79, #7a869a);
+                color: var(--text-inverse);
+            }
+
+            .btn-login {
+                @include btn-login-signup-base();
+            }
+
+            .btn-signup {
+                @include btn-login-signup-base();
+                @include button-bg(#0065ff, #0747a6, #0747a6);
+                color: var(--text-inverse);
+            }
         }
     }
 }
