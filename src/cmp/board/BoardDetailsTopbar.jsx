@@ -1,6 +1,7 @@
 import { updateBoard } from '../../store/actions/board.actions'
 import { EditableTitle } from '../general/EditableTitle'
 import { Icon } from '../general/Icon'
+import { BoardMembers } from './BoardMembers'
 import { BoardFilter } from './filter/BoardFilter'
 
 export function BoardDetailsTopbar({
@@ -44,6 +45,9 @@ export function BoardDetailsTopbar({
 
                 {/* Divider */}
                 <span className="separator" />
+
+                {/* Members */}
+                <BoardMembers members={board.members} />
             </div>
         </div>
     )
