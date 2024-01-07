@@ -1,0 +1,59 @@
+.user-account-menu {
+    box-sizing: border-box;
+    padding: 4px 0 8px;
+    width: 232px;
+
+    .header {
+        h2 {
+            text-transform: uppercase;
+            @include font(11px, 16px, 700);
+            color: var(--ds-text-subtlest, #626f86);
+            margin: 16px 0 8px;
+            padding: 0 20px;
+        }
+
+        .user {
+            padding: 8px 20px;
+
+            display: grid;
+            grid-template-columns: auto 1fr;
+            grid-template-rows: repeat(2, auto);
+
+            .user-avatar {
+                grid-area: 1 / 1 / -1 / span 1;
+                margin-inline-end: 8px;
+                @include square(40px);
+                border-radius: 50%;
+            }
+
+            .fullname {
+                grid-area: 1 / 2;
+                margin-top: 2px;
+                @include font-p();
+            }
+
+            .username {
+                grid-area: 2 / 2;
+                @include font(12px, 16px, 400);
+            }
+        }
+    }
+
+    .content {
+        padding: 0;
+        box-sizing: border-box;
+        width: 100%;
+
+        button {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 8px 20px;
+            @include font-p();
+            @include button-bg(
+                transparent,
+                var(--bg-neutral-subtle-hovered),
+                var(--bg-neutral-subtle-pressed)
+            );
+        }
+    }
+}
