@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Icon } from '../../general/Icon'
 import { BoardMenuMain } from './BoardMenuMain'
 import { BoardMenuArchive } from './BoardMenuArchive'
+import { BoardMenuChangeBackground } from './BoardMenuChangeBackground'
 
 export function BoardMenu({ board, onClose }) {
     // current page in the group menu popover
@@ -25,12 +26,20 @@ export function BoardMenu({ board, onClose }) {
                     onArchive={() => {
                         setPage('archive')
                     }}
+                    onChangeBackground={() => {
+                        setPage('changeBackground')
+                    }}
                 />
             ),
         },
         archive: {
             title: 'Archive',
             cmp: <BoardMenuArchive board={board} />,
+            onBack: onNavToMain,
+        },
+        changeBackground: {
+            title: 'Change background',
+            cmp: <BoardMenuChangeBackground board={board} />,
             onBack: onNavToMain,
         },
     }
