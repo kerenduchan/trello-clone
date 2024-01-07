@@ -15,7 +15,20 @@
         height: 16px;
     }
 
-    .avatar {
+    .user-avatar {
         justify-self: end;
+        @include square(32px);
+        border-radius: 50%;
+        @include flex-center-center();
+        @include button-bg(
+            transparent,
+            var(--bg-neutral-hovered),
+            var(--bg-neutral-hovered)
+        );
+
+        img {
+            border-radius: 50%;
+            @include square(24px);
+        }
     }
 }

@@ -82,3 +82,12 @@
         var(--bg-neutral-pressed)
     );
 }
+
+.link {
+    color: var(--text-link);
+    @include font-p();
+
+    &:hover {
+        text-decoration: underline;
+    }
+}

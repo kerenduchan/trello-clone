@@ -322,3 +322,11 @@
     overflow: hidden;
     white-space: nowrap;
 }
+
+@mixin btn-login-signup-base() {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    padding: 8px 24px;
+    @include font(19.2px, 28.8px, 400);
+}

@@ -12,8 +12,9 @@
 // PAGES
 @import 'pages/BoardDetails';
 @import 'pages/BoardIndex';
-@import 'pages/TaskDetails';
 @import 'pages/Home';
+@import 'pages/LoginSignup';
+@import 'pages/TaskDetails';
 
 // COMPONENTS
 
@@ -120,6 +121,9 @@
 
 // task/move
 @import 'cmp/task/move/TaskMoveMenu';
+
+// user
+@import 'cmp/user/UserAccountMenu';
 
 // home
 @import 'cmp/home/Home101';
