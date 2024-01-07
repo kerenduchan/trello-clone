@@ -567,34 +567,48 @@ function handleDragEnd(result, board) {
         return
     }
 
-    if (type === 'task') {
-        // drag-drop task
-        const sourceGroup = board.groups.find(
-            (g) => g._id === source.droppableId
-        )
-        const targetGroupId = destination.droppableId
-        const task = sourceGroup.tasks.find((t) => t._id === draggableId)
-        const hierarchy = { board, group: sourceGroup, task }
-
-        moveTask(hierarchy, board._id, targetGroupId, destination.index)
-    } else if (type === 'group') {
-        // drag-drop group
-        const group = board.groups.find((g) => g._id === draggableId)
-
-        moveGroup(board, group, board._id, destination.index)
-    } else if (type === 'checklist') {
-        // drag-drop checklist
-        const { group, task } = boardService.getGroupAndTaskByTaskId(
-            board,
-            source.droppableId
-        )
-
-        const hierarchy = { board, group, task }
-
-        moveChecklist(hierarchy, draggableId, destination.index)
+    switch (type) {
+        case 'task':
+            _dragDropTask(result, board)
+            break
+        case 'group':
+            _dragDropGroup(result, board)
+            break
+        case 'checklist':
+            _dragDropChecklist(result, board)
+            break
     }
 }
 
 function getTasksCount(board) {
     return board.groups.reduce((acc, group) => acc + group.tasks.length, 0)
+}
+
+function _dragDropTask(result, board) {
+    const { destination, source, draggableId } = result
+    const sourceGroup = board.groups.find((g) => g._id === source.droppableId)
+    const targetGroupId = destination.droppableId
+    const task = sourceGroup.tasks.find((t) => t._id === draggableId)
+    const hierarchy = { board, group: sourceGroup, task }
+
+    moveTask(hierarchy, board._id, targetGroupId, destination.index)
+}
+
+function _dragDropGroup(result, board) {
+    const { destination, draggableId } = result
+    const group = board.groups.find((g) => g._id === draggableId)
+
+    moveGroup(board, group, board._id, destination.index)
+}
+
+function _dragDropChecklist(result, board) {
+    const { destination, draggableId } = result
+    // drag-drop checklist
+    const { group, task } = boardService.getGroupAndTaskByTaskId(
+        board,
+        source.droppableId
+    )
+
+    const hierarchy = { board, group, task }
+    moveChecklist(hierarchy, draggableId, destination.index)
 }
