@@ -72,7 +72,7 @@ export function BoardDetails() {
         >
             <BoardIndexHeader />
 
-            {filteredBoard ? (
+            {board && filteredBoard ? (
                 <>
                     <header className="board-details-header">
                         <BoardDetailsTopbar

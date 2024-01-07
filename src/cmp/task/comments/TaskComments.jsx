@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { boardService } from '../../../services/board.service'
-import { userService } from '../../../services/user.service'
+import { authService } from '../../../services/auth.service'
 import { addTaskComment } from '../../../store/actions/board.actions'
 import { useForm } from '../../../customHooks/useForm'
 import { useKeyDownListener } from '../../../customHooks/useKeyDownListener'
@@ -35,7 +35,7 @@ export function TaskComments({ hierarchy }) {
         onHideForm()
     }
 
-    const user = userService.getLoggedInUser()
+    const user = authService.getLoggedinUser()
 
     return (
         <div className="task-comments">

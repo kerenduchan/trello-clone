@@ -168,7 +168,7 @@ function _createBoards() {
                 isStarred: false,
                 archivedAt: null,
                 createdBy: {
-                    _id: 'u102',
+                    _id: 'u101',
                     fullname: 'Keren Duchan',
                     imgUrl: 'images/keren-avatar.jpg',
                 },
@@ -179,12 +179,12 @@ function _createBoards() {
                 labels: _getDefaultLabels(),
                 members: [
                     {
-                        _id: 'u101',
+                        _id: 'u102',
                         fullname: 'Yigal Shalom',
                         imgUrl: 'images/yigal-avatar.jpg',
                     },
                     {
-                        _id: 'u102',
+                        _id: 'u101',
                         fullname: 'Keren Duchan',
                         imgUrl: 'images/keren-avatar.jpg',
                     },

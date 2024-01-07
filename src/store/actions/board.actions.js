@@ -366,7 +366,7 @@ async function removeTaskMember(hierarchy, member) {
 // COMMENT
 
 async function addTaskComment(hierarchy, comment) {
-    comment.createdBy = authService.getLoggedInUser()._id
+    comment.createdBy = authService.getLoggedinUser()._id
     const { board, group, task } = hierarchy
     const taskToUpdate = { ...task }
     if (taskToUpdate.comments) {
