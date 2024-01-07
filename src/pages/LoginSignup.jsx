@@ -4,7 +4,7 @@ import { authService } from '../services/auth.service'
 import { useForm } from '../customHooks/useForm'
 import { LoginContext } from '../contexts/LoginContext'
 
-export function Login() {
+export function LoginSignup() {
     const [draft, handleChange] = useForm({ username: '', password: '' })
     const [errorMsg, setErrorMsg] = useState(null)
 

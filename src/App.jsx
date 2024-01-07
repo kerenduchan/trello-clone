@@ -3,7 +3,7 @@ import { Route, HashRouter as Router, Routes } from 'react-router-dom'
 import { authService } from './services/auth.service'
 import { LoginContext } from './contexts/LoginContext'
 import { Home } from './pages/Home'
-import { Login } from './pages/Login'
+import { LoginSignup } from './pages/LoginSignup'
 import { BoardIndex } from './pages/BoardIndex'
 import { BoardDetails } from './pages/BoardDetails'
 import { TaskDetails } from './pages/TaskDetails'
@@ -20,8 +20,8 @@ function App() {
                     <div className="app-content">
                         <Routes>
                             <Route path="/" element={<Home />} />
-                            <Route path="/login" element={<Login />} />
-                            <Route path="/signup" element={<Login />} />
+                            <Route path="/login" element={<LoginSignup />} />
+                            <Route path="/signup" element={<LoginSignup />} />
                             <Route path="/boards" element={<BoardIndex />} />
                             <Route
                                 path="/b/:boardId"
