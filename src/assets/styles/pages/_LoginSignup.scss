@@ -2,10 +2,19 @@
     @include flex-center-center();
     height: 100%;
 
+    background-color: rgb(250, 251, 252);
+    background-image: url('https://aid-frontend.prod.atl-paas.net/atlassian-id/front-end/5.0.525/trello-left.4f52d13c.svg'),
+        url('https://aid-frontend.prod.atl-paas.net/atlassian-id/front-end/5.0.525/trello-right.3ee60d6f.svg');
+    background-repeat: no-repeat, no-repeat;
+    background-attachment: fixed, fixed;
+    background-size: 368px, 368px;
+    background-position: left bottom, right bottom;
+
     & > .content {
         box-sizing: border-box;
         width: 400px;
         padding: 32px 40px;
+        background-color: var(--bg-1);
         box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
 
         .header {
