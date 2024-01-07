@@ -2,7 +2,6 @@
     .board-menu-main-list {
         display: flex;
         flex-direction: column;
-        gap: 8px;
 
         & > li {
             margin-bottom: 4px;
@@ -27,6 +26,9 @@
                 grid-area: 1/1;
                 padding-inline-start: 12px;
             }
+        }
+        hr {
+            margin-top: 4px;
         }
     }
 }

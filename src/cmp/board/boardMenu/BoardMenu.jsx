@@ -21,6 +21,7 @@ export function BoardMenu({ board, onClose }) {
             title: 'Menu',
             cmp: (
                 <BoardMenuMain
+                    board={board}
                     onArchive={() => {
                         setPage('archive')
                     }}
