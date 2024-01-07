@@ -1,3 +1,5 @@
+import { userService } from './user.service'
+
 export const authService = {
     login,
     logout,
@@ -7,7 +9,12 @@ export const authService = {
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 
-async function login(user) {
+async function login({ username, password }) {
+    const user = await userService.getByUsername(username)
+
+    if (!user) {
+        throw 'Incorrect username or password'
+    }
     _saveLoggedinUser(user)
     return user
 }

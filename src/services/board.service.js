@@ -168,9 +168,9 @@ function _createBoards() {
                 isStarred: false,
                 archivedAt: null,
                 createdBy: {
-                    _id: 'u101',
+                    _id: 'u102',
                     fullname: 'Keren Duchan',
-                    imgUrl: 'http://some-img',
+                    imgUrl: 'images/keren-avatar.jpg',
                 },
                 style: {
                     backgroundImage:

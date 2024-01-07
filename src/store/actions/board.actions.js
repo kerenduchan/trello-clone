@@ -1,6 +1,6 @@
 import { utilService } from '../../services/util.service'
 import { boardService } from '../../services/board.service'
-import { userService } from '../../services/user.service'
+import { authService } from '../../services/auth.service'
 import {
     SET_BOARDS,
     SET_BOARD,
@@ -366,7 +366,7 @@ async function removeTaskMember(hierarchy, member) {
 // COMMENT
 
 async function addTaskComment(hierarchy, comment) {
-    comment.createdBy = userService.getLoggedInUser()._id
+    comment.createdBy = authService.getLoggedInUser()._id
     const { board, group, task } = hierarchy
     const taskToUpdate = { ...task }
     if (taskToUpdate.comments) {

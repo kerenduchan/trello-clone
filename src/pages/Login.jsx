@@ -1,22 +1,26 @@
+import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { authService } from '../services/auth.service'
-import { useContext } from 'react'
+import { useForm } from '../customHooks/useForm'
 import { LoginContext } from '../contexts/LoginContext'
 
 export function Login() {
+    const [draft, handleChange] = useForm({ username: '', password: '' })
+    const [errorMsg, setErrorMsg] = useState(null)
+
     const { setLoggedinUser } = useContext(LoginContext)
     const navigate = useNavigate()
 
     async function onSubmit(e) {
         e.preventDefault()
-        const user = await authService.login({
-            _id: 'u101',
-            username: 'keren',
-            fullname: 'Keren Duchan',
-            imgUrl: 'images/keren-avatar.jpg',
-        })
-        setLoggedinUser(user)
-        navigate(`/boards`)
+        try {
+            const user = await authService.login(draft)
+            setLoggedinUser(user)
+            navigate(`/boards`)
+        } catch (err) {
+            console.log(err)
+            setErrorMsg(err)
+        }
     }
 
     return (
@@ -29,11 +33,15 @@ export function Login() {
                 <form onSubmit={onSubmit}>
                     <input
                         type="text"
+                        name="username"
                         placeholder="Enter your username"
+                        value={draft.username}
+                        onChange={handleChange}
                     ></input>
                     <button className="btn-primary btn-continue">
                         Continue
                     </button>
+                    {errorMsg && <div className="error">{errorMsg}</div>}
                 </form>
             </div>
         </div>
