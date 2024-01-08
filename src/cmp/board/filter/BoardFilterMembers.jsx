@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useSelector } from 'react-redux'
+import { LoginContext } from '../../../contexts/LoginContext'
+import { Icon } from '../../general/Icon'
 
 export function BoardFilterMembers({ filter, onChange }) {
     const board = useSelector((storeState) => storeState.boardModule.curBoard)
-
+    const { loggedinUser } = useContext(LoginContext)
     const [selectedMemberIds, setSelectedMembers] = useState(filter.member)
 
     useEffect(() => {
@@ -18,13 +20,34 @@ export function BoardFilterMembers({ filter, onChange }) {
         )
     }
 
+    const items = [
+        board.members.find((m) => m._id === loggedinUser._id),
+        ...board.members.filter((m) => m._id !== loggedinUser._id),
+    ]
+
     function isSelected(memberId) {
         return selectedMemberIds.find((id) => id === memberId) !== undefined
     }
 
     return (
         <div className="board-filter-members">
-            {board.members.map(({ _id, fullname }) => (
+            {/* No members */}
+            <li key={'none'} className="member" onClick={() => onClick('none')}>
+                <input
+                    type="checkbox"
+                    name={'none'}
+                    value={'none'}
+                    onChange={() => {}}
+                    checked={isSelected('none')}
+                />
+                <span className="field-content">
+                    <Icon type="member" />
+                    <span className="label no-members-label">No members</span>
+                </span>
+            </li>
+
+            {/* Board members */}
+            {items.map(({ _id, fullname, imgUrl, username }) => (
                 <li key={_id} className="member" onClick={() => onClick(_id)}>
                     <input
                         type="checkbox"
@@ -34,7 +57,15 @@ export function BoardFilterMembers({ filter, onChange }) {
                         checked={isSelected(_id)}
                     />
                     <span className="field-content">
-                        <span className="label">{fullname}</span>
+                        <img src={imgUrl} />
+                        <span className="label fullname">
+                            {_id === loggedinUser._id
+                                ? 'Cards assigned to me'
+                                : fullname}
+                        </span>
+                        {_id !== loggedinUser._id && (
+                            <span className="username">@{username}</span>
+                        )}
                     </span>
                 </li>
             ))}

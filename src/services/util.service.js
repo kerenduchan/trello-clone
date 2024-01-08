@@ -201,6 +201,8 @@ function parseSearchParams(searchParams, defaultFilter) {
         let val = searchParams.get(key)
         if (!val) {
             val = defaultFilter[key]
+        } else if (Array.isArray(defaultFilter[key]) && !Array.isArray(val)) {
+            val = [val]
         } else if (val === 'true') {
             val = true
         } else if (val === 'false') {

@@ -1,0 +1,45 @@
+.board-filter-members {
+    .member {
+        padding: 8px;
+        padding-inline-end: 0;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        & > input[type='checkbox'] {
+            @include square(16px);
+        }
+
+        .field-content {
+            margin-inline-start: 16px;
+            display: flex;
+            align-items: center;
+
+            .no-members-label {
+                color: var(--text-color-subtle);
+            }
+
+            .icon,
+            img {
+                @include square(24px);
+                border-radius: 50%;
+            }
+
+            .icon {
+                background-color: var(--bg-neutral);
+                @include flex-center-center;
+            }
+
+            .label {
+                margin-inline-start: 8px;
+                @include font-p();
+            }
+
+            .username {
+                margin-inline-start: 8px;
+                color: var(--text-color-subtle);
+                @include font(11px, 20px, 400);
+            }
+        }
+    }
+}

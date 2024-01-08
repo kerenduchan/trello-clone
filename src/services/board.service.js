@@ -194,11 +194,13 @@ function _createBoards() {
                     {
                         _id: 'u102',
                         fullname: 'Yigal Shalom',
+                        username: 'yigal',
                         imgUrl: 'images/yigal-avatar.jpg',
                     },
                     {
                         _id: 'u101',
                         fullname: 'Keren Duchan',
+                        username: 'keren',
                         imgUrl: 'images/keren-avatar.jpg',
                     },
                 ],
