@@ -26,7 +26,7 @@ export function LoginSignup() {
             setLoggedinUser(user)
             navigate(`/boards`)
         } catch (err) {
-            console.log(err)
+            console.error(err)
             setErrorMsg(err)
         }
     }

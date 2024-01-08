@@ -660,18 +660,18 @@ function _isTaskMatchFilter(task, filter) {
 }
 
 function _isTaskMatchMembers(task, filter) {
-    const { member } = filter
+    const { members } = filter
 
-    if (!member || !member.length) {
+    if (!members || !members.length) {
         // no member-related filtering
         return true
     }
 
     if (!task.memberIds || !task.memberIds.length) {
-        return member.includes('none')
+        return members.includes('none')
     }
 
-    return task.memberIds.some((id) => member.includes(id))
+    return task.memberIds.some((id) => members.includes(id))
 }
 
 function _isTaskMatchDate(task, filter) {

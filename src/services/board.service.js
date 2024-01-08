@@ -59,7 +59,7 @@ function getDefaultFilter() {
         overdue: false,
         due: null,
         complete: null,
-        member: [],
+        members: [],
     }
 }
 

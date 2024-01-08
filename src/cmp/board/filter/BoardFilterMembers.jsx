@@ -6,10 +6,10 @@ import { Icon } from '../../general/Icon'
 export function BoardFilterMembers({ filter, onChange }) {
     const board = useSelector((storeState) => storeState.boardModule.curBoard)
     const { loggedinUser } = useContext(LoginContext)
-    const [selectedMemberIds, setSelectedMembers] = useState(filter.member)
+    const [selectedMemberIds, setSelectedMembers] = useState(filter.members)
 
     useEffect(() => {
-        onChange({ member: selectedMemberIds })
+        onChange({ members: selectedMemberIds })
     }, [selectedMemberIds])
 
     function onClick(memberId) {
