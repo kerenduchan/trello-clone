@@ -1,4 +1,5 @@
 import { PopoverMenu } from '../../general/PopoverMenu'
+import { BoardFilterMembers } from './BoardFilterMembers'
 import { BoardFilterDate } from './BoardFilterDate'
 
 export function BoardFilterMenu({ popoverState, filter, onChange }) {
@@ -33,6 +34,10 @@ export function BoardFilterMenu({ popoverState, filter, onChange }) {
 
             {/* Members */}
             <h4>Members</h4>
+            <BoardFilterMembers
+                filter={filter}
+                onChange={onFilterFieldsChange}
+            />
 
             {/* Due date */}
             <h4>Due date</h4>

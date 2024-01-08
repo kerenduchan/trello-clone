@@ -53,7 +53,14 @@ _createBoards()
 
 function getDefaultFilter() {
     // careful with the 'complete' field - it can be true, false, or null
-    return { txt: '', notDue: false, overdue: false, due: null, complete: null }
+    return {
+        txt: '',
+        notDue: false,
+        overdue: false,
+        due: null,
+        complete: null,
+        member: [],
+    }
 }
 
 function isFilterEmpty(filter) {
