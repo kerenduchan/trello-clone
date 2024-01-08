@@ -640,16 +640,38 @@ function _applyBoardFilterToGroup(group, filter) {
 }
 
 function _isTaskMatchFilter(task, filter) {
+    // keyword
     const pattern = new RegExp(filter.txt, 'i')
     if (!task.title.match(pattern)) {
         return false
     }
 
+    // members
+    if (!_isTaskMatchMembers(task, filter)) {
+        return false
+    }
+
+    // due date
     if (!_isTaskMatchDate(task, filter)) {
         return false
     }
 
     return true
+}
+
+function _isTaskMatchMembers(task, filter) {
+    const { member } = filter
+
+    if (!member || !member.length) {
+        // no member-related filtering
+        return true
+    }
+
+    if (!task.memberIds || !task.memberIds.length) {
+        return member.includes('none')
+    }
+
+    return task.memberIds.some((id) => member.includes(id))
 }
 
 function _isTaskMatchDate(task, filter) {
