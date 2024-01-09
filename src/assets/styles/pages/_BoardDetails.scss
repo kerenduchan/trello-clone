@@ -5,10 +5,7 @@
     display: grid;
     grid-template-rows: repeat(2, auto) 1fr;
     grid-template-columns: 1fr auto;
-
-    &.board-text-color-light {
-        color: var(--text-inverse);
-    }
+    color: var(--dynamic-text);
 
     .board-index-header {
         grid-area: 1 / 1 / span 1 / -1;

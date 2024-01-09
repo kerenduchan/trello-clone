@@ -21,9 +21,6 @@
     --text-link: #0052cc;
 
     --text-inverse: #ffffff;
-    --dynamic-text: #172b4d;
-
-    --dynamic-icon: #42526e;
 
     // icon color
     --icon-color: #44546f;
@@ -33,10 +30,6 @@
     --bg-neutral-subtle: #00000000;
     --bg-neutral-subtle-hovered: #091e420f;
     --bg-neutral-subtle-pressed: #091e4224;
-
-    --dynamic-button-highlighted: rgba(0, 0, 0, 0.5);
-    --dynamic-button-highlighted-hovered: rgba(0, 0, 0, 0.6);
-    --dynamic-button-highlighted-text: #ffffff;
 
     // backgrounds for success, warning, danger
     --bg-success-bold: #1f845a;
@@ -82,12 +75,9 @@
     --border-selected: #0c66e4;
     --border-inverse: #ffffff;
     --bg-label: #091e420f;
-    --dynamic-text-transparent: hsla(218, 54%, 19.6%, 0.16);
     --ds-text-subtlest: #626f86;
     --ds-background-accent-gray-subtler: #dcdfe4;
-    --dynamic-background: hsla(0, 0%, 0%, 0.16);
     --board-header-background-color: #0000003d;
-    --dynamic-text-transparent: hsla(0, 0%, 100%, 0.16);
 
     // BOX SHADOW
 
@@ -98,4 +88,39 @@
     --icon-star: #e2b203;
 
     --board-menu-width: 339px;
+}
+
+// Dynamic variables - they change depending on the
+// .board-theme-dark / .board-theme-light classes
+
+// in the light theme, the text is dark and the background is light
+.board-theme-light {
+    --dynamic-button: transparent;
+    --dynamic-button-hovered: #091e4224;
+    --dynamic-button-pressed: #091e424f;
+    --dynamic-button-highlighted: rgba(0, 0, 0, 0.5);
+    --dynamic-button-highlighted-text: #ffffff;
+    --dynamic-button-highlighted-hovered: rgba(0, 0, 0, 0.6);
+    --dynamic-star: var(--dynamic-icon);
+    --dynamic-icon: #42526e;
+    --dynamic-text: #172b4d;
+    --dynamic-text-transparent: hsla(218, 54%, 19.6%, 0.16);
+    --dynamic-background: hsl(0, 0%, 100%);
+    --dynamic-background-transparent: hsla(0, 0%, 95.7%, 0.9);
+}
+
+// in the dark theme, the text is light and the background is dark
+.board-theme-dark {
+    --dynamic-button: transparent;
+    --dynamic-button-hovered: #a6c5e229;
+    --dynamic-button-pressed: #bfdbf847;
+    --dynamic-button-highlighted: #dfe1e6;
+    --dynamic-button-highlighted-text: #172b4d;
+    --dynamic-button-highlighted-hovered: #ffffff;
+    --dynamic-star: var(--dynamic-icon);
+    --dynamic-icon: #ffffff;
+    --dynamic-text: #ffffff;
+    --dynamic-text-transparent: hsla(0, 0%, 100%, 0.16);
+    --dynamic-background: hsla(0, 0%, 0%, 0.16);
+    --dynamic-background-transparent: hsla(0, 0%, 0%, 0.16);
 }

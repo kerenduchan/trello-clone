@@ -78,14 +78,14 @@ export function BoardDetails() {
 
     function getTextColor() {
         if (board?.style?.backgroundColor) {
-            return 'light'
+            return 'dark'
         }
-        return 'dark'
+        return 'light'
     }
 
     return (
         <div
-            className={`board-details board-text-color-${getTextColor()}`}
+            className={`board-details board-theme-${getTextColor()}`}
             style={getBoardStyle()}
         >
             <BoardIndexHeader />
