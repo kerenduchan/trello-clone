@@ -607,17 +607,18 @@ function getTasksCount(board) {
 }
 
 function _dragDropTask(result, board, filteredBoard) {
+    const { destination, source, draggableId } = result
+
     // the source.index and destination.index are indices in filteredBoard.
     // need to convert them to indices in board, which may contain archived
     // tasks and/or tasks that are filtered out.
-
-    const { destinationIndex } = _fixDragEndIndices(
-        result,
+    const destinationIndex = _fixTaskDragEndIndex(
         board,
-        filteredBoard
+        filteredBoard,
+        destination.droppableId,
+        destination.index
     )
 
-    const { destination, source, draggableId } = result
     const sourceGroup = board.groups.find((g) => g._id === source.droppableId)
     const targetGroupId = destination.droppableId
     const task = sourceGroup.tasks.find((t) => t._id === draggableId)
@@ -645,28 +646,9 @@ function _dragDropChecklist(result, board) {
     moveChecklist(hierarchy, draggableId, destination.index)
 }
 
-function _fixDragEndIndices(result, board, filteredBoard) {
-    const { source, destination } = result
-
-    const sourceIndex = _fixDragEndIndex(
-        board,
-        filteredBoard,
-        source.droppableId,
-        source.index
-    )
-    const destinationIndex = _fixDragEndIndex(
-        board,
-        filteredBoard,
-        destination.droppableId,
-        destination.index
-    )
-
-    return { sourceIndex, destinationIndex }
-}
-
 // convert index in group with ID=groupId in the filteredBoard to
 // index in board
-function _fixDragEndIndex(board, filteredBoard, groupId, index) {
+function _fixTaskDragEndIndex(board, filteredBoard, groupId, index) {
     // find the ID of the task before which to drop in the filtered board
     const filteredGroup = filteredBoard.groups.find((g) => g._id === groupId)
     const taskId = filteredGroup.tasks[index]._id
