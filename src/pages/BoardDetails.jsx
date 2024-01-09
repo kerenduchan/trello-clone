@@ -106,7 +106,7 @@ export function BoardDetails() {
 
                         {!showMenu && (
                             <button
-                                className="btn-square btn-more"
+                                className="btn-square-sharp btn-more"
                                 onClick={toggleShowMenu}
                             >
                                 <Icon type="more" />

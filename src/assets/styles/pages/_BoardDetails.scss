@@ -25,6 +25,10 @@
         background-color: var(--board-header-background-color);
         @include backdrop-blur();
 
+        .btn-more {
+            @include btn-dynamic-colors();
+        }
+
         &.menu-open {
             box-sizing: border-box;
             width: calc(100% - var(--board-menu-width) + 8px);

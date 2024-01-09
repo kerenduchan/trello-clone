@@ -294,15 +294,19 @@
     }
 }
 
-@mixin btn-dynamic {
-    padding: 6px;
-    border-radius: 3px;
+@mixin btn-dynamic-colors() {
     @include button-bg(
         --dynamic-button,
         var(--dynamic-button-hovered),
         var(--dynamic-button-pressed)
     );
     color: var(--dynamic-text);
+}
+
+@mixin btn-dynamic() {
+    padding: 6px;
+    border-radius: 3px;
+    @include btn-dynamic-colors();
     display: flex;
     align-items: center;
     gap: 8px;

@@ -39,6 +39,12 @@
     @include btn-dynamic();
 }
 
+.btn-dynamic-wide {
+    @include btn-dynamic();
+    padding-inline-start: 12px;
+    padding-inline-end: 12px;
+}
+
 .task-dates-status {
     &-complete {
         background-color: var(--bg-success-bold);

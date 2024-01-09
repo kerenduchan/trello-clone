@@ -18,9 +18,11 @@ export function BoardIndexHeader() {
                     <img className="logo" src="krello.svg" />
                 </Link>
 
-                <Link to="/boards">Boards</Link>
+                <Link to="/boards" className="btn-dynamic-wide">
+                    Boards
+                </Link>
                 <button
-                    className="btn-primary"
+                    className="btn-dynamic-wide"
                     {...createBoardMenu.triggerAndTarget}
                 >
                     Create Board

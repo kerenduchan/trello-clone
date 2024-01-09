@@ -27,10 +27,17 @@ export function BoardDetailsTopbar({
         <div className="board-details-topbar">
             <div className="start-container">
                 {/* Title */}
-                <EditableTitle onChange={onTitleChange} title={board.title} />
+                <EditableTitle
+                    className="title"
+                    onChange={onTitleChange}
+                    title={board.title}
+                />
 
                 {/* Star */}
-                <button className="btn-square btn-star" onClick={onStarClick}>
+                <button
+                    className="btn-square-sharp btn-star"
+                    onClick={onStarClick}
+                >
                     <Icon type="star" full={board.isStarred} />
                 </button>
             </div>

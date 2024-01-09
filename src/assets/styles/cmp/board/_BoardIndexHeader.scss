@@ -9,7 +9,7 @@
     display: grid;
     grid-template-columns: repeat(3, auto) 1fr;
     align-items: center;
-    column-gap: 26px;
+    column-gap: 8px;
 
     .logo {
         height: 16px;
@@ -20,11 +20,7 @@
         @include square(32px);
         border-radius: 50%;
         @include flex-center-center();
-        @include button-bg(
-            transparent,
-            var(--bg-neutral-hovered),
-            var(--bg-neutral-hovered)
-        );
+        @include btn-dynamic-colors();
 
         img {
             border-radius: 50%;

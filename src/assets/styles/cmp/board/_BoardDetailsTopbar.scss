@@ -6,26 +6,31 @@
         display: flex;
         align-items: center;
         gap: 6px;
+
+        .editable-title {
+            .title {
+                border-radius: 3px;
+                @include board-details-editable-title();
+                @include button-bg(
+                    --dynamic-button,
+                    var(--dynamic-button-hovered),
+                    var(--dynamic-button-hovered)
+                );
+            }
+
+            textarea {
+                @include board-details-editable-title();
+            }
+        }
+
+        .btn-star {
+            @include btn-dynamic-colors();
+        }
     }
     .end-container {
         display: flex;
         align-items: center;
         gap: 6px;
-    }
-
-    .editable-title {
-        .title {
-            border-radius: 3px;
-            @include board-details-editable-title();
-
-            &:hover {
-                background-color: var(--bg-neutral-hovered);
-            }
-        }
-
-        textarea {
-            @include board-details-editable-title();
-        }
     }
 
     .separator {
