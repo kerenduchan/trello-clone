@@ -147,6 +147,10 @@
     &:hover:not(:focus) {
         background-color: var(--bg-input-hovered);
     }
+
+    &:focus {
+        color: var(--text-color);
+    }
 }
 
 @mixin input-styling() {
@@ -301,11 +305,6 @@
     display: flex;
     align-items: center;
     gap: 8px;
-
-    .icon,
-    .label {
-        color: inherit;
-    }
 
     &.highlighted {
         color: var(--dynamic-button-highlighted-text);

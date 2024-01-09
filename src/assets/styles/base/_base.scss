@@ -3,7 +3,6 @@
     background: none repeat scroll 0 0 transparent;
     border: medium none;
     border-spacing: 0;
-    color: var(--text-color);
     list-style: none outside none;
     margin: 0;
     padding: 0;
@@ -33,6 +32,11 @@ h3 {
 p,
 pre {
     @include font-p();
+}
+
+a,
+button {
+    color: inherit;
 }
 
 input,

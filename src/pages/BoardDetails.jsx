@@ -75,8 +75,19 @@ export function BoardDetails() {
         }
         return {}
     }
+
+    function getTextColor() {
+        if (board?.style?.backgroundColor) {
+            return 'light'
+        }
+        return 'dark'
+    }
+
     return (
-        <div className="board-details" style={getBoardStyle()}>
+        <div
+            className={`board-details board-text-color-${getTextColor()}`}
+            style={getBoardStyle()}
+        >
             <BoardIndexHeader />
 
             {board && filteredBoard ? (
