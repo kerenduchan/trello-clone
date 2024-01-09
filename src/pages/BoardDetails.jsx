@@ -74,7 +74,11 @@ export function BoardDetails() {
 
             {board && filteredBoard ? (
                 <>
-                    <header className="board-details-header">
+                    <header
+                        className={`board-details-header ${
+                            showMenu ? 'menu-open' : ''
+                        }`}
+                    >
                         <BoardDetailsTopbar
                             board={board}
                             filter={filter}
@@ -82,12 +86,14 @@ export function BoardDetails() {
                             onFilterChange={onFilterChange}
                         />
 
-                        <button
-                            className="btn-square btn-more"
-                            onClick={toggleShowMenu}
-                        >
-                            <Icon type="more" />
-                        </button>
+                        {!showMenu && (
+                            <button
+                                className="btn-square btn-more"
+                                onClick={toggleShowMenu}
+                            >
+                                <Icon type="more" />
+                            </button>
+                        )}
                     </header>
 
                     {showMenu && (

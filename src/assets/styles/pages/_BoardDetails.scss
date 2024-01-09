@@ -20,6 +20,11 @@
         grid-template-columns: 1fr auto;
         background-color: var(--bg-board-header);
         @include backdrop-blur();
+
+        &.menu-open {
+            box-sizing: border-box;
+            width: calc(100% - var(--board-menu-width) + 8px);
+        }
     }
 
     .board-canvas {
