@@ -8,6 +8,11 @@
     padding-top: 48px;
     padding-bottom: 48px;
     overflow: auto;
+    color: var(--text-color);
+
+    .icon {
+        color: var(--icon-color);
+    }
 
     .task-details {
         position: relative;
