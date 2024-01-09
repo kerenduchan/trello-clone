@@ -1,6 +1,6 @@
-export function BoardMenuChangeBackground({ onPhotosClick, onColorsClick }) {
+export function BoardMenuBackgroundMain({ onPhotosClick, onColorsClick }) {
     return (
-        <div className="board-menu-change-background">
+        <div className="board-menu-background-main">
             <div className="photos-and-colors">
                 {/* Photos */}
                 <button className="btn-submenu" onClick={onPhotosClick}>

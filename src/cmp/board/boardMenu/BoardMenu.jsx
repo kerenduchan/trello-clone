@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Icon } from '../../general/Icon'
 import { BoardMenuMain } from './BoardMenuMain'
 import { BoardMenuArchive } from './BoardMenuArchive'
-import { BoardMenuChangeBackground } from './BoardMenuChangeBackground'
+import { BoardMenuBackgroundMain } from './BoardMenuBackgroundMain'
 import { BoardMenuBackgroundColor } from './BoardMenuBackgroundColor'
 
 export function BoardMenu({ board, onClose }) {
@@ -28,7 +28,7 @@ export function BoardMenu({ board, onClose }) {
                         setPage('archive')
                     }}
                     onChangeBackground={() => {
-                        setPage('changeBackground')
+                        setPage('backgroundMain')
                     }}
                 />
             ),
@@ -38,34 +38,34 @@ export function BoardMenu({ board, onClose }) {
             cmp: <BoardMenuArchive board={board} />,
             onBack: onNavToMain,
         },
-        changeBackground: {
+        backgroundMain: {
             title: 'Change background',
             cmp: (
-                <BoardMenuChangeBackground
+                <BoardMenuBackgroundMain
                     board={board}
                     onPhotosClick={() => {
-                        setPage('changeBackgroundPhoto')
+                        setPage('backgroundPhoto')
                     }}
                     onColorsClick={() => {
-                        setPage('changeBackgroundColor')
+                        setPage('backgroundColor')
                     }}
                 />
             ),
             onBack: onNavToMain,
         },
 
-        changeBackgroundPhoto: {
+        backgroundPhoto: {
             title: 'Photos',
             onBack: () => {
-                setPage('changeBackground')
+                setPage('backgroundMain')
             },
         },
 
-        changeBackgroundColor: {
+        backgroundColor: {
             title: 'Colors',
             cmp: <BoardMenuBackgroundColor />,
             onBack: () => {
-                setPage('changeBackground')
+                setPage('backgroundMain')
             },
         },
     }
