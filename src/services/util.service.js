@@ -240,7 +240,6 @@ function buildSearchParams(filter, defaultFilter) {
 
 function simpleIsEqual(obj1, obj2) {
     return Object.entries(obj1).every(([k, v]) => {
-        console.log(k, v, obj2[k])
         if (Array.isArray(v)) {
             return v.length === obj2[k].length
         }
