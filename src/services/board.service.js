@@ -594,7 +594,7 @@ function handleDragEnd(result, board, filteredBoard) {
             _dragDropTask(result, board, filteredBoard)
             break
         case 'group':
-            _dragDropGroup(result, board)
+            _dragDropGroup(result, board, filteredBoard)
             break
         case 'checklist':
             _dragDropChecklist(result, board)
@@ -612,7 +612,7 @@ function _dragDropTask(result, board, filteredBoard) {
     // the source.index and destination.index are indices in filteredBoard.
     // need to convert them to indices in board, which may contain archived
     // tasks and/or tasks that are filtered out.
-    const destinationIndex = _fixTaskDragEndIndex(
+    const destinationIndex = _fixTaskIndex(
         board,
         filteredBoard,
         destination.droppableId,
@@ -627,11 +627,21 @@ function _dragDropTask(result, board, filteredBoard) {
     moveTask(hierarchy, board._id, targetGroupId, destinationIndex)
 }
 
-function _dragDropGroup(result, board) {
+function _dragDropGroup(result, board, filteredBoard) {
     const { destination, draggableId } = result
+
+    // the source.index and destination.index are indices in filteredBoard.
+    // need to convert them to indices in board, which may contain archived
+    // groups
+    const destinationIndex = _fixGroupIndex(
+        board,
+        filteredBoard,
+        destination.index
+    )
+
     const group = board.groups.find((g) => g._id === draggableId)
 
-    moveGroup(board, group, board._id, destination.index)
+    moveGroup(board, group, board._id, destinationIndex)
 }
 
 function _dragDropChecklist(result, board) {
@@ -646,9 +656,9 @@ function _dragDropChecklist(result, board) {
     moveChecklist(hierarchy, draggableId, destination.index)
 }
 
-// convert index in group with ID=groupId in the filteredBoard to
-// index in board
-function _fixTaskDragEndIndex(board, filteredBoard, groupId, index) {
+// convert index of task in group with ID=groupId in the filteredBoard to
+// index in the same group in board
+function _fixTaskIndex(board, filteredBoard, groupId, index) {
     // find the ID of the task before which to drop in the filtered board
     const filteredGroup = filteredBoard.groups.find((g) => g._id === groupId)
     const taskId = filteredGroup.tasks[index]._id
@@ -656,5 +666,15 @@ function _fixTaskDragEndIndex(board, filteredBoard, groupId, index) {
     // find the index of this task in board
     const group = board.groups.find((g) => g._id === groupId)
     const fixedIndex = group.tasks.findIndex((t) => t._id === taskId)
+    return fixedIndex
+}
+
+// convert index of group in the filteredBoard to index in board
+function _fixGroupIndex(board, filteredBoard, index) {
+    // ID of the group before which to drop in the filtered board
+    const groupId = filteredBoard.groups[index]._id
+
+    // find the index of this group in board
+    const fixedIndex = board.groups.findIndex((g) => g._id === groupId)
     return fixedIndex
 }
