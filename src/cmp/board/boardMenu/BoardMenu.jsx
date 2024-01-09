@@ -3,6 +3,7 @@ import { Icon } from '../../general/Icon'
 import { BoardMenuMain } from './BoardMenuMain'
 import { BoardMenuArchive } from './BoardMenuArchive'
 import { BoardMenuChangeBackground } from './BoardMenuChangeBackground'
+import { BoardMenuBackgroundColor } from './BoardMenuBackgroundColor'
 
 export function BoardMenu({ board, onClose }) {
     // current page in the group menu popover
@@ -62,6 +63,7 @@ export function BoardMenu({ board, onClose }) {
 
         changeBackgroundColor: {
             title: 'Colors',
+            cmp: <BoardMenuBackgroundColor />,
             onBack: () => {
                 setPage('changeBackground')
             },

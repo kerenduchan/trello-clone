@@ -45,6 +45,7 @@ export const boardService = {
     getTasksCount,
     parseSearchParams,
     buildSearchParams,
+    getBackgroundColors,
 }
 
 const STORAGE_KEY = 'boards'
@@ -452,6 +453,20 @@ function getLabelColors() {
         _getLabelColor('lc128', 'bold lime', '#5b7f24', '#ffffff'),
         _getLabelColor('lc129', 'bold pink', '#ae4787', '#ffffff'),
         _getLabelColor('lc130', 'bold black', '#626f86', '#ffffff'),
+    ]
+}
+
+function getBackgroundColors() {
+    return [
+        '#0079bf',
+        '#d29034',
+        '#519839',
+        '#b04632',
+        '#89609e',
+        '#cd5a91',
+        '#4bbf6b',
+        '#00aecc',
+        '#838c91',
     ]
 }
 
