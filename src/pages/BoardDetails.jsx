@@ -63,13 +63,20 @@ export function BoardDetails() {
         setSearchParams(updatedSearchParams)
     }
 
+    function getBoardStyle() {
+        if (!board) return
+
+        const { backgroundImage, backgroundColor } = board.style
+
+        if (backgroundImage) {
+            return { backgroundImage: `url(${backgroundImage})` }
+        } else if (backgroundColor) {
+            return { backgroundColor }
+        }
+        return {}
+    }
     return (
-        <div
-            className="board-details"
-            style={{
-                backgroundImage: `url(${board?.style?.backgroundImage})`,
-            }}
-        >
+        <div className="board-details" style={getBoardStyle()}>
             <BoardIndexHeader />
 
             {board && filteredBoard ? (
