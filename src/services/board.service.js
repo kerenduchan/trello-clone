@@ -46,6 +46,7 @@ export const boardService = {
     parseSearchParams,
     buildSearchParams,
     getBackgroundColors,
+    getBoardStyle,
 }
 
 const STORAGE_KEY = 'boards'
@@ -619,6 +620,19 @@ function handleDragEnd(result, board, filteredBoard) {
 
 function getTasksCount(board) {
     return board.groups.reduce((acc, group) => acc + group.tasks.length, 0)
+}
+
+function getBoardStyle(board) {
+    if (!board) return
+
+    const { backgroundImage, backgroundColor } = board.style
+
+    if (backgroundImage) {
+        return { backgroundImage: `url(${backgroundImage})` }
+    } else if (backgroundColor) {
+        return { backgroundColor }
+    }
+    return {}
 }
 
 function _dragDropTask(result, board, filteredBoard) {

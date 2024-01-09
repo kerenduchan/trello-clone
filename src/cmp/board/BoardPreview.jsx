@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Icon } from '../general/Icon'
 import { updateBoard } from '../../store/actions/board.actions'
+import { boardService } from '../../services/board.service'
 
 export function BoardPreview({ board }) {
     function onStarClick() {
@@ -15,9 +16,7 @@ export function BoardPreview({ board }) {
     return (
         <div
             className="board-preview"
-            style={{
-                backgroundImage: `url(${board.style?.backgroundImage})`,
-            }}
+            style={boardService.getBoardStyle(board)}
         >
             <div className="board-preview-contents">
                 <h1 className="board-title">{board.title}</h1>

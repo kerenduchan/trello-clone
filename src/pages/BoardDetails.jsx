@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
+import { useSearchParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import {
@@ -7,16 +8,15 @@ import {
     unloadBoard,
     applyBoardFilter,
 } from '../store/actions/board.actions'
+import { boardService } from '../services/board.service'
 import { useToggle } from '../customHooks/useToggle'
 import { GroupList } from '../cmp/group/GroupList'
 import { BoardDetailsTopbar } from '../cmp/board/BoardDetailsTopbar'
 import { TaskDetails } from './TaskDetails'
 import { BoardMenu } from '../cmp/board/boardMenu/BoardMenu'
 import { GroupCreate } from '../cmp/group/GroupCreate'
-import { boardService } from '../services/board.service'
 import { Icon } from '../cmp/general/Icon'
 import { BoardIndexHeader } from '../cmp/board/BoardIndexHeader'
-import { useSearchParams } from 'react-router-dom'
 
 export function BoardDetails() {
     const params = useParams()
@@ -63,19 +63,6 @@ export function BoardDetails() {
         setSearchParams(updatedSearchParams)
     }
 
-    function getBoardStyle() {
-        if (!board) return
-
-        const { backgroundImage, backgroundColor } = board.style
-
-        if (backgroundImage) {
-            return { backgroundImage: `url(${backgroundImage})` }
-        } else if (backgroundColor) {
-            return { backgroundColor }
-        }
-        return {}
-    }
-
     function getTextColor() {
         if (board?.style?.backgroundColor) {
             return 'dark'
@@ -86,7 +73,7 @@ export function BoardDetails() {
     return (
         <div
             className={`board-details board-theme-${getTextColor()}`}
-            style={getBoardStyle()}
+            style={boardService.getBoardStyle(board)}
         >
             <BoardIndexHeader />
 
