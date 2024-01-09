@@ -77,7 +77,6 @@
     --bg-label: #091e420f;
     --ds-text-subtlest: #626f86;
     --ds-background-accent-gray-subtler: #dcdfe4;
-    --board-header-background-color: #0000003d;
 
     // BOX SHADOW
 
@@ -107,6 +106,7 @@
     --dynamic-text-transparent: hsla(218, 54%, 19.6%, 0.16);
     --dynamic-background: hsl(0, 0%, 100%);
     --dynamic-background-transparent: hsla(0, 0%, 95.7%, 0.9);
+    --board-header-background-color: #ffffff3d;
 }
 
 // in the dark theme, the text is light and the background is dark
@@ -123,4 +123,5 @@
     --dynamic-text-transparent: hsla(0, 0%, 100%, 0.16);
     --dynamic-background: hsla(0, 0%, 0%, 0.16);
     --dynamic-background-transparent: hsla(0, 0%, 0%, 0.16);
+    --board-header-background-color: #0000003d;
 }
