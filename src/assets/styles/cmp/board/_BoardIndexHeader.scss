@@ -3,9 +3,9 @@
     width: 100%;
     padding: 8px;
     padding-inline-start: 24px;
-    background-color: var(--bg-1);
+    background-color: var(--dynamic-background);
     box-sizing: border-box;
-    border-bottom: 0.8px solid var(--board-index-header-border-bottom-color);
+    border-bottom: 1px solid var(--dynamic-text-transparent);
     display: grid;
     grid-template-columns: repeat(3, auto) 1fr;
     align-items: center;

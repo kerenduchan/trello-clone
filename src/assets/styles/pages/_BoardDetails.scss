@@ -18,7 +18,7 @@
         padding-bottom: 12px;
         display: grid;
         grid-template-columns: 1fr auto;
-        background-color: var(--bg-board-header);
+        background-color: var(--board-header-background-color);
         @include backdrop-blur();
 
         &.menu-open {
