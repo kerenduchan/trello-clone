@@ -458,15 +458,15 @@ function getLabelColors() {
 
 function getBackgroundColors() {
     return [
-        '#0079bf',
-        '#d29034',
-        '#519839',
-        '#b04632',
-        '#89609e',
-        '#cd5a91',
-        '#4bbf6b',
-        '#00aecc',
-        '#838c91',
+        { _id: 'bgc101', color: '#0079bf' },
+        { _id: 'bgc102', color: '#d29034' },
+        { _id: 'bgc103', color: '#519839' },
+        { _id: 'bgc104', color: '#b04632' },
+        { _id: 'bgc105', color: '#89609e' },
+        { _id: 'bgc106', color: '#cd5a91' },
+        { _id: 'bgc107', color: '#4bbf6b' },
+        { _id: 'bgc108', color: '#00aecc' },
+        { _id: 'bgc109', color: '#838c91' },
     ]
 }
 
