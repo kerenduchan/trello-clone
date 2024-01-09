@@ -55,7 +55,7 @@ export function BoardDetails() {
         : null
 
     function onDragEnd(result) {
-        boardService.handleDragEnd(result, board)
+        boardService.handleDragEnd(result, board, filteredBoard)
     }
 
     function onFilterChange(filter) {
