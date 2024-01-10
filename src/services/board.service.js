@@ -637,8 +637,13 @@ function getBoardStyle(board) {
 }
 
 function getBoardTheme(board) {
-    if (board?.style?.backgroundColor) {
-        return 'dark'
+    if (board && board.style) {
+        if (board.style.theme) {
+            return board.style.theme
+        }
+        if (board.style.backgroundColor) {
+            return 'dark'
+        }
     }
     return 'light'
 }

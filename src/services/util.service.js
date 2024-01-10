@@ -1,3 +1,5 @@
+import { FastAverageColor } from 'fast-average-color'
+
 export const utilService = {
     makeId,
     makeLorem,
@@ -19,6 +21,7 @@ export const utilService = {
     parseSearchParams,
     buildSearchParams,
     simpleIsEqual,
+    getImageTheme,
 }
 
 function makeId(length = 6) {
@@ -245,4 +248,25 @@ function simpleIsEqual(obj1, obj2) {
         }
         return v === obj2[k]
     })
+}
+
+async function getImageTheme(imageUrl) {
+    const img = document.createElement('img')
+    img.src = imageUrl
+    img.crossOrigin = 'Anonymous'
+
+    const fac = new FastAverageColor()
+
+    try {
+        const color = await fac.getColorAsync(img)
+        img.remove()
+        const [r, g, b] = color.value
+
+        // Calculate relative luminance
+        const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b
+        const isLightTheme = luminance > 128
+        return isLightTheme ? 'light' : 'dark'
+    } catch (err) {
+        console.warn(`Failed to get average color for ${imageUrl}`, err)
+    }
 }

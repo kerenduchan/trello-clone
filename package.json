@@ -13,6 +13,7 @@
     },
     "dependencies": {
         "@popperjs/core": "^2.11.8",
+        "fast-average-color": "^9.4.0",
         "gh-pages": "^6.0.0",
         "moment": "^2.29.4",
         "react": "^18.2.0",
