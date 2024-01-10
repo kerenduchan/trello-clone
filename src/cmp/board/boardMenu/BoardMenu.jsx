@@ -4,6 +4,7 @@ import { BoardMenuMain } from './BoardMenuMain'
 import { BoardMenuArchive } from './BoardMenuArchive'
 import { BoardMenuBackgroundMain } from './BoardMenuBackgroundMain'
 import { BoardMenuBackgroundColor } from './BoardMenuBackgroundColor'
+import { BoardMenuBackgroundPhoto } from './BoardMenuBackgroundPhoto'
 
 export function BoardMenu({ board, onClose }) {
     // current page in the group menu popover
@@ -56,6 +57,7 @@ export function BoardMenu({ board, onClose }) {
 
         backgroundPhoto: {
             title: 'Photos',
+            cmp: <BoardMenuBackgroundPhoto board={board} />,
             onBack: () => {
                 setPage('backgroundMain')
             },
