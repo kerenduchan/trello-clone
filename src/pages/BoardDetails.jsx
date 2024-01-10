@@ -65,7 +65,9 @@ export function BoardDetails() {
 
     return (
         <div
-            className={`board-details board-theme-${board?.theme}`}
+            className={`board-details board-theme-${boardService.getBoardTheme(
+                board
+            )}`}
             style={boardService.getBoardStyle(board)}
         >
             <BoardIndexHeader board={board} />

@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { boardService } from '../../services/board.service'
 import { usePopoverState } from '../../customHooks/usePopoverState'
 import { LoginContext } from '../../contexts/LoginContext'
 import { BoardCreate } from './BoardCreate'
@@ -17,7 +18,7 @@ export function BoardIndexHeader({ board }) {
     }
 
     function getLogo() {
-        if (!board || board.theme === 'light') {
+        if (boardService.getBoardTheme(board) === 'light') {
             return 'krello.svg'
         }
         return 'krello-white.svg'

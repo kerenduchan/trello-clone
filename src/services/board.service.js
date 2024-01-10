@@ -47,6 +47,7 @@ export const boardService = {
     buildSearchParams,
     getBackgroundColors,
     getBoardStyle,
+    getBoardTheme,
 }
 
 const STORAGE_KEY = 'boards'
@@ -633,6 +634,13 @@ function getBoardStyle(board) {
         return { backgroundColor }
     }
     return {}
+}
+
+function getBoardTheme(board) {
+    if (board?.style?.backgroundColor) {
+        return 'dark'
+    }
+    return 'light'
 }
 
 function _dragDropTask(result, board, filteredBoard) {
