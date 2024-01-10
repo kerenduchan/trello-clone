@@ -5,7 +5,7 @@ const api = createApi({
     accessKey: import.meta.env.VITE_UNSPLASH_ACCESS_KEY,
 })
 
-export function UnsplashImages({ query }) {
+export function UnsplashImages({ query, onImageClick }) {
     const [images, setImages] = useState(null)
 
     useEffect(() => {
@@ -34,7 +34,10 @@ export function UnsplashImages({ query }) {
             <ul>
                 {images.map((image) => (
                     <li key={image.id}>
-                        <UnsplashImage image={image} />
+                        <UnsplashImage
+                            image={image}
+                            onClick={() => onImageClick(image)}
+                        />
                     </li>
                 ))}
             </ul>
@@ -42,7 +45,7 @@ export function UnsplashImages({ query }) {
     )
 }
 
-function UnsplashImage({ image }) {
+function UnsplashImage({ image, onClick }) {
     const { user, urls } = image
 
     return (
@@ -50,6 +53,7 @@ function UnsplashImage({ image }) {
             <div
                 className="image"
                 style={{ backgroundImage: `url(${urls.regular})` }}
+                onClick={onClick}
             />
             <a
                 className="credit"
