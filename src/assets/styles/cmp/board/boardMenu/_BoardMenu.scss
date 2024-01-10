@@ -25,6 +25,14 @@
             justify-self: center;
             padding: 18px 0;
             @include font(16px, 20px, 500);
+
+            .bg-photo-title {
+                @include font(16px, 20px, 500);
+
+                a {
+                    @include font(16px, 20px, 500);
+                }
+            }
         }
 
         .btn-close {

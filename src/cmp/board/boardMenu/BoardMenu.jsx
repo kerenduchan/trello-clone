@@ -56,7 +56,18 @@ export function BoardMenu({ board, onClose }) {
         },
 
         backgroundPhoto: {
-            title: 'Photos',
+            title: (
+                <div className="bg-photo-title">
+                    Photos by{' '}
+                    <a
+                        className="link"
+                        href="https://unsplash.com/"
+                        target="_blank"
+                    >
+                        Unsplash
+                    </a>
+                </div>
+            ),
             cmp: <BoardMenuBackgroundPhoto board={board} />,
             onBack: () => {
                 setPage('backgroundMain')
