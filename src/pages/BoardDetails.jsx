@@ -63,19 +63,12 @@ export function BoardDetails() {
         setSearchParams(updatedSearchParams)
     }
 
-    function getTextColor() {
-        if (board?.style?.backgroundColor) {
-            return 'dark'
-        }
-        return 'light'
-    }
-
     return (
         <div
-            className={`board-details board-theme-${getTextColor()}`}
+            className={`board-details board-theme-${board?.theme}`}
             style={boardService.getBoardStyle(board)}
         >
-            <BoardIndexHeader />
+            <BoardIndexHeader board={board} />
 
             {board && filteredBoard ? (
                 <>

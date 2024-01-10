@@ -1,22 +1,34 @@
 import { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { usePopoverState } from '../../customHooks/usePopoverState'
 import { LoginContext } from '../../contexts/LoginContext'
 import { BoardCreate } from './BoardCreate'
 import { PopoverMenu } from '../general/PopoverMenu'
 import { UserAccountMenu } from '../user/UserAccountMenu'
 
-export function BoardIndexHeader() {
+export function BoardIndexHeader({ board }) {
+    const navigate = useNavigate()
     const { loggedinUser } = useContext(LoginContext)
     const createBoardMenu = usePopoverState()
     const userAccountMenu = usePopoverState()
 
+    function onLogoClick() {
+        navigate('/')
+    }
+
+    function getLogo() {
+        if (!board || board.theme === 'light') {
+            return 'krello.svg'
+        }
+        return 'krello-white.svg'
+    }
+
     return (
         <>
             <header className="board-index-header">
-                <Link to="/">
-                    <img className="logo" src="krello.svg" />
-                </Link>
+                <button className="btn-dynamic" onClick={onLogoClick}>
+                    <img className="logo" src={getLogo()} />
+                </button>
 
                 <Link to="/boards" className="btn-dynamic-wide">
                     Boards

@@ -65,6 +65,7 @@ async function loadBoards() {
 async function loadBoard(boardId) {
     try {
         const board = await boardService.getById(boardId)
+        board.theme = _getBoardTheme(board)
         store.dispatch({ type: SET_BOARD, board })
     } catch (err) {
         console.error('Failed to load board:', err)
@@ -746,4 +747,11 @@ function _isDatesMatchDue(due, dates) {
         month: 30,
     }
     return delta > 0 && delta < maxDeltaDays[due] * 24 * SECONDS_PER_HOUR
+}
+
+function _getBoardTheme(board) {
+    if (board?.style?.backgroundColor) {
+        return 'dark'
+    }
+    return 'light'
 }
