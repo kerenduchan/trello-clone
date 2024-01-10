@@ -24,7 +24,13 @@
 
             .icon {
                 grid-area: 1/1;
-                padding-inline-start: 12px;
+                margin-inline-start: 12px;
+            }
+
+            .change-background {
+                @include square(20px);
+                border-radius: 3px;
+                background-size: cover;
             }
         }
         hr {

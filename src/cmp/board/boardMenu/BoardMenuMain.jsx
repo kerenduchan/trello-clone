@@ -13,6 +13,15 @@ export function BoardMenuMain({ board, onArchive, onChangeBackground }) {
         navigate('/boards')
     }
 
+    function getChangeBackgroundStyle() {
+        if (board.style.backgroundColor) {
+            return { backgroundColor: board.style.backgroundColor }
+        } else if (board.style.backgroundImage) {
+            return { backgroundImage: `url(${board.style.backgroundImage})` }
+        }
+        return {}
+    }
+
     return (
         <div className="board-menu-main">
             <ul className="board-menu-main-list">
@@ -26,7 +35,10 @@ export function BoardMenuMain({ board, onArchive, onChangeBackground }) {
 
                 {/* Change background */}
                 <li onClick={onChangeBackground}>
-                    <Icon type="palette" />
+                    <span
+                        className="icon change-background"
+                        style={getChangeBackgroundStyle()}
+                    />
                     <div className="title"> Change background</div>
                 </li>
 
