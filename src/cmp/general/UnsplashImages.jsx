@@ -5,17 +5,18 @@ const api = createApi({
     accessKey: import.meta.env.VITE_UNSPLASH_ACCESS_KEY,
 })
 
-export function UnsplashImages({ query, onImageClick }) {
+export function UnsplashImages({ onImageClick }) {
     const [images, setImages] = useState(null)
 
     useEffect(() => {
         loadPhotos()
-    }, [query])
+    }, [])
 
     async function loadPhotos() {
         try {
-            const res = await api.search.getPhotos({
-                query,
+            const res = await api.collections.getPhotos({
+                collectionId: '317099',
+                perPage: 30,
                 orientation: 'landscape',
             })
             if (res.errors) {
@@ -23,7 +24,7 @@ export function UnsplashImages({ query, onImageClick }) {
             }
             setImages(res.response.results)
         } catch (err) {
-            console.error('failed to get photos from Unsplash')
+            console.error('failed to get photos from Unsplash', err)
         }
     }
 
