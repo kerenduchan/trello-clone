@@ -47,8 +47,15 @@ function UnsplashImage({ image }) {
 
     return (
         <div className="unsplash-image">
-            <img src={urls.regular} />
-            <a target="_blank" href={`https://unsplash.com/@${user.username}`}>
+            <div
+                className="image"
+                style={{ backgroundImage: `url(${urls.regular})` }}
+            />
+            <a
+                className="credit"
+                target="_blank"
+                href={`https://unsplash.com/@${user.username}`}
+            >
                 {user.name}
             </a>
         </div>
