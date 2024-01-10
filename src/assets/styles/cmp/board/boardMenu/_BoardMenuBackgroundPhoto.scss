@@ -1,0 +1,27 @@
+.board-menu-background-photo {
+    .unsplash > ul {
+        width: 100%;
+        margin-inline-start: 4px;
+        margin-inline-end: 4px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, auto);
+        gap: 8px;
+
+        .unsplash-image {
+            height: 96px;
+            border-radius: 8px;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                background-size: cover;
+
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+}

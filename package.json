@@ -23,7 +23,8 @@
         "react-router": "^6.18.0",
         "react-router-dom": "^6.18.0",
         "redux": "^4.2.1",
-        "sass": "^1.69.5"
+        "sass": "^1.69.5",
+        "unsplash-js": "^7.0.19"
     },
     "devDependencies": {
         "@types/react": "^18.2.15",
