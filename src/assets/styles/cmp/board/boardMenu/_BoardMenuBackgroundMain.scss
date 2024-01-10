@@ -32,4 +32,27 @@
             }
         }
     }
+
+    & > hr {
+        margin: 15px 0 20px;
+    }
+
+    .custom-title {
+        @include font(20px, 24px, 600);
+        margin-bottom: 8px;
+    }
+
+    .custom-backgrounds {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 96px;
+        gap: 8px;
+        padding-inline-start: 4px;
+        padding-inline-end: 4px;
+
+        .btn-add {
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+    }
 }
