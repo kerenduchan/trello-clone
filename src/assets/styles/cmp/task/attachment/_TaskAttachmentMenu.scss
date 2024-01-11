@@ -9,9 +9,8 @@
             margin-top: 12px;
         }
 
-        > input {
-            @include input-styling();
-            width: 100%;
+        input[type='file'] {
+            display: none;
         }
     }
 }
