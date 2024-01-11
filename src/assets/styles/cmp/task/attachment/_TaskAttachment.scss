@@ -24,8 +24,22 @@
         padding: 8px;
         padding-inline-start: 0;
 
-        .title {
-            @include font(14px, 20px, 700);
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+
+            .title {
+                @include font(14px, 20px, 700);
+            }
+
+            a {
+                @include flex-center-center();
+
+                .icon {
+                    @include font-size-and-line-height(12px);
+                }
+            }
         }
 
         .actions {

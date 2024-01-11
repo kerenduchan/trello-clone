@@ -24,7 +24,12 @@ export function TaskAttachment({ hierarchy, attachment }) {
                 style={{ backgroundImage: `url(${attachment.fileUrl})` }}
             />
             <div className="details">
-                <div className="title">{attachment.title}</div>
+                <div className="header">
+                    <span className="title">{attachment.title}</span>
+                    <a href={attachment.fileUrl} target="_blank">
+                        <Icon type="north_east" />
+                    </a>
+                </div>
 
                 <div className="actions">
                     <span className="creation-time">
