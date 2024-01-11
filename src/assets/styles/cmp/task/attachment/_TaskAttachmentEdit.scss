@@ -1,0 +1,18 @@
+.task-attachment-edit {
+    h5 {
+        margin-top: 4px;
+        @include font(12px, 16px, 700);
+        color: var(--ds-text-subtle);
+    }
+
+    input {
+        @include input-styling();
+        width: 100%;
+        margin-top: 4px;
+        margin-bottom: 12px;
+    }
+
+    .btn-update {
+        padding: 6px 24px;
+    }
+}

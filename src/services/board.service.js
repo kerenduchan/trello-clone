@@ -296,7 +296,7 @@ function _createBoards() {
                                 attachments: [
                                     {
                                         _id: 'a101',
-                                        text: 'cute cats',
+                                        title: 'cute cats',
                                         createdAt: 1590999817436,
                                         createdBy: 'u101',
                                         fileUrl:

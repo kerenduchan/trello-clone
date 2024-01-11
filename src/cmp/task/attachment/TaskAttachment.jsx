@@ -3,22 +3,14 @@ import { deleteTaskAttachment } from '../../../store/actions/board.actions'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { Icon } from '../../general/Icon'
 import { DeleteMenu } from '../../general/DeleteMenu'
+import { TaskAttachmentEdit } from './TaskAttachmentEdit'
 
 export function TaskAttachment({ hierarchy, attachment }) {
     const deleteMenu = usePopoverState()
+    const editMenu = usePopoverState()
 
     function onDelete() {
         deleteTaskAttachment(hierarchy, attachment)
-    }
-
-    function getTitle() {
-        const { title, fileUrl } = attachment
-        if (title) {
-            return title
-        }
-
-        const urlParts = fileUrl.split('/')
-        return urlParts[urlParts.length - 1]
     }
 
     function getCreationTime() {
@@ -32,7 +24,7 @@ export function TaskAttachment({ hierarchy, attachment }) {
                 style={{ backgroundImage: `url(${attachment.fileUrl})` }}
             />
             <div className="details">
-                <div className="title">{getTitle()}</div>
+                <div className="title">{attachment.title}</div>
 
                 <div className="actions">
                     <span className="creation-time">
@@ -47,7 +39,12 @@ export function TaskAttachment({ hierarchy, attachment }) {
                         Delete
                     </button>
                     <span> • </span>
-                    <button className="action btn-link-small edit">Edit</button>
+                    <button
+                        className="action btn-link-small edit"
+                        {...editMenu.triggerAndTarget}
+                    >
+                        Edit
+                    </button>
                 </div>
                 <div className="make-cover">
                     <Icon type="cover" />
@@ -56,14 +53,21 @@ export function TaskAttachment({ hierarchy, attachment }) {
             </div>
 
             {/* Delete attachment menu */}
-
-            {/* Delete task menu */}
             {deleteMenu.show && (
                 <DeleteMenu
                     deleteMenu={deleteMenu}
                     title="Delete attachment?"
                     text="Deleting an attachment is permanent. There is no undo."
                     onDelete={onDelete}
+                />
+            )}
+
+            {/* Edit attachment menu */}
+            {editMenu.show && (
+                <TaskAttachmentEdit
+                    popoverState={editMenu}
+                    hierarchy={hierarchy}
+                    attachment={attachment}
                 />
             )}
         </div>

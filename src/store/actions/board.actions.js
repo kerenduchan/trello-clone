@@ -40,6 +40,7 @@ export {
     updateTaskComment,
     addTaskAttachment,
     deleteTaskAttachment,
+    updateTaskAttachment,
     addChecklist,
     deleteChecklist,
     moveChecklist,
@@ -429,6 +430,17 @@ async function deleteTaskAttachment(hierarchy, attachment) {
     return _updateTask(board, group, taskToUpdate)
 }
 
+async function updateTaskAttachment(hierarchy, attachment) {
+    const { board, group, task } = hierarchy
+    const taskToUpdate = { ...task }
+
+    taskToUpdate.attachments = task.attachments.map((a) =>
+        a._id === attachment._id ? attachment : a
+    )
+
+    return _updateTask(board, group, taskToUpdate)
+}
+
 // CHEKCLIST
 
 async function addChecklist(hierarchy, checklist) {
@@ -776,9 +788,12 @@ function _isDatesMatchDue(due, dates) {
 }
 
 function _createAttachment(fileUrl) {
+    const urlParts = fileUrl.split('/')
+    const title = urlParts[urlParts.length - 1]
+
     const attachment = {
         _id: utilService.makeId(),
-        text: null,
+        title,
         createdAt: Date.now(),
         createdBy: authService.getLoggedinUser()._id,
         fileUrl,
