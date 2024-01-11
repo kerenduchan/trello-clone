@@ -337,3 +337,10 @@
     padding: 8px 24px;
     @include font(19.2px, 28.8px, 400);
 }
+
+@mixin btn-link-small() {
+    @include font-p();
+    text-decoration: underline;
+    cursor: pointer;
+    color: var(--ds-text-subtle);
+}

@@ -9,6 +9,7 @@ import { TaskDetailsHeader } from '../cmp/task/TaskDetailsHeader'
 import { setCurChecklist } from '../store/actions/app.actions'
 import { MembersWidget } from '../cmp/task/members/MembersWidget'
 import { TaskDatesWidget } from '../cmp/task/dates/TaskDatesWidget'
+import { TaskAttachments } from '../cmp/task/attachment/TaskAttachments'
 
 export function TaskDetails({ hierarchy }) {
     const navigate = useNavigate()
@@ -40,6 +41,7 @@ export function TaskDetails({ hierarchy }) {
                     </div>
                     <TaskDescription hierarchy={hierarchy} />
                     <ChecklistList hierarchy={hierarchy} />
+                    <TaskAttachments hierarchy={hierarchy} />
                     <TaskDetailsActivity hierarchy={hierarchy} />
                 </div>
                 <TaskDetailsSidebar hierarchy={hierarchy} />
