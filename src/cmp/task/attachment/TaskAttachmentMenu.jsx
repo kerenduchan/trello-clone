@@ -12,10 +12,6 @@ export function TaskAttachmentMenu({ hierarchy, popoverState }) {
             <button className="btn-secondary-centered btn-choose-file">
                 Choose a file
             </button>
-
-            <hr />
-            <h5>Display text (optional)</h5>
-            <input type="text" placeholder="Text to display" />
         </PopoverMenu>
     )
 }
