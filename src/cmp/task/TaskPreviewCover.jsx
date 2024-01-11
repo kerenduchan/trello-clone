@@ -7,7 +7,7 @@ export function TaskPreviewCover({ hierarchy }) {
         <div
             className="task-preview-cover"
             style={{
-                backgroundColor: task.cover.bgColor,
+                backgroundColor: task.cover.bgColor.color,
             }}
         ></div>
     )

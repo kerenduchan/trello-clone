@@ -1,11 +1,22 @@
+import { useEffect, useState } from 'react'
 import { boardService } from '../../../services/board.service'
 import { updateTask } from '../../../store/actions/board.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 
 export function TaskCoverMenu({ hierarchy, popoverState }) {
+    const { task } = hierarchy
+    const [selectedColor, setSelectedColor] = useState(
+        task.cover?.bgColor || null
+    )
+
+    useEffect(() => {
+        setSelectedColor(task.cover?.bgColor || null)
+    }, [task])
+
     function onColorClick(c) {
-        updateTask(hierarchy, { cover: { bgColor: c.color } })
+        console.log
+        updateTask(hierarchy, { cover: { bgColor: c } })
     }
 
     function onRemoveCoverClick() {
@@ -26,7 +37,9 @@ export function TaskCoverMenu({ hierarchy, popoverState }) {
                 {boardService.getCoverColors().map((c) => (
                     <li key={c._id}>
                         <div
-                            className="btn-color"
+                            className={`btn-color ${
+                                selectedColor?._id === c._id ? ' selected' : ''
+                            }`}
                             style={{ backgroundColor: c.color }}
                             onClick={() => onColorClick(c)}
                         />

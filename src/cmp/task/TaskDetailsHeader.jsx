@@ -32,7 +32,7 @@ export function TaskDetailsHeader({ hierarchy, onClose }) {
                 <div
                     className="cover"
                     style={{
-                        backgroundColor: task.cover.bgColor,
+                        backgroundColor: task.cover.bgColor.color,
                     }}
                 ></div>
             )}

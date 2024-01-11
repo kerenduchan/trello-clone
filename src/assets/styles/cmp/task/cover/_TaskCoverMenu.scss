@@ -24,7 +24,13 @@
             height: 32px;
             border-radius: 3px;
 
-            &:hover {
+            &.selected {
+                box-shadow: rgb(255, 255, 255) 0px 0px 0px 2px,
+                    rgb(12, 102, 228) 0px 0px 0px 4px;
+            }
+
+            &:not(.selected):hover {
+                filter: saturate(85%) brightness(85%);
             }
         }
     }
