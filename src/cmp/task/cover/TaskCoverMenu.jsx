@@ -7,7 +7,8 @@ export function TaskCoverMenu({ hierarchy, popoverState }) {
     const { task } = hierarchy
 
     function onRemoveCover() {
-        const cover = { size: task.cover.size, bgColor: null }
+        // retain size, no bg color, and no bg image
+        const cover = { size: task.cover.size }
         updateTask(hierarchy, { cover })
     }
 
@@ -15,11 +16,21 @@ export function TaskCoverMenu({ hierarchy, popoverState }) {
         if (task.cover?.bgColor?._id === c._id) {
             onRemoveCover()
         }
-        const cover = { size: task.cover.size, bgColor: c }
+
+        // retain size, update bg color and text color, and no bg image
+        const cover = {
+            size: task.cover.size,
+            bgColor: {
+                _id: c._id,
+                color: c.color,
+            },
+            textColor: c.textColor,
+        }
         updateTask(hierarchy, { cover })
     }
 
     function onSizeClick(size) {
+        // retain bg color / bg image, and update size
         const cover = { ...task.cover, size }
         updateTask(hierarchy, { cover })
     }

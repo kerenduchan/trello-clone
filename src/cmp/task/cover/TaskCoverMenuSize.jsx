@@ -2,7 +2,7 @@ export function TaskCoverMenuSize({ hierarchy, onSizeClick }) {
     const { task } = hierarchy
 
     function onClick(size) {
-        if (!getColor()) {
+        if (isDisabled()) {
             return
         }
         onSizeClick(size)
@@ -13,16 +13,21 @@ export function TaskCoverMenuSize({ hierarchy, onSizeClick }) {
     }
 
     function getTextColor() {
-        return task.cover?.bgColor?.textColor
+        return task.cover?.textColor
     }
 
     function isSelected(size) {
-        if (!task.cover?.bgColor) return false
-        return task.cover?.size === size
+        if (isDisabled()) {
+            return false
+        }
+        return task.cover.size === size
     }
 
     function isDisabled() {
-        return !task.cover?.bgColor
+        if (!task.cover) {
+            return true
+        }
+        return !task.cover.bgColor && !task.cover.bgImage
     }
 
     return (
