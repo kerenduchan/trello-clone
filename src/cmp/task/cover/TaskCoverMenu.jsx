@@ -2,6 +2,7 @@ import { updateTask } from '../../../store/actions/board.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 import { TaskCoverMenuColors } from './TaskCoverMenuColors'
+import { TaskCoverMenuSize } from './TaskCoverMenuSize'
 
 export function TaskCoverMenu({ hierarchy, popoverState }) {
     const { task } = hierarchy
@@ -15,6 +16,8 @@ export function TaskCoverMenu({ hierarchy, popoverState }) {
         updateTask(hierarchy, { cover })
     }
 
+    function onSizeClick() {}
+
     return (
         <PopoverMenu
             className="task-cover-menu"
@@ -23,9 +26,15 @@ export function TaskCoverMenu({ hierarchy, popoverState }) {
         >
             {/* Size */}
             <h4>Size</h4>
+            <TaskCoverMenuSize
+                hierarchy={hierarchy}
+                onSizeClick={onSizeClick}
+            />
 
             {/* Remove cover */}
-            <SecondaryBtn text="Remove cover" onClick={onRemoveCover} />
+            {task.cover && (
+                <SecondaryBtn text="Remove cover" onClick={onRemoveCover} />
+            )}
 
             {/* Colors */}
             <h4>Colors</h4>
