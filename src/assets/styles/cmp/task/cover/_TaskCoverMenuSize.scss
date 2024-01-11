@@ -15,6 +15,10 @@
             overflow: hidden;
         }
 
+        .cover {
+            background-color: var(--ds-background-accent-gray-subtler);
+        }
+
         .size-small {
             .cover {
                 height: 28px;
@@ -26,6 +30,11 @@
             .contents {
                 position: absolute;
                 bottom: 4px;
+
+                .mock-row {
+                    background-color: var(--ds-surface-raised);
+                    opacity: 0.8;
+                }
             }
         }
     }
@@ -66,5 +75,9 @@
                 justify-self: end;
             }
         }
+    }
+
+    .no-cover {
+        background-color: var(--ds-background-accent-gray-subtler) !important;
     }
 }
