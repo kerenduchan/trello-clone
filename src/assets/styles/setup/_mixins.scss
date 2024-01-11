@@ -155,18 +155,21 @@
 
 @mixin input-styling() {
     box-sizing: border-box;
-    box-shadow: var(--box-shadow-input);
+    border: 2px solid var(--ds-border-input);
     border-radius: 3px;
     padding: 8px 12px;
     outline: none;
     @include font-p();
+    transition: background-color 0.2s ease-in-out 0s,
+        border-color 0.2s ease-in-out 0s;
 
     &:hover:not(:focus) {
-        background-color: var(--bg-input-hovered);
+        background-color: var(--ds-background-input-hovered);
     }
 
     &:focus {
-        box-shadow: var(--box-shadow-input-focused);
+        background-color: var(--ds-background-input-pressed);
+        border-color: var(--ds-border-focused);
     }
 }
 
