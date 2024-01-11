@@ -293,6 +293,16 @@ function _createBoards() {
                                         createdBy: 'u101',
                                     },
                                 ],
+                                attachments: [
+                                    {
+                                        _id: 'a101',
+                                        text: 'cute cats',
+                                        createdAt: 1590999817436,
+                                        createdBy: 'u101',
+                                        fileUrl:
+                                            'https://res.cloudinary.com/ddp0wyac3/raw/upload/v1704969821/teu5zl8dwhc90iwzul6p.jpg',
+                                    },
+                                ],
                             },
                             {
                                 _id: 'c104',
