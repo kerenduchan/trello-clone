@@ -1,7 +1,7 @@
 export function TaskPreviewCover({ hierarchy }) {
     const { task } = hierarchy
 
-    if (!task.cover) return <></>
+    if (!task.cover?.bgColor) return <></>
 
     return (
         <div

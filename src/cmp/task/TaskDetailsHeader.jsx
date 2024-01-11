@@ -28,7 +28,7 @@ export function TaskDetailsHeader({ hierarchy, onClose }) {
             </button>
 
             {/* Task cover */}
-            {task.cover && (
+            {task.cover?.bgColor && (
                 <div
                     className="cover"
                     style={{
