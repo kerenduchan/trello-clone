@@ -1,26 +1,18 @@
-import { useEffect, useState } from 'react'
-import { boardService } from '../../../services/board.service'
 import { updateTask } from '../../../store/actions/board.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
+import { TaskCoverMenuColors } from './TaskCoverMenuColors'
 
 export function TaskCoverMenu({ hierarchy, popoverState }) {
     const { task } = hierarchy
-    const [selectedColor, setSelectedColor] = useState(
-        task.cover?.bgColor || null
-    )
 
-    useEffect(() => {
-        setSelectedColor(task.cover?.bgColor || null)
-    }, [task])
-
-    function onColorClick(c) {
-        const cover = c._id === selectedColor?._id ? null : { bgColor: c }
-        updateTask(hierarchy, { cover })
+    function onRemoveCover() {
+        updateTask(hierarchy, { cover: null })
     }
 
-    function onRemoveCoverClick() {
-        updateTask(hierarchy, { cover: null })
+    function onColorClick(c) {
+        const cover = task.cover?.bgColor?._id === c._id ? null : { bgColor: c }
+        updateTask(hierarchy, { cover })
     }
 
     return (
@@ -29,23 +21,20 @@ export function TaskCoverMenu({ hierarchy, popoverState }) {
             title="Cover"
             {...popoverState.popover}
         >
+            {/* Size */}
             <h4>Size</h4>
 
-            <SecondaryBtn text="Remove cover" onClick={onRemoveCoverClick} />
+            {/* Remove cover */}
+            <SecondaryBtn text="Remove cover" onClick={onRemoveCover} />
+
+            {/* Colors */}
             <h4>Colors</h4>
-            <ul className="colors">
-                {boardService.getCoverColors().map((c) => (
-                    <li key={c._id}>
-                        <div
-                            className={`btn-color ${
-                                selectedColor?._id === c._id ? ' selected' : ''
-                            }`}
-                            style={{ backgroundColor: c.color }}
-                            onClick={() => onColorClick(c)}
-                        />
-                    </li>
-                ))}
-            </ul>
+            <TaskCoverMenuColors
+                hierarchy={hierarchy}
+                onColorClick={onColorClick}
+            />
+
+            {/* Attachments */}
             <h4>Attachments</h4>
 
             <SecondaryBtn text="Upload a cover image" />
