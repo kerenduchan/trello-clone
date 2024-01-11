@@ -33,7 +33,12 @@ export function TaskAttachmentMenu({ hierarchy, popoverState }) {
             >
                 Choose a file
             </button>
-            <input type="file" ref={inputFileRef} onChange={onFileSelected} />
+            <input
+                type="file"
+                ref={inputFileRef}
+                accept="image/*"
+                onChange={onFileSelected}
+            />
         </PopoverMenu>
     )
 }
