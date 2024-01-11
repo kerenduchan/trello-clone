@@ -3,13 +3,14 @@ import { PopoverMenu } from '../../general/PopoverMenu'
 import { TaskCoverMenuColors } from './TaskCoverMenuColors'
 import { TaskCoverMenuSize } from './TaskCoverMenuSize'
 
-export function TaskCoverMenu({ hierarchy, popoverState }) {
+export function TaskCoverMenu({ hierarchy, popoverState, onRemoveCover }) {
     const { task } = hierarchy
 
-    function onRemoveCover() {
+    function onRemoveCoverInternal() {
         // retain size, no bg color, and no bg image
         const cover = { size: task.cover.size }
         updateTask(hierarchy, { cover })
+        onRemoveCover && onRemoveCover()
     }
 
     function onColorClick(c) {
@@ -53,7 +54,7 @@ export function TaskCoverMenu({ hierarchy, popoverState }) {
             {task.cover?.bgColor && (
                 <button
                     className="btn-secondary-centered btn-remove-cover"
-                    onClick={onRemoveCover}
+                    onClick={onRemoveCoverInternal}
                 >
                     Remove cover
                 </button>
