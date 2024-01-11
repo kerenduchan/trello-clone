@@ -1,0 +1,16 @@
+.task-attachment-menu {
+    .content {
+        h5 {
+            @include font(14px, 16px, 600);
+            margin-bottom: 4px;
+        }
+
+        .btn-choose-file {
+            margin-top: 12px;
+        }
+
+        input[type='file'] {
+            display: none;
+        }
+    }
+}

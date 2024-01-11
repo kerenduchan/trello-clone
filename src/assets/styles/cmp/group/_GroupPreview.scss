@@ -1,3 +1,9 @@
+.group-list {
+    > li > div {
+        height: 100%;
+    }
+}
+
 .group-preview {
     @include group-preview();
     box-sizing: border-box;

@@ -97,3 +97,7 @@
         text-decoration: underline;
     }
 }
+
+.btn-link-small {
+    @include btn-link-small();
+}

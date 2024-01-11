@@ -1,0 +1,66 @@
+.task-attachment {
+    margin-inline-start: 40px;
+    margin-bottom: 8px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    &:hover {
+        background-color: var(--ds-background-neutral);
+    }
+
+    .preview {
+        width: 112px;
+        height: 80px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-color: var(--bg-attachment);
+        background-position: 50%;
+        border-radius: 3px;
+    }
+
+    .details {
+        padding: 8px;
+        padding-inline-start: 0;
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+
+            .title {
+                @include font(14px, 20px, 700);
+            }
+
+            a {
+                @include flex-center-center();
+
+                .icon {
+                    @include font-size-and-line-height(12px);
+                }
+            }
+        }
+
+        .actions {
+            margin-bottom: 8px;
+            color: var(--ds-text-subtle);
+
+            .creation-time {
+                @include font-p();
+            }
+        }
+
+        .make-cover {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .icon {
+                @include flex-center-center();
+                @include square(20px);
+                @include font-size-and-line-height(15px);
+            }
+        }
+    }
+}

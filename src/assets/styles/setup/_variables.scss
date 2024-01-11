@@ -57,6 +57,13 @@
     --bg-disabled: #091e4208;
     --text-disabled: #091e424f;
 
+    // input
+    --ds-background-input: #ffffff;
+    --ds-background-input-hovered: #f7f8f9;
+    --ds-background-input-pressed: #ffffff;
+    --ds-border-input: #091e4224;
+    --ds-border-focused: #388bff;
+
     // components
     --board-index-header-border-bottom-color: rgba(23, 43, 77, 0.16);
     --bg-group-create: #ffffff3d;
@@ -77,6 +84,11 @@
     --bg-label: #091e420f;
     --ds-text-subtlest: #626f86;
     --ds-background-accent-gray-subtler: #dcdfe4;
+    --ds-border-focused: #388bff;
+    --bg-attachment: #a9a7a9;
+
+    --ds-background-neutral: #091e420f;
+    --ds-text-subtle: #44546f;
 
     // BOX SHADOW
 

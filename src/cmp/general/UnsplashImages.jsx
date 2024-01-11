@@ -55,14 +55,15 @@ function UnsplashImage({ image, onClick }) {
                 className="image"
                 style={{ backgroundImage: `url(${urls.regular})` }}
                 onClick={onClick}
-            />
-            <a
-                className="credit"
-                target="_blank"
-                href={`https://unsplash.com/@${user.username}`}
             >
-                {user.name}
-            </a>
+                <a
+                    className="credit"
+                    target="_blank"
+                    href={`https://unsplash.com/@${user.username}`}
+                >
+                    {user.name}
+                </a>
+            </div>
         </div>
     )
 }

@@ -9,6 +9,7 @@ import { MembersMenu } from './members/MembersMenu'
 import { TaskCoverMenu } from './cover/TaskCoverMenu'
 import { TaskDatesMenu } from './dates/TaskDatesMenu'
 import { TaskMoveMenu } from './move/TaskMoveMenu'
+import { TaskAttachmentMenu } from './attachment/TaskAttachmentMenu'
 
 export function TaskDetailsSidebar({ hierarchy }) {
     const { task, board } = hierarchy
@@ -18,6 +19,7 @@ export function TaskDetailsSidebar({ hierarchy }) {
     const labelsMenu = usePopoverState()
     const checklistMenu = usePopoverState()
     const datesMenu = usePopoverState()
+    const attachmentMenu = usePopoverState()
     const coverMenu = usePopoverState()
     const moveMenu = usePopoverState()
     const copyMenu = usePopoverState()
@@ -77,7 +79,11 @@ export function TaskDetailsSidebar({ hierarchy }) {
                         />
 
                         {/* Attachment */}
-                        <SecondaryBtn icon="attachment" text="Attachment" />
+                        <SecondaryBtn
+                            {...attachmentMenu.triggerAndTarget}
+                            icon="attachment"
+                            text="Attachment"
+                        />
 
                         {/* Cover */}
                         <SecondaryBtn
@@ -156,6 +162,14 @@ export function TaskDetailsSidebar({ hierarchy }) {
             {/* Dates menu */}
             {datesMenu.show && (
                 <TaskDatesMenu hierarchy={hierarchy} popoverState={datesMenu} />
+            )}
+
+            {/* Attachment menu */}
+            {attachmentMenu.show && (
+                <TaskAttachmentMenu
+                    hierarchy={hierarchy}
+                    popoverState={attachmentMenu}
+                />
             )}
 
             {/* Cover menu */}

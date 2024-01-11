@@ -38,6 +38,9 @@ export {
     addTaskComment,
     deleteTaskComment,
     updateTaskComment,
+    addTaskAttachment,
+    deleteTaskAttachment,
+    updateTaskAttachment,
     addChecklist,
     deleteChecklist,
     moveChecklist,
@@ -402,6 +405,42 @@ async function updateTaskComment(hierarchy, comment) {
     return _updateTask(board, group, taskToUpdate)
 }
 
+async function addTaskAttachment(hierarchy, fileUrl) {
+    const { board, group, task } = hierarchy
+    const taskToUpdate = { ...task }
+    const attachment = _createAttachment(fileUrl)
+
+    if (taskToUpdate.attachments) {
+        taskToUpdate.attachments = [...task.attachments, attachment]
+    } else {
+        taskToUpdate.attachments = [attachment]
+    }
+
+    return _updateTask(board, group, taskToUpdate)
+}
+
+async function deleteTaskAttachment(hierarchy, attachment) {
+    // TODO: also delete the attachment from cloudinary
+    const { board, group, task } = hierarchy
+    const taskToUpdate = { ...task }
+
+    taskToUpdate.attachments = task.attachments.filter(
+        (a) => a._id !== attachment._id
+    )
+    return _updateTask(board, group, taskToUpdate)
+}
+
+async function updateTaskAttachment(hierarchy, attachment) {
+    const { board, group, task } = hierarchy
+    const taskToUpdate = { ...task }
+
+    taskToUpdate.attachments = task.attachments.map((a) =>
+        a._id === attachment._id ? attachment : a
+    )
+
+    return _updateTask(board, group, taskToUpdate)
+}
+
 // CHEKCLIST
 
 async function addChecklist(hierarchy, checklist) {
@@ -746,4 +785,18 @@ function _isDatesMatchDue(due, dates) {
         month: 30,
     }
     return delta > 0 && delta < maxDeltaDays[due] * 24 * SECONDS_PER_HOUR
+}
+
+function _createAttachment(fileUrl) {
+    const urlParts = fileUrl.split('/')
+    const title = urlParts[urlParts.length - 1]
+
+    const attachment = {
+        _id: utilService.makeId(),
+        title,
+        createdAt: Date.now(),
+        createdBy: authService.getLoggedinUser()._id,
+        fileUrl,
+    }
+    return attachment
 }
