@@ -15,8 +15,8 @@ export function TaskCoverMenu({ hierarchy, popoverState }) {
     }, [task])
 
     function onColorClick(c) {
-        console.log
-        updateTask(hierarchy, { cover: { bgColor: c } })
+        const cover = c._id === selectedColor?._id ? null : { bgColor: c }
+        updateTask(hierarchy, { cover })
     }
 
     function onRemoveCoverClick() {
