@@ -1,6 +1,5 @@
 import { updateTask } from '../../../store/actions/board.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
-import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 import { TaskCoverMenuColors } from './TaskCoverMenuColors'
 import { TaskCoverMenuSize } from './TaskCoverMenuSize'
 
@@ -40,11 +39,12 @@ export function TaskCoverMenu({ hierarchy, popoverState }) {
 
             {/* Remove cover */}
             {task.cover?.bgColor && (
-                <SecondaryBtn
-                    className="btn-remove-cover"
-                    text="Remove cover"
+                <button
+                    className="btn-secondary-centered btn-remove-cover"
                     onClick={onRemoveCover}
-                />
+                >
+                    Remove cover
+                </button>
             )}
 
             {/* Colors */}
@@ -57,7 +57,9 @@ export function TaskCoverMenu({ hierarchy, popoverState }) {
             {/* Attachments */}
             <h4>Attachments</h4>
 
-            <SecondaryBtn text="Upload a cover image" />
+            <button className="btn-secondary-centered btn-upload-image">
+                Upload a cover image
+            </button>
         </PopoverMenu>
     )
 }
