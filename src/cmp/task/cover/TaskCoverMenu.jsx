@@ -25,6 +25,7 @@ export function TaskCoverMenu({ hierarchy, popoverState }) {
                 color: c.color,
             },
             textColor: c.textColor,
+            theme: c._id === 'gray' ? 'dark' : 'light',
         }
         updateTask(hierarchy, { cover })
     }

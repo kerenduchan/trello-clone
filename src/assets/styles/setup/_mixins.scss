@@ -1,3 +1,9 @@
+@mixin flex-center-center() {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @mixin font($font-size, $line-height, $font-weight) {
     font-size: $font-size;
     line-height: $line-height;
@@ -250,9 +256,7 @@
     );
     border-radius: 50%;
     @include square(40px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex-center-center();
 }
 
 @mixin btn-square() {
@@ -265,12 +269,6 @@
     padding: 8px;
     border-radius: 8px;
     @include flex-center();
-}
-
-@mixin flex-center-center() {
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 @mixin btn-secondary-centered() {
@@ -299,7 +297,7 @@
 
 @mixin btn-dynamic-colors() {
     @include button-bg(
-        --dynamic-button,
+        transparent,
         var(--dynamic-button-hovered),
         var(--dynamic-button-pressed)
     );

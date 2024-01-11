@@ -12,6 +12,8 @@ import { TaskDatesWidget } from '../cmp/task/dates/TaskDatesWidget'
 import { TaskAttachments } from '../cmp/task/attachment/TaskAttachments'
 
 export function TaskDetails({ hierarchy }) {
+    const { task } = hierarchy
+
     const navigate = useNavigate()
     const params = useParams()
 
@@ -27,23 +29,38 @@ export function TaskDetails({ hierarchy }) {
         navigate(`/b/${params.boardId}`)
     }
 
+    function getTaskTheme() {
+        return task.cover?.theme || ''
+    }
+
     if (!hierarchy.task) return <></>
 
     return (
         <div className="task-details-bg" onClick={onClose}>
-            <div className="task-details" onClick={(e) => e.stopPropagation()}>
+            <div
+                className={`task-details task-theme-${getTaskTheme()}`}
+                onClick={(e) => e.stopPropagation()}
+            >
+                {/* Header */}
                 <TaskDetailsHeader hierarchy={hierarchy} onClose={onClose} />
+
+                {/* Main section */}
                 <div className="main">
+                    {/* Widgets */}
                     <div className="widgets">
                         <MembersWidget hierarchy={hierarchy} />
                         <LabelsWidget hierarchy={hierarchy} />
                         <TaskDatesWidget hierarchy={hierarchy} />
                     </div>
+
+                    {/* Description, checklists, attachments, activity */}
                     <TaskDescription hierarchy={hierarchy} />
                     <ChecklistList hierarchy={hierarchy} />
                     <TaskAttachments hierarchy={hierarchy} />
                     <TaskDetailsActivity hierarchy={hierarchy} />
                 </div>
+
+                {/* Sidebar */}
                 <TaskDetailsSidebar hierarchy={hierarchy} />
             </div>
         </div>
