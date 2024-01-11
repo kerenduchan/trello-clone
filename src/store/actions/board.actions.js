@@ -39,6 +39,7 @@ export {
     deleteTaskComment,
     updateTaskComment,
     addTaskAttachment,
+    deleteTaskAttachment,
     addChecklist,
     deleteChecklist,
     moveChecklist,
@@ -414,7 +415,17 @@ async function addTaskAttachment(hierarchy, fileUrl) {
         taskToUpdate.attachments = [attachment]
     }
 
-    console.log(taskToUpdate)
+    return _updateTask(board, group, taskToUpdate)
+}
+
+async function deleteTaskAttachment(hierarchy, attachment) {
+    // TODO: also delete the attachment from cloudinary
+    const { board, group, task } = hierarchy
+    const taskToUpdate = { ...task }
+
+    taskToUpdate.attachments = task.attachments.filter(
+        (a) => a._id !== attachment._id
+    )
     return _updateTask(board, group, taskToUpdate)
 }
 

@@ -1,8 +1,16 @@
 import moment from 'moment'
+import { deleteTaskAttachment } from '../../../store/actions/board.actions'
+import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { Icon } from '../../general/Icon'
+import { DeleteMenu } from '../../general/DeleteMenu'
 
 export function TaskAttachment({ hierarchy, attachment }) {
-    console.log(attachment)
+    const deleteMenu = usePopoverState()
+
+    function onDelete() {
+        deleteTaskAttachment(hierarchy, attachment)
+    }
+
     function getTitle() {
         const { title, fileUrl } = attachment
         if (title) {
@@ -32,15 +40,32 @@ export function TaskAttachment({ hierarchy, attachment }) {
                     </span>
                     <span> • </span>
 
-                    <span className="action btn-link-small delete">Delete</span>
+                    <button
+                        className="action btn-link-small delete"
+                        {...deleteMenu.triggerAndTarget}
+                    >
+                        Delete
+                    </button>
                     <span> • </span>
-                    <span className="action btn-link-small edit">Edit</span>
+                    <button className="action btn-link-small edit">Edit</button>
                 </div>
                 <div className="make-cover">
                     <Icon type="cover" />
                     <span className="btn-link-small">Make cover</span>
                 </div>
             </div>
+
+            {/* Delete attachment menu */}
+
+            {/* Delete task menu */}
+            {deleteMenu.show && (
+                <DeleteMenu
+                    deleteMenu={deleteMenu}
+                    title="Delete attachment?"
+                    text="Deleting an attachment is permanent. There is no undo."
+                    onDelete={onDelete}
+                />
+            )}
         </div>
     )
 }
