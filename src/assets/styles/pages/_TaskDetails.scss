@@ -10,10 +10,6 @@
     overflow: auto;
     color: var(--text-color);
 
-    .icon {
-        color: var(--icon-color);
-    }
-
     .task-details {
         position: relative;
         margin: auto;
@@ -32,9 +28,9 @@
             'header header'
             'main   sidebar';
 
-        .cover {
-            height: 116px;
+        .task-details-cover {
             grid-area: cover;
+            height: 116px;
         }
 
         .main {

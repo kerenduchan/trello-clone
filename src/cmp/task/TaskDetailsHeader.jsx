@@ -3,6 +3,7 @@ import { EditableTitle } from '../general/EditableTitle'
 import { updateTask } from '../../store/actions/board.actions'
 import { usePopoverState } from '../../customHooks/usePopoverState'
 import { TaskMoveMenu } from './move/TaskMoveMenu'
+import { TaskDetailsCover } from './cover/TaskDetailsCover'
 
 export function TaskDetailsHeader({ hierarchy, onClose }) {
     const { group, task } = hierarchy
@@ -28,14 +29,7 @@ export function TaskDetailsHeader({ hierarchy, onClose }) {
             </button>
 
             {/* Task cover */}
-            {task.cover && (
-                <div
-                    className="cover"
-                    style={{
-                        backgroundColor: task.cover.bgColor,
-                    }}
-                ></div>
-            )}
+            <TaskDetailsCover hierarchy={hierarchy} />
 
             {/* Archive banner */}
             {(task.archivedAt || group.archivedAt) && (

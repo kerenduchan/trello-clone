@@ -5,27 +5,7 @@
         margin-bottom: 4px;
     }
 
-    .btn-secondary {
+    .btn-remove-cover {
         margin-top: 4px;
-        padding: 6px 12px;
-        width: 280px;
-        justify-content: center;
-    }
-
-    .colors {
-        display: grid;
-        grid-template-columns: repeat(5, 50px);
-        gap: 8px;
-        padding: 4px;
-        margin-inline-start: -4px;
-        margin-inline-end: -4px;
-
-        .btn-color {
-            height: 32px;
-            border-radius: 3px;
-
-            &:hover {
-            }
-        }
     }
 }

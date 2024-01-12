@@ -1,11 +1,16 @@
 import moment from 'moment'
-import { deleteTaskAttachment } from '../../../store/actions/board.actions'
+import {
+    deleteTaskAttachment,
+    removeTaskCover,
+    setTaskCoverImage,
+} from '../../../store/actions/board.actions'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { Icon } from '../../general/Icon'
 import { DeleteMenu } from '../../general/DeleteMenu'
 import { TaskAttachmentEdit } from './TaskAttachmentEdit'
 
 export function TaskAttachment({ hierarchy, attachment }) {
+    const { task } = hierarchy
     const deleteMenu = usePopoverState()
     const editMenu = usePopoverState()
 
@@ -13,8 +18,18 @@ export function TaskAttachment({ hierarchy, attachment }) {
         deleteTaskAttachment(hierarchy, attachment)
     }
 
+    function onToggleCover() {
+        isCover()
+            ? removeTaskCover(hierarchy)
+            : setTaskCoverImage(hierarchy, attachment)
+    }
+
     function getCreationTime() {
         return moment(attachment.createdAt).fromNow()
+    }
+
+    function isCover() {
+        return task.cover?.bgImage?.attachmentId === attachment._id
     }
 
     return (
@@ -53,7 +68,9 @@ export function TaskAttachment({ hierarchy, attachment }) {
                 </div>
                 <div className="make-cover">
                     <Icon type="cover" />
-                    <span className="btn-link-small">Make cover</span>
+                    <span className="btn-link-small" onClick={onToggleCover}>
+                        {isCover() ? 'Remove' : 'Make'} cover
+                    </span>
                 </div>
             </div>
 

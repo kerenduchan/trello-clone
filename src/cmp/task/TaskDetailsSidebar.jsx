@@ -44,6 +44,10 @@ export function TaskDetailsSidebar({ hierarchy }) {
         updateTask(hierarchy, { archivedAt: null })
     }
 
+    function hasCover() {
+        return task.cover?.bgColor || task.cover?.bgImage
+    }
+
     return (
         <>
             <div className="task-details-sidebar">
@@ -86,11 +90,13 @@ export function TaskDetailsSidebar({ hierarchy }) {
                         />
 
                         {/* Cover */}
-                        <SecondaryBtn
-                            {...coverMenu.triggerAndTarget}
-                            icon="cover"
-                            text="Cover"
-                        />
+                        {!hasCover() && (
+                            <SecondaryBtn
+                                {...coverMenu.triggerAndTarget}
+                                icon="cover"
+                                text="Cover"
+                            />
+                        )}
                     </div>
                 </section>
 

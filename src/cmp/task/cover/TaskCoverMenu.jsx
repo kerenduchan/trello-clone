@@ -1,15 +1,50 @@
-import { boardService } from '../../../services/board.service'
-import { updateTask } from '../../../store/actions/board.actions'
+import { uploadService } from '../../../services/upload.service'
+import {
+    addTaskAttachment,
+    addTaskCoverImage,
+    removeTaskCover,
+    setTaskCoverColor,
+    setTaskCoverImage,
+    updateTask,
+} from '../../../store/actions/board.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
-import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
+import { BtnFileUpload } from '../../general/btn/BtnFileUpload'
+import { TaskCoverMenuColors } from './TaskCoverMenuColors'
+import { TaskCoverMenuSize } from './TaskCoverMenuSize'
+import { TaskCoverMenuTextColor } from './TaskCoverMenuTextColor'
 
-export function TaskCoverMenu({ hierarchy, popoverState }) {
-    function onColorClick(c) {
-        updateTask(hierarchy, { cover: { bgColor: c.color } })
+export function TaskCoverMenu({ hierarchy, popoverState, onRemoveCover }) {
+    const { task } = hierarchy
+
+    function onRemoveCoverInternal() {
+        removeTaskCover(hierarchy)
+        onRemoveCover && onRemoveCover()
     }
 
-    function onRemoveCoverClick() {
-        updateTask(hierarchy, { cover: null })
+    function onColorClick(c) {
+        if (task.cover?.bgColor?._id === c._id) {
+            onRemoveCoverInternal()
+        } else {
+            setTaskCoverColor(hierarchy, c)
+        }
+    }
+
+    function onSizeClick(size) {
+        // retain bg color / bg image, and update size
+        const cover = { ...task.cover, size }
+        updateTask(hierarchy, { cover })
+    }
+
+    function onTextColorClick(textColor) {
+        const bgImage = { ...task.cover.bgImage, textColor }
+        const cover = { ...task.cover, bgImage }
+        updateTask(hierarchy, { cover })
+    }
+
+    async function onFileSelected(file) {
+        const fileUrl = await uploadService.uploadFile(file)
+        await addTaskCoverImage(hierarchy, fileUrl)
+        popoverState.onClose()
     }
 
     return (
@@ -18,24 +53,45 @@ export function TaskCoverMenu({ hierarchy, popoverState }) {
             title="Cover"
             {...popoverState.popover}
         >
+            {/* Size */}
             <h4>Size</h4>
+            <TaskCoverMenuSize
+                hierarchy={hierarchy}
+                onSizeClick={onSizeClick}
+            />
 
-            <SecondaryBtn text="Remove cover" onClick={onRemoveCoverClick} />
+            {/* Remove cover */}
+            {(task.cover?.bgColor || task.cover?.bgImage) && (
+                <button
+                    className="btn-secondary-centered btn-remove-cover"
+                    onClick={onRemoveCoverInternal}
+                >
+                    Remove cover
+                </button>
+            )}
+
+            {/* Text color */}
+            {task.cover?.bgImage && (
+                <TaskCoverMenuTextColor
+                    hierarchy={hierarchy}
+                    onTextColorClick={onTextColorClick}
+                />
+            )}
+
+            {/* Colors */}
             <h4>Colors</h4>
-            <ul className="colors">
-                {boardService.getCoverColors().map((c) => (
-                    <li key={c._id}>
-                        <div
-                            className="btn-color"
-                            style={{ backgroundColor: c.color }}
-                            onClick={() => onColorClick(c)}
-                        />
-                    </li>
-                ))}
-            </ul>
+            <TaskCoverMenuColors
+                hierarchy={hierarchy}
+                onColorClick={onColorClick}
+            />
+
+            {/* Attachments */}
             <h4>Attachments</h4>
 
-            <SecondaryBtn text="Upload a cover image" />
+            <BtnFileUpload
+                onFileSelected={onFileSelected}
+                label="Upload a cover image"
+            />
         </PopoverMenu>
     )
 }

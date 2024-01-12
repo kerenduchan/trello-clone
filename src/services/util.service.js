@@ -22,6 +22,8 @@ export const utilService = {
     buildSearchParams,
     simpleIsEqual,
     getImageTheme,
+    getAverageColor,
+    getThemeByAverageColor,
 }
 
 function makeId(length = 6) {
@@ -250,16 +252,23 @@ function simpleIsEqual(obj1, obj2) {
     })
 }
 
-async function getImageTheme(imageUrl) {
+async function getAverageColor(imageUrl) {
     const img = document.createElement('img')
     img.src = imageUrl
     img.crossOrigin = 'Anonymous'
-
     const fac = new FastAverageColor()
 
     try {
         const color = await fac.getColorAsync(img)
         img.remove()
+        return color
+    } catch (err) {
+        console.warn(`Failed to get average color for ${imageUrl}`, err)
+    }
+}
+
+function getThemeByAverageColor(color) {
+    try {
         const [r, g, b] = color.value
 
         // Calculate relative luminance
@@ -267,6 +276,15 @@ async function getImageTheme(imageUrl) {
         const isLightTheme = luminance > 128
         return isLightTheme ? 'light' : 'dark'
     } catch (err) {
-        console.warn(`Failed to get average color for ${imageUrl}`, err)
+        console.warn(`Failed to get theme for color ${color.hex}`, err)
+    }
+}
+
+async function getImageTheme(imageUrl) {
+    try {
+        const color = await getAverageColor(imageUrl)
+        return getThemeByAverageColor(color)
+    } catch (err) {
+        console.warn(`Failed to get image theme for ${imageUrl}`, err)
     }
 }

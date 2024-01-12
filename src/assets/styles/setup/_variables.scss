@@ -89,6 +89,11 @@
 
     --ds-background-neutral: #091e420f;
     --ds-text-subtle: #44546f;
+    --ds-background-accent-gray-subtle: #8590a2;
+    --ds-border: #091e4224;
+    --ds-surface-raised: #ffffff;
+    --ds-border-inverse: #ffffff;
+    --ds-border-brand: #0c66e4;
 
     // BOX SHADOW
 
@@ -105,7 +110,8 @@
 // .board-theme-dark / .board-theme-light classes
 
 // in the light theme, the text is dark and the background is light
-.board-theme-light {
+.board-theme-light,
+.task-theme-light {
     --dynamic-button: transparent;
     --dynamic-button-hovered: #091e4224;
     --dynamic-button-pressed: #091e424f;
@@ -122,7 +128,8 @@
 }
 
 // in the dark theme, the text is light and the background is dark
-.board-theme-dark {
+.board-theme-dark,
+.task-theme-dark {
     --dynamic-button: transparent;
     --dynamic-button-hovered: #a6c5e229;
     --dynamic-button-pressed: #bfdbf847;
