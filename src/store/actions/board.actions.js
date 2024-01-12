@@ -566,7 +566,13 @@ async function setTaskCoverImage(hierarchy, attachment) {
 
     const cover = {
         size: 'large',
-        bgImage: { url, color: color.hex, attachmentId: attachment._id },
+        bgImage: {
+            url,
+            color: color.hex,
+            attachmentId: attachment._id,
+            textColor: 'dark',
+        },
+
         theme,
     }
 
@@ -583,8 +589,8 @@ async function setTaskCoverColor(hierarchy, c) {
         bgColor: {
             _id: c._id,
             color: c.color,
+            textColor: c.textColor,
         },
-        textColor: c.textColor,
         theme: c._id === 'gray' ? 'dark' : 'light',
     }
     updateTask(hierarchy, { cover })

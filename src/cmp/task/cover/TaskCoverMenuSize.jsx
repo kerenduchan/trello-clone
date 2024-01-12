@@ -13,7 +13,7 @@ export function TaskCoverMenuSize({ hierarchy, onSizeClick }) {
     }
 
     function getTextColor() {
-        return task.cover?.textColor
+        return task.cover?.bgColor?.textColor
     }
 
     function isSelected(size) {

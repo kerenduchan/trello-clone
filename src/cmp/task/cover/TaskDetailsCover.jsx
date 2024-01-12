@@ -29,7 +29,7 @@ export function TaskDetailsCover({ hierarchy }) {
     }
 
     function getButtonStyle() {
-        return { color: task.cover.textColor }
+        return { color: task.cover.bgColor?.textColor }
     }
 
     if (!hasCover()) return <></>

@@ -25,7 +25,10 @@ export function TaskPreview({ hierarchy, index }) {
     }
 
     function isFullCover() {
-        return task.cover?.size === 'large'
+        return (
+            (task.cover?.bgImage || task.cover?.bgColor) &&
+            task.cover?.size === 'large'
+        )
     }
 
     return (
