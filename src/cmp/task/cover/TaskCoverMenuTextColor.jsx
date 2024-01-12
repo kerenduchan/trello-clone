@@ -13,7 +13,7 @@ export function TaskCoverMenuTextColor({ hierarchy, onTextColorClick }) {
     ]
 
     function isSelected(option) {
-        return textColor === option
+        return textColor === option.id
     }
 
     return (
