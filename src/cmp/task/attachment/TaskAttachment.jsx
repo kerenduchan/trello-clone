@@ -11,7 +11,6 @@ import { TaskAttachmentEdit } from './TaskAttachmentEdit'
 
 export function TaskAttachment({ hierarchy, attachment }) {
     const { task } = hierarchy
-    console.log(task)
     const deleteMenu = usePopoverState()
     const editMenu = usePopoverState()
 

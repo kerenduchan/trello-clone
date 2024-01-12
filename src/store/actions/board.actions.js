@@ -580,7 +580,6 @@ async function setTaskCoverImage(hierarchy, attachment) {
 }
 
 async function setTaskCoverColor(hierarchy, c) {
-    console.log(hierarchy, c)
     const { task } = hierarchy
 
     // retain size, update bg color and text color, and no bg image
