@@ -1,6 +1,19 @@
 .task-preview-full-cover {
     min-height: 40px;
-    padding: 8px 8px 8px 12px;
+
+    align-items: end;
+    height: 250px;
+    background-size: cover;
+    background-position: 50%;
     display: flex;
     align-items: end;
+
+    .title-container {
+        height: 25%;
+        width: 100%;
+        padding: 8px 8px 8px 12px;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+        display: flex;
+        align-items: end;
+    }
 }
