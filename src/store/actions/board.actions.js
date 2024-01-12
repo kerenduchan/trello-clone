@@ -410,8 +410,9 @@ async function updateTaskComment(hierarchy, comment) {
 }
 
 async function addTaskAttachment(hierarchy, fileUrl) {
+    const { board, group } = hierarchy
     const [newHierarchy] = _addTaskAttachment(hierarchy, fileUrl)
-    await _updateTask(...newHierarchy)
+    await _updateTask(board, group, newHierarchy.task)
     return attachment
 }
 
