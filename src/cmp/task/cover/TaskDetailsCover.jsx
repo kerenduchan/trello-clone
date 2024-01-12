@@ -15,8 +15,16 @@ export function TaskDetailsCover({ hierarchy }) {
     }
 
     function getCoverStyle() {
-        if (task.cover.bgColor) {
-            return { backgroundColor: task.cover.bgColor.color }
+        const { bgColor, bgImage } = task.cover
+
+        if (bgColor) {
+            return { backgroundColor: bgColor.color }
+        }
+        if (bgImage) {
+            return {
+                backgroundColor: bgImage.color,
+                backgroundImage: `url(${bgImage.url})`,
+            }
         }
     }
 
