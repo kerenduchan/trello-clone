@@ -430,6 +430,13 @@ async function deleteTaskAttachment(hierarchy, attachment) {
     taskToUpdate.attachments = task.attachments.filter(
         (a) => a._id !== attachment._id
     )
+
+    // if this attachment was the task cover, remove task cover
+    if (task.cover?.bgImage?.attachmentId === attachment._id) {
+        const cover = { size: task.cover.size || 'small' }
+        taskToUpdate.cover = cover
+    }
+
     return _updateTask(board, group, taskToUpdate)
 }
 
