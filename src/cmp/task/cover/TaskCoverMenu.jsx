@@ -6,6 +6,7 @@ import {
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { TaskCoverMenuColors } from './TaskCoverMenuColors'
 import { TaskCoverMenuSize } from './TaskCoverMenuSize'
+import { TaskCoverMenuTextColor } from './TaskCoverMenuTextColor'
 
 export function TaskCoverMenu({ hierarchy, popoverState, onRemoveCover }) {
     const { task } = hierarchy
@@ -29,6 +30,12 @@ export function TaskCoverMenu({ hierarchy, popoverState, onRemoveCover }) {
         updateTask(hierarchy, { cover })
     }
 
+    function onTextColorClick(textColor) {
+        const bgImage = { ...task.cover.bgImage, textColor }
+        const cover = { ...task.cover, bgImage }
+        updateTask(hierarchy, { cover })
+    }
+
     return (
         <PopoverMenu
             className="task-cover-menu"
@@ -43,13 +50,21 @@ export function TaskCoverMenu({ hierarchy, popoverState, onRemoveCover }) {
             />
 
             {/* Remove cover */}
-            {task.cover?.bgColor && (
+            {(task.cover?.bgColor || task.cover?.bgImage) && (
                 <button
                     className="btn-secondary-centered btn-remove-cover"
                     onClick={onRemoveCoverInternal}
                 >
                     Remove cover
                 </button>
+            )}
+
+            {/* Text color */}
+            {task.cover?.bgImage && (
+                <TaskCoverMenuTextColor
+                    hierarchy={hierarchy}
+                    onTextColorClick={onTextColorClick}
+                />
             )}
 
             {/* Colors */}

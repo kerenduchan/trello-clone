@@ -1,0 +1,31 @@
+.task-cover-menu-text-color {
+    margin-top: 16px;
+    margin-bottom: 8px;
+
+    ul {
+        padding: 4px;
+        margin-inline-start: -4px;
+        margin-inline-end: -4px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+
+        .option {
+            padding: 6px 12px;
+            border-radius: 3px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .option-light {
+            background-color: black;
+            color: white;
+        }
+
+        .option-dark {
+            background-color: white;
+            color: dark;
+        }
+    }
+}
