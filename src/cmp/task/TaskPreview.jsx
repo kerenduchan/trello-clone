@@ -7,6 +7,7 @@ import { TaskDatesBadge } from './dates/TaskDatesBadge'
 import { Icon } from '../general/Icon'
 import { MembersBadge } from './members/MembersBadge'
 import { TaskCommentsBadge } from './comments/TaskCommentsBadge'
+import { TaskPreviewFullCover } from './TaskPreviewFullCover'
 
 export function TaskPreview({ hierarchy, index }) {
     const { board, task } = hierarchy
@@ -23,6 +24,10 @@ export function TaskPreview({ hierarchy, index }) {
         navigate(`/b/${board._id}/c/${task._id}`)
     }
 
+    function isFullCover() {
+        return task.cover?.size === 'large'
+    }
+
     return (
         <Draggable draggableId={task._id} index={index}>
             {(provided, snapshot) => (
@@ -35,8 +40,6 @@ export function TaskPreview({ hierarchy, index }) {
                     ref={provided.innerRef}
                     onClick={onClick}
                 >
-                    <TaskPreviewCover hierarchy={hierarchy} />
-
                     <div className="container-btn-edit">
                         <div className="bg-btn-edit" />
                         <button
@@ -46,24 +49,35 @@ export function TaskPreview({ hierarchy, index }) {
                             <Icon type="edit" />
                         </button>
                     </div>
-                    <div className="content">
-                        <LabelsPreview hierarchy={hierarchy} />
-                        <p className="title">{task.title}</p>
+                    {isFullCover() ? (
+                        <TaskPreviewFullCover hierarchy={hierarchy} />
+                    ) : (
+                        <>
+                            <TaskPreviewCover hierarchy={hierarchy} />
 
-                        <div className="badges">
-                            <TaskDatesBadge hierarchy={hierarchy} />
+                            <div className="content">
+                                <LabelsPreview hierarchy={hierarchy} />
+                                <p className="title">{task.title}</p>
 
-                            {task.description && (
-                                <span className="description-badge">
-                                    <Icon type="description" size="xs" />
-                                </span>
-                            )}
+                                <div className="badges">
+                                    <TaskDatesBadge hierarchy={hierarchy} />
 
-                            <TaskCommentsBadge hierarchy={hierarchy} />
-                            <ChecklistsBadge hierarchy={hierarchy} />
-                            <MembersBadge hierarchy={hierarchy} />
-                        </div>
-                    </div>
+                                    {task.description && (
+                                        <span className="description-badge">
+                                            <Icon
+                                                type="description"
+                                                size="xs"
+                                            />
+                                        </span>
+                                    )}
+
+                                    <TaskCommentsBadge hierarchy={hierarchy} />
+                                    <ChecklistsBadge hierarchy={hierarchy} />
+                                    <MembersBadge hierarchy={hierarchy} />
+                                </div>
+                            </div>
+                        </>
+                    )}
                 </section>
             )}
         </Draggable>
