@@ -14,7 +14,7 @@ export function BtnFileUpload({ label, onFileSelected }) {
     }
 
     return (
-        <>
+        <div className="btn-file-upload">
             <button
                 className="btn-secondary-centered btn-choose-file"
                 onClick={onClick}
@@ -27,6 +27,6 @@ export function BtnFileUpload({ label, onFileSelected }) {
                 accept="image/*"
                 onChange={onChange}
             />
-        </>
+        </div>
     )
 }

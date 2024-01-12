@@ -1,9 +1,14 @@
+import { uploadService } from '../../../services/upload.service'
 import {
+    addTaskAttachment,
+    addTaskCoverImage,
     removeTaskCover,
     setTaskCoverColor,
+    setTaskCoverImage,
     updateTask,
 } from '../../../store/actions/board.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
+import { BtnFileUpload } from '../../general/btn/BtnFileUpload'
 import { TaskCoverMenuColors } from './TaskCoverMenuColors'
 import { TaskCoverMenuSize } from './TaskCoverMenuSize'
 import { TaskCoverMenuTextColor } from './TaskCoverMenuTextColor'
@@ -34,6 +39,12 @@ export function TaskCoverMenu({ hierarchy, popoverState, onRemoveCover }) {
         const bgImage = { ...task.cover.bgImage, textColor }
         const cover = { ...task.cover, bgImage }
         updateTask(hierarchy, { cover })
+    }
+
+    async function onFileSelected(file) {
+        const fileUrl = await uploadService.uploadFile(file)
+        await addTaskCoverImage(hierarchy, fileUrl)
+        popoverState.onClose()
     }
 
     return (
@@ -77,9 +88,10 @@ export function TaskCoverMenu({ hierarchy, popoverState, onRemoveCover }) {
             {/* Attachments */}
             <h4>Attachments</h4>
 
-            <button className="btn-secondary-centered btn-upload-image">
-                Upload a cover image
-            </button>
+            <BtnFileUpload
+                onFileSelected={onFileSelected}
+                label="Upload a cover image"
+            />
         </PopoverMenu>
     )
 }
