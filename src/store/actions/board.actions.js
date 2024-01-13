@@ -678,6 +678,7 @@ async function _moveTaskInsideBoard(hierarchy, targetGroupId, targetPosition) {
     // insert task into target group
     const targetGroup = board.groups.find((g) => g._id === targetGroupId)
     const targetGroupToUpdate = { ...targetGroup }
+    targetGroupToUpdate.tasks = [...targetGroupToUpdate.tasks]
     targetGroupToUpdate.tasks.splice(targetPosition, 0, task)
 
     const boardToUpdate = { ...board }
