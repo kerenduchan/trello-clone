@@ -5,7 +5,7 @@ import boardReducer from './reducers/board.reducer'
 
 export const store = configureStore({
     reducer: {
-        appModule: appReducer,
-        boardModule: boardReducer,
+        app: appReducer,
+        board: boardReducer,
     },
 })

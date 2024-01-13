@@ -34,6 +34,5 @@ const appSlice = createSlice({
 export const { curChecklistChanged, curChecklistItemChanged } = appSlice.actions
 export default appSlice.reducer
 
-export const selectChecklistId = (state) => state.appModule.curChecklistId
-export const selectChecklistItemId = (state) =>
-    state.appModule.curChecklistItemId
+export const selectChecklistId = (state) => state.app.curChecklistId
+export const selectChecklistItemId = (state) => state.app.curChecklistItemId

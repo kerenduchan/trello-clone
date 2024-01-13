@@ -80,13 +80,13 @@ async function loadBoard(boardId) {
 }
 
 function unloadBoard() {
-    if (store.getState().boardModule.curBoard !== null) {
+    if (store.getState().board.curBoard !== null) {
         store.dispatch(boardChanged(null))
     }
 }
 
 function applyBoardFilter(filter) {
-    const board = store.getState().boardModule.curBoard
+    const board = store.getState().board.curBoard
     if (!board) {
         return null
     }
@@ -210,7 +210,7 @@ async function moveGroup(board, group, targetBoardId, targetPositionId) {
     }
 
     // move group to a different board
-    const allBoards = store.getState().boardModule.boards
+    const allBoards = store.getState().board.boards
     const targetBoard = allBoards.find((b) => b._id === targetBoardId)
     const targetBoardToUpdate = { ...targetBoard }
     targetBoardToUpdate.groups.splice(targetPositionId, 0, group)
@@ -333,7 +333,7 @@ async function copyTask(
     targetGroupId,
     targetPositionId
 ) {
-    const allBoards = store.getState().boardModule.boards
+    const allBoards = store.getState().board.boards
     const targetBoard = allBoards.find((b) => b._id === targetBoardId)
     const targetGroup = targetBoard.groups.find((g) => g._id === targetGroupId)
     const targetGroupToUpdate = { ...targetGroup }
@@ -710,7 +710,7 @@ async function _moveTaskToDifferentBoard(
     )
 
     // insert task into target group in target board
-    const allBoards = store.getState().boardModule.boards
+    const allBoards = store.getState().board.boards
     const targetBoard = allBoards.find((b) => b._id === targetBoardId)
     const targetGroup = targetBoard.groups.find((g) => g._id === targetGroupId)
     const targetGroupToUpdate = { ...targetGroup }
