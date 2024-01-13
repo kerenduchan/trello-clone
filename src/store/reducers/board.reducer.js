@@ -1,10 +1,4 @@
-export const SET_BOARDS = 'SET_BOARDS'
-export const SET_BOARD = 'SET_BOARD'
-export const ADD_BOARD = 'ADD_BOARD'
-export const REMOVE_BOARD = 'REMOVE_BOARD'
-export const UPDATE_BOARD = 'UPDATE_BOARD'
-export const UPDATE_BOARDS = 'UPDATE_BOARDS'
-export const SET_FILTERED_BOARD = 'SET_FILTERED_BOARD'
+import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     boards: [],
@@ -18,75 +12,68 @@ const initialState = {
     prevState: null,
 }
 
-// Objects in action MUST NOT contain pointers to the current state.
-// New state can contain pointers to prev state's objects as long as they
-// are not mutated at any point.
-export function boardReducer(state = initialState, action = {}) {
-    const newState = {
-        ...state,
-        prevState: state,
-    }
+// "mutating" code is okay inside of createSlice!
+const boardSlice = createSlice({
+    name: 'board',
+    initialState,
+    reducers: {
+        boardsChanged(state, action) {
+            state.boards = action.payload
+            return state
+        },
+        boardChanged(state, action) {
+            state.curBoard = action.payload
+            return state
+        },
+        filteredBoardChanged(state, action) {
+            state.filteredBoard = action.payload
+            return state
+        },
+        boardAdded(state, action) {
+            state.boards.push(action.payload)
+            return state
+        },
+        boardRemoved(state, action) {
+            state.boards = state.boards.filter((b) => b._id !== action.payload)
+            return state
+        },
+        boardUpdated(state, action) {
+            const board = action.payload
+            const idx = state.boards.findIndex((b) => b._id === board._id)
+            state.boards[idx] = board
 
-    switch (action.type) {
-        case SET_BOARDS:
-            newState.boards = action.boards
-            break
-
-        case SET_BOARD:
-            newState.curBoard = action.board
-            break
-
-        case SET_FILTERED_BOARD:
-            newState.filteredBoard = action.filteredBoard
-            break
-
-        case ADD_BOARD:
-            // new array containing pointers to old unmutated boards
-            // and a new board
-            newState.boards = [...newState.boards, action.board]
-            break
-
-        case REMOVE_BOARD:
-            // new array containing pointers to old unmutated boards
-            // minus the removed board
-            newState.boards = newState.boards.filter(
-                (b) => b._id !== action.boardId
-            )
-            break
-
-        case UPDATE_BOARD:
-            // new array containing pointers to old unmutated boards
-            // except for the updated board which is new
-            newState.boards = newState.boards.map((b) =>
-                b._id === action.board._id ? action.board : b
-            )
-
-            if (newState.curBoard?._id === action.board._id) {
-                newState.curBoard = action.board
+            if (state.curBoard?._id === board._id) {
+                state.curBoard = board
             }
-            break
-
-        case UPDATE_BOARDS:
+            return state
+        },
+        boardsUpdated(state, action) {
             const boardIdToBoardMap = {}
-            for (const b of action.boards) {
+            for (const b of action.payload) {
                 boardIdToBoardMap[b._id] = b
             }
 
-            // new array containing pointers to old unmutated boards
-            // except for the updated boards which are new
-
-            newState.boards = newState.boards.map((b) =>
+            state.boards = state.boards.map((b) =>
                 boardIdToBoardMap[b._id] ? boardIdToBoardMap[b._id] : b
             )
 
-            const curBoardId = newState.curBoard?._id
+            const curBoardId = state.curBoard?._id
             if (boardIdToBoardMap[curBoardId]) {
-                newState.curBoard = boardIdToBoardMap[curBoardId]
+                state.curBoard = boardIdToBoardMap[curBoardId]
             }
-            break
-
-        default:
             return state
-    }
-    return newState
-}
+        },
+    },
+})
+
+export const {
+    boardsChanged,
+    boardChanged,
+    filteredBoardChanged,
+    boardAdded,
+    boardRemoved,
+    boardUpdated,
+    boardsUpdated,
+} = boardSlice.actions
+
+export default boardSlice.reducer
