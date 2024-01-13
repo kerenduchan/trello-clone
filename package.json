@@ -13,6 +13,7 @@
     },
     "dependencies": {
         "@popperjs/core": "^2.11.8",
+        "@reduxjs/toolkit": "^2.0.1",
         "axios": "^1.6.5",
         "cloudinary": "^1.41.2",
         "fast-average-color": "^9.4.0",
@@ -25,7 +26,6 @@
         "react-redux": "^8.1.3",
         "react-router": "^6.18.0",
         "react-router-dom": "^6.18.0",
-        "redux": "^4.2.1",
         "sass": "^1.69.5",
         "unsplash-js": "^7.0.19"
     },
