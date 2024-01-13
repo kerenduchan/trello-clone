@@ -6,11 +6,15 @@ export const taskLocalService = {
     updateTask,
 }
 
-async function createTask(boardId, groupId, position, task) {
-    const board = await boardService.getById(boardId)
-    const group = board.groups.find((g) => g._id === groupId)
-    group.tasks.splice(position, 0, task)
-    await boardService.save(board)
+async function createTask(board, group, position, task) {
+    const groupToUpdate = { ...group }
+    groupToUpdate.tasks = [...groupToUpdate.tasks]
+    groupToUpdate.tasks.splice(position, 0, task)
+    const boardToUpdate = { ...board }
+    boardToUpdate.groups = board.groups.map((g) =>
+        g._id === group._id ? groupToUpdate : g
+    )
+    await boardService.save(boardToUpdate)
 }
 
 async function deleteTask(boardId, groupId, taskId) {

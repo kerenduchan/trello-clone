@@ -87,9 +87,11 @@ const boardSlice = createSlice({
         },
 
         taskCreated(state, action) {
-            const { groupId, position, task } = action.payload
-            const group = state.curBoard.groups.find((g) => g._id === groupId)
-            group.tasks.splice(position, 0, task)
+            const { group, position, task } = action.payload
+            const groupToUpdate = state.curBoard.groups.find(
+                (g) => g._id === group._id
+            )
+            groupToUpdate.tasks.splice(position, 0, task)
             return state
         },
 

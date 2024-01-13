@@ -8,11 +8,11 @@ import { taskService } from '../../services/task.service'
 
 export { createTask, deleteTask, updateTask }
 
-async function createTask(boardId, groupId, position, task) {
+async function createTask(board, group, position, task) {
     try {
         // optimistic update
-        store.dispatch(taskCreated({ boardId, groupId, position, task }))
-        await taskService.createTask(boardId, groupId, position, task)
+        store.dispatch(taskCreated({ board, group, position, task }))
+        await taskService.createTask(board, group, position, task)
     } catch (err) {
         // TODO: rollback store change
         throw err
