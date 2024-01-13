@@ -1,15 +1,15 @@
 import {
-    SET_CUR_CHECKLIST,
-    SET_CUR_CHECKLIST_ITEM,
+    curChecklistChanged,
+    curChecklistItemChanged,
 } from '../reducers/app.reducer'
 import { store } from '../store'
 
 export { setCurChecklist, setCurChecklistItem }
 
 function setCurChecklist(checklistId) {
-    store.dispatch({ type: SET_CUR_CHECKLIST, checklistId })
+    store.dispatch(curChecklistChanged(checklistId))
 }
 
-function setCurChecklistItem(checklistId) {
-    store.dispatch({ type: SET_CUR_CHECKLIST_ITEM, checklistId })
+function setCurChecklistItem(checklistItemId) {
+    store.dispatch(curChecklistItemChanged(checklistItemId))
 }
