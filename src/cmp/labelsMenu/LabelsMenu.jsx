@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import {
     addTaskLabel,
-    createBoardLabel,
     deleteBoardLabel,
+    updateBoard,
     updateBoardLabel,
 } from '../../store/actions/board.actions'
 import { PopoverMenu } from '../general/PopoverMenu'
@@ -42,7 +42,7 @@ export function LabelsMenu({ hierarchy, labelsMenu }) {
         onNavToMain()
     }
 
-    function onSaveAfterEdit(updatedLabel) {
+    function onUpdate(updatedLabel) {
         try {
             updateBoardLabel(board, updatedLabel)
             onNavToMain()
@@ -51,9 +51,11 @@ export function LabelsMenu({ hierarchy, labelsMenu }) {
         }
     }
 
-    async function onSaveAfterCreate(newLabel) {
+    async function onCreate(newLabel) {
         try {
-            const updatedBoard = await createBoardLabel(board, newLabel)
+            const updatedBoard = await updateBoard(board, {
+                labels: [...board.labels, newLabel],
+            })
             const updatedHierarchy = { ...hierarchy, board: updatedBoard }
 
             addTaskLabel(updatedHierarchy, newLabel)
@@ -82,7 +84,7 @@ export function LabelsMenu({ hierarchy, labelsMenu }) {
             >
                 <LabelsMenuEdit
                     label={curLabel}
-                    onSave={onSaveAfterEdit}
+                    onSave={onUpdate}
                     onDelete={onNavToDelete}
                 />
             </PopoverMenu>
@@ -93,7 +95,7 @@ export function LabelsMenu({ hierarchy, labelsMenu }) {
                 {...labelsMenu.popover}
                 onBack={onNavToMain}
             >
-                <LabelsMenuEdit label={null} onSave={onSaveAfterCreate} />
+                <LabelsMenuEdit label={null} onSave={onCreate} />
             </PopoverMenu>
         ),
         delete: (

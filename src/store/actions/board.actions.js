@@ -11,6 +11,7 @@ import {
     boardsUpdated,
     taskCreated,
     taskDeleted,
+    taskUpdated,
 } from '../reducers/board.reducer'
 import { store } from '../store'
 import { curChecklistChanged } from '../reducers/app.reducer'
@@ -51,7 +52,6 @@ export {
     updateChecklistItem,
     deleteChecklistItem,
     convertChecklistItemToTask,
-    createBoardLabel,
     updateBoardLabel,
     deleteBoardLabel,
     removeTaskLabel,
@@ -148,12 +148,6 @@ async function deleteBoard(board) {
 }
 
 // BOARD LABEL
-
-async function createBoardLabel(board, label) {
-    const boardToUpdate = { ...board }
-    boardToUpdate.labels = [...board.labels, label]
-    return _updateBoard(boardToUpdate)
-}
 
 async function updateBoardLabel(board, label, fieldsToUpdate) {
     const boardToUpdate = { ...board }
@@ -260,11 +254,19 @@ async function deleteTask(boardId, groupId, taskId) {
 
 async function updateTask(hierarchy, fieldsToUpdate) {
     const { board, group, task } = hierarchy
-    const groupToUpdate = { ...group }
-    groupToUpdate.tasks = group.tasks.map((t) =>
-        t._id === task._id ? { ...task, ...fieldsToUpdate } : t
-    )
-    return _updateGroup(board, groupToUpdate)
+    const boardId = board._id
+    const groupId = group._id
+
+    const updatedTask = { ...task, ...fieldsToUpdate }
+
+    try {
+        // optimistic update
+        store.dispatch(taskUpdated({ boardId, groupId, task: updatedTask }))
+        await taskService.updateTask(boardId, groupId, updatedTask)
+    } catch (err) {
+        // TODO: rollback store change
+        throw err
+    }
 }
 
 async function moveTask(
