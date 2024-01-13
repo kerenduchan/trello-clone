@@ -1,0 +1,48 @@
+import { store } from '../store'
+import {
+    taskCreated,
+    taskUpdated,
+    taskDeleted,
+} from '../reducers/board.reducer'
+import { taskService } from '../../services/task.service'
+
+export { createTask, deleteTask, updateTask }
+
+async function createTask(boardId, groupId, position, task) {
+    try {
+        // optimistic update
+        store.dispatch(taskCreated({ boardId, groupId, position, task }))
+        await taskService.createTask(boardId, groupId, position, task)
+    } catch (err) {
+        // TODO: rollback store change
+        throw err
+    }
+}
+
+async function deleteTask(boardId, groupId, taskId) {
+    try {
+        // optimistic update
+        store.dispatch(taskDeleted({ boardId, groupId, taskId }))
+        await taskService.deleteTask(boardId, groupId, taskId)
+    } catch (err) {
+        // TODO: rollback store change
+        throw err
+    }
+}
+
+async function updateTask(hierarchy, fieldsToUpdate) {
+    const { board, group, task } = hierarchy
+    const boardId = board._id
+    const groupId = group._id
+
+    const updatedTask = { ...task, ...fieldsToUpdate }
+
+    try {
+        // optimistic update
+        store.dispatch(taskUpdated({ boardId, groupId, task: updatedTask }))
+        await taskService.updateTask(boardId, groupId, updatedTask)
+    } catch (err) {
+        // TODO: rollback store change
+        throw err
+    }
+}

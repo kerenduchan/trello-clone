@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router'
-import { updateTask, deleteTask } from '../../store/actions/board.actions'
+import { updateTask, deleteTask } from '../../store/actions/task.actions'
 import { usePopoverState } from '../../customHooks/usePopoverState'
 import { DeleteMenu } from '../general/DeleteMenu'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'

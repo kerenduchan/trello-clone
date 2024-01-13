@@ -1,12 +1,10 @@
 import { uploadService } from '../../../services/upload.service'
 import {
-    addTaskAttachment,
     addTaskCoverImage,
     removeTaskCover,
     setTaskCoverColor,
-    setTaskCoverImage,
-    updateTask,
 } from '../../../store/actions/board.actions'
+import { updateTask } from '../../../store/actions/task.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { BtnFileUpload } from '../../general/btn/BtnFileUpload'
 import { TaskCoverMenuColors } from './TaskCoverMenuColors'

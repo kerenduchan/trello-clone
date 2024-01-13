@@ -4,7 +4,7 @@ import { useToggle } from '../../../customHooks/useToggle'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { TaskDatesMenu } from './TaskDatesMenu'
 import { Icon } from '../../general/Icon'
-import { updateTask } from '../../../store/actions/board.actions'
+import { updateTask } from '../../../store/actions/task.actions'
 import { boardService } from '../../../services/board.service'
 
 export function TaskDatesWidget({ hierarchy }) {
