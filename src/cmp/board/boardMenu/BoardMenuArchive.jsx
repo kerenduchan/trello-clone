@@ -30,8 +30,7 @@ export function BoardMenuArchive({ board }) {
     }
 
     function onDeleteTask(hierarchy) {
-        const { board, group, task } = hierarchy
-        deleteTask(board._id, group._id, task._id)
+        deleteTask(hierarchy)
     }
 
     function onUnarchiveGroup(group) {

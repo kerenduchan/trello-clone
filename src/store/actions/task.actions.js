@@ -19,11 +19,11 @@ async function createTask(board, group, position, task) {
     }
 }
 
-async function deleteTask(boardId, groupId, taskId) {
+async function deleteTask(hierarchy) {
     try {
         // optimistic update
-        store.dispatch(taskDeleted({ boardId, groupId, taskId }))
-        await taskService.deleteTask(boardId, groupId, taskId)
+        store.dispatch(taskDeleted({ ...hierarchy }))
+        await taskService.deleteTask(hierarchy)
     } catch (err) {
         // TODO: rollback store change
         throw err

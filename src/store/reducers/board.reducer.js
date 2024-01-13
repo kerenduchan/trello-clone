@@ -96,9 +96,11 @@ const boardSlice = createSlice({
         },
 
         taskDeleted(state, action) {
-            const { groupId, taskId } = action.payload
-            const group = state.curBoard.groups.find((g) => g._id === groupId)
-            group.tasks = group.tasks.filter((t) => t._id !== taskId)
+            const { group, task } = action.payload
+            const groupToUpdate = state.curBoard.groups.find(
+                (g) => g._id === group._id
+            )
+            groupToUpdate.tasks = group.tasks.filter((t) => t._id !== task._id)
             return state
         },
 

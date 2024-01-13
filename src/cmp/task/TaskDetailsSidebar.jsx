@@ -12,7 +12,7 @@ import { TaskMoveMenu } from './move/TaskMoveMenu'
 import { TaskAttachmentMenu } from './attachment/TaskAttachmentMenu'
 
 export function TaskDetailsSidebar({ hierarchy }) {
-    const { board, group, task } = hierarchy
+    const { board, task } = hierarchy
 
     const navigate = useNavigate()
     const membersMenu = usePopoverState()
@@ -27,7 +27,7 @@ export function TaskDetailsSidebar({ hierarchy }) {
 
     function onDeleteTask() {
         try {
-            deleteTask(board._id, group._id, task._id)
+            deleteTask(hierarchy)
             deleteTaskMenu.onClose()
             navigate(`/b/${board._id}`)
         } catch (err) {
