@@ -78,6 +78,7 @@ function getEmptyBoard() {
             backgroundImage: '',
         },
         groups: [],
+        members: [],
         labels: _getDefaultLabels(),
     }
 }
