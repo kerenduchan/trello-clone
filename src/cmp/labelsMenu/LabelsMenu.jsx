@@ -3,7 +3,6 @@ import {
     addTaskLabel,
     deleteBoardLabel,
     updateBoard,
-    updateBoardLabel,
 } from '../../store/actions/board.actions'
 import { PopoverMenu } from '../general/PopoverMenu'
 import { LabelsMenuEdit } from './LabelsMenuEdit'
@@ -42,9 +41,12 @@ export function LabelsMenu({ hierarchy, labelsMenu }) {
         onNavToMain()
     }
 
-    function onUpdate(updatedLabel) {
+    function onUpdate(label) {
         try {
-            updateBoardLabel(board, updatedLabel)
+            const labels = board.labels.map((l) =>
+                l._id === label._id ? label : l
+            )
+            updateBoard(board, { labels })
             onNavToMain()
         } catch (err) {
             console.error(err)
