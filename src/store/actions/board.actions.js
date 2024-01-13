@@ -9,9 +9,6 @@ import {
     boardRemoved,
     boardUpdated,
     boardsUpdated,
-    taskCreated,
-    taskDeleted,
-    taskUpdated,
 } from '../reducers/board.reducer'
 import { store } from '../store'
 import { curChecklistChanged } from '../reducers/app.reducer'
