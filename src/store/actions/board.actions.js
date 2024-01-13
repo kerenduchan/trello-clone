@@ -9,9 +9,11 @@ import {
     boardRemoved,
     boardUpdated,
     boardsUpdated,
+    taskCreated,
 } from '../reducers/board.reducer'
 import { store } from '../store'
 import { curChecklistChanged } from '../reducers/app.reducer'
+import { taskService } from '../../services/task.service'
 
 export {
     loadBoards,
@@ -233,11 +235,15 @@ async function copyGroup(board, group, title, targetPosition) {
 
 // TASK
 
-async function createTask(board, group, task, position) {
-    const groupToUpdate = { ...group }
-    groupToUpdate.tasks = [...group.tasks]
-    groupToUpdate.tasks.splice(position, 0, task)
-    return _updateGroup(board, groupToUpdate)
+async function createTask(boardId, groupId, position, task) {
+    try {
+        // optimistic update
+        store.dispatch(taskCreated({ boardId, groupId, position, task }))
+        await taskService.createTask(boardId, groupId, position, task)
+    } catch (err) {
+        // TODO: rollback store change
+        throw err
+    }
 }
 
 async function deleteTask(hierarchy) {

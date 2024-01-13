@@ -15,7 +15,7 @@ export function GroupPreview({ board, group, index, isFilterEmpty }) {
 
     async function onCreateTask(board, group, task, position) {
         try {
-            createTask(board, group, task, position)
+            createTask(board._id, group._id, position, task)
             setTaskCreateFormPosition((prev) => prev + 1)
         } catch (err) {
             console.error(err)
