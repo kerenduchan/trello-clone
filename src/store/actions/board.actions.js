@@ -11,7 +11,7 @@ import {
     SET_FILTERED_BOARD,
 } from '../reducers/board.reducer'
 import { store } from '../store'
-import { setCurChecklist } from './app.actions'
+import { curChecklistChanged } from '../reducers/app.reducer'
 
 export {
     loadBoards,
@@ -451,7 +451,7 @@ async function addChecklist(hierarchy, checklist) {
     const { board, group, task } = hierarchy
     const taskToUpdate = { ...task }
     taskToUpdate.checklists = [...task.checklists, checklist]
-    setCurChecklist(checklist._id)
+    store.dispatch(curChecklistChanged(checklist._id))
     return _updateTask(board, group, taskToUpdate)
 }
 

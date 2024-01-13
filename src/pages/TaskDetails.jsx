@@ -1,19 +1,21 @@
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router'
+import { useDispatch } from 'react-redux'
 import { TaskDescription } from '../cmp/task/description/TaskDescription'
 import { TaskDetailsActivity } from '../cmp/task/TaskDetailsActivity'
 import { TaskDetailsSidebar } from '../cmp/task/TaskDetailsSidebar'
 import { ChecklistList } from '../cmp/task/checklist/ChecklistList'
 import { LabelsWidget } from '../cmp/task/label/LabelsWidget'
 import { TaskDetailsHeader } from '../cmp/task/TaskDetailsHeader'
-import { setCurChecklist } from '../store/actions/app.actions'
 import { MembersWidget } from '../cmp/task/members/MembersWidget'
 import { TaskDatesWidget } from '../cmp/task/dates/TaskDatesWidget'
 import { TaskAttachments } from '../cmp/task/attachment/TaskAttachments'
+import { curChecklistChanged } from '../store/reducers/app.reducer'
 
 export function TaskDetails({ hierarchy }) {
     const { task } = hierarchy
 
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const params = useParams()
 
@@ -25,7 +27,7 @@ export function TaskDetails({ hierarchy }) {
     }, [])
 
     function onClose() {
-        setCurChecklist(null)
+        dispatch(curChecklistChanged(null))
         navigate(`/b/${params.boardId}`)
     }
 
