@@ -1,5 +1,9 @@
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Draggable } from 'react-beautiful-dnd'
+import {
+    curChecklistChanged,
+    selectChecklistId,
+} from '../../../store/reducers/app.reducer'
 import { useForm } from '../../../customHooks/useForm'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 import { ChecklistItem } from './ChecklistItem'
@@ -10,12 +14,10 @@ import { DeleteMenu } from '../../general/DeleteMenu'
 import { boardService } from '../../../services/board.service'
 import { deleteChecklist } from '../../../store/actions/board.actions'
 import { ChecklistItemCreateForm } from './ChecklistItemCreateForm'
-import { setCurChecklist } from '../../../store/actions/app.actions'
 
 export function Checklist({ hierarchy, checklist, index }) {
-    const curChecklistId = useSelector(
-        (storeState) => storeState.appModule.curChecklistId
-    )
+    const dispatch = useDispatch()
+    const curChecklistId = useSelector(selectChecklistId)
 
     // When create checklist item form is closed, need to retain draft
     const [draft, handleChange, setDraft] = useForm(
@@ -35,11 +37,11 @@ export function Checklist({ hierarchy, checklist, index }) {
     }
 
     function onShowForm() {
-        setCurChecklist(checklist._id)
+        dispatch(curChecklistChanged(checklist._id))
     }
 
     function onHideForm() {
-        setCurChecklist(null)
+        dispatch(curChecklistChanged(null))
     }
 
     function isShowForm() {

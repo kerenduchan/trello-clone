@@ -1,15 +1,17 @@
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import {
+    curChecklistItemChanged,
+    selectChecklistItemId,
+} from '../../../store/reducers/app.reducer'
 import { updateChecklistItem } from '../../../store/actions/board.actions'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { ChecklistItemActionsMenu } from './ChecklistItemActionsMenu'
 import { ChecklistItemEditForm } from './ChecklistItemEditForm'
-import { setCurChecklistItem } from '../../../store/actions/app.actions'
 import { Icon } from '../../general/Icon'
 
 export function ChecklistItem({ hierarchy, checklist, item }) {
-    const curChecklistItemId = useSelector(
-        (storeState) => storeState.appModule.curChecklistItemId
-    )
+    const dispatch = useDispatch()
+    const curChecklistItemId = useSelector(selectChecklistItemId)
     const actionsMenu = usePopoverState()
 
     function onCheckboxClick() {
@@ -26,11 +28,11 @@ export function ChecklistItem({ hierarchy, checklist, item }) {
     }
 
     function onShowForm() {
-        setCurChecklistItem(item._id)
+        dispatch(curChecklistItemChanged(item._id))
     }
 
     function onHideForm() {
-        setCurChecklistItem(null)
+        dispatch(curChecklistItemChanged(null))
     }
 
     function isShowForm() {

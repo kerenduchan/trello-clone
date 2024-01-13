@@ -1,22 +1,24 @@
+import { useDispatch } from 'react-redux'
 import { useRef } from 'react'
 import { Droppable } from 'react-beautiful-dnd'
-import {
-    setCurChecklist,
-    setCurChecklistItem,
-} from '../../../store/actions/app.actions'
 import { useClickedOutListener } from '../../../customHooks/useClickedOutListener'
-import { Checklist } from './Checklist'
 import { useKeyDownListener } from '../../../customHooks/useKeyDownListener'
+import { Checklist } from './Checklist'
+import {
+    curChecklistChanged,
+    curChecklistItemChanged,
+} from '../../../store/reducers/app.reducer'
 
 export function ChecklistList({ hierarchy }) {
+    const dispatch = useDispatch()
     const { task } = hierarchy
     const listElRef = useRef()
     useClickedOutListener([listElRef], onClose)
     useKeyDownListener(['Escape'], onClose)
 
     function onClose() {
-        setCurChecklist(null)
-        setCurChecklistItem(null)
+        dispatch(curChecklistChanged(null))
+        dispatch(curChecklistItemChanged(null))
     }
 
     return (

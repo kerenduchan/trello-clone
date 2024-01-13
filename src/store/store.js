@@ -1,18 +1,11 @@
-import {
-    combineReducers,
-    compose,
-    legacy_createStore as createStore,
-} from 'redux'
-import { appReducer } from './reducers/app.reducer'
-import { boardReducer } from './reducers/board.reducer'
+import { configureStore } from '@reduxjs/toolkit'
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+import appReducer from './reducers/app.reducer'
+import boardReducer from './reducers/board.reducer'
 
-const rootReducer = combineReducers({
-    appModule: appReducer,
-    boardModule: boardReducer,
+export const store = configureStore({
+    reducer: {
+        app: appReducer,
+        board: boardReducer,
+    },
 })
-
-export const store = createStore(rootReducer, composeEnhancers())
-
-window.gStore = store

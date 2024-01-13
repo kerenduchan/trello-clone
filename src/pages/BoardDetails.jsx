@@ -4,6 +4,10 @@ import { useSearchParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import {
+    selectBoard,
+    selectFilteredBoard,
+} from '../store/reducers/board.reducer'
+import {
     loadBoard,
     unloadBoard,
     applyBoardFilter,
@@ -22,10 +26,8 @@ export function BoardDetails() {
     const params = useParams()
     const [searchParams, setSearchParams] = useSearchParams()
     const [isFilterEmpty, setIsFilterEmpty] = useState(true)
-    const board = useSelector((storeState) => storeState.boardModule.curBoard)
-    const filteredBoard = useSelector(
-        (storeState) => storeState.boardModule.filteredBoard
-    )
+    const board = useSelector(selectBoard)
+    const filteredBoard = useSelector(selectFilteredBoard)
     const [showMenu, toggleShowMenu, setShowMenu] = useToggle()
     const [filter, setFilter] = useState(null)
 

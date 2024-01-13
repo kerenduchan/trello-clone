@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux'
 import { boardService } from '../../../services/board.service'
+import { selectBoard } from '../../../store/reducers/board.reducer'
 import { updateBoard } from '../../../store/actions/board.actions'
 import { Icon } from '../../general/Icon'
 
 export function BoardMenuBackgroundColor() {
-    const board = useSelector((storeState) => storeState.boardModule.curBoard)
+    const board = useSelector(selectBoard)
 
     function onSelect(color) {
         updateBoard(board, { style: { backgroundColor: color } })

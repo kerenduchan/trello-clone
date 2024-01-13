@@ -1,5 +1,4 @@
-export const SET_CUR_CHECKLIST = 'SET_CUR_CHECKLIST'
-export const SET_CUR_CHECKLIST_ITEM = 'SET_CUR_CHECKLIST_ITEM'
+import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     // The ID of the checklist, in which the "Add checklist item"
@@ -12,23 +11,28 @@ const initialState = {
     curChecklistItemId: null,
 }
 
-// Objects in action MUST NOT contain pointers to the current state.
-// New state can contain pointers to prev state's objects as long as they
-// are not mutated at any point.
-export function appReducer(state = initialState, action = {}) {
-    switch (action.type) {
-        case SET_CUR_CHECKLIST:
+// "mutating" code is okay inside of createSlice!
+const appSlice = createSlice({
+    name: 'app',
+    initialState,
+    reducers: {
+        curChecklistChanged(state, action) {
             return {
-                curChecklistId: action.checklistId,
+                curChecklistId: action.payload,
                 curChecklistItemId: null,
             }
-        case SET_CUR_CHECKLIST_ITEM:
+        },
+        curChecklistItemChanged(state, action) {
             return {
                 curChecklistId: null,
-                curChecklistItemId: action.checklistId,
+                curChecklistItemId: action.payload,
             }
+        },
+    },
+})
 
-        default:
-            return state
-    }
-}
+export const { curChecklistChanged, curChecklistItemChanged } = appSlice.actions
+export default appSlice.reducer
+
+export const selectChecklistId = (state) => state.app.curChecklistId
+export const selectChecklistItemId = (state) => state.app.curChecklistItemId

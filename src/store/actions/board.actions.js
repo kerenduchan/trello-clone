@@ -2,16 +2,16 @@ import { utilService } from '../../services/util.service'
 import { boardService } from '../../services/board.service'
 import { authService } from '../../services/auth.service'
 import {
-    SET_BOARDS,
-    SET_BOARD,
-    ADD_BOARD,
-    REMOVE_BOARD,
-    UPDATE_BOARD,
-    UPDATE_BOARDS,
-    SET_FILTERED_BOARD,
+    boardsChanged,
+    boardChanged,
+    filteredBoardChanged,
+    boardAdded,
+    boardRemoved,
+    boardUpdated,
+    boardsUpdated,
 } from '../reducers/board.reducer'
 import { store } from '../store'
-import { setCurChecklist } from './app.actions'
+import { curChecklistChanged } from '../reducers/app.reducer'
 
 export {
     loadBoards,
@@ -62,7 +62,7 @@ export {
 async function loadBoards() {
     try {
         const boards = await boardService.query()
-        store.dispatch({ type: SET_BOARDS, boards })
+        store.dispatch(boardsChanged(boards))
     } catch (err) {
         console.error('Failed to load boards:', err)
         throw err
@@ -72,7 +72,7 @@ async function loadBoards() {
 async function loadBoard(boardId) {
     try {
         const board = await boardService.getById(boardId)
-        store.dispatch({ type: SET_BOARD, board })
+        store.dispatch(boardChanged(board))
     } catch (err) {
         console.error('Failed to load board:', err)
         throw err
@@ -80,13 +80,13 @@ async function loadBoard(boardId) {
 }
 
 function unloadBoard() {
-    if (store.getState().boardModule.curBoard !== null) {
-        store.dispatch({ type: SET_BOARD, board: null })
+    if (store.getState().board.curBoard !== null) {
+        store.dispatch(boardChanged(null))
     }
 }
 
 function applyBoardFilter(filter) {
-    const board = store.getState().boardModule.curBoard
+    const board = store.getState().board.curBoard
     if (!board) {
         return null
     }
@@ -106,7 +106,7 @@ function applyBoardFilter(filter) {
     )
 
     const filteredBoard = { ...board, groups: filteredGroups }
-    store.dispatch({ type: SET_FILTERED_BOARD, filteredBoard })
+    store.dispatch(filteredBoardChanged(filteredBoard))
 }
 
 // BOARD
@@ -116,7 +116,7 @@ async function createBoard(board) {
         // Can't optimistically add a board
         // because the ID comes from the backend
         const boardWithId = await boardService.save(board)
-        store.dispatch({ type: ADD_BOARD, board: boardWithId })
+        store.dispatch(boardAdded(boardWithId))
         return boardWithId
     } catch (err) {
         console.error('Failed to create board:', err)
@@ -137,7 +137,7 @@ async function deleteBoard(board) {
         // removal, boards should be reloaded from the backend at a component
         // above the BoardIndex.
         await boardService.remove(boardId)
-        store.dispatch({ type: REMOVE_BOARD, boardId })
+        store.dispatch(boardRemoved(boardId))
     } catch (err) {
         console.error('Failed to delete board:', err)
         throw err
@@ -210,7 +210,7 @@ async function moveGroup(board, group, targetBoardId, targetPositionId) {
     }
 
     // move group to a different board
-    const allBoards = store.getState().boardModule.boards
+    const allBoards = store.getState().board.boards
     const targetBoard = allBoards.find((b) => b._id === targetBoardId)
     const targetBoardToUpdate = { ...targetBoard }
     targetBoardToUpdate.groups.splice(targetPositionId, 0, group)
@@ -333,7 +333,7 @@ async function copyTask(
     targetGroupId,
     targetPositionId
 ) {
-    const allBoards = store.getState().boardModule.boards
+    const allBoards = store.getState().board.boards
     const targetBoard = allBoards.find((b) => b._id === targetBoardId)
     const targetGroup = targetBoard.groups.find((g) => g._id === targetGroupId)
     const targetGroupToUpdate = { ...targetGroup }
@@ -451,7 +451,7 @@ async function addChecklist(hierarchy, checklist) {
     const { board, group, task } = hierarchy
     const taskToUpdate = { ...task }
     taskToUpdate.checklists = [...task.checklists, checklist]
-    setCurChecklist(checklist._id)
+    store.dispatch(curChecklistChanged(checklist._id))
     return _updateTask(board, group, taskToUpdate)
 }
 
@@ -605,7 +605,7 @@ async function removeTaskCover(hierarchy) {
 async function _updateBoard(board) {
     try {
         // optimistic update
-        store.dispatch({ type: UPDATE_BOARD, board })
+        store.dispatch(boardUpdated(board))
         return boardService.save(board)
     } catch (err) {
         console.error('Failed to update board:', err)
@@ -617,7 +617,7 @@ async function _updateBoard(board) {
 async function _updateBoards(boards) {
     try {
         // optimistic update
-        store.dispatch({ type: UPDATE_BOARDS, boards })
+        store.dispatch(boardsUpdated(boards))
 
         for (const b of boards) {
             await boardService.save(b)
@@ -678,6 +678,7 @@ async function _moveTaskInsideBoard(hierarchy, targetGroupId, targetPosition) {
     // insert task into target group
     const targetGroup = board.groups.find((g) => g._id === targetGroupId)
     const targetGroupToUpdate = { ...targetGroup }
+    targetGroupToUpdate.tasks = [...targetGroupToUpdate.tasks]
     targetGroupToUpdate.tasks.splice(targetPosition, 0, task)
 
     const boardToUpdate = { ...board }
@@ -710,7 +711,7 @@ async function _moveTaskToDifferentBoard(
     )
 
     // insert task into target group in target board
-    const allBoards = store.getState().boardModule.boards
+    const allBoards = store.getState().board.boards
     const targetBoard = allBoards.find((b) => b._id === targetBoardId)
     const targetGroup = targetBoard.groups.find((g) => g._id === targetGroupId)
     const targetGroupToUpdate = { ...targetGroup }

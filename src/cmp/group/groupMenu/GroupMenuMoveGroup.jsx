@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState } from 'react'
-import { CustomSelect } from '../../general/CustomSelect'
+import { useEffect, useState } from 'react'
+import { selectAllBoards } from '../../../store/reducers/board.reducer'
 import { loadBoards } from '../../../store/actions/board.actions'
+import { CustomSelect } from '../../general/CustomSelect'
 import { utilService } from '../../../services/util.service'
 import { useSelector } from 'react-redux'
 
 export function GroupMenuMoveGroup({ board, group, onMoveGroup }) {
-    const allBoards = useSelector((storeState) => storeState.boardModule.boards)
+    const allBoards = useSelector(selectAllBoards)
 
     const [boardOptions, setBoardOptions] = useState([])
     const [positionOptions, setPositionOptions] = useState([])
