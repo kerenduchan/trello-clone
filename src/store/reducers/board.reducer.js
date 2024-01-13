@@ -70,6 +70,13 @@ const boardSlice = createSlice({
             group.tasks.splice(position, 0, task)
             return state
         },
+
+        taskDeleted(state, action) {
+            const { groupId, taskId } = action.payload
+            const group = state.curBoard.groups.find((g) => g._id === groupId)
+            group.tasks = group.tasks.filter((t) => t._id !== taskId)
+            return state
+        },
     },
 })
 
@@ -82,6 +89,7 @@ export const {
     boardUpdated,
     boardsUpdated,
     taskCreated,
+    taskDeleted,
 } = boardSlice.actions
 
 export default boardSlice.reducer

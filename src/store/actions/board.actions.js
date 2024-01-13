@@ -10,6 +10,7 @@ import {
     boardUpdated,
     boardsUpdated,
     taskCreated,
+    taskDeleted,
 } from '../reducers/board.reducer'
 import { store } from '../store'
 import { curChecklistChanged } from '../reducers/app.reducer'
@@ -246,11 +247,15 @@ async function createTask(boardId, groupId, position, task) {
     }
 }
 
-async function deleteTask(hierarchy) {
-    const { board, group, task } = hierarchy
-    const groupToUpdate = { ...group }
-    groupToUpdate.tasks = group.tasks.filter((t) => t._id !== task._id)
-    return _updateGroup(board, groupToUpdate)
+async function deleteTask(boardId, groupId, taskId) {
+    try {
+        // optimistic update
+        store.dispatch(taskDeleted({ boardId, groupId, taskId }))
+        await taskService.deleteTask(boardId, groupId, taskId)
+    } catch (err) {
+        // TODO: rollback store change
+        throw err
+    }
 }
 
 async function updateTask(hierarchy, fieldsToUpdate) {
