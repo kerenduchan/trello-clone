@@ -25,7 +25,7 @@ export function GroupCreate({ board }) {
 
         if (draft.title.length > 0) {
             try {
-                createGroup(board, draft)
+                createGroup(board._id, draft)
                 setDraft(boardService.getEmptyGroup())
                 inputRef.current.focus()
             } catch (err) {

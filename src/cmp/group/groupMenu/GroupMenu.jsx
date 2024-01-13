@@ -58,7 +58,7 @@ export function GroupMenu({
     }
 
     function onArchiveGroup() {
-        updateGroup(board, group, { archivedAt: Date.now() })
+        updateGroup(board._id, group, { archivedAt: Date.now() })
         onClose()
     }
 

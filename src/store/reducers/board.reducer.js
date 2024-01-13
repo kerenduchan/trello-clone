@@ -64,6 +64,28 @@ const boardSlice = createSlice({
             return state
         },
 
+        groupCreated(state, action) {
+            const { group } = action.payload
+            state.curBoard.groups.push(group)
+            return state
+        },
+
+        groupDeleted(state, action) {
+            const { groupId } = action.payload
+            state.curBoard.groups = state.curBoard.groups.filter(
+                (g) => g._id !== groupId
+            )
+            return state
+        },
+
+        groupUpdated(state, action) {
+            const { group } = action.payload
+            state.curBoard.groups = state.curBoard.groups.map((g) =>
+                g._id === group._id ? group : g
+            )
+            return state
+        },
+
         taskCreated(state, action) {
             const { groupId, position, task } = action.payload
             const group = state.curBoard.groups.find((g) => g._id === groupId)
@@ -97,6 +119,9 @@ export const {
     boardRemoved,
     boardUpdated,
     boardsUpdated,
+    groupCreated,
+    groupDeleted,
+    groupUpdated,
     taskCreated,
     taskDeleted,
     taskUpdated,

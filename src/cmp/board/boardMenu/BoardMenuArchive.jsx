@@ -37,7 +37,7 @@ export function BoardMenuArchive({ board }) {
     }
 
     function onUnarchiveGroup(group) {
-        updateGroup(board, group, { archivedAt: null })
+        updateGroup(board._id, group, { archivedAt: null })
     }
 
     if (!archivedTasksInfo || !archivedGroups) return 'Loading...'

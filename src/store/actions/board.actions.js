@@ -12,10 +12,13 @@ import {
     taskCreated,
     taskDeleted,
     taskUpdated,
+    groupCreated,
+    groupUpdated,
 } from '../reducers/board.reducer'
 import { store } from '../store'
 import { curChecklistChanged } from '../reducers/app.reducer'
 import { taskService } from '../../services/task.service'
+import { groupService } from '../../services/group.service'
 
 export {
     loadBoards,
@@ -164,24 +167,39 @@ async function deleteBoardLabel(board, label) {
 
 // GROUP
 
-async function createGroup(board, group) {
-    const boardToUpdate = { ...board }
-    boardToUpdate.groups = [...board.groups, group]
-    return _updateBoard(boardToUpdate)
+async function createGroup(boardId, group) {
+    try {
+        // optimistic update
+        store.dispatch(groupCreated({ boardId, group }))
+        await groupService.createGroup(boardId, group)
+    } catch (err) {
+        // TODO: rollback store change
+        throw err
+    }
 }
 
-async function deleteGroup(board, group) {
-    const boardToUpdate = { ...board }
-    boardToUpdate.groups = board.groups.filter((g) => g._id !== group._id)
-    return _updateBoard(boardToUpdate)
+async function deleteGroup(boardId, groupId) {
+    try {
+        // optimistic update
+        store.dispatch(groupDeleted({ boardId, groupId }))
+        await groupService.deleteGroup(boardId, groupId)
+    } catch (err) {
+        // TODO: rollback store change
+        throw err
+    }
 }
 
-async function updateGroup(board, group, fieldsToUpdate) {
-    const boardToUpdate = { ...board }
-    boardToUpdate.groups = board.groups.map((g) =>
-        g._id === group._id ? { ...group, ...fieldsToUpdate } : g
-    )
-    return _updateBoard(boardToUpdate)
+async function updateGroup(boardId, group, fieldsToUpdate) {
+    const updatedGroup = { ...group, ...fieldsToUpdate }
+
+    try {
+        // optimistic update
+        store.dispatch(groupUpdated({ boardId, group: updatedGroup }))
+        await groupService.updateGroup(boardId, updatedGroup)
+    } catch (err) {
+        // TODO: rollback store change
+        throw err
+    }
 }
 
 async function moveGroup(board, group, targetBoardId, targetPositionId) {
