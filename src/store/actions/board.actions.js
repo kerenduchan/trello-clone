@@ -37,8 +37,6 @@ export {
     moveTasks,
     archiveTasks,
     copyTask,
-    addTaskMember,
-    removeTaskMember,
     addTaskComment,
     deleteTaskComment,
     updateTaskComment,
@@ -351,27 +349,6 @@ async function copyTask(
     }
     targetGroupToUpdate.tasks.splice(targetPositionId, 0, taskCopy)
     _updateGroup(targetBoard, targetGroupToUpdate)
-}
-
-// TASK MEMBER
-
-async function addTaskMember(hierarchy, member) {
-    const { board, group, task } = hierarchy
-    const taskToUpdate = { ...task }
-    if (taskToUpdate.memberIds) {
-        taskToUpdate.memberIds = [...task.memberIds, member._id]
-    } else {
-        taskToUpdate.memberIds = [member._id]
-    }
-
-    return _updateTask(board, group, taskToUpdate)
-}
-
-async function removeTaskMember(hierarchy, member) {
-    const { board, group, task } = hierarchy
-    const taskToUpdate = { ...task }
-    taskToUpdate.memberIds = task.memberIds.filter((id) => id !== member._id)
-    return _updateTask(board, group, taskToUpdate)
 }
 
 // COMMENT
