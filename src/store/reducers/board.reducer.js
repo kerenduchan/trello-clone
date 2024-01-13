@@ -77,3 +77,8 @@ export const {
 } = boardSlice.actions
 
 export default boardSlice.reducer
+
+// for useSelector in react components
+export const selectAllBoards = (state) => state.boardModule.boards
+export const selectBoard = (state) => state.boardModule.curBoard
+export const selectFilteredBoard = (state) => state.boardModule.filteredBoard

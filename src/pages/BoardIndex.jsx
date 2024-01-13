@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { selectAllBoards } from '../store/reducers/board.reducer'
 import { loadBoards } from '../store/actions/board.actions'
 import { BoardList } from '../cmp/board/BoardList'
 import { Icon } from '../cmp/general/Icon'
 import { BoardIndexHeader } from '../cmp/board/BoardIndexHeader'
 
 export function BoardIndex() {
-    const boards = useSelector((storeState) => storeState.boardModule.boards)
+    const boards = useSelector(selectAllBoards)
     const [starredBoards, setStarredBoards] = useState([])
 
     useEffect(() => {

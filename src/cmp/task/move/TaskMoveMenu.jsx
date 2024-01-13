@@ -1,14 +1,18 @@
 import { useEffect, useState, useRef } from 'react'
 import { useSelector } from 'react-redux'
-import { loadBoards } from '../../../store/actions/board.actions'
-import { moveTask, copyTask } from '../../../store/actions/board.actions'
+import { selectAllBoards } from '../../../store/reducers/board.reducer'
+import {
+    loadBoards,
+    moveTask,
+    copyTask,
+} from '../../../store/actions/board.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { CustomSelect } from '../../general/CustomSelect'
 
 export function TaskMoveMenu({ hierarchy, popoverState, isCopy }) {
     const { board, group, task } = hierarchy
 
-    const allBoards = useSelector((storeState) => storeState.boardModule.boards)
+    const allBoards = useSelector(selectAllBoards)
     const [boardOptions, setBoardOptions] = useState([])
     const [groupOptions, setGroupOptions] = useState([])
     const [positionOptions, setPositionOptions] = useState([])

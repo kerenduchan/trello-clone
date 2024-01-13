@@ -1,6 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { Draggable } from 'react-beautiful-dnd'
-import { curChecklistChanged } from '../../../store/reducers/app.reducer'
+import {
+    curChecklistChanged,
+    selectChecklistId,
+} from '../../../store/reducers/app.reducer'
 import { useForm } from '../../../customHooks/useForm'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 import { ChecklistItem } from './ChecklistItem'
@@ -14,9 +17,7 @@ import { ChecklistItemCreateForm } from './ChecklistItemCreateForm'
 
 export function Checklist({ hierarchy, checklist, index }) {
     const dispatch = useDispatch()
-    const curChecklistId = useSelector(
-        (storeState) => storeState.appModule.curChecklistId
-    )
+    const curChecklistId = useSelector(selectChecklistId)
 
     // When create checklist item form is closed, need to retain draft
     const [draft, handleChange, setDraft] = useForm(
