@@ -30,9 +30,6 @@ export {
     addTaskComment,
     deleteTaskComment,
     updateTaskComment,
-    addTaskAttachment,
-    deleteTaskAttachment,
-    updateTaskAttachment,
     addChecklist,
     deleteChecklist,
     moveChecklist,
@@ -41,12 +38,6 @@ export {
     deleteChecklistItem,
     convertChecklistItemToTask,
     deleteBoardLabel,
-    removeTaskLabel,
-    addTaskLabel,
-    setTaskCoverImage,
-    addTaskCoverImage,
-    setTaskCoverColor,
-    removeTaskCover,
 }
 
 async function loadBoards() {
@@ -321,42 +312,6 @@ async function updateTaskComment(hierarchy, comment) {
     return _updateTask(board, group, taskToUpdate)
 }
 
-async function addTaskAttachment(hierarchy, fileUrl) {
-    const { board, group } = hierarchy
-    const [newHierarchy] = _addTaskAttachment(hierarchy, fileUrl)
-    await _updateTask(board, group, newHierarchy.task)
-    return attachment
-}
-
-async function deleteTaskAttachment(hierarchy, attachment) {
-    // TODO: also delete the attachment from cloudinary
-    const { board, group, task } = hierarchy
-    const taskToUpdate = { ...task }
-
-    taskToUpdate.attachments = task.attachments.filter(
-        (a) => a._id !== attachment._id
-    )
-
-    // if this attachment was the task cover, remove task cover
-    if (task.cover?.bgImage?.attachmentId === attachment._id) {
-        const cover = { size: task.cover.size || 'small' }
-        taskToUpdate.cover = cover
-    }
-
-    return _updateTask(board, group, taskToUpdate)
-}
-
-async function updateTaskAttachment(hierarchy, attachment) {
-    const { board, group, task } = hierarchy
-    const taskToUpdate = { ...task }
-
-    taskToUpdate.attachments = task.attachments.map((a) =>
-        a._id === attachment._id ? attachment : a
-    )
-
-    return _updateTask(board, group, taskToUpdate)
-}
-
 // CHEKCLIST
 
 async function addChecklist(hierarchy, checklist) {
@@ -435,81 +390,6 @@ async function convertChecklistItemToTask(hierarchy, checklist, item) {
     )
 
     _updateGroup(board, groupToUpdate)
-}
-
-// TASK LABEL
-
-async function addTaskLabel(hierarchy, label) {
-    const { board, group, task } = hierarchy
-    const taskToUpdate = { ...task }
-    const taskLabelIds = [...task.labelIds, label._id]
-
-    // keep the same order of labels as in the board labels
-    taskToUpdate.labelIds = board.labels
-        .filter((l) => taskLabelIds.includes(l._id))
-        .map((l) => l._id)
-
-    return _updateTask(board, group, taskToUpdate)
-}
-
-async function removeTaskLabel(hierarchy, label) {
-    const { board, group, task } = hierarchy
-    const taskToUpdate = { ...task }
-    const taskLabelIds = task.labelIds.filter((id) => id !== label._id)
-
-    // keep the same order of labels as in the board labels
-    taskToUpdate.labelIds = board.labels
-        .filter((l) => taskLabelIds.includes(l._id))
-        .map((l) => l._id)
-    return _updateTask(board, group, taskToUpdate)
-}
-
-async function addTaskCoverImage(hierarchy, imgUrl) {
-    const [newHierarchy, attachment] = _addTaskAttachment(hierarchy, imgUrl)
-    return setTaskCoverImage(newHierarchy, attachment)
-}
-
-async function setTaskCoverImage(hierarchy, attachment) {
-    const url = attachment.fileUrl
-
-    const color = await utilService.getAverageColor(url)
-    const theme = utilService.getThemeByAverageColor(color)
-
-    const cover = {
-        size: 'large',
-        bgImage: {
-            url,
-            color: color.hex,
-            attachmentId: attachment._id,
-            textColor: 'dark',
-        },
-
-        theme,
-    }
-
-    updateTask(hierarchy, { cover })
-}
-
-async function setTaskCoverColor(hierarchy, c) {
-    const { task } = hierarchy
-
-    // retain size, update bg color and text color, and no bg image
-    const cover = {
-        size: task.cover.size,
-        bgColor: {
-            _id: c._id,
-            color: c.color,
-            textColor: c.textColor,
-        },
-        theme: c._id === 'gray' ? 'dark' : 'light',
-    }
-    updateTask(hierarchy, { cover })
-}
-
-async function removeTaskCover(hierarchy) {
-    const prevCover = hierarchy.task.cover
-    const cover = { size: prevCover.size || 'small' }
-    updateTask(hierarchy, { cover })
 }
 
 // PRIVATE HELPER FUNCTIONS
@@ -750,31 +630,4 @@ function _isDatesMatchDue(due, dates) {
         month: 30,
     }
     return delta > 0 && delta < maxDeltaDays[due] * 24 * SECONDS_PER_HOUR
-}
-
-function _createAttachment(fileUrl) {
-    const urlParts = fileUrl.split('/')
-    const title = urlParts[urlParts.length - 1]
-
-    const attachment = {
-        _id: utilService.makeId(),
-        title,
-        createdAt: Date.now(),
-        createdBy: authService.getLoggedinUser()._id,
-        fileUrl,
-    }
-    return attachment
-}
-
-function _addTaskAttachment(hierarchy, fileUrl) {
-    const { task } = hierarchy
-    const taskToUpdate = { ...task }
-    const attachment = _createAttachment(fileUrl)
-
-    if (taskToUpdate.attachments) {
-        taskToUpdate.attachments = [...task.attachments, attachment]
-    } else {
-        taskToUpdate.attachments = [attachment]
-    }
-    return [{ ...hierarchy, task: taskToUpdate }, attachment]
 }

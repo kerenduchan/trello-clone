@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react'
-import { updateTaskAttachment } from '../../../store/actions/board.actions'
+import { updateTaskAttachment } from '../../../store/actions/task.actions'
 import { useForm } from '../../../customHooks/useForm'
 import { PopoverMenu } from '../../general/PopoverMenu'
 

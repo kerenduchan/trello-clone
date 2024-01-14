@@ -28,9 +28,14 @@ async function deleteTask(hierarchy) {
     await boardService.save(boardToUpdate)
 }
 
-async function updateTask(boardId, groupId, task) {
-    const board = await boardService.getById(boardId)
-    const group = board.groups.find((g) => g._id === groupId)
-    group.tasks = group.tasks.map((t) => (t._id === task._id ? task : t))
-    await boardService.save(board)
+async function updateTask(board, group, task) {
+    const groupToUpdate = { ...group }
+    groupToUpdate.tasks = group.tasks.map((t) =>
+        t._id === task._id ? task : t
+    )
+    const boardToUpdate = { ...board }
+    boardToUpdate.groups = board.groups.map((g) =>
+        g._id === group._id ? groupToUpdate : g
+    )
+    await boardService.save(boardToUpdate)
 }

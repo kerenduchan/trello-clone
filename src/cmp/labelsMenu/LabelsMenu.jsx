@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import {
-    addTaskLabel,
-    deleteBoardLabel,
     updateBoard,
+    deleteBoardLabel,
 } from '../../store/actions/board.actions'
+import { addTaskLabel } from '../../store/actions/task.actions'
 import { PopoverMenu } from '../general/PopoverMenu'
 import { LabelsMenuEdit } from './LabelsMenuEdit'
 import { LabelsMenuMain } from './LabelsMenuMain'
