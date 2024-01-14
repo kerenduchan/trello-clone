@@ -2,7 +2,7 @@ import { useState } from 'react'
 import {
     updateBoard,
     deleteBoardLabel,
-} from '../../store/actions/board.actions'
+} from '../../store/actions/board/board.actions'
 import { addTaskLabel } from '../../store/actions/task/task.label.actions'
 import { PopoverMenu } from '../general/PopoverMenu'
 import { LabelsMenuEdit } from './LabelsMenuEdit'

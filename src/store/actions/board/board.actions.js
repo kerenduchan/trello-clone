@@ -1,6 +1,6 @@
-import { utilService } from '../../services/util.service'
-import { boardService } from '../../services/board.service'
-import { authService } from '../../services/auth.service'
+import { utilService } from '../../../services/util.service'
+import { boardService } from '../../../services/board.service'
+import { authService } from '../../../services/auth.service'
 import {
     boardsChanged,
     boardChanged,
@@ -9,8 +9,8 @@ import {
     boardRemoved,
     boardUpdated,
     boardsUpdated,
-} from '../reducers/board.reducer'
-import { store } from '../store'
+} from '../../reducers/board.reducer'
+import { store } from '../../store'
 
 export {
     loadBoards,

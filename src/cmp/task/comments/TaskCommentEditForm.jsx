@@ -1,4 +1,4 @@
-import { updateTaskComment } from '../../../store/actions/board.actions'
+import { updateTaskComment } from '../../../store/actions/board/board.actions'
 import { useForm } from '../../../customHooks/useForm'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 

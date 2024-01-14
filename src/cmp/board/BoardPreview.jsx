@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Icon } from '../general/Icon'
-import { updateBoard } from '../../store/actions/board.actions'
+import { updateBoard } from '../../store/actions/board/board.actions'
 import { boardService } from '../../services/board.service'
 
 export function BoardPreview({ board }) {

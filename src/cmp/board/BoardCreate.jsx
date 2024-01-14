@@ -1,6 +1,6 @@
 import { useForm } from '../../customHooks/useForm'
 import { useNavigate } from 'react-router'
-import { createBoard } from '../../store/actions/board.actions'
+import { createBoard } from '../../store/actions/board/board.actions'
 import { boardService } from '../../services/board.service'
 import { ImgSelect } from '../general/ImgSelect'
 

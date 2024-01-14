@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { selectAllBoards } from '../../../store/reducers/board.reducer'
-import { loadBoards } from '../../../store/actions/board.actions'
+import { loadBoards } from '../../../store/actions/board/board.actions'
 import { CustomSelect } from '../../general/CustomSelect'
 import { utilService } from '../../../services/util.service'
 import { useSelector } from 'react-redux'

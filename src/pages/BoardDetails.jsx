@@ -11,7 +11,7 @@ import {
     loadBoard,
     unloadBoard,
     applyBoardFilter,
-} from '../store/actions/board.actions'
+} from '../store/actions/board/board.actions'
 import { boardService } from '../services/board.service'
 import { useToggle } from '../customHooks/useToggle'
 import { GroupList } from '../cmp/group/GroupList'

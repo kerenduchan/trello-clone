@@ -1,4 +1,4 @@
-import { updateBoard } from '../../store/actions/board.actions'
+import { updateBoard } from '../../store/actions/board/board.actions'
 import { EditableTitle } from '../general/EditableTitle'
 import { Icon } from '../general/Icon'
 import { BoardMembers } from './BoardMembers'

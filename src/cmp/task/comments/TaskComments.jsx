@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { boardService } from '../../../services/board.service'
 import { authService } from '../../../services/auth.service'
-import { addTaskComment } from '../../../store/actions/board.actions'
+import { addTaskComment } from '../../../store/actions/board/board.actions'
 import { useForm } from '../../../customHooks/useForm'
 import { useKeyDownListener } from '../../../customHooks/useKeyDownListener'
 import { TaskCommentCreateForm } from './TaskCommentCreateForm'

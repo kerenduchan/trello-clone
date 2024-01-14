@@ -8,6 +8,7 @@ export const groupLocalService = {
 
 async function createGroup(board, group) {
     const boardToUpdate = { ...board }
+    console.log(board)
     boardToUpdate.groups = [...board.groups, group]
     await boardService.save(boardToUpdate)
     return group
