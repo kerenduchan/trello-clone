@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { updateTask } from '../../../store/actions/task.actions'
+import { updateTask } from '../../../store/actions/task/task.actions'
 import { useToggle } from '../../../customHooks/useToggle'
 import moment from 'moment/moment'
 import { Icon } from '../../general/Icon'

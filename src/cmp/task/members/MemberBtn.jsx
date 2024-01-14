@@ -1,4 +1,4 @@
-import { updateTask } from '../../../store/actions/task.actions'
+import { updateTask } from '../../../store/actions/task/task.actions'
 import { Avatar } from '../../general/Avatar'
 import { Icon } from '../../general/Icon'
 

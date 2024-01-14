@@ -1,6 +1,6 @@
 import { Icon } from '../general/Icon'
 import { EditableTitle } from '../general/EditableTitle'
-import { updateTask } from '../../store/actions/task.actions'
+import { updateTask } from '../../store/actions/task/task.actions'
 import { usePopoverState } from '../../customHooks/usePopoverState'
 import { TaskMoveMenu } from './move/TaskMoveMenu'
 import { TaskDetailsCover } from './cover/TaskDetailsCover'

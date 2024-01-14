@@ -1,6 +1,6 @@
 import moment from 'moment/moment'
 import { useForm } from '../../../customHooks/useForm'
-import { updateTask } from '../../../store/actions/task.actions'
+import { updateTask } from '../../../store/actions/task/task.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { useEffect } from 'react'
 
