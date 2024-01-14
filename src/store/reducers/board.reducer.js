@@ -63,6 +63,57 @@ const boardSlice = createSlice({
             }
             return state
         },
+
+        groupCreated(state, action) {
+            const { group } = action.payload
+            state.curBoard.groups.push(group)
+            return state
+        },
+
+        groupDeleted(state, action) {
+            const { group } = action.payload
+            state.curBoard.groups = state.curBoard.groups.filter(
+                (g) => g._id !== group._id
+            )
+            return state
+        },
+
+        groupUpdated(state, action) {
+            const { group } = action.payload
+            state.curBoard.groups = state.curBoard.groups.map((g) =>
+                g._id === group._id ? group : g
+            )
+            return state
+        },
+
+        taskCreated(state, action) {
+            const { group, position, task } = action.payload
+            const groupToUpdate = state.curBoard.groups.find(
+                (g) => g._id === group._id
+            )
+            groupToUpdate.tasks.splice(position, 0, task)
+            return state
+        },
+
+        taskDeleted(state, action) {
+            const { group, task } = action.payload
+            const groupToUpdate = state.curBoard.groups.find(
+                (g) => g._id === group._id
+            )
+            groupToUpdate.tasks = group.tasks.filter((t) => t._id !== task._id)
+            return state
+        },
+
+        taskUpdated(state, action) {
+            const { group, task } = action.payload
+            const groupToUpdate = state.curBoard.groups.find(
+                (g) => g._id === group._id
+            )
+            groupToUpdate.tasks = group.tasks.map((t) =>
+                t._id === task._id ? task : t
+            )
+            return state
+        },
     },
 })
 
@@ -74,6 +125,12 @@ export const {
     boardRemoved,
     boardUpdated,
     boardsUpdated,
+    groupCreated,
+    groupDeleted,
+    groupUpdated,
+    taskCreated,
+    taskDeleted,
+    taskUpdated,
 } = boardSlice.actions
 
 export default boardSlice.reducer

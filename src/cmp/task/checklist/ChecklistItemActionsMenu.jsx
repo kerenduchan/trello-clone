@@ -1,7 +1,7 @@
 import {
     convertChecklistItemToTask,
     deleteChecklistItem,
-} from '../../../store/actions/board.actions'
+} from '../../../store/actions/task/task.checklist.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 

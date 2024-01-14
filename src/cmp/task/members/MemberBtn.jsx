@@ -1,7 +1,4 @@
-import {
-    addTaskMember,
-    removeTaskMember,
-} from '../../../store/actions/board.actions'
+import { updateTask } from '../../../store/actions/task/task.actions'
 import { Avatar } from '../../general/Avatar'
 import { Icon } from '../../general/Icon'
 
@@ -13,10 +10,15 @@ export function MemberBtn({ hierarchy, member }) {
     }
 
     function onClick() {
+        const { task } = hierarchy
+
         if (isTaskMember()) {
-            removeTaskMember(hierarchy, member)
+            const memberIds = task.memberIds.filter((id) => id !== member._id)
+            updateTask(hierarchy, { memberIds })
         } else {
-            addTaskMember(hierarchy, member)
+            const memberIds = task.memberIds ? [...task.memberIds] : []
+            memberIds.push(member._id)
+            updateTask(hierarchy, { memberIds })
         }
     }
 

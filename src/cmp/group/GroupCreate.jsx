@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { useForm } from '../../customHooks/useForm'
 import { useToggle } from '../../customHooks/useToggle'
-import { createGroup } from '../../store/actions/board.actions'
+import { createGroup } from '../../store/actions/group.actions'
 import { boardService } from '../../services/board.service'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
 import { useClickedOutListener } from '../../customHooks/useClickedOutListener'

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { boardService } from '../../../services/board.service'
 import { authService } from '../../../services/auth.service'
-import { addTaskComment } from '../../../store/actions/board.actions'
+import { addTaskComment } from '../../../store/actions/task/task.comment.actions'
 import { useForm } from '../../../customHooks/useForm'
 import { useKeyDownListener } from '../../../customHooks/useKeyDownListener'
 import { TaskCommentCreateForm } from './TaskCommentCreateForm'
@@ -30,7 +30,7 @@ export function TaskComments({ hierarchy }) {
     }
 
     function onSubmitForm() {
-        addTaskComment(hierarchy, { ...draft, createdAt: Date.now() })
+        addTaskComment(hierarchy, draft)
         setDraft(boardService.getEmptyComment())
         onHideForm()
     }

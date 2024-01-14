@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import {
-    addTaskLabel,
-    createBoardLabel,
+    updateBoard,
     deleteBoardLabel,
-    updateBoardLabel,
-} from '../../store/actions/board.actions'
+} from '../../store/actions/board/board.actions'
+import { addTaskLabel } from '../../store/actions/task/task.label.actions'
 import { PopoverMenu } from '../general/PopoverMenu'
 import { LabelsMenuEdit } from './LabelsMenuEdit'
 import { LabelsMenuMain } from './LabelsMenuMain'
@@ -42,18 +41,23 @@ export function LabelsMenu({ hierarchy, labelsMenu }) {
         onNavToMain()
     }
 
-    function onSaveAfterEdit(updatedLabel) {
+    function onUpdate(label) {
         try {
-            updateBoardLabel(board, updatedLabel)
+            const labels = board.labels.map((l) =>
+                l._id === label._id ? label : l
+            )
+            updateBoard(board, { labels })
             onNavToMain()
         } catch (err) {
             console.error(err)
         }
     }
 
-    async function onSaveAfterCreate(newLabel) {
+    async function onCreate(newLabel) {
         try {
-            const updatedBoard = await createBoardLabel(board, newLabel)
+            const updatedBoard = await updateBoard(board, {
+                labels: [...board.labels, newLabel],
+            })
             const updatedHierarchy = { ...hierarchy, board: updatedBoard }
 
             addTaskLabel(updatedHierarchy, newLabel)
@@ -82,7 +86,7 @@ export function LabelsMenu({ hierarchy, labelsMenu }) {
             >
                 <LabelsMenuEdit
                     label={curLabel}
-                    onSave={onSaveAfterEdit}
+                    onSave={onUpdate}
                     onDelete={onNavToDelete}
                 />
             </PopoverMenu>
@@ -93,7 +97,7 @@ export function LabelsMenu({ hierarchy, labelsMenu }) {
                 {...labelsMenu.popover}
                 onBack={onNavToMain}
             >
-                <LabelsMenuEdit label={null} onSave={onSaveAfterCreate} />
+                <LabelsMenuEdit label={null} onSave={onCreate} />
             </PopoverMenu>
         ),
         delete: (

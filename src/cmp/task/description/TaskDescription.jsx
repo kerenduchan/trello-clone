@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { updateTask } from '../../../store/actions/board.actions'
+import { updateTask } from '../../../store/actions/task/task.actions'
 import { useForm } from '../../../customHooks/useForm'
 import { useClickedOutListener } from '../../../customHooks/useClickedOutListener'
 import { useKeyDownListener } from '../../../customHooks/useKeyDownListener'

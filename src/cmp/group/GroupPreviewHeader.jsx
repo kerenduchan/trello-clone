@@ -1,4 +1,4 @@
-import { updateGroup } from '../../store/actions/board.actions'
+import { updateGroup } from '../../store/actions/group.actions'
 import { usePopoverState } from '../../customHooks/usePopoverState'
 import { EditableTitle } from '../general/EditableTitle'
 import { Icon } from '../general/Icon'

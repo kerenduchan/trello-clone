@@ -18,7 +18,7 @@ export function LabelsPreview({ hierarchy }) {
             .map((labelId) =>
                 boardService.getItemById(board, 'labels', labelId)
             )
-            .filter((label) => label.color.name !== 'none')
+            .filter((label) => label && label.color.name !== 'none')
     }
 
     if (!task.labelIds?.length) return <></>

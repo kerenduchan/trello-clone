@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react'
 import { boardService } from '../../../services/board.service'
 import {
     deleteTask,
-    updateGroup,
     updateTask,
-} from '../../../store/actions/board.actions'
+} from '../../../store/actions/task/task.actions'
+import { updateGroup } from '../../../store/actions/group.actions'
+
 import { ArchivedTaskPreview } from './ArchivedTaskPreview'
 import { ArchivedGroupPreview } from './ArchivedGroupPreview'
 

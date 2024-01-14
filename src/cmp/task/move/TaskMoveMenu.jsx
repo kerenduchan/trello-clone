@@ -5,7 +5,7 @@ import {
     loadBoards,
     moveTask,
     copyTask,
-} from '../../../store/actions/board.actions'
+} from '../../../store/actions/board/board.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { CustomSelect } from '../../general/CustomSelect'
 

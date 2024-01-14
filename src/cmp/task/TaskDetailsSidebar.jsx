@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router'
-import { updateTask, deleteTask } from '../../store/actions/board.actions'
+import { updateTask, deleteTask } from '../../store/actions/task/task.actions'
 import { usePopoverState } from '../../customHooks/usePopoverState'
 import { DeleteMenu } from '../general/DeleteMenu'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
@@ -12,7 +12,7 @@ import { TaskMoveMenu } from './move/TaskMoveMenu'
 import { TaskAttachmentMenu } from './attachment/TaskAttachmentMenu'
 
 export function TaskDetailsSidebar({ hierarchy }) {
-    const { task, board } = hierarchy
+    const { board, task } = hierarchy
 
     const navigate = useNavigate()
     const membersMenu = usePopoverState()

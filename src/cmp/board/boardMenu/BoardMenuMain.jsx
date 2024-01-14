@@ -1,4 +1,4 @@
-import { deleteBoard } from '../../../store/actions/board.actions'
+import { deleteBoard } from '../../../store/actions/board/board.actions'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { Icon } from '../../general/Icon'
 import { DeleteMenu } from '../../general/DeleteMenu'

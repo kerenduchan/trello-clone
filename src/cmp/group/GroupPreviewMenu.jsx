@@ -1,16 +1,4 @@
-import { deleteGroup } from '../../store/actions/board.actions'
-
-export function GroupPreviewMenu({ board, group, onClose, onTaskCreate }) {
-    function onDelete() {
-        try {
-            deleteGroup(board, group)
-            onClose()
-        } catch (err) {
-            console.error(err)
-            // TODO: show an error dialog
-        }
-    }
-
+export function GroupPreviewMenu({ onClose, onTaskCreate }) {
     function onAddCard() {
         onTaskCreate()
         onClose()

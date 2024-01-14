@@ -1,9 +1,10 @@
 import moment from 'moment'
+import { deleteTaskAttachment } from '../../../store/actions/task/task.attachment.actions'
 import {
-    deleteTaskAttachment,
     removeTaskCover,
     setTaskCoverImage,
-} from '../../../store/actions/board.actions'
+} from '../../../store/actions/task/task.cover.actions'
+
 import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { Icon } from '../../general/Icon'
 import { DeleteMenu } from '../../general/DeleteMenu'

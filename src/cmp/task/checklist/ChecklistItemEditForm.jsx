@@ -4,7 +4,7 @@ import { usePopoverState } from '../../../customHooks/usePopoverState'
 import {
     deleteChecklistItem,
     updateChecklistItem,
-} from '../../../store/actions/board.actions'
+} from '../../../store/actions/task/task.checklist.actions'
 import { ChecklistItemActionsMenu } from './ChecklistItemActionsMenu'
 import { Icon } from '../../general/Icon'
 

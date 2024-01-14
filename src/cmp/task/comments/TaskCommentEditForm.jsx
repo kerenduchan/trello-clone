@@ -1,13 +1,13 @@
-import { updateTaskComment } from '../../../store/actions/board.actions'
+import { updateTaskComment } from '../../../store/actions/task/task.comment.actions'
 import { useForm } from '../../../customHooks/useForm'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 
 export function TaskCommentEditForm({ hierarchy, comment, onClose }) {
-    const [draft, handleChange, setDraft] = useForm({ text: comment.text })
+    const [draft, handleChange] = useForm({ text: comment.text })
 
     function onSubmit(e) {
         e.preventDefault()
-        updateTaskComment(hierarchy, { ...comment, ...draft })
+        updateTaskComment(hierarchy, comment, draft)
         onClose()
     }
 

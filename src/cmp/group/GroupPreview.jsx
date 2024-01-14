@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { createTask } from '../../store/actions/board.actions'
+import { createTask } from '../../store/actions/task/task.actions'
 import { TaskList } from '../task/TaskList'
 import { GroupPreviewHeader } from './GroupPreviewHeader'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
@@ -15,7 +15,7 @@ export function GroupPreview({ board, group, index, isFilterEmpty }) {
 
     async function onCreateTask(board, group, task, position) {
         try {
-            createTask(board, group, task, position)
+            createTask(board, group, position, task)
             setTaskCreateFormPosition((prev) => prev + 1)
         } catch (err) {
             console.error(err)

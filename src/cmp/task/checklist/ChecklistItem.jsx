@@ -3,7 +3,7 @@ import {
     curChecklistItemChanged,
     selectChecklistItemId,
 } from '../../../store/reducers/app.reducer'
-import { updateChecklistItem } from '../../../store/actions/board.actions'
+import { updateChecklistItem } from '../../../store/actions/task/task.checklist.actions'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { ChecklistItemActionsMenu } from './ChecklistItemActionsMenu'
 import { ChecklistItemEditForm } from './ChecklistItemEditForm'

@@ -4,8 +4,8 @@ import {
     copyGroup,
     moveGroup,
     moveTasks,
-    updateGroup,
-} from '../../../store/actions/board.actions'
+} from '../../../store/actions/board/board.actions'
+import { updateGroup } from '../../../store/actions/group.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { GroupMenuMain } from './GroupMenuMain'
 import { GroupMenuArchiveTasks } from './GroupMenuArchiveTasks'

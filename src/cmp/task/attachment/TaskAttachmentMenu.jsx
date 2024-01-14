@@ -1,6 +1,6 @@
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { uploadService } from '../../../services/upload.service'
-import { addTaskAttachment } from '../../../store/actions/board.actions'
+import { addTaskAttachment } from '../../../store/actions/task/task.attachment.actions'
 import { BtnFileUpload } from '../../general/btn/BtnFileUpload'
 
 export function TaskAttachmentMenu({ hierarchy, popoverState }) {
