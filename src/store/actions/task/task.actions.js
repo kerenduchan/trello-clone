@@ -5,8 +5,6 @@ import {
     taskDeleted,
 } from '../../reducers/board.reducer'
 import { taskService } from '../../../services/task.service'
-import { utilService } from '../../../services/util.service'
-import { authService } from '../../../services/auth.service'
 
 export { createTask, deleteTask, updateTask }
 
