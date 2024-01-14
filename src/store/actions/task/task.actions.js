@@ -12,8 +12,6 @@ export {
     createTask,
     deleteTask,
     updateTask,
-    removeTaskLabel,
-    addTaskLabel,
     setTaskCoverImage,
     addTaskCoverImage,
     setTaskCoverColor,
@@ -49,32 +47,6 @@ async function updateTask(hierarchy, fieldsToUpdate) {
     const { board, group, task } = hierarchy
     const updatedTask = { ...task, ...fieldsToUpdate }
     _updateTask(board, group, updatedTask)
-}
-
-// TASK LABEL
-
-async function addTaskLabel(hierarchy, label) {
-    const { board, task } = hierarchy
-    const taskLabelIds = [...task.labelIds, label._id]
-
-    // keep the same order of labels as in the board labels
-    const orderedTaskLabelIds = board.labels
-        .filter((l) => taskLabelIds.includes(l._id))
-        .map((l) => l._id)
-
-    return updateTask(hierarchy, { labelIds: orderedTaskLabelIds })
-}
-
-async function removeTaskLabel(hierarchy, label) {
-    const { board, group, task } = hierarchy
-    const taskToUpdate = { ...task }
-    const taskLabelIds = task.labelIds.filter((id) => id !== label._id)
-
-    // keep the same order of labels as in the board labels
-    taskToUpdate.labelIds = board.labels
-        .filter((l) => taskLabelIds.includes(l._id))
-        .map((l) => l._id)
-    return _updateTask(board, group, taskToUpdate)
 }
 
 // TASK COVER IMAGE

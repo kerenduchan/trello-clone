@@ -1,7 +1,7 @@
 import {
     removeTaskLabel,
     addTaskLabel,
-} from '../../store/actions/task/task.actions'
+} from '../../store/actions/task/task.label.actions'
 import { useToggle } from '../../customHooks/useToggle'
 import { Icon } from '../general/Icon'
 

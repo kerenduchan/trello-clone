@@ -3,7 +3,7 @@ import {
     updateBoard,
     deleteBoardLabel,
 } from '../../store/actions/board.actions'
-import { addTaskLabel } from '../../store/actions/task/task.actions'
+import { addTaskLabel } from '../../store/actions/task/task.label.actions'
 import { PopoverMenu } from '../general/PopoverMenu'
 import { LabelsMenuEdit } from './LabelsMenuEdit'
 import { LabelsMenuMain } from './LabelsMenuMain'
