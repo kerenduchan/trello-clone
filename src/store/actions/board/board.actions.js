@@ -273,14 +273,6 @@ async function _updateGroup(board, groupToUpdate) {
     return _updateBoard(boardToUpdate)
 }
 
-async function _updateTask(board, group, taskToUpdate) {
-    const groupToUpdate = { ...group }
-    groupToUpdate.tasks = group.tasks.map((t) =>
-        t._id === taskToUpdate._id ? taskToUpdate : t
-    )
-    _updateGroup(board, groupToUpdate)
-}
-
 // move task in the same group
 async function _moveTaskInsideGroup(hierarchy, targetPosition) {
     const { board, group, task } = hierarchy
