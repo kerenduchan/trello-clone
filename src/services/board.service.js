@@ -1,12 +1,8 @@
 import { storageService } from './async-storage.service'
 import { utilService } from './util.service'
 import { authService } from './auth.service'
-import {
-    moveTask,
-    moveGroup,
-    moveChecklist,
-} from '../store/actions/board.actions'
-
+import { moveTask, moveGroup } from '../store/actions/board.actions'
+import { moveChecklist } from '../store/actions/task/task.checklist.actions'
 export const boardService = {
     getDefaultFilter,
     isFilterEmpty,

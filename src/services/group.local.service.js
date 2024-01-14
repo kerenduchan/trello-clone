@@ -6,21 +6,23 @@ export const groupLocalService = {
     updateGroup,
 }
 
-async function createGroup(boardId, group) {
-    const board = await boardService.getById(boardId)
-    board.groups.push(group)
-    await boardService.save(board)
+async function createGroup(board, group) {
+    const boardToUpdate = { ...board }
+    boardToUpdate.groups = [...board.groups, group]
+    await boardService.save(boardToUpdate)
     return group
 }
 
-async function deleteGroup(boardId, groupId) {
-    const board = await boardService.getById(boardId)
-    board.groups = board.groups.filter((g) => g._id !== groupId)
-    await boardService.save(board)
+async function deleteGroup(board, group) {
+    const boardToUpdate = { ...board }
+    boardToUpdate.groups = board.groups.filter((g) => g._id !== group._id)
+    await boardService.save(boardToUpdate)
 }
 
-async function updateGroup(boardId, group) {
-    const board = await boardService.getById(boardId)
-    board.groups = board.groups.map((g) => (g._id === group._id ? group : g))
-    await boardService.save(board)
+async function updateGroup(board, group) {
+    const boardToUpdate = { ...board }
+    boardToUpdate.groups = board.groups.map((g) =>
+        g._id === group._id ? group : g
+    )
+    await boardService.save(boardToUpdate)
 }

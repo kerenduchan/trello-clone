@@ -11,7 +11,6 @@ import {
     boardsUpdated,
 } from '../reducers/board.reducer'
 import { store } from '../store'
-import { curChecklistChanged } from '../reducers/app.reducer'
 
 export {
     loadBoards,
@@ -30,13 +29,6 @@ export {
     addTaskComment,
     deleteTaskComment,
     updateTaskComment,
-    addChecklist,
-    deleteChecklist,
-    moveChecklist,
-    addChecklistItem,
-    updateChecklistItem,
-    deleteChecklistItem,
-    convertChecklistItemToTask,
     deleteBoardLabel,
 }
 
@@ -312,86 +304,6 @@ async function updateTaskComment(hierarchy, comment) {
     return _updateTask(board, group, taskToUpdate)
 }
 
-// CHEKCLIST
-
-async function addChecklist(hierarchy, checklist) {
-    const { board, group, task } = hierarchy
-    const taskToUpdate = { ...task }
-    taskToUpdate.checklists = [...task.checklists, checklist]
-    store.dispatch(curChecklistChanged(checklist._id))
-    return _updateTask(board, group, taskToUpdate)
-}
-
-async function deleteChecklist(hierarchy, checklist) {
-    const { board, group, task } = hierarchy
-    const taskToUpdate = { ...task }
-    taskToUpdate.checklists = task.checklists.filter(
-        (c) => c._id !== checklist._id
-    )
-    return _updateTask(board, group, taskToUpdate)
-}
-
-async function moveChecklist(hierarchy, checklistId, targetPositionId) {
-    const { board, group, task } = hierarchy
-    const taskToUpdate = { ...task }
-
-    const checklistToMove = task.checklists.find((c) => c._id === checklistId)
-    taskToUpdate.checklists = [...task.checklists]
-    taskToUpdate.checklists = task.checklists.filter(
-        (c) => c._id !== checklistId
-    )
-
-    taskToUpdate.checklists.splice(targetPositionId, 0, checklistToMove)
-    return _updateTask(board, group, taskToUpdate)
-}
-
-async function addChecklistItem(hierarchy, checklist, item) {
-    const checklistToUpdate = { ...checklist }
-    checklistToUpdate.items = [...checklist.items, item]
-    _updateChecklist(hierarchy, checklistToUpdate)
-}
-
-async function updateChecklistItem(hierarchy, checklist, item, fieldsToUpdate) {
-    const checklistToUpdate = { ...checklist }
-    checklistToUpdate.items = checklist.items.map((i) =>
-        i._id === item._id ? { ...item, ...fieldsToUpdate } : i
-    )
-    _updateChecklist(hierarchy, checklistToUpdate)
-}
-
-async function deleteChecklistItem(hierarchy, checklist, item) {
-    const checklistToUpdate = { ...checklist }
-    checklistToUpdate.items = checklist.items.filter((i) => i._id !== item._id)
-    _updateChecklist(hierarchy, checklistToUpdate)
-}
-
-async function convertChecklistItemToTask(hierarchy, checklist, item) {
-    const { board, group, task } = hierarchy
-
-    const groupToUpdate = { ...group }
-
-    // Add a new task to the group
-    const newTask = boardService.getEmptyTask(item.title)
-    groupToUpdate.tasks = [...group.tasks, newTask]
-
-    // remove the checklist item from the checklist
-    const checklistToUpdate = { ...checklist }
-    checklistToUpdate.items = checklist.items.filter((i) => i._id !== item._id)
-
-    // update the checklists in the task
-    const taskToUpdate = { ...task }
-    taskToUpdate.checklists = task.checklists.map((c) =>
-        c._id === checklistToUpdate._id ? checklistToUpdate : c
-    )
-
-    // update the task in the updated group
-    groupToUpdate.tasks = groupToUpdate.tasks.map((t) =>
-        t._id === taskToUpdate._id ? taskToUpdate : t
-    )
-
-    _updateGroup(board, groupToUpdate)
-}
-
 // PRIVATE HELPER FUNCTIONS
 
 async function _updateBoard(board) {
@@ -435,15 +347,6 @@ async function _updateTask(board, group, taskToUpdate) {
         t._id === taskToUpdate._id ? taskToUpdate : t
     )
     _updateGroup(board, groupToUpdate)
-}
-
-async function _updateChecklist(hierarchy, checklistToUpdate) {
-    const { board, group, task } = hierarchy
-    const taskToUpdate = { ...task }
-    taskToUpdate.checklists = task.checklists.map((c) =>
-        c._id === checklistToUpdate._id ? checklistToUpdate : c
-    )
-    _updateTask(board, group, taskToUpdate)
 }
 
 // move task in the same group

@@ -14,7 +14,7 @@ export function GroupPreviewHeader({
 
     function onTitleChange(title) {
         try {
-            updateGroup(board._id, group, { title })
+            updateGroup(board, group, { title })
         } catch (err) {
             console.error(err)
             // TODO: show an error dialog

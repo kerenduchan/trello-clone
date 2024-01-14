@@ -71,9 +71,9 @@ const boardSlice = createSlice({
         },
 
         groupDeleted(state, action) {
-            const { groupId } = action.payload
+            const { group } = action.payload
             state.curBoard.groups = state.curBoard.groups.filter(
-                (g) => g._id !== groupId
+                (g) => g._id !== group._id
             )
             return state
         },

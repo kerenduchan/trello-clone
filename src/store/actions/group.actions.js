@@ -4,35 +4,35 @@ import { groupService } from '../../services/group.service'
 
 export { createGroup, deleteGroup, updateGroup }
 
-async function createGroup(boardId, group) {
+async function createGroup(board, group) {
     try {
         // optimistic update
-        store.dispatch(groupCreated({ boardId, group }))
-        await groupService.createGroup(boardId, group)
+        store.dispatch(groupCreated({ board, group }))
+        await groupService.createGroup(board, group)
     } catch (err) {
         // TODO: rollback store change
         throw err
     }
 }
 
-async function deleteGroup(boardId, groupId) {
+async function deleteGroup(board, group) {
     try {
         // optimistic update
-        store.dispatch(groupDeleted({ boardId, groupId }))
-        await groupService.deleteGroup(boardId, groupId)
+        store.dispatch(groupDeleted({ board, group }))
+        await groupService.deleteGroup(board, group)
     } catch (err) {
         // TODO: rollback store change
         throw err
     }
 }
 
-async function updateGroup(boardId, group, fieldsToUpdate) {
+async function updateGroup(board, group, fieldsToUpdate) {
     const updatedGroup = { ...group, ...fieldsToUpdate }
 
     try {
         // optimistic update
-        store.dispatch(groupUpdated({ boardId, group: updatedGroup }))
-        await groupService.updateGroup(boardId, updatedGroup)
+        store.dispatch(groupUpdated({ board, group: updatedGroup }))
+        await groupService.updateGroup(board, updatedGroup)
     } catch (err) {
         // TODO: rollback store change
         throw err
