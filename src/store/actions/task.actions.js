@@ -80,7 +80,13 @@ async function removeTaskLabel(hierarchy, label) {
 // TASK COVER IMAGE
 
 async function addTaskCoverImage(hierarchy, imgUrl) {
-    const [newHierarchy, attachment] = _addTaskAttachment(hierarchy, imgUrl)
+    const { task } = hierarchy
+    const attachment = _createAttachment(imgUrl)
+    const attachments = task.attachments ? [...task.attachments] : []
+    attachments.push(attachment)
+    const taskToUpdate = { ...task, attachments }
+
+    const newHierarchy = { ...hierarchy, task: taskToUpdate }
     return setTaskCoverImage(newHierarchy, attachment)
 }
 
@@ -132,9 +138,11 @@ async function removeTaskCover(hierarchy) {
 // TASK ATTACHMENT
 
 async function addTaskAttachment(hierarchy, fileUrl) {
-    const { board, group } = hierarchy
-    const [newHierarchy] = _addTaskAttachment(hierarchy, fileUrl)
-    await _updateTask(board, group, newHierarchy.task)
+    const { task } = hierarchy
+    const attachment = _createAttachment(fileUrl)
+    const attachments = task.attachments ? [...task.attachments] : []
+    attachments.push(attachment)
+    await updateTask(hierarchy, { attachments })
     return attachment
 }
 
@@ -193,17 +201,4 @@ function _createAttachment(fileUrl) {
         fileUrl,
     }
     return attachment
-}
-
-function _addTaskAttachment(hierarchy, fileUrl) {
-    const { task } = hierarchy
-    const taskToUpdate = { ...task }
-    const attachment = _createAttachment(fileUrl)
-
-    if (taskToUpdate.attachments) {
-        taskToUpdate.attachments = [...task.attachments, attachment]
-    } else {
-        taskToUpdate.attachments = [attachment]
-    }
-    return [{ ...hierarchy, task: taskToUpdate }, attachment]
 }
