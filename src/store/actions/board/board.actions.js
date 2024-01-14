@@ -1,6 +1,6 @@
 import { utilService } from '../../../services/util.service'
 import { boardService } from '../../../services/board.service'
-import { authService } from '../../../services/auth.service'
+
 import {
     boardsChanged,
     boardChanged,
@@ -24,9 +24,6 @@ export {
     moveTasks,
     archiveTasks,
     copyTask,
-    addTaskComment,
-    deleteTaskComment,
-    updateTaskComment,
     deleteBoardLabel,
 }
 
@@ -237,45 +234,6 @@ async function copyTask(
     }
     targetGroupToUpdate.tasks.splice(targetPositionId, 0, taskCopy)
     _updateGroup(targetBoard, targetGroupToUpdate)
-}
-
-// COMMENT
-
-async function addTaskComment(hierarchy, comment) {
-    comment.createdBy = authService.getLoggedinUser()._id
-    const { board, group, task } = hierarchy
-    const taskToUpdate = { ...task }
-    if (taskToUpdate.comments) {
-        taskToUpdate.comments = [...task.comments, comment]
-        taskToUpdate.comments.sort((c1, c2) =>
-            c1.createdAt < c2.createdAt ? 1 : -1
-        )
-    } else {
-        taskToUpdate.comments = [comment]
-    }
-
-    return _updateTask(board, group, taskToUpdate)
-}
-
-async function deleteTaskComment(hierarchy, comment) {
-    const { board, group, task } = hierarchy
-    const taskToUpdate = { ...task }
-    taskToUpdate.comments = taskToUpdate.comments.filter(
-        (c) => c._id !== comment._id
-    )
-    return _updateTask(board, group, taskToUpdate)
-}
-
-async function updateTaskComment(hierarchy, comment) {
-    comment.isEdited = true
-
-    const { board, group, task } = hierarchy
-    const taskToUpdate = { ...task }
-
-    taskToUpdate.comments = task.comments.map((c) =>
-        c._id === comment._id ? comment : c
-    )
-    return _updateTask(board, group, taskToUpdate)
 }
 
 // PRIVATE HELPER FUNCTIONS

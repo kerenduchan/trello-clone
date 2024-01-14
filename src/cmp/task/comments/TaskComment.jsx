@@ -3,7 +3,7 @@ import { boardService } from '../../../services/board.service'
 import { Avatar } from '../../general/Avatar'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { DeleteMenu } from '../../general/DeleteMenu'
-import { deleteTaskComment } from '../../../store/actions/board/board.actions'
+import { deleteTaskComment } from '../../../store/actions/task/task.comment.actions'
 import { useState } from 'react'
 import { TaskCommentEditForm } from './TaskCommentEditForm'
 

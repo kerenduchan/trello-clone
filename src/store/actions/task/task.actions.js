@@ -37,7 +37,7 @@ async function updateTask(hierarchy, fieldsToUpdate) {
     try {
         // optimistic update
         store.dispatch(taskUpdated({ board, group, task: updatedTask }))
-        await taskService.updateTask(board, group, task)
+        await taskService.updateTask(board, group, updatedTask)
     } catch (err) {
         // TODO: rollback store change
         throw err
