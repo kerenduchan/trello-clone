@@ -7,11 +7,8 @@ import {
     selectBoard,
     selectFilteredBoard,
 } from '../store/reducers/board.reducer'
-import {
-    loadBoard,
-    unloadBoard,
-    applyBoardFilter,
-} from '../store/actions/board/board.actions'
+import { loadBoard, unloadBoard } from '../store/actions/board/board.actions'
+import { applyBoardFilter } from '../store/actions/board/board.filter.actions'
 import { boardService } from '../services/board.service'
 import { useToggle } from '../customHooks/useToggle'
 import { GroupList } from '../cmp/group/GroupList'
