@@ -11,7 +11,7 @@ async function addTaskComment(hierarchy, comment) {
     // todo: comment created by and created at should be set by the server
     comment.createdBy = authService.getLoggedinUser()._id
     comment.createdAt = Date.now()
-    let comments = [...task.comments] || []
+    let comments = task.comments ? [...task.comments] : []
     comments.unshift(comment)
     return updateTask(hierarchy, { comments })
 }
