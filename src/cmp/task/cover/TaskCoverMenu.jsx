@@ -3,7 +3,7 @@ import {
     addTaskCoverImage,
     removeTaskCover,
     setTaskCoverColor,
-} from '../../../store/actions/task/task.actions'
+} from '../../../store/actions/task/task.cover.actions'
 import { updateTask } from '../../../store/actions/task/task.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { BtnFileUpload } from '../../general/btn/BtnFileUpload'
