@@ -19,6 +19,7 @@ const UPDATE_FIELDS = [
     'comments',
     'labelIds',
     'description',
+    'memberIds',
 ]
 
 async function getById(boardId, groupId, taskId) {

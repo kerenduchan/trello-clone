@@ -55,6 +55,25 @@ export const TaskSchema = new Schema(
             type: String,
             default: '',
         },
+
+        memberIds: {
+            type: [{ type: SchemaTypes.ObjectId, ref: 'User' }],
+            default: [],
+            validate: {
+                validator: async function (memberIds) {
+                    // Validate that each member ID corresponds to an existing user
+                    for (const memberId of memberIds) {
+                        const user = await User.findById(memberId)
+                        if (!user) {
+                            return false // Validation fails if any author ID is not found
+                        }
+                    }
+                    return true // All author IDs are valid
+                },
+                message: 'One or more authors do not exist.',
+            },
+        },
+
         archivedAt: {
             type: Date,
             default: null,
