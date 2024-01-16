@@ -33,6 +33,50 @@ const commentSchema = new Schema(
     { _id: false } // Don't auto-assign _id to comment
 )
 
+const checklistItemSchema = new Schema(
+    {
+        _id: {
+            type: String,
+            required: [true, 'id is required'],
+        },
+    },
+    { _id: false } // Don't auto-assign _id)
+)
+
+const checklistSchema = new Schema(
+    {
+        _id: {
+            type: String,
+            required: [true, 'id is required'],
+        },
+        title: {
+            type: String,
+            default: '',
+        },
+        items: {
+            type: [checklistItemSchema],
+            default: [],
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now(),
+        },
+        createdBy: {
+            type: SchemaTypes.ObjectId,
+            ref: 'User',
+            required: [true, 'createdBy is required'],
+            validate: {
+                validator: async function (userId) {
+                    const user = await User.findById(userId)
+                    return !!user
+                },
+                message: 'Invalid createdBy. User does not exist.',
+            },
+        },
+    },
+    { _id: false } // Don't auto-assign _id)
+)
+
 export const TaskSchema = new Schema(
     {
         title: {
@@ -74,6 +118,10 @@ export const TaskSchema = new Schema(
             },
         },
 
+        checklists: {
+            type: [checklistSchema],
+            default: [],
+        },
         archivedAt: {
             type: Date,
             default: null,
@@ -83,5 +131,5 @@ export const TaskSchema = new Schema(
             default: Date.now(),
         },
     },
-    { _id: false } // Don't auto-assign _id to tasks
+    { _id: false } // Don't auto-assign _id
 )

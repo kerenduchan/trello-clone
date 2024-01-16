@@ -20,6 +20,7 @@ const UPDATE_FIELDS = [
     'labelIds',
     'description',
     'memberIds',
+    'checklists',
 ]
 
 async function getById(boardId, groupId, taskId) {
