@@ -334,6 +334,7 @@ async function _moveTaskToDifferentBoard(
     const targetBoard = allBoards.find((b) => b._id === targetBoardId)
     const targetGroup = targetBoard.groups.find((g) => g._id === targetGroupId)
     const targetGroupToUpdate = { ...targetGroup }
+    targetGroupToUpdate.tasks = [...targetGroupToUpdate.tasks]
     targetGroupToUpdate.tasks.splice(targetPositionId, 0, task)
     const targetBoardToUpdate = { ...targetBoard }
     targetBoardToUpdate.groups = targetBoard.groups.map((g) =>

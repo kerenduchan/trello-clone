@@ -28,8 +28,6 @@ const UPDATE_FIELDS = [
     'groups',
 ]
 
-// query boards (with filter, sort, pagination) and populate the creator of each
-// board
 async function query(
     filterBy,
     sortBy,
@@ -40,7 +38,6 @@ async function query(
     const criteria = _buildCriteria(filterBy)
     const totalCount = await Board.countDocuments(criteria)
 
-    // lookup, project, and filter
     const pipeline = [
         {
             $lookup: {
@@ -69,6 +66,7 @@ async function query(
                 labels: 1,
                 createdAt: 1,
                 memberIds: 1,
+                groups: 1,
                 creator: {
                     _id: 1,
                     username: 1,
