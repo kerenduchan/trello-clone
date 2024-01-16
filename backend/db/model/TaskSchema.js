@@ -107,7 +107,12 @@ export const TaskSchema = new Schema(
             type: String,
             default: '',
         },
-
+        dates: {
+            type: SchemaTypes.Mixed, // TODO
+        },
+        attachments: {
+            type: [SchemaTypes.Mixed], // TODO
+        },
         memberIds: {
             type: [{ type: SchemaTypes.ObjectId, ref: 'User' }],
             default: [],
