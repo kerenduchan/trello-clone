@@ -8,6 +8,7 @@ export const boardService = {
     remove,
     create,
     update,
+    getDefaultLabels,
 }
 
 // board fields that can be set upon creation. creatorId is set by board.controller.
@@ -230,4 +231,24 @@ function _toObject(dbBoard) {
 // don't expose the DB - formulate our own error messages
 function _handleError(err) {
     utilService.handleDbError(err)
+}
+
+function getDefaultLabels() {
+    return [
+        _getLabel('#4bce97', 'Green'),
+        _getLabel('#f5cd47', 'Yellow'),
+        _getLabel('#fea362', 'Orange'),
+        _getLabel('#f87168', 'Red'),
+        _getLabel('#9f8fef', 'Purple'),
+        _getLabel('#579dff', 'Blue'),
+    ]
+}
+
+function _getLabel(color, colorName) {
+    return {
+        _id: new ObjectId(),
+        title: '',
+        color,
+        colorName,
+    }
 }

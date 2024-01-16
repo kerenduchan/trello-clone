@@ -31,8 +31,8 @@ import { taskRoutes } from './api/task/task.routes.js'
 app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/board', boardRoutes)
-app.use('/api/board/group', groupRoutes)
-app.use('/api/board/group/task', taskRoutes)
+app.use('/api/board', groupRoutes)
+app.use('/api/board', taskRoutes)
 
 // fallback route
 app.get('/**', (req, res) => {
