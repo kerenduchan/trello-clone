@@ -10,6 +10,7 @@ export function getDemoData() {
             createdBy: {
                 _id: 'u101',
                 fullname: 'Keren Duchan',
+                username: 'keren',
                 imgUrl: 'images/keren-avatar.jpg',
             },
             style: {
@@ -152,13 +153,15 @@ export function getDemoData() {
                 {
                     _id: 'u101',
                     fullname: 'Keren Duchan',
+                    username: 'keren',
                     imgUrl: 'images/keren-avatar.jpg',
                 },
             ],
             createdBy: {
                 _id: 'u102',
                 fullname: 'Yigal Shalom',
-                imgUrl: 'http://some-img',
+                username: 'yigal',
+                imgUrl: 'images/yigal-avatar.jpg',
             },
             style: {
                 backgroundImage:
