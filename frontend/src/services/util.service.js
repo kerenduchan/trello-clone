@@ -24,6 +24,7 @@ export const utilService = {
     getImageTheme,
     getAverageColor,
     getThemeByAverageColor,
+    isUseLocalStorage,
 }
 
 function makeId(length = 6) {
@@ -287,4 +288,8 @@ async function getImageTheme(imageUrl) {
     } catch (err) {
         console.warn(`Failed to get image theme for ${imageUrl}`, err)
     }
+}
+
+function isUseLocalStorage() {
+    return import.meta.env.VITE_USE_LOCAL_STORAGE === 'true'
 }

@@ -5,10 +5,9 @@ import { moveTask, moveGroup } from '../../store/actions/board/board.actions'
 import { moveChecklist } from '../../store/actions/task/task.checklist.actions'
 import { labelService } from '../label.service'
 
-// change to true in order to work with local storage instead of server
-const USE_LOCAL = false
-
-const service = USE_LOCAL ? boardLocalService : boardAxiosService
+const service = utilService.isUseLocalStorage()
+    ? boardLocalService
+    : boardAxiosService
 
 export const boardService = {
     ...service,
