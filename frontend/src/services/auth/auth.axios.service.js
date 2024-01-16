@@ -15,13 +15,23 @@ const axios = Axios.create({
 const BASE_URL = axiosService.getBaseUrl() + 'auth/'
 
 async function login(user) {
-    const { data: res } = await axios.post(BASE_URL + 'login', user)
-    authUtilService.saveLoggedinUser(res)
+    try {
+        const { data: res } = await axios.post(BASE_URL + 'login', user)
+        authUtilService.saveLoggedinUser(res)
+    } catch (err) {
+        console.error(err)
+        throw err.response.data.error
+    }
 }
 
 async function logout() {
-    await axios.post(BASE_URL + 'logout')
-    authUtilService.clearLoggedinUser()
+    try {
+        await axios.post(BASE_URL + 'logout')
+        authUtilService.clearLoggedinUser()
+    } catch (err) {
+        console.error(err)
+        throw err.response.data.error
+    }
 }
 
 async function signup(user) {
