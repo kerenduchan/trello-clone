@@ -24,6 +24,9 @@ export function BoardIndexHeader({ board }) {
         return 'krello-white.svg'
     }
 
+    function getImgUrl() {
+        return loggedinUser.imgUrl || '/images/no-avatar.svg'
+    }
     return (
         <>
             <header className="board-index-header">
@@ -44,7 +47,7 @@ export function BoardIndexHeader({ board }) {
                     className="user-avatar"
                     {...userAccountMenu.triggerAndTarget}
                 >
-                    <img src={loggedinUser.imgUrl} />
+                    <img src={getImgUrl()} />
                 </button>
             </header>
 
