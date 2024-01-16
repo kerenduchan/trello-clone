@@ -59,7 +59,7 @@ async function createBoard(board) {
     try {
         // Can't optimistically add a board
         // because the ID comes from the backend
-        const boardWithId = await boardService.save(board)
+        const boardWithId = await boardService.create(board)
         store.dispatch(boardAdded(boardWithId))
         return boardWithId
     } catch (err) {
@@ -242,7 +242,7 @@ async function _updateBoard(board) {
     try {
         // optimistic update
         store.dispatch(boardUpdated(board))
-        return boardService.save(board)
+        return boardService.update(board)
     } catch (err) {
         console.error('Failed to update board:', err)
         // TODO: undo the store change
@@ -256,7 +256,7 @@ async function _updateBoards(boards) {
         store.dispatch(boardsUpdated(boards))
 
         for (const b of boards) {
-            await boardService.save(b)
+            await boardService.update(b)
         }
     } catch (err) {
         console.error('Failed to update boards:', err)

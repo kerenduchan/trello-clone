@@ -9,14 +9,14 @@ export const groupLocalService = {
 async function createGroup(board, group) {
     const boardToUpdate = { ...board }
     boardToUpdate.groups = [...board.groups, group]
-    await boardService.save(boardToUpdate)
+    await boardService.update(boardToUpdate)
     return group
 }
 
 async function deleteGroup(board, group) {
     const boardToUpdate = { ...board }
     boardToUpdate.groups = board.groups.filter((g) => g._id !== group._id)
-    await boardService.save(boardToUpdate)
+    await boardService.update(boardToUpdate)
 }
 
 async function updateGroup(board, group) {
@@ -24,5 +24,5 @@ async function updateGroup(board, group) {
     boardToUpdate.groups = board.groups.map((g) =>
         g._id === group._id ? group : g
     )
-    await boardService.save(boardToUpdate)
+    await boardService.update(boardToUpdate)
 }

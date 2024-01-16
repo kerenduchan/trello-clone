@@ -6,9 +6,9 @@ import { getDemoData } from './board.local.demo.data'
 export const boardLocalService = {
     query,
     getById,
-    save,
-    remove,
     create,
+    update,
+    remove,
 }
 
 const STORAGE_KEY = 'boards'
@@ -32,17 +32,13 @@ function remove(id) {
     return storageService.remove(STORAGE_KEY, id)
 }
 
-function save(boardToSave) {
-    if (boardToSave._id) {
-        return storageService.put(STORAGE_KEY, boardToSave)
-    } else {
-        // this is what the real backend does
-        boardToSave.labels = _getDefaultLabels()
-        return storageService.post(STORAGE_KEY, boardToSave)
-    }
+function update(board) {
+    return storageService.put(STORAGE_KEY, board)
 }
 
 async function create(board) {
+    // this is what the real backend does
+    board.labels = _getDefaultLabels()
     return await storageService.post(STORAGE_KEY, board)
 }
 
