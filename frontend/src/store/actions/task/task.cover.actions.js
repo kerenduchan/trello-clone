@@ -48,7 +48,7 @@ async function setTaskCoverColor(hierarchy, c) {
 
     // retain size, update bg color and text color, and no bg image
     const cover = {
-        size: task.cover.size,
+        size: task.cover?.size || 'small',
         bgColor: {
             _id: c._id,
             color: c.color,

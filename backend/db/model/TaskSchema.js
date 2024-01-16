@@ -135,6 +135,10 @@ export const TaskSchema = new Schema(
             type: [checklistSchema],
             default: [],
         },
+        cover: {
+            type: SchemaTypes.Mixed, // TODO
+        },
+
         archivedAt: {
             type: Date,
             default: null,

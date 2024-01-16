@@ -23,6 +23,7 @@ const UPDATE_FIELDS = [
     'checklists',
     'dates',
     'attachments',
+    'cover',
 ]
 
 async function getById(boardId, groupId, taskId) {
@@ -61,9 +62,7 @@ async function create(boardId, groupId, task) {
 
 async function update(boardId, groupId, taskId, fields) {
     // disregard unexpected fields
-    console.log(fields)
     fields = utilService.extractFields(fields, UPDATE_FIELDS)
-    console.log(fields)
 
     // TODO: validation
 
