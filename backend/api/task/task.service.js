@@ -13,7 +13,13 @@ export const taskService = {
 const CREATE_FIELDS = ['title', '_id']
 
 // fields that can be updated
-const UPDATE_FIELDS = ['title', 'isArchived', 'comments', 'labelIds']
+const UPDATE_FIELDS = [
+    'title',
+    'isArchived',
+    'comments',
+    'labelIds',
+    'description',
+]
 
 async function getById(boardId, groupId, taskId) {
     const group = await groupService.getById(boardId, groupId)

@@ -51,6 +51,10 @@ export const TaskSchema = new Schema(
             type: [String],
             default: [],
         },
+        description: {
+            type: String,
+            default: '',
+        },
         archivedAt: {
             type: Date,
             default: null,
