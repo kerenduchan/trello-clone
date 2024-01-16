@@ -13,7 +13,7 @@ const router = express.Router()
 router.get('/:boardId/group/:groupId/task/:taskId', authenticate, getTask)
 
 // create task in group in board
-router.post('/:boardId/group/:groupId', authenticate, createTask)
+router.post('/:boardId/group/:groupId/task', authenticate, createTask)
 
 // update task in the given group in the given board
 router.put('/:boardId/group/:groupId/task/:taskId', authenticate, updateTask)
