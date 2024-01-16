@@ -39,6 +39,14 @@ const checklistItemSchema = new Schema(
             type: String,
             required: [true, 'id is required'],
         },
+        title: {
+            type: String,
+            default: '',
+        },
+        isDone: {
+            type: Boolean,
+            default: false,
+        },
     },
     { _id: false } // Don't auto-assign _id)
 )
