@@ -32,7 +32,7 @@ async function moveChecklist(hierarchy, checklistId, targetPositionId) {
     const checklistToMove = task.checklists.find((c) => c._id === checklistId)
     let checklists = [...task.checklists]
     checklists = task.checklists.filter((c) => c._id !== checklistId)
-    checklists = checklists.splice(targetPositionId, 0, checklistToMove)
+    checklists.splice(targetPositionId, 0, checklistToMove)
     return updateTask(hierarchy, { checklists })
 }
 

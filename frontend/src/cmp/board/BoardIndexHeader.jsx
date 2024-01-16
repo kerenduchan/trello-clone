@@ -25,7 +25,7 @@ export function BoardIndexHeader({ board }) {
     }
 
     function getImgUrl() {
-        return loggedinUser.imgUrl || '/images/no-avatar.svg'
+        return loggedinUser?.imgUrl || '/images/no-avatar.svg'
     }
     return (
         <>

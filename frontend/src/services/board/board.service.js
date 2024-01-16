@@ -407,7 +407,7 @@ function _dragDropGroup(result, board, filteredBoard) {
 }
 
 function _dragDropChecklist(result, board) {
-    const { destination, draggableId } = result
+    const { destination, draggableId, source } = result
     // drag-drop checklist
     const { group, task } = boardService.getGroupAndTaskByTaskId(
         board,
