@@ -1,5 +1,5 @@
 import moment from 'moment/moment'
-import { boardService } from '../../../services/board.service'
+import { boardService } from '../../../services/board/board.service'
 import { Avatar } from '../../general/Avatar'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { DeleteMenu } from '../../general/DeleteMenu'

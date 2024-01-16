@@ -2,7 +2,7 @@ import { store } from '../../store'
 import { curChecklistChanged } from '../../reducers/app.reducer'
 import { updateGroup } from '../group.actions'
 import { updateTask } from './task.actions'
-import { boardService } from '../../../services/board.service'
+import { boardService } from '../../../services/board/board.service'
 
 export {
     addChecklist,

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { boardService } from '../../../services/board.service'
+import { boardService } from '../../../services/board/board.service'
 import { addChecklistItem } from '../../../store/actions/task/task.checklist.actions'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 

@@ -1,4 +1,4 @@
-import { boardService } from './board.service'
+import { boardService } from './../board/board.service'
 
 export const groupLocalService = {
     createGroup,

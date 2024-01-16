@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { boardService } from '../../services/board.service'
+import { boardService } from '../../services/board/board.service'
 import { usePopoverState } from '../../customHooks/usePopoverState'
 import { LoginContext } from '../../contexts/LoginContext'
 import { BoardCreate } from './BoardCreate'

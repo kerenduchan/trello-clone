@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { boardService } from '../../../services/board.service'
+import { boardService } from '../../../services/board/board.service'
 import { authService } from '../../../services/auth.service'
 import { addTaskComment } from '../../../store/actions/task/task.comment.actions'
 import { useForm } from '../../../customHooks/useForm'

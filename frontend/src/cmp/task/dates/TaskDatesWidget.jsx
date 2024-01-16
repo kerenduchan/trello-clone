@@ -5,7 +5,7 @@ import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { TaskDatesMenu } from './TaskDatesMenu'
 import { Icon } from '../../general/Icon'
 import { updateTask } from '../../../store/actions/task/task.actions'
-import { boardService } from '../../../services/board.service'
+import { boardService } from '../../../services/board/board.service'
 
 export function TaskDatesWidget({ hierarchy }) {
     const { task } = hierarchy

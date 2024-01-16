@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { boardService } from '../../../services/board.service'
+import { boardService } from '../../../services/board/board.service'
 import { selectBoard } from '../../../store/reducers/board.reducer'
 import { updateBoard } from '../../../store/actions/board/board.actions'
 import { Icon } from '../../general/Icon'

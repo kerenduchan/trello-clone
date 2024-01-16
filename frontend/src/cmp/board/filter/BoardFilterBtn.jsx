@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { selectFilteredBoard } from '../../../store/reducers/board.reducer'
-import { boardService } from '../../../services/board.service'
+import { boardService } from '../../../services/board/board.service'
 import { Icon } from '../../general/Icon'
 
 export function BoardFilterBtn({ isFilterEmpty, filterMenu, onClearFilter }) {

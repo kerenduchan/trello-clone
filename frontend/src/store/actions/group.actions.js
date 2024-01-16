@@ -1,6 +1,6 @@
 import { store } from '../store'
 import { groupCreated, groupUpdated } from '../reducers/board.reducer'
-import { groupService } from '../../services/group.service'
+import { groupService } from '../../services/group/group.service'
 
 export { createGroup, deleteGroup, updateGroup }
 

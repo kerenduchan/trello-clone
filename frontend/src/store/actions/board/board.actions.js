@@ -1,5 +1,5 @@
 import { utilService } from '../../../services/util.service'
-import { boardService } from '../../../services/board.service'
+import { boardService } from '../../../services/board/board.service'
 
 import {
     boardsChanged,

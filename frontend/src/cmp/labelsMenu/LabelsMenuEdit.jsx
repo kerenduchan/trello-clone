@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useForm } from '../../customHooks/useForm'
-import { boardService } from '../../services/board.service'
+import { boardService } from '../../services/board/board.service'
 import { LabelColorSelect } from './LabelColorSelect'
 import { Icon } from '../general/Icon'
 
