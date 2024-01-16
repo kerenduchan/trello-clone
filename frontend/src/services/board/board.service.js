@@ -344,7 +344,7 @@ function getTasksCount(board) {
 }
 
 function getBoardStyle(board) {
-    if (!board) return
+    if (!board || !board.style) return
 
     const { backgroundImage, backgroundColor } = board.style
 

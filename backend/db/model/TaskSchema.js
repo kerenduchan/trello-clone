@@ -47,6 +47,10 @@ export const TaskSchema = new Schema(
         comments: {
             type: [commentSchema],
         },
+        labelIds: {
+            type: [String],
+            default: [],
+        },
         archivedAt: {
             type: Date,
             default: null,

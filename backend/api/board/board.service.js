@@ -1,6 +1,7 @@
 import { utilService } from '../../services/util.service.js'
 import Board from '../../db/model/Board.js'
 import { ObjectId } from 'mongodb'
+import { labelService } from '../../services/label.service.js'
 
 export const boardService = {
     query,
@@ -234,21 +235,23 @@ function _handleError(err) {
 }
 
 function getDefaultLabels() {
-    return [
-        _getLabel('#4bce97', 'Green'),
-        _getLabel('#f5cd47', 'Yellow'),
-        _getLabel('#fea362', 'Orange'),
-        _getLabel('#f87168', 'Red'),
-        _getLabel('#9f8fef', 'Purple'),
-        _getLabel('#579dff', 'Blue'),
+    const defaultColorIds = [
+        'green',
+        'yellow',
+        'orange',
+        'red',
+        'purple',
+        'blue',
     ]
-}
 
-function _getLabel(color, colorName) {
-    return {
-        _id: new ObjectId(),
-        title: '',
-        color,
-        colorName,
-    }
+    return defaultColorIds.map((colorId, idx) => {
+        const color = labelService.getLabelColorById(colorId)
+
+        return {
+            _id: `l10${idx + 1}`,
+            title: '',
+            colorId,
+            color,
+        }
+    })
 }
