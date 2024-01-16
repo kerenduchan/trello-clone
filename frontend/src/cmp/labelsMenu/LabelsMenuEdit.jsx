@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useForm } from '../../customHooks/useForm'
 import { boardService } from '../../services/board/board.service'
+import { labelService } from '../../services/label.service'
 import { LabelColorSelect } from './LabelColorSelect'
 import { Icon } from '../general/Icon'
-
 export function LabelsMenuEdit({ label, onSave, onDelete }) {
     const [draft, handleChange, setDraft] = useForm(
         label || boardService.getEmptyLabel()
@@ -13,12 +13,12 @@ export function LabelsMenuEdit({ label, onSave, onDelete }) {
         // flesh out the color in the draft, based on colorId
         setDraft((prev) => ({
             ...prev,
-            color: boardService.getLabelColorById(prev.colorId),
+            color: labelService.getLabelColorById(prev.colorId),
         }))
     }, [draft.colorId])
 
     function onRemoveColorClick() {
-        onColorSelect(boardService.getNoLabelColor()._id)
+        onColorSelect(labelService.getNoLabelColor()._id)
     }
 
     function onColorSelect(colorId) {
@@ -35,7 +35,7 @@ export function LabelsMenuEdit({ label, onSave, onDelete }) {
     }
 
     function isRemoveColorDisabled() {
-        return draft.colorId === boardService.getNoLabelColor()._id
+        return draft.colorId === labelService.getNoLabelColor()._id
     }
 
     return (
@@ -64,7 +64,7 @@ export function LabelsMenuEdit({ label, onSave, onDelete }) {
 
                 <h3 className="title">Select a color</h3>
                 <LabelColorSelect
-                    labelColors={boardService.getLabelColors()}
+                    labelColors={labelService.getLabelColors()}
                     selectedId={draft.colorId}
                     onSelect={onColorSelect}
                 />

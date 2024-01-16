@@ -2,6 +2,7 @@ import { utilService } from '../util.service'
 import { boardLocalService } from './board.local.service'
 import { moveTask, moveGroup } from '../../store/actions/board/board.actions'
 import { moveChecklist } from '../../store/actions/task/task.checklist.actions'
+import { labelService } from '../label.service'
 
 const service = boardLocalService
 
@@ -89,12 +90,12 @@ function getEmptyTask(title = '') {
 }
 
 function getEmptyLabel() {
-    const colorId = _getDefaultLabelColorId()
+    const colorId = 'sky'
     return {
         _id: utilService.makeId(),
         title: '',
         colorId,
-        color: service.getLabelColorById(colorId),
+        color: labelService.getLabelColorById(colorId),
     }
 }
 
@@ -176,10 +177,6 @@ function getCoverColors() {
         { _id: 'magenta', color: '#e774bb', textColor: '#50253F' },
         { _id: 'gray', color: '#8490a2', textColor: '#091E42' },
     ]
-}
-
-function _getDefaultLabelColorId() {
-    return service.getLabelColors().find((lc) => lc.name === 'sky')._id
 }
 
 function getBackgroundColors() {
