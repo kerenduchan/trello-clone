@@ -6,7 +6,6 @@ import {
     updateBoard,
     removeBoard,
 } from './board.controller.js'
-import { createGroup } from '../group/group.controller.js'
 import { authenticate } from '../../middleware/auth.middleware.js'
 
 const router = express.Router()

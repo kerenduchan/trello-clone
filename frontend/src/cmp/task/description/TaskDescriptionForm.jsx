@@ -18,7 +18,7 @@ export function TaskDescriptionForm({
                 id="description"
                 name="description"
                 onChange={handleChange}
-                value={draft.description}
+                value={draft?.description || ''}
             />
             <div className="actions">
                 <button className="btn-primary btn-save">Save</button>

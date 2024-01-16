@@ -1,4 +1,4 @@
-import { boardService } from '../../../services/board.service'
+import { boardService } from '../../../services/board/board.service'
 
 export function TaskCoverMenuColors({ hierarchy, onColorClick }) {
     const { task } = hierarchy

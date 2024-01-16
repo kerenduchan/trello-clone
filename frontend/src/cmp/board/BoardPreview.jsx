@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Icon } from '../general/Icon'
 import { updateBoard } from '../../store/actions/board/board.actions'
-import { boardService } from '../../services/board.service'
+import { boardService } from '../../services/board/board.service'
 
 export function BoardPreview({ board }) {
     function onStarClick() {

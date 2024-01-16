@@ -3,7 +3,7 @@ import { updateTask } from '../../../store/actions/task/task.actions'
 import { useToggle } from '../../../customHooks/useToggle'
 import moment from 'moment/moment'
 import { Icon } from '../../general/Icon'
-import { boardService } from '../../../services/board.service'
+import { boardService } from '../../../services/board/board.service'
 
 export function TaskDatesBadge({ hierarchy }) {
     const { task } = hierarchy

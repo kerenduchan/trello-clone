@@ -1,6 +1,7 @@
 import { utilService } from '../../services/util.service.js'
 import Board from '../../db/model/Board.js'
 import { ObjectId } from 'mongodb'
+import { labelService } from '../../services/label.service.js'
 
 export const boardService = {
     query,
@@ -22,10 +23,11 @@ const UPDATE_FIELDS = [
     'isArchived',
     'labels',
     'memberIds',
+
+    // for move task/group. TODO: tighter API
+    'groups',
 ]
 
-// query boards (with filter, sort, pagination) and populate the creator of each
-// board
 async function query(
     filterBy,
     sortBy,
@@ -36,7 +38,6 @@ async function query(
     const criteria = _buildCriteria(filterBy)
     const totalCount = await Board.countDocuments(criteria)
 
-    // lookup, project, and filter
     const pipeline = [
         {
             $lookup: {
@@ -65,6 +66,7 @@ async function query(
                 labels: 1,
                 createdAt: 1,
                 memberIds: 1,
+                groups: 1,
                 creator: {
                     _id: 1,
                     username: 1,
@@ -234,21 +236,23 @@ function _handleError(err) {
 }
 
 function getDefaultLabels() {
-    return [
-        _getLabel('#4bce97', 'Green'),
-        _getLabel('#f5cd47', 'Yellow'),
-        _getLabel('#fea362', 'Orange'),
-        _getLabel('#f87168', 'Red'),
-        _getLabel('#9f8fef', 'Purple'),
-        _getLabel('#579dff', 'Blue'),
+    const defaultColorIds = [
+        'green',
+        'yellow',
+        'orange',
+        'red',
+        'purple',
+        'blue',
     ]
-}
 
-function _getLabel(color, colorName) {
-    return {
-        _id: new ObjectId(),
-        title: '',
-        color,
-        colorName,
-    }
+    return defaultColorIds.map((colorId, idx) => {
+        const color = labelService.getLabelColorById(colorId)
+
+        return {
+            _id: `l10${idx + 1}`,
+            title: '',
+            colorId,
+            color,
+        }
+    })
 }

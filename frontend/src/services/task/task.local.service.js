@@ -1,4 +1,4 @@
-import { boardService } from './board.service'
+import { boardService } from '../board/board.service'
 
 export const taskLocalService = {
     createTask,
@@ -14,7 +14,7 @@ async function createTask(board, group, position, task) {
     boardToUpdate.groups = board.groups.map((g) =>
         g._id === group._id ? groupToUpdate : g
     )
-    await boardService.save(boardToUpdate)
+    await boardService.update(boardToUpdate)
 }
 
 async function deleteTask(hierarchy) {
@@ -25,7 +25,7 @@ async function deleteTask(hierarchy) {
     boardToUpdate.groups = board.groups.map((g) =>
         g._id === group._id ? groupToUpdate : g
     )
-    await boardService.save(boardToUpdate)
+    await boardService.update(boardToUpdate)
 }
 
 async function updateTask(board, group, task) {
@@ -37,5 +37,5 @@ async function updateTask(board, group, task) {
     boardToUpdate.groups = board.groups.map((g) =>
         g._id === group._id ? groupToUpdate : g
     )
-    await boardService.save(boardToUpdate)
+    await boardService.update(boardToUpdate)
 }

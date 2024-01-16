@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { boardService } from '../../../services/board.service'
+import { boardService } from '../../../services/board/board.service'
 import {
     deleteTask,
     updateTask,

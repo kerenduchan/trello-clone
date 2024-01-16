@@ -1,4 +1,4 @@
-import { boardService } from '../../../services/board.service'
+import { boardService } from '../../../services/board/board.service'
 import { Avatar } from '../../general/Avatar'
 
 export function MembersBadge({ hierarchy }) {

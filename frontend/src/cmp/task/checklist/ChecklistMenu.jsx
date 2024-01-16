@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useForm } from '../../../customHooks/useForm'
-import { boardService } from '../../../services/board.service'
+import { boardService } from '../../../services/board/board.service'
 import { addChecklist } from '../../../store/actions/task/task.checklist.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
 

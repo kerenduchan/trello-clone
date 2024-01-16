@@ -1,4 +1,4 @@
-import { boardService } from '../../../services/board.service'
+import { boardService } from '../../../services/board/board.service'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { LabelBtn } from './LabelBtn'
 import { LabelsMenu } from '../../labelsMenu/LabelsMenu'

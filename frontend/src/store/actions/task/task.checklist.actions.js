@@ -2,7 +2,7 @@ import { store } from '../../store'
 import { curChecklistChanged } from '../../reducers/app.reducer'
 import { updateGroup } from '../group.actions'
 import { updateTask } from './task.actions'
-import { boardService } from '../../../services/board.service'
+import { boardService } from '../../../services/board/board.service'
 
 export {
     addChecklist,
@@ -32,7 +32,7 @@ async function moveChecklist(hierarchy, checklistId, targetPositionId) {
     const checklistToMove = task.checklists.find((c) => c._id === checklistId)
     let checklists = [...task.checklists]
     checklists = task.checklists.filter((c) => c._id !== checklistId)
-    checklists = checklists.splice(targetPositionId, 0, checklistToMove)
+    checklists.splice(targetPositionId, 0, checklistToMove)
     return updateTask(hierarchy, { checklists })
 }
 

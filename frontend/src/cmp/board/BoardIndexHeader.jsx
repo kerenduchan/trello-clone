@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { boardService } from '../../services/board.service'
+import { boardService } from '../../services/board/board.service'
 import { usePopoverState } from '../../customHooks/usePopoverState'
 import { LoginContext } from '../../contexts/LoginContext'
 import { BoardCreate } from './BoardCreate'
@@ -24,6 +24,9 @@ export function BoardIndexHeader({ board }) {
         return 'krello-white.svg'
     }
 
+    function getImgUrl() {
+        return loggedinUser?.imgUrl || '/images/no-avatar.svg'
+    }
     return (
         <>
             <header className="board-index-header">
@@ -44,7 +47,7 @@ export function BoardIndexHeader({ board }) {
                     className="user-avatar"
                     {...userAccountMenu.triggerAndTarget}
                 >
-                    <img src={loggedinUser.imgUrl} />
+                    <img src={getImgUrl()} />
                 </button>
             </header>
 

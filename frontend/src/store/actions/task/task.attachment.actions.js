@@ -1,5 +1,5 @@
 import { utilService } from '../../../services/util.service'
-import { authService } from '../../../services/auth.service'
+import { authService } from '../../../services/auth/auth.service'
 import { updateTask } from './task.actions'
 
 export {

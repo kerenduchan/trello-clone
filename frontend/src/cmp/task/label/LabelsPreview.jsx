@@ -1,4 +1,4 @@
-import { boardService } from '../../../services/board.service'
+import { boardService } from '../../../services/board/board.service'
 import { useToggle } from '../../../customHooks/useToggle'
 import { LabelBtn } from './LabelBtn'
 

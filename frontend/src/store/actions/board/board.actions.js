@@ -1,5 +1,5 @@
 import { utilService } from '../../../services/util.service'
-import { boardService } from '../../../services/board.service'
+import { boardService } from '../../../services/board/board.service'
 
 import {
     boardsChanged,
@@ -29,8 +29,8 @@ export {
 
 async function loadBoards() {
     try {
-        const boards = await boardService.query()
-        store.dispatch(boardsChanged(boards))
+        const { data } = await boardService.query()
+        store.dispatch(boardsChanged(data))
     } catch (err) {
         console.error('Failed to load boards:', err)
         throw err
@@ -59,7 +59,7 @@ async function createBoard(board) {
     try {
         // Can't optimistically add a board
         // because the ID comes from the backend
-        const boardWithId = await boardService.save(board)
+        const boardWithId = await boardService.create(board)
         store.dispatch(boardAdded(boardWithId))
         return boardWithId
     } catch (err) {
@@ -242,7 +242,7 @@ async function _updateBoard(board) {
     try {
         // optimistic update
         store.dispatch(boardUpdated(board))
-        return boardService.save(board)
+        return boardService.update(board)
     } catch (err) {
         console.error('Failed to update board:', err)
         // TODO: undo the store change
@@ -256,7 +256,7 @@ async function _updateBoards(boards) {
         store.dispatch(boardsUpdated(boards))
 
         for (const b of boards) {
-            await boardService.save(b)
+            await boardService.update(b)
         }
     } catch (err) {
         console.error('Failed to update boards:', err)
@@ -334,6 +334,7 @@ async function _moveTaskToDifferentBoard(
     const targetBoard = allBoards.find((b) => b._id === targetBoardId)
     const targetGroup = targetBoard.groups.find((g) => g._id === targetGroupId)
     const targetGroupToUpdate = { ...targetGroup }
+    targetGroupToUpdate.tasks = [...targetGroupToUpdate.tasks]
     targetGroupToUpdate.tasks.splice(targetPositionId, 0, task)
     const targetBoardToUpdate = { ...targetBoard }
     targetBoardToUpdate.groups = targetBoard.groups.map((g) =>

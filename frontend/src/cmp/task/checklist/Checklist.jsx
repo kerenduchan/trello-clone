@@ -4,7 +4,7 @@ import {
     curChecklistChanged,
     selectChecklistId,
 } from '../../../store/reducers/app.reducer'
-import { boardService } from '../../../services/board.service'
+import { boardService } from '../../../services/board/board.service'
 import { deleteChecklist } from '../../../store/actions/task/task.checklist.actions'
 import { useForm } from '../../../customHooks/useForm'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'

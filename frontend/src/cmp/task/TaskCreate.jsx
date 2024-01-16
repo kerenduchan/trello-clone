@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { useForm } from '../../customHooks/useForm'
-import { boardService } from '../../services/board.service'
+import { boardService } from '../../services/board/board.service'
 import { useClickedOutListener } from '../../customHooks/useClickedOutListener'
 import { useKeyDownListener } from '../../customHooks/useKeyDownListener'
 import { Icon } from '../general/Icon'

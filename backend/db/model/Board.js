@@ -15,23 +15,24 @@ const styleSchema = new Schema({
 
 // labels subfield of board
 const labelSchema = new Schema({
-    _id: SchemaTypes.ObjectId,
+    _id: String,
     title: {
         type: String,
         default: '',
     },
-    color: {
+    colorId: {
         type: String,
-        required: [true, 'color is required'],
-        validate: {
-            validator: utilService.isValidHexColor,
-            message:
-                'Invalid color hex code format. It should be in the format #RRGGBB.',
-        },
     },
-    colorName: {
-        type: String,
-        required: [true, 'colorName is required'],
+    color: {
+        bgColor: {
+            type: String,
+        },
+        textColor: {
+            type: String,
+        },
+        colorName: {
+            type: String,
+        },
     },
 })
 
@@ -81,13 +82,15 @@ const boardSchema = new Schema({
     },
     groups: {
         type: [GroupSchema],
+        required: true,
+        default: [],
     },
     style: {
         type: styleSchema,
     },
     createdAt: {
         type: Date,
-        default: Date.now,
+        default: Date.now(),
     },
 })
 

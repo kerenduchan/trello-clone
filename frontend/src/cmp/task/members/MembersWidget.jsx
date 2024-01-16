@@ -1,5 +1,5 @@
 import { usePopoverState } from '../../../customHooks/usePopoverState'
-import { boardService } from '../../../services/board.service'
+import { boardService } from '../../../services/board/board.service'
 import { MembersMenu } from './MembersMenu'
 import { MembersWidgetItem } from './MembersWidgetItem'
 

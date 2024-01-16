@@ -1,5 +1,5 @@
 import { usePopoverState } from '../../../customHooks/usePopoverState'
-import { boardService } from '../../../services/board.service'
+import { boardService } from '../../../services/board/board.service'
 import { BoardFilterMenu } from './BoardFilterMenu'
 import { BoardFilterBtn } from './BoardFilterBtn'
 

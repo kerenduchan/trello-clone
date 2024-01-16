@@ -10,15 +10,15 @@ import { authenticate } from '../../middleware/auth.middleware.js'
 const router = express.Router()
 
 // get task from the given group from the given board
-router.get('/:boardId/:groupId/:taskId', authenticate, getTask)
+router.get('/:boardId/group/:groupId/task/:taskId', authenticate, getTask)
 
 // create task in group in board
-router.post('/:boardId/:groupId', authenticate, createTask)
+router.post('/:boardId/group/:groupId/task', authenticate, createTask)
 
 // update task in the given group in the given board
-router.put('/:boardId/:groupId/:taskId', authenticate, updateTask)
+router.put('/:boardId/group/:groupId/task/:taskId', authenticate, updateTask)
 
 // delete task from the given group in the given board
-router.delete('/:boardId/:groupId/:taskId', authenticate, deleteTask)
+router.delete('/:boardId/group/:groupId/task/:taskId', authenticate, deleteTask)
 
 export const taskRoutes = router
