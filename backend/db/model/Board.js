@@ -82,6 +82,8 @@ const boardSchema = new Schema({
     },
     groups: {
         type: [GroupSchema],
+        required: true,
+        default: [],
     },
     style: {
         type: styleSchema,

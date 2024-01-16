@@ -65,22 +65,6 @@ const checklistSchema = new Schema(
             type: [checklistItemSchema],
             default: [],
         },
-        createdAt: {
-            type: Date,
-            default: Date.now(),
-        },
-        createdBy: {
-            type: SchemaTypes.ObjectId,
-            ref: 'User',
-            required: [true, 'createdBy is required'],
-            validate: {
-                validator: async function (userId) {
-                    const user = await User.findById(userId)
-                    return !!user
-                },
-                message: 'Invalid createdBy. User does not exist.',
-            },
-        },
     },
     { _id: false } // Don't auto-assign _id)
 )

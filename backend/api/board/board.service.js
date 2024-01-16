@@ -23,6 +23,9 @@ const UPDATE_FIELDS = [
     'isArchived',
     'labels',
     'memberIds',
+
+    // for move task/group. TODO: tighter API
+    'groups',
 ]
 
 // query boards (with filter, sort, pagination) and populate the creator of each
