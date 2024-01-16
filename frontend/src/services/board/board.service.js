@@ -1,10 +1,14 @@
 import { utilService } from '../util.service'
 import { boardLocalService } from './board.local.service'
+import { boardAxiosService } from './board.axios.service'
 import { moveTask, moveGroup } from '../../store/actions/board/board.actions'
 import { moveChecklist } from '../../store/actions/task/task.checklist.actions'
 import { labelService } from '../label.service'
 
-const service = boardLocalService
+// change to true in order to work with local storage instead of server
+const USE_LOCAL = false
+
+const service = USE_LOCAL ? boardLocalService : boardAxiosService
 
 export const boardService = {
     ...service,

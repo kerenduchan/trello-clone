@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
-import { authService } from '../services/auth.service'
+import { authService } from '../services/auth/auth.service'
 import { useForm } from '../customHooks/useForm'
 import { LoginContext } from '../contexts/LoginContext'
 

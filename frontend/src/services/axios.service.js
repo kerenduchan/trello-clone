@@ -2,6 +2,11 @@ import Axios from 'axios'
 
 export const axiosService = {
     getBaseUrl,
+    query,
+    getById,
+    create,
+    update,
+    remove,
 }
 
 const axios = Axios.create({
@@ -12,14 +17,6 @@ function getBaseUrl() {
     return process.env.NODE_ENV !== 'development'
         ? '/api/'
         : '//localhost:3000/api/'
-}
-
-export const utilAxiosService = {
-    query,
-    getById,
-    create,
-    update,
-    remove,
 }
 
 async function query(baseUrl, params = {}) {

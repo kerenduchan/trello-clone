@@ -1,5 +1,5 @@
 import { storageService } from '../async-storage.service'
-import { authService } from '../auth.service'
+import { authService } from '../auth/auth.service'
 import { utilService } from '../util.service'
 import { getDemoData } from './board.local.demo.data'
 
@@ -19,9 +19,10 @@ async function query() {
     // return only the boards that this user is authorized to view
     const allboards = await storageService.query(STORAGE_KEY)
     const loggedinUser = authService.getLoggedinUser()
-    return allboards.filter((b) =>
+    const boards = allboards.filter((b) =>
         b.members.find((member) => member._id === loggedinUser._id)
     )
+    return { data: boards }
 }
 
 function getById(id) {

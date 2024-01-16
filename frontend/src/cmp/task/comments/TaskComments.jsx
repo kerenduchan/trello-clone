@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { boardService } from '../../../services/board/board.service'
-import { authService } from '../../../services/auth.service'
+import { authService } from '../../../services/auth/auth.service'
 import { addTaskComment } from '../../../store/actions/task/task.comment.actions'
 import { useForm } from '../../../customHooks/useForm'
 import { useKeyDownListener } from '../../../customHooks/useKeyDownListener'

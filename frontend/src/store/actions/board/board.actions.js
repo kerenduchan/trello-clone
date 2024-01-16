@@ -29,8 +29,8 @@ export {
 
 async function loadBoards() {
     try {
-        const boards = await boardService.query()
-        store.dispatch(boardsChanged(boards))
+        const { data } = await boardService.query()
+        store.dispatch(boardsChanged(data))
     } catch (err) {
         console.error('Failed to load boards:', err)
         throw err

@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { authService } from '../../services/auth.service'
+import { authService } from '../../services/auth/auth.service'
 import { Popover } from '../general/Popover'
 import { LoginContext } from '../../contexts/LoginContext'
 import { useNavigate } from 'react-router'

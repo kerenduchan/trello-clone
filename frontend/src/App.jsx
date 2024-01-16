@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Route, HashRouter as Router, Routes } from 'react-router-dom'
-import { authService } from './services/auth.service'
+import { authService } from './services/auth/auth.service'
 import { LoginContext } from './contexts/LoginContext'
 import { Home } from './pages/Home'
 import { LoginSignup } from './pages/LoginSignup'
