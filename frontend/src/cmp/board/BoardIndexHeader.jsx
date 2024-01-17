@@ -4,7 +4,6 @@ import { boardService } from '../../services/board/board.service'
 import { usePopoverState } from '../../customHooks/usePopoverState'
 import { LoginContext } from '../../contexts/LoginContext'
 import { BoardCreate } from './BoardCreate'
-import { PopoverMenu } from '../general/PopoverMenu'
 import { UserAccountMenu } from '../user/UserAccountMenu'
 
 export function BoardIndexHeader({ board }) {
@@ -38,7 +37,9 @@ export function BoardIndexHeader({ board }) {
                     Boards
                 </Link>
                 <button
-                    className="btn-dynamic-wide"
+                    className={`btn-dynamic-wide btn-create-board ${
+                        createBoardMenu.show ? 'active' : ''
+                    }`}
                     {...createBoardMenu.triggerAndTarget}
                 >
                     Create Board
@@ -53,9 +54,7 @@ export function BoardIndexHeader({ board }) {
 
             {/* Create Board menu */}
             {createBoardMenu.show && (
-                <PopoverMenu title="Create Board" {...createBoardMenu.popover}>
-                    <BoardCreate onClose={createBoardMenu.onClose} />
-                </PopoverMenu>
+                <BoardCreate popoverState={createBoardMenu} />
             )}
 
             {/* User account menu */}

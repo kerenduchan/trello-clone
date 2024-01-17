@@ -1,0 +1,16 @@
+.checklist-header {
+    > .icon {
+        align-self: start;
+        margin-top: 8px;
+    }
+
+    .title {
+        height: 36px;
+        display: flex;
+        align-items: center;
+    }
+
+    .checklist-header-edit {
+        grid-area: 2 / 3;
+    }
+}

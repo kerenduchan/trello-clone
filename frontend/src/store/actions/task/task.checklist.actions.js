@@ -6,6 +6,7 @@ import { boardService } from '../../../services/board/board.service'
 
 export {
     addChecklist,
+    updateChecklist,
     deleteChecklist,
     moveChecklist,
     addChecklistItem,
@@ -18,6 +19,14 @@ async function addChecklist(hierarchy, checklist) {
     const { task } = hierarchy
     const checklists = [...task.checklists, checklist]
     store.dispatch(curChecklistChanged(checklist._id))
+    return updateTask(hierarchy, { checklists })
+}
+
+async function updateChecklist(hierarchy, checklist) {
+    const { task } = hierarchy
+    const checklists = task.checklists.map((cl) =>
+        cl._id === checklist._id ? checklist : cl
+    )
     return updateTask(hierarchy, { checklists })
 }
 

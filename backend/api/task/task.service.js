@@ -35,7 +35,7 @@ async function getById(boardId, groupId, taskId) {
     return task
 }
 
-async function create(boardId, groupId, task) {
+async function create(boardId, groupId, task, position) {
     // disregard unexpected fields
     task = utilService.extractFields(task, CREATE_FIELDS)
 
@@ -44,7 +44,14 @@ async function create(boardId, groupId, task) {
     try {
         const updatedBoard = await Board.findOneAndUpdate(
             { _id: boardId, 'groups._id': groupId },
-            { $push: { 'groups.$.tasks': task } },
+            {
+                $push: {
+                    'groups.$.tasks': {
+                        $each: [task],
+                        $position: position,
+                    },
+                },
+            },
             { new: true }
         )
 

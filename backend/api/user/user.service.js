@@ -13,7 +13,7 @@ export const userService = {
 }
 
 // user fields that can be set/updated
-const FIELDS = ['username', 'fullname', 'password', 'isAdmin']
+const FIELDS = ['username', 'fullname', 'password', 'isAdmin', 'imgUrl']
 
 async function query(
     filterBy,

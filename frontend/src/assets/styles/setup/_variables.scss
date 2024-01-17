@@ -96,6 +96,22 @@
     --ds-border-brand: #0c66e4;
     --dynamic-text-transparent: hsla(218, 54%, 19.6%, 0.16);
 
+    --ds-background-brand-bold: #0c66e4;
+    --ds-background-brand-bold-hovered: #0055cc;
+    --ds-background-brand-bold-pressed: #09326c;
+
+    --ds-background-selected: #e9f2ff;
+    --ds-background-selected-hovered: #cce0ff;
+    --ds-background-selected-pressed: #85b8ff;
+
+    --ds-text: #172b4d;
+    --ds-text-inverse: #ffffff;
+    --ds-text-selected: #0c66e4;
+
+    --ds-icon-accent-red: #c9372c;
+
+    --create-menu-button-color: var(--ds-text-inverse);
+
     // BOX SHADOW
 
     --box-shadow-subtle: 0px 1px 1px #091e4240, 0px 0px 1px #091e424f;
@@ -105,6 +121,17 @@
     --icon-star: #e2b203;
 
     --board-menu-width: 339px;
+
+    // create menu button
+    --create-menu-button-background: var(--ds-background-brand-bold);
+    --create-menu-button-background-hovered: var(
+        --ds-background-brand-bold-hovered
+    );
+    --create-menu-button-background-active: var(--ds-background-selected);
+    --create-menu-button-background-active-hovered: var(
+        --ds-background-selected-hovered
+    );
+    --create-menu-button-color-active: var(--ds-text-selected);
 }
 
 // Dynamic variables - they change depending on the
@@ -144,4 +171,12 @@
     --dynamic-background: hsla(0, 0%, 0%, 0.16);
     --dynamic-background-transparent: hsla(0, 0%, 0%, 0.16);
     --board-header-background-color: #0000003d;
+
+    // create menu button
+    --create-menu-button-background: rgba(255, 255, 255, 0.2);
+    --create-menu-button-background-hovered: rgba(255, 255, 255, 0.3);
+    --create-menu-button-background-active: rgba(255, 255, 255, 0.3);
+    --create-menu-button-background-active-hovered: var(
+        --create-menu-button-background-active
+    );
 }
