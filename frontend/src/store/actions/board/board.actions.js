@@ -189,6 +189,7 @@ async function moveTasks(board, sourceGroup, targetGroupId) {
     // insert tasks into target group
     const targetGroup = board.groups.find((g) => g._id === targetGroupId)
     const targetGroupToUpdate = { ...targetGroup }
+    targetGroupToUpdate.tasks = [...targetGroup.tasks]
     targetGroupToUpdate.tasks.push(...tasksToMove)
 
     const boardToUpdate = { ...board }
