@@ -2,6 +2,7 @@ import { boardService } from '../../../services/board/board.service'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { LabelBtn } from './LabelBtn'
 import { LabelsMenu } from '../../labelsMenu/LabelsMenu'
+import { Icon } from '../../general/Icon'
 
 export function LabelsWidget({ hierarchy }) {
     const labels = boardService.getTaskLabels(hierarchy)
@@ -22,6 +23,14 @@ export function LabelsWidget({ hierarchy }) {
                                     />
                                 </li>
                             ))}
+                            <li key="add">
+                                <button
+                                    className="btn-square-sharp btn-add"
+                                    {...labelsMenu.trigger}
+                                >
+                                    <Icon type="add" />
+                                </button>
+                            </li>
                         </ul>
                     </>
                 )}
