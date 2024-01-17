@@ -9,6 +9,8 @@ const initialState = {
     // The one and only checklist item whose form is currently open.
     // Only one checklist form / checklist item form should be open at a time.
     curChecklistItemId: null,
+
+    loggedinUser: null,
 }
 
 // "mutating" code is okay inside of createSlice!
@@ -16,14 +18,23 @@ const appSlice = createSlice({
     name: 'app',
     initialState,
     reducers: {
+        loggedinUserChanged(state, action) {
+            return {
+                ...state,
+                loggedinUser: action.payload,
+            }
+        },
+
         curChecklistChanged(state, action) {
             return {
+                ...state,
                 curChecklistId: action.payload,
                 curChecklistItemId: null,
             }
         },
         curChecklistItemChanged(state, action) {
             return {
+                ...state,
                 curChecklistId: null,
                 curChecklistItemId: action.payload,
             }
@@ -31,8 +42,13 @@ const appSlice = createSlice({
     },
 })
 
-export const { curChecklistChanged, curChecklistItemChanged } = appSlice.actions
+export const {
+    loggedinUserChanged,
+    curChecklistChanged,
+    curChecklistItemChanged,
+} = appSlice.actions
 export default appSlice.reducer
 
 export const selectChecklistId = (state) => state.app.curChecklistId
 export const selectChecklistItemId = (state) => state.app.curChecklistItemId
+export const selectLoggedinUser = (state) => state.app.loggedinUser

@@ -1,14 +1,14 @@
-import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { boardService } from '../../services/board/board.service'
 import { usePopoverState } from '../../customHooks/usePopoverState'
-import { LoginContext } from '../../contexts/LoginContext'
 import { BoardCreate } from './BoardCreate'
 import { UserAccountMenu } from '../user/UserAccountMenu'
+import { selectLoggedinUser } from '../../store/reducers/app.reducer'
 
 export function BoardIndexHeader({ board }) {
     const navigate = useNavigate()
-    const { loggedinUser } = useContext(LoginContext)
+    const loggedinUser = useSelector(selectLoggedinUser)
     const createBoardMenu = usePopoverState()
     const userAccountMenu = usePopoverState()
 

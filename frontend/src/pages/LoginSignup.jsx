@@ -1,11 +1,13 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { loggedinUserChanged } from '../store/reducers/app.reducer'
 import { authService } from '../services/auth/auth.service'
 import { useForm } from '../customHooks/useForm'
-import { LoginContext } from '../contexts/LoginContext'
 
 export function LoginSignup() {
+    const dispatch = useDispatch()
     const location = useLocation()
     const [draft, handleChange] = useForm({
         username: '',
@@ -14,7 +16,6 @@ export function LoginSignup() {
     })
     const [errorMsg, setErrorMsg] = useState(null)
 
-    const { setLoggedinUser } = useContext(LoginContext)
     const navigate = useNavigate()
 
     async function onSubmit(e) {
@@ -23,7 +24,8 @@ export function LoginSignup() {
             const user = isLogin()
                 ? await authService.login(draft)
                 : await authService.signup(draft)
-            setLoggedinUser(user)
+
+            dispatch(loggedinUserChanged(user))
             navigate(`/boards`)
         } catch (err) {
             console.error(err)

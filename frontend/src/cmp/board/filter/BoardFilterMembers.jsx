@@ -1,12 +1,12 @@
-import { useState, useEffect, useContext } from 'react'
-import { selectBoard } from '../../../store/reducers/board.reducer'
+import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { LoginContext } from '../../../contexts/LoginContext'
+import { selectBoard } from '../../../store/reducers/board.reducer'
+import { selectLoggedinUser } from '../../../store/reducers/app.reducer'
 import { Icon } from '../../general/Icon'
 
 export function BoardFilterMembers({ filter, onChange }) {
     const board = useSelector(selectBoard)
-    const { loggedinUser } = useContext(LoginContext)
+    const loggedinUser = useSelector(selectLoggedinUser)
     const [selectedMemberIds, setSelectedMembers] = useState(filter.members)
 
     useEffect(() => {

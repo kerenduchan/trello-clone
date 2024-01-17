@@ -1,17 +1,21 @@
-import { useContext } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { authService } from '../../services/auth/auth.service'
 import { Popover } from '../general/Popover'
-import { LoginContext } from '../../contexts/LoginContext'
 import { useNavigate } from 'react-router'
+import {
+    loggedinUserChanged,
+    selectLoggedinUser,
+} from '../../store/reducers/app.reducer'
 
 export function UserAccountMenu({ popover }) {
+    const dispatch = useDispatch()
     const navigate = useNavigate()
-    const { loggedinUser, setLoggedinUser } = useContext(LoginContext)
+    const loggedinUser = useSelector(selectLoggedinUser)
 
     async function onLogout() {
         try {
             await authService.logout()
-            setLoggedinUser(null)
+            dispatch(loggedinUserChanged(null))
             navigate('/')
         } catch (err) {
             console.error('Logout failed', err)
@@ -19,6 +23,9 @@ export function UserAccountMenu({ popover }) {
     }
 
     const { refEl, onClose } = popover
+
+    if (!loggedinUser) return <></>
+
     return (
         <Popover
             className="popover-menu user-account-menu"

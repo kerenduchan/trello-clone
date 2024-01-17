@@ -1,9 +1,9 @@
-import { useContext } from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { LoginContext } from '../../contexts/LoginContext'
+import { selectLoggedinUser } from '../../store/reducers/app.reducer'
 
 export function HomeHeader() {
-    const { loggedinUser } = useContext(LoginContext)
+    const loggedinUser = useSelector(selectLoggedinUser)
 
     return (
         <header className="home-header-bg">
