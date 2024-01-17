@@ -13,7 +13,9 @@ export const boardLocalService = {
 
 const STORAGE_KEY = 'boards'
 
-_createBoards()
+if (utilService.isUseLocalStorage()) {
+    _createBoards()
+}
 
 async function query() {
     // return only the boards that this user is authorized to view

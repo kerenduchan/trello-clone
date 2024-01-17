@@ -5,7 +5,9 @@ export const userService = { query, getById, save, getByUsername }
 
 const STORAGE_KEY = 'users'
 
-_createUsers()
+if (utilService.isUseLocalStorage()) {
+    _createUsers()
+}
 
 async function query() {
     return await storageService.query(STORAGE_KEY)
