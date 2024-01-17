@@ -53,7 +53,10 @@ export function BoardCreate({ popoverState }) {
                     selectedImg={draft.style.backgroundImage}
                     onClick={onImgSelect}
                 />
-                <label htmlFor="title">Board Title</label>
+                <label htmlFor="title">
+                    Board Title
+                    <span className="required-asterisk">*</span>
+                </label>
                 <input
                     id="title"
                     name="title"
@@ -61,7 +64,12 @@ export function BoardCreate({ popoverState }) {
                     onChange={handleChange}
                     value={draft.title}
                 />
-                <button className="btn-primary btn-create">Create</button>
+                <button
+                    className="btn-primary btn-create"
+                    disabled={draft.title.length === 0}
+                >
+                    Create
+                </button>
             </form>
         </PopoverMenu>
     )

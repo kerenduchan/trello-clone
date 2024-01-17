@@ -38,6 +38,12 @@
 
         .btn-create {
             margin-top: 16px;
+            width: 100%;
+        }
+
+        .required-asterisk {
+            margin-inline-start: 2px;
+            color: var(--ds-icon-accent-red, #e34935);
         }
     }
 }
