@@ -10,6 +10,8 @@ export function BoardIndex() {
     const boards = useSelector(selectAllBoards)
     const [starredBoards, setStarredBoards] = useState([])
 
+    console.log(boards)
+
     useEffect(() => {
         loadBoards()
     }, [])
