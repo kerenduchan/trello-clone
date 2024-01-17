@@ -1,0 +1,15 @@
+.member-menu {
+    width: 304px;
+    border-radius: 8px;
+    overflow: hidden;
+
+    .header {
+        height: 96px;
+        padding: 24px 12px 8px 14px;
+        background-image: linear-gradient(
+            to bottom,
+            var(--ds-background-brand-bold) 0%,
+            var(--ds-background-brand-bold) 100%
+        );
+    }
+}
