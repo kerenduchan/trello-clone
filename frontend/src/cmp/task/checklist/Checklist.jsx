@@ -5,7 +5,10 @@ import {
     selectChecklistId,
 } from '../../../store/reducers/app.reducer'
 import { boardService } from '../../../services/board/board.service'
-import { deleteChecklist } from '../../../store/actions/task/task.checklist.actions'
+import {
+    deleteChecklist,
+    updateChecklist,
+} from '../../../store/actions/task/task.checklist.actions'
 import { useForm } from '../../../customHooks/useForm'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 import { ChecklistItem } from './ChecklistItem'
@@ -29,6 +32,10 @@ export function Checklist({ hierarchy, checklist, index }) {
             console.error(err)
             // TODO: show an error dialog
         }
+    }
+
+    function onUpdateTitle(title) {
+        updateChecklist(hierarchy, { ...checklist, title })
     }
 
     function onShowForm() {
@@ -55,6 +62,7 @@ export function Checklist({ hierarchy, checklist, index }) {
                     <ChecklistHeader
                         title={checklist.title}
                         onDelete={onDeleteChecklist}
+                        onUpdateTitle={onUpdateTitle}
                     />
 
                     <div className="content">

@@ -4,7 +4,7 @@ import { DeleteMenu } from '../../general/DeleteMenu'
 import { Icon } from '../../general/Icon'
 import { ChecklistHeaderEdit } from './ChecklistHeaderEdit'
 
-export function ChecklistHeader({ title, onDelete }) {
+export function ChecklistHeader({ title, onDelete, onUpdateTitle }) {
     const deleteChecklistMenu = usePopoverState()
     const [showEditTitle, setShowEditTitle] = useState(false)
 
@@ -24,6 +24,7 @@ export function ChecklistHeader({ title, onDelete }) {
                 <ChecklistHeaderEdit
                     title={title}
                     onClose={() => setShowEditTitle(false)}
+                    onSave={onUpdateTitle}
                 />
             ) : (
                 <>
