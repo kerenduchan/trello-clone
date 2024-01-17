@@ -66,7 +66,7 @@ function getEmptyBoard() {
     return {
         title: '',
         style: {
-            backgroundImage: '',
+            backgroundImage: getBackgroundImages()[0],
         },
         groups: [],
         members: [],
