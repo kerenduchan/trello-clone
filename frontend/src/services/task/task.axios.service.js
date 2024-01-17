@@ -7,8 +7,18 @@ export const taskAxiosService = {
 }
 
 async function updateTask(board, group, task) {
+    const taskToSend = { ...task }
+    if (task.archivedAt !== undefined) {
+        if (task.archivedAt === null) {
+            taskToSend.isArchived = false
+        } else {
+            taskToSend.isArchived = true
+        }
+    }
+    delete taskToSend.archivedAt
+
     const baseUrl = _getBaseUrl(board._id, group._id)
-    return axiosService.update(baseUrl, task)
+    return axiosService.update(baseUrl, taskToSend)
 }
 
 async function createTask(board, group, position, task) {

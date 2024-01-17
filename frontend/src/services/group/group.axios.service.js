@@ -11,7 +11,17 @@ async function deleteGroup(board, group) {
 }
 
 async function updateGroup(board, group) {
-    return axiosService.update(_getBaseUrl(board._id), group)
+    const groupToSend = { ...group }
+    if (group.archivedAt !== undefined) {
+        if (group.archivedAt === null) {
+            groupToSend.isArchived = false
+        } else {
+            groupToSend.isArchived = true
+        }
+    }
+    delete groupToSend.archivedAt
+
+    return axiosService.update(_getBaseUrl(board._id), groupToSend)
 }
 
 async function createGroup(board, group) {
