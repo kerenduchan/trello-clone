@@ -1,11 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { authService } from '../../services/auth/auth.service'
-import { Popover } from '../general/Popover'
 import { useNavigate } from 'react-router'
+import { useDispatch, useSelector } from 'react-redux'
 import {
     loggedinUserChanged,
     selectLoggedinUser,
 } from '../../store/reducers/app.reducer'
+import { userService } from '../../services/user/user.service'
+import { authService } from '../../services/auth/auth.service'
+import { Popover } from '../general/Popover'
 
 export function UserAccountMenu({ popover }) {
     const dispatch = useDispatch()
@@ -35,7 +36,10 @@ export function UserAccountMenu({ popover }) {
             <div className="header">
                 <h2>Account</h2>
                 <div className="user">
-                    <img className="user-avatar" src={loggedinUser.imgUrl} />
+                    <img
+                        className="user-avatar"
+                        src={userService.getImgUrl(loggedinUser)}
+                    />
                     <div className="fullname">{loggedinUser.fullname}</div>
                     <div className="username">{loggedinUser.username}</div>
                 </div>

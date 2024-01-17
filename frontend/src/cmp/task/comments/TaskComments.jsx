@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { boardService } from '../../../services/board/board.service'
 import { authService } from '../../../services/auth/auth.service'
+import { userService } from '../../../services/user/user.service'
 import { addTaskComment } from '../../../store/actions/task/task.comment.actions'
 import { useForm } from '../../../customHooks/useForm'
 import { useKeyDownListener } from '../../../customHooks/useKeyDownListener'
@@ -40,7 +41,7 @@ export function TaskComments({ hierarchy }) {
     return (
         <div className="task-comments">
             <div className="logged-in-user-avatar">
-                <Avatar imgSrc={user.imgUrl} />
+                <Avatar imgSrc={userService.getImgUrl(user)} />
             </div>
             {showForm ? (
                 <TaskCommentCreateForm

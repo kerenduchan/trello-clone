@@ -1,5 +1,6 @@
 import moment from 'moment/moment'
 import { boardService } from '../../../services/board/board.service'
+import { userService } from '../../../services/user/user.service'
 import { Avatar } from '../../general/Avatar'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { DeleteMenu } from '../../general/DeleteMenu'
@@ -35,7 +36,7 @@ export function TaskComment({ hierarchy, comment, isSelected, onClick }) {
     return (
         <div className={`task-comment ${isSelected ? 'selected' : ''}`}>
             <div className="created-by-avatar">
-                <Avatar imgSrc={createdBy.imgUrl} />
+                <Avatar imgSrc={userService.getImgUrl(createdBy)} />
             </div>
 
             {showEditForm ? (

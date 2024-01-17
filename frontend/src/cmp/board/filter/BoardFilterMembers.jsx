@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { selectBoard } from '../../../store/reducers/board.reducer'
 import { selectLoggedinUser } from '../../../store/reducers/app.reducer'
 import { Icon } from '../../general/Icon'
+import { userService } from '../../../services/user/user.service'
 
 export function BoardFilterMembers({ filter, onChange }) {
     const board = useSelector(selectBoard)
@@ -48,28 +49,35 @@ export function BoardFilterMembers({ filter, onChange }) {
             </li>
 
             {/* Board members */}
-            {items.map(({ _id, fullname, imgUrl, username }) => (
-                <li key={_id} className="member" onClick={() => onClick(_id)}>
-                    <input
-                        type="checkbox"
-                        name={_id}
-                        value={_id}
-                        onChange={() => {}}
-                        checked={isSelected(_id)}
-                    />
-                    <span className="field-content">
-                        <img src={imgUrl} />
-                        <span className="label fullname">
-                            {_id === loggedinUser._id
-                                ? 'Cards assigned to me'
-                                : fullname}
+            {items.map((member) => {
+                const { _id, fullname, username } = member
+                return (
+                    <li
+                        key={_id}
+                        className="member"
+                        onClick={() => onClick(_id)}
+                    >
+                        <input
+                            type="checkbox"
+                            name={_id}
+                            value={_id}
+                            onChange={() => {}}
+                            checked={isSelected(_id)}
+                        />
+                        <span className="field-content">
+                            <img src={userService.getImgUrl(member)} />
+                            <span className="label fullname">
+                                {_id === loggedinUser._id
+                                    ? 'Cards assigned to me'
+                                    : fullname}
+                            </span>
+                            {_id !== loggedinUser._id && (
+                                <span className="username">@{username}</span>
+                            )}
                         </span>
-                        {_id !== loggedinUser._id && (
-                            <span className="username">@{username}</span>
-                        )}
-                    </span>
-                </li>
-            ))}
+                    </li>
+                )
+            })}
         </div>
     )
 }

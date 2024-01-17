@@ -1,4 +1,5 @@
 import { boardService } from '../../../services/board/board.service'
+import { userService } from '../../../services/user/user.service'
 import { Avatar } from '../../general/Avatar'
 
 export function MembersBadge({ hierarchy }) {
@@ -11,7 +12,10 @@ export function MembersBadge({ hierarchy }) {
                     <ul>
                         {members.map((member) => (
                             <li key={member._id}>
-                                <Avatar imgSrc={member.imgUrl} size="xs" />
+                                <Avatar
+                                    imgSrc={userService.getImgUrl(member)}
+                                    size="xs"
+                                />
                             </li>
                         ))}
                     </ul>

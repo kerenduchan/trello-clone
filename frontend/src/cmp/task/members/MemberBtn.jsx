@@ -1,3 +1,4 @@
+import { userService } from '../../../services/user/user.service'
 import { updateTask } from '../../../store/actions/task/task.actions'
 import { Avatar } from '../../general/Avatar'
 import { Icon } from '../../general/Icon'
@@ -24,7 +25,7 @@ export function MemberBtn({ hierarchy, member }) {
 
     return (
         <button className="btn-member" onClick={onClick}>
-            <Avatar imgSrc={member.imgUrl} />
+            <Avatar imgSrc={userService.getImgUrl(member)} />
             <div className="title">{member.fullname}</div>
             {isTaskMember() && <Icon type="check" size="xs" />}
         </button>

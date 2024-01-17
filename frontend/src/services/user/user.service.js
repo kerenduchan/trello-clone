@@ -8,4 +8,9 @@ const service = utilService.isUseLocalStorage()
 
 export const userService = {
     ...service,
+    getImgUrl,
+}
+
+function getImgUrl(user) {
+    return user?.imgUrl || '/images/no-avatar.svg'
 }

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { boardService } from '../../services/board/board.service'
+import { userService } from '../../services/user/user.service'
 import { usePopoverState } from '../../customHooks/usePopoverState'
 import { BoardCreate } from './BoardCreate'
 import { UserAccountMenu } from '../user/UserAccountMenu'
@@ -23,9 +24,6 @@ export function BoardIndexHeader({ board }) {
         return 'krello-white.svg'
     }
 
-    function getImgUrl() {
-        return loggedinUser?.imgUrl || '/images/no-avatar.svg'
-    }
     return (
         <>
             <header className="board-index-header">
@@ -48,7 +46,7 @@ export function BoardIndexHeader({ board }) {
                     className="user-avatar"
                     {...userAccountMenu.triggerAndTarget}
                 >
-                    <img src={getImgUrl()} />
+                    <img src={userService.getImgUrl(loggedinUser)} />
                 </button>
             </header>
 

@@ -1,3 +1,5 @@
+import { userService } from '../../services/user/user.service'
+
 export function BoardMembers({ members }) {
     return (
         <div className="board-members">
@@ -7,7 +9,7 @@ export function BoardMembers({ members }) {
                     className="btn-board-member"
                     style={{ zIndex: members.length - idx }}
                 >
-                    <img src={member.imgUrl} />
+                    <img src={userService.getImgUrl(member)} />
                     <div
                         className="overlay"
                         style={{ zIndex: members.length - idx + 1 }}
