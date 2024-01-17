@@ -1,0 +1,19 @@
+.checklist-header-edit {
+    textarea {
+        width: 100%;
+        @include textarea-styling();
+    }
+
+    .actions {
+        display: flex;
+
+        .btn-save {
+            margin-inline-end: 4px;
+        }
+
+        .btn-close {
+            @include square(32px);
+            @include flex-center-center();
+        }
+    }
+}
