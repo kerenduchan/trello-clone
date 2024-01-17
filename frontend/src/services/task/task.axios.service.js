@@ -13,7 +13,7 @@ async function updateTask(board, group, task) {
 
 async function createTask(board, group, position, task) {
     const baseUrl = _getBaseUrl(board._id, group._id)
-    return axiosService.create(baseUrl, task)
+    return axiosService.create(baseUrl, { ...task, position })
 }
 
 async function deleteTask(hierarchy) {
