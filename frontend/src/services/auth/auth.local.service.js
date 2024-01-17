@@ -1,4 +1,4 @@
-import { userService } from '../user.service'
+import { userService } from '../user/user.service'
 import { authUtilService } from './auth.util.service'
 
 export const authLocalService = {

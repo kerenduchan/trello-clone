@@ -1,7 +1,7 @@
-import { storageService } from './async-storage.service'
-import { utilService } from './util.service'
+import { storageService } from '../async-storage.service'
+import { utilService } from '../util.service'
 
-export const userService = { query, getById, save, getByUsername }
+export const userLocalService = { getByUsername }
 
 const STORAGE_KEY = 'users'
 
