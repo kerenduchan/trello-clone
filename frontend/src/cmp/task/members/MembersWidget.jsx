@@ -1,5 +1,6 @@
 import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { boardService } from '../../../services/board/board.service'
+import { Icon } from '../../general/Icon'
 import { MembersMenu } from './MembersMenu'
 import { MembersWidgetItem } from './MembersWidgetItem'
 
@@ -21,6 +22,14 @@ export function MembersWidget({ hierarchy }) {
                                 />
                             </li>
                         ))}
+                        <li key="add">
+                            <button
+                                className="btn-circle btn-add"
+                                {...membersMenu.triggerAndTarget}
+                            >
+                                <Icon type="add" />
+                            </button>
+                        </li>
                     </ul>
                 </section>
             )}

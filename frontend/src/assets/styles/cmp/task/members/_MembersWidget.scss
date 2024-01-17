@@ -5,5 +5,19 @@
     ul {
         display: flex;
         column-gap: 4px;
+
+        .li {
+            @include square(32px);
+        }
+
+        .btn-add {
+            @include square(32px);
+            @include button-bg(
+                var(--ds-background-neutral),
+                var(--ds-background-neutral-hovered),
+                var(--ds-background-neutral-pressed)
+            );
+            margin-inline-end: 8px;
+        }
     }
 }
