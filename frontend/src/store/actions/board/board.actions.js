@@ -123,6 +123,7 @@ async function moveGroup(board, group, targetBoardId, targetPositionId) {
     const allBoards = store.getState().board.boards
     const targetBoard = allBoards.find((b) => b._id === targetBoardId)
     const targetBoardToUpdate = { ...targetBoard }
+    targetBoardToUpdate.groups = [...targetBoardToUpdate.groups]
     targetBoardToUpdate.groups.splice(targetPositionId, 0, group)
     return _updateBoards([boardToUpdate, targetBoardToUpdate])
 }
