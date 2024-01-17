@@ -121,6 +121,17 @@
     --icon-star: #e2b203;
 
     --board-menu-width: 339px;
+
+    // create menu button
+    --create-menu-button-background: var(--ds-background-brand-bold);
+    --create-menu-button-background-hovered: var(
+        --ds-background-brand-bold-hovered
+    );
+    --create-menu-button-background-active: var(--ds-background-selected);
+    --create-menu-button-background-active-hovered: var(
+        --ds-background-selected-hovered
+    );
+    --create-menu-button-color-active: var(--ds-text-selected);
 }
 
 // Dynamic variables - they change depending on the
@@ -142,17 +153,6 @@
     --dynamic-background: hsl(0, 0%, 100%);
     --dynamic-background-transparent: hsla(0, 0%, 95.7%, 0.9);
     --board-header-background-color: #ffffff3d;
-
-    // create menu button
-    --create-menu-button-background: var(--ds-background-brand-bold);
-    --create-menu-button-background-hovered: var(
-        --ds-background-brand-bold-hovered
-    );
-    --create-menu-button-background-active: var(--ds-background-selected);
-    --create-menu-button-background-active-hovered: var(
-        --ds-background-selected-hovered
-    );
-    --create-menu-button-color-active: var(--ds-text-selected);
 }
 
 // in the dark theme, the text is light and the background is dark

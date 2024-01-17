@@ -46,6 +46,6 @@ async function login(username, password) {
     return miniUser
 }
 
-async function signup({ username, password, fullname }) {
-    return userService.create({ username, password, fullname })
+async function signup(user) {
+    return userService.create(user)
 }
