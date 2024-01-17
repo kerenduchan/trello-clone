@@ -421,13 +421,19 @@ function _dragDropChecklist(result, board) {
 // convert index of task in group with ID=groupId in the filteredBoard to
 // index in the same group in board
 function _fixTaskIndex(board, filteredBoard, groupId, index) {
-    // find the ID of the task before which to drop in the filtered board
     const filteredGroup = filteredBoard.groups.find((g) => g._id === groupId)
+
+    if (filteredGroup.tasks.length === 0) {
+        return 0
+    }
+
+    // find the ID of the task before which to drop in the filtered board
     const taskId = filteredGroup.tasks[index]._id
 
     // find the index of this task in board
     const group = board.groups.find((g) => g._id === groupId)
     const fixedIndex = group.tasks.findIndex((t) => t._id === taskId)
+
     return fixedIndex
 }
 
