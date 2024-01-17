@@ -96,6 +96,32 @@
     --ds-border-brand: #0c66e4;
     --dynamic-text-transparent: hsla(218, 54%, 19.6%, 0.16);
 
+    --ds-background-brand-bold: #0c66e4;
+    --ds-background-brand-bold-hovered: #0055cc;
+    --ds-background-brand-bold-pressed: #09326c;
+
+    --ds-background-selected: #e9f2ff;
+    --ds-background-selected-hovered: #cce0ff;
+    --ds-background-selected-pressed: #85b8ff;
+
+    --ds-text-inverse: #ffffff;
+    --ds-text-selected: #0c66e4;
+
+    // create menu button
+    --create-menu-button-background: var(--ds-background-brand-bold);
+    --create-menu-button-background-hovered: var(
+        --ds-background-brand-bold-hovered
+    );
+    --create-menu-button-background-pressed: var(
+        --ds-background-brand-bold-pressed
+    );
+    --create-menu-button-background-active: var(--ds-background-selected);
+    --create-menu-button-background-active-hovered: var(
+        --ds-background-selected-hovered
+    );
+    --create-menu-button-color: var(--ds-text-inverse);
+    --create-menu-button-color-active: var(--ds-text-selected);
+
     // BOX SHADOW
 
     --box-shadow-subtle: 0px 1px 1px #091e4240, 0px 0px 1px #091e424f;

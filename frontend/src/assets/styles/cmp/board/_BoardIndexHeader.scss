@@ -28,4 +28,18 @@
             @include square(24px);
         }
     }
+
+    .btn-create-board {
+        @include button-bg(
+            var(--create-menu-button-background),
+            var(--create-menu-button-background-hovered),
+            var(--create-menu-button-background-hovered)
+        );
+        color: var(--ds-text-inverse);
+
+        &.active {
+            background-color: var(--create-menu-button-background-active);
+            color: var(--create-menu-button-color-active);
+        }
+    }
 }

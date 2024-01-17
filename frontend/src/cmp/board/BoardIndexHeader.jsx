@@ -38,7 +38,9 @@ export function BoardIndexHeader({ board }) {
                     Boards
                 </Link>
                 <button
-                    className="btn-dynamic-wide"
+                    className={`btn-dynamic-wide btn-create-board ${
+                        createBoardMenu.show ? 'active' : ''
+                    }`}
                     {...createBoardMenu.triggerAndTarget}
                 >
                     Create Board
