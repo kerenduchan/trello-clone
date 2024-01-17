@@ -10,10 +10,8 @@ import { useForm } from '../../../customHooks/useForm'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 import { ChecklistItem } from './ChecklistItem'
 import { ProgressBar } from '../../general/ProgressBar'
-import { TaskDetailsSubsectionHeader } from '../TaskDetailsSubsectionHeader'
-import { usePopoverState } from '../../../customHooks/usePopoverState'
-import { DeleteMenu } from '../../general/DeleteMenu'
 import { ChecklistItemCreateForm } from './ChecklistItemCreateForm'
+import { ChecklistHeader } from './ChecklistHeader'
 
 export function Checklist({ hierarchy, checklist, index }) {
     const dispatch = useDispatch()
@@ -24,12 +22,9 @@ export function Checklist({ hierarchy, checklist, index }) {
         boardService.getEmptyChecklistItem()
     )
 
-    const deleteChecklistMenu = usePopoverState()
-
     function onDeleteChecklist() {
         try {
             deleteChecklist(hierarchy, checklist)
-            deleteChecklistMenu.onClose()
         } catch (err) {
             console.error(err)
             // TODO: show an error dialog
@@ -50,23 +45,17 @@ export function Checklist({ hierarchy, checklist, index }) {
 
     return (
         <Draggable draggableId={checklist._id} index={index}>
-            {(provided, snapshot) => (
+            {(provided) => (
                 <div
                     className="checklist"
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
                 >
-                    <TaskDetailsSubsectionHeader
-                        icon="checklist"
+                    <ChecklistHeader
                         title={checklist.title}
-                    >
-                        <SecondaryBtn
-                            className="btn-title"
-                            text="Delete"
-                            {...deleteChecklistMenu.triggerAndTarget}
-                        />
-                    </TaskDetailsSubsectionHeader>
+                        onDelete={onDeleteChecklist}
+                    />
 
                     <div className="content">
                         <ProgressBar
@@ -106,17 +95,6 @@ export function Checklist({ hierarchy, checklist, index }) {
                             </div>
                         )}
                     </div>
-
-                    {/* Delete checklist menu */}
-                    {deleteChecklistMenu.show && (
-                        <DeleteMenu
-                            deleteMenu={deleteChecklistMenu}
-                            title={`Delete ${checklist.title}?`}
-                            text="Deleting a checklist is permanent and there is no way to get it back."
-                            btnText="Delete checklist"
-                            onDelete={onDeleteChecklist}
-                        />
-                    )}
                 </div>
             )}
         </Draggable>
