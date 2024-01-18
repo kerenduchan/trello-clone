@@ -23,9 +23,6 @@ async function getByUsername(username) {
 }
 
 function save(userToSave) {
-    if (!userToSave._id && !userToSave.imgUrl) {
-        userToSave.imgUrl = 'images/no-avatar.svg'
-    }
     if (userToSave._id) {
         return storageService.put(STORAGE_KEY, userToSave)
     } else {
