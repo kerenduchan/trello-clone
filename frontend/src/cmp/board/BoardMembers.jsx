@@ -19,10 +19,15 @@ export function BoardMembers({ members }) {
                         className="overlay"
                         style={{ zIndex: members.length - idx + 1 }}
                     />
+
+                    {memberMenu.show && (
+                        <MemberMenu
+                            popover={memberMenu.popover}
+                            member={member}
+                        />
+                    )}
                 </button>
             ))}
-
-            {memberMenu.show && <MemberMenu popover={memberMenu.popover} />}
         </div>
     )
 }

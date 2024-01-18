@@ -11,5 +11,35 @@
             var(--ds-background-brand-bold) 0%,
             var(--ds-background-brand-bold) 100%
         );
+        background-repeat: no-repeat;
+        background-size: 100% 82px;
+        display: grid;
+        grid-template-columns: auto 1fr;
+
+        .member-avatar {
+            @include square(88px);
+            border-radius: 50%;
+            border: 1px solid var(--ds-background-accent-gray-subtler);
+            margin-bottom: 8px;
+        }
+
+        .member-info {
+            margin-top: 8px;
+            margin-inline-start: 8px;
+            color: var(--ds-text-inverse);
+
+            .fullname {
+                @include font(16px, 20px, 500);
+            }
+
+            .username {
+                @include font-p();
+            }
+        }
+    }
+
+    .content {
+        padding: 12px;
+        padding-top: 0;
     }
 }

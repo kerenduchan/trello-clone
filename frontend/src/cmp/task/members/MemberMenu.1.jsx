@@ -20,9 +20,7 @@ export function MemberMenu({ popover, member }) {
                     <div className="username">@{member.username}</div>
                 </div>
             </div>
-            <div className="content">
-                {/* TODO: Edit profile info, view member activity */}
-            </div>
+            <div className="content"></div>
         </Popover>
     )
 }
