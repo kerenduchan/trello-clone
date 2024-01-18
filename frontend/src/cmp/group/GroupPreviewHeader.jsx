@@ -2,7 +2,7 @@ import { updateGroup } from '../../store/actions/group.actions'
 import { usePopoverState } from '../../customHooks/usePopoverState'
 import { EditableTitle } from '../general/EditableTitle'
 import { Icon } from '../general/Icon'
-import { GroupMenu } from './groupMenu/groupMenu'
+import { GroupMenu } from './groupMenu/GroupMenu'
 
 export function GroupPreviewHeader({
     board,
