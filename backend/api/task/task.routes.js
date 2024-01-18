@@ -1,6 +1,7 @@
 import express from 'express'
 import {
     getTask,
+    getTaskActivities,
     createTask,
     updateTask,
     deleteTask,
@@ -11,6 +12,13 @@ const router = express.Router()
 
 // get task from the given group from the given board
 router.get('/:boardId/group/:groupId/task/:taskId', authenticate, getTask)
+
+// get task activities
+router.get(
+    '/:boardId/group/:groupId/task/:taskId/activity',
+    authenticate,
+    getTaskActivities
+)
 
 // create task in group in board
 router.post('/:boardId/group/:groupId/task', authenticate, createTask)

@@ -3,12 +3,7 @@ import { activityService } from './activity.service.js'
 
 export async function getActivities(req, res) {
     try {
-        const { boardId } = req.params
-        let query = {
-            ...req.query,
-            boardId,
-        }
-        const filterBy = _buildFilter(query)
+        const filterBy = _buildFilter(req.query)
         const data = await activityService.query(filterBy)
         res.send(data)
     } catch (err) {
@@ -18,10 +13,12 @@ export async function getActivities(req, res) {
 }
 
 function _buildFilter(query) {
-    const { boardId } = query
+    const { boardId, groupId, taskId } = query
 
     const filter = {
         boardId,
+        groupId,
+        taskId,
     }
 
     return utilService.removeNullAndUndefined(filter)

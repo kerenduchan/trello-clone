@@ -1,3 +1,4 @@
+import { getActivities } from '../activity/activity.controller.js'
 import { taskService } from './task.service.js'
 
 export async function getTask(req, res) {
@@ -10,6 +11,12 @@ export async function getTask(req, res) {
         if (err.stack) console.error(err.stack)
         res.status(400).send({ error: err })
     }
+}
+
+export async function getTaskActivities(req, res) {
+    const { boardId, groupId, taskId } = req.params
+    req.query = { ...req.query, boardId, groupId, taskId }
+    return await getActivities(req, res)
 }
 
 export async function createTask(req, res) {
