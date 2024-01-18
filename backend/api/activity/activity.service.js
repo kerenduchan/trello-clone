@@ -7,7 +7,7 @@ export const activityService = {
 
 async function query(filterBy, sortBy, sortDir = 1) {
     const criteria = _buildCriteria(filterBy)
-    console.log(criteria)
+
     const pipeline = [
         {
             $lookup: {
