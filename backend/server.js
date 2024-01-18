@@ -27,12 +27,14 @@ import { userRoutes } from './api/user/user.routes.js'
 import { boardRoutes } from './api/board/board.routes.js'
 import { groupRoutes } from './api/group/group.routes.js'
 import { taskRoutes } from './api/task/task.routes.js'
+import { activityRoutes } from './api/activity/activity.routes.js'
 
 app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/board', boardRoutes)
 app.use('/api/board', groupRoutes)
 app.use('/api/board', taskRoutes)
+app.use('/api/activity', activityRoutes)
 
 // fallback route
 app.get('/**', (req, res) => {

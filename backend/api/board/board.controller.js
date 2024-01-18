@@ -1,6 +1,7 @@
 // Board CRUDL API
 import { utilService } from '../../services/util.service.js'
 import { boardService } from './board.service.js'
+import { getActivities } from '../activity/activity.controller.js'
 
 export async function getBoards(req, res) {
     try {
@@ -44,6 +45,12 @@ export async function getBoard(req, res) {
         if (err.stack) console.error(err.stack)
         res.status(400).send({ error: err })
     }
+}
+
+export async function getBoardActivities(req, res) {
+    const { boardId } = req.params
+    req.query.boardId = boardId
+    return await getActivities(req, res)
 }
 
 export async function removeBoard(req, res) {
