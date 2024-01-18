@@ -2,7 +2,7 @@ import { Schema } from 'mongoose'
 import { dbUtil } from '../dbUtil.js'
 import { TaskSchema } from './TaskSchema.js'
 
-export const GroupSchema = new Schema(
+export const groupSchema = new Schema(
     {
         title: {
             type: String,

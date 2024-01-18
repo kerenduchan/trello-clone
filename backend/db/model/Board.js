@@ -2,8 +2,7 @@ import { Schema, model, SchemaTypes } from 'mongoose'
 import { dbUtil } from '../dbUtil.js'
 import User from './User.js'
 import { boardService } from '../../api/board/board.service.js'
-import { utilService } from '../../services/util.service.js'
-import { GroupSchema } from './GroupSchema.js'
+import { groupSchema } from './groupSchema.js'
 
 // style subfield of board
 const styleSchema = new Schema({
@@ -81,7 +80,7 @@ const boardSchema = new Schema({
         },
     },
     groups: {
-        type: [GroupSchema],
+        type: [groupSchema],
         required: true,
         default: [],
     },
