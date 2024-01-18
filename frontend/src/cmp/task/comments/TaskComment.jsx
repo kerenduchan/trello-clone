@@ -64,7 +64,7 @@ export function TaskComment({
                             <span className="is-edited"> (edited)</span>
                         )}
                     </div>
-                    <div className="text">{comment.text}</div>
+                    <pre className="text">{comment.text}</pre>
                     <div className="actions">
                         <button onClick={onEdit}>Edit</button>
                         <span> • </span>
