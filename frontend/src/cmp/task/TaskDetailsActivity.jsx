@@ -27,7 +27,10 @@ export function TaskDetailsActivity({ hierarchy }) {
                 ></SecondaryBtn>
             </TaskDetailsSubsectionHeader>
             <div className="content">
-                <TaskComments hierarchy={hierarchy} />
+                <TaskComments
+                    hierarchy={hierarchy}
+                    activities={taskActivities}
+                />
             </div>
         </div>
     )

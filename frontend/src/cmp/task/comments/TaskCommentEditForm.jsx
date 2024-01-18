@@ -1,13 +1,19 @@
-import { updateTaskComment } from '../../../store/actions/task/task.comment.actions'
 import { useForm } from '../../../customHooks/useForm'
+import { updateActivity } from '../../../store/actions/activity/activity.actions'
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 
-export function TaskCommentEditForm({ hierarchy, comment, onClose }) {
+export function TaskCommentEditForm({ activity, onClose }) {
+    const { comment } = activity
+
     const [draft, handleChange] = useForm({ text: comment.text })
 
     function onSubmit(e) {
         e.preventDefault()
-        updateTaskComment(hierarchy, comment, draft)
+        const updatedActivity = {
+            ...activity,
+            comment: { ...comment, text: draft.text },
+        }
+        updateActivity(updatedActivity)
         onClose()
     }
 

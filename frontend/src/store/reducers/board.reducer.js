@@ -117,7 +117,23 @@ const boardSlice = createSlice({
 
         activityCreated(state, action) {
             const { activity } = action.payload
-            state.curBoard.activities.push(activity)
+            state.curBoard.activities.unshift(activity)
+            return state
+        },
+
+        activityUpdated(state, action) {
+            const { activity } = action.payload
+            state.curBoard.activities = state.curBoard.activities.map((a) =>
+                a._id === activity._id ? activity : a
+            )
+            return state
+        },
+
+        activityDeleted(state, action) {
+            const { activity } = action.payload
+            state.curBoard.activities = state.curBoard.activities.filter(
+                (a) => a._id !== activity._id
+            )
             return state
         },
     },
@@ -138,6 +154,8 @@ export const {
     taskDeleted,
     taskUpdated,
     activityCreated,
+    activityUpdated,
+    activityDeleted,
 } = boardSlice.actions
 
 export default boardSlice.reducer

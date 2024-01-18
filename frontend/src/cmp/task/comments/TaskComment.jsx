@@ -4,18 +4,24 @@ import { userService } from '../../../services/user/user.service'
 import { Avatar } from '../../general/Avatar'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { DeleteMenu } from '../../general/DeleteMenu'
-import { deleteTaskComment } from '../../../store/actions/task/task.comment.actions'
 import { useState } from 'react'
 import { TaskCommentEditForm } from './TaskCommentEditForm'
 
-export function TaskComment({ hierarchy, comment, isSelected, onClick }) {
+export function TaskComment({
+    hierarchy,
+    activity,
+    isSelected,
+    onClick,
+    onDelete,
+}) {
     const { board } = hierarchy
+    const { comment } = activity
 
     const [showEditForm, setShowEditForm] = useState(false)
     const deleteCommentMenu = usePopoverState()
 
     function onDeleteComment() {
-        deleteTaskComment(hierarchy, comment)
+        onDelete()
         deleteCommentMenu.onClose()
     }
 
@@ -42,7 +48,7 @@ export function TaskComment({ hierarchy, comment, isSelected, onClick }) {
             {showEditForm ? (
                 <TaskCommentEditForm
                     hierarchy={hierarchy}
-                    comment={comment}
+                    activity={activity}
                     onClose={() => setShowEditForm(false)}
                 />
             ) : (
