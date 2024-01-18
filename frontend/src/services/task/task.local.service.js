@@ -1,3 +1,5 @@
+import { activityService } from '../activity/activity.service'
+import { activityUtilService } from '../activity/activity.util.service'
 import { boardService } from '../board/board.service'
 
 export const taskLocalService = {
@@ -15,6 +17,15 @@ async function createTask(board, group, position, task) {
         g._id === group._id ? groupToUpdate : g
     )
     await boardService.update(boardToUpdate)
+
+    // TODO: performedAt should be taken from the task's creation time
+    const activity = activityUtilService.getActivityCreateTask(
+        board,
+        group,
+        task,
+        Date.now()
+    )
+    await activityService.create(activity)
 }
 
 async function deleteTask(hierarchy) {
