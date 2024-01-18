@@ -1,19 +1,26 @@
-import { authService } from '../../../services/auth/auth.service'
+import { store } from '../../store'
 import { updateTask } from './task.actions'
+import { activityService } from '../../../services/activity/activity.service'
+import { activityUtilService } from '../../../services/activity/activity.util.service'
+import { activityCreated } from '../../reducers/board.reducer'
 
 export { addTaskComment, deleteTaskComment, updateTaskComment }
 
 // COMMENT
 
 async function addTaskComment(hierarchy, comment) {
-    const { task } = hierarchy
-
-    // todo: comment created by and created at should be set by the server
-    comment.createdBy = authService.getLoggedinUser()._id
-    comment.createdAt = Date.now()
-    let comments = task.comments ? [...task.comments] : []
-    comments.unshift(comment)
-    return updateTask(hierarchy, { comments })
+    try {
+        // optimistic update
+        const activity = activityUtilService.getActivityCreateComment(
+            hierarchy,
+            comment
+        )
+        store.dispatch(activityCreated({ activity }))
+        await activityService.createComment(hierarchy, comment)
+    } catch (err) {
+        // TODO: rollback store change
+        throw err
+    }
 }
 
 async function deleteTaskComment(hierarchy, comment) {

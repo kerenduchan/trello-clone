@@ -114,6 +114,12 @@ const boardSlice = createSlice({
             )
             return state
         },
+
+        activityCreated(state, action) {
+            const { activity } = action.payload
+            state.curBoard.activities.push(activity)
+            return state
+        },
     },
 })
 
@@ -131,6 +137,7 @@ export const {
     taskCreated,
     taskDeleted,
     taskUpdated,
+    activityCreated,
 } = boardSlice.actions
 
 export default boardSlice.reducer
@@ -139,3 +146,4 @@ export default boardSlice.reducer
 export const selectAllBoards = (state) => state.board.boards
 export const selectBoard = (state) => state.board.curBoard
 export const selectFilteredBoard = (state) => state.board.filteredBoard
+export const selectActivities = (state) => state.board.curBoard.activities

@@ -1,3 +1,4 @@
+import { activityService } from '../activity/activity.service'
 import { storageService } from '../async-storage.service'
 import { authService } from '../auth/auth.service'
 import { utilService } from '../util.service'
@@ -27,15 +28,19 @@ async function query() {
     return { data: boards }
 }
 
-function getById(id) {
-    return storageService.get(STORAGE_KEY, id)
+async function getById(id) {
+    // get the board and all of the board's activities
+    const board = await storageService.get(STORAGE_KEY, id)
+    const activities = await activityService.query({ boardId: id })
+    board.activities = activities
+    return board
 }
 
-function remove(id) {
+async function remove(id) {
     return storageService.remove(STORAGE_KEY, id)
 }
 
-function update(board) {
+async function update(board) {
     return storageService.put(STORAGE_KEY, board)
 }
 
