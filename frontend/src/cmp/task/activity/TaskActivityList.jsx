@@ -6,12 +6,12 @@ import { userService } from '../../../services/user/user.service'
 import { activityUtilService } from '../../../services/activity/activity.util.service'
 import { useForm } from '../../../customHooks/useForm'
 import { useKeyDownListener } from '../../../customHooks/useKeyDownListener'
-import { TaskCommentCreateForm } from './TaskCommentCreateForm'
+import { TaskCommentCreateForm } from '../comments/TaskCommentCreateForm'
 import { Avatar } from '../../general/Avatar'
-import { TaskActivityItem } from '../activity/TaskActivityItem'
+import { TaskActivityItem } from './TaskActivityItem'
 import { createActivity } from '../../../store/actions/activity/activity.actions'
 
-export function TaskComments({ hierarchy, activities }) {
+export function TaskActivityList({ hierarchy, activities }) {
     const [selectedItemId, setSelectedItemId] = useState()
     const loggedinUser = useSelector(selectLoggedinUser)
 
@@ -49,7 +49,7 @@ export function TaskComments({ hierarchy, activities }) {
     }
 
     return (
-        <div className="task-comments">
+        <div className="task-activity-list">
             <div className="logged-in-user-avatar">
                 <Avatar imgSrc={userService.getImgUrl(loggedinUser)} />
             </div>

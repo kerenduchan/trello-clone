@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { selectActivities } from '../../store/reducers/board.reducer'
 import { useToggle } from '../../customHooks/useToggle'
 import { SecondaryBtn } from '../general/btn/SecondaryBtn'
-import { TaskComments } from './comments/TaskComments'
+import { TaskActivityList } from './activity/TaskActivityList'
 import { TaskDetailsSubsectionHeader } from './TaskDetailsSubsectionHeader'
 
 export function TaskDetailsActivity({ hierarchy }) {
@@ -27,7 +27,7 @@ export function TaskDetailsActivity({ hierarchy }) {
                 ></SecondaryBtn>
             </TaskDetailsSubsectionHeader>
             <div className="content">
-                <TaskComments
+                <TaskActivityList
                     hierarchy={hierarchy}
                     activities={taskActivities}
                 />
