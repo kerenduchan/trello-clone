@@ -66,8 +66,10 @@ async function create(creatorId, boardId, groupId, task, position) {
         // create an activity recording this task creation
         const activity = {
             userId: creatorId,
+            boardId,
+            groupId,
+            taskId: addedTask._id,
             type: 'task-create',
-            info: { groupId },
             performedAt: addedTask.createdAt,
         }
 

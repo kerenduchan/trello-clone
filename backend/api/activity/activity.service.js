@@ -6,7 +6,6 @@ export const activityService = {
 }
 
 async function query(filterBy, sortBy, sortDir = 1) {
-    console.log('activities query', filterBy)
     const criteria = _buildCriteria(filterBy)
 
     const pipeline = [
@@ -26,6 +25,9 @@ async function query(filterBy, sortBy, sortDir = 1) {
                     fullname: 1,
                     imgUrl: 1,
                 },
+                boardId: 1,
+                groupId: 1,
+                taskId: 1,
                 type: 1,
                 info: 1,
                 performedAt: 1,

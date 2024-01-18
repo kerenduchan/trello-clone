@@ -21,6 +21,10 @@ const activitySchema = new Schema({
         required: [true, 'actionType is required'],
     },
 
+    boardId: String,
+    groupId: String,
+    taskId: String,
+
     info: {
         type: SchemaTypes.Mixed, // TODO
     },
