@@ -1,6 +1,7 @@
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { selectLoggedinUser } from '../../../store/reducers/app.reducer'
 import { boardService } from '../../../services/board/board.service'
-import { authService } from '../../../services/auth/auth.service'
 import { userService } from '../../../services/user/user.service'
 import { addTaskComment } from '../../../store/actions/task/task.comment.actions'
 import { useForm } from '../../../customHooks/useForm'
@@ -12,6 +13,7 @@ import { Avatar } from '../../general/Avatar'
 export function TaskComments({ hierarchy }) {
     const { task } = hierarchy
     const [selectedItemId, setSelectedItemId] = useState()
+    const loggedinUser = useSelector(selectLoggedinUser)
 
     // TODO: show form and comment if comment draft exists on the task
     const [showForm, setShowForm] = useState(false)
@@ -40,12 +42,10 @@ export function TaskComments({ hierarchy }) {
         setSelectedItemId((prev) => (prev === comment._id ? null : comment._id))
     }
 
-    const user = authService.getLoggedinUser()
-
     return (
         <div className="task-comments">
             <div className="logged-in-user-avatar">
-                <Avatar imgSrc={userService.getImgUrl(user)} />
+                <Avatar imgSrc={userService.getImgUrl(loggedinUser)} />
             </div>
             {showForm ? (
                 <TaskCommentCreateForm
