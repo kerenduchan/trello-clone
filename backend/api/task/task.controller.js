@@ -19,6 +19,7 @@ export async function createTask(req, res) {
         const position = task.position
         delete task.position
         const savedTask = await taskService.create(
+            req.loggedinUser._id,
             boardId,
             groupId,
             task,

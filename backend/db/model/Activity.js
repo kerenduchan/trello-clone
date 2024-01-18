@@ -16,12 +16,12 @@ const activitySchema = new Schema({
         },
     },
 
-    actionType: {
+    type: {
         type: String,
         required: [true, 'actionType is required'],
     },
 
-    actionInfo: {
+    info: {
         type: SchemaTypes.Mixed, // TODO
     },
 

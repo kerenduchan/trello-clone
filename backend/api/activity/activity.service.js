@@ -2,6 +2,7 @@ import Activity from '../../db/model/Activity.js'
 
 export const activityService = {
     query,
+    create,
 }
 
 async function query(filterBy, sortBy, sortDir = 1) {
@@ -25,8 +26,8 @@ async function query(filterBy, sortBy, sortDir = 1) {
                     fullname: 1,
                     imgUrl: 1,
                 },
-                actionType: 1,
-                actionInfo: 1,
+                type: 1,
+                info: 1,
                 performedAt: 1,
             },
         },
@@ -45,6 +46,15 @@ async function query(filterBy, sortBy, sortDir = 1) {
         return activities
     } catch (err) {
         throw err
+    }
+}
+
+async function create(activity) {
+    try {
+        const dbActivity = await Activity.create(activity)
+        return dbActivity
+    } catch (err) {
+        _handleError(err)
     }
 }
 
