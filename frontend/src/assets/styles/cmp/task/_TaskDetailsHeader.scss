@@ -1,9 +1,9 @@
 .btn-task-details-close {
-    @include btn-dynamic-colors();
     position: absolute;
     top: 12px;
     right: 12px;
     z-index: 2;
+    color: var(--ds-icon);
 }
 
 .archive-banner {
