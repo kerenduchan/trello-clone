@@ -36,6 +36,10 @@ export function TaskComments({ hierarchy }) {
         onHideForm()
     }
 
+    function onCommentClick(comment) {
+        setSelectedItemId((prev) => (prev === comment._id ? null : comment._id))
+    }
+
     const user = authService.getLoggedinUser()
 
     return (
@@ -62,7 +66,7 @@ export function TaskComments({ hierarchy }) {
                             hierarchy={hierarchy}
                             comment={c}
                             isSelected={selectedItemId === c._id}
-                            onClick={() => setSelectedItemId(c._id)}
+                            onClick={() => onCommentClick(c)}
                         />
                     </li>
                 ))}
