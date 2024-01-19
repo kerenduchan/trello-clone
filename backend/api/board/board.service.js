@@ -108,21 +108,82 @@ async function query(
 
 async function getById(boardId) {
     try {
-        const dbBoard = await Board.findById(boardId)
-            .populate({
-                path: 'creatorId',
-                select: 'username fullname',
-            })
-            .populate({
-                path: 'memberIds',
-                select: 'username fullname',
-            })
-            .exec()
-        if (!dbBoard) {
-            throw `Board not found`
+        const pipeline = [
+            {
+                $match: {
+                    _id: new ObjectId(boardId),
+                },
+            },
+            {
+                $lookup: {
+                    from: 'activities',
+                    localField: '_id',
+                    foreignField: 'boardId',
+                    as: 'activities',
+                },
+            },
+            {
+                $lookup: {
+                    from: 'users',
+                    localField: 'creatorId',
+                    foreignField: '_id',
+                    as: 'creator',
+                },
+            },
+            {
+                $lookup: {
+                    from: 'users',
+                    localField: 'memberIds',
+                    foreignField: '_id',
+                    as: 'members',
+                },
+            },
+            {
+                $project: {
+                    _id: 1,
+                    title: 1,
+                    isStarred: 1,
+                    archivedAt: 1,
+                    creatorId: 1,
+                    labels: 1,
+                    groups: 1,
+                    createdAt: 1,
+                    activities: 1,
+                    creator: {
+                        $map: {
+                            input: '$creator',
+                            as: 'user',
+                            in: {
+                                _id: '$$user._id',
+                                username: '$$user.username',
+                                fullname: '$$user.fullname',
+                                imgUrl: '$$user.imgUrl',
+                            },
+                        },
+                    },
+                    members: {
+                        $map: {
+                            input: '$members',
+                            as: 'user',
+                            in: {
+                                _id: '$$user._id',
+                                username: '$$user.username',
+                                fullname: '$$user.fullname',
+                                imgUrl: '$$user.imgUrl',
+                            },
+                        },
+                    },
+                },
+            },
+        ]
+
+        const result = await Board.aggregate(pipeline)
+
+        if (result.length === 0) {
+            throw 'Board not found'
         }
 
-        return _toObject(dbBoard)
+        return result[0]
     } catch (err) {
         _handleError(err)
     }

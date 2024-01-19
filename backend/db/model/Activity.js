@@ -21,11 +21,11 @@ const activitySchema = new Schema({
         required: [true, 'actionType is required'],
     },
 
-    boardId: String,
+    boardId: SchemaTypes.ObjectId,
     groupId: String,
     taskId: String,
 
-    info: {
+    data: {
         type: SchemaTypes.Mixed, // TODO
     },
 

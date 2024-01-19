@@ -59,9 +59,9 @@ async function create(creatorId, boardId, groupId, task, position) {
         if (!updatedBoard) {
             throw 'Board or group not found'
         }
-        const addedTask = updatedBoard.groups
-            .find((g) => g._id === groupId)
-            .tasks.slice(-1)[0]
+
+        const group = updatedBoard.groups.find((g) => g._id === groupId)
+        const addedTask = group.tasks.slice(-1)[0]
 
         // create an activity recording this task creation
         const activity = {
@@ -69,7 +69,10 @@ async function create(creatorId, boardId, groupId, task, position) {
             boardId,
             groupId,
             taskId: addedTask._id,
-            type: 'task-create',
+            type: 'create-task',
+            data: {
+                groupTitle: group.title,
+            },
             performedAt: addedTask.createdAt,
         }
 

@@ -14,6 +14,8 @@ export function TaskDetailsActivity({ hierarchy }) {
     const [taskActivities, setTaskActivities] = useState([])
 
     useEffect(() => {
+        if (!activities) return
+
         // flesh out the task's activities, including the user
         const taskActivities = activities
             .filter((a) => a.taskId === task._id)

@@ -36,7 +36,7 @@ function buildCreateTaskActivity(board, group, task, performedAt) {
         performedAt
     )
     activity.data = {
-        groupName: group.title,
+        groupTitle: group.title,
     }
     return activity
 }
@@ -44,7 +44,7 @@ function buildCreateTaskActivity(board, group, task, performedAt) {
 function getDescription(activity) {
     switch (activity.type) {
         case 'create-task':
-            return 'added this card to ' + activity.data.groupName
+            return 'added this card to ' + activity.data.groupTitle
     }
 }
 
