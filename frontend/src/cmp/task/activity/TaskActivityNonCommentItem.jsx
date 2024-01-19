@@ -18,7 +18,11 @@ export function TaskActivityNonCommentItem({
     }
 
     return (
-        <div className="task-activity-non-comment-item">
+        <div
+            className={`task-activity-non-comment-item ${
+                isSelected ? 'selected' : ''
+            }`}
+        >
             <Avatar imgSrc={userService.getImgUrl(activity.user)} />
             <div className="details">
                 <div className="description">
