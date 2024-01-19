@@ -13,16 +13,17 @@
         grid-area: 1 / 1;
         padding: 8px 0;
         margin-inline-start: 40px;
-        @include font-p();
 
         .description {
+            @include font-p();
+
             .user-fullname {
                 font-weight: 700;
             }
         }
 
         .performed-at {
-            font-size: 12px;
+            @include font(12px, 20px, 400);
 
             &:hover {
                 text-decoration: underline;
