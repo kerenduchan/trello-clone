@@ -1,17 +1,19 @@
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { selectLoggedinUser } from '../../../store/reducers/app.reducer'
 import { boardService } from '../../../services/board/board.service'
-import { authService } from '../../../services/auth/auth.service'
 import { userService } from '../../../services/user/user.service'
-import { addTaskComment } from '../../../store/actions/task/task.comment.actions'
+import { activityUtilService } from '../../../services/activity/activity.util.service'
 import { useForm } from '../../../customHooks/useForm'
 import { useKeyDownListener } from '../../../customHooks/useKeyDownListener'
-import { TaskCommentCreateForm } from './TaskCommentCreateForm'
-import { TaskComment } from './TaskComment'
+import { TaskCommentCreateForm } from '../comments/TaskCommentCreateForm'
 import { Avatar } from '../../general/Avatar'
+import { TaskActivityItem } from './TaskActivityItem'
+import { createActivity } from '../../../store/actions/activity/activity.actions'
 
-export function TaskComments({ hierarchy }) {
-    const { task } = hierarchy
+export function TaskActivityList({ hierarchy, activities }) {
     const [selectedItemId, setSelectedItemId] = useState()
+    const loggedinUser = useSelector(selectLoggedinUser)
 
     // TODO: show form and comment if comment draft exists on the task
     const [showForm, setShowForm] = useState(false)
@@ -31,17 +33,25 @@ export function TaskComments({ hierarchy }) {
     }
 
     function onSubmitForm() {
-        addTaskComment(hierarchy, draft)
+        const activity = activityUtilService.buildCreateCommentActivity(
+            hierarchy,
+            draft
+        )
+        createActivity(activity)
         setDraft(boardService.getEmptyComment())
         onHideForm()
     }
 
-    const user = authService.getLoggedinUser()
+    function onActivityClick(activity) {
+        setSelectedItemId((prev) =>
+            prev === activity._id ? null : activity._id
+        )
+    }
 
     return (
-        <div className="task-comments">
+        <div className="task-activity-list">
             <div className="logged-in-user-avatar">
-                <Avatar imgSrc={userService.getImgUrl(user)} />
+                <Avatar imgSrc={userService.getImgUrl(loggedinUser)} />
             </div>
             {showForm ? (
                 <TaskCommentCreateForm
@@ -56,13 +66,13 @@ export function TaskComments({ hierarchy }) {
             )}
 
             <ul className="comments-list">
-                {task.comments?.map((c) => (
-                    <li key={c._id}>
-                        <TaskComment
+                {activities.map((a) => (
+                    <li key={a._id}>
+                        <TaskActivityItem
                             hierarchy={hierarchy}
-                            comment={c}
-                            isSelected={selectedItemId === c._id}
-                            onClick={() => setSelectedItemId(c._id)}
+                            activity={a}
+                            isSelected={selectedItemId === a._id}
+                            onClick={() => onActivityClick(a)}
                         />
                     </li>
                 ))}

@@ -1,0 +1,38 @@
+.task-activity-non-comment-item {
+    display: grid;
+    border-inline-start: 4px solid transparent;
+    margin-inline-start: -12px;
+    padding-inline-start: 8px;
+
+    .avatar {
+        grid-area: 1 / 1;
+        margin-top: 8px;
+    }
+
+    .details {
+        grid-area: 1 / 1;
+        padding: 8px 0;
+        margin-inline-start: 40px;
+
+        .description {
+            @include font-p();
+
+            .user-fullname {
+                font-weight: 700;
+            }
+        }
+
+        .performed-at {
+            @include font(12px, 20px, 400);
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &.selected {
+        background-color: var(--bg-information);
+        border-color: var(--border-information);
+    }
+}

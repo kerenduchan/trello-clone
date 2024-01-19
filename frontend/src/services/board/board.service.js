@@ -122,8 +122,6 @@ function getEmptyComment() {
     return {
         _id: utilService.makeId(),
         text: '',
-        createdBy: 'u101',
-        createdAt: null,
     }
 }
 

@@ -1,21 +1,25 @@
 import moment from 'moment/moment'
-import { boardService } from '../../../services/board/board.service'
 import { userService } from '../../../services/user/user.service'
 import { Avatar } from '../../general/Avatar'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { DeleteMenu } from '../../general/DeleteMenu'
-import { deleteTaskComment } from '../../../store/actions/task/task.comment.actions'
 import { useState } from 'react'
 import { TaskCommentEditForm } from './TaskCommentEditForm'
 
-export function TaskComment({ hierarchy, comment, isSelected, onClick }) {
-    const { board } = hierarchy
+export function TaskComment({
+    hierarchy,
+    activity,
+    isSelected,
+    onClick,
+    onDelete,
+}) {
+    const comment = activity.data
 
     const [showEditForm, setShowEditForm] = useState(false)
     const deleteCommentMenu = usePopoverState()
 
     function onDeleteComment() {
-        deleteTaskComment(hierarchy, comment)
+        onDelete()
         deleteCommentMenu.onClose()
     }
 
@@ -23,33 +27,27 @@ export function TaskComment({ hierarchy, comment, isSelected, onClick }) {
         setShowEditForm(true)
     }
 
-    function getCreatedBy() {
-        return boardService.getItemById(board, 'members', comment.createdBy)
-    }
-
     function getCreatedAt() {
-        return moment(comment.createdAt).fromNow()
+        return moment(activity.performedAt).fromNow()
     }
-
-    const createdBy = getCreatedBy()
 
     return (
         <div className={`task-comment ${isSelected ? 'selected' : ''}`}>
             <div className="created-by-avatar">
-                <Avatar imgSrc={userService.getImgUrl(createdBy)} />
+                <Avatar imgSrc={userService.getImgUrl(activity.user.imgUrl)} />
             </div>
 
             {showEditForm ? (
                 <TaskCommentEditForm
                     hierarchy={hierarchy}
-                    comment={comment}
+                    activity={activity}
                     onClose={() => setShowEditForm(false)}
                 />
             ) : (
                 <>
                     <div className="heading">
                         <span className="created-by-fullname">
-                            {createdBy.fullname}
+                            {activity.user.fullname}
                         </span>
                         <span className="created-at" onClick={onClick}>
                             {getCreatedAt()}
@@ -58,7 +56,7 @@ export function TaskComment({ hierarchy, comment, isSelected, onClick }) {
                             <span className="is-edited"> (edited)</span>
                         )}
                     </div>
-                    <div className="text">{comment.text}</div>
+                    <pre className="text">{comment.text}</pre>
                     <div className="actions">
                         <button onClick={onEdit}>Edit</button>
                         <span> • </span>

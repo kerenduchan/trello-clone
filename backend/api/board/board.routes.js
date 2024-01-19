@@ -2,6 +2,7 @@ import express from 'express'
 import {
     getBoards,
     getBoard,
+    getBoardActivities,
     createBoard,
     updateBoard,
     removeBoard,
@@ -15,6 +16,9 @@ router.get('/', authenticate, getBoards)
 
 // get board with all of its groups and tasks
 router.get('/:boardId', authenticate, getBoard)
+
+// get board activities
+router.get('/:boardId/activity', authenticate, getBoardActivities)
 
 // create board
 router.post('/', authenticate, createBoard)

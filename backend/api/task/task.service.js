@@ -1,6 +1,8 @@
+import { ObjectId } from 'mongodb'
 import { utilService } from '../../services/util.service.js'
 import Board from '../../db/model/Board.js'
 import { groupService } from '../group/group.service.js'
+import { activityService } from '../activity/activity.service.js'
 
 export const taskService = {
     getById,
@@ -35,7 +37,7 @@ async function getById(boardId, groupId, taskId) {
     return task
 }
 
-async function create(boardId, groupId, task, position) {
+async function create(creatorId, boardId, groupId, task, position) {
     // disregard unexpected fields
     task = utilService.extractFields(task, CREATE_FIELDS)
 
@@ -58,9 +60,26 @@ async function create(boardId, groupId, task, position) {
         if (!updatedBoard) {
             throw 'Board or group not found'
         }
-        const addedTask = updatedBoard.groups
-            .find((g) => g._id === groupId)
-            .tasks.slice(-1)[0]
+
+        const group = updatedBoard.groups.find((g) => g._id === groupId)
+        const addedTask = group.tasks.slice(-1)[0]
+
+        // create an activity recording this task creation
+        const activity = {
+            _id: new ObjectId(),
+            userId: creatorId,
+            boardId,
+            groupId,
+            taskId: addedTask._id,
+            type: 'create-task',
+            data: {
+                groupTitle: group.title,
+            },
+            performedAt: addedTask.createdAt,
+        }
+
+        activityService.create(activity)
+
         return addedTask
     } catch (err) {
         utilService.handleDbError(err)

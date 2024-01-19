@@ -1,5 +1,5 @@
+import { store } from '../../store'
 import { utilService } from '../../../services/util.service'
-import { authService } from '../../../services/auth/auth.service'
 import { updateTask } from './task.actions'
 
 export {
@@ -52,7 +52,7 @@ function createAttachment(fileUrl) {
         _id: utilService.makeId(),
         title,
         createdAt: Date.now(),
-        createdBy: authService.getLoggedinUser()._id,
+        createdBy: store.getState().app.loggedinUser._id,
         fileUrl,
     }
     return attachment
