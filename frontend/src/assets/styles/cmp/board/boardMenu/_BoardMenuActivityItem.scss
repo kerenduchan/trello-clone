@@ -67,6 +67,11 @@
                     text-decoration: underline;
                 }
             }
+
+            .is-edited {
+                @include font(12px, 20px, 400);
+                color: var(--ds-text-subtle);
+            }
         }
 
         .comment-box {

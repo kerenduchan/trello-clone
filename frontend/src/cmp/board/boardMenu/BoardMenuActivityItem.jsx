@@ -62,6 +62,9 @@ export function DetailsForTaskComment({ activity }) {
                 <Link to={`c/${activity.taskId}`} className="performed-at">
                     {getPerformedAt()}
                 </Link>
+                {activity.data.isEdited && (
+                    <span className="is-edited"> (edited)</span>
+                )}
             </div>
             <div className="comment-box">
                 <p>{activity.data.text}</p>

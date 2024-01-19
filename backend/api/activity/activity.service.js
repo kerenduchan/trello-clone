@@ -69,6 +69,10 @@ async function create(activity) {
 async function update(activityId, fields) {
     const options = { new: true, runValidators: true }
 
+    if (fields.type === 'task-comment') {
+        fields.data.isEdited = true
+    }
+
     try {
         const updatedActivity = await Activity.findOneAndUpdate(
             { _id: activityId },
