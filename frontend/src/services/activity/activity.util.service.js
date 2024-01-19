@@ -2,12 +2,12 @@ import { store } from '../../store/store'
 import { utilService } from '../util.service'
 
 export const activityUtilService = {
-    getActivityCreateComment,
-    getActivityCreateTask,
+    buildCreateCommentActivity,
+    buildCreateTaskActivity,
     getDescription,
 }
 
-function getActivityCreateComment(hierarchy, comment) {
+function buildCreateCommentActivity(hierarchy, comment) {
     const { board, group, task } = hierarchy
 
     let activity = _getActivity(
@@ -27,7 +27,7 @@ function getActivityCreateComment(hierarchy, comment) {
     return activity
 }
 
-function getActivityCreateTask(board, group, task, performedAt) {
+function buildCreateTaskActivity(board, group, task, performedAt) {
     let activity = _getActivity(
         'create-task',
         board._id,

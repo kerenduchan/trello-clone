@@ -33,7 +33,7 @@ export function TaskActivityList({ hierarchy, activities }) {
     }
 
     function onSubmitForm() {
-        const activity = activityUtilService.getActivityCreateComment(
+        const activity = activityUtilService.buildCreateCommentActivity(
             hierarchy,
             draft
         )
