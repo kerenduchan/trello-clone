@@ -9,7 +9,7 @@ import { TaskDetailsSubsectionHeader } from './TaskDetailsSubsectionHeader'
 export function TaskDetailsActivity({ hierarchy }) {
     const { board, task } = hierarchy
 
-    const [showDetails, toggleShowDetails] = useToggle()
+    const [showDetails, toggleShowDetails] = useToggle(true)
     const activities = useSelector(selectActivities)
     const [taskActivities, setTaskActivities] = useState([])
     const [filteredTaskActivities, setFilteredTaskActivities] = useState([])
