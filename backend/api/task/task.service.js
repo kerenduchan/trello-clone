@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb'
 import { utilService } from '../../services/util.service.js'
 import Board from '../../db/model/Board.js'
 import { groupService } from '../group/group.service.js'
@@ -65,6 +66,7 @@ async function create(creatorId, boardId, groupId, task, position) {
 
         // create an activity recording this task creation
         const activity = {
+            _id: new ObjectId(),
             userId: creatorId,
             boardId,
             groupId,
