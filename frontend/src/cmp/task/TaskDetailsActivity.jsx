@@ -12,6 +12,7 @@ export function TaskDetailsActivity({ hierarchy }) {
     const [showDetails, toggleShowDetails] = useToggle()
     const activities = useSelector(selectActivities)
     const [taskActivities, setTaskActivities] = useState([])
+    const [filteredTaskActivities, setFilteredTaskActivities] = useState([])
 
     useEffect(() => {
         if (!activities) return
@@ -26,6 +27,14 @@ export function TaskDetailsActivity({ hierarchy }) {
         setTaskActivities(taskActivities)
     }, [activities])
 
+    useEffect(() => {
+        let val = taskActivities
+        if (!showDetails) {
+            val = val.filter((a) => a.type === 'task-comment')
+        }
+        setFilteredTaskActivities(val)
+    }, [showDetails, taskActivities])
+
     return (
         <div className="task-details-activity">
             <TaskDetailsSubsectionHeader icon="activity" title="Activity">
@@ -38,7 +47,7 @@ export function TaskDetailsActivity({ hierarchy }) {
             <div className="content">
                 <TaskActivityList
                     hierarchy={hierarchy}
-                    activities={taskActivities}
+                    activities={filteredTaskActivities}
                 />
             </div>
         </div>
