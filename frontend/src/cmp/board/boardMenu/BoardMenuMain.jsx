@@ -4,7 +4,12 @@ import { Icon } from '../../general/Icon'
 import { DeleteMenu } from '../../general/DeleteMenu'
 import { useNavigate } from 'react-router'
 
-export function BoardMenuMain({ board, onArchive, onChangeBackground }) {
+export function BoardMenuMain({
+    board,
+    onActivity,
+    onArchive,
+    onChangeBackground,
+}) {
     const navigate = useNavigate()
     const deleteBoardMenu = usePopoverState()
 
@@ -25,6 +30,12 @@ export function BoardMenuMain({ board, onArchive, onChangeBackground }) {
     return (
         <div className="board-menu-main">
             <ul className="board-menu-main-list">
+                {/* Activity */}
+                <li onClick={onActivity}>
+                    <Icon type="list" />
+                    <div className="title"> Activity</div>
+                </li>
+
                 {/* Archived items */}
                 <li onClick={onArchive}>
                     <Icon type="archive" />

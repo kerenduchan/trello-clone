@@ -5,6 +5,7 @@ import { BoardMenuArchive } from './BoardMenuArchive'
 import { BoardMenuBackgroundMain } from './BoardMenuBackgroundMain'
 import { BoardMenuBackgroundColor } from './BoardMenuBackgroundColor'
 import { BoardMenuBackgroundPhoto } from './BoardMenuBackgroundPhoto'
+import { BoardMenuActivity } from './BoardMenuActivity'
 
 export function BoardMenu({ board, onClose }) {
     // current page in the group menu popover
@@ -25,6 +26,9 @@ export function BoardMenu({ board, onClose }) {
             cmp: (
                 <BoardMenuMain
                     board={board}
+                    onActivity={() => {
+                        setPage('activity')
+                    }}
                     onArchive={() => {
                         setPage('archive')
                     }}
@@ -33,6 +37,11 @@ export function BoardMenu({ board, onClose }) {
                     }}
                 />
             ),
+        },
+        activity: {
+            title: 'Activity',
+            cmp: <BoardMenuActivity board={board} />,
+            onBack: onNavToMain,
         },
         archive: {
             title: 'Archive',

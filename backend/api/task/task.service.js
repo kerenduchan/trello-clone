@@ -73,6 +73,7 @@ async function create(creatorId, boardId, groupId, task, position) {
             taskId: addedTask._id,
             type: 'create-task',
             data: {
+                taskTitle: task.title,
                 groupTitle: group.title,
             },
             performedAt: addedTask.createdAt,

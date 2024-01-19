@@ -20,6 +20,7 @@ function buildCreateCommentActivity(hierarchy, comment) {
 
     activity.data = {
         ...comment,
+        taskTitle: task.title,
         createdAt: Date.now(),
         createdBy: activity.userId,
     }
@@ -36,6 +37,7 @@ function buildCreateTaskActivity(board, group, task, performedAt) {
         performedAt
     )
     activity.data = {
+        taskTitle: task.title,
         groupTitle: group.title,
     }
     return activity

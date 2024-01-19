@@ -1,0 +1,83 @@
+.board-menu-activity-item {
+    display: grid;
+
+    .avatar {
+        grid-area: 1 / 1;
+        margin-top: 8px;
+    }
+
+    .details-for-create-task {
+        grid-area: 1 / 1;
+        padding: 8px 0;
+        margin-inline-start: 40px;
+
+        .description {
+            @include font-p();
+
+            .user-fullname {
+                font-weight: 700;
+            }
+
+            .task-link {
+                @include font-p();
+                color: var(--ds-link);
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        .performed-at {
+            @include font(12px, 20px, 400);
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .details-for-task-comment {
+        grid-area: 1 / 1;
+        padding: 8px 0;
+        margin-inline-start: 40px;
+
+        .description {
+            @include font-p();
+
+            .user-fullname {
+                font-weight: 700;
+            }
+
+            .task-link {
+                @include font-p();
+                color: var(--ds-link);
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            .performed-at {
+                @include font(12px, 20px, 400);
+                margin-inline-start: 4px;
+                color: var(--ds-text-subtle);
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        .comment-box {
+            margin: 4px 2px 4px 0;
+            padding: 8px 12px;
+            border-radius: 8px;
+            box-shadow: var(
+                --ds-shadow-raised,
+                0 1px 1px #091e4240,
+                0 0 1px #091e424f
+            );
+        }
+    }
+}
