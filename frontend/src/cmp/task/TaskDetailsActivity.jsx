@@ -7,14 +7,21 @@ import { TaskActivityList } from './activity/TaskActivityList'
 import { TaskDetailsSubsectionHeader } from './TaskDetailsSubsectionHeader'
 
 export function TaskDetailsActivity({ hierarchy }) {
-    const { task } = hierarchy
+    const { board, task } = hierarchy
 
     const [showDetails, toggleShowDetails] = useToggle()
     const activities = useSelector(selectActivities)
     const [taskActivities, setTaskActivities] = useState([])
 
     useEffect(() => {
-        setTaskActivities(activities.filter((a) => a.taskId === task._id))
+        // flesh out the task's activities, including the user
+        const taskActivities = activities
+            .filter((a) => a.taskId === task._id)
+            .map((a) => ({
+                ...a,
+                user: board.members.find((m) => m._id === a.userId),
+            }))
+        setTaskActivities(taskActivities)
     }, [activities])
 
     return (
