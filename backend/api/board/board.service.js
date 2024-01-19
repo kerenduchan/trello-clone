@@ -184,7 +184,13 @@ async function getById(boardId) {
             throw 'Board not found'
         }
 
-        return result[0]
+        const board = result[0]
+
+        board.activities = board.activities.sort((a1, a2) =>
+            a1.performedAt < a2.performedAt ? 1 : -1
+        )
+        console.log(board.activities)
+        return board
     } catch (err) {
         _handleError(err)
     }
