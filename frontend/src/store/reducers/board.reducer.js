@@ -164,7 +164,7 @@ export default boardSlice.reducer
 export const selectAllBoards = (state) => state.board.boards
 export const selectBoard = (state) => state.board.curBoard
 export const selectFilteredBoard = (state) => state.board.filteredBoard
-export const selectActivities = (state) => state.board.curBoard.activities
+export const selectActivities = (state) => state.board?.curBoard?.activities
 
 export const selectTaskActivities = createSelector(
     selectActivities,
@@ -181,5 +181,16 @@ export const selectTaskComments = createSelector(
         return allActivities?.filter(
             (a) => a.type === 'task-comment' && a.taskId === taskId
         )
+    }
+)
+
+export const selectTaskActivitiesWithUser = createSelector(
+    selectTaskActivities,
+    (state) => state.board?.curBoard?.members,
+    (taskActivities, members) => {
+        return taskActivities?.map((a) => ({
+            ...a,
+            user: members.find((m) => m._id === a.userId),
+        }))
     }
 )
