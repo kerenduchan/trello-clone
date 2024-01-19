@@ -1,5 +1,6 @@
 import { deleteActivity } from '../../../store/actions/activity/activity.actions'
 import { TaskComment } from '../comments/TaskComment'
+import { TaskActivityNonCommentItem } from './TaskActivityNonCommentItem'
 
 export function TaskActivityItem({ hierarchy, activity, isSelected, onClick }) {
     function onDelete() {
@@ -17,7 +18,12 @@ export function TaskActivityItem({ hierarchy, activity, isSelected, onClick }) {
                     onDelete={onDelete}
                 />
             ) : (
-                <div>other activity</div>
+                <TaskActivityNonCommentItem
+                    hierarchy={hierarchy}
+                    activity={activity}
+                    isSelected={isSelected}
+                    onClick={onClick}
+                />
             )}
         </div>
     )

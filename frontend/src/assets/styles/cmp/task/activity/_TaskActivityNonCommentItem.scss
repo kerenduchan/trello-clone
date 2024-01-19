@@ -1,0 +1,29 @@
+.task-activity-non-comment-item {
+    display: grid;
+
+    .avatar {
+        grid-area: 1 / 1;
+        margin-top: 8px;
+    }
+
+    .details {
+        grid-area: 1 / 1;
+        padding: 8px 0;
+        margin-inline-start: 40px;
+        @include font-p();
+
+        .description {
+            .user-fullname {
+                font-weight: 700;
+            }
+        }
+
+        .performed-at {
+            font-size: 12px;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}

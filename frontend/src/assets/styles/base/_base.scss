@@ -9,7 +9,8 @@
     text-align: left;
     text-decoration: none;
     text-indent: 0;
-    @include font(14px, 20px, 500);
+    font-size: 14px;
+    line-height: 20px;
 }
 
 body {
