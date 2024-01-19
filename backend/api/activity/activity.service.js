@@ -6,6 +6,7 @@ export const activityService = {
     query,
     create,
     update,
+    remove,
 }
 
 async function query(filterBy, sortBy, sortDir = 1) {
@@ -81,7 +82,16 @@ async function update(activityId, fields) {
             .exec()
         return updatedActivity
     } catch (err) {
-        _handleError(err)
+        utilService.handleDbError(err)
+    }
+}
+
+async function remove(activityId) {
+    try {
+        const { deletedCount } = await Activity.deleteOne({ _id: activityId })
+        return { deletedCount }
+    } catch (err) {
+        utilService.handleDbError(err)
     }
 }
 

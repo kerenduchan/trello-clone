@@ -2,6 +2,7 @@ import express from 'express'
 import {
     createActivity,
     getActivities,
+    removeActivity,
     updateActivity,
 } from './activity.controller.js'
 import { authenticate } from '../../middleware/auth.middleware.js'
@@ -20,6 +21,6 @@ router.post('/', authenticate, createActivity)
 router.put('/:activityId', authenticate, updateActivity)
 
 // // delete activity
-// router.delete('/:boardId', authenticate, removeActivity)
+router.delete('/:activityId', authenticate, removeActivity)
 
 export const activityRoutes = router

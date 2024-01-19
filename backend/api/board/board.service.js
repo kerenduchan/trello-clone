@@ -197,7 +197,6 @@ async function getById(boardId) {
 
 async function remove(boardId) {
     try {
-        // TODO: remove all the lists and tasks of the board before removing the board
         const { deletedCount } = await Board.deleteOne({ _id: boardId })
         return { deletedCount }
     } catch (err) {

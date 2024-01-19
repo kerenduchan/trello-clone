@@ -36,6 +36,18 @@ export async function updateActivity(req, res) {
     }
 }
 
+export async function removeActivity(req, res) {
+    const { activityId } = req.params
+
+    try {
+        const result = await activityService.remove(activityId)
+        res.send(result)
+    } catch (err) {
+        if (err.stack) console.error(err.stack)
+        res.status(400).send({ error: err })
+    }
+}
+
 function _buildFilter(query) {
     const { boardId, groupId, taskId } = query
 
