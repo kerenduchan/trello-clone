@@ -1,11 +1,25 @@
 import express from 'express'
-import { getActivities } from './activity.controller.js'
+import {
+    createActivity,
+    getActivities,
+    updateActivity,
+} from './activity.controller.js'
 import { authenticate } from '../../middleware/auth.middleware.js'
 
 const router = express.Router()
 
-// get activities for the given board
 // TODO: authorization
+
+// get activities for the given board
 router.get('/', authenticate, getActivities)
+
+// create activity
+router.post('/', authenticate, createActivity)
+
+// update activity
+router.put('/:activityId', authenticate, updateActivity)
+
+// // delete activity
+// router.delete('/:boardId', authenticate, removeActivity)
 
 export const activityRoutes = router

@@ -18,7 +18,7 @@ function buildCreateCommentActivity(hierarchy, comment) {
         Date.now()
     )
 
-    activity.comment = {
+    activity.data = {
         ...comment,
         createdAt: Date.now(),
         createdBy: activity.userId,

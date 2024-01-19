@@ -1,8 +1,11 @@
+import { ObjectId } from 'mongodb'
 import Activity from '../../db/model/Activity.js'
+import { utilService } from '../../services/util.service.js'
 
 export const activityService = {
     query,
     create,
+    update,
 }
 
 async function query(filterBy, sortBy, sortDir = 1) {
@@ -52,9 +55,31 @@ async function query(filterBy, sortBy, sortDir = 1) {
 }
 
 async function create(activity) {
+    activity.userId = new ObjectId(activity.userId)
+
     try {
         const dbActivity = await Activity.create(activity)
         return dbActivity
+    } catch (err) {
+        utilService.handleDbError(err)
+    }
+}
+
+async function update(activityId, fields) {
+    const options = { new: true, runValidators: true }
+
+    try {
+        const updatedActivity = await Activity.findOneAndUpdate(
+            { _id: activityId },
+            fields,
+            options
+        )
+            .populate({
+                path: 'userId',
+                select: 'username fullname imgUrl',
+            })
+            .exec()
+        return updatedActivity
     } catch (err) {
         _handleError(err)
     }

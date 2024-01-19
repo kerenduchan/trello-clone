@@ -11,7 +11,7 @@ export function TaskCommentEditForm({ activity, onClose }) {
         e.preventDefault()
         const updatedActivity = {
             ...activity,
-            comment: { ...comment, text: draft.text },
+            data: { ...comment, text: draft.text },
         }
         updateActivity(updatedActivity)
         onClose()

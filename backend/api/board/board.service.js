@@ -147,6 +147,7 @@ async function getById(boardId) {
                     creatorId: 1,
                     labels: 1,
                     groups: 1,
+                    style: 1,
                     createdAt: 1,
                     activities: 1,
                     creator: {

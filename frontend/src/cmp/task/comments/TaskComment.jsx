@@ -1,5 +1,4 @@
 import moment from 'moment/moment'
-import { boardService } from '../../../services/board/board.service'
 import { userService } from '../../../services/user/user.service'
 import { Avatar } from '../../general/Avatar'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
@@ -14,8 +13,7 @@ export function TaskComment({
     onClick,
     onDelete,
 }) {
-    const { board } = hierarchy
-    const { comment } = activity
+    const comment = activity.data
 
     const [showEditForm, setShowEditForm] = useState(false)
     const deleteCommentMenu = usePopoverState()
@@ -29,20 +27,14 @@ export function TaskComment({
         setShowEditForm(true)
     }
 
-    function getCreatedBy() {
-        return boardService.getItemById(board, 'members', comment.createdBy)
-    }
-
     function getCreatedAt() {
-        return moment(comment.createdAt).fromNow()
+        return moment(activity.performedAt).fromNow()
     }
-
-    const createdBy = getCreatedBy()
 
     return (
         <div className={`task-comment ${isSelected ? 'selected' : ''}`}>
             <div className="created-by-avatar">
-                <Avatar imgSrc={userService.getImgUrl(createdBy)} />
+                <Avatar imgSrc={userService.getImgUrl(activity.user.imgUrl)} />
             </div>
 
             {showEditForm ? (
@@ -55,7 +47,7 @@ export function TaskComment({
                 <>
                     <div className="heading">
                         <span className="created-by-fullname">
-                            {createdBy.fullname}
+                            {activity.user.fullname}
                         </span>
                         <span className="created-at" onClick={onClick}>
                             {getCreatedAt()}

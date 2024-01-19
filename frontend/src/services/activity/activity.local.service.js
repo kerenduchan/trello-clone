@@ -25,8 +25,8 @@ async function update(activity) {
     let updatedActivity = activity
     if (activity.type === 'task-comment') {
         updatedActivity = { ...activity }
-        updatedActivity.comment = { ...activity.comment }
-        updatedActivity.comment.isEdited = true
+        updatedActivity.data = { ...activity.data }
+        updatedActivity.data.isEdited = true
     }
     return storageService.put(STORAGE_KEY, updatedActivity)
 }

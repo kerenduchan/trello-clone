@@ -12,6 +12,30 @@ export async function getActivities(req, res) {
     }
 }
 
+export async function createActivity(req, res) {
+    try {
+        const activity = { ...req.body, userId: req.loggedinUser._id }
+        const savedActivity = await activityService.create(activity)
+        res.send(savedActivity)
+    } catch (err) {
+        if (err.stack) console.error(err.stack)
+        res.status(400).send({ error: err })
+    }
+}
+
+export async function updateActivity(req, res) {
+    try {
+        const savedActivity = await activityService.update(
+            req.params.activityId,
+            fields
+        )
+        res.send(savedActivity)
+    } catch (err) {
+        if (err.stack) console.error(err.stack)
+        res.status(400).send({ error: err })
+    }
+}
+
 function _buildFilter(query) {
     const { boardId, groupId, taskId } = query
 
