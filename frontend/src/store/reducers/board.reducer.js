@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSelector, createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     boards: [],
@@ -165,3 +165,21 @@ export const selectAllBoards = (state) => state.board.boards
 export const selectBoard = (state) => state.board.curBoard
 export const selectFilteredBoard = (state) => state.board.filteredBoard
 export const selectActivities = (state) => state.board.curBoard.activities
+
+export const selectTaskActivities = createSelector(
+    selectActivities,
+    (_, taskId) => taskId,
+    (allActivities, taskId) => {
+        return allActivities?.filter((a) => a.taskId === taskId)
+    }
+)
+
+export const selectTaskComments = createSelector(
+    selectActivities,
+    (_, taskId) => taskId,
+    (allActivities, taskId) => {
+        return allActivities?.filter(
+            (a) => a.type === 'task-comment' && a.taskId === taskId
+        )
+    }
+)
