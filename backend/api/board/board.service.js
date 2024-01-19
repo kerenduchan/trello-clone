@@ -189,7 +189,6 @@ async function getById(boardId) {
         board.activities = board.activities.sort((a1, a2) =>
             a1.performedAt < a2.performedAt ? 1 : -1
         )
-        console.log(board.activities)
         return board
     } catch (err) {
         _handleError(err)

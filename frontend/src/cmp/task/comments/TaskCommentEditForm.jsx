@@ -3,7 +3,7 @@ import { updateActivity } from '../../../store/actions/activity/activity.actions
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 
 export function TaskCommentEditForm({ activity, onClose }) {
-    const { comment } = activity
+    const comment = activity.data
 
     const [draft, handleChange] = useForm({ text: comment.text })
 

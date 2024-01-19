@@ -27,7 +27,7 @@ export async function updateActivity(req, res) {
     try {
         const savedActivity = await activityService.update(
             req.params.activityId,
-            fields
+            req.body
         )
         res.send(savedActivity)
     } catch (err) {
