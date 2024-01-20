@@ -6,6 +6,7 @@ export const activityUtilService = {
     taskUpdated,
     taskDeleted,
     groupCreated,
+    groupUpdated,
 }
 
 async function taskCreated(board, group, task) {
@@ -50,6 +51,22 @@ async function taskDeleted(userId, board, group, task) {
 async function groupCreated(userId, board, group) {
     const activity = _getGroupActivity('group-created', userId, board, group)
     return activityService.create(activity)
+}
+
+async function groupUpdated(userId, board, group, fields) {
+    let activity
+    if ('archivedAt' in fields) {
+        activity = _getGroupActivity(
+            fields.archivedAt ? 'group-archived' : 'group-unarchived',
+            userId,
+            board,
+            group
+        )
+    }
+    if (activity) {
+        return activityService.create(activity)
+    }
+    return null
 }
 
 function _getTaskActivity(type, userId, board, group, task) {

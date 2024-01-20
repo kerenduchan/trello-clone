@@ -55,7 +55,7 @@ async function create(userId, boardId, group) {
     }
 }
 
-async function update(boardId, groupId, fields) {
+async function update(userId, boardId, groupId, fields) {
     // disregard unexpected fields
     fields = utilService.extractFields(fields, UPDATE_FIELDS)
 
@@ -86,6 +86,14 @@ async function update(boardId, groupId, fields) {
         const updatedGroup = updatedBoard.groups.find(
             (g) => g._id.toString() === groupId
         )
+
+        await activityUtilService.groupUpdated(
+            userId,
+            updatedBoard,
+            updatedGroup,
+            fields
+        )
+
         return updatedGroup
     } catch (err) {
         _handleError(err)
