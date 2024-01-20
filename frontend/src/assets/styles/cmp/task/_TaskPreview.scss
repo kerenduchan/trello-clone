@@ -43,7 +43,7 @@
         }
     }
 
-    .content {
+    > .content {
         grid-area: 2 / 1;
         padding-inline-start: 12px;
         padding-inline-end: 12px;
@@ -51,7 +51,7 @@
         padding-bottom: 4px;
         display: grid;
 
-        .title {
+        > .title {
             margin-bottom: 4px;
         }
 
