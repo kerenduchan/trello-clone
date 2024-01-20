@@ -23,7 +23,7 @@ export function TaskActivityNonCommentItem({
                 return 'sent this card to the board'
 
             // CHECKLIST ADDED
-            case 'task-checklist-added':
+            case 'task-checklist-created':
                 return `added ${activity.checklistTitle} to this card`
 
             // CHECKLIST DELETED

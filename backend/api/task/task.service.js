@@ -94,11 +94,11 @@ async function update(userId, boardId, groupId, taskId, fields) {
     }
 
     let group = await groupService.getById(boardId, groupId)
-    let task = group.tasks.find((t) => t._id === taskId)
-    if (!task) {
+    const origTask = group.tasks.find((t) => t._id === taskId)
+    if (!origTask) {
         throw 'Task not found'
     }
-    task = { ...task, ...fields }
+    const task = { ...origTask, ...fields }
 
     group.tasks = group.tasks.map((t) => (t._id === task._id ? task : t))
 
@@ -127,12 +127,16 @@ async function update(userId, boardId, groupId, taskId, fields) {
         throw 'Task not found in the updated group'
     }
 
+    // need the task before the update
     const hierarchy = {
         board: updatedBoard,
         group: updatedGroup,
-        task: updatedTask,
+        task: origTask,
     }
-    await _createActivityForUpdateTask(userId, hierarchy, fields)
+    const activity = _getActivityForUpdateTask(userId, hierarchy, fields)
+    if (activity) {
+        await activityService.create(activity)
+    }
 
     return updatedTask
 }
@@ -176,7 +180,7 @@ async function remove(userId, boardId, groupId, taskId) {
     return { deletedCount: 1 }
 }
 
-async function _createActivityForUpdateTask(userId, hierarchy, fields) {
+function _getActivityForUpdateTask(userId, hierarchy, fields) {
     let activity
     if ('archivedAt' in fields) {
         activity = activityUtilService.getTaskActivity(
@@ -185,9 +189,39 @@ async function _createActivityForUpdateTask(userId, hierarchy, fields) {
             hierarchy
         )
     } else if ('checklists' in fields) {
-        console.log('checklists activity...')
+        activity = _getActivityForUpdateChecklists(userId, hierarchy, fields)
     }
-    if (activity) {
-        return activityService.create(activity)
+    return activity
+}
+
+function _getActivityForUpdateChecklists(userId, hierarchy, fields) {
+    const prevChecklists = hierarchy.task.checklists
+    const curChecklists = fields.checklists
+
+    if (prevChecklists.length === curChecklists.length) {
+        console.log('checklist updated')
+        return
+    }
+
+    let cl
+    let activityType
+    if (prevChecklists.length < curChecklists.length) {
+        // checklist created (the last one).
+        cl = curChecklists[curChecklists.length - 1]
+        activityType = 'task-checklist-created'
+    } else {
+        // checklist deleted. Find out which one.
+        const curChecklistIds = new Set(curChecklists.map((cl) => cl._id))
+        const removedChecklists = prevChecklists.filter(
+            (cl) => !curChecklistIds.has(cl._id)
+        )
+        cl = removedChecklists[0]
+        activityType = 'task-checklist-deleted'
+    }
+
+    return {
+        ...activityUtilService.getTaskActivity(activityType, userId, hierarchy),
+        checklistId: cl._id,
+        checklistTitle: cl.title,
     }
 }

@@ -22,7 +22,7 @@ async function addChecklist(hierarchy, checklist) {
     store.dispatch(curChecklistChanged(checklist._id))
 
     const activity = activityUtilService.getChecklistActivity(
-        'task-checklist-added',
+        'task-checklist-created',
         hierarchy,
         checklist
     )
