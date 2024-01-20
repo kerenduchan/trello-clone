@@ -4,11 +4,12 @@ import { utilService } from '../util.service'
 export const activityUtilService = {
     getCommentActivity,
     getTaskActivity,
+    getGroupActivity,
 }
 
 function getCommentActivity(hierarchy, comment) {
     const { task } = hierarchy
-    let activity = _getActivity('task-comment', hierarchy)
+    let activity = _getTaskActivity('task-comment', hierarchy)
 
     activity.data = {
         ...comment,
@@ -23,7 +24,7 @@ function getCommentActivity(hierarchy, comment) {
 function getTaskActivity(type, hierarchy) {
     const { group, task } = hierarchy
 
-    let activity = _getActivity(type, hierarchy)
+    let activity = _getTaskActivity(type, hierarchy)
     activity.data = {
         taskTitle: task.title,
         groupTitle: group.title,
@@ -31,7 +32,24 @@ function getTaskActivity(type, hierarchy) {
     return activity
 }
 
-function _getActivity(type, hierarchy) {
+function getGroupActivity(type, board, group) {
+    return {
+        _id: utilService.makeId(),
+        userId: store.getState().app.loggedinUser._id,
+        type,
+        performedAt: Date.now(),
+        boardId: board._id,
+        groupId: group._id,
+        data: {
+            groupTitle: group.title,
+        },
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// PRIVATE HELPER FUNCTIONS
+
+function _getTaskActivity(type, hierarchy) {
     const { board, group, task } = hierarchy
     return {
         _id: utilService.makeId(),

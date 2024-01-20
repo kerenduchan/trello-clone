@@ -12,7 +12,17 @@ export function BoardMenuActivityItem({ activity }) {
     )
 }
 
-export function Details({ activity }) {
+function Details({ activity }) {
+    function getGroupActivityDescription(activity) {
+        const title = activity.data.groupTitle
+        switch (activity.type) {
+            case 'group-created':
+                return ` added ${title} to this board`
+            case 'group-archived':
+                return `archived list ${title}`
+        }
+    }
+
     switch (activity.type) {
         // TASK COMMENT
         case 'task-comment':
@@ -21,7 +31,7 @@ export function Details({ activity }) {
         // TASK CREATED
         case 'task-created':
             return (
-                <TaskActivityDetails
+                <ActivityDetailsTask
                     activity={activity}
                     textBefore="added"
                     textAfter={`to ${activity.data.groupTitle}`}
@@ -31,7 +41,7 @@ export function Details({ activity }) {
         // TASK ARCHIVED
         case 'task-archived':
             return (
-                <TaskActivityDetails
+                <ActivityDetailsTask
                     activity={activity}
                     textBefore="archived"
                 />
@@ -40,7 +50,7 @@ export function Details({ activity }) {
         // TASK UNARCHIVED
         case 'task-unarchived':
             return (
-                <TaskActivityDetails
+                <ActivityDetailsTask
                     activity={activity}
                     textBefore="sent"
                     textAfter="to the board"
@@ -50,11 +60,19 @@ export function Details({ activity }) {
         // TASK DELETED
         case 'task-deleted':
             return (
-                <TaskActivityDetails
+                <ActivityDetailsSimple
                     activity={activity}
-                    textBefore="deleted"
-                    textAfter={`from ${activity.data.groupTitle}`}
-                    isLink={false}
+                    text={`deleted ${activity.data.taskTitle} from ${activity.data.groupTitle}`}
+                />
+            )
+
+        case 'group-created':
+        case 'group-archived':
+        case 'group-unarchived':
+            return (
+                <ActivityDetailsSimple
+                    activity={activity}
+                    text={getGroupActivityDescription(activity)}
                 />
             )
     }
@@ -62,7 +80,7 @@ export function Details({ activity }) {
 }
 
 // TASK COMMENT
-export function TaskCommentDetails({ activity }) {
+function TaskCommentDetails({ activity }) {
     function getPerformedAt() {
         return moment(activity.performedAt).fromNow()
     }
@@ -93,12 +111,7 @@ export function TaskCommentDetails({ activity }) {
     )
 }
 
-export function TaskActivityDetails({
-    activity,
-    textBefore,
-    textAfter,
-    isLink = true,
-}) {
+function ActivityDetailsTask({ activity, textBefore, textAfter }) {
     function getPerformedAt() {
         return moment(activity.performedAt).fromNow()
     }
@@ -108,25 +121,30 @@ export function TaskActivityDetails({
             <div className="description">
                 <span className="user-fullname">{activity.user.fullname}</span>
                 {` ${textBefore} `}
-                {isLink ? (
-                    <Link to={`c/${activity.taskId}`} className="task-link">
-                        {activity.data.taskTitle}
-                    </Link>
-                ) : (
-                    activity.data.taskTitle
-                )}
+                <Link to={`c/${activity.taskId}`} className="task-link">
+                    {activity.data.taskTitle}
+                </Link>
                 {textAfter && ` ${textAfter}`}
             </div>
-            {isLink ? (
-                <Link
-                    to={`c/${activity.taskId}`}
-                    className="performed-at small"
-                >
-                    {getPerformedAt()}
-                </Link>
-            ) : (
-                <div className="small">{getPerformedAt()}</div>
-            )}
+            <Link to={`c/${activity.taskId}`} className="performed-at small">
+                {getPerformedAt()}
+            </Link>
+        </div>
+    )
+}
+
+function ActivityDetailsSimple({ activity, text }) {
+    function getPerformedAt() {
+        return moment(activity.performedAt).fromNow()
+    }
+
+    return (
+        <div className="details-for-activity">
+            <div className="description">
+                <span className="user-fullname">{activity.user.fullname}</span>
+                {` ${text}`}
+            </div>
+            <div className="small">{getPerformedAt()}</div>
         </div>
     )
 }

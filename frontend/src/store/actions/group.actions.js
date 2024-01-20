@@ -1,6 +1,11 @@
 import { store } from '../store'
-import { groupCreated, groupUpdated } from '../reducers/board.reducer'
+import {
+    activityCreated,
+    groupCreated,
+    groupUpdated,
+} from '../reducers/board.reducer'
 import { groupService } from '../../services/group/group.service'
+import { activityUtilService } from '../../services/activity/activity.util.service'
 
 export { createGroup, deleteGroup, updateGroup }
 
@@ -8,6 +13,15 @@ async function createGroup(board, group) {
     try {
         // optimistic update
         store.dispatch(groupCreated({ board, group }))
+
+        // mimic what the server does upon create group
+        const activity = activityUtilService.getGroupActivity(
+            'group-created',
+            board,
+            group
+        )
+        store.dispatch(activityCreated({ activity }))
+
         await groupService.createGroup(board, group)
     } catch (err) {
         // TODO: rollback store change
