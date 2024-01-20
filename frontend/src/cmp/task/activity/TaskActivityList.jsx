@@ -3,13 +3,12 @@ import { useSelector } from 'react-redux'
 import { selectLoggedinUser } from '../../../store/reducers/app.reducer'
 import { boardService } from '../../../services/board/board.service'
 import { userService } from '../../../services/user/user.service'
-import { activityUtilService } from '../../../services/activity/activity.util.service'
 import { useForm } from '../../../customHooks/useForm'
 import { useKeyDownListener } from '../../../customHooks/useKeyDownListener'
 import { TaskCommentCreateForm } from '../comments/TaskCommentCreateForm'
 import { Avatar } from '../../general/Avatar'
 import { TaskActivityItem } from './TaskActivityItem'
-import { createActivity } from '../../../store/actions/activity/activity.actions'
+import { addComment } from '../../../store/actions/task/task.comment.actions'
 
 export function TaskActivityList({ hierarchy, activities }) {
     const [selectedItemId, setSelectedItemId] = useState()
@@ -33,8 +32,7 @@ export function TaskActivityList({ hierarchy, activities }) {
     }
 
     function onSubmitForm() {
-        const activity = activityUtilService.commentCreated(hierarchy, draft)
-        createActivity(activity)
+        addComment(hierarchy, draft)
         setDraft(boardService.getEmptyComment())
         onHideForm()
     }

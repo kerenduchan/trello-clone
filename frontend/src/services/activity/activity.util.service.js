@@ -2,14 +2,11 @@ import { store } from '../../store/store'
 import { utilService } from '../util.service'
 
 export const activityUtilService = {
-    commentCreated,
-    taskCreated,
-    taskDeleted,
-    taskArchived,
-    taskUnarchived,
+    getCommentActivity,
+    getTaskActivity,
 }
 
-function commentCreated(hierarchy, comment) {
+function getCommentActivity(hierarchy, comment) {
     const { task } = hierarchy
     let activity = _getActivity('task-comment', hierarchy)
 
@@ -23,23 +20,7 @@ function commentCreated(hierarchy, comment) {
     return activity
 }
 
-function taskCreated(hierarchy) {
-    return _getTaskActivity('task-created', hierarchy)
-}
-
-function taskDeleted(hierarchy) {
-    return _getTaskActivity('task-deleted', hierarchy)
-}
-
-function taskArchived(hierarchy) {
-    return _getTaskActivity('task-archived', hierarchy)
-}
-
-function taskUnarchived(hierarchy) {
-    return _getTaskActivity('task-unarchived', hierarchy)
-}
-
-function _getTaskActivity(type, hierarchy) {
+function getTaskActivity(type, hierarchy) {
     const { group, task } = hierarchy
 
     let activity = _getActivity(type, hierarchy)

@@ -17,7 +17,10 @@ async function createTask(board, group, position, task) {
         store.dispatch(taskCreated({ board, group, position, task }))
 
         // mimic what the server does upon create task
-        const activity = activityUtilService.taskCreated(hierarchy)
+        const activity = activityUtilService.getTaskActivity(
+            'task-created',
+            hierarchy
+        )
         store.dispatch(activityCreated({ activity }))
 
         await taskService.createTask(board, group, position, task)
@@ -33,7 +36,10 @@ async function deleteTask(hierarchy) {
         store.dispatch(taskDeleted({ ...hierarchy }))
 
         // mimic what the server does upon delete task
-        const activity = activityUtilService.taskDeleted(hierarchy)
+        const activity = activityUtilService.getTaskActivity(
+            'task-deleted',
+            hierarchy
+        )
         store.dispatch(activityCreated({ activity }))
 
         await taskService.deleteTask(hierarchy)
@@ -62,15 +68,13 @@ async function updateTask(hierarchy, fieldsToUpdate) {
 }
 
 function _createActivityForUpdateTask(hierarchy, fieldsToUpdate) {
-    let activity
+    let type
     if ('archivedAt' in fieldsToUpdate) {
-        if (fieldsToUpdate.archivedAt === null) {
-            activity = activityUtilService.taskUnarchived(hierarchy)
-        } else {
-            activity = activityUtilService.taskArchived(hierarchy)
-        }
+        type = fieldsToUpdate.archivedAt ? 'task-archived' : 'task-unarchived'
     }
-    if (activity) {
+
+    if (type) {
+        const activity = activityUtilService.getTaskActivity(type, hierarchy)
         store.dispatch(activityCreated({ activity }))
     }
 }
