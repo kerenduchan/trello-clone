@@ -66,6 +66,7 @@ async function query(
                 labels: 1,
                 createdAt: 1,
                 memberIds: 1,
+                isStarred: 1,
                 style: 1,
                 groups: 1,
                 creator: {
