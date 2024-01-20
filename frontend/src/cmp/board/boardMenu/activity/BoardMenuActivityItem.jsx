@@ -20,6 +20,8 @@ function Details({ activity }) {
                 return ` added ${title} to this board`
             case 'group-archived':
                 return `archived list ${title}`
+            case 'group-unarchived':
+                return `sent list ${title} to the board`
         }
     }
 

@@ -46,9 +46,30 @@ async function updateGroup(board, group, fieldsToUpdate) {
     try {
         // optimistic update
         store.dispatch(groupUpdated({ board, group: updatedGroup }))
+
+        // mimic what the server does upon update task
+        _createActivityForUpdateGroup(board, group, fieldsToUpdate)
+
         await groupService.updateGroup(board, updatedGroup)
     } catch (err) {
         // TODO: rollback store change
         throw err
+    }
+}
+
+function _createActivityForUpdateGroup(board, group, fieldsToUpdate) {
+    let type
+    if ('archivedAt' in fieldsToUpdate) {
+        type = fieldsToUpdate.archivedAt ? 'group-archived' : 'group-unarchived'
+    }
+
+    if (type) {
+        const activity = activityUtilService.getGroupActivity(
+            type,
+            board,
+            group
+        )
+
+        store.dispatch(activityCreated({ activity }))
     }
 }
