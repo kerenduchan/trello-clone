@@ -31,7 +31,10 @@ export function BoardIndex() {
                             <Icon type="star" size="lg"></Icon>
                             <h1 className="title">Starred Boards</h1>
                         </header>
-                        <BoardList boards={starredBoards} />
+                        <BoardList
+                            boards={starredBoards}
+                            showCreateBtn={false}
+                        />
                     </div>
                 )}
 

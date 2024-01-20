@@ -2,7 +2,7 @@ import { usePopoverState } from '../../customHooks/usePopoverState'
 import { BoardCreate } from './BoardCreate'
 import { BoardPreview } from './BoardPreview'
 
-export function BoardList({ boards }) {
+export function BoardList({ boards, showCreateBtn = true }) {
     const boardCreateMenu = usePopoverState()
 
     if (!boards) return <div className="board-list loading">Loading...</div>
@@ -14,14 +14,16 @@ export function BoardList({ boards }) {
                     <BoardPreview board={b} />
                 </li>
             ))}
-            <li key="new">
-                <button
-                    className="btn-create-board btn-secondary-centered"
-                    {...boardCreateMenu.triggerAndTarget}
-                >
-                    Create new board
-                </button>
-            </li>
+            {showCreateBtn && (
+                <li key="new">
+                    <button
+                        className="btn-create-board btn-secondary-centered"
+                        {...boardCreateMenu.triggerAndTarget}
+                    >
+                        Create new board
+                    </button>
+                </li>
+            )}
 
             {boardCreateMenu.show && (
                 <BoardCreate popoverState={boardCreateMenu} />
