@@ -2,50 +2,24 @@ import { ObjectId } from 'mongodb'
 import { activityService } from '../activity/activity.service.js'
 
 export const activityUtilService = {
-    taskCreated,
-    taskUpdated,
-    taskDeleted,
+    getTaskActivity,
     groupCreated,
     groupUpdated,
 }
 
-async function taskCreated(board, group, task) {
-    const activity = _getTaskActivity(
-        'task-created',
-        task.creatorId,
-        board,
-        group,
-        task
-    )
-    return activityService.create(activity)
-}
-
-async function taskUpdated(userId, board, group, task, fields) {
-    let activity
-    if ('archivedAt' in fields) {
-        activity = _getTaskActivity(
-            fields.archivedAt ? 'task-archived' : 'task-unarchived',
-            userId,
-            board,
-            group,
-            task
-        )
-    }
-    if (activity) {
-        return activityService.create(activity)
-    }
-    return null
-}
-
-async function taskDeleted(userId, board, group, task) {
-    const activity = _getTaskActivity(
-        'task-deleted',
+function getTaskActivity(type, userId, hierarchy) {
+    const { board, group, task } = hierarchy
+    return {
+        _id: new ObjectId(),
+        type,
         userId,
-        board,
-        group,
-        task
-    )
-    return activityService.create(activity)
+        boardId: board._id,
+        groupId: group._id,
+        taskId: task._id,
+        taskTitle: task.title,
+        groupTitle: group.title,
+        performedAt: Date.now(),
+    }
 }
 
 async function groupCreated(userId, board, group) {
@@ -69,22 +43,6 @@ async function groupUpdated(userId, board, group, fields) {
     return null
 }
 
-function _getTaskActivity(type, userId, board, group, task) {
-    return {
-        _id: new ObjectId(),
-        type,
-        userId,
-        boardId: board._id,
-        groupId: group._id,
-        taskId: task._id,
-        data: {
-            taskTitle: task.title,
-            groupTitle: group.title,
-        },
-        performedAt: Date.now(),
-    }
-}
-
 function _getGroupActivity(type, userId, board, group) {
     return {
         _id: new ObjectId(),
@@ -92,9 +50,7 @@ function _getGroupActivity(type, userId, board, group) {
         userId,
         boardId: board._id,
         groupId: group._id,
-        data: {
-            groupTitle: group.title,
-        },
+        groupTitle: group.title,
         performedAt: Date.now(),
     }
 }

@@ -3,15 +3,13 @@ import { updateActivity } from '../../../store/actions/activity/activity.actions
 import { SecondaryBtn } from '../../general/btn/SecondaryBtn'
 
 export function TaskCommentEditForm({ activity, onClose }) {
-    const comment = activity.data
+    const { comment } = activity
 
     const [draft, handleChange] = useForm({ text: comment.text })
 
     function onSubmit(e) {
         e.preventDefault()
-        const fields = {
-            data: { ...comment, text: draft.text, isEdited: true },
-        }
+        const fields = { comment: { ...draft, isEdited: true } }
         updateActivity(activity, fields)
         onClose()
     }

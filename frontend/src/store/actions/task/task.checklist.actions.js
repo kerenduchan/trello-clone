@@ -3,6 +3,7 @@ import { curChecklistChanged } from '../../reducers/app.reducer'
 import { updateGroup } from '../group.actions'
 import { updateTask } from './task.actions'
 import { boardService } from '../../../services/board/board.service'
+import { activityUtilService } from '../../../services/activity/activity.util.service'
 
 export {
     addChecklist,
@@ -19,7 +20,13 @@ async function addChecklist(hierarchy, checklist) {
     const { task } = hierarchy
     const checklists = [...task.checklists, checklist]
     store.dispatch(curChecklistChanged(checklist._id))
-    return updateTask(hierarchy, { checklists })
+
+    const activity = activityUtilService.getChecklistActivity(
+        'task-checklist-created',
+        hierarchy,
+        checklist
+    )
+    return updateTask(hierarchy, { checklists }, activity)
 }
 
 async function updateChecklist(hierarchy, checklist) {
@@ -33,7 +40,13 @@ async function updateChecklist(hierarchy, checklist) {
 async function deleteChecklist(hierarchy, checklist) {
     const { task } = hierarchy
     const checklists = task.checklists.filter((c) => c._id !== checklist._id)
-    return updateTask(hierarchy, { checklists })
+
+    const activity = activityUtilService.getChecklistActivity(
+        'task-checklist-deleted',
+        hierarchy,
+        checklist
+    )
+    return updateTask(hierarchy, { checklists }, activity)
 }
 
 async function moveChecklist(hierarchy, checklistId, targetPositionId) {

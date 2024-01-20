@@ -70,7 +70,7 @@ async function update(activityId, fields) {
     const options = { new: true, runValidators: true }
 
     if (fields.type === 'task-comment') {
-        fields.data.isEdited = true
+        fields.comment.isEdited = true
     }
 
     try {

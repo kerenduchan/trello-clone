@@ -120,7 +120,6 @@ function getEmptyChecklistItem() {
 
 function getEmptyComment() {
     return {
-        _id: utilService.makeId(),
         text: '',
     }
 }

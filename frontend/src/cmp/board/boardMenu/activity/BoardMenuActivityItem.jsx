@@ -14,7 +14,7 @@ export function BoardMenuActivityItem({ activity }) {
 
 function Details({ activity }) {
     function getGroupActivityDescription(activity) {
-        const title = activity.data.groupTitle
+        const title = activity.groupTitle
         switch (activity.type) {
             case 'group-created':
                 return ` added ${title} to this board`
@@ -36,7 +36,7 @@ function Details({ activity }) {
                 <ActivityDetailsTask
                     activity={activity}
                     textBefore="added"
-                    textAfter={`to ${activity.data.groupTitle}`}
+                    textAfter={`to ${activity.groupTitle}`}
                 />
             )
 
@@ -64,10 +64,29 @@ function Details({ activity }) {
             return (
                 <ActivityDetailsSimple
                     activity={activity}
-                    text={`deleted ${activity.data.taskTitle} from ${activity.data.groupTitle}`}
+                    text={`deleted ${activity.taskTitle} from ${activity.groupTitle}`}
                 />
             )
 
+        // CHECKLIST CREATED
+        case 'task-checklist-created':
+            return (
+                <ActivityDetailsTask
+                    activity={activity}
+                    textBefore={`added ${activity.checklistTitle} to`}
+                />
+            )
+
+        // CHECKLIST DELETED
+        case 'task-checklist-deleted':
+            return (
+                <ActivityDetailsTask
+                    activity={activity}
+                    textBefore={`removed ${activity.checklistTitle} from`}
+                />
+            )
+
+        // GROUP CREATED/ARCHIVED/UNARCHIVED
         case 'group-created':
         case 'group-archived':
         case 'group-unarchived':
@@ -83,6 +102,8 @@ function Details({ activity }) {
 
 // TASK COMMENT
 function TaskCommentDetails({ activity }) {
+    const { comment } = activity
+
     function getPerformedAt() {
         return moment(activity.performedAt).fromNow()
     }
@@ -93,7 +114,7 @@ function TaskCommentDetails({ activity }) {
                 <span className="user-fullname">{activity.user.fullname}</span>
                 {' on '}
                 <Link to={`c/${activity.taskId}`} className="task-link">
-                    {activity.data.taskTitle}
+                    {activity.taskTitle}
                 </Link>
 
                 <Link
@@ -102,12 +123,10 @@ function TaskCommentDetails({ activity }) {
                 >
                     {getPerformedAt()}
                 </Link>
-                {activity.data.isEdited && (
-                    <span className="small"> (edited)</span>
-                )}
+                {comment.isEdited && <span className="small"> (edited)</span>}
             </div>
             <div className="comment-box">
-                <p>{activity.data.text}</p>
+                <p>{comment.text}</p>
             </div>
         </div>
     )
@@ -124,7 +143,7 @@ function ActivityDetailsTask({ activity, textBefore, textAfter }) {
                 <span className="user-fullname">{activity.user.fullname}</span>
                 {` ${textBefore} `}
                 <Link to={`c/${activity.taskId}`} className="task-link">
-                    {activity.data.taskTitle}
+                    {activity.taskTitle}
                 </Link>
                 {textAfter && ` ${textAfter}`}
             </div>
