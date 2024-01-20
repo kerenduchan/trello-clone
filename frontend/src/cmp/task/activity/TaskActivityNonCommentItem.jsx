@@ -25,10 +25,6 @@ export function TaskActivityNonCommentItem({
     }
 
     function getPerformedAt() {
-        console.log(
-            activity.performedAt,
-            moment(activity.performedAt).fromNow()
-        )
         return moment(activity.performedAt).fromNow()
     }
 
