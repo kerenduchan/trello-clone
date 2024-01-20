@@ -68,6 +68,25 @@ function Details({ activity }) {
                 />
             )
 
+        // CHECKLIST CREATED
+        case 'task-checklist-created':
+            return (
+                <ActivityDetailsTask
+                    activity={activity}
+                    textBefore={`added ${activity.checklistTitle} to`}
+                />
+            )
+
+        // CHECKLIST DELETED
+        case 'task-checklist-deleted':
+            return (
+                <ActivityDetailsTask
+                    activity={activity}
+                    textBefore={`removed ${activity.checklistTitle} from`}
+                />
+            )
+
+        // GROUP CREATED/ARCHIVED/UNARCHIVED
         case 'group-created':
         case 'group-archived':
         case 'group-unarchived':

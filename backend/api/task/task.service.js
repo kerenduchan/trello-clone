@@ -199,7 +199,7 @@ function _getActivityForUpdateChecklists(userId, hierarchy, fields) {
     const curChecklists = fields.checklists
 
     if (prevChecklists.length === curChecklists.length) {
-        console.log('checklist updated')
+        // TODO: create an activity that a checklist item was checked/unchecked
         return
     }
 
