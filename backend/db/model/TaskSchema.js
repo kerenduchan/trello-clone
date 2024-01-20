@@ -27,7 +27,7 @@ const commentSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: Date.now(),
+            default: Date.now,
         },
     },
     { _id: false } // Don't auto-assign _id to comment
@@ -129,7 +129,7 @@ export const TaskSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: Date.now(),
+            default: Date.now,
         },
 
         creatorId: {
