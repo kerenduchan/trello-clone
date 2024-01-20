@@ -7,7 +7,11 @@ import {
     selectBoard,
     selectFilteredBoard,
 } from '../store/reducers/board.reducer'
-import { loadBoard, unloadBoard } from '../store/actions/board/board.actions'
+import {
+    loadBoard,
+    loadBoards,
+    unloadBoard,
+} from '../store/actions/board/board.actions'
 import { applyBoardFilter } from '../store/actions/board/board.filter.actions'
 import { boardService } from '../services/board/board.service'
 import { useToggle } from '../customHooks/useToggle'
@@ -29,6 +33,8 @@ export function BoardDetails() {
     const [filter, setFilter] = useState(null)
 
     useEffect(() => {
+        // load all boards in case page was refreshed and tasks will be dragged/dropped
+        loadBoards()
         loadBoard(params.boardId)
 
         return () => {
