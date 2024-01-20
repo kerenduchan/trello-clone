@@ -4,6 +4,7 @@ import { boardAxiosService } from './board.axios.service'
 import { moveTask, moveGroup } from '../../store/actions/board/board.actions'
 import { moveChecklist } from '../../store/actions/task/task.checklist.actions'
 import { labelService } from '../label.service'
+import { store } from '../../store/store'
 
 const service = utilService.isUseLocalStorage()
     ? boardLocalService
@@ -85,6 +86,7 @@ function getEmptyGroup() {
 function getEmptyTask(title = '') {
     return {
         _id: utilService.makeId(),
+        creatorId: store.getState().app.loggedinUser._id,
         title,
         archivedAt: null,
         labelIds: [],
