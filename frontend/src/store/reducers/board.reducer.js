@@ -1,7 +1,7 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    boards: [],
+    boards: null,
 
     // the full board, including filtered-out items and archived items
     curBoard: null,

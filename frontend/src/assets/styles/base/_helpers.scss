@@ -101,3 +101,9 @@
 .btn-link-small {
     @include btn-link-small();
 }
+
+.loading {
+    color: var(--ds-text-subtle);
+    font-style: italic;
+    @include fade-in-out();
+}

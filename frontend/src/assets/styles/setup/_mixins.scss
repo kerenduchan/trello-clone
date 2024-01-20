@@ -342,3 +342,19 @@
     cursor: pointer;
     color: var(--ds-text-subtle);
 }
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 0.3;
+    }
+}
+
+@mixin fade-in-out() {
+    animation: fadeInOut 1.2s ease-in-out infinite;
+}

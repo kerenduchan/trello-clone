@@ -15,10 +15,9 @@ export function BoardIndex() {
     }, [])
 
     useEffect(() => {
+        if (!boards) return
         setStarredBoards(boards.filter((b) => b.isStarred === true))
     }, [boards])
-
-    if (!boards) return <div>Loading..</div>
 
     return (
         <div className="board-index">

@@ -1,6 +1,12 @@
 .board-list {
     display: grid;
-    grid-template-columns: repeat(6, min-content);
+    grid-template-columns: repeat(4, min-content);
     gap: 16.5px;
     align-content: start;
+
+    .btn-create-board {
+        width: 200px;
+        height: 96px;
+        border-radius: 3px;
+    }
 }

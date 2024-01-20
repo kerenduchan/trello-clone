@@ -135,7 +135,7 @@ export function BoardDetails() {
                     </DragDropContext>
                 </>
             ) : (
-                <div>Loading..</div>
+                <div className="loading">Loading..</div>
             )}
         </div>
     )
