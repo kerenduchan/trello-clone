@@ -83,6 +83,8 @@ function Details({ activity }) {
 
 // TASK COMMENT
 function TaskCommentDetails({ activity }) {
+    const { comment } = activity
+
     function getPerformedAt() {
         return moment(activity.performedAt).fromNow()
     }
@@ -102,12 +104,10 @@ function TaskCommentDetails({ activity }) {
                 >
                     {getPerformedAt()}
                 </Link>
-                {activity.data.isEdited && (
-                    <span className="small"> (edited)</span>
-                )}
+                {comment.isEdited && <span className="small"> (edited)</span>}
             </div>
             <div className="comment-box">
-                <p>{activity.data.text}</p>
+                <p>{comment.text}</p>
             </div>
         </div>
     )

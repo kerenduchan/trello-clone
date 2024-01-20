@@ -13,7 +13,7 @@ export function TaskComment({
     onClick,
     onDelete,
 }) {
-    const comment = activity.data
+    const { comment } = activity
 
     const [showEditForm, setShowEditForm] = useState(false)
     const deleteCommentMenu = usePopoverState()

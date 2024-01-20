@@ -29,8 +29,13 @@ const activitySchema = new Schema(
         taskId: String,
         taskTitle: String,
         groupTitle: String,
+
+        // for checklist
         checklistId: String,
         checklistTitle: String,
+
+        // for comment
+        comment: SchemaTypes.Mixed,
 
         performedAt: {
             type: Date,
