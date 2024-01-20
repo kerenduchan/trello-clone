@@ -1,5 +1,4 @@
 import moment from 'moment'
-import { activityUtilService } from '../../../services/activity/activity.util.service'
 import { userService } from '../../../services/user/user.service'
 import { Avatar } from '../../general/Avatar'
 
@@ -10,7 +9,19 @@ export function TaskActivityNonCommentItem({
     onClick,
 }) {
     function getDescription() {
-        return ' ' + activityUtilService.getDescription(activity)
+        switch (activity.type) {
+            // TASK CREATED
+            case 'task-created':
+                return 'added this card to ' + activity.data.groupTitle
+
+            // TASK ARCHIVED
+            case 'task-archived':
+                return 'archived this card'
+
+            // TASK UNARCHIVED
+            case 'task-unarchived':
+                return 'sent this card to the board'
+        }
     }
 
     function getPerformedAt() {
@@ -29,7 +40,7 @@ export function TaskActivityNonCommentItem({
                     <span className="user-fullname">
                         {activity.user.fullname}
                     </span>
-                    {getDescription()}
+                    {` ${getDescription()}`}
                 </div>
                 <div className="performed-at" onClick={onClick}>
                     {getPerformedAt()}

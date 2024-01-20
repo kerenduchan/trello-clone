@@ -14,12 +14,49 @@ export function BoardMenuActivityItem({ activity }) {
 
 export function Details({ activity }) {
     switch (activity.type) {
+        // TASK COMMENT
         case 'task-comment':
             return <TaskCommentDetails activity={activity} />
+
+        // TASK CREATED
         case 'task-created':
-            return <TaskCreatedDetails activity={activity} />
+            return (
+                <TaskActivityDetails
+                    activity={activity}
+                    textBefore="added"
+                    textAfter={`to ${activity.data.groupTitle}`}
+                />
+            )
+
+        // TASK ARCHIVED
+        case 'task-archived':
+            return (
+                <TaskActivityDetails
+                    activity={activity}
+                    textBefore="archived"
+                />
+            )
+
+        // TASK UNARCHIVED
+        case 'task-unarchived':
+            return (
+                <TaskActivityDetails
+                    activity={activity}
+                    textBefore="sent"
+                    textAfter="to the board"
+                />
+            )
+
+        // TASK DELETED
         case 'task-deleted':
-            return <TaskDeletedDetails activity={activity} />
+            return (
+                <TaskActivityDetails
+                    activity={activity}
+                    textBefore="deleted card"
+                    textAfter={`from ${activity.data.groupTitle}`}
+                    isLink={false}
+                />
+            )
     }
     return <></>
 }
@@ -53,7 +90,12 @@ export function TaskCommentDetails({ activity }) {
     )
 }
 
-export function NonCommentActivityDetails({ activity, children }) {
+export function TaskActivityDetails({
+    activity,
+    textBefore,
+    textAfter,
+    isLink = true,
+}) {
     function getPerformedAt() {
         return moment(activity.performedAt).fromNow()
     }
@@ -62,34 +104,23 @@ export function NonCommentActivityDetails({ activity, children }) {
         <div className="details-for-activity">
             <div className="description">
                 <span className="user-fullname">{activity.user.fullname}</span>
-                {children}
+                {` ${textBefore} `}
+                {isLink ? (
+                    <Link to={`c/${activity.taskId}`} className="task-link">
+                        {activity.data.taskTitle}
+                    </Link>
+                ) : (
+                    activity.data.taskTitle
+                )}
+                {textAfter && ` ${textAfter}`}
             </div>
-            <Link to={`c/${activity.taskId}`} className="performed-at">
-                {getPerformedAt()}
-            </Link>
+            {isLink ? (
+                <Link to={`c/${activity.taskId}`} className="performed-at">
+                    {getPerformedAt()}
+                </Link>
+            ) : (
+                getPerformedAt()
+            )}
         </div>
-    )
-}
-
-// TASK CREATED
-export function TaskCreatedDetails({ activity }) {
-    return (
-        <NonCommentActivityDetails activity={activity}>
-            {' added '}
-            <Link to={`c/${activity.taskId}`} className="task-link">
-                {activity.data.taskTitle}
-            </Link>
-            {' to '}
-            {activity.data.groupTitle}
-        </NonCommentActivityDetails>
-    )
-}
-
-// TASK DELETED
-export function TaskDeletedDetails({ activity }) {
-    return (
-        <NonCommentActivityDetails activity={activity}>
-            {` deleted card ${activity.data.taskTitle} from ${activity.data.groupTitle}`}
-        </NonCommentActivityDetails>
     )
 }

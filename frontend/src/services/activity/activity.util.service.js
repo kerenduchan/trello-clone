@@ -5,7 +5,8 @@ export const activityUtilService = {
     commentCreated,
     taskCreated,
     taskDeleted,
-    getDescription,
+    taskArchived,
+    taskUnarchived,
 }
 
 function commentCreated(hierarchy, comment) {
@@ -23,32 +24,30 @@ function commentCreated(hierarchy, comment) {
 }
 
 function taskCreated(hierarchy) {
-    const { group, task } = hierarchy
-
-    let activity = _getActivity('task-created', hierarchy)
-    activity.data = {
-        taskTitle: task.title,
-        groupTitle: group.title,
-    }
-    return activity
+    return _getTaskActivity('task-created', hierarchy)
 }
 
 function taskDeleted(hierarchy) {
-    let activity = _getActivity('task-deleted', hierarchy)
+    return _getTaskActivity('task-deleted', hierarchy)
+}
+
+function taskArchived(hierarchy) {
+    return _getTaskActivity('task-archived', hierarchy)
+}
+
+function taskUnarchived(hierarchy) {
+    return _getTaskActivity('task-unarchived', hierarchy)
+}
+
+function _getTaskActivity(type, hierarchy) {
+    const { group, task } = hierarchy
+
+    let activity = _getActivity(type, hierarchy)
     activity.data = {
         taskTitle: task.title,
         groupTitle: group.title,
     }
     return activity
-}
-
-// This description is shown inside the task details.
-// The description in the board menu > Activities is different.
-function getDescription(activity) {
-    switch (activity.type) {
-        case 'task-created':
-            return 'added this card to ' + activity.data.groupTitle
-    }
 }
 
 function _getActivity(type, hierarchy) {

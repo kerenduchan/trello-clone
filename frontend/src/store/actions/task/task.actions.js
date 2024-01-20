@@ -50,9 +50,27 @@ async function updateTask(hierarchy, fieldsToUpdate) {
     try {
         // optimistic update
         store.dispatch(taskUpdated({ board, group, task: updatedTask }))
+
+        // mimic what the server does upon update task
+        _createActivityForUpdateTask(hierarchy, fieldsToUpdate)
+
         await taskService.updateTask(board, group, updatedTask)
     } catch (err) {
         // TODO: rollback store change
         throw err
+    }
+}
+
+function _createActivityForUpdateTask(hierarchy, fieldsToUpdate) {
+    let activity
+    if ('archivedAt' in fieldsToUpdate) {
+        if (fieldsToUpdate.archivedAt === null) {
+            activity = activityUtilService.taskUnarchived(hierarchy)
+        } else {
+            activity = activityUtilService.taskArchived(hierarchy)
+        }
+    }
+    if (activity) {
+        store.dispatch(activityCreated({ activity }))
     }
 }
