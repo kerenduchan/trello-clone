@@ -424,6 +424,11 @@ function _fixTaskIndex(board, filteredBoard, groupId, index) {
         return 0
     }
 
+    if (index === filteredGroup.tasks.length) {
+        // drop at end of group
+        return index
+    }
+
     // find the ID of the task before which to drop in the filtered board
     const taskId = filteredGroup.tasks[index]._id
 
