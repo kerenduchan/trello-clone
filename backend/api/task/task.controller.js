@@ -36,6 +36,7 @@ export async function updateTask(req, res) {
         const { boardId, groupId, taskId } = req.params
         const fields = req.body
         const updatedTask = await taskService.update(
+            req.loggedinUser._id,
             boardId,
             groupId,
             taskId,

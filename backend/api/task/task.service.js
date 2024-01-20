@@ -72,7 +72,7 @@ async function create(boardId, groupId, task) {
     }
 }
 
-async function update(boardId, groupId, taskId, fields) {
+async function update(userId, boardId, groupId, taskId, fields) {
     // disregard unexpected fields
     fields = utilService.extractFields(fields, UPDATE_FIELDS)
 
@@ -80,12 +80,10 @@ async function update(boardId, groupId, taskId, fields) {
 
     // archivedAt - Pass isArchived=true to set archivedAt to now.
     // Pass isArchived=false to set archivedAt to null.
-    if (fields.isArchived) {
-        fields.archivedAt = Date.now()
-    } else if (fields.isArchived === false) {
-        fields.archivedAt = null
+    if ('isArchived' in fields) {
+        fields.archivedAt = fields.isArchived ? Date.now() : null
+        delete fields.isArchived
     }
-    delete fields.isArchived
 
     let group = await groupService.getById(boardId, groupId)
     let task = group.tasks.find((t) => t._id === taskId)
@@ -120,6 +118,15 @@ async function update(boardId, groupId, taskId, fields) {
     if (!updatedTask) {
         throw 'Task not found in the updated group'
     }
+
+    await activityUtilService.taskUpdated(
+        userId,
+        updatedBoard,
+        updatedGroup,
+        updatedTask,
+        fields
+    )
+
     return updatedTask
 }
 
