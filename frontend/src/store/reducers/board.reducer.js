@@ -47,22 +47,6 @@ const boardSlice = createSlice({
             }
             return state
         },
-        boardsUpdated(state, action) {
-            const boardIdToBoardMap = {}
-            for (const b of action.payload) {
-                boardIdToBoardMap[b._id] = b
-            }
-
-            state.boards = state.boards.map((b) =>
-                boardIdToBoardMap[b._id] ? boardIdToBoardMap[b._id] : b
-            )
-
-            const curBoardId = state.curBoard?._id
-            if (boardIdToBoardMap[curBoardId]) {
-                state.curBoard = boardIdToBoardMap[curBoardId]
-            }
-            return state
-        },
 
         groupCreated(state, action) {
             const { group } = action.payload
@@ -146,7 +130,6 @@ export const {
     boardAdded,
     boardRemoved,
     boardUpdated,
-    boardsUpdated,
     groupCreated,
     groupDeleted,
     groupUpdated,

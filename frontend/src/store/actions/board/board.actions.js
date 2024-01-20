@@ -7,7 +7,6 @@ import {
     boardAdded,
     boardRemoved,
     boardUpdated,
-    boardsUpdated,
 } from '../../reducers/board.reducer'
 import { store } from '../../store'
 
@@ -68,12 +67,12 @@ async function createBoard(board) {
     }
 }
 
-async function updateBoard(board, fieldsToUpdate) {
-    const updatedBoard = { ...board, ...fieldsToUpdate }
+async function updateBoard(board, fields) {
+    const updatedBoard = { ...board, ...fields }
     try {
         // optimistic update
         store.dispatch(boardUpdated(updatedBoard))
-        return boardService.update(board._id, updatedBoard)
+        return boardService.update(board._id, fields)
     } catch (err) {
         console.error('Failed to update board:', err)
         // TODO: undo the store change
@@ -100,11 +99,10 @@ async function deleteBoard(board) {
 // BOARD LABEL
 
 async function deleteBoardLabel(board, label) {
-    const boardToUpdate = { ...board }
-    boardToUpdate.labels = board.labels.filter((l) => l._id !== label._id)
+    const labels = board.labels.filter((l) => l._id !== label._id)
 
     // also delete the label from all tasks that use it
-    boardToUpdate.groups = board.groups.map((group) => ({
+    const groups = board.groups.map((group) => ({
         ...group,
         tasks: group.tasks.map((task) => ({
             ...task,
@@ -112,29 +110,29 @@ async function deleteBoardLabel(board, label) {
         })),
     }))
 
-    return updateBoard(boardToUpdate)
+    return updateBoard(board, { labels, groups })
 }
 
 // GROUP
 
 async function moveGroup(board, group, targetBoardId, targetPositionId) {
     // remove group from source board
-    const boardToUpdate = { ...board }
-    boardToUpdate.groups = board.groups.filter((g) => g._id !== group._id)
+    let groups = board.groups.filter((g) => g._id !== group._id)
 
     if (board._id === targetBoardId) {
         // move group to a new position in the same board
-        boardToUpdate.groups.splice(targetPositionId, 0, group)
-        return updateBoard(boardToUpdate)
+        groups.splice(targetPositionId, 0, group)
+        return updateBoard(board, { groups })
     }
 
     // move group to a different board
     const allBoards = store.getState().board.boards
     const targetBoard = allBoards.find((b) => b._id === targetBoardId)
-    const targetBoardToUpdate = { ...targetBoard }
-    targetBoardToUpdate.groups = [...targetBoardToUpdate.groups]
-    targetBoardToUpdate.groups.splice(targetPositionId, 0, group)
-    return updateBoards([boardToUpdate, targetBoardToUpdate])
+
+    let targetGroups = [...targetBoard.groups]
+    targetGroups.splice(targetPositionId, 0, group)
+    await updateBoard(board, { groups })
+    await updateBoard(targetBoard, { groups: targetGroups })
 }
 
 async function copyGroup(board, group, title, targetPosition) {
@@ -146,9 +144,9 @@ async function copyGroup(board, group, title, targetPosition) {
 
     groupCopy.tasks.forEach((task) => (task._id = utilService.makeId()))
 
-    const boardToUpdate = { ...board }
-    boardToUpdate.groups.splice(targetPosition, 0, groupCopy)
-    updateBoard(boardToUpdate)
+    let groups = [...board.groups]
+    groups.splice(targetPosition, 0, groupCopy)
+    updateBoard(board, { groups })
 }
 
 // TASK
@@ -201,8 +199,7 @@ async function moveTasks(board, sourceGroup, targetGroupId) {
     targetGroupToUpdate.tasks = [...targetGroup.tasks]
     targetGroupToUpdate.tasks.push(...tasksToMove)
 
-    const boardToUpdate = { ...board }
-    boardToUpdate.groups = board.groups.map((g) =>
+    const groups = board.groups.map((g) =>
         g._id === targetGroupId
             ? targetGroupToUpdate
             : g._id === sourceGroup._id
@@ -210,7 +207,7 @@ async function moveTasks(board, sourceGroup, targetGroupId) {
             : g
     )
 
-    return updateBoard(boardToUpdate)
+    return updateBoard(board, { groups })
 }
 
 // archive all tasks in the group
@@ -249,27 +246,11 @@ async function copyTask(
 
 // PRIVATE HELPER FUNCTIONS
 
-async function updateBoards(boards) {
-    try {
-        // optimistic update
-        store.dispatch(boardsUpdated(boards))
-
-        for (const b of boards) {
-            await boardService.update(b)
-        }
-    } catch (err) {
-        console.error('Failed to update boards:', err)
-        // TODO: undo the store change
-        throw err
-    }
-}
-
 async function _updateGroup(board, groupToUpdate) {
-    const boardToUpdate = { ...board }
-    boardToUpdate.groups = board.groups.map((g) =>
+    const groups = board.groups.map((g) =>
         g._id === groupToUpdate._id ? groupToUpdate : g
     )
-    return updateBoard(boardToUpdate)
+    return updateBoard(board, { groups })
 }
 
 // move task in the same group
@@ -299,8 +280,7 @@ async function _moveTaskInsideBoard(hierarchy, targetGroupId, targetPosition) {
     targetGroupToUpdate.tasks = [...targetGroupToUpdate.tasks]
     targetGroupToUpdate.tasks.splice(targetPosition, 0, task)
 
-    const boardToUpdate = { ...board }
-    boardToUpdate.groups = board.groups.map((g) =>
+    const groups = board.groups.map((g) =>
         g._id === targetGroupId
             ? targetGroupToUpdate
             : g._id === group._id
@@ -308,7 +288,7 @@ async function _moveTaskInsideBoard(hierarchy, targetGroupId, targetPosition) {
             : g
     )
 
-    return updateBoard(boardToUpdate)
+    return updateBoard(board, { groups })
 }
 
 // move task to a different board
@@ -323,8 +303,7 @@ async function _moveTaskToDifferentBoard(
     // remove task from source group
     const sourceGroupToUpdate = { ...group }
     sourceGroupToUpdate.tasks = group.tasks.filter((t) => t._id !== task._id)
-    const sourceBoardToUpdate = { ...board }
-    sourceBoardToUpdate.groups = board.groups.map((g) =>
+    const groups = board.groups.map((g) =>
         g._id === group._id ? sourceGroupToUpdate : g
     )
 
@@ -335,10 +314,11 @@ async function _moveTaskToDifferentBoard(
     const targetGroupToUpdate = { ...targetGroup }
     targetGroupToUpdate.tasks = [...targetGroupToUpdate.tasks]
     targetGroupToUpdate.tasks.splice(targetPositionId, 0, task)
-    const targetBoardToUpdate = { ...targetBoard }
-    targetBoardToUpdate.groups = targetBoard.groups.map((g) =>
+
+    const targetGroups = targetBoard.groups.map((g) =>
         g._id === targetGroupId ? targetGroupToUpdate : g
     )
 
-    return updateBoards([sourceBoardToUpdate, targetBoardToUpdate])
+    await updateBoard(board, { groups })
+    await updateBoard(targetBoard, { groups: targetGroups })
 }
