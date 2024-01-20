@@ -52,7 +52,7 @@ export function Details({ activity }) {
             return (
                 <TaskActivityDetails
                     activity={activity}
-                    textBefore="deleted card"
+                    textBefore="deleted"
                     textAfter={`from ${activity.data.groupTitle}`}
                     isLink={false}
                 />
@@ -76,11 +76,14 @@ export function TaskCommentDetails({ activity }) {
                     {activity.data.taskTitle}
                 </Link>
 
-                <Link to={`c/${activity.taskId}`} className="performed-at">
+                <Link
+                    to={`c/${activity.taskId}`}
+                    className="performed-at small"
+                >
                     {getPerformedAt()}
                 </Link>
                 {activity.data.isEdited && (
-                    <span className="is-edited"> (edited)</span>
+                    <span className="small"> (edited)</span>
                 )}
             </div>
             <div className="comment-box">
@@ -115,11 +118,14 @@ export function TaskActivityDetails({
                 {textAfter && ` ${textAfter}`}
             </div>
             {isLink ? (
-                <Link to={`c/${activity.taskId}`} className="performed-at">
+                <Link
+                    to={`c/${activity.taskId}`}
+                    className="performed-at small"
+                >
                     {getPerformedAt()}
                 </Link>
             ) : (
-                getPerformedAt()
+                <div className="small">{getPerformedAt()}</div>
             )}
         </div>
     )

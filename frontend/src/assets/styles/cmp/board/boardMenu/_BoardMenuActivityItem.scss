@@ -1,6 +1,11 @@
 .board-menu-activity-item {
     display: grid;
 
+    .small {
+        @include font(12px, 20px, 400);
+        color: var(--ds-text-subtle);
+    }
+
     .avatar {
         grid-area: 1 / 1;
         margin-top: 8px;
@@ -28,12 +33,8 @@
             }
         }
 
-        .performed-at {
-            @include font(12px, 20px, 400);
-
-            &:hover {
-                text-decoration: underline;
-            }
+        .performed-at:hover {
+            text-decoration: underline;
         }
     }
 
@@ -59,18 +60,11 @@
             }
 
             .performed-at {
-                @include font(12px, 20px, 400);
                 margin-inline-start: 4px;
-                color: var(--ds-text-subtle);
 
                 &:hover {
                     text-decoration: underline;
                 }
-            }
-
-            .is-edited {
-                @include font(12px, 20px, 400);
-                color: var(--ds-text-subtle);
             }
         }
 
