@@ -73,7 +73,7 @@ async function updateBoard(board, fieldsToUpdate) {
     try {
         // optimistic update
         store.dispatch(boardUpdated(updatedBoard))
-        return boardService.update(board._id, fieldsToUpdate)
+        return boardService.update(board._id, updatedBoard)
     } catch (err) {
         console.error('Failed to update board:', err)
         // TODO: undo the store change
