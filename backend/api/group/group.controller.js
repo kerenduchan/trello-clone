@@ -15,7 +15,11 @@ export async function createGroup(req, res) {
     try {
         const boardId = req.params.boardId
         const group = req.body
-        const savedGroup = await groupService.create(boardId, group)
+        const savedGroup = await groupService.create(
+            req.loggedinUser._id,
+            boardId,
+            group
+        )
         res.send(savedGroup)
     } catch (err) {
         if (err.stack) console.error(err.stack)

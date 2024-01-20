@@ -1,5 +1,6 @@
 import Board from '../../db/model/Board.js'
 import { utilService } from '../../services/util.service.js'
+import { activityUtilService } from '../activity/activity.util.service.js'
 import { boardService } from '../board/board.service.js'
 
 export const groupService = {
@@ -24,7 +25,7 @@ async function getById(boardId, groupId) {
     return group
 }
 
-async function create(boardId, group) {
+async function create(userId, boardId, group) {
     // disregard unexpected fields
     group = utilService.extractFields(group, CREATE_FIELDS)
 
@@ -40,7 +41,15 @@ async function create(boardId, group) {
         if (!updatedBoard) {
             throw 'Board not found'
         }
-        return updatedBoard.groups[updatedBoard.groups.length - 1]
+
+        const updatedGroup = updatedBoard.groups[updatedBoard.groups.length - 1]
+        await activityUtilService.groupCreated(
+            userId,
+            updatedBoard,
+            updatedGroup
+        )
+
+        return
     } catch (err) {
         _handleError(err)
     }
