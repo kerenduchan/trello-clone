@@ -3,6 +3,7 @@ import Board from '../../db/model/Board.js'
 import { groupService } from '../group/group.service.js'
 import { activityUtilService } from '../activity/activity.util.service.js'
 import { boardService } from '../board/board.service.js'
+import { activityService } from '../activity/activity.service.js'
 
 export const taskService = {
     getById,
@@ -64,8 +65,15 @@ async function create(boardId, groupId, task) {
         }
 
         const group = board.groups.find((g) => g._id === groupId)
-        const addedTask = group.tasks.slice(-1)[0]
-        await activityUtilService.taskCreated(board, group, addedTask)
+        const addedTask = group.tasks[position]
+
+        const hierarchy = { board, group, task: addedTask }
+        const activity = activityUtilService.getTaskActivity(
+            'task-created',
+            task.creatorId,
+            hierarchy
+        )
+        await activityService.create(activity)
         return addedTask
     } catch (err) {
         utilService.handleDbError(err)
@@ -119,13 +127,12 @@ async function update(userId, boardId, groupId, taskId, fields) {
         throw 'Task not found in the updated group'
     }
 
-    await activityUtilService.taskUpdated(
-        userId,
-        updatedBoard,
-        updatedGroup,
-        updatedTask,
-        fields
-    )
+    const hierarchy = {
+        board: updatedBoard,
+        group: updatedGroup,
+        task: updatedTask,
+    }
+    await _createActivityForUpdateTask(userId, hierarchy, fields)
 
     return updatedTask
 }
@@ -158,7 +165,29 @@ async function remove(userId, boardId, groupId, taskId) {
         throw 'Board or group not found'
     }
 
-    await activityUtilService.taskDeleted(userId, board, group, task)
+    const hierarchy = { board: updatedBoard, group, task }
+    const activity = activityUtilService.getTaskActivity(
+        'task-deleted',
+        userId,
+        hierarchy
+    )
+    await activityService.create(activity)
 
     return { deletedCount: 1 }
+}
+
+async function _createActivityForUpdateTask(userId, hierarchy, fields) {
+    let activity
+    if ('archivedAt' in fields) {
+        activity = activityUtilService.getTaskActivity(
+            fields.archivedAt ? 'task-archived' : 'task-unarchived',
+            userId,
+            hierarchy
+        )
+    } else if ('checklists' in fields) {
+        console.log('checklists activity...')
+    }
+    if (activity) {
+        return activityService.create(activity)
+    }
 }

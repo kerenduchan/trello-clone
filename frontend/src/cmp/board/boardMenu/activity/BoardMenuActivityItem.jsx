@@ -14,7 +14,7 @@ export function BoardMenuActivityItem({ activity }) {
 
 function Details({ activity }) {
     function getGroupActivityDescription(activity) {
-        const title = activity.data.groupTitle
+        const title = activity.groupTitle
         switch (activity.type) {
             case 'group-created':
                 return ` added ${title} to this board`
@@ -36,7 +36,7 @@ function Details({ activity }) {
                 <ActivityDetailsTask
                     activity={activity}
                     textBefore="added"
-                    textAfter={`to ${activity.data.groupTitle}`}
+                    textAfter={`to ${activity.groupTitle}`}
                 />
             )
 
@@ -64,7 +64,7 @@ function Details({ activity }) {
             return (
                 <ActivityDetailsSimple
                     activity={activity}
-                    text={`deleted ${activity.data.taskTitle} from ${activity.data.groupTitle}`}
+                    text={`deleted ${activity.taskTitle} from ${activity.groupTitle}`}
                 />
             )
 
@@ -93,7 +93,7 @@ function TaskCommentDetails({ activity }) {
                 <span className="user-fullname">{activity.user.fullname}</span>
                 {' on '}
                 <Link to={`c/${activity.taskId}`} className="task-link">
-                    {activity.data.taskTitle}
+                    {activity.taskTitle}
                 </Link>
 
                 <Link
@@ -124,7 +124,7 @@ function ActivityDetailsTask({ activity, textBefore, textAfter }) {
                 <span className="user-fullname">{activity.user.fullname}</span>
                 {` ${textBefore} `}
                 <Link to={`c/${activity.taskId}`} className="task-link">
-                    {activity.data.taskTitle}
+                    {activity.taskTitle}
                 </Link>
                 {textAfter && ` ${textAfter}`}
             </div>

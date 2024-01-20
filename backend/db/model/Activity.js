@@ -27,10 +27,10 @@ const activitySchema = new Schema(
         boardId: SchemaTypes.ObjectId,
         groupId: String,
         taskId: String,
-
-        data: {
-            type: SchemaTypes.Mixed, // TODO
-        },
+        taskTitle: String,
+        groupTitle: String,
+        checklistId: String,
+        checklistTitle: String,
 
         performedAt: {
             type: Date,

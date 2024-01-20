@@ -25,8 +25,8 @@ function getCommentActivity(hierarchy, comment) {
 function getTaskActivity(type, hierarchy) {
     const { group, task } = hierarchy
 
-    let activity = _getTaskActivity(type, hierarchy)
-    activity.data = {
+    let activity = {
+        ..._getTaskActivity(type, hierarchy),
         taskTitle: task.title,
         groupTitle: group.title,
     }
@@ -57,9 +57,7 @@ function getGroupActivity(type, board, group) {
         performedAt: Date.now(),
         boardId: board._id,
         groupId: group._id,
-        data: {
-            groupTitle: group.title,
-        },
+        groupTitle: group.title,
     }
 }
 

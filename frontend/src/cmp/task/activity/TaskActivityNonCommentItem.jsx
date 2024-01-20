@@ -12,7 +12,7 @@ export function TaskActivityNonCommentItem({
         switch (activity.type) {
             // TASK CREATED
             case 'task-created':
-                return 'added this card to ' + activity.data.groupTitle
+                return 'added this card to ' + activity.groupTitle
 
             // TASK ARCHIVED
             case 'task-archived':
