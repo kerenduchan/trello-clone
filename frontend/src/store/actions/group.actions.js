@@ -50,7 +50,7 @@ async function updateGroup(board, group, fieldsToUpdate) {
         // mimic what the server does upon update task
         _createActivityForUpdateGroup(board, group, fieldsToUpdate)
 
-        await groupService.updateGroup(board, updatedGroup)
+        await groupService.updateGroup(board, group._id, fieldsToUpdate)
     } catch (err) {
         // TODO: rollback store change
         throw err

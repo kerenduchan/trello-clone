@@ -9,11 +9,10 @@ export function TaskCommentEditForm({ activity, onClose }) {
 
     function onSubmit(e) {
         e.preventDefault()
-        const updatedActivity = {
-            ...activity,
+        const fields = {
             data: { ...comment, text: draft.text, isEdited: true },
         }
-        updateActivity(updatedActivity)
+        updateActivity(activity, fields)
         onClose()
     }
 

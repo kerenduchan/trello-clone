@@ -60,7 +60,7 @@ async function updateTask(hierarchy, fieldsToUpdate) {
         // mimic what the server does upon update task
         _createActivityForUpdateTask(hierarchy, fieldsToUpdate)
 
-        await taskService.updateTask(board, group, updatedTask)
+        await taskService.updateTask(board, group, task._id, fieldsToUpdate)
     } catch (err) {
         // TODO: rollback store change
         throw err

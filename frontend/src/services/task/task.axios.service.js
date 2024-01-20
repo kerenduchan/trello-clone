@@ -6,19 +6,14 @@ export const taskAxiosService = {
     updateTask,
 }
 
-async function updateTask(board, group, task) {
-    const taskToSend = { ...task }
-    if (task.archivedAt !== undefined) {
-        if (task.archivedAt === null) {
-            taskToSend.isArchived = false
-        } else {
-            taskToSend.isArchived = true
-        }
+async function updateTask(board, group, taskId, fields) {
+    if ('archivedAt' in fields) {
+        fields.isArchived = fields.archivedAt !== null
+        delete fields.archivedAt
     }
-    delete taskToSend.archivedAt
 
-    const baseUrl = _getBaseUrl(board._id, group._id)
-    return axiosService.update(baseUrl, taskToSend)
+    const baseUrl = _getBaseUrl(board._id, group._id) + taskId
+    return axiosService.update(baseUrl, fields)
 }
 
 async function createTask(board, group, position, task) {
