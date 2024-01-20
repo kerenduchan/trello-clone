@@ -23,6 +23,7 @@ const UPDATE_FIELDS = [
     'isArchived',
     'labels',
     'memberIds',
+    'isLabelsZoomedIn',
 
     // for move task/group. TODO: tighter API
     'groups',
@@ -65,6 +66,7 @@ async function query(
                 severity: 1,
                 labels: 1,
                 createdAt: 1,
+                isLabelsZoomedIn: 1,
                 memberIds: 1,
                 isStarred: 1,
                 style: 1,
@@ -151,6 +153,7 @@ async function getById(boardId) {
                     style: 1,
                     createdAt: 1,
                     activities: 1,
+                    isLabelsZoomedIn: 1,
                     creator: {
                         $map: {
                             input: '$creator',

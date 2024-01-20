@@ -49,6 +49,10 @@ const boardSchema = new Schema({
         type: [labelSchema],
         default: boardService.getDefaultLabels(),
     },
+    isLabelsZoomedIn: {
+        type: Boolean,
+        default: false,
+    },
     archivedAt: {
         type: Date,
         default: null,
