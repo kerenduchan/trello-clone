@@ -17,8 +17,8 @@ async function remove(id) {
     return axiosService.remove(BASE_URL, id)
 }
 
-async function update(activity) {
-    return axiosService.update(BASE_URL, activity)
+async function update(activityId, fields) {
+    return axiosService.update(BASE_URL + activityId, fields)
 }
 
 async function create(activity) {

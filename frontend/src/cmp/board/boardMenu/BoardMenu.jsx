@@ -5,7 +5,7 @@ import { BoardMenuArchive } from './BoardMenuArchive'
 import { BoardMenuBackgroundMain } from './BoardMenuBackgroundMain'
 import { BoardMenuBackgroundColor } from './BoardMenuBackgroundColor'
 import { BoardMenuBackgroundPhoto } from './BoardMenuBackgroundPhoto'
-import { BoardMenuActivity } from './BoardMenuActivity'
+import { BoardMenuActivity } from './activity/BoardMenuActivity'
 
 export function BoardMenu({ board, onClose }) {
     // current page in the group menu popover

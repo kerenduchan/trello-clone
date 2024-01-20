@@ -69,7 +69,16 @@ async function createBoard(board) {
 }
 
 async function updateBoard(board, fieldsToUpdate) {
-    return _updateBoard({ ...board, ...fieldsToUpdate })
+    const updatedBoard = { ...board, ...fieldsToUpdate }
+    try {
+        // optimistic update
+        store.dispatch(boardUpdated(updatedBoard))
+        return boardService.update(board._id, fieldsToUpdate)
+    } catch (err) {
+        console.error('Failed to update board:', err)
+        // TODO: undo the store change
+        throw err
+    }
 }
 
 async function deleteBoard(board) {
@@ -103,7 +112,7 @@ async function deleteBoardLabel(board, label) {
         })),
     }))
 
-    return _updateBoard(boardToUpdate)
+    return updateBoard(boardToUpdate)
 }
 
 // GROUP
@@ -116,7 +125,7 @@ async function moveGroup(board, group, targetBoardId, targetPositionId) {
     if (board._id === targetBoardId) {
         // move group to a new position in the same board
         boardToUpdate.groups.splice(targetPositionId, 0, group)
-        return _updateBoard(boardToUpdate)
+        return updateBoard(boardToUpdate)
     }
 
     // move group to a different board
@@ -125,7 +134,7 @@ async function moveGroup(board, group, targetBoardId, targetPositionId) {
     const targetBoardToUpdate = { ...targetBoard }
     targetBoardToUpdate.groups = [...targetBoardToUpdate.groups]
     targetBoardToUpdate.groups.splice(targetPositionId, 0, group)
-    return _updateBoards([boardToUpdate, targetBoardToUpdate])
+    return updateBoards([boardToUpdate, targetBoardToUpdate])
 }
 
 async function copyGroup(board, group, title, targetPosition) {
@@ -139,7 +148,7 @@ async function copyGroup(board, group, title, targetPosition) {
 
     const boardToUpdate = { ...board }
     boardToUpdate.groups.splice(targetPosition, 0, groupCopy)
-    _updateBoard(boardToUpdate)
+    updateBoard(boardToUpdate)
 }
 
 // TASK
@@ -201,7 +210,7 @@ async function moveTasks(board, sourceGroup, targetGroupId) {
             : g
     )
 
-    return _updateBoard(boardToUpdate)
+    return updateBoard(boardToUpdate)
 }
 
 // archive all tasks in the group
@@ -240,19 +249,7 @@ async function copyTask(
 
 // PRIVATE HELPER FUNCTIONS
 
-async function _updateBoard(board) {
-    try {
-        // optimistic update
-        store.dispatch(boardUpdated(board))
-        return boardService.update(board)
-    } catch (err) {
-        console.error('Failed to update board:', err)
-        // TODO: undo the store change
-        throw err
-    }
-}
-
-async function _updateBoards(boards) {
+async function updateBoards(boards) {
     try {
         // optimistic update
         store.dispatch(boardsUpdated(boards))
@@ -272,7 +269,7 @@ async function _updateGroup(board, groupToUpdate) {
     boardToUpdate.groups = board.groups.map((g) =>
         g._id === groupToUpdate._id ? groupToUpdate : g
     )
-    return _updateBoard(boardToUpdate)
+    return updateBoard(boardToUpdate)
 }
 
 // move task in the same group
@@ -311,7 +308,7 @@ async function _moveTaskInsideBoard(hierarchy, targetGroupId, targetPosition) {
             : g
     )
 
-    return _updateBoard(boardToUpdate)
+    return updateBoard(boardToUpdate)
 }
 
 // move task to a different board
@@ -343,5 +340,5 @@ async function _moveTaskToDifferentBoard(
         g._id === targetGroupId ? targetGroupToUpdate : g
     )
 
-    return _updateBoards([sourceBoardToUpdate, targetBoardToUpdate])
+    return updateBoards([sourceBoardToUpdate, targetBoardToUpdate])
 }

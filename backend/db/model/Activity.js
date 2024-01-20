@@ -21,7 +21,7 @@ const activitySchema = new Schema(
 
         type: {
             type: String,
-            required: [true, 'actionType is required'],
+            required: [true, 'type is required'],
         },
 
         boardId: SchemaTypes.ObjectId,

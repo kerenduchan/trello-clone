@@ -19,7 +19,7 @@ export const groupSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: Date.now(),
+            default: Date.now,
         },
         tasks: {
             type: [TaskSchema],

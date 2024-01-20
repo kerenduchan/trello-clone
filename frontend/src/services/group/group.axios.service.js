@@ -10,18 +10,13 @@ async function deleteGroup(board, group) {
     return axiosService.remove(_getBaseUrl(board._id), group._id)
 }
 
-async function updateGroup(board, group) {
-    const groupToSend = { ...group }
-    if (group.archivedAt !== undefined) {
-        if (group.archivedAt === null) {
-            groupToSend.isArchived = false
-        } else {
-            groupToSend.isArchived = true
-        }
+async function updateGroup(board, groupId, fields) {
+    if ('archivedAt' in fields) {
+        fields.isArchived = fields.archivedAt !== null
+        delete fields.archivedAt
     }
-    delete groupToSend.archivedAt
 
-    return axiosService.update(_getBaseUrl(board._id), groupToSend)
+    return axiosService.update(_getBaseUrl(board._id) + groupId, fields)
 }
 
 async function createGroup(board, group) {

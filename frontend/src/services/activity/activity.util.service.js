@@ -2,21 +2,14 @@ import { store } from '../../store/store'
 import { utilService } from '../util.service'
 
 export const activityUtilService = {
-    buildCreateCommentActivity,
-    buildCreateTaskActivity,
-    getDescription,
+    getCommentActivity,
+    getTaskActivity,
+    getGroupActivity,
 }
 
-function buildCreateCommentActivity(hierarchy, comment) {
-    const { board, group, task } = hierarchy
-
-    let activity = _getActivity(
-        'task-comment',
-        board._id,
-        group._id,
-        task._id,
-        Date.now()
-    )
+function getCommentActivity(hierarchy, comment) {
+    const { task } = hierarchy
+    let activity = _getTaskActivity('task-comment', hierarchy)
 
     activity.data = {
         ...comment,
@@ -28,14 +21,10 @@ function buildCreateCommentActivity(hierarchy, comment) {
     return activity
 }
 
-function buildCreateTaskActivity(board, group, task, performedAt) {
-    let activity = _getActivity(
-        'create-task',
-        board._id,
-        group._id,
-        task._id,
-        performedAt
-    )
+function getTaskActivity(type, hierarchy) {
+    const { group, task } = hierarchy
+
+    let activity = _getTaskActivity(type, hierarchy)
     activity.data = {
         taskTitle: task.title,
         groupTitle: group.title,
@@ -43,21 +32,32 @@ function buildCreateTaskActivity(board, group, task, performedAt) {
     return activity
 }
 
-function getDescription(activity) {
-    switch (activity.type) {
-        case 'create-task':
-            return 'added this card to ' + activity.data.groupTitle
-    }
-}
-
-function _getActivity(type, boardId, groupId, taskId, performedAt) {
+function getGroupActivity(type, board, group) {
     return {
         _id: utilService.makeId(),
         userId: store.getState().app.loggedinUser._id,
         type,
-        performedAt,
-        boardId,
-        groupId,
-        taskId,
+        performedAt: Date.now(),
+        boardId: board._id,
+        groupId: group._id,
+        data: {
+            groupTitle: group.title,
+        },
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// PRIVATE HELPER FUNCTIONS
+
+function _getTaskActivity(type, hierarchy) {
+    const { board, group, task } = hierarchy
+    return {
+        _id: utilService.makeId(),
+        userId: store.getState().app.loggedinUser._id,
+        type,
+        performedAt: Date.now(),
+        boardId: board._id,
+        groupId: group._id,
+        taskId: task._id,
     }
 }

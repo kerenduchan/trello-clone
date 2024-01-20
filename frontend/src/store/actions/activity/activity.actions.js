@@ -19,11 +19,12 @@ async function createActivity(activity) {
     }
 }
 
-async function updateActivity(activity) {
+async function updateActivity(activity, fields) {
+    const updatedActivity = { ...activity, ...fields }
     try {
         // optimistic update
-        store.dispatch(activityUpdated({ activity }))
-        await activityService.update(activity)
+        store.dispatch(activityUpdated({ activity: updatedActivity }))
+        await activityService.update(activity._id, fields)
     } catch (err) {
         // TODO: rollback store change
         throw err

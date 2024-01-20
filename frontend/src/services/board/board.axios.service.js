@@ -22,8 +22,8 @@ async function remove(id) {
     return axiosService.remove(BASE_URL, id)
 }
 
-async function update(board) {
-    return axiosService.update(BASE_URL, board)
+async function update(boardId, fields) {
+    return axiosService.update(BASE_URL + boardId, fields)
 }
 
 async function create(board) {

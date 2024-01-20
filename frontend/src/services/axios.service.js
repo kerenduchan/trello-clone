@@ -52,8 +52,6 @@ async function create(baseUrl, entity) {
 }
 
 async function update(baseUrl, entity) {
-    baseUrl += entity._id
-
     try {
         const { data } = await axios.put(baseUrl, entity)
         return data
