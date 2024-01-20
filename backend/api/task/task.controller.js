@@ -51,7 +51,12 @@ export async function updateTask(req, res) {
 export async function deleteTask(req, res) {
     try {
         const { boardId, groupId, taskId } = req.params
-        const result = await taskService.remove(boardId, groupId, taskId)
+        const result = await taskService.remove(
+            req.loggedinUser._id,
+            boardId,
+            groupId,
+            taskId
+        )
         res.send(result)
     } catch (err) {
         if (err.stack) console.error(err.stack)

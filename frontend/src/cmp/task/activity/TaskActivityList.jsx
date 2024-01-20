@@ -33,10 +33,7 @@ export function TaskActivityList({ hierarchy, activities }) {
     }
 
     function onSubmitForm() {
-        const activity = activityUtilService.buildCreateCommentActivity(
-            hierarchy,
-            draft
-        )
+        const activity = activityUtilService.commentCreated(hierarchy, draft)
         createActivity(activity)
         setDraft(boardService.getEmptyComment())
         onHideForm()

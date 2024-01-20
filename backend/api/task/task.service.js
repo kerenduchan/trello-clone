@@ -2,6 +2,7 @@ import { utilService } from '../../services/util.service.js'
 import Board from '../../db/model/Board.js'
 import { groupService } from '../group/group.service.js'
 import { activityUtilService } from '../activity/activity.util.service.js'
+import { boardService } from '../board/board.service.js'
 
 export const taskService = {
     getById,
@@ -64,7 +65,7 @@ async function create(boardId, groupId, task) {
 
         const group = board.groups.find((g) => g._id === groupId)
         const addedTask = group.tasks.slice(-1)[0]
-        activityUtilService.taskCreated(board, group, addedTask)
+        await activityUtilService.taskCreated(board, group, addedTask)
         return addedTask
     } catch (err) {
         utilService.handleDbError(err)
@@ -122,8 +123,12 @@ async function update(boardId, groupId, taskId, fields) {
     return updatedTask
 }
 
-async function remove(boardId, groupId, taskId) {
-    let group = await groupService.getById(boardId, groupId)
+async function remove(userId, boardId, groupId, taskId) {
+    const board = await boardService.getById(boardId)
+    if (!board) throw 'Board not found'
+
+    const group = board.groups.find((g) => g._id === groupId)
+    if (!group) throw 'Group not found'
 
     let task = group.tasks.find((t) => t._id === taskId)
     if (!task) {
@@ -145,5 +150,8 @@ async function remove(boardId, groupId, taskId) {
     if (!updatedBoard) {
         throw 'Board or group not found'
     }
+
+    await activityUtilService.taskDeleted(userId, board, group, task)
+
     return { deletedCount: 1 }
 }

@@ -1,13 +1,12 @@
 import { ObjectId } from 'mongodb'
 import { activityService } from '../activity/activity.service.js'
 
-export const activityUtilService = { taskCreated }
+export const activityUtilService = { taskCreated, taskDeleted }
 
 async function taskCreated(board, group, task) {
-    // create an activity recording this task creation
     const activity = {
         _id: new ObjectId(),
-        type: 'create-task',
+        type: 'task-created',
         userId: task.creatorId,
         boardId: board._id,
         groupId: group._id,
@@ -18,6 +17,22 @@ async function taskCreated(board, group, task) {
         },
         performedAt: task.createdAt,
     }
-    console.log(activity)
+    return activityService.create(activity)
+}
+
+async function taskDeleted(userId, board, group, task) {
+    const activity = {
+        _id: new ObjectId(),
+        type: 'task-deleted',
+        userId,
+        boardId: board._id,
+        groupId: group._id,
+        taskId: task._id,
+        data: {
+            taskTitle: task.title,
+            groupTitle: group.title,
+        },
+        performedAt: Date.now(),
+    }
     return activityService.create(activity)
 }

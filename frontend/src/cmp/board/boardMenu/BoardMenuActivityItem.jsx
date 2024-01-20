@@ -14,8 +14,10 @@ export function BoardMenuActivityItem({ activity }) {
 
 export function Details({ activity }) {
     switch (activity.type) {
-        case 'create-task':
+        case 'task-created':
             return <DetailsForCreateTask activity={activity} />
+        case 'task-deleted':
+            return <DetailsForDeleteTask activity={activity} />
         case 'task-comment':
             return <DetailsForTaskComment activity={activity} />
     }
@@ -23,20 +25,36 @@ export function Details({ activity }) {
 }
 
 export function DetailsForCreateTask({ activity }) {
+    return (
+        <DetailsForActivity activity={activity}>
+            {' added '}
+            <Link to={`c/${activity.taskId}`} className="task-link">
+                {activity.data.taskTitle}
+            </Link>
+            {' to '}
+            {activity.data.groupTitle}
+        </DetailsForActivity>
+    )
+}
+
+export function DetailsForDeleteTask({ activity }) {
+    return (
+        <DetailsForActivity activity={activity}>
+            {` deleted card ${activity.data.taskTitle} from ${activity.data.groupTitle}`}
+        </DetailsForActivity>
+    )
+}
+
+export function DetailsForActivity({ activity, children }) {
     function getPerformedAt() {
         return moment(activity.performedAt).fromNow()
     }
 
     return (
-        <div className="details-for-create-task">
+        <div className="details-for-activity">
             <div className="description">
                 <span className="user-fullname">{activity.user.fullname}</span>
-                {' added '}
-                <Link to={`c/${activity.taskId}`} className="task-link">
-                    {activity.data.taskTitle}
-                </Link>
-                {' to '}
-                {activity.data.groupTitle}
+                {children}
             </div>
             <Link to={`c/${activity.taskId}`} className="performed-at">
                 {getPerformedAt()}

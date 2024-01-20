@@ -2,21 +2,15 @@ import { store } from '../../store/store'
 import { utilService } from '../util.service'
 
 export const activityUtilService = {
-    buildCreateCommentActivity,
-    buildCreateTaskActivity,
+    commentCreated,
+    taskCreated,
+    taskDeleted,
     getDescription,
 }
 
-function buildCreateCommentActivity(hierarchy, comment) {
-    const { board, group, task } = hierarchy
-
-    let activity = _getActivity(
-        'task-comment',
-        board._id,
-        group._id,
-        task._id,
-        Date.now()
-    )
+function commentCreated(hierarchy, comment) {
+    const { task } = hierarchy
+    let activity = _getActivity('task-comment', hierarchy)
 
     activity.data = {
         ...comment,
@@ -28,14 +22,10 @@ function buildCreateCommentActivity(hierarchy, comment) {
     return activity
 }
 
-function buildCreateTaskActivity(board, group, task, performedAt) {
-    let activity = _getActivity(
-        'create-task',
-        board._id,
-        group._id,
-        task._id,
-        performedAt
-    )
+function taskCreated(hierarchy) {
+    const { group, task } = hierarchy
+
+    let activity = _getActivity('task-created', hierarchy)
     activity.data = {
         taskTitle: task.title,
         groupTitle: group.title,
@@ -43,21 +33,33 @@ function buildCreateTaskActivity(board, group, task, performedAt) {
     return activity
 }
 
+function taskDeleted(hierarchy) {
+    let activity = _getActivity('task-deleted', hierarchy)
+    activity.data = {
+        taskTitle: task.title,
+        groupTitle: group.title,
+    }
+    return activity
+}
+
+// This description is shown inside the task details.
+// The description in the board menu > Activities is different.
 function getDescription(activity) {
     switch (activity.type) {
-        case 'create-task':
+        case 'task-created':
             return 'added this card to ' + activity.data.groupTitle
     }
 }
 
-function _getActivity(type, boardId, groupId, taskId, performedAt) {
+function _getActivity(type, hierarchy) {
+    const { board, group, task } = hierarchy
     return {
         _id: utilService.makeId(),
         userId: store.getState().app.loggedinUser._id,
         type,
-        performedAt,
-        boardId,
-        groupId,
-        taskId,
+        performedAt: Date.now(),
+        boardId: board._id,
+        groupId: group._id,
+        taskId: task._id,
     }
 }

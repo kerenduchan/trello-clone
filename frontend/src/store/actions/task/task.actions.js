@@ -11,18 +11,13 @@ import { taskService } from '../../../services/task/task.service'
 export { createTask, deleteTask, updateTask }
 
 async function createTask(board, group, position, task) {
+    const hierarchy = { board, group, task }
     try {
         // optimistic update
         store.dispatch(taskCreated({ board, group, position, task }))
 
         // mimic what the server does upon create task
-        const activity = activityUtilService.buildCreateTaskActivity(
-            board,
-            group,
-            task,
-            Date.now()
-        )
-
+        const activity = activityUtilService.taskCreated(hierarchy)
         store.dispatch(activityCreated({ activity }))
 
         await taskService.createTask(board, group, position, task)
@@ -36,6 +31,11 @@ async function deleteTask(hierarchy) {
     try {
         // optimistic update
         store.dispatch(taskDeleted({ ...hierarchy }))
+
+        // mimic what the server does upon delete task
+        const activity = activityUtilService.taskDeleted(hierarchy)
+        store.dispatch(activityCreated({ activity }))
+
         await taskService.deleteTask(hierarchy)
     } catch (err) {
         // TODO: rollback store change

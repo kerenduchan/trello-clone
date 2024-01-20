@@ -19,7 +19,7 @@ async function createTask(board, group, position, task) {
     await boardService.update(boardToUpdate)
 
     // TODO: performedAt should be taken from the task's creation time
-    const activity = activityUtilService.buildCreateTaskActivity(
+    const activity = activityUtilService.taskCreated(
         board,
         group,
         task,
