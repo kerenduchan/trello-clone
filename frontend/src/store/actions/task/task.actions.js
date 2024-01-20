@@ -49,7 +49,7 @@ async function deleteTask(hierarchy) {
     }
 }
 
-async function updateTask(hierarchy, fieldsToUpdate) {
+async function updateTask(hierarchy, fieldsToUpdate, activity = null) {
     const { board, group, task } = hierarchy
     const updatedTask = { ...task, ...fieldsToUpdate }
 
@@ -57,8 +57,13 @@ async function updateTask(hierarchy, fieldsToUpdate) {
         // optimistic update
         store.dispatch(taskUpdated({ board, group, task: updatedTask }))
 
-        // mimic what the server does upon update task
-        _createActivityForUpdateTask(hierarchy, fieldsToUpdate)
+        if (!activity) {
+            // mimic what the server does upon update task
+            activity = _createActivityForUpdateTask(hierarchy, fieldsToUpdate)
+        }
+        if (activity) {
+            store.dispatch(activityCreated({ activity }))
+        }
 
         await taskService.updateTask(board, group, task._id, fieldsToUpdate)
     } catch (err) {
@@ -74,7 +79,6 @@ function _createActivityForUpdateTask(hierarchy, fieldsToUpdate) {
     }
 
     if (type) {
-        const activity = activityUtilService.getTaskActivity(type, hierarchy)
-        store.dispatch(activityCreated({ activity }))
+        return activityUtilService.getTaskActivity(type, hierarchy)
     }
 }

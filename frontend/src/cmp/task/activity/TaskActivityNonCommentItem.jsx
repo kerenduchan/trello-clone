@@ -21,6 +21,14 @@ export function TaskActivityNonCommentItem({
             // TASK UNARCHIVED
             case 'task-unarchived':
                 return 'sent this card to the board'
+
+            // CHECKLIST ADDED
+            case 'task-checklist-added':
+                return `added ${activity.checklistTitle} to this card`
+
+            // CHECKLIST DELETED
+            case 'task-checklist-deleted':
+                return `removed ${activity.checklistTitle} from this card`
         }
     }
 
