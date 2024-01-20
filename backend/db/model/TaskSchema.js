@@ -131,6 +131,19 @@ export const TaskSchema = new Schema(
             type: Date,
             default: Date.now(),
         },
+
+        creatorId: {
+            type: SchemaTypes.ObjectId,
+            ref: 'User',
+            required: [true, 'creatorId is required'],
+            validate: {
+                validator: async function (userId) {
+                    const user = await User.findById(userId)
+                    return !!user
+                },
+                message: 'Invalid creatorId. User does not exist.',
+            },
+        },
     },
     { _id: false } // Don't auto-assign _id
 )

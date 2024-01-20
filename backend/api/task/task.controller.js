@@ -22,16 +22,8 @@ export async function getTaskActivities(req, res) {
 export async function createTask(req, res) {
     try {
         const { boardId, groupId } = req.params
-        const task = req.body
-        const position = task.position
-        delete task.position
-        const savedTask = await taskService.create(
-            req.loggedinUser._id,
-            boardId,
-            groupId,
-            task,
-            position
-        )
+        const task = { ...req.body, creatorId: req.loggedinUser._id }
+        const savedTask = await taskService.create(boardId, groupId, task)
         res.send(savedTask)
     } catch (err) {
         if (err.stack) console.error(err.stack)

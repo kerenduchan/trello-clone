@@ -1,8 +1,7 @@
-import { ObjectId } from 'mongodb'
 import { utilService } from '../../services/util.service.js'
 import Board from '../../db/model/Board.js'
 import { groupService } from '../group/group.service.js'
-import { activityService } from '../activity/activity.service.js'
+import { activityUtilService } from '../activity/activity.util.service.js'
 
 export const taskService = {
     getById,
@@ -12,7 +11,7 @@ export const taskService = {
 }
 
 // fields that can be set upon creation. Client sets the ID (for optimistic create).
-const CREATE_FIELDS = ['title', '_id']
+const CREATE_FIELDS = ['title', 'creatorId', '_id']
 
 // fields that can be updated
 const UPDATE_FIELDS = [
@@ -37,14 +36,16 @@ async function getById(boardId, groupId, taskId) {
     return task
 }
 
-async function create(creatorId, boardId, groupId, task, position) {
+async function create(boardId, groupId, task) {
+    const position = task.position
+
     // disregard unexpected fields
     task = utilService.extractFields(task, CREATE_FIELDS)
 
     // TODO: validation
 
     try {
-        const updatedBoard = await Board.findOneAndUpdate(
+        const board = await Board.findOneAndUpdate(
             { _id: boardId, 'groups._id': groupId },
             {
                 $push: {
@@ -57,30 +58,13 @@ async function create(creatorId, boardId, groupId, task, position) {
             { new: true }
         )
 
-        if (!updatedBoard) {
+        if (!board) {
             throw 'Board or group not found'
         }
 
-        const group = updatedBoard.groups.find((g) => g._id === groupId)
+        const group = board.groups.find((g) => g._id === groupId)
         const addedTask = group.tasks.slice(-1)[0]
-
-        // create an activity recording this task creation
-        const activity = {
-            _id: new ObjectId(),
-            userId: creatorId,
-            boardId,
-            groupId,
-            taskId: addedTask._id,
-            type: 'create-task',
-            data: {
-                taskTitle: task.title,
-                groupTitle: group.title,
-            },
-            performedAt: addedTask.createdAt,
-        }
-
-        activityService.create(activity)
-
+        activityUtilService.taskCreated(board, group, addedTask)
         return addedTask
     } catch (err) {
         utilService.handleDbError(err)
