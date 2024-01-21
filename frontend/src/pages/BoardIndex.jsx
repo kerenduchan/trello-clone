@@ -20,7 +20,7 @@ export function BoardIndex() {
     }, [boards])
 
     return (
-        <div className="board-index">
+        <div className="board-index board-theme-light">
             <BoardIndexHeader />
 
             <div className="boards-sections">
