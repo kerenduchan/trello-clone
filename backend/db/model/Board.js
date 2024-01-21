@@ -10,6 +10,8 @@ const styleSchema = new Schema({
         type: String,
         default: '',
     },
+    backgroundColor: String,
+    theme: String,
 })
 
 // labels subfield of board
