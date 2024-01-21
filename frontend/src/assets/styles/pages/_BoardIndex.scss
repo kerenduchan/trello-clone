@@ -5,8 +5,9 @@
     align-items: center;
 
     .boards-sections {
-        width: 825px;
-        margin-top: 40px;
+        margin-top: 20px;
+        margin-inline-start: 16px;
+        margin-inline-end: 16px;
 
         .boards-section {
             margin-bottom: 32px;

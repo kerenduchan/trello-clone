@@ -190,3 +190,8 @@
     );
     --create-menu-button-color-active: var(--ds-text-inverse);
 }
+
+// responsive breaks
+$break-wide: 1440px;
+$break-normal: 768px;
+$break-narrow: 375px;

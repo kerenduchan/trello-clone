@@ -358,3 +358,15 @@
 @mixin fade-in-out() {
     animation: fadeInOut 1.2s ease-in-out infinite;
 }
+
+@mixin for-normal-layout {
+    @media (min-width: $break-normal) {
+        @content;
+    }
+}
+
+@mixin for-wide-layout {
+    @media (min-width: $break-wide) {
+        @content;
+    }
+}
