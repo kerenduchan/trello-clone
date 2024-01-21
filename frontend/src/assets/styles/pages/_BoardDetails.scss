@@ -17,6 +17,12 @@
         background-color: var(--dynamic-background);
         backdrop-filter: blur(6px);
         transition: background-color 300ms;
+
+        @include for-narrow-layout() {
+            .btn-create-board {
+                display: none;
+            }
+        }
     }
 
     .board-details-header {

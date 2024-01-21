@@ -6,6 +6,7 @@ import { usePopoverState } from '../../customHooks/usePopoverState'
 import { BoardCreate } from './BoardCreate'
 import { UserAccountMenu } from '../user/UserAccountMenu'
 import { selectLoggedinUser } from '../../store/reducers/app.reducer'
+import { Icon } from '../general/Icon'
 
 export function BoardIndexHeader({ board }) {
     const location = useLocation()
@@ -28,10 +29,12 @@ export function BoardIndexHeader({ board }) {
     return (
         <>
             <header className="board-index-header">
+                {/* Logo */}
                 <button className="btn-dynamic btn-logo" onClick={onLogoClick}>
                     <img className="logo" src={getLogo()} />
                 </button>
 
+                {/* Button that links to board index */}
                 {location.pathname !== '/boards' && (
                     <Link
                         to="/boards"
@@ -41,14 +44,18 @@ export function BoardIndexHeader({ board }) {
                     </Link>
                 )}
 
+                {/* Create board button */}
                 <button
-                    className={`btn-dynamic-wide btn-create-board ${
+                    className={`btn-create-board ${
                         createBoardMenu.show ? 'active' : ''
                     }`}
                     {...createBoardMenu.triggerAndTarget}
                 >
-                    Create Board
+                    <Icon className="for-narrow-layout" type="add" />
+                    <span className="for-normal-layout">Create Board</span>
                 </button>
+
+                {/* User avatar button */}
                 <button
                     className="user-avatar"
                     {...userAccountMenu.triggerAndTarget}
