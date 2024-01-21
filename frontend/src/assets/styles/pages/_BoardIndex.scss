@@ -19,25 +19,27 @@
         .boards-section {
             width: 100%;
 
-            > .title {
-                padding-top: 12px;
-                padding-bottom: 12px;
-                padding-inline-start: 8px;
-                background-color: var(--ds-background-neutral);
-                @include font(12px, 16px, 400);
-                border-top: 1px solid var(--bg-divider);
-                border-bottom: 1px solid var(--bg-divider);
-            }
+            > header {
+                .title {
+                    padding-top: 12px;
+                    padding-bottom: 12px;
+                    padding-inline-start: 8px;
+                    background-color: var(--ds-background-neutral);
+                    @include font(12px, 16px, 400);
+                    border-top: 1px solid var(--bg-divider);
+                    border-bottom: 1px solid var(--bg-divider);
+                }
 
-            > .icon {
-                display: none;
+                .icon {
+                    display: none;
+                }
             }
 
             // TABLET AND ABOVE
             @include for-normal-layout() {
                 width: auto;
                 margin-bottom: 32px;
-                > .title {
+                > header .title {
                     padding: 0;
                     border: none;
                     @include font(16px, 24px, 700);
@@ -63,7 +65,8 @@
                 }
 
                 &.your-boards-section {
-                    > .title {
+                    > header .title {
+                        grid-area: 1 / 1 / -1 / -1;
                         text-transform: uppercase;
                         padding-top: 20px;
                         padding-bottom: 20px;

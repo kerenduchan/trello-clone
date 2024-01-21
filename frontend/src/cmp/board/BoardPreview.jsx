@@ -15,13 +15,13 @@ export function BoardPreview({ board }) {
 
     return (
         <div className="board-preview">
-            <Link to={`/b/${board._id}`} />
             <div
                 className="bg-image"
                 style={boardService.getBoardStyle(board)}
             />
             <div className="overlay" />
             <h1 className="title">{board.title}</h1>
+            <Link to={`/b/${board._id}`} />
             <Icon
                 className={`star ${board.isStarred ? 'starred' : 'unstarred'}`}
                 type="star"

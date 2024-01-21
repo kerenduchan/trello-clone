@@ -40,7 +40,9 @@ export function BoardIndex() {
 
                 {/* All boards */}
                 <div className="boards-section your-boards-section">
-                    <h1 className="title">Your boards</h1>
+                    <header className="header">
+                        <h1 className="title">Your boards</h1>
+                    </header>
                     <BoardList boards={boards} />
                 </div>
             </div>
