@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { boardService } from '../../services/board/board.service'
 import { userService } from '../../services/user/user.service'
@@ -8,6 +8,7 @@ import { UserAccountMenu } from '../user/UserAccountMenu'
 import { selectLoggedinUser } from '../../store/reducers/app.reducer'
 
 export function BoardIndexHeader({ board }) {
+    const location = useLocation()
     const navigate = useNavigate()
     const loggedinUser = useSelector(selectLoggedinUser)
     const createBoardMenu = usePopoverState()
@@ -27,13 +28,19 @@ export function BoardIndexHeader({ board }) {
     return (
         <>
             <header className="board-index-header">
-                <button className="btn-dynamic" onClick={onLogoClick}>
+                <button className="btn-dynamic btn-logo" onClick={onLogoClick}>
                     <img className="logo" src={getLogo()} />
                 </button>
 
-                <Link to="/boards" className="btn-dynamic-wide">
-                    Boards
-                </Link>
+                {location.pathname !== '/boards' && (
+                    <Link
+                        to="/boards"
+                        className="btn-dynamic-wide btn-board-link"
+                    >
+                        Boards
+                    </Link>
+                )}
+
                 <button
                     className={`btn-dynamic-wide btn-create-board ${
                         createBoardMenu.show ? 'active' : ''
