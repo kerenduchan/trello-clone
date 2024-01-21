@@ -14,23 +14,21 @@ export function BoardPreview({ board }) {
     }
 
     return (
-        <div
-            className="board-preview"
-            style={boardService.getBoardStyle(board)}
-        >
-            <div className="board-preview-contents">
-                <h1 className="board-title">{board.title}</h1>
-                <Link to={`/b/${board._id}`} className="link"></Link>
-
-                <Icon
-                    className={`star ${
-                        board.isStarred ? 'starred' : 'unstarred'
-                    }`}
-                    type="star"
-                    full={board.isStarred}
-                    onClick={onStarClick}
-                />
-            </div>
+        <div className="board-preview">
+            <Link to={`/b/${board._id}`} />
+            <div
+                className="bg-image"
+                style={boardService.getBoardStyle(board)}
+            />
+            <div className="overlay" />
+            <h1 className="title">{board.title}</h1>
+            <Icon
+                className={`star ${board.isStarred ? 'starred' : 'unstarred'}`}
+                type="star"
+                size="xs"
+                full={board.isStarred}
+                onClick={onStarClick}
+            />
         </div>
     )
 }

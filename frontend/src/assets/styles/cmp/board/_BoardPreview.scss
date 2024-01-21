@@ -2,56 +2,69 @@
     width: 100%;
     height: 96px;
     border-radius: 3px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 50%;
-    display: flex;
     overflow: hidden;
+    display: flex;
     cursor: pointer;
+    display: grid;
 
-    .board-preview-contents {
-        flex-grow: 1;
+    // TABLET AND ABOVE
+    @include for-normal-layout() {
+        border-radius: 3px;
+    }
+
+    > a {
+        grid-area: 1/1;
+    }
+    .bg-image {
+        grid-area: 1 / 1;
         background-color: rgba(0, 0, 0, 0.3);
-        display: grid;
-        grid-template-rows: 8px auto 20px 12px;
-        grid-template-columns: 8px 1fr 20px 12px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 50%;
+    }
 
-        .link {
-            grid-area: 1 / 1 / -1 / -1;
-        }
+    > .overlay {
+        grid-area: 1 / 1;
+        background-color: #00000026;
+    }
 
-        .board-title {
-            grid-area: 2 / 2 / span 1 / span 2;
-            color: var(--text-color-light);
-            @include font(16px, 20px, 700);
-        }
+    &:hover > .overlay {
+        grid-area: 1 / 1;
+        background-color: #0006;
+    }
 
-        .star-icon {
-            grid-area: 3 / 3;
-            margin-inline-end: -70px;
-            align-self: center;
-            justify-self: center;
-            color: white;
-            transition: margin-inline-end 0.2s, font-size 0.2s;
-            font-size: 16px;
-            z-index: 2;
+    > h1.title {
+        grid-area: 1 / 1;
+        padding: 8px;
+        color: var(--text-color-light);
+        @include font(16px, 20px, 700);
+    }
 
-            &.starred {
-                color: var(--icon-star);
-                margin-inline-end: 0;
-            }
+    > .icon.star-icon {
+        grid-area: 1 / 1;
+        padding: 10px;
+        margin-inline-end: -70px;
+        align-self: end;
+        justify-self: end;
+        color: white;
+        transition: margin-inline-end 0.2s, transform 0.2s;
+        z-index: 2;
 
-            &:hover {
-                font-size: 20px;
-            }
+        &.starred {
+            color: var(--icon-star);
+            margin-inline-end: 0;
         }
 
         &:hover {
-            background-color: rgba(0, 0, 0, 0.4);
+            transform: scale(1.2);
         }
+    }
 
-        &:hover .star-icon {
-            margin-inline-end: 0;
-        }
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    &:hover .star-icon {
+        margin-inline-end: 0;
     }
 }

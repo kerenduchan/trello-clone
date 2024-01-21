@@ -39,7 +39,7 @@ export function BoardIndex() {
                 )}
 
                 {/* All boards */}
-                <div className="your-boards-section">
+                <div className="boards-section your-boards-section">
                     <h1 className="title">Your boards</h1>
                     <BoardList boards={boards} />
                 </div>
