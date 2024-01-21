@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { boardService } from '../../services/board/board.service'
 import { userService } from '../../services/user/user.service'
@@ -6,8 +6,10 @@ import { usePopoverState } from '../../customHooks/usePopoverState'
 import { BoardCreate } from './BoardCreate'
 import { UserAccountMenu } from '../user/UserAccountMenu'
 import { selectLoggedinUser } from '../../store/reducers/app.reducer'
+import { Icon } from '../general/Icon'
 
 export function BoardIndexHeader({ board }) {
+    const location = useLocation()
     const navigate = useNavigate()
     const loggedinUser = useSelector(selectLoggedinUser)
     const createBoardMenu = usePopoverState()
@@ -27,21 +29,33 @@ export function BoardIndexHeader({ board }) {
     return (
         <>
             <header className="board-index-header">
-                <button className="btn-dynamic" onClick={onLogoClick}>
+                {/* Logo */}
+                <button className="btn-dynamic btn-logo" onClick={onLogoClick}>
                     <img className="logo" src={getLogo()} />
                 </button>
 
-                <Link to="/boards" className="btn-dynamic-wide">
-                    Boards
-                </Link>
+                {/* Button that links to board index */}
+                {location.pathname !== '/boards' && (
+                    <Link
+                        to="/boards"
+                        className="btn-dynamic-wide btn-board-link"
+                    >
+                        Boards
+                    </Link>
+                )}
+
+                {/* Create board button */}
                 <button
-                    className={`btn-dynamic-wide btn-create-board ${
+                    className={`btn-create-board ${
                         createBoardMenu.show ? 'active' : ''
                     }`}
                     {...createBoardMenu.triggerAndTarget}
                 >
-                    Create Board
+                    <Icon className="for-narrow-layout" type="add" />
+                    <span className="for-normal-layout">Create Board</span>
                 </button>
+
+                {/* User avatar button */}
                 <button
                     className="user-avatar"
                     {...userAccountMenu.triggerAndTarget}

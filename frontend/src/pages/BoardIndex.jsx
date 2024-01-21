@@ -20,7 +20,7 @@ export function BoardIndex() {
     }, [boards])
 
     return (
-        <div className="board-index">
+        <div className="board-index board-theme-light">
             <BoardIndexHeader />
 
             <div className="boards-sections">
@@ -39,8 +39,10 @@ export function BoardIndex() {
                 )}
 
                 {/* All boards */}
-                <div className="your-boards-section">
-                    <h1 className="title">Your boards</h1>
+                <div className="boards-section your-boards-section">
+                    <header className="header">
+                        <h1 className="title">Your boards</h1>
+                    </header>
                     <BoardList boards={boards} />
                 </div>
             </div>

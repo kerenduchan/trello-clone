@@ -40,9 +40,7 @@
 }
 
 .btn-dynamic-wide {
-    @include btn-dynamic();
-    padding-inline-start: 12px;
-    padding-inline-end: 12px;
+    @include btn-dynamic-wide();
 }
 
 .task-dates-status {

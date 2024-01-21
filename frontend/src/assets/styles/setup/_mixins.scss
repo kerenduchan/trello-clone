@@ -322,6 +322,12 @@
     }
 }
 
+@mixin btn-dynamic-wide() {
+    @include btn-dynamic();
+    padding-inline-start: 12px;
+    padding-inline-end: 12px;
+}
+
 @mixin ellipsis() {
     text-overflow: ellipsis;
     overflow: hidden;
@@ -357,4 +363,22 @@
 
 @mixin fade-in-out() {
     animation: fadeInOut 1.2s ease-in-out infinite;
+}
+
+@mixin for-narrow-layout {
+    @media (max-width: $break-normal) {
+        @content;
+    }
+}
+
+@mixin for-normal-layout {
+    @media (min-width: $break-normal) {
+        @content;
+    }
+}
+
+@mixin for-wide-layout {
+    @media (min-width: $break-wide) {
+        @content;
+    }
 }

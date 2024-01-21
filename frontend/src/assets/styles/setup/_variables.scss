@@ -91,6 +91,7 @@
     --ds-background-neutral-hovered: #091e4224;
     --ds-background-neutral-pressed: #091e424f;
 
+    --ds-background-neutral-subtle: #091e420f;
     --ds-background-neutral-subtle-hovered: #091e420f;
     --ds-background-neutral-subtle-pressed: #091e4224;
 
@@ -190,3 +191,8 @@
     );
     --create-menu-button-color-active: var(--ds-text-inverse);
 }
+
+// responsive breaks
+$break-wide: 1440px;
+$break-normal: 768px;
+$break-narrow: 375px;
