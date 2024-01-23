@@ -27,6 +27,7 @@
         "react-router": "^6.18.0",
         "react-router-dom": "^6.18.0",
         "sass": "^1.69.5",
+        "socket.io-client": "^4.7.4",
         "unsplash-js": "^7.0.19"
     },
     "devDependencies": {
