@@ -1,9 +1,12 @@
 import io from 'socket.io-client'
-import { userService } from './user.service'
+import { authService } from './auth/auth.service.js'
+import { authUtilService } from './auth/auth.util.service.js'
 
 const SOCKET_URL = 'http://localhost:4000'
 
 export const socketService = _createSocketService()
+
+socketService.connect()
 
 function _createSocketService() {
     console.log('create socket service')
@@ -12,9 +15,17 @@ function _createSocketService() {
         connect() {
             // Connect to the server and login
             socket = io(SOCKET_URL)
-            socket.emit('login', userService.getLoggedinUser())
+            const user = authService.getLoggedinUser()
+            if (user) this.login(user)
         },
 
+        login() {
+            const loginToken = authUtilService.getLoginTokenFromCookies()
+            socket.emit('login', loginToken)
+        },
+        logout() {
+            socket.emit('logout')
+        },
         disconnect() {
             // Logout and disconnect from the server
             socket.emit('logout')

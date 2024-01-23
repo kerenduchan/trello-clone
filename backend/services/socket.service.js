@@ -1,4 +1,6 @@
 import { Server } from 'socket.io'
+import { authService } from '../api/auth/auth.service.js'
+import { authUtilService } from '../../frontend/src/services/auth/auth.util.service.js'
 
 const SOCKET_IO_PORT = 4000
 
@@ -20,9 +22,14 @@ export function setupSocketAPI(http) {
             console.log('User disconnected', socket.id)
         })
 
-        socket.on('login', (userId) => {
-            console.log(`User logged in: ${userId}`)
-            socket.userId = userId
+        socket.on('login', (loginToken) => {
+            try {
+                const loggedinUser = authService.validateToken(loginToken)
+                socket.user = loggedinUser
+                console.log('A user logged in', loggedinUser)
+            } catch (err) {
+                console.error(err)
+            }
         })
 
         socket.on('message', (text) => {
