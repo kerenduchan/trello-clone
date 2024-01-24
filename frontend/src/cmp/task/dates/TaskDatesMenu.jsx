@@ -1,31 +1,50 @@
 import moment from 'moment/moment'
+import { useState } from 'react'
 import { useForm } from '../../../customHooks/useForm'
 import { updateTask } from '../../../store/actions/task/task.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
-import { useEffect, useState } from 'react'
 import { DatePicker } from '../../general/DatePicker'
 
 export function TaskDatesMenu({ hierarchy, popoverState }) {
     const { task } = hierarchy
-    const [draft, handleChange, setDraft] = useForm(convertTaskDatesToDraft())
-    const [startDate, setStartDate] = useState(new Date('2014/02/08'))
-    const [endDate, setEndDate] = useState(new Date('2014/02/10'))
 
-    useEffect(() => {
-        setDraft(convertTaskDatesToDraft())
-    }, [task])
+    // For checkboxes (boolean values) and text input fields (string values)
+    const [draft, handleChange, setDraft] = useForm({
+        hasStartDate: false,
+        startDate: '',
+        hasDueDate: false,
+        dueDate: '',
+    })
+
+    // The date picker. startDate and endDate are Date objects
+    const [datePicker, setDatePicker] = useState({
+        isSelectsRange: false,
+        startDate: null,
+        endDate: null,
+    })
+
+    function onDatePickerChange(start, end) {
+        console.log('onDatePickerChange', start, end)
+
+        if (!draft.hasStartDate) {
+            setDraft((prev) => ({
+                ...prev,
+                hasDueDate: true,
+                dueDate: convertDateToText(start),
+            }))
+            setDatePicker({
+                startDate: start,
+                endDate: end,
+                isSelectsRange: false,
+            })
+        }
+    }
 
     function onSubmit(e) {
         e.preventDefault()
-        const dates = convertDraftToTaskDates()
-        updateTask(hierarchy, { dates })
+        // const dates = convertDraftToTaskDates()
+        // updateTask(hierarchy, { dates })
         popoverState.onClose()
-    }
-
-    const onChange = (dates) => {
-        const [start, end] = dates
-        setStartDate(start)
-        setEndDate(end)
     }
 
     function onRemove() {
@@ -33,38 +52,8 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
         popoverState.onClose()
     }
 
-    function convertDraftToTaskDates() {
-        if (!draft.hasStartDate && !draft.hasDueDate) {
-            return null
-        }
-
-        return {
-            startDate: draft.hasStartDate ? draft.startDate : null,
-            dueDate: draft.hasDueDate ? moment(draft.dueDate).unix() : null,
-            isComplete: Boolean(draft.hasDueDate && task.dates?.isComplete),
-        }
-    }
-
-    function convertTaskDatesToDraft() {
-        const res = {
-            hasStartDate: false,
-            startDate: '',
-            hasDueDate: false,
-            dueDate: '',
-        }
-
-        if (task.dates?.startDate) {
-            res.hasStartDate = true
-            res.startDate = task.dates.startDate
-        }
-
-        if (task.dates?.dueDate) {
-            res.hasDueDate = true
-            res.dueDate = moment
-                .unix(task.dates.dueDate)
-                .format('YYYY-MM-DDTHH:mm')
-        }
-        return res
+    function convertDateToText(date) {
+        return moment(date).format('DD/MM/YYYY')
     }
 
     return (
@@ -74,15 +63,13 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
             {...popoverState.popover}
         >
             {/* Date picker */}
-            <DatePicker
-                startDate={startDate}
-                endDate={endDate}
-                onChange={onChange}
-            />
+            <DatePicker datePicker={datePicker} onChange={onDatePickerChange} />
 
             <form onSubmit={onSubmit}>
+                {/* Start date */}
                 <h4>Start date</h4>
                 <input
+                    className="date-checkbox"
                     type="checkbox"
                     id="hasStartDate"
                     name="hasStartDate"
@@ -90,7 +77,8 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
                     onChange={handleChange}
                 />
                 <input
-                    type="date"
+                    className="date-input"
+                    type="text"
                     id="startDate"
                     name="startDate"
                     disabled={!draft.hasStartDate}
@@ -98,8 +86,10 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
                     onChange={handleChange}
                 />
 
+                {/* Due date */}
                 <h4>Due date</h4>
                 <input
+                    className="date-checkbox"
                     type="checkbox"
                     id="hasDueDate"
                     name="hasDueDate"
@@ -107,11 +97,12 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
                     onChange={handleChange}
                 />
                 <input
-                    type="datetime-local"
+                    className="date-input"
+                    type="text"
                     id="dueDate"
                     name="dueDate"
                     disabled={!draft.hasDueDate}
-                    value={draft.dueDate}
+                    value={draft.hasDueDate ? draft.dueDate : 'DD/MM/YYYY'}
                     onChange={handleChange}
                 />
                 <button className="btn-primary btn-save">Save</button>

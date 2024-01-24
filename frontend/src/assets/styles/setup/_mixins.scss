@@ -169,13 +169,20 @@
     transition: background-color 0.2s ease-in-out 0s,
         border-color 0.2s ease-in-out 0s;
 
-    &:hover:not(:focus) {
+    &:hover:not(:focus):not(:disabled) {
         background-color: var(--ds-background-input-hovered);
     }
 
     &:focus {
         background-color: var(--ds-background-input-pressed);
         border-color: var(--ds-border-focused);
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        border-color: transparent;
+        background-color: var(--ds-background-disabled);
+        color: var(--ds-text-disabled);
     }
 }
 

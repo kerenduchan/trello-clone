@@ -5,6 +5,16 @@
         margin-bottom: 4px;
     }
 
+    .date-checkbox {
+        margin-inline-end: 8px;
+    }
+
+    .date-input {
+        @include input-styling();
+        padding: 6px;
+        width: 110px;
+    }
+
     .btn-save,
     .btn-remove {
         width: 100%;
