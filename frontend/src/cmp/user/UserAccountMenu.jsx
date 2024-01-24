@@ -5,7 +5,7 @@ import {
     selectLoggedinUser,
 } from '../../store/reducers/app.reducer'
 import { userService } from '../../services/user/user.service'
-import { authService } from '../../services/auth/auth.service'
+import { logout } from '../../store/actions/auth.actions'
 import { Popover } from '../general/Popover'
 
 export function UserAccountMenu({ popover }) {
@@ -15,7 +15,7 @@ export function UserAccountMenu({ popover }) {
 
     async function onLogout() {
         try {
-            await authService.logout()
+            await logout()
             dispatch(loggedinUserChanged(null))
             navigate('/')
         } catch (err) {

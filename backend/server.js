@@ -1,10 +1,11 @@
+import http from 'http'
 import path from 'path'
 import express from 'express'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose'
 import { getDbUrl } from './db/config.js'
-
+import { setupSocketAPI } from './services/socket.service.js'
 import { loggerService } from './services/logger.service.js'
 
 const corsOptions = {
@@ -14,6 +15,10 @@ const corsOptions = {
 
 const app = express()
 const port = process.env.PORT || 3000
+
+// sockets
+const server = http.createServer(app)
+setupSocketAPI(server)
 
 // App configuration
 app.use(cors(corsOptions))

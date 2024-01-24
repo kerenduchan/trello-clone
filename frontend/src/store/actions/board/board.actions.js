@@ -1,6 +1,6 @@
 import { utilService } from '../../../services/util.service'
 import { boardService } from '../../../services/board/board.service'
-
+import { socketService } from '../../../services/socket.service'
 import {
     boardsChanged,
     boardChanged,
@@ -59,6 +59,7 @@ async function createBoard(board) {
         // Can't optimistically add a board
         // because the ID comes from the backend
         const boardWithId = await boardService.create(board)
+        socketService.notifyBoardUpdated(boardWithId._id)
         store.dispatch(boardAdded(boardWithId))
         return boardWithId
     } catch (err) {
@@ -72,7 +73,8 @@ async function updateBoard(board, fields) {
     try {
         // optimistic update
         store.dispatch(boardUpdated(updatedBoard))
-        return boardService.update(board._id, fields)
+        await boardService.update(board._id, fields)
+        socketService.notifyBoardUpdated(board._id)
     } catch (err) {
         console.error('Failed to update board:', err)
         // TODO: undo the store change
@@ -89,6 +91,7 @@ async function deleteBoard(board) {
         // removal, boards should be reloaded from the backend at a component
         // above the BoardIndex.
         await boardService.remove(boardId)
+        socketService.notifyBoardUpdated(boardWithId._id)
         store.dispatch(boardRemoved(boardId))
     } catch (err) {
         console.error('Failed to delete board:', err)

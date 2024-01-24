@@ -2,6 +2,7 @@ export const authUtilService = {
     getLoggedinUser,
     saveLoggedinUser,
     clearLoggedinUser,
+    getLoginTokenFromCookies,
 }
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
@@ -16,4 +17,14 @@ function saveLoggedinUser(user) {
 
 function clearLoggedinUser() {
     sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
+}
+
+function getLoginTokenFromCookies() {
+    const cookiesString = document.cookie
+    const cookies = cookiesString.split('; ').reduce((acc, cookie) => {
+        const [name, value] = cookie.split('=')
+        acc[name] = value
+        return acc
+    }, {})
+    return cookies.loginToken
 }

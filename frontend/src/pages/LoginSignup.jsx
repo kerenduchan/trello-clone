@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { loggedinUserChanged } from '../store/reducers/app.reducer'
-import { authService } from '../services/auth/auth.service'
+import { login, signup } from '../store/actions/auth.actions.js'
 import { useForm } from '../customHooks/useForm'
 
 export function LoginSignup() {
@@ -21,9 +21,7 @@ export function LoginSignup() {
     async function onSubmit(e) {
         e.preventDefault()
         try {
-            const user = isLogin()
-                ? await authService.login(draft)
-                : await authService.signup(draft)
+            const user = isLogin() ? await login(draft) : await signup(draft)
 
             dispatch(loggedinUserChanged(user))
             navigate(`/boards`)
