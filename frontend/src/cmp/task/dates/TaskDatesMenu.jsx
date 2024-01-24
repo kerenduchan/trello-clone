@@ -30,25 +30,24 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
         console.log('onDatePickerChange', start, end)
 
         if (!draft.hasStartDate) {
-            console.log('doesnt have start date')
+            // doesn't have start date
             setDraft((prev) => ({
                 ...prev,
                 hasDueDate: true,
                 dueDate: convertDateToText(start),
             }))
         } else if (!draft.hasDueDate) {
-            console.log('doesnt have end date')
+            // has start date and doesn't have due date
             setDraft((prev) => ({
                 ...prev,
                 startDate: convertDateToText(start),
             }))
         } else {
-            // has both start and end date
-            console.log('has both')
+            // has both start and due date
             setDraft((prev) => ({
                 ...prev,
                 startDate: convertDateToText(start),
-                dueDate: convertDateToText(end),
+                dueDate: end ? convertDateToText(end) : prev.dueDate,
             }))
         }
 
