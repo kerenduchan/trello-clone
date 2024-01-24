@@ -16,26 +16,20 @@ export function setupSocketAPI(http) {
     console.log('Socket IO listening on port ' + SOCKET_IO_PORT)
 
     _io.on('connection', (socket) => {
-        console.log('A user connected', socket.id)
-
-        socket.on('disconnect', () => {
-            console.log('User disconnected', socket.id)
-        })
+        socket.on('disconnect', () => {})
 
         socket.on('login', (loginToken) => {
             try {
                 const loggedinUser = authService.validateToken(loginToken)
                 socket.user = loggedinUser
-                console.log('A user logged in', loggedinUser)
             } catch (err) {
                 console.error(err)
             }
         })
 
-        socket.on('message', (text) => {
-            console.log(`Received message from ${socket.userId}: ${text}`)
-            const message = { _id: makeId(), userId: socket.userId, text }
-            io.emit('message', message) // Broadcast the message to all connected clients
+        socket.on('board-updated', (boardId) => {
+            // Broadcast the message to all clients except the sender
+            socket.broadcast.emit('board-updated', boardId)
         })
     })
 }

@@ -4,7 +4,6 @@ import { socketService } from '../../services/socket.service'
 export { login, signup, logout }
 
 async function login(user) {
-    console.log('auth actions login', user)
     await authService.login(user)
     socketService.login()
 }

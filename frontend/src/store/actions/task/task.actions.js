@@ -7,6 +7,7 @@ import {
 } from '../../reducers/board.reducer'
 import { activityUtilService } from '../../../services/activity/activity.util.service'
 import { taskService } from '../../../services/task/task.service'
+import { socketService } from '../../../services/socket.service'
 
 export { createTask, deleteTask, updateTask }
 
@@ -24,6 +25,7 @@ async function createTask(board, group, position, task) {
         store.dispatch(activityCreated({ activity }))
 
         await taskService.createTask(board, group, position, task)
+        socketService.notifyBoardUpdated(board._id)
     } catch (err) {
         // TODO: rollback store change
         throw err
@@ -43,6 +45,7 @@ async function deleteTask(hierarchy) {
         store.dispatch(activityCreated({ activity }))
 
         await taskService.deleteTask(hierarchy)
+        socketService.notifyBoardUpdated(hierarchy.board._id)
     } catch (err) {
         // TODO: rollback store change
         throw err
@@ -66,6 +69,7 @@ async function updateTask(hierarchy, fieldsToUpdate, activity = null) {
         }
 
         await taskService.updateTask(board, group, task._id, fieldsToUpdate)
+        socketService.notifyBoardUpdated(board._id)
     } catch (err) {
         // TODO: rollback store change
         throw err

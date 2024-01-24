@@ -18,6 +18,11 @@ export function EditableTitle({ title, onChange }) {
         }
     }, [showForm])
 
+    useEffect(() => {
+        setShowForm(false)
+        setDraft({ title })
+    }, [title])
+
     function onSubmit(e) {
         if (e) e.preventDefault()
         onChange(draft.title)

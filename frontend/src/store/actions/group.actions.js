@@ -6,6 +6,7 @@ import {
 } from '../reducers/board.reducer'
 import { groupService } from '../../services/group/group.service'
 import { activityUtilService } from '../../services/activity/activity.util.service'
+import { socketService } from '../../services/socket.service'
 
 export { createGroup, deleteGroup, updateGroup }
 
@@ -23,6 +24,7 @@ async function createGroup(board, group) {
         store.dispatch(activityCreated({ activity }))
 
         await groupService.createGroup(board, group)
+        socketService.notifyBoardUpdated(board._id)
     } catch (err) {
         // TODO: rollback store change
         throw err
@@ -34,6 +36,7 @@ async function deleteGroup(board, group) {
         // optimistic update
         store.dispatch(groupDeleted({ board, group }))
         await groupService.deleteGroup(board, group)
+        socketService.notifyBoardUpdated(board._id)
     } catch (err) {
         // TODO: rollback store change
         throw err
@@ -51,6 +54,7 @@ async function updateGroup(board, group, fieldsToUpdate) {
         _createActivityForUpdateGroup(board, group, fieldsToUpdate)
 
         await groupService.updateGroup(board, group._id, fieldsToUpdate)
+        socketService.notifyBoardUpdated(board._id)
     } catch (err) {
         // TODO: rollback store change
         throw err
