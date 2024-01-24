@@ -2,11 +2,14 @@ import moment from 'moment/moment'
 import { useForm } from '../../../customHooks/useForm'
 import { updateTask } from '../../../store/actions/task/task.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { DatePicker } from '../../general/DatePicker'
 
 export function TaskDatesMenu({ hierarchy, popoverState }) {
     const { task } = hierarchy
     const [draft, handleChange, setDraft] = useForm(convertTaskDatesToDraft())
+    const [startDate, setStartDate] = useState(new Date('2014/02/08'))
+    const [endDate, setEndDate] = useState(new Date('2014/02/10'))
 
     useEffect(() => {
         setDraft(convertTaskDatesToDraft())
@@ -17,6 +20,12 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
         const dates = convertDraftToTaskDates()
         updateTask(hierarchy, { dates })
         popoverState.onClose()
+    }
+
+    const onChange = (dates) => {
+        const [start, end] = dates
+        setStartDate(start)
+        setEndDate(end)
     }
 
     function onRemove() {
@@ -64,9 +73,15 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
             title="Dates"
             {...popoverState.popover}
         >
-            <h4>Start date</h4>
+            {/* Date picker */}
+            <DatePicker
+                startDate={startDate}
+                endDate={endDate}
+                onChange={onChange}
+            />
 
             <form onSubmit={onSubmit}>
+                <h4>Start date</h4>
                 <input
                     type="checkbox"
                     id="hasStartDate"
