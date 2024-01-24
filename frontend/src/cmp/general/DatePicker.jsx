@@ -1,9 +1,9 @@
 import ReactDatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-export function DatePicker({ datePicker, onChange }) {
+export function DatePicker({ datePicker, isSelectsRange, onChange }) {
     console.log('DatePicker', datePicker)
-    const { startDate, endDate, isSelectsRange } = datePicker
+    const { startDate, endDate } = datePicker
 
     function onChangeInternal(dates) {
         if (Array.isArray(dates)) {

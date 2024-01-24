@@ -18,26 +18,44 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
 
     // The date picker. startDate and endDate are Date objects
     const [datePicker, setDatePicker] = useState({
-        isSelectsRange: false,
         startDate: null,
         endDate: null,
     })
+
+    function isSelectsRange() {
+        return draft.hasStartDate && draft.hasDueDate
+    }
 
     function onDatePickerChange(start, end) {
         console.log('onDatePickerChange', start, end)
 
         if (!draft.hasStartDate) {
+            console.log('doesnt have start date')
             setDraft((prev) => ({
                 ...prev,
                 hasDueDate: true,
                 dueDate: convertDateToText(start),
             }))
-            setDatePicker({
-                startDate: start,
-                endDate: end,
-                isSelectsRange: false,
-            })
+        } else if (!draft.hasDueDate) {
+            console.log('doesnt have end date')
+            setDraft((prev) => ({
+                ...prev,
+                startDate: convertDateToText(start),
+            }))
+        } else {
+            // has both start and end date
+            console.log('has both')
+            setDraft((prev) => ({
+                ...prev,
+                startDate: convertDateToText(start),
+                dueDate: convertDateToText(end),
+            }))
         }
+
+        setDatePicker({
+            startDate: start,
+            endDate: end,
+        })
     }
 
     function onSubmit(e) {
@@ -63,7 +81,11 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
             {...popoverState.popover}
         >
             {/* Date picker */}
-            <DatePicker datePicker={datePicker} onChange={onDatePickerChange} />
+            <DatePicker
+                datePicker={datePicker}
+                isSelectsRange={isSelectsRange()}
+                onChange={onDatePickerChange}
+            />
 
             <form onSubmit={onSubmit}>
                 {/* Start date */}
@@ -82,7 +104,7 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
                     id="startDate"
                     name="startDate"
                     disabled={!draft.hasStartDate}
-                    value={draft.startDate}
+                    value={draft.hasStartDate ? draft.startDate : 'DD/MM/YYYY'}
                     onChange={handleChange}
                 />
 
