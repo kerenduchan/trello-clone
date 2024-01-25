@@ -20,6 +20,22 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
         setDraft(convertTaskDatesToDraft())
     }, [task])
 
+    useEffect(() => {
+        if (draft.hasStartDate && draft.startDate === '') {
+            setDraft((prev) => ({
+                ...prev,
+                startDate: convertDateToStr(Date.now()),
+            }))
+        }
+
+        if (draft.hasDueDate && draft.dueDate === '') {
+            setDraft((prev) => ({
+                ...prev,
+                dueDate: prev.startDate || convertDateToStr(Date.now()),
+            }))
+        }
+    }, [draft])
+
     function onDatePickerChange(start, end) {
         if (!draft.hasStartDate) {
             // doesn't have start date
