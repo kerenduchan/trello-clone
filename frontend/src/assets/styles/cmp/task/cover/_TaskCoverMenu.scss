@@ -1,11 +1,24 @@
 .task-cover-menu {
-    h4 {
-        @include font(12px, 16px, 600);
-        color: var(--text-color-subtle);
-        margin-bottom: 4px;
+    overflow: hidden;
+    .content {
+        position: relative;
+
+        h4 {
+            @include font(12px, 16px, 600);
+            color: var(--text-color-subtle);
+            margin-bottom: 4px;
+        }
+
+        .btn-remove-cover {
+            margin-top: 4px;
+        }
     }
 
-    .btn-remove-cover {
-        margin-top: 4px;
+    .overlay {
+        display: none;
+    }
+
+    &.uploading .overlay {
+        @include overlay;
     }
 }

@@ -8,5 +8,12 @@
         .btn-choose-file {
             margin-top: 12px;
         }
+
+        .overlay {
+            display: none;
+        }
+    }
+    &.uploading .overlay {
+        @include overlay;
     }
 }

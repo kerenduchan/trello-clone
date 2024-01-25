@@ -10,9 +10,12 @@ import { BtnFileUpload } from '../../general/btn/BtnFileUpload'
 import { TaskCoverMenuColors } from './TaskCoverMenuColors'
 import { TaskCoverMenuSize } from './TaskCoverMenuSize'
 import { TaskCoverMenuTextColor } from './TaskCoverMenuTextColor'
+import { useState } from 'react'
 
 export function TaskCoverMenu({ hierarchy, popoverState, onRemoveCover }) {
     const { task } = hierarchy
+
+    const [isUploading, setIsUploading] = useState(false)
 
     function onRemoveCoverInternal() {
         removeTaskCover(hierarchy)
@@ -40,14 +43,15 @@ export function TaskCoverMenu({ hierarchy, popoverState, onRemoveCover }) {
     }
 
     async function onFileSelected(file) {
+        setIsUploading(true)
         const fileUrl = await uploadService.uploadFile(file)
         await addTaskCoverImage(hierarchy, fileUrl)
-        popoverState.onClose()
+        setIsUploading(false)
     }
 
     return (
         <PopoverMenu
-            className="task-cover-menu"
+            className={`task-cover-menu ${isUploading ? 'uploading' : ''}`}
             title="Cover"
             {...popoverState.popover}
         >
@@ -90,6 +94,10 @@ export function TaskCoverMenu({ hierarchy, popoverState, onRemoveCover }) {
                 onFileSelected={onFileSelected}
                 label="Upload a cover image"
             />
+
+            <div className="overlay">
+                <span>Uploading, please wait...</span>
+            </div>
         </PopoverMenu>
     )
 }
