@@ -52,7 +52,8 @@ export function TaskDatesWidget({ hierarchy }) {
             }
         }
         if (dates.dueDate) {
-            res += moment.unix(task.dates.dueDate).format('MMM DD [at] HH:mm A')
+            // TODO: add time:  [at] HH:mm A
+            res += moment.unix(task.dates.dueDate).format('MMM DD')
         }
         return res
     }

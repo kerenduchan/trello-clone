@@ -67,7 +67,7 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
 
     function onDateInputBlur(e) {
         const val = e.target.value
-        console.log(isDateValid(val))
+
         if (!isDateValid(val)) {
             setDraft(convertTaskDatesToDraft())
             return
