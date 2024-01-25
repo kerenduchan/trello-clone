@@ -87,45 +87,52 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
             />
 
             <form onSubmit={onSubmit}>
-                {/* Start date */}
-                <h4>Start date</h4>
-                <input
-                    className="date-checkbox"
-                    type="checkbox"
-                    id="hasStartDate"
-                    name="hasStartDate"
-                    checked={draft.hasStartDate}
-                    onChange={handleChange}
-                />
-                <input
-                    className="date-input"
-                    type="text"
-                    id="startDate"
-                    name="startDate"
-                    disabled={!draft.hasStartDate}
-                    value={draft.hasStartDate ? draft.startDate : 'DD/MM/YYYY'}
-                    onChange={handleChange}
-                />
+                <div className="date-container">
+                    {/* Start date */}
+                    <h4>Start date</h4>
+                    <input
+                        className="date-checkbox"
+                        type="checkbox"
+                        id="hasStartDate"
+                        name="hasStartDate"
+                        checked={draft.hasStartDate}
+                        onChange={handleChange}
+                    />
+                    <input
+                        className="date-input"
+                        type="text"
+                        id="startDate"
+                        name="startDate"
+                        disabled={!draft.hasStartDate}
+                        value={
+                            draft.hasStartDate ? draft.startDate : 'DD/MM/YYYY'
+                        }
+                        onChange={handleChange}
+                    />
+                </div>
 
                 {/* Due date */}
-                <h4>Due date</h4>
-                <input
-                    className="date-checkbox"
-                    type="checkbox"
-                    id="hasDueDate"
-                    name="hasDueDate"
-                    checked={draft.hasDueDate}
-                    onChange={handleChange}
-                />
-                <input
-                    className="date-input"
-                    type="text"
-                    id="dueDate"
-                    name="dueDate"
-                    disabled={!draft.hasDueDate}
-                    value={draft.hasDueDate ? draft.dueDate : 'DD/MM/YYYY'}
-                    onChange={handleChange}
-                />
+                <div className="date-container">
+                    <h4>Due date</h4>
+                    <input
+                        className="date-checkbox"
+                        type="checkbox"
+                        id="hasDueDate"
+                        name="hasDueDate"
+                        checked={draft.hasDueDate}
+                        onChange={handleChange}
+                    />
+                    <input
+                        className="date-input"
+                        type="text"
+                        id="dueDate"
+                        name="dueDate"
+                        disabled={!draft.hasDueDate}
+                        value={draft.hasDueDate ? draft.dueDate : 'DD/MM/YYYY'}
+                        onChange={handleChange}
+                    />
+                </div>
+
                 <button className="btn-primary btn-save">Save</button>
                 <button
                     type="button"

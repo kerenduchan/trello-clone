@@ -16,6 +16,7 @@
                 .react-datepicker__current-month {
                     color: var(--ds-text);
                     text-align: center;
+                    @include font(14px, 16px, 600);
                 }
             }
         }
