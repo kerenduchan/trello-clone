@@ -1,6 +1,5 @@
 import { Server } from 'socket.io'
 import { authService } from '../api/auth/auth.service.js'
-import { authUtilService } from '../../frontend/src/services/auth/auth.util.service.js'
 
 const SOCKET_IO_PORT = 4000
 
@@ -9,7 +8,7 @@ let _io
 export function setupSocketAPI(http) {
     const _io = new Server(http, {
         cors: {
-            origin: 'http://localhost:5173',
+            origin: '*',
         },
     })
     _io.listen(SOCKET_IO_PORT)
