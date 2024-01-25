@@ -75,6 +75,7 @@ async function updateBoard(board, fields) {
         store.dispatch(boardUpdated(updatedBoard))
         await boardService.update(board._id, fields)
         socketService.notifyBoardUpdated(board._id)
+        return updatedBoard
     } catch (err) {
         console.error('Failed to update board:', err)
         // TODO: undo the store change
