@@ -34,7 +34,7 @@ export function TaskComment({
     return (
         <div className={`task-comment ${isSelected ? 'selected' : ''}`}>
             <div className="created-by-avatar">
-                <Avatar imgSrc={userService.getImgUrl(activity.user.imgUrl)} />
+                <Avatar imgSrc={userService.getImgUrl(activity.user)} />
             </div>
 
             {showEditForm ? (

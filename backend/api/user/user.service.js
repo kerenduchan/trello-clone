@@ -43,6 +43,7 @@ async function query(
                 _id: 1,
                 username: 1,
                 fullname: 1,
+                imgUrl: 1,
                 isAdmin: 1,
                 createdAt: 1,
                 boardCount: { $size: '$boards' },
