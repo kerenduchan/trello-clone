@@ -38,7 +38,7 @@ export function TaskDatesBadge({ hierarchy }) {
             if (!dates.dueDate) {
                 res += 'Started: '
             }
-            res += moment(dates.startDate).format('MMM DD')
+            res += moment(dates.startDate, 'DD/MM/YYYY').format('MMM DD')
             if (dates.dueDate) {
                 res += ' - '
             }

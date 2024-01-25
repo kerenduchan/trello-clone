@@ -46,13 +46,14 @@ export function TaskDatesWidget({ hierarchy }) {
         // TODO: different format if not in the current year
         let res = ''
         if (dates.startDate) {
-            res += moment(dates.startDate).format('MMM DD')
+            res += moment(dates.startDate, 'DD/MM/YYYY').format('MMM DD')
             if (dates.dueDate) {
                 res += ' - '
             }
         }
         if (dates.dueDate) {
-            res += moment.unix(task.dates.dueDate).format('MMM DD [at] HH:mm A')
+            // TODO: add time:  [at] HH:mm A
+            res += moment.unix(task.dates.dueDate).format('MMM DD')
         }
         return res
     }

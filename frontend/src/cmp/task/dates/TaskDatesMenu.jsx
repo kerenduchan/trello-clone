@@ -1,16 +1,79 @@
-import moment from 'moment/moment'
+import moment from 'moment'
+import { useEffect, useState } from 'react'
 import { useForm } from '../../../customHooks/useForm'
 import { updateTask } from '../../../store/actions/task/task.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
-import { useEffect } from 'react'
+import { DatePicker } from '../../general/DatePicker'
+
+const DATE_STR_FORMAT = 'DD/MM/YYYY'
 
 export function TaskDatesMenu({ hierarchy, popoverState }) {
     const { task } = hierarchy
+
+    // For checkboxes (boolean values) and text input fields (string values)
     const [draft, handleChange, setDraft] = useForm(convertTaskDatesToDraft())
+
+    // The date picker. startDate and endDate are Date objects
+    const [datePicker, setDatePicker] = useState(convertDraftToDatePicker())
 
     useEffect(() => {
         setDraft(convertTaskDatesToDraft())
     }, [task])
+
+    useEffect(() => {
+        if (draft.hasStartDate && draft.startDate === '') {
+            setDraft((prev) => ({
+                ...prev,
+                startDate: convertDateToStr(Date.now()),
+            }))
+        }
+
+        if (draft.hasDueDate && draft.dueDate === '') {
+            setDraft((prev) => ({
+                ...prev,
+                dueDate: prev.startDate || convertDateToStr(Date.now()),
+            }))
+        }
+    }, [draft])
+
+    function onDatePickerChange(start, end) {
+        if (!draft.hasStartDate) {
+            // doesn't have start date
+            setDraft((prev) => ({
+                ...prev,
+                hasDueDate: true,
+                dueDate: convertDateToStr(start),
+            }))
+        } else if (!draft.hasDueDate) {
+            // has start date and doesn't have due date
+            setDraft((prev) => ({
+                ...prev,
+                startDate: convertDateToStr(start),
+            }))
+        } else {
+            // has both start and due date
+            setDraft((prev) => ({
+                ...prev,
+                startDate: convertDateToStr(start),
+                dueDate: end ? convertDateToStr(end) : prev.dueDate,
+            }))
+        }
+
+        setDatePicker({
+            startDate: start,
+            endDate: end,
+        })
+    }
+
+    function onDateInputBlur(e) {
+        const val = e.target.value
+
+        if (!isDateValid(val)) {
+            setDraft(convertTaskDatesToDraft())
+            return
+        }
+        setDatePicker(convertDraftToDatePicker())
+    }
 
     function onSubmit(e) {
         e.preventDefault()
@@ -31,9 +94,23 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
 
         return {
             startDate: draft.hasStartDate ? draft.startDate : null,
-            dueDate: draft.hasDueDate ? moment(draft.dueDate).unix() : null,
+            dueDate: draft.hasDueDate
+                ? moment(draft.dueDate, DATE_STR_FORMAT).unix()
+                : null,
             isComplete: Boolean(draft.hasDueDate && task.dates?.isComplete),
         }
+    }
+
+    function convertDraftToDatePicker() {
+        const { hasStartDate, startDate, hasDueDate, dueDate } = draft
+        return {
+            startDate: hasStartDate ? convertStrToDate(startDate) : null,
+            endDate: hasDueDate ? convertStrToDate(dueDate) : null,
+        }
+    }
+
+    function isSelectsRange() {
+        return draft.hasStartDate && draft.hasDueDate
     }
 
     function convertTaskDatesToDraft() {
@@ -51,11 +128,26 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
 
         if (task.dates?.dueDate) {
             res.hasDueDate = true
-            res.dueDate = moment
-                .unix(task.dates.dueDate)
-                .format('YYYY-MM-DDTHH:mm')
+            res.dueDate = moment.unix(task.dates.dueDate).format('DD/MM/YYYY')
         }
         return res
+    }
+
+    function convertDateToStr(date) {
+        return moment(date).format(DATE_STR_FORMAT)
+    }
+
+    function convertStrToDate(date) {
+        if (!date) {
+            return null
+        }
+        return moment(date, DATE_STR_FORMAT).toDate()
+    }
+
+    function isDateValid(dateString) {
+        // The "true" flag enables strict parsing
+        const parsedDate = moment(dateString, DATE_STR_FORMAT, true)
+        return parsedDate.isValid()
     }
 
     return (
@@ -64,41 +156,68 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
             title="Dates"
             {...popoverState.popover}
         >
-            <h4>Start date</h4>
+            {/* Date picker */}
+            <DatePicker
+                datePicker={datePicker}
+                isSelectsRange={isSelectsRange()}
+                onChange={onDatePickerChange}
+            />
 
             <form onSubmit={onSubmit}>
-                <input
-                    type="checkbox"
-                    id="hasStartDate"
-                    name="hasStartDate"
-                    checked={draft.hasStartDate}
-                    onChange={handleChange}
-                />
-                <input
-                    type="date"
-                    id="startDate"
-                    name="startDate"
-                    disabled={!draft.hasStartDate}
-                    value={draft.startDate}
-                    onChange={handleChange}
-                />
+                <div className="date-container">
+                    {/* Start date */}
+                    <h4>Start date</h4>
+                    <input
+                        className="date-checkbox"
+                        type="checkbox"
+                        id="hasStartDate"
+                        name="hasStartDate"
+                        checked={draft.hasStartDate}
+                        onChange={handleChange}
+                    />
+                    <input
+                        className="date-input"
+                        type="text"
+                        id="startDate"
+                        name="startDate"
+                        placeholder="DD/MM/YYYY"
+                        disabled={!draft.hasStartDate}
+                        value={
+                            draft.hasStartDate
+                                ? draft.startDate
+                                : DATE_STR_FORMAT
+                        }
+                        onChange={handleChange}
+                        onBlur={onDateInputBlur}
+                    />
+                </div>
 
-                <h4>Due date</h4>
-                <input
-                    type="checkbox"
-                    id="hasDueDate"
-                    name="hasDueDate"
-                    checked={draft.hasDueDate}
-                    onChange={handleChange}
-                />
-                <input
-                    type="datetime-local"
-                    id="dueDate"
-                    name="dueDate"
-                    disabled={!draft.hasDueDate}
-                    value={draft.dueDate}
-                    onChange={handleChange}
-                />
+                {/* Due date */}
+                <div className="date-container">
+                    <h4>Due date</h4>
+                    <input
+                        className="date-checkbox"
+                        type="checkbox"
+                        id="hasDueDate"
+                        name="hasDueDate"
+                        checked={draft.hasDueDate}
+                        onChange={handleChange}
+                    />
+                    <input
+                        className="date-input"
+                        type="text"
+                        id="dueDate"
+                        name="dueDate"
+                        placeholder="DD/MM/YYYY"
+                        disabled={!draft.hasDueDate}
+                        value={
+                            draft.hasDueDate ? draft.dueDate : DATE_STR_FORMAT
+                        }
+                        onChange={handleChange}
+                        onBlur={onDateInputBlur}
+                    />
+                </div>
+
                 <button className="btn-primary btn-save">Save</button>
                 <button
                     type="button"
