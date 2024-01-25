@@ -14,10 +14,7 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
     const [draft, handleChange, setDraft] = useForm(convertTaskDatesToDraft())
 
     // The date picker. startDate and endDate are Date objects
-    const [datePicker, setDatePicker] = useState({
-        startDate: null,
-        endDate: null,
-    })
+    const [datePicker, setDatePicker] = useState(convertDraftToDatePicker())
 
     useEffect(() => {
         setDraft(convertTaskDatesToDraft())
@@ -64,10 +61,6 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
         popoverState.onClose()
     }
 
-    function convertDateToStr(date) {
-        return moment(date).format(DATE_STR_FORMAT)
-    }
-
     function convertDraftToTaskDates() {
         if (!draft.hasStartDate && !draft.hasDueDate) {
             return null
@@ -79,6 +72,14 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
                 ? moment(draft.dueDate, DATE_STR_FORMAT).unix()
                 : null,
             isComplete: Boolean(draft.hasDueDate && task.dates?.isComplete),
+        }
+    }
+
+    function convertDraftToDatePicker() {
+        const { hasStartDate, startDate, hasDueDate, dueDate } = draft
+        return {
+            startDate: hasStartDate ? convertStrToDate(startDate) : null,
+            endDate: hasDueDate ? convertStrToDate(dueDate) : null,
         }
     }
 
@@ -105,6 +106,18 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
         }
         return res
     }
+
+    function convertDateToStr(date) {
+        return moment(date).format(DATE_STR_FORMAT)
+    }
+
+    function convertStrToDate(date) {
+        if (!date) {
+            return null
+        }
+        return moment(date, DATE_STR_FORMAT).toDate()
+    }
+
     return (
         <PopoverMenu
             className="task-dates-menu"
