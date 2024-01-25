@@ -16,7 +16,7 @@ export function TaskCreate({ board, group, position, onCreate, onClose }) {
     function onSubmit(e) {
         e.preventDefault()
 
-        if (draft.title.length > 0) {
+        if (draft.title.trim().length > 0) {
             onCreate(board, group, draft, position)
             setDraft(boardService.getEmptyTask())
             inputRef.current.focus()

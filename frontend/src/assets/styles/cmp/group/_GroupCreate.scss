@@ -30,6 +30,7 @@
             justify-self: stretch;
             outline: none;
             border-radius: 4px;
+            color: var(--ds-text);
 
             &:hover {
                 background-color: var(--bg-input-hovered);

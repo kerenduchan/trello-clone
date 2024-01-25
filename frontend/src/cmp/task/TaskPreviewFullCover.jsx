@@ -7,11 +7,13 @@ export function TaskPreviewFullCover({ hierarchy }) {
             return {
                 backgroundColor: cover.bgColor.color,
                 color: cover.bgColor.textColor,
+                height: '56px',
             }
         }
 
         return {
             backgroundImage: `url("${cover.bgImage.url}")`,
+            height: '250px',
         }
     }
 

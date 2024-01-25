@@ -17,6 +17,7 @@
         @include font-p();
         padding: 8px 12px;
         outline: none;
+        color: var(--ds-text);
     }
 
     .btn-add {
