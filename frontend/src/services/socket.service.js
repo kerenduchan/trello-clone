@@ -4,7 +4,8 @@ import { authUtilService } from './auth/auth.util.service.js'
 import { loadBoard, loadBoards } from '../store/actions/board/board.actions.js'
 import { store } from '../store/store.js'
 
-const SOCKET_URL = 'http://localhost:4000'
+const SOCKET_URL =
+    process.env.NODE_ENV === 'production' ? '' : '//localhost:4000'
 
 export const socketService = _createSocketService()
 
