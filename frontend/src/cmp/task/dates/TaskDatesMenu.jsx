@@ -49,6 +49,16 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
         })
     }
 
+    function onDateInputBlur(e) {
+        const val = e.target.value
+        console.log(isDateValid(val))
+        if (!isDateValid(val)) {
+            setDraft(convertTaskDatesToDraft())
+            return
+        }
+        setDatePicker(convertDraftToDatePicker())
+    }
+
     function onSubmit(e) {
         e.preventDefault()
         const dates = convertDraftToTaskDates()
@@ -118,6 +128,12 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
         return moment(date, DATE_STR_FORMAT).toDate()
     }
 
+    function isDateValid(dateString) {
+        // The "true" flag enables strict parsing
+        const parsedDate = moment(dateString, DATE_STR_FORMAT, true)
+        return parsedDate.isValid()
+    }
+
     return (
         <PopoverMenu
             className="task-dates-menu"
@@ -148,6 +164,7 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
                         type="text"
                         id="startDate"
                         name="startDate"
+                        placeholder="DD/MM/YYYY"
                         disabled={!draft.hasStartDate}
                         value={
                             draft.hasStartDate
@@ -155,6 +172,7 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
                                 : DATE_STR_FORMAT
                         }
                         onChange={handleChange}
+                        onBlur={onDateInputBlur}
                     />
                 </div>
 
@@ -174,11 +192,13 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
                         type="text"
                         id="dueDate"
                         name="dueDate"
+                        placeholder="DD/MM/YYYY"
                         disabled={!draft.hasDueDate}
                         value={
                             draft.hasDueDate ? draft.dueDate : DATE_STR_FORMAT
                         }
                         onChange={handleChange}
+                        onBlur={onDateInputBlur}
                     />
                 </div>
 
