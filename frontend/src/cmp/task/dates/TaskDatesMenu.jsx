@@ -1,20 +1,17 @@
-import moment from 'moment/moment'
-import { useState } from 'react'
+import moment from 'moment'
+import { useEffect, useState } from 'react'
 import { useForm } from '../../../customHooks/useForm'
 import { updateTask } from '../../../store/actions/task/task.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { DatePicker } from '../../general/DatePicker'
 
+const DATE_STR_FORMAT = 'DD/MM/YYYY'
+
 export function TaskDatesMenu({ hierarchy, popoverState }) {
     const { task } = hierarchy
 
     // For checkboxes (boolean values) and text input fields (string values)
-    const [draft, handleChange, setDraft] = useForm({
-        hasStartDate: false,
-        startDate: '',
-        hasDueDate: false,
-        dueDate: '',
-    })
+    const [draft, handleChange, setDraft] = useForm(convertTaskDatesToDraft())
 
     // The date picker. startDate and endDate are Date objects
     const [datePicker, setDatePicker] = useState({
@@ -22,32 +19,30 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
         endDate: null,
     })
 
-    function isSelectsRange() {
-        return draft.hasStartDate && draft.hasDueDate
-    }
+    useEffect(() => {
+        setDraft(convertTaskDatesToDraft())
+    }, [task])
 
     function onDatePickerChange(start, end) {
-        console.log('onDatePickerChange', start, end)
-
         if (!draft.hasStartDate) {
             // doesn't have start date
             setDraft((prev) => ({
                 ...prev,
                 hasDueDate: true,
-                dueDate: convertDateToText(start),
+                dueDate: convertDateToStr(start),
             }))
         } else if (!draft.hasDueDate) {
             // has start date and doesn't have due date
             setDraft((prev) => ({
                 ...prev,
-                startDate: convertDateToText(start),
+                startDate: convertDateToStr(start),
             }))
         } else {
             // has both start and due date
             setDraft((prev) => ({
                 ...prev,
-                startDate: convertDateToText(start),
-                dueDate: end ? convertDateToText(end) : prev.dueDate,
+                startDate: convertDateToStr(start),
+                dueDate: end ? convertDateToStr(end) : prev.dueDate,
             }))
         }
 
@@ -59,8 +54,8 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
 
     function onSubmit(e) {
         e.preventDefault()
-        // const dates = convertDraftToTaskDates()
-        // updateTask(hierarchy, { dates })
+        const dates = convertDraftToTaskDates()
+        updateTask(hierarchy, { dates })
         popoverState.onClose()
     }
 
@@ -69,10 +64,47 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
         popoverState.onClose()
     }
 
-    function convertDateToText(date) {
-        return moment(date).format('DD/MM/YYYY')
+    function convertDateToStr(date) {
+        return moment(date).format(DATE_STR_FORMAT)
     }
 
+    function convertDraftToTaskDates() {
+        if (!draft.hasStartDate && !draft.hasDueDate) {
+            return null
+        }
+
+        return {
+            startDate: draft.hasStartDate ? draft.startDate : null,
+            dueDate: draft.hasDueDate
+                ? moment(draft.dueDate, DATE_STR_FORMAT).unix()
+                : null,
+            isComplete: Boolean(draft.hasDueDate && task.dates?.isComplete),
+        }
+    }
+
+    function isSelectsRange() {
+        return draft.hasStartDate && draft.hasDueDate
+    }
+
+    function convertTaskDatesToDraft() {
+        const res = {
+            hasStartDate: false,
+            startDate: '',
+            hasDueDate: false,
+            dueDate: '',
+        }
+
+        if (task.dates?.startDate) {
+            res.hasStartDate = true
+            res.startDate = task.dates.startDate
+        }
+
+        if (task.dates?.dueDate) {
+            res.hasDueDate = true
+            res.dueDate = moment.unix(task.dates.dueDate).format('DD/MM/YYYY')
+        }
+        return res
+    }
     return (
         <PopoverMenu
             className="task-dates-menu"
@@ -105,7 +137,9 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
                         name="startDate"
                         disabled={!draft.hasStartDate}
                         value={
-                            draft.hasStartDate ? draft.startDate : 'DD/MM/YYYY'
+                            draft.hasStartDate
+                                ? draft.startDate
+                                : DATE_STR_FORMAT
                         }
                         onChange={handleChange}
                     />
@@ -128,7 +162,9 @@ export function TaskDatesMenu({ hierarchy, popoverState }) {
                         id="dueDate"
                         name="dueDate"
                         disabled={!draft.hasDueDate}
-                        value={draft.hasDueDate ? draft.dueDate : 'DD/MM/YYYY'}
+                        value={
+                            draft.hasDueDate ? draft.dueDate : DATE_STR_FORMAT
+                        }
                         onChange={handleChange}
                     />
                 </div>
