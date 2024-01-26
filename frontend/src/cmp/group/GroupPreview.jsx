@@ -48,7 +48,7 @@ export function GroupPreview({ board, group, index, isFilterEmpty }) {
                                     />
                                 </div>
                                 <div
-                                    className="task-list"
+                                    className="task-list-container"
                                     ref={droppableProvided.innerRef}
                                     {...droppableProvided.droppableProps}
                                 >

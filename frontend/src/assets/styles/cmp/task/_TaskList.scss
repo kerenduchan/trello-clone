@@ -1,7 +1,10 @@
-.task-list {
+.task-list-container {
     margin: 0px -4px;
     padding: 2px 4px;
     overflow-y: auto;
+}
+
+.task-list {
     display: flex;
     flex-direction: column;
     gap: 8px;
