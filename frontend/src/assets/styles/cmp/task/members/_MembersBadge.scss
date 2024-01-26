@@ -1,6 +1,8 @@
 .members-badge {
     grid-area: 1 / -1;
     justify-self: end;
+    margin-inline-end: -4px;
+    padding-bottom: 4px;
     ul {
         display: flex;
         column-gap: 4px;
