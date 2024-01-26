@@ -43,7 +43,7 @@ export function TaskPreview({ hierarchy, index }) {
                     ref={provided.innerRef}
                     onClick={onClick}
                 >
-                    <div className="container-btn-edit">
+                    {/* <div className="container-btn-edit">
                         <div className="bg-btn-edit" />
                         <button
                             className="btn-circle btn-edit"
@@ -51,7 +51,7 @@ export function TaskPreview({ hierarchy, index }) {
                         >
                             <Icon type="edit" />
                         </button>
-                    </div>
+                    </div> */}
                     {isFullCover() ? (
                         <TaskPreviewFullCover hierarchy={hierarchy} />
                     ) : (

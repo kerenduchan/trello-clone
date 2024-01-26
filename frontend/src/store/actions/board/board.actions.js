@@ -92,7 +92,7 @@ async function deleteBoard(board) {
         // removal, boards should be reloaded from the backend at a component
         // above the BoardIndex.
         await boardService.remove(boardId)
-        socketService.notifyBoardUpdated(boardWithId._id)
+        socketService.notifyBoardUpdated(boardId)
         store.dispatch(boardRemoved(boardId))
     } catch (err) {
         console.error('Failed to delete board:', err)
