@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux'
+import { selectDragUpdateInfo } from '../../store/reducers/app.reducer'
 import { TaskPreview } from '../task/TaskPreview'
 import { TaskCreate } from './TaskCreate'
 
@@ -5,8 +7,31 @@ const TASK_CREATE_FORM = 'task-create-form'
 const TASK_DRAG_PLACEHOLDER = 'task-drag-placeholder'
 
 export function TaskList(props) {
-    const { taskCreateFormPosition, dragDestinationIdx, group } = props
-    console.log(dragDestinationIdx)
+    const { taskCreateFormPosition, group } = props
+    const dragUpdateInfo = useSelector(selectDragUpdateInfo)
+
+    function getDragDestinationIdx() {
+        if (
+            !dragUpdateInfo ||
+            dragUpdateInfo.destination.droppableId !== group._id
+        ) {
+            return null
+        }
+
+        const { source, destination } = dragUpdateInfo
+
+        let res = destination.index
+        if (
+            destination.droppableId === source.droppableId &&
+            source.index <= destination.index
+        ) {
+            // drag/dropping in the same container affects the placeholder index
+            res++
+        }
+        return res
+    }
+
+    const dragDestinationIdx = getDragDestinationIdx()
     const listItems = group.tasks.map((task, index) => ({
         _id: task._id,
         task,
@@ -22,7 +47,12 @@ export function TaskList(props) {
     if (dragDestinationIdx !== null) {
         listItems.splice(dragDestinationIdx, 0, {
             _id: TASK_DRAG_PLACEHOLDER,
+            height: getPlaceholderHeight(),
         })
+    }
+
+    function getPlaceholderHeight() {
+        return '100px'
     }
 
     return (
@@ -60,7 +90,7 @@ function TaskListItem({
             return (
                 <div
                     className="task-drag-placeholder"
-                    style={{ height: '100px' }}
+                    style={{ height: item.height }}
                 />
             )
 

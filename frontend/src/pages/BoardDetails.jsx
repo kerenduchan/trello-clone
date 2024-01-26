@@ -62,27 +62,14 @@ export function BoardDetails() {
         : null
 
     function onDragUpdate(update) {
-        const { destination, source } = update
-
-        if (!destination) {
+        if (!update.destination) {
             return
         }
-
-        let destinationIdx = destination.index
-        if (
-            destination.droppableId === source.droppableId &&
-            source.index <= destination.index
-        ) {
-            // drag/dropping in the same container affects the placeholder index
-            destinationIdx++
-        }
-        store.dispatch(
-            dragUpdateInfoChanged({ destinationIdx, sourceIdx: source.index })
-        )
+        store.dispatch(dragUpdateInfoChanged(update))
     }
 
     function onDragEnd(result) {
-        dragUpdateInfoChanged(null)
+        store.dispatch(dragUpdateInfoChanged(null))
         boardService.handleDragEnd(result, board, filteredBoard)
     }
 
