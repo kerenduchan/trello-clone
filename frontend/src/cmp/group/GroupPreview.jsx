@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { selectDragUpdateInfo } from '../../store/reducers/app.reducer'
 import { createTask } from '../../store/actions/task/task.actions'
 import { TaskList } from '../task/TaskList'
 import { GroupPreviewHeader } from './GroupPreviewHeader'
@@ -8,6 +10,7 @@ import { Draggable, Droppable } from 'react-beautiful-dnd'
 // Represents a group of tasks (a list in the UI) in a board
 export function GroupPreview({ board, group, index, isFilterEmpty }) {
     const [taskCreateFormPosition, setTaskCreateFormPosition] = useState(null)
+    const dragUpdateInfo = useSelector(selectDragUpdateInfo)
 
     function onShowTaskCreateForm(position) {
         setTaskCreateFormPosition(position)
@@ -21,6 +24,13 @@ export function GroupPreview({ board, group, index, isFilterEmpty }) {
             console.error(err)
             // TODO: show an error dialog
         }
+    }
+
+    function getDragDestinationIdx(snapshot) {
+        if (snapshot.isDraggingOver) {
+            return dragUpdateInfo ? dragUpdateInfo.destinationIdx : null
+        }
+        return null
     }
 
     return (
@@ -58,6 +68,9 @@ export function GroupPreview({ board, group, index, isFilterEmpty }) {
                                         taskCreateFormPosition={
                                             taskCreateFormPosition
                                         }
+                                        dragDestinationIdx={getDragDestinationIdx(
+                                            snapshot
+                                        )}
                                         onCloseTaskCreateForm={() =>
                                             setTaskCreateFormPosition(null)
                                         }

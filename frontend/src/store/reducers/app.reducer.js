@@ -11,6 +11,8 @@ const initialState = {
     curChecklistItemId: null,
 
     loggedinUser: null,
+
+    dragUpdateInfo: null,
 }
 
 // "mutating" code is okay inside of createSlice!
@@ -39,6 +41,13 @@ const appSlice = createSlice({
                 curChecklistItemId: action.payload,
             }
         },
+        dragUpdateInfoChanged(state, action) {
+            const dragUpdateInfo = action.payload
+            return {
+                ...state,
+                dragUpdateInfo,
+            }
+        },
     },
 })
 
@@ -46,9 +55,11 @@ export const {
     loggedinUserChanged,
     curChecklistChanged,
     curChecklistItemChanged,
+    dragUpdateInfoChanged,
 } = appSlice.actions
 export default appSlice.reducer
 
 export const selectChecklistId = (state) => state.app.curChecklistId
 export const selectChecklistItemId = (state) => state.app.curChecklistItemId
 export const selectLoggedinUser = (state) => state.app.loggedinUser
+export const selectDragUpdateInfo = (state) => state.app.dragUpdateInfo

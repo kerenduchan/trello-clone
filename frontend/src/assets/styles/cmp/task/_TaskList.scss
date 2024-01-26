@@ -5,4 +5,10 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+
+    .task-drag-placeholder {
+        border-radius: 8px;
+        background-color: var(--ds-background-neutral);
+        background-color: red;
+    }
 }

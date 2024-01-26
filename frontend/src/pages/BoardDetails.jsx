@@ -7,6 +7,7 @@ import {
     selectBoard,
     selectFilteredBoard,
 } from '../store/reducers/board.reducer'
+import { dragUpdateInfoChanged } from '../store/reducers/app.reducer'
 import {
     loadBoard,
     loadBoards,
@@ -22,6 +23,7 @@ import { BoardMenu } from '../cmp/board/boardMenu/BoardMenu'
 import { GroupCreate } from '../cmp/group/GroupCreate'
 import { Icon } from '../cmp/general/Icon'
 import { BoardIndexHeader } from '../cmp/board/BoardIndexHeader'
+import { store } from '../store/store'
 
 export function BoardDetails() {
     const params = useParams()
@@ -59,7 +61,28 @@ export function BoardDetails() {
         ? boardService.getGroupAndTaskByTaskId(board, params.taskId)
         : null
 
+    function onDragUpdate(update) {
+        const { destination, source } = update
+
+        if (!destination) {
+            return
+        }
+
+        let destinationIdx = destination.index
+        if (
+            destination.droppableId === source.droppableId &&
+            source.index <= destination.index
+        ) {
+            // drag/dropping in the same container affects the placeholder index
+            destinationIdx++
+        }
+        store.dispatch(
+            dragUpdateInfoChanged({ destinationIdx, sourceIdx: source.index })
+        )
+    }
+
     function onDragEnd(result) {
+        dragUpdateInfoChanged(null)
         boardService.handleDragEnd(result, board, filteredBoard)
     }
 
@@ -107,7 +130,10 @@ export function BoardDetails() {
                             onClose={() => setShowMenu(false)}
                         />
                     )}
-                    <DragDropContext onDragEnd={onDragEnd}>
+                    <DragDropContext
+                        onDragEnd={onDragEnd}
+                        onDragUpdate={onDragUpdate}
+                    >
                         <Droppable
                             droppableId={board._id}
                             direction="horizontal"
