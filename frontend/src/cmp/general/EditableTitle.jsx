@@ -3,7 +3,11 @@ import { useForm } from '../../customHooks/useForm'
 import { useKeyDownListener } from '../../customHooks/useKeyDownListener'
 import { useClickedOutListener } from '../../customHooks/useClickedOutListener'
 
-export function EditableTitle({ title, onChange }) {
+export function EditableTitle({
+    title,
+    onChange,
+    isTitleValid = (t) => t.length > 0,
+}) {
     const [showForm, setShowForm] = useState(false)
     const [draft, handleChange, setDraft] = useForm({ title })
     const textareaRef = useRef(null)
@@ -25,7 +29,15 @@ export function EditableTitle({ title, onChange }) {
 
     function onSubmit(e) {
         if (e) e.preventDefault()
-        onChange(draft.title)
+
+        const newTitle = draft.title.trim()
+
+        if (isTitleValid(newTitle)) {
+            onChange(newTitle)
+            setDraft({ title: newTitle })
+        } else {
+            setDraft({ title })
+        }
         setShowForm(false)
     }
 
