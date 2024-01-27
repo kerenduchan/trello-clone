@@ -2,7 +2,10 @@ import { utilService } from '../util.service'
 import { boardLocalService } from './board.local.service'
 import { boardAxiosService } from './board.axios.service'
 import { moveTask, moveGroup } from '../../store/actions/board/board.actions'
-import { moveChecklist } from '../../store/actions/task/task.checklist.actions'
+import {
+    moveChecklist,
+    moveChecklistItem,
+} from '../../store/actions/task/task.checklist.actions'
 import { labelService } from '../label.service'
 import { store } from '../../store/store'
 
@@ -217,6 +220,25 @@ function getGroupAndTaskByTaskId(board, taskId) {
     return null
 }
 
+function getGroupAndTaskAndChecklistByChecklistId(board, checklistId) {
+    if (!board) {
+        return
+    }
+    for (let i = 0; i < board.groups.length; i++) {
+        const group = board.groups[i]
+        for (let j = 0; j < group.tasks.length; ++j) {
+            const task = group.tasks[j]
+            for (let k = 0; k < task.checklists.length; ++k) {
+                const checklist = task.checklists[k]
+                if (checklist._id === checklistId) {
+                    return { group, task, checklist }
+                }
+            }
+        }
+    }
+    return null
+}
+
 function getChecklistById(board, groupId, taskId, checklistId) {
     return getTaskById(board, groupId, taskId)?.checklists.find(
         (c) => c._id === checklistId
@@ -335,6 +357,9 @@ function handleDragEnd(result, board, filteredBoard) {
         case 'checklist':
             _dragDropChecklist(result, board)
             break
+        case 'checklist-item':
+            _dragDropChecklistItem(result, board)
+            break
     }
 }
 
@@ -415,6 +440,23 @@ function _dragDropChecklist(result, board) {
 
     const hierarchy = { board, group, task }
     moveChecklist(hierarchy, draggableId, destination.index)
+}
+
+function _dragDropChecklistItem(result, board) {
+    const { destination, draggableId, source } = result
+    const { group, task, checklist } = getGroupAndTaskAndChecklistByChecklistId(
+        board,
+        source.droppableId
+    )
+
+    const hierarchy = { board, group, task }
+    moveChecklistItem(
+        hierarchy,
+        checklist,
+        destination.droppableId,
+        draggableId,
+        destination.index
+    )
 }
 
 // convert index of task in group with ID=groupId in the filteredBoard to

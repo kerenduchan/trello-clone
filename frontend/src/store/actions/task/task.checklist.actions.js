@@ -12,6 +12,7 @@ export {
     moveChecklist,
     addChecklistItem,
     updateChecklistItem,
+    moveChecklistItem,
     deleteChecklistItem,
     convertChecklistItemToTask,
 }
@@ -72,6 +73,31 @@ async function updateChecklistItem(hierarchy, checklist, item, fieldsToUpdate) {
     _updateChecklist(hierarchy, checklistToUpdate)
 }
 
+async function moveChecklistItem(
+    hierarchy,
+    sourceChecklist,
+    targetChecklistId,
+    itemId,
+    targetIndex
+) {
+    if (targetChecklistId === sourceChecklist._id) {
+        await _moveChecklistItemInSameChecklist(
+            hierarchy,
+            sourceChecklist,
+            itemId,
+            targetIndex
+        )
+    } else {
+        await _moveChecklistItemToAnotherChecklist(
+            hierarchy,
+            sourceChecklist,
+            targetChecklistId,
+            itemId,
+            targetIndex
+        )
+    }
+}
+
 async function deleteChecklistItem(hierarchy, checklist, item) {
     const checklistToUpdate = { ...checklist }
     checklistToUpdate.items = checklist.items.filter((i) => i._id !== item._id)
@@ -110,4 +136,61 @@ async function _updateChecklist(hierarchy, checklist) {
         cl._id === checklist._id ? checklist : cl
     )
     updateTask(hierarchy, { checklists })
+}
+
+async function _moveChecklistItemInSameChecklist(
+    hierarchy,
+    checklist,
+    itemId,
+    targetIndex
+) {
+    const { task } = hierarchy
+    const itemToMove = checklist.items.find((i) => i._id === itemId)
+    let updatedItems = checklist.items.filter((i) => i._id !== itemId)
+    updatedItems.splice(targetIndex, 0, itemToMove)
+    const updatedChecklist = { ...checklist, items: updatedItems }
+    const updatedChecklists = task.checklists.map((cl) =>
+        cl._id === checklist._id ? updatedChecklist : cl
+    )
+    return updateTask(hierarchy, { checklists: updatedChecklists })
+}
+
+async function _moveChecklistItemToAnotherChecklist(
+    hierarchy,
+    sourceChecklist,
+    targetChecklistId,
+    itemId,
+    targetIndex
+) {
+    const { task } = hierarchy
+
+    // get item to move and remove it from the source checklist
+    const itemToMove = sourceChecklist.items.find((i) => i._id === itemId)
+    const updatedSourceItems = sourceChecklist.items.filter(
+        (i) => i._id !== itemId
+    )
+    const updatedSourceChecklist = {
+        ...sourceChecklist,
+        items: updatedSourceItems,
+    }
+
+    // find target checklist and add item to it
+    const targetChecklist = task.checklists.find(
+        (cl) => cl._id === targetChecklistId
+    )
+    let targetItems = [...targetChecklist.items]
+    targetItems.splice(targetIndex, 0, itemToMove)
+    const updatedTargetChecklist = {
+        ...targetChecklist,
+        items: targetItems,
+    }
+
+    const updatedChecklists = task.checklists.map((cl) =>
+        cl._id === sourceChecklist._id
+            ? updatedSourceChecklist
+            : cl._id === targetChecklistId
+            ? updatedTargetChecklist
+            : cl
+    )
+    return updateTask(hierarchy, { checklists: updatedChecklists })
 }
