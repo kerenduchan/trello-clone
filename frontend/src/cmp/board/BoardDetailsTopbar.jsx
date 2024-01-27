@@ -58,7 +58,7 @@ export function BoardDetailsTopbar({
                 <BoardMembers members={board.members} />
 
                 {/* Share */}
-                <BoardShare members={board.members} />
+                <BoardShare board={board} />
             </div>
         </div>
     )
