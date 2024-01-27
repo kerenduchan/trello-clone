@@ -2,7 +2,7 @@
 
 A [Trello](https://trello.com/) clone implementation in React + Redux + NodeJs + MongoDB.
 
-Hosted live here: https://dashboard.render.com/
+Hosted live here: [https://dashboard.render.com/](https://krello.onrender.com/)
 
 _Note that it may take a minute or two for the live server to start back up, as it is hosted on a free Render account._
 
