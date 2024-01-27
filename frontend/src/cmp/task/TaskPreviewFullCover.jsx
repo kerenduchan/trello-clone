@@ -2,24 +2,9 @@ export function TaskPreviewFullCover({ hierarchy }) {
     const { task } = hierarchy
     const { cover } = task
 
-    function getStyle() {
-        if (cover.bgColor) {
-            return {
-                backgroundColor: cover.bgColor.color,
-                color: cover.bgColor.textColor,
-                height: '56px',
-            }
-        }
-
-        return {
-            backgroundImage: `url("${cover.bgImage.url}")`,
-            height: '250px',
-        }
-    }
-
     function getGradientClass() {
         if (cover.bgColor) {
-            return {}
+            return ''
         }
 
         return `gradient-${
@@ -28,9 +13,23 @@ export function TaskPreviewFullCover({ hierarchy }) {
     }
 
     return (
-        <div className="task-preview-full-cover" style={getStyle()}>
+        <div className="task-preview-full-cover">
+            {cover.bgColor ? (
+                <div
+                    className="bg-color"
+                    style={{ backgroundColor: cover.bgColor.color }}
+                />
+            ) : (
+                <img className="bg-image" src={cover.bgImage.url} />
+            )}
+
             <div className={`title-container ${getGradientClass()}`}>
-                <div className="title">{task.title}</div>
+                <div
+                    className="title"
+                    style={{ color: cover.bgColor?.textColor }}
+                >
+                    {task.title}
+                </div>
             </div>
         </div>
     )
