@@ -1,5 +1,7 @@
 .task-attachment-menu {
     .content {
+        position: relative;
+
         h5 {
             @include font(14px, 16px, 600);
             margin-bottom: 4px;
