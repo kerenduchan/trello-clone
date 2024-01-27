@@ -61,10 +61,10 @@
         }
 
         .badges {
-            display: grid;
-            grid-template-columns: repeat(5, auto) 1fr;
+            display: flex;
             justify-content: start;
             align-items: center;
+            flex-wrap: wrap;
 
             .description-badge {
                 display: flex;
