@@ -59,63 +59,65 @@ export function Checklist({ hierarchy, checklist, index }) {
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
                 >
-                    <ChecklistHeader
-                        title={checklist.title}
-                        onDelete={onDeleteChecklist}
-                        onUpdateTitle={onUpdateTitle}
-                    />
+                    <Droppable
+                        droppableId={checklist._id}
+                        type="checklist-item"
+                    >
+                        {(provided) => (
+                            <>
+                                <ChecklistHeader
+                                    title={checklist.title}
+                                    onDelete={onDeleteChecklist}
+                                    onUpdateTitle={onUpdateTitle}
+                                />
 
-                    <div className="content">
-                        <ProgressBar
-                            percent={boardService.getChecklistPercent(
-                                checklist
-                            )}
-                        />
-
-                        <Droppable
-                            droppableId={checklist._id}
-                            type="checklist-item"
-                        >
-                            {(provided) => (
-                                <ol
-                                    className="items"
+                                <div
+                                    className="content"
                                     {...provided.droppableProps}
                                     ref={provided.innerRef}
                                 >
-                                    {checklist.items.map((item, idx) => (
-                                        <li key={item._id}>
-                                            <ChecklistItem
-                                                hierarchy={hierarchy}
-                                                checklist={checklist}
-                                                item={item}
-                                                index={idx}
-                                            />
-                                        </li>
-                                    ))}
-                                    {provided.placeholder}
-                                </ol>
-                            )}
-                        </Droppable>
+                                    <ProgressBar
+                                        percent={boardService.getChecklistPercent(
+                                            checklist
+                                        )}
+                                    />
 
-                        {isShowForm() ? (
-                            <ChecklistItemCreateForm
-                                hierarchy={hierarchy}
-                                checklist={checklist}
-                                onClose={onHideForm}
-                                draft={draft}
-                                handleChange={handleChange}
-                                setDraft={setDraft}
-                            />
-                        ) : (
-                            <div className="add-item">
-                                <SecondaryBtn
-                                    className="btn-add"
-                                    text="Add an item"
-                                    onClick={onShowForm}
-                                />
-                            </div>
+                                    <ol className="items">
+                                        {checklist.items.map((item, idx) => (
+                                            <li key={item._id}>
+                                                <ChecklistItem
+                                                    hierarchy={hierarchy}
+                                                    checklist={checklist}
+                                                    item={item}
+                                                    index={idx}
+                                                />
+                                            </li>
+                                        ))}
+                                        {provided.placeholder}
+                                    </ol>
+
+                                    {isShowForm() ? (
+                                        <ChecklistItemCreateForm
+                                            hierarchy={hierarchy}
+                                            checklist={checklist}
+                                            onClose={onHideForm}
+                                            draft={draft}
+                                            handleChange={handleChange}
+                                            setDraft={setDraft}
+                                        />
+                                    ) : (
+                                        <div className="add-item">
+                                            <SecondaryBtn
+                                                className="btn-add"
+                                                text="Add an item"
+                                                onClick={onShowForm}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            </>
                         )}
-                    </div>
+                    </Droppable>
                 </div>
             )}
         </Draggable>
