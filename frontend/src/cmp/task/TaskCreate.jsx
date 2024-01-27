@@ -13,12 +13,21 @@ export function TaskCreate({ board, group, position, onCreate, onClose }) {
     useClickedOutListener([formElRef], onSubmit)
     useKeyDownListener(['Escape'], onClose)
 
-    function onSubmit(e) {
+    async function onSubmit(e) {
         e.preventDefault()
 
         if (draft.title.trim().length > 0) {
-            onCreate(board, group, draft, position)
+            await onCreate(board, group, draft, position)
             setDraft(boardService.getEmptyTask())
+
+            if (group.tasks.length === position) {
+                // Scroll to the bottom
+                const createFormEl = document.querySelector('.task-create-form')
+                const taskListContainerEl =
+                    createFormEl.parentNode.parentNode.parentNode
+                taskListContainerEl.scrollTop = taskListContainerEl.scrollHeight
+            }
+
             inputRef.current.focus()
         } else {
             onClose()
