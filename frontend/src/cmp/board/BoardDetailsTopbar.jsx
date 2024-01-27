@@ -2,6 +2,7 @@ import { updateBoard } from '../../store/actions/board/board.actions'
 import { EditableTitle } from '../general/EditableTitle'
 import { Icon } from '../general/Icon'
 import { BoardMembers } from './BoardMembers'
+import { BoardShare } from './BoardShare'
 import { BoardFilter } from './filter/BoardFilter'
 
 export function BoardDetailsTopbar({
@@ -55,6 +56,9 @@ export function BoardDetailsTopbar({
 
                 {/* Members */}
                 <BoardMembers members={board.members} />
+
+                {/* Share */}
+                <BoardShare members={board.members} />
             </div>
         </div>
     )
