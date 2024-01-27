@@ -73,7 +73,7 @@ export function TaskCoverMenu({ hierarchy, popoverState, onRemoveCover }) {
             )}
 
             {/* Text color */}
-            {task.cover?.bgImage && (
+            {task.cover?.bgImage && task.cover?.size === 'large' && (
                 <TaskCoverMenuTextColor
                     hierarchy={hierarchy}
                     onTextColorClick={onTextColorClick}
