@@ -31,7 +31,6 @@ export function GroupCreate({ board }) {
                 const boardCanvasEl = document.querySelector(
                     '.board-canvas-container'
                 )
-                console.log(boardCanvasEl.scrollWidth)
                 boardCanvasEl.scrollLeft = boardCanvasEl.scrollWidth
                 inputRef.current.focus()
             } catch (err) {
