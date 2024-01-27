@@ -8,6 +8,7 @@ import { Icon } from '../general/Icon'
 import { MembersBadge } from './members/MembersBadge'
 import { TaskCommentsBadge } from './comments/TaskCommentsBadge'
 import { TaskPreviewFullCover } from './TaskPreviewFullCover'
+import { TaskAttachmentsBadge } from './attachment/TaskAttachmentsBadge'
 
 export function TaskPreview({ hierarchy, index }) {
     const { board, task } = hierarchy
@@ -75,6 +76,9 @@ export function TaskPreview({ hierarchy, index }) {
                                     )}
 
                                     <TaskCommentsBadge hierarchy={hierarchy} />
+                                    <TaskAttachmentsBadge
+                                        hierarchy={hierarchy}
+                                    />
                                     <ChecklistsBadge hierarchy={hierarchy} />
                                     <MembersBadge hierarchy={hierarchy} />
                                 </div>
