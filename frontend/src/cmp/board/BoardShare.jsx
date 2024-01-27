@@ -18,7 +18,7 @@ export function BoardShare({ board }) {
     useEffect(() => {
         if (!users) return
         setNonMembers(users.filter((u) => !isBoardMember(u)))
-    }, [users])
+    }, [users, board])
 
     async function onUserClick(user) {
         const members = [...board.members, user]
@@ -53,19 +53,25 @@ export function BoardShare({ board }) {
                     title="Share Board"
                     {...shareMenu.popover}
                 >
-                    <h4>Users</h4>
+                    {!!nonMembers.length ? (
+                        <>
+                            <h4>Users</h4>
 
-                    <ul>
-                        {nonMembers.map((user) => (
-                            <li key={user._id}>
-                                <MemberBtn
-                                    member={user}
-                                    isChecked={false}
-                                    onClick={() => onUserClick(user)}
-                                />
-                            </li>
-                        ))}
-                    </ul>
+                            <ul>
+                                {nonMembers.map((user) => (
+                                    <li key={user._id}>
+                                        <MemberBtn
+                                            member={user}
+                                            isChecked={false}
+                                            onClick={() => onUserClick(user)}
+                                        />
+                                    </li>
+                                ))}
+                            </ul>
+                        </>
+                    ) : (
+                        <div>No more users to add.</div>
+                    )}
                 </PopoverMenu>
             )}
         </div>
