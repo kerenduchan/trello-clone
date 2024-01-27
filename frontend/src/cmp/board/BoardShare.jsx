@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { usePopoverState } from '../../customHooks/usePopoverState'
 import { Icon } from '../general/Icon'
 import { PopoverMenu } from '../general/PopoverMenu'
@@ -6,14 +6,20 @@ import { MemberBtn } from '../task/members/MemberBtn'
 
 export function BoardShare({ board }) {
     const shareMenu = usePopoverState()
+    const [users, setUsers] = useState(board.members)
+    const [nonMembers, setNonMembers] = useState(null)
 
-    const [users, setUsers] = useState([])
+    useEffect(() => {
+        setNonMembers(users.filter((u) => !isBoardMember(u)))
+    }, [users])
 
     function onUserClick() {}
 
     function isBoardMember(user) {
-        return board.members?.includes(user._id)
+        return board.members.find((m) => m._id === user._id)
     }
+
+    if (!nonMembers) return <></>
 
     return (
         <div className="board-share">
@@ -30,14 +36,14 @@ export function BoardShare({ board }) {
                     title="Share Board"
                     {...shareMenu.popover}
                 >
-                    <h4>Board members</h4>
+                    <h4>Users</h4>
 
                     <ul>
-                        {users.map((user) => (
+                        {nonMembers.map((user) => (
                             <li key={user._id}>
                                 <MemberBtn
                                     member={user}
-                                    isChecked={isBoardMember(user)}
+                                    isChecked={false}
                                     onClick={() => onUserClick(user)}
                                 />
                             </li>
