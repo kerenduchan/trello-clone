@@ -8,6 +8,11 @@
     grid-template-rows: repeat(2, auto);
     cursor: pointer;
 
+    &.dragging {
+        transform: rotate(5deg);
+        opacity: 0.5;
+    }
+
     .container-btn-edit {
         visibility: hidden;
         position: absolute;

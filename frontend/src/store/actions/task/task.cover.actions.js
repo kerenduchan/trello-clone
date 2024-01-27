@@ -27,7 +27,7 @@ async function setTaskCoverImage(hierarchy, attachment) {
     const theme = utilService.getThemeByAverageColor(color)
 
     const cover = {
-        size: 'large',
+        size: hierarchy.task.cover?.size || 'small',
         bgImage: {
             url,
             color: color.hex,

@@ -8,6 +8,7 @@ import { Icon } from '../general/Icon'
 import { MembersBadge } from './members/MembersBadge'
 import { TaskCommentsBadge } from './comments/TaskCommentsBadge'
 import { TaskPreviewFullCover } from './TaskPreviewFullCover'
+import { TaskAttachmentsBadge } from './attachment/TaskAttachmentsBadge'
 
 export function TaskPreview({ hierarchy, index }) {
     const { board, task } = hierarchy
@@ -35,15 +36,17 @@ export function TaskPreview({ hierarchy, index }) {
         <Draggable draggableId={task._id} index={index}>
             {(provided, snapshot) => (
                 <section
-                    className={`task-preview ${
-                        snapshot.isDragging ? 'dragging' : ''
-                    }`}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
                     onClick={onClick}
                 >
-                    {/* <div className="container-btn-edit">
+                    <div
+                        className={`task-preview ${
+                            snapshot.isDragging ? 'dragging' : ''
+                        }`}
+                    >
+                        {/* <div className="container-btn-edit">
                         <div className="bg-btn-edit" />
                         <button
                             className="btn-circle btn-edit"
@@ -52,35 +55,43 @@ export function TaskPreview({ hierarchy, index }) {
                             <Icon type="edit" />
                         </button>
                     </div> */}
-                    {isFullCover() ? (
-                        <TaskPreviewFullCover hierarchy={hierarchy} />
-                    ) : (
-                        <>
-                            <TaskPreviewCover hierarchy={hierarchy} />
+                        {isFullCover() ? (
+                            <TaskPreviewFullCover hierarchy={hierarchy} />
+                        ) : (
+                            <>
+                                <TaskPreviewCover hierarchy={hierarchy} />
 
-                            <div className="content">
-                                <LabelsPreview hierarchy={hierarchy} />
-                                <p className="title">{task.title}</p>
+                                <div className="content">
+                                    <LabelsPreview hierarchy={hierarchy} />
+                                    <p className="title">{task.title}</p>
 
-                                <div className="badges">
-                                    <TaskDatesBadge hierarchy={hierarchy} />
+                                    <div className="badges">
+                                        <TaskDatesBadge hierarchy={hierarchy} />
 
-                                    {task.description && (
-                                        <span className="description-badge">
-                                            <Icon
-                                                type="description"
-                                                size="xs"
-                                            />
-                                        </span>
-                                    )}
+                                        {task.description && (
+                                            <span className="description-badge">
+                                                <Icon
+                                                    type="description"
+                                                    size="xs"
+                                                />
+                                            </span>
+                                        )}
 
-                                    <TaskCommentsBadge hierarchy={hierarchy} />
-                                    <ChecklistsBadge hierarchy={hierarchy} />
-                                    <MembersBadge hierarchy={hierarchy} />
+                                        <TaskCommentsBadge
+                                            hierarchy={hierarchy}
+                                        />
+                                        <TaskAttachmentsBadge
+                                            hierarchy={hierarchy}
+                                        />
+                                        <ChecklistsBadge
+                                            hierarchy={hierarchy}
+                                        />
+                                        <MembersBadge hierarchy={hierarchy} />
+                                    </div>
                                 </div>
-                            </div>
-                        </>
-                    )}
+                            </>
+                        )}
+                    </div>
                 </section>
             )}
         </Draggable>

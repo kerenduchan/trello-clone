@@ -1,4 +1,7 @@
 .group-list {
     display: flex;
-    gap: 12px;
+
+    > li > div {
+        height: 100%;
+    }
 }

@@ -5,10 +5,13 @@ import { loadBoards } from '../store/actions/board/board.actions'
 import { BoardList } from '../cmp/board/BoardList'
 import { Icon } from '../cmp/general/Icon'
 import { BoardIndexHeader } from '../cmp/board/BoardIndexHeader'
+import { useDocumentTitle } from '../customHooks/useDocumentTitle'
 
 export function BoardIndex() {
     const boards = useSelector(selectAllBoards)
     const [starredBoards, setStarredBoards] = useState([])
+
+    useDocumentTitle('Boards | Krello')
 
     useEffect(() => {
         loadBoards()

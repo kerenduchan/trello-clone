@@ -46,16 +46,16 @@
         }
     }
 
-    .board-canvas {
-        height: calc(100% - 22px);
-        padding-inline-start: 12px;
-        padding-inline-end: 12px;
-        padding-bottom: 10px;
-
-        box-sizing: border-box;
-        margin-top: 12px;
+    .board-canvas-container {
         overflow-x: auto;
         display: flex;
-        gap: 12px;
+        margin: 12px 0;
+    }
+
+    .board-canvas {
+        padding-inline-start: 12px;
+        height: calc(100% - 22px);
+        box-sizing: border-box;
+        display: flex;
     }
 }
