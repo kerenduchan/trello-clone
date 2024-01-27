@@ -108,27 +108,30 @@ export function BoardDetails() {
                         />
                     )}
                     <DragDropContext onDragEnd={onDragEnd}>
-                        <Droppable
-                            droppableId={board._id}
-                            direction="horizontal"
-                            type="group"
-                        >
-                            {(provided) => (
-                                <section
-                                    className="board-canvas"
-                                    {...provided.droppableProps}
-                                    ref={provided.innerRef}
-                                >
-                                    <GroupList
-                                        board={board}
-                                        groups={filteredBoard.groups}
-                                        isFilterEmpty={isFilterEmpty}
-                                    />
-                                    <GroupCreate board={board} />
-                                    {provided.placeholder}
-                                </section>
-                            )}
-                        </Droppable>
+                        <div className="board-canvas-container">
+                            <Droppable
+                                droppableId={board._id}
+                                direction="horizontal"
+                                type="group"
+                            >
+                                {(provided) => (
+                                    <section
+                                        className="board-canvas"
+                                        {...provided.droppableProps}
+                                        ref={provided.innerRef}
+                                    >
+                                        <GroupList
+                                            board={board}
+                                            groups={filteredBoard.groups}
+                                            isFilterEmpty={isFilterEmpty}
+                                        />
+
+                                        {provided.placeholder}
+                                    </section>
+                                )}
+                            </Droppable>
+                            <GroupCreate board={board} />
+                        </div>
 
                         {params.taskId && (
                             <TaskDetails
