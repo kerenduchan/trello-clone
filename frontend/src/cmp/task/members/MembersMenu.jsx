@@ -1,8 +1,27 @@
+import { updateTask } from '../../../store/actions/task/task.actions'
 import { PopoverMenu } from '../../general/PopoverMenu'
 import { MemberBtn } from './MemberBtn'
 
 export function MembersMenu({ hierarchy, popoverState }) {
-    const { board } = hierarchy
+    const { task, board } = hierarchy
+
+    function isTaskMember(member) {
+        return task.memberIds?.includes(member._id)
+    }
+
+    function onMemberClick(member) {
+        const { task } = hierarchy
+
+        if (isTaskMember(member)) {
+            const memberIds = task.memberIds.filter((id) => id !== member._id)
+            updateTask(hierarchy, { memberIds })
+        } else {
+            const memberIds = task.memberIds ? [...task.memberIds] : []
+            memberIds.push(member._id)
+            updateTask(hierarchy, { memberIds })
+        }
+    }
+
     return (
         <PopoverMenu
             className="members-menu"
@@ -14,7 +33,11 @@ export function MembersMenu({ hierarchy, popoverState }) {
             <ul>
                 {board.members?.map((member) => (
                     <li key={member._id}>
-                        <MemberBtn hierarchy={hierarchy} member={member} />
+                        <MemberBtn
+                            member={member}
+                            isChecked={isTaskMember(member)}
+                            onClick={() => onMemberClick(member)}
+                        />
                     </li>
                 ))}
             </ul>
