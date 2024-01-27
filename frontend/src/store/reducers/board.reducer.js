@@ -171,7 +171,8 @@ export const selectTaskActivitiesWithUser = createSelector(
     selectTaskActivities,
     (state) => state.board?.curBoard?.members,
     (taskActivities, members) => {
-        return taskActivities?.map((a) => ({
+        if (!taskActivities) return []
+        return taskActivities.map((a) => ({
             ...a,
             user: members.find((m) => m._id === a.userId),
         }))

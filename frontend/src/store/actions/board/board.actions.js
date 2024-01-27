@@ -244,6 +244,7 @@ async function copyTask(
         archivedAt: null,
         title: newTitle,
     }
+    targetGroupToUpdate.tasks = [...targetGroupToUpdate.tasks]
     targetGroupToUpdate.tasks.splice(targetPositionId, 0, taskCopy)
     _updateGroup(targetBoard, targetGroupToUpdate)
 }
