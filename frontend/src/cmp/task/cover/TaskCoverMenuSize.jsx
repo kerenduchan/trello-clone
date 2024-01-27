@@ -1,5 +1,6 @@
 export function TaskCoverMenuSize({ hierarchy, onSizeClick }) {
     const { task } = hierarchy
+    const { cover } = task
 
     function onClick(size) {
         if (isDisabled()) {
@@ -8,26 +9,34 @@ export function TaskCoverMenuSize({ hierarchy, onSizeClick }) {
         onSizeClick(size)
     }
 
-    function getColor() {
-        return task.cover?.bgColor?.color
+    function getCoverStyle() {
+        if (!cover) {
+            return null
+        }
+        if (cover.bgColor) {
+            return { backgroundColor: cover.bgColor.color }
+        }
+        if (cover.bgImage) {
+            return { backgroundImage: `url(${cover.bgImage.url})` }
+        }
     }
 
     function getTextColor() {
-        return task.cover?.bgColor?.textColor
+        return cover?.bgColor?.textColor
     }
 
     function isSelected(size) {
         if (isDisabled()) {
             return false
         }
-        return task.cover.size === size
+        return cover.size === size
     }
 
     function isDisabled() {
-        if (!task.cover) {
+        if (!cover) {
             return true
         }
-        return !task.cover.bgColor && !task.cover.bgImage
+        return !cover.bgColor && !cover.bgImage
     }
 
     return (
@@ -42,10 +51,7 @@ export function TaskCoverMenuSize({ hierarchy, onSizeClick }) {
                     }`}
                     onClick={() => onClick('small')}
                 >
-                    <div
-                        className="cover"
-                        style={{ backgroundColor: getColor() }}
-                    />
+                    <div className="cover" style={getCoverStyle()} />
                     <div className="contents">
                         <div className="mock-row" />
                         <div className="mock-row mock-row-2" />
@@ -62,7 +68,7 @@ export function TaskCoverMenuSize({ hierarchy, onSizeClick }) {
                     className={`size-large cover ${
                         isSelected('large') ? 'selected' : ''
                     }`}
-                    style={{ backgroundColor: getColor() }}
+                    style={getCoverStyle()}
                     onClick={() => onClick('large')}
                 >
                     <div className="contents">
