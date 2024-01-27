@@ -43,8 +43,8 @@ export function BoardFilterMenu({ popoverState, filter, onChange }) {
             <h4>Due date</h4>
             <BoardFilterDate filter={filter} onChange={onFilterFieldsChange} />
 
-            {/* Labels */}
-            <h4>Labels</h4>
+            {/* Labels - TODO */}
+            {/* <h4>Labels</h4> */}
         </PopoverMenu>
     )
 }
