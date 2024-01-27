@@ -1,0 +1,30 @@
+.board-share {
+    .btn-share {
+        padding-top: 6px;
+        padding-bottom: 6px;
+        padding-inline-start: 8px;
+        padding-inline-end: 12px;
+        margin-inline-end: 4px;
+        background-color: var(--dynamic-button-highlighted);
+        color: var(--dynamic-button-highlighted-text);
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+
+        &:hover {
+            background: var(--dynamic-button-highlighted-hovered);
+        }
+
+        > .label {
+            margin-inline-start: 4px;
+        }
+    }
+}
+
+.share-menu {
+    h4 {
+        @include font(12px, 16px, 600);
+        margin-top: 4px;
+        margin-bottom: 8px;
+    }
+}
