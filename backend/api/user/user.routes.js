@@ -7,6 +7,7 @@ import {
     updateUser,
 } from './user.controller.js'
 import {
+    authenticate,
     authenticateAdmin,
     authenticateAdminOrSelf,
     authorizeCreateOrUpdateUser,
@@ -14,7 +15,7 @@ import {
 
 const router = express.Router()
 
-router.get('/', authenticateAdmin, getUsers)
+router.get('/', authenticate, getUsers)
 router.get('/:userId', authenticateAdminOrSelf, getUser)
 router.delete('/:userId', authenticateAdmin, removeUser)
 router.post('/', authenticateAdmin, createUser)
