@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import { useDispatch } from 'react-redux'
+import { useDocumentTitle } from '../customHooks/useDocumentTitle'
 import { TaskDescription } from '../cmp/task/description/TaskDescription'
 import { TaskDetailsActivity } from '../cmp/task/TaskDetailsActivity'
 import { TaskDetailsSidebar } from '../cmp/task/TaskDetailsSidebar'
@@ -13,11 +14,13 @@ import { TaskAttachments } from '../cmp/task/attachment/TaskAttachments'
 import { curChecklistChanged } from '../store/reducers/app.reducer'
 
 export function TaskDetails({ hierarchy }) {
-    const { task } = hierarchy
+    const { task, board } = hierarchy
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const params = useParams()
+
+    useDocumentTitle(task && `${task.title} on ${board.title} | Krello`, task)
 
     useEffect(() => {
         if (!hierarchy.task) {

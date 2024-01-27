@@ -15,6 +15,7 @@ import {
 import { applyBoardFilter } from '../store/actions/board/board.filter.actions'
 import { boardService } from '../services/board/board.service'
 import { useToggle } from '../customHooks/useToggle'
+import { useDocumentTitle } from '../customHooks/useDocumentTitle'
 import { GroupList } from '../cmp/group/GroupList'
 import { BoardDetailsTopbar } from '../cmp/board/BoardDetailsTopbar'
 import { TaskDetails } from './TaskDetails'
@@ -31,6 +32,8 @@ export function BoardDetails() {
     const filteredBoard = useSelector(selectFilteredBoard)
     const [showMenu, toggleShowMenu, setShowMenu] = useToggle()
     const [filter, setFilter] = useState(null)
+
+    useDocumentTitle(board && board.title + ' | Krello', board)
 
     useEffect(() => {
         // load all boards in case page was refreshed and tasks will be dragged/dropped
