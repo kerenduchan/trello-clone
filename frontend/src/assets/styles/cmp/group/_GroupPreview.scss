@@ -10,11 +10,17 @@
     max-height: 100%;
     display: flex;
     flex-direction: column;
-    row-gap: 8px;
     color: var(--text-color);
 
+    .group-preview-header {
+        margin-bottom: 6px;
+    }
+
     .btn-show-add-form {
+        margin-top: 8px;
         border-radius: 8px;
+        padding-top: 6px;
+        padding-bottom: 6px;
         color: var(--text-color-subtle);
         @include button-bg(
             transparent,
