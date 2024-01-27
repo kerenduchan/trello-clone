@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { Draggable } from 'react-beautiful-dnd'
+import { Draggable, Droppable } from 'react-beautiful-dnd'
 import {
     curChecklistChanged,
     selectChecklistId,
@@ -72,17 +72,30 @@ export function Checklist({ hierarchy, checklist, index }) {
                             )}
                         />
 
-                        <ol className="items">
-                            {checklist.items.map((item) => (
-                                <li key={item._id}>
-                                    <ChecklistItem
-                                        hierarchy={hierarchy}
-                                        checklist={checklist}
-                                        item={item}
-                                    />
-                                </li>
-                            ))}
-                        </ol>
+                        <Droppable
+                            droppableId={checklist._id}
+                            type="checklist-item"
+                        >
+                            {(provided) => (
+                                <ol
+                                    className="items"
+                                    {...provided.droppableProps}
+                                    ref={provided.innerRef}
+                                >
+                                    {checklist.items.map((item, idx) => (
+                                        <li key={item._id}>
+                                            <ChecklistItem
+                                                hierarchy={hierarchy}
+                                                checklist={checklist}
+                                                item={item}
+                                                index={idx}
+                                            />
+                                        </li>
+                                    ))}
+                                    {provided.placeholder}
+                                </ol>
+                            )}
+                        </Droppable>
 
                         {isShowForm() ? (
                             <ChecklistItemCreateForm
