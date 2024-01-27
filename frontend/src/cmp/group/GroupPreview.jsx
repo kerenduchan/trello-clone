@@ -25,7 +25,7 @@ export function GroupPreview({ board, group, index, isFilterEmpty }) {
 
     return (
         <Draggable draggableId={group._id} index={index}>
-            {(draggableProvided) => (
+            {(draggableProvided, draggableSnapshot) => (
                 <div
                     {...draggableProvided.draggableProps}
                     ref={draggableProvided.innerRef}
@@ -34,8 +34,8 @@ export function GroupPreview({ board, group, index, isFilterEmpty }) {
                         {(droppableProvided, snapshot) => (
                             <section
                                 className={`group-preview ${
-                                    snapshot.isDraggingOver
-                                        ? 'dragging-over'
+                                    draggableSnapshot.isDragging
+                                        ? 'dragging'
                                         : ''
                                 }`}
                             >
