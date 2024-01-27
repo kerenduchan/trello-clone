@@ -65,6 +65,7 @@ Login, Signup, Logout
 -   Drag/drop checklist to reorder checklists in task
 -   Add item to checklist
 -   Check/uncheck an item in a checklist
+-   Drag/drop checklist item in same checklist / to a different checklist
 -   Delete item from checklist
 -   Convert checklist item to task
 -   Show checklists badge in task preview
