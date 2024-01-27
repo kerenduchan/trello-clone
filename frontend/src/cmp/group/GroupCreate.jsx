@@ -25,8 +25,14 @@ export function GroupCreate({ board }) {
 
         if (draft.title.length > 0) {
             try {
-                createGroup(board, draft)
+                await createGroup(board, draft)
                 setDraft(boardService.getEmptyGroup())
+                // scroll to the right
+                const boardCanvasEl = document.querySelector(
+                    '.board-canvas-container'
+                )
+                console.log(boardCanvasEl.scrollWidth)
+                boardCanvasEl.scrollLeft = boardCanvasEl.scrollWidth
                 inputRef.current.focus()
             } catch (err) {
                 console.error(err)
