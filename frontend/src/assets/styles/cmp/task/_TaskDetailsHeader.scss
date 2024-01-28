@@ -3,7 +3,8 @@
     top: 12px;
     right: 12px;
     z-index: 2;
-    color: var(--ds-icon);
+    @include btn-dynamic-colors();
+    transition: background-color 85ms, color 85ms;
 }
 
 .archive-banner {

@@ -36,7 +36,7 @@ export function TaskDetails({ hierarchy }) {
     }
 
     function getTaskTheme() {
-        return task.cover?.theme || ''
+        return task.cover?.theme || 'light'
     }
 
     if (!hierarchy.task) return <></>
