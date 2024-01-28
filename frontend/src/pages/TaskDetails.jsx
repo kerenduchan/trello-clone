@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router'
+import { useLocation, useNavigate, useParams } from 'react-router'
 import { useDispatch } from 'react-redux'
 import { useDocumentTitle } from '../customHooks/useDocumentTitle'
 import { TaskDescription } from '../cmp/task/description/TaskDescription'
@@ -19,6 +19,7 @@ export function TaskDetails({ hierarchy }) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const params = useParams()
+    const location = useLocation()
 
     useDocumentTitle(task && `${task.title} on ${board.title} | Krello`, task)
 
@@ -31,7 +32,7 @@ export function TaskDetails({ hierarchy }) {
 
     function onClose() {
         dispatch(curChecklistChanged(null))
-        navigate(`/b/${params.boardId}`)
+        navigate(`/b/${params.boardId}${location.search}`)
     }
 
     function getTaskTheme() {
