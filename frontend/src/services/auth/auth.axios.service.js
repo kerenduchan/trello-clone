@@ -36,7 +36,12 @@ async function logout() {
 }
 
 async function signup(user) {
-    const { data } = await axios.post(BASE_URL + 'signup', user)
-    authUtilService.saveLoggedinUser(data)
-    return data
+    try {
+        const { data } = await axios.post(BASE_URL + 'signup', user)
+        authUtilService.saveLoggedinUser(data)
+        return data
+    } catch (err) {
+        console.error(err)
+        throw err.response.data.error
+    }
 }

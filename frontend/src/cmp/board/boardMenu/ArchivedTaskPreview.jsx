@@ -1,15 +1,16 @@
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import { usePopoverState } from '../../../customHooks/usePopoverState'
 import { DeleteMenu } from '../../general/DeleteMenu'
 
 export function ArchivedTaskPreview({ hierarchy, onUnarchive, onDelete }) {
     const { board, task } = hierarchy
+    const location = useLocation()
 
     const navigate = useNavigate()
     const deleteTaskMenu = usePopoverState()
 
     function onTaskClick() {
-        navigate(`/b/${board._id}/c/${task._id}`)
+        navigate(`/b/${board._id}/c/${task._id}${location.search}`)
     }
 
     return (

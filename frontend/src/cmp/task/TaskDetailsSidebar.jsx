@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import { updateTask, deleteTask } from '../../store/actions/task/task.actions'
 import { usePopoverState } from '../../customHooks/usePopoverState'
 import { DeleteMenu } from '../general/DeleteMenu'
@@ -15,6 +15,7 @@ export function TaskDetailsSidebar({ hierarchy }) {
     const { board, task } = hierarchy
 
     const navigate = useNavigate()
+    const location = useLocation()
     const membersMenu = usePopoverState()
     const labelsMenu = usePopoverState()
     const checklistMenu = usePopoverState()
@@ -29,7 +30,7 @@ export function TaskDetailsSidebar({ hierarchy }) {
         try {
             deleteTask(hierarchy)
             deleteTaskMenu.onClose()
-            navigate(`/b/${board._id}`)
+            navigate(`/b/${board._id}${location.search}`)
         } catch (err) {
             console.error(err)
             // TODO: show an error dialog

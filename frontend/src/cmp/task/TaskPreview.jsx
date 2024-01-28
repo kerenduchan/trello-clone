@@ -1,5 +1,5 @@
 import { Draggable } from 'react-beautiful-dnd'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { TaskPreviewCover } from './TaskPreviewCover'
 import { LabelsPreview } from './label/LabelsPreview'
 import { ChecklistsBadge } from './checklist/ChecklistsBadge'
@@ -12,17 +12,11 @@ import { TaskAttachmentsBadge } from './attachment/TaskAttachmentsBadge'
 
 export function TaskPreview({ hierarchy, index }) {
     const { board, task } = hierarchy
-
+    const location = useLocation()
     const navigate = useNavigate()
 
-    function onEditClick(e) {
-        // stop propagation so that task details doesn't open
-        e.stopPropagation()
-        // TODO
-    }
-
     function onClick() {
-        navigate(`/b/${board._id}/c/${task._id}`)
+        navigate(`/b/${board._id}/c/${task._id}${location.search}`)
     }
 
     function isFullCover() {
