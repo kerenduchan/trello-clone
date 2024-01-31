@@ -8,7 +8,7 @@ export function HomeHeader() {
     return (
         <header className="home-header-bg">
             <div className="home-header">
-                <img className="logo" src="krello.svg" />
+                <img className="logo" src="/krello.svg" />
 
                 <div className="actions-container">
                     {loggedinUser ? (

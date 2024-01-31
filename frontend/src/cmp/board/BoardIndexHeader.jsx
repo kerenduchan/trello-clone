@@ -21,9 +21,9 @@ export function BoardIndexHeader({ board }) {
 
     function getLogo() {
         if (boardService.getBoardTheme(board) === 'light') {
-            return 'krello.svg'
+            return '/krello.svg'
         }
-        return 'krello-white.svg'
+        return '/krello-white.svg'
     }
 
     return (

@@ -39,7 +39,7 @@ export function LoginSignup() {
         <div className="login-signup">
             <div className="content">
                 <div className="header">
-                    <img className="logo" src="krello.svg" />
+                    <img className="logo" src="/krello.svg" />
                     <h5>{isLogin() ? 'Log in' : 'Sign up'} to continue</h5>
                 </div>
                 <form onSubmit={onSubmit}>
