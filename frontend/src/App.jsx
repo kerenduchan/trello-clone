@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Route, HashRouter as Router, Routes } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { loggedinUserChanged } from './store/reducers/app.reducer'
 import { authService } from './services/auth/auth.service'
